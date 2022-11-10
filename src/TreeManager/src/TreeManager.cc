@@ -331,7 +331,7 @@ void TreeManager::FillBrankTree(int TagID) {
       //iclass_woTagN = 0;
       mode_woTagN   = 1;
       Ibound_woTagN = 1;
-      numnu_woTagN  = 10; //default
+      numnu_woTagN  = 0; //default
       for (Int_t ivc=0; ivc<numnu_woTagN; ivc++) {
         pnu_woTagN[ivc]  = 0.6;
         ipnu_woTagN[ivc] = 12;
@@ -341,21 +341,21 @@ void TreeManager::FillBrankTree(int TagID) {
         dirnu_woTagN[ivc][2] = 0.0242228;
       }
 
-      Npvc_woTagN = 10; //default
+      Npvc_woTagN = 5; //default
       for (Int_t ivc=0; ivc<Npvc_woTagN; ivc++) {
         Ipvc_woTagN[ivc]   = 1;
         Ichvc_woTagN[ivc]  = 1;
-        Iflvc_woTagN[ivc]  = 1;
-        Iorgvc_woTagN[ivc] = 1;
-        Abspvc_woTagN[ivc] = 0.1;
-        for (int idir=0; idir<3; idir++) Pvc_woTagN[ivc][idir] = 0.1;
+        Iflvc_woTagN[ivc]  = 0;
+        Iorgvc_woTagN[ivc] = 0;
+        Abspvc_woTagN[ivc] = 100;
+        for (int idir=0; idir<3; idir++) Pvc_woTagN[ivc][idir] = 5.;
       }
       Crsx_woTagN   = -1.;
       Crsy_woTagN   = -1.;
       Crsz_woTagN   = -1.;
       Crsphi_woTagN = -1.;
 
-      Nvert_woTagN = 10; //default
+      Nvert_woTagN = 5; //default
       for (int iv=0; iv<Nvert_woTagN; iv++) {
         Iflgvert_woTagN[iv] = 1;
         for (int idir=0; idir<3; idir++) Posvert_woTagN[iv][idir] = 0.1;
@@ -372,7 +372,7 @@ void TreeManager::FillBrankTree(int TagID) {
           Dirvert_woTagN[ivc][idir] = 0.1;
         }
       }
-      Fsiprob_woTagN = 1.;
+      Fsiprob_woTagN = 0.5;
 
       Numbndn_woTagN = 8;
       Numbndp_woTagN = 8;
@@ -399,7 +399,7 @@ void TreeManager::FillBrankTree(int TagID) {
       Fsiprobsk_woTagN = 0.1;
 
 
-      npar_woTagN = 10; //default
+      npar_woTagN = 0; //default
       for (int iv=0; iv<npar_woTagN; iv++) {
         ipv_woTagN[iv]   = 1;
         pmomv_woTagN[iv] = 0.1;
@@ -412,32 +412,32 @@ void TreeManager::FillBrankTree(int TagID) {
         }*/
       }
       for (int idir=0; idir<3; idir++) posv_woTagN[idir] = 0.1;
-      wallv_woTagN  = 0.1;
+      wallv_woTagN  = 400;
       wgtosc_woTagN = 0.2;
       for (int ipi=0; ipi<2; ipi++) {
-        pi0like_woTagN[ipi] = 0.1;
-        pi0mass_woTagN[ipi] = 0.1;
+        pi0like_woTagN[ipi] = 0;
+        pi0mass_woTagN[ipi] = 0;
         for (int jpi=0; jpi<2; jpi++) {
-          pi0_e_woTagN[ipi][jpi] = 0.1;
+          pi0_e_woTagN[ipi][jpi] = 0;
 
-          pi0_dir_woTagN[ipi][jpi][0] = 0.669764;
-          pi0_dir_woTagN[ipi][jpi][1] = -0.742179;
-          pi0_dir_woTagN[ipi][jpi][2] = 0.0242228;
+          pi0_dir_woTagN[ipi][jpi][0] = 0.;
+          pi0_dir_woTagN[ipi][jpi][1] = 0.;
+          pi0_dir_woTagN[ipi][jpi][2] = 0.;
           /*for (int idir=0; idir<3; idir++) {
             pi0_dir_woTagN[ipi][jpi][idir] = 0.;
           }*/
         }
       }
-      nmue_woTagN = 1;
+      nmue_woTagN = 0;
 
       nscndprt_woTagN = 10; //default
       for (int iscnd=0; iscnd<nscndprt_woTagN; iscnd++) {
         itrkscnd_woTagN[iscnd] = 1;
         iprtscnd_woTagN[iscnd] = 1;
         tscnd_woTagN[iscnd]    = 0.1;
-        iprntprt_woTagN[iscnd] = 1;
-        lmecscnd_woTagN[iscnd] = 1;
-        iprnttrk_woTagN[iscnd] = 1;
+        iprntprt_woTagN[iscnd] = 11;
+        lmecscnd_woTagN[iscnd] = 5;
+        iprnttrk_woTagN[iscnd] = 3;
         iorgprt_woTagN[iscnd]  = 1;
         iflgscnd_woTagN[iscnd] = 1;
         for (int idir=0; idir<3; idir++) {
@@ -448,19 +448,19 @@ void TreeManager::FillBrankTree(int TagID) {
       }
 
       
-      nring_woTagN  = 2; //default
+      nring_woTagN  = 0; //default
       nev_woTagN    = 1;
       nhitac_woTagN = 1;
       wall_woTagN   = 0.1;
       evis_woTagN   = 0.1;
 
-      fqnse_woTagN = 10;  //default
+      fqnse_woTagN = 0;  //default
       for (Int_t ifq=0; ifq<fqnse_woTagN; ifq++) {
         for (int ihyp=0; ihyp<7; ihyp++) {
 
-          fq1rdir_woTagN[ifq][ihyp][0] = 0.669764;
-          fq1rdir_woTagN[ifq][ihyp][1] = -0.742179;
-          fq1rdir_woTagN[ifq][ihyp][2] = 0.0242228;
+          fq1rdir_woTagN[ifq][ihyp][0] = 0.1;
+          fq1rdir_woTagN[ifq][ihyp][1] = 0.1;
+          fq1rdir_woTagN[ifq][ihyp][2] = 0.1;
           /*for (int idir=0; idir<3; idir++) {
             //fqmrdir_wTagN[ifq][ihyp][idir] = 0.;
             //fqmrmom_wTagN[ifq][ihyp][idir] = 0.;
@@ -468,17 +468,17 @@ void TreeManager::FillBrankTree(int TagID) {
           }*/
         }
       }
-      fqmome_woTagN = 0.1;
-      fqmomm_woTagN = 0.1;
+      fqmome_woTagN = 200.;
+      fqmomm_woTagN = 500.;
 
-      fqnmrfit_woTagN = 2; //default
+      fqnmrfit_woTagN = 0; //default
       for (Int_t ifq=0; ifq<fqnmrfit_woTagN; ifq++) {
         //ipp_wTagN[ifq] = fqmrifit[ifq];
         for (int ihyp=0; ihyp<6; ihyp++) {
 
-          fqmrdir_woTagN[ifq][ihyp][0] = 0.669764;
-          fqmrdir_woTagN[ifq][ihyp][1] = -0.742179;
-          fqmrdir_woTagN[ifq][ihyp][2] = 0.0242228;
+          fqmrdir_woTagN[ifq][ihyp][0] = 0.1;
+          fqmrdir_woTagN[ifq][ihyp][1] = 0.1;
+          fqmrdir_woTagN[ifq][ihyp][2] = 0.1;
           for (int idir=0; idir<3; idir++) {
             //fqmrdir_woTagN[ifq][ihyp][idir] = 0.;
             fqmrmom_woTagN[ifq][ihyp][idir] = 0.1;
@@ -493,12 +493,12 @@ void TreeManager::FillBrankTree(int TagID) {
         }
       }*/
       if (nring_woTagN==0) {
-        for (int iring=0; iring<10; iring++) {
+        for (int iring=0; iring<1; iring++) {
           ip_woTagN[iring] = 1;
 
-          dir_woTagN[iring][0] = 0.669764;
-          dir_woTagN[iring][1] = -0.742179;
-          dir_woTagN[iring][2] = 0.0242228;
+          dir_woTagN[iring][0] = 1.;
+          dir_woTagN[iring][1] = 0.;
+          dir_woTagN[iring][2] = 0.;
           /*for (int idir=0; idir<3; idir++) {
             dir_woTagN[iring][idir] = 0.;
           }*/
@@ -508,9 +508,9 @@ void TreeManager::FillBrankTree(int TagID) {
         for (int iring=0; iring<nring_woTagN; iring++) {
           ip_woTagN[iring] = 1;
 
-          dir_woTagN[iring][0] = 0.669764;
-          dir_woTagN[iring][1] = -0.742179;
-          dir_woTagN[iring][2] = 0.0242228;
+          dir_woTagN[iring][0] = 1.;
+          dir_woTagN[iring][1] = 0.;
+          dir_woTagN[iring][2] = 0.;
           /*for (int idir=0; idir<3; idir++) {
             dir_woTagN[iring][idir] = 0.;
           }*/
