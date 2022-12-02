@@ -1,6 +1,6 @@
 #!/bin/bash
 
-make clean
+make cleangetNNvariables
 make getNNvariables.exe
 
 if [ ! -f ./getNNvariables.exe ]; then
@@ -9,6 +9,7 @@ fi
 
 FITQUNDIR=/disk02/usr6/sedi/fiTQun/converted_output
 NTAGDIR=/disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining
+NTAGDIR3=/disk03/usr8/sedi/Ntag/output/w.mccomb/sk6/NNtraining
 ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis
 
 ######
@@ -22,6 +23,7 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 # 8th index: decay-e-tagging ON/OFF
 ######
 
+#### Pre NN #####
 #./getNNvariables.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.preNN.root\
@@ -32,6 +34,8 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 #                     -BEAMMODE FHC\
 #                     -OSCCH NUMU
 
+#### mu- #####
+<<COMMENTOUT
 ./getNNvariables.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                      $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                      $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.preNN.muminus.root\
@@ -41,7 +45,22 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
                      -ETAG ON\
                      -BEAMMODE FHC\
                      -OSCCH NUMU
+COMMENTOUT
 
+#### neutron classification(mu- vs nu) #####
+#<<COMMENTOUT
+./getNNvariables.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part001.skip0.root\
+                     $NTAGDIR3/tageoption/noinpmt/numu/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part001.skip0.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.preNN.ndistance.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.preNN.ndistance.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.preNN.ndistance.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUMU
+#COMMENTOUT
+
+#### Post NN #####
 #./getNNvariables.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.postNN.root\
@@ -53,6 +72,10 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 #                     -OSCCH NUMU
 
 
+################################################
+
+
+#### Pre NN #####
 #./getNNvariables.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                     $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                     ./output/fhc/fhc.numubar_x_numubar.preNN.muminus.root\
@@ -63,6 +86,7 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 #                     -BEAMMODE FHC\
 #                     -OSCCH NUMUBAR
 
+#### Post NN #####
 #./getNNvariables.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                     $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                     ./output/fhc/fhc.numubar_x_numubar.postNN.root\

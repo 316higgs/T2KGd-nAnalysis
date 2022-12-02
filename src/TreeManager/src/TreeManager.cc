@@ -430,7 +430,7 @@ void TreeManager::FillBrankTree(int TagID) {
       }
       nmue_woTagN = 0;
 
-      nscndprt_woTagN = 10; //default
+      nscndprt_woTagN = 0; //default
       for (int iscnd=0; iscnd<nscndprt_woTagN; iscnd++) {
         itrkscnd_woTagN[iscnd] = 1;
         iprtscnd_woTagN[iscnd] = 1;
@@ -531,7 +531,7 @@ void TreeManager::FillBrankTree(int TagID) {
       //iclass_wTagN = 0;
       mode_wTagN   = 1;
       Ibound_wTagN = 1;
-      numnu_wTagN  = 10; //default
+      numnu_wTagN  = 0; //default
       for (Int_t ivc=0; ivc<numnu_wTagN; ivc++) {
         pnu_wTagN[ivc]  = 0.6;
         ipnu_wTagN[ivc] = 12;
@@ -541,21 +541,21 @@ void TreeManager::FillBrankTree(int TagID) {
         dirnu_wTagN[ivc][2] = 0.0242228;
       }
 
-      Npvc_wTagN = 10;  //default
+      Npvc_wTagN = 5;  //default
       for (Int_t ivc=0; ivc<Npvc_wTagN; ivc++) {
         Ipvc_wTagN[ivc]   = 1;
         Ichvc_wTagN[ivc]  = 1;
-        Iflvc_wTagN[ivc]  = 1;
-        Iorgvc_wTagN[ivc] = 1;
-        Abspvc_wTagN[ivc] = 0.1;
-        for (int idir=0; idir<3; idir++) Pvc_wTagN[ivc][idir] = 0.1;
+        Iflvc_wTagN[ivc]  = 0;
+        Iorgvc_wTagN[ivc] = 0;
+        Abspvc_wTagN[ivc] = 100;
+        for (int idir=0; idir<3; idir++) Pvc_wTagN[ivc][idir] = 5.;
       }
       Crsx_wTagN   = -1.;
       Crsy_wTagN   = -1.;
       Crsz_wTagN   = -1.;
       Crsphi_wTagN = -1.;
 
-      Nvert_wTagN = 10; //default
+      Nvert_wTagN = 5; //default
       for (int iv=0; iv<Nvert_wTagN; iv++) {
         Iflgvert_wTagN[iv] = 1;
         for (int idir=0; idir<3; idir++) Posvert_wTagN[iv][idir] = 0.1;
@@ -572,7 +572,7 @@ void TreeManager::FillBrankTree(int TagID) {
           Dirvert_wTagN[ivc][idir] = 0.1;
         }
       }
-      Fsiprob_wTagN = 1.;
+      Fsiprob_wTagN = 0.5;
 
       Numbndn_wTagN = 8;
       Numbndp_wTagN = 8;
@@ -599,7 +599,7 @@ void TreeManager::FillBrankTree(int TagID) {
       Fsiprobsk_wTagN = 0.1;
 
 
-      npar_wTagN = 10; //default
+      npar_wTagN = 0; //default
       for (int iv=0; iv<npar_wTagN; iv++) {
         ipv_wTagN[iv]   = 1;
         pmomv_wTagN[iv] = 0.1;
@@ -612,32 +612,32 @@ void TreeManager::FillBrankTree(int TagID) {
         }*/
       }
       for (int idir=0; idir<3; idir++) posv_wTagN[idir] = 0.1;
-      wallv_wTagN  = 0.1;
+      wallv_wTagN  = 400;
       wgtosc_wTagN = 0.2;
       for (int ipi=0; ipi<2; ipi++) {
-        pi0like_wTagN[ipi] = 0.1;
-        pi0mass_wTagN[ipi] = 0.1;
+        pi0like_wTagN[ipi] = 0;
+        pi0mass_wTagN[ipi] = 0;
         for (int jpi=0; jpi<2; jpi++) {
-          pi0_e_wTagN[ipi][jpi] = 0.1;
+          pi0_e_wTagN[ipi][jpi] = 0;
 
-          pi0_dir_wTagN[ipi][jpi][0] = 0.669764;
-          pi0_dir_wTagN[ipi][jpi][1] = -0.742179;
-          pi0_dir_wTagN[ipi][jpi][2] = 0.0242228;
+          pi0_dir_wTagN[ipi][jpi][0] = 0.;
+          pi0_dir_wTagN[ipi][jpi][1] = 0.;
+          pi0_dir_wTagN[ipi][jpi][2] = 0.;
           /*for (int idir=0; idir<3; idir++) {
             pi0_dir_wTagN[ipi][jpi][idir] = 0.;
           }*/
         }
       }
-      nmue_woTagN = 1;
+      nmue_woTagN = 0;
 
       nscndprt_wTagN = 10; //default
       for (int iscnd=0; iscnd<nscndprt_wTagN; iscnd++) {
         itrkscnd_wTagN[iscnd] = 1;
         iprtscnd_wTagN[iscnd] = 1;
         tscnd_wTagN[iscnd]    = 0.1;
-        iprntprt_wTagN[iscnd] = 1;
-        lmecscnd_wTagN[iscnd] = 1;
-        iprnttrk_wTagN[iscnd] = 1;
+        iprntprt_wTagN[iscnd] = 11;
+        lmecscnd_wTagN[iscnd] = 5;
+        iprnttrk_wTagN[iscnd] = 3;
         iorgprt_wTagN[iscnd]  = 1;
         iflgscnd_wTagN[iscnd] = 1;
         for (int idir=0; idir<3; idir++) {
@@ -647,19 +647,19 @@ void TreeManager::FillBrankTree(int TagID) {
         }
       }
       
-      nring_wTagN  = 2; //default
+      nring_wTagN  = 0; //default
       nev_wTagN    = 1;
       nhitac_wTagN = 1;
       wall_wTagN   = 0.1;
       evis_wTagN   = 0.1;
 
-      fqnse_wTagN = 10; //default
+      fqnse_wTagN = 0; //default
       for (Int_t ifq=0; ifq<fqnse_wTagN; ifq++) {
         for (int ihyp=0; ihyp<7; ihyp++) {
 
-          fq1rdir_wTagN[ifq][ihyp][0] = 0.669764;
-          fq1rdir_wTagN[ifq][ihyp][1] = -0.742179;
-          fq1rdir_wTagN[ifq][ihyp][2] = 0.0242228;
+          fq1rdir_wTagN[ifq][ihyp][0] = 0.1;
+          fq1rdir_wTagN[ifq][ihyp][1] = 0.1;
+          fq1rdir_wTagN[ifq][ihyp][2] = 0.1;
           /*for (int idir=0; idir<3; idir++) {
             //fqmrdir_wTagN[ifq][ihyp][idir] = 0.;
             //fqmrmom_wTagN[ifq][ihyp][idir] = 0.;
@@ -667,17 +667,17 @@ void TreeManager::FillBrankTree(int TagID) {
           }*/
         }
       }
-      fqmome_wTagN = 0.1;
-      fqmomm_wTagN = 0.1;
+      fqmome_wTagN = 200.;
+      fqmomm_wTagN = 500.;
 
       fqnmrfit_wTagN = 2; //default
       for (Int_t ifq=0; ifq<fqnmrfit_wTagN; ifq++) {
         //ipp_wTagN[ifq] = fqmrifit[ifq];
         for (int ihyp=0; ihyp<6; ihyp++) {
 
-          fqmrdir_wTagN[ifq][ihyp][0] = 0.669764;
-          fqmrdir_wTagN[ifq][ihyp][1] = -0.742179;
-          fqmrdir_wTagN[ifq][ihyp][2] = 0.0242228;
+          fqmrdir_wTagN[ifq][ihyp][0] = 0.1;
+          fqmrdir_wTagN[ifq][ihyp][1] = 0.1;
+          fqmrdir_wTagN[ifq][ihyp][2] = 0.1;
           for (int idir=0; idir<3; idir++) {
             //fqmrdir_wTagN[ifq][ihyp][idir] = 0.;
             fqmrmom_wTagN[ifq][ihyp][idir] = 0.1;
@@ -692,12 +692,12 @@ void TreeManager::FillBrankTree(int TagID) {
         }
       }*/
       if (nring_wTagN==0) {
-        for (int iring=0; iring<10; iring++) {
+        for (int iring=0; iring<1; iring++) {
           ip_wTagN[iring] = 1;
 
-          dir_wTagN[iring][0] = 0.669764;
-          dir_wTagN[iring][1] = -0.742179;
-          dir_wTagN[iring][2] = 0.0242228;
+          dir_wTagN[iring][0] = 1.;
+          dir_wTagN[iring][1] = 0.;
+          dir_wTagN[iring][2] = 0.;
           /*for (int idir=0; idir<3; idir++) {
             dir_wTagN[iring][idir] = 0.;
           }*/
@@ -707,9 +707,9 @@ void TreeManager::FillBrankTree(int TagID) {
         for (int iring=0; iring<nring_wTagN; iring++) {
           ip_wTagN[iring] = 1;
 
-          dir_wTagN[iring][0] = 0.669764;
-          dir_wTagN[iring][1] = -0.742179;
-          dir_wTagN[iring][2] = 0.0242228;
+          dir_wTagN[iring][0] = 1.;
+          dir_wTagN[iring][1] = 0.;
+          dir_wTagN[iring][2] = 0.;
           /*for (int idir=0; idir<3; idir++) {
             dir_wTagN[iring][idir] = 0.;
           }*/
@@ -728,7 +728,7 @@ void TreeManager::FillBrankTree(int TagID) {
       //iclass = 0;
       mode_NoNTag   = 1;
       Ibound_NoNTag = 1;
-      numnu_NoNTag  = 10; //default
+      numnu_NoNTag  = 0; //default
       for (Int_t ivc=0; ivc<numnu_NoNTag; ivc++) {
         pnu_NoNTag[ivc]  = 0.6;
         ipnu_NoNTag[ivc] = 12;
@@ -738,21 +738,21 @@ void TreeManager::FillBrankTree(int TagID) {
         dirnu_NoNTag[ivc][2] = 0.0242228;
       }
 
-      Npvc_NoNTag = 10; //default
+      Npvc_NoNTag = 5; //default
       for (Int_t ivc=0; ivc<Npvc_NoNTag; ivc++) {
         Ipvc_NoNTag[ivc]   = 1;
         Ichvc_NoNTag[ivc]  = 1;
-        Iflvc_NoNTag[ivc]  = 1;
-        Iorgvc_NoNTag[ivc] = 1;
-        Abspvc_NoNTag[ivc] = 0.1;
-        for (int idir=0; idir<3; idir++) Pvc_NoNTag[ivc][idir] = 0.1;
+        Iflvc_NoNTag[ivc]  = 0;
+        Iorgvc_NoNTag[ivc] = 0;
+        Abspvc_NoNTag[ivc] = 100;
+        for (int idir=0; idir<3; idir++) Pvc_NoNTag[ivc][idir] = 5.;
       }
       Crsx_NoNTag   = -1.;
       Crsy_NoNTag   = -1.;
       Crsz_NoNTag   = -1.;
       Crsphi_NoNTag = -1.;
 
-      Nvert_NoNTag = 10; //default
+      Nvert_NoNTag = 5; //default
       for (int iv=0; iv<Nvert_NoNTag; iv++) {
         Iflgvert_NoNTag[iv] = 1;
         for (int idir=0; idir<3; idir++) Posvert_NoNTag[iv][idir] = 0.1;
@@ -769,7 +769,7 @@ void TreeManager::FillBrankTree(int TagID) {
           Dirvert_NoNTag[ivc][idir] = 0.1;
         }
       }
-      Fsiprob_NoNTag = 1.;
+      Fsiprob_NoNTag = 0.5;
 
       Numbndn_NoNTag = 8;
       Numbndp_NoNTag = 8;
@@ -796,7 +796,7 @@ void TreeManager::FillBrankTree(int TagID) {
       Fsiprobsk_NoNTag = 0.1;
 
 
-      npar_NoNTag = 10; //default
+      npar_NoNTag = 0; //default
       for (int iv=0; iv<npar_NoNTag; iv++) {
         ipv_NoNTag[iv]   = 1;
         pmomv_NoNTag[iv] = 0.1;
@@ -809,32 +809,32 @@ void TreeManager::FillBrankTree(int TagID) {
         }*/
       }
       for (int idir=0; idir<3; idir++) posv_NoNTag[idir] = 0.1;
-      wallv_NoNTag  = 0.1;
+      wallv_NoNTag  = 400;
       wgtosc_NoNTag = 0.2;
       for (int ipi=0; ipi<2; ipi++) {
-        pi0like_NoNTag[ipi] = 0.1;
-        pi0mass_NoNTag[ipi] = 0.1;
+        pi0like_NoNTag[ipi] = 0;
+        pi0mass_NoNTag[ipi] = 0;
         for (int jpi=0; jpi<2; jpi++) {
-          pi0_e_NoNTag[ipi][jpi] = 0.1;
+          pi0_e_NoNTag[ipi][jpi] = 0;
 
-          pi0_dir_NoNTag[ipi][jpi][0] = 0.669764;
-          pi0_dir_NoNTag[ipi][jpi][1] = -0.742179;
-          pi0_dir_NoNTag[ipi][jpi][2] = 0.0242228;
+          pi0_dir_NoNTag[ipi][jpi][0] = 0.;
+          pi0_dir_NoNTag[ipi][jpi][1] = 0.;
+          pi0_dir_NoNTag[ipi][jpi][2] = 0.;
           /*for (int idir=0; idir<3; idir++) {
             pi0_dir_NoNTag[ipi][jpi][idir] = 0.;
           }*/
         }
       }
-      nmue_NoNTag = 1;
+      nmue_NoNTag = 0;
 
       nscndprt_NoNTag = 10; //default
       for (int iscnd=0; iscnd<nscndprt_NoNTag; iscnd++) {
         itrkscnd_NoNTag[iscnd] = 1;
         iprtscnd_NoNTag[iscnd] = 1;
         tscnd_NoNTag[iscnd]    = 0.1;
-        iprntprt_NoNTag[iscnd] = 1;
-        lmecscnd_NoNTag[iscnd] = 1;
-        iprnttrk_NoNTag[iscnd] = 1;
+        iprntprt_NoNTag[iscnd] = 11;
+        lmecscnd_NoNTag[iscnd] = 5;
+        iprnttrk_NoNTag[iscnd] = 3;
         iorgprt_NoNTag[iscnd]  = 1;
         iflgscnd_NoNTag[iscnd] = 1;
         for (int idir=0; idir<3; idir++) {
@@ -844,19 +844,19 @@ void TreeManager::FillBrankTree(int TagID) {
         }
       }
       
-      nring_NoNTag  = 2; //default
+      nring_NoNTag  = 0; //default
       nev_NoNTag    = 1;
       nhitac_NoNTag = 1;
       wall_NoNTag   = 0.1;
       evis_NoNTag   = 0.1;
 
-      fqnse_NoNTag = 10; //default
+      fqnse_NoNTag = 0; //default
       for (Int_t ifq=0; ifq<fqnse_NoNTag; ifq++) {
         for (int ihyp=0; ihyp<7; ihyp++) {
 
-          fq1rdir_NoNTag[ifq][ihyp][0] = 0.669764;
-          fq1rdir_NoNTag[ifq][ihyp][1] = -0.742179;
-          fq1rdir_NoNTag[ifq][ihyp][2] = 0.0242228;
+          fq1rdir_NoNTag[ifq][ihyp][0] = 0.1;
+          fq1rdir_NoNTag[ifq][ihyp][1] = 0.1;
+          fq1rdir_NoNTag[ifq][ihyp][2] = 0.1;
           /*for (int idir=0; idir<3; idir++) {
             //fqmrdir_NoNTag[ifq][ihyp][idir] = 0.;
             //fqmrmom_NoNTag[ifq][ihyp][idir] = 0.;
@@ -864,17 +864,17 @@ void TreeManager::FillBrankTree(int TagID) {
           }*/
         }
       }
-      fqmome_NoNTag = 0.1;
-      fqmomm_NoNTag = 0.1;
+      fqmome_NoNTag = 200.;
+      fqmomm_NoNTag = 500.;
 
-      fqnmrfit_NoNTag = 2; //default
+      fqnmrfit_NoNTag = 0; //default
       for (Int_t ifq=0; ifq<fqnmrfit_NoNTag; ifq++) {
         //ipp_wTagN[ifq] = fqmrifit[ifq];
         for (int ihyp=0; ihyp<6; ihyp++) {
 
-          fqmrdir_NoNTag[ifq][ihyp][0] = 0.669764;
-          fqmrdir_NoNTag[ifq][ihyp][1] = -0.742179;
-          fqmrdir_NoNTag[ifq][ihyp][2] = 0.0242228;
+          fqmrdir_NoNTag[ifq][ihyp][0] = 0.1;
+          fqmrdir_NoNTag[ifq][ihyp][1] = 0.1;
+          fqmrdir_NoNTag[ifq][ihyp][2] = 0.1;
           for (int idir=0; idir<3; idir++) {
             //fqmrdir_NoNTag[ifq][ihyp][idir] = 0.;
             fqmrmom_NoNTag[ifq][ihyp][idir] = 0.1;
@@ -889,12 +889,12 @@ void TreeManager::FillBrankTree(int TagID) {
         }
       }*/
       if (nring_NoNTag==0) {
-        for (int iring=0; iring<10; iring++) {
+        for (int iring=0; iring<1; iring++) {
           ip_NoNTag[iring] = 1;
 
-          dir_NoNTag[iring][0] = 0.669764;
-          dir_NoNTag[iring][1] = -0.742179;
-          dir_NoNTag[iring][2] = 0.0242228;
+          dir_NoNTag[iring][0] = 1.;
+          dir_NoNTag[iring][1] = 0.;
+          dir_NoNTag[iring][2] = 0.;
           /*for (int idir=0; idir<3; idir++) {
             dir_NoNTag[iring][idir] = 0.;
           }*/
@@ -904,9 +904,9 @@ void TreeManager::FillBrankTree(int TagID) {
         for (int iring=0; iring<nring_NoNTag; iring++) {
           ip_NoNTag[iring] = 1;
 
-          dir_NoNTag[iring][0] = 0.669764;
-          dir_NoNTag[iring][1] = -0.742179;
-          dir_NoNTag[iring][2] = 0.0242228;
+          dir_NoNTag[iring][0] = 1.;
+          dir_NoNTag[iring][1] = 0.;
+          dir_NoNTag[iring][2] = 0.;
           /*for (int idir=0; idir<3; idir++) {
             dir_NoNTag[iring][idir] = 0.;
           }*/

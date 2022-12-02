@@ -20,12 +20,12 @@ TH1F* h1_NNvar_Gd[NNVARIABLES];
 
 TH1F* h1_NTagOut[4];
 
-TH1F* h1_FitT_NHitsExcess;
+TH1F* h1_FitT_NHitsExcess;  // use @ getNNvariables.cc
 //TH1F* h1_lmecscnd_NHitsExcess;
 //TH2F* h2_tscnd_lmecscnd_NHitsExcess;
 TH1F* h1_IntID;
 TH1F* h1_KE;
-TH1F* h1_timediff;
+TH1F* h1_timediff;  // use @ getNNvariables.cc
 
 //TH2F* h2_NHits_x_NumAccNoise;
 //TH2F* h2_N200_x_NumAccNoise;

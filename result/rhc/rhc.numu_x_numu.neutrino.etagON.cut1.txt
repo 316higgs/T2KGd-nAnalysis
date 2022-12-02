@@ -7,6 +7,9 @@
 [Neutrino] C3: 88132 -> 88132
 [Neutrino] C4: 61680 -> 82354
 [Neutrino] C5: 60488 -> 80522
+Generated CCQE events   : 118252
+Generated CCnonQE events: 105974
+Generated NC events     : 75234
 [Decay-e Cut Scan] 
 [Decay-e Cut Scan] dt = 20 us: 82354
                              : 80522
@@ -18,8 +21,9 @@
                              : 80628
 [Decay-e Cut Scan] dt =  3 us: 83196
                              : 81327
-[Neutrino] All Parent Neutrino Events: 299460
+[Neutrino] All Parent Neutrino Events          : 299460
 [Neutrino] Generated Neutrino Events(wallv>200): 190292
+[Neutrino] Generated 1Rmu Events (Oscillated)  : 17426.9
  
 [Neutrino] Oscillated CCQE Events     : 9068.92(72.6216 %)
            w/ truth neutrons : 4012.48 (60.2246 %), w/o truth neutrons :5056.54 (86.8002 %)

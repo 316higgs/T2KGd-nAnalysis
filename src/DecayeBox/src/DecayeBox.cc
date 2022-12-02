@@ -108,17 +108,17 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
   //Make tscnd list
   std::vector<float> tscndlist;
   for (int jsub=0; jsub<nse_true; jsub++) {
-    std::cout << "[true] push_back tscnd = " << numu->var<float>("tscnd", jsub) << " us" << std::endl;
+    //std::cout << "[true] push_back tscnd = " << numu->var<float>("tscnd", jsub) << " us" << std::endl;
     tscndlist.push_back( numu->var<float>("tscnd", jsub) );
 
-    std::cout << "[true] push_back tscnd = " << tscnd[jsub]/1000. << " us" << std::endl;
+    //std::cout << "[true] push_back tscnd = " << tscnd[jsub]/1000. << " us" << std::endl;
     tscndlist.push_back( tscnd[jsub]/1000. );
   }
 
   //Make dt list
   std::vector<float> dtlist;
   for (int jsub=1; jsub<nse_reco; jsub++) {
-    std::cout << "[reco] push_back dt = " << (numu->var<float>("fq1rt0", 1, jsub) - numu->var<float>("fq1rt0", 2, 0))/1000. << " us" << std::endl;
+    //std::cout << "[reco] push_back dt = " << (numu->var<float>("fq1rt0", 1, jsub) - numu->var<float>("fq1rt0", 2, 0))/1000. << " us" << std::endl;
     dtlist.push_back( (numu->var<float>("fq1rt0", 1, jsub) - numu->var<float>("fq1rt0", 2, 0))/1000. );
   }
 
@@ -132,7 +132,7 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
   bool loopfinisher = false;
   while (loopfinisher==false) {
 
-    std::cout << "[### DecayeBox::GetDecayeTagPurity() ###] true:reco = " << truecounter << " : " << recocounter << std::endl;
+    //std::cout << "[### DecayeBox::GetDecayeTagPurity() ###] true:reco = " << truecounter << " : " << recocounter << std::endl;
 
     ///////////////////////////////////
     //
@@ -211,8 +211,7 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
       float this_iprtscnd = numu->var<int>("iprtscnd", itrue);
       float this_lmecscnd = numu->var<int>("lmecscnd", itrue);
       float this_tscnd = tscndlist.at(itrue);
-      if (this_iprtscnd==2112 || this_iprtscnd==22)
-        std::cout << "[true# " << itrue+1 << "]  PID = " << this_iprtscnd << ", interaction code: << " << this_lmecscnd << ", Track# = " << itrkscnd[itrue] << std::endl;
+      //if (this_iprtscnd==2112 || this_iprtscnd==22) std::cout << "[true# " << itrue+1 << "]  PID = " << this_iprtscnd << ", interaction code: << " << this_lmecscnd << ", Track# = " << itrkscnd[itrue] << std::endl;
       //std::cout << "  tscnd = " << this_tscnd << " us" << std::endl;
 
       /*float this_pscnd = std::sqrt(pscnd[itrue][0]*pscnd[itrue][0] +
@@ -275,9 +274,9 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
     recocounter -= 1;
 
     loopfinisher = (truecounter==0 || recocounter==0);
-    std::cout << "-----------------" << std::endl; 
+    //std::cout << "-----------------" << std::endl; 
   }
-  std::cout << " " << std::endl;
+  //std::cout << " " << std::endl;
 
   //Get the number of tagged truth decay-e
   TaggedTrueDecaye += fin_itr_reco.size();

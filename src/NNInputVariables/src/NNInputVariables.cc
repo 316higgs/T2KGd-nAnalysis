@@ -199,8 +199,9 @@ void NNInputVariables::SetNNinputHisto() {
       h1_KE -> Fill(gammaenergy);
     }
   }
-
 }*/
+
+
 
 
 void NNInputVariables::cdNNInputVariables(TFile* fout) {

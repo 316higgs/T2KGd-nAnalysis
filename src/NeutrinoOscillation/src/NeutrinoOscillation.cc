@@ -345,7 +345,8 @@ float NeutrinoOscillation::GetEnuResolution(CC0PiNumu* numu, float theta, float 
     //CC RES (Delta0)
     if (mode==12) h1_Enureso[5] -> Fill(EnuReso);
 
-    //CC other
+    //CC other(not include CCRES)
+    //should be included CCRES?
     if (mode>=14 && mode<=30) h1_Enureso[6] -> Fill(EnuReso);
 
     //NC
@@ -662,7 +663,7 @@ float NeutrinoOscillation::GetWgtNeutrino(CC0PiNumu* numu, float theta, float th
 
       if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCRES0 += OscProb;
     }
-    //CC other
+    //CC other(not include CCRES)
     if (mode>=14 && mode<=30) {
       h1_TruthOscProb[6]      -> Fill(TrueEnu, OscProb);
 

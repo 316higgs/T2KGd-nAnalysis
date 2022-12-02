@@ -70,6 +70,9 @@ cleanprotoanalysis:
 cleancreateOAinputs:
 	$(RM) createOAinputs.o createOAinputs.exe
 
+cleangetNNvariables:
+	$(RM) getNNvariables.o getNNvariables.exe
+
 cleanDecayeTag:
 	$(RM) DecayeTag.o DecayeTag.exe
 

@@ -110,6 +110,13 @@ int main(int argc, char **argv) {
 
   //=========  TTree event variables  ============
   float NTrueN = 0.;
+  float vecvx  = 0.;
+  float vecvy  = 0.;
+  float vecvz  = 0.;
+  tchev->SetBranchAddress("NTrueN", &NTrueN);
+  tchev->SetBranchAddress("vecvx", &vecvx);
+  tchev->SetBranchAddress("vecvy", &vecvy);
+  tchev->SetBranchAddress("vecvz", &vecvz);
   //=========  TTree taggable variables  ============
   std::vector<int> *Type = 0;
   TBranch *bType = 0;
@@ -125,16 +132,27 @@ int main(int argc, char **argv) {
   TBranch *bPID = 0;
   std::vector<int> *ParentPID = 0;
   TBranch *bParentPID = 0;
+  std::vector<int> *ParentIndex = 0; //avalable at NTag1.1.2
+  TBranch *bParentIndex = 0;         //avalable at NTag1.1.2
   std::vector<int> *IntID = 0;
   TBranch *bIntID = 0;
-  //double par_t[100];
   std::vector<float> *par_t = 0;
   TBranch *bpar_t = 0;
+  std::vector<float> *par_x = 0;
+  TBranch *bpar_x = 0;
+  std::vector<float> *par_y = 0;
+  TBranch *bpar_y = 0;
+  std::vector<float> *par_z = 0;
+  TBranch *bpar_z = 0;
   tchpar->SetBranchAddress("PID", &PID, &bPID);
   tchpar->SetBranchAddress("ParentPID", &ParentPID, &bParentPID);
+  tchpar->SetBranchAddress("ParentIndex", &ParentIndex, &bParentIndex); //avalable at NTag1.1.2
   tchpar->SetBranchAddress("IntID", &IntID, &bIntID);
-  //tchpar->SetBranchAddress("t", par_t);
+  tchpar->SetBranchAddress("t", par_t);
   tchpar->SetBranchAddress("t", &par_t, &bpar_t);
+  tchpar->SetBranchAddress("x", &par_x, &bpar_x);
+  tchpar->SetBranchAddress("y", &par_y, &bpar_y);
+  tchpar->SetBranchAddress("z", &par_z, &bpar_z);
   //=========  TTree ntag variables  ============
   std::vector<float> *Label = 0;
   TBranch *bLabel = 0;
@@ -231,6 +249,24 @@ int main(int argc, char **argv) {
   NNInputVariables nninputs;
   nninputs.SetNNinputHisto();
 
+  DistanceViewer ndistance;
+  ndistance.SetHistoFrame();
+  ndistance.SetHistoFormat();
+
+
+  //Total event number of muon
+  int NumberMu = 0;
+
+  //Number of neutrons from mu-
+  int NumberMuN = 0;
+
+  //Number of neutrons from neutrino
+  int NumberNuN = 0;
+
+  int expNumberNuN = 0;
+
+  int NumberGdn = 0;
+
 
   //Process
   CLTOptionSummary(ETAGKeyword, ETAG, MCTypeKeyword, MCType);
@@ -249,8 +285,12 @@ int main(int argc, char **argv) {
     Long64_t tentry = tchntag->LoadTree(ientry);
     bPID        -> GetEntry(tentry);
     bParentPID  -> GetEntry(tentry);
+    bParentIndex -> GetEntry(tentry);  //avalable at NTag1.1.2
     bIntID      -> GetEntry(tentry);
     bpar_t      -> GetEntry(tentry);
+    bpar_x      -> GetEntry(tentry);
+    bpar_y      -> GetEntry(tentry);
+    bpar_z      -> GetEntry(tentry);
     bType       -> GetEntry(tentry);
     bE          -> GetEntry(tentry);
     bLabel      -> GetEntry(tentry);
@@ -276,6 +316,7 @@ int main(int argc, char **argv) {
     numu->applyfQ1RCC0PiNumuCut();
     const EvSelVar_t evsel = numu->getEvSelVar();
 
+
     //New 1R muon selection
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., true)) {
       GetSelectedModeEvents(numu);
@@ -292,7 +333,7 @@ int main(int argc, char **argv) {
           h1_energy_capture -> Fill(gammaenergy);
         }
       }*/
-      
+
 
       int reco = 0;
       float reco_mucaptime = 0.;
@@ -343,16 +384,20 @@ int main(int argc, char **argv) {
           }
 
           //Pre-NN
-          /*if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
+#if 1
+          if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
           if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar);
           if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar);
-          if (Label->at(jentry)==3) h1_NNvar_Gd[ivar]       -> Fill(NNVar);*/
+          if (Label->at(jentry)==3) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
+#endif
 
           //Post-NN
+#if 0
           if (Label->at(jentry)==0 && TagOut->at(jentry) > NLIKETHRESHOLD) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
           if (Label->at(jentry)==1 && TagOut->at(jentry) > NLIKETHRESHOLD) h1_NNvar_Decaye[ivar]   -> Fill(NNVar);
           if (Label->at(jentry)==2 && TagOut->at(jentry) > NLIKETHRESHOLD) h1_NNvar_H[ivar]        -> Fill(NNVar);
           if (Label->at(jentry)==3 && TagOut->at(jentry) > NLIKETHRESHOLD) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
+#endif
         }
 
         //TMVA output
@@ -372,17 +417,22 @@ int main(int argc, char **argv) {
       }
 
 
+      //NHits excess check
       int truth = 0;
       float truth_mucaptime = 0.;
+      //Truth particles loop
       //std::cout << "Npvc(" << Npvc << ") + nscndprt(" << nscndprt << "): " << Npvc+nscndprt << std::endl;
       for (UInt_t jentry=0; jentry<PID->size(); ++jentry) {
         //std::cout << "[" << jentry+1 << "] PID: " << PID->at(jentry) << " --- ParentPID: " << ParentPID->at(jentry) << std::endl;
+
+        //Truth gamma from muon
         if (PID->at(jentry)==22 && ParentPID->at(jentry)==13) {
           //std::cout << "[" << jentry+1 << "] PID: " << PID->at(jentry) << " --- ParentPID: " 
           //                                          << ParentPID->at(jentry) << " IntID:" 
           //                                          << IntID->at(jentry) << std::endl;
           h1_IntID -> Fill(IntID->at(jentry));
 
+          //mu- capture
           if (IntID->at(jentry)==5) {
             truth++;
             truth_mucaptime = par_t->at(jentry);
@@ -391,11 +441,183 @@ int main(int argc, char **argv) {
         }
       }
 
+      //matching with the excess event and the truth
       if (reco==1 && reco==truth) h1_timediff -> Fill(truth_mucaptime - reco_mucaptime);
       //if (reco==1 && reco==truth) h1_timediff -> Fill(truth_mucaptime);
+
+
+
+      //Get gamma from mu- capture and make lists of neutrons from mu- capture and neutrino interactions
+      std::vector<int> MuNeutronList;
+      std::vector<int> NuNeutronList;
+      for (UInt_t jentry=0; jentry<PID->size(); ++jentry) {
+
+        float d_x = std::fabs(par_x->at(jentry) - vecvx);
+        float d_y = std::fabs(par_y->at(jentry) - vecvy);
+        float d_z = std::fabs(par_z->at(jentry) - vecvz);
+        float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
+
+        //Fill creation vertex of all gamma-primary vertex
+        /*if (PID->at(jentry)==22) {
+          h1_truedistance_particle -> Fill(d/100.);
+        }*/
+
+        //Total number of muon
+        if (PID->at(jentry)==13) NumberMu++;
+
+        //Number of neutrons from muon
+        if (PID->at(jentry)==2112 && ParentPID->at(jentry)==13 && IntID->at(jentry)==5) NumberMuN++; 
+
+        //Number of neutrons from neutrino interaction
+        if (PID->at(jentry)==2112 && ParentPID->at(jentry)==0) NumberNuN++;
+        //if (!(IntID->at(jentry)==5 && ParentPID->at(jentry)==13) && PID->at(jentry)==2112 && ParentPID->at(jentry)==0) NumberNuN++;
+
+        if (PID->at(jentry)==22 && ParentPID->at(jentry)==22) NumberGdn++;
+
+        std::cout << "[### " << ientry << " ###] Particle[" << jentry << "]=" << PID->at(jentry) 
+                                       << ", ParentPID=" << ParentPID->at(jentry) 
+                                       << ", ParentIndex=" << ParentIndex->at(jentry) << std::endl;
+
+        //Products from mu- capture (either n or gamma)
+        if (IntID->at(jentry)==5 && ParentPID->at(jentry)==13) {
+          //h1_truedistance_mu -> Fill(d/100.);
+          if (PID->at(jentry)==22) h1_truedistance_mu_gamma -> Fill(d/100.);
+
+          if (PID->at(jentry)==2112) {
+            std::cout << "----------------> MuNeutron[" << jentry << "] ParentPID: " << ParentPID->at(jentry) << std::endl;
+            MuNeutronList.push_back(jentry);
+          }
+        }
+        //Neutrons from neutrino interaction
+        else {
+          if (PID->at(jentry)==2112 && ParentPID->at(jentry)==0) {
+            std::cout << "----------------> NuNeutron[" << jentry << "] ParentPID: " << ParentPID->at(jentry) << std::endl;
+            NuNeutronList.push_back(jentry);
+          }
+        }
+      }
+      expNumberNuN += NuNeutronList.size();
+
+
+      //Get gamma from neutron lists which are obtained the above loop
+      /*
+      int filled_mu_n = 0;
+      int filled_nu_n = 0;
+      for (UInt_t jentry=0; jentry<PID->size(); ++jentry) {
+
+        float d_x = std::fabs(par_x->at(jentry) - vecvx);
+        float d_y = std::fabs(par_y->at(jentry) - vecvy);
+        float d_z = std::fabs(par_z->at(jentry) - vecvz);
+        float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
+
+        //Get gamma from neutron captures
+        if (PID->at(jentry)==22 && ParentPID->at(jentry)==2112) {
+
+          //Find neutron captures (n from mu- capture)
+          for (UInt_t imu=0; imu<MuNeutronList.size(); ++imu) {
+            if (ParentIndex->at(jentry) == MuNeutronList.at(imu)) {
+              std::cout << "[### " << jentry << " ###] ParentIndex: " << ParentIndex->at(jentry) << " --- MuNeutron[" << MuNeutronList.at(imu) << "] filled: " << filled_mu_n << std::endl;
+              if (filled_mu_n==0) h1_truedistance_mu_n -> Fill(d/100.);
+              filled_mu_n++;
+            }
+          }
+          std::cout << "--------" << std::endl;
+
+          //Find neutron captures (n from neutrino interaction)
+          for (UInt_t inu=0; inu<NuNeutronList.size(); ++inu) {
+            if (ParentIndex->at(jentry) == NuNeutronList.at(inu)) {
+              std::cout << "[### " << jentry << " ###] ParentIndex: " << ParentIndex->at(jentry) << " --- NuNeutron[" << NuNeutronList.at(inu) << "] filled: " << filled_nu_n << std::endl;
+              if (filled_nu_n==0) h1_truedistance_nu_n -> Fill(d/100.);
+              filled_nu_n++;
+            }
+          }
+
+        }
+        
+      }
+      std::cout << " " << std::endl;
+      */
+     
+
+      if (NuNeutronList.size()==0) {
+        std::cout << " " << std::endl;
+        //continue;
+      }
+      else {
+        std::cout << "Start to find neutrons..." << std::endl;
+        int done_nu_n = 0;
+        while(NuNeutronList.size() - done_nu_n != 0) {
+          for (UInt_t inu=0; inu<PID->size(); ++inu) {
+
+            float d_x = std::fabs(par_x->at(inu) - vecvx);
+            float d_y = std::fabs(par_y->at(inu) - vecvy);
+            float d_z = std::fabs(par_z->at(inu) - vecvz);
+            float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
+
+            if (PID->at(inu)==22 && 
+                ParentPID->at(inu)==2112 && 
+                ParentIndex->at(inu)==NuNeutronList[done_nu_n]) {
+              std::cout << "[### " << ientry << " ###] FOUND:" << inu 
+                        << " ParentIndex = " << ParentIndex->at(inu) 
+                        << " --- NuNeutronList[" << done_nu_n << "] = " << NuNeutronList[done_nu_n] << std::endl;
+              h1_truedistance_nu_n -> Fill(d/100.);
+              break;
+            }
+            std::cout << "[### " << ientry << " ###] Searching neutrons from nu... List[" << done_nu_n << "]=" << NuNeutronList[done_nu_n] << " : Particle[" << inu << "]=" << ParentIndex->at(inu) << std::endl;
+          }
+          std::cout << "-------------------------------------------------------------------------------------" << std::endl;
+          done_nu_n++;
+        }
+      }
+
+      if (MuNeutronList.size()==0) {
+        std::cout << " " << std::endl;
+        //continue;
+      }
+      else {
+        std::cout << "Start to find neutrons..." << std::endl;
+        int done_mu_n = 0;
+        while(MuNeutronList.size() - done_mu_n != 0) {
+          for (UInt_t imu=0; imu<PID->size(); ++imu) {
+
+            float d_x = std::fabs(par_x->at(imu) - vecvx);
+            float d_y = std::fabs(par_y->at(imu) - vecvy);
+            float d_z = std::fabs(par_z->at(imu) - vecvz);
+            float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
+
+            if (PID->at(imu)==22 && 
+                ParentPID->at(imu)==2112 && 
+                ParentIndex->at(imu)==MuNeutronList[done_mu_n]) {
+              std::cout << "[### " << ientry << " ###] FOUND:" << imu 
+                        << " ParentIndex = " << ParentIndex->at(imu) 
+                        << " --- MuNeutronList[" << done_mu_n << "] = " << MuNeutronList[done_mu_n] << std::endl;
+              h1_truedistance_mu_n -> Fill(d/100.);
+              break;
+            }
+            std::cout << "[### " << ientry << " ###] Searching neutrons from mu... List[" << done_mu_n << "]=" << MuNeutronList[done_mu_n] << " : Particle[" << imu << "]=" << ParentIndex->at(imu) << std::endl;
+          }
+          std::cout << "-------------------------------------------------------------------------------------" << std::endl;
+          done_mu_n++;
+        }
+      }
       
-    }
-  }
+      std::cout << " " << std::endl;
+
+      //clean up
+      MuNeutronList.clear();
+      NuNeutronList.clear();
+
+    } //1R mu selection
+
+  } //Event loop
+
+
+  std::cout << "Total number of muon events              : " << NumberMu << std::endl;
+  std::cout << "Total number of neutrons from mu- capture: " << NumberMuN << std::endl;
+  std::cout << "Number of Gd-n (mu- capture)             : " << h1_truedistance_mu_n->Integral() << std::endl;
+  std::cout << "Total number of neutrons from neutrino   : " << NumberNuN << std::endl;
+  std::cout << "Expected number of neutrons from neutrino: " << expNumberNuN << std::endl;
+  std::cout << "Number of Gd-n (neutrino)                : " << h1_truedistance_nu_n->Integral() << std::endl;
 
 
   TFile* fout = new TFile(OutputRootName, "RECREATE");
@@ -412,5 +634,9 @@ int main(int argc, char **argv) {
 
   nninputs.cdNNInputVariables(fout);
   nninputs.WritePlots();
+
+  ndistance.cdDistanceViewer(fout);
+  ndistance.WritePlots();
+  gDirectory -> cd("..");
 
 }

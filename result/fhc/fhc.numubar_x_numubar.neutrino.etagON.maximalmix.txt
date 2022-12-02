@@ -1,0 +1,56 @@
+[fiTQun OUTPUT] /disk02/usr6/sedi/fiTQun/converted_output/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0*.part00*.skip*.root
+[NTag   OUTPUT] /disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0*.part00*.skip*.root
+ 
+[Neutrino] C0: 126994 -> 126994
+[Neutrino] C1: 77200 -> 77200
+[Neutrino] C2: 74157 -> 74157
+[Neutrino] C3: 74123 -> 74123
+[Neutrino] C4: 37842 -> 72759
+[Neutrino] C5: 37008 -> 71169
+Generated CCQE events   : 101087
+Generated CCnonQE events: 116341
+Generated NC events     : 82572
+[Decay-e Cut Scan] 
+[Decay-e Cut Scan] dt = 20 us: 72759
+                             : 71169
+[Decay-e Cut Scan] dt = 15 us: 72760
+                             : 71170
+[Decay-e Cut Scan] dt = 10 us: 72767
+                             : 71177
+[Decay-e Cut Scan] dt =  5 us: 72848
+                             : 71257
+[Decay-e Cut Scan] dt =  3 us: 73118
+                             : 71518
+[Neutrino] All Parent Neutrino Events          : 300000
+[Neutrino] Generated Neutrino Events(wallv>200): 190909
+[Neutrino] Generated 1Rmu Events (Oscillated)  : 37454.6
+ 
+[Neutrino] Oscillated CCQE Events     : 10157.9(60.8308 %)
+           w/ truth neutrons : 9501.1 (60.4429 %), w/o truth neutrons :656.79 (67.0563 %)
+           w/ tagged neutrons: 5466.9(53.4248 %), w/o tagged neutrons:4690.98(72.5517 %)
+[Neutrino] Oscillated CC(2p2h) Events : 2132.12(12.7683 %)
+           w/ truth neutrons : 2080.23 (13.2337 %), w/o truth neutrons :51.8917 (5.29799 %)
+           w/ tagged neutrons: 1576.68(15.4079 %), w/o tagged neutrons:555.442(8.59059 %)
+[Neutrino] Oscillated CCRES0 Events   : 333.044(1.99445 %)
+           w/ truth neutrons : 332.027 (2.11225 %), w/o truth neutrons :1.01746 (0.10388 %)
+           w/ tagged neutrons: 272.752(2.66545 %), w/o tagged neutrons:60.2922(0.932494 %)
+[Neutrino] Oscillated CCRES+ Events   : 655.752(3.927 %)
+           w/ truth neutrons : 600.187 (3.81819 %), w/o truth neutrons :55.5653 (5.67306 %)
+           w/ tagged neutrons: 437.303(4.27351 %), w/o tagged neutrons:218.448(3.37857 %)
+[Neutrino] Oscillated CCRES++ Events  : 1872.68(11.2146 %)
+           w/ truth neutrons : 1861.87 (11.8446 %), w/o truth neutrons :10.8131 (1.10399 %)
+           w/ tagged neutrons: 1554.42(15.1904 %), w/o tagged neutrons:318.267(4.9224 %)
+[Neutrino] Oscillated All CCRES Events: 2861.48(17.1361 %)
+           w/ truth neutrons : 2794.08 (17.775 %), w/o truth neutrons :67.3959 (6.88092 %)
+           w/ tagged neutrons: 2264.47(22.1294 %), w/o tagged neutrons:597.008(9.23346 %)
+[Neutrino] Oscillated CC Other Events : 727.106(4.3543 %)
+           w/ truth neutrons : 604.723 (3.84705 %), w/o truth neutrons :122.383 (12.495 %)
+           w/ tagged neutrons: 432.833(4.22982 %), w/o tagged neutrons:294.273(4.5513 %)
+[Neutrino] Oscillated NC Events       : 820(4.9106 %)
+           w/ truth neutrons : 739 (4.70128 %), w/o truth neutrons :81 (8.26986 %)
+           w/ tagged neutrons: 492(4.80803 %), w/o tagged neutrons:328(5.07293 %)
+[Neutrino] Oscillated Neutrino Events within [0.25 GeV, 1.5 GeV]
+           Legacy Analysis    : 16698.5(Osc)/46354(No Osc) = 0.360239
+           Only CCQE(1p1h)    : 10157.9(Osc)/32717(No Osc) = 0.310477
+           w/o truth neutrons : 979.461(Osc)/2838(No Osc) = 0.345124
+           w/o tagged neutrons: 6465.69(Osc)/19273(No Osc) = 0.335479

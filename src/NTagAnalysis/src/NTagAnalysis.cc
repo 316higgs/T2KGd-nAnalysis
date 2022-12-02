@@ -881,6 +881,7 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
           //CC RES(Delta+)
           if (mode==13) h1_Enureso_CCRES_deltap[0] -> Fill(EnuReso);
           //CC-other
+          //should be included CCRES?
           if (mode>=14 && mode<=30) h1_Enureso_CCOther[0] -> Fill(EnuReso);
           //NC
           if (mode>=31) h1_Enureso_NC[0] -> Fill(EnuReso);
@@ -916,7 +917,8 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
           if (mode==12) h1_Enureso_CCRES_delta0[1] -> Fill(EnuReso);
           //CC RES(Delta+)
           if (mode==13) h1_Enureso_CCRES_deltap[1] -> Fill(EnuReso);
-          //CC-other
+          //CC-other(not include CCRES)
+          //should be included CCRES?
           if (mode>=14 && mode<=30) h1_Enureso_CCOther[1] -> Fill(EnuReso);
           //NC
           if (mode>=31) h1_Enureso_NC[1] -> Fill(EnuReso);
@@ -962,6 +964,7 @@ void NTagAnalysis::GetResolutionwTrueN(CC0PiNumu* numu, float NTrueN) {
     //CC RES (Delta+)
     if (mode==13) h1_Enureso_CCRES_deltap_trueN[0] -> Fill(EnuReso);
     //CC-other
+    //should be included CCRES?
     if (mode>=14 && mode<=30) h1_Enureso_CCOther_trueN[0] -> Fill(EnuReso);
     //NC
     if (mode>=31) h1_Enureso_NC_trueN[0] -> Fill(EnuReso);
@@ -978,6 +981,7 @@ void NTagAnalysis::GetResolutionwTrueN(CC0PiNumu* numu, float NTrueN) {
     //CC RES (Delta+)
     if (mode==13) h1_Enureso_CCRES_deltap_trueN[1] -> Fill(EnuReso);
     //CC-other
+    //should be included CCRES?
     if (mode>=14 && mode<=30) h1_Enureso_CCOther_trueN[1] -> Fill(EnuReso);
     //NC
     if (mode>=31) h1_Enureso_NC_trueN[1] -> Fill(EnuReso);

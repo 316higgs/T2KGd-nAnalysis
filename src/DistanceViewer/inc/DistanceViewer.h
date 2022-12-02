@@ -9,11 +9,20 @@
 //Truth distance distribution
 TH1F* h1_truedistance;
 TH1F* h1_truedistance_CCQE;
+TH1F* h1_truedistance_CC2p2h;
+TH1F* h1_truedistance_CCOther;
 TH1F* h1_truedistance_CCnonQE;
 TH1F* h1_truedistance_NC;
-TH1F* h1_truedistance_CCRESdeltap;
-TH1F* h1_truedistance_CCRESdeltapp;
-TH1F* h1_truedistance_CCRESdelta0;
+//TH1F* h1_truedistance_CCRESdeltap;
+//TH1F* h1_truedistance_CCRESdeltapp;
+//TH1F* h1_truedistance_CCRESdelta0;
+
+TH1F* h1_truedistance_particle; //test
+TH1F* h1_truedistance_nu_n;
+TH1F* h1_truedistance_mu;
+TH1F* h1_truedistance_mu_n;
+TH1F* h1_truedistance_mu_gamma;
+
 
 //Truth distance distribution of truth neutrons in candidates
 TH1F* h1_Candidatetruedistance;
@@ -39,6 +48,7 @@ class DistanceViewer {
     	                     float primaryvtxx,
     	                     float primaryvtxy,
     	                     float primaryvtxz);
+
 
     void GetPreEffDistance(int tagindex,
                            UInt_t matchtrue,
