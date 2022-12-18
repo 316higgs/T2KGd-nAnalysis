@@ -273,7 +273,7 @@ float NeutrinoOscillation::GetTrueEnu(CC0PiNumu* numu) {
   //CCQE(1p1h)
   if (mode==1) h1_Enutrue[0] -> Fill(Enu);
 
-  //CC non-QE
+  //CC 2p2h
   if (mode>=2 && mode<=10) h1_Enutrue[1] -> Fill(Enu);
 
   //NC
@@ -299,7 +299,7 @@ float NeutrinoOscillation::GetRecoEnu(CC0PiNumu* numu) {
   //CCQE(1p1h)
   if (mode==1) h1_Enureco[0] -> Fill(Enu/1000.);
 
-  //CC non-QE
+  //CC 2p2h
   if (mode>=2 && mode<=10) h1_Enureco[1] -> Fill(Enu/1000.);
 
   //NC

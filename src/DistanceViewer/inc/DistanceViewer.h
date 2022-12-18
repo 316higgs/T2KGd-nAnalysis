@@ -23,6 +23,10 @@ TH1F* h1_truedistance_mu;
 TH1F* h1_truedistance_mu_n;
 TH1F* h1_truedistance_mu_gamma;
 
+TH1F* h1_truedistance_decaye;   // |primary vtx - decay-e genated vertex|
+TH1F* h1_truedistance_mudecay;  // |primary vtx - mu decay vertex|
+TH1F* h1_truedistance_pidecay;  // |primary vtx - pi+ decay vertex|
+
 
 //Truth distance distribution of truth neutrons in candidates
 TH1F* h1_Candidatetruedistance;

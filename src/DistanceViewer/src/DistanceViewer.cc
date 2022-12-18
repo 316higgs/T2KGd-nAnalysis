@@ -20,6 +20,10 @@ void DistanceViewer::SetHistoFrame() {
   h1_truedistance_mu_n     = new TH1F("h1_truedistance_mu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
   h1_truedistance_mu_gamma = new TH1F("h1_truedistance_mu_gamma", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
 
+  h1_truedistance_decaye   = new TH1F("h1_truedistance_decaye", "Truth distance; Distance from primary vertex[m]; Number of Events", 50, 0, 5);
+  h1_truedistance_mudecay = new TH1F("h1_truedistance_mudecay", "Truth distance of #mu decay; Distance from primary vertex[m]; Number of Events", 50, 0, 5);
+  h1_truedistance_pidecay = new TH1F("h1_truedistance_pidecay", "Truth distance of #pi^{+} decay; Distance from primary vertex[m]; Number of Events", 50, 0, 5);
+
   h1_Candidatetruedistance = new TH1F("h1_Candidatetruedistance", "Truth Distance From PV; Truth distance[m]; Entries", 10, 0, 5);
   ((TGaxis*)h1_Candidatetruedistance->GetYaxis())->SetMaxDigits(4);
 
@@ -239,6 +243,10 @@ void DistanceViewer::WritePlots() {
   //h1_truedistance_CCRESdeltap  -> Write();
   //h1_truedistance_CCRESdeltapp -> Write();
   //h1_truedistance_CCRESdelta0  -> Write();
+
+  h1_truedistance_decaye  -> Write();
+  h1_truedistance_mudecay -> Write();
+  h1_truedistance_pidecay -> Write();
 
   h1_truedistance_particle -> Write();
   h1_truedistance_nu_n -> Write();

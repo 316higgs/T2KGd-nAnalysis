@@ -217,11 +217,16 @@ int main(int argc, char **argv) {
   Int_t   Ipvc[100];        //PID of primary particles
   Float_t Pvc[100][3];      //Momentum of primary particles
   Int_t   Iflvc[100];       //Flag of final states
-  Int_t   Ichvc[100];       //Chase at detector simulation or not(1: chase/0: not chase)
+  Int_t   Ichvc[100];       //Chase at detector simulation or not (1: chase/0: not chase)
+  Int_t   Iorgvc[100];      //Index of parent particle (0: initial particles, n: n-th final particle at the primary interaction)
   Int_t   nscndprt;         //Number of secondary particles
   Int_t   iprtscnd[1000];   //PID of the secondary particle
   Float_t tscnd[1000];      //Generated time of secondary particles
   Int_t   iprntprt[1000];   //PID of the parent of this secondary particle
+  Int_t   iorgprt[1000];
+  Int_t   iprnttrk[1000];
+  Int_t   iprntidx[1000];   //Index of the parent particle (0: no parent(connected from primary particles), n: the parent of n-th secondary particle)
+  Int_t   ichildidx[1000];  //Index of the first child particle (0: no childs, n: the first child of n-th secondary particle)
   Int_t   lmecscnd[1000];   //Interaction code of secondary particles based on GEANT
   Float_t pscnd[1000][3];   //Momentum of the secondary particle
   tchfQ -> SetBranchAddress("Npvc", &Npvc);
@@ -229,10 +234,15 @@ int main(int argc, char **argv) {
   tchfQ -> SetBranchAddress("Ipvc", Ipvc);
   tchfQ -> SetBranchAddress("Ichvc", Ichvc);
   tchfQ -> SetBranchAddress("Iflvc", Iflvc);
+  tchfQ -> SetBranchAddress("Iorgvc", Iorgvc);
   tchfQ -> SetBranchAddress("nscndprt", &nscndprt);
   tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
   tchfQ -> SetBranchAddress("tscnd", tscnd);
   tchfQ -> SetBranchAddress("iprntprt", iprntprt);
+  tchfQ -> SetBranchAddress("iorgprt", iorgprt);
+  tchfQ -> SetBranchAddress("iprnttrk", iprnttrk);
+  tchfQ -> SetBranchAddress("iprntidx", iprntidx);
+  tchfQ -> SetBranchAddress("ichildidx", ichildidx);
   tchfQ -> SetBranchAddress("lmecscnd", lmecscnd);
   tchfQ -> SetBranchAddress("pscnd", pscnd);
 
@@ -256,16 +266,20 @@ int main(int argc, char **argv) {
 
   //Total event number of muon
   int NumberMu = 0;
+  int NumberMuCap = 0;
+  int NumberMu_wNeutrons = 0;
 
   //Number of neutrons from mu-
   int NumberMuN = 0;
+  int NumberNCap_MuN = 0;
 
   //Number of neutrons from neutrino
   int NumberNuN = 0;
+  int NumberNCap_NuN = 0;
 
-  int expNumberNuN = 0;
+  //int expNumberNuN = 0;
 
-  int NumberGdn = 0;
+  int NumberNCap = 0;
 
 
   //Process
@@ -316,6 +330,9 @@ int main(int argc, char **argv) {
     numu->applyfQ1RCC0PiNumuCut();
     const EvSelVar_t evsel = numu->getEvSelVar();
 
+
+    //Number of selected neutrino events
+    Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
 
     //New 1R muon selection
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., true)) {
@@ -447,9 +464,36 @@ int main(int argc, char **argv) {
 
 
 
+#if 0
+      //NEUT level check
+      // primary particles
+      std::cout << "------  NEUT primary info  ------" << std::endl;
+      for (int iprm=0; iprm<Npvc; iprm++) {
+        std::cout << "[### " << ientry << " ###] Particle[" << iprm << "]=" << Ipvc[iprm]
+                                       << ", Iflvc=" << Iflvc[iprm] 
+                                       << ", Ichvc=" << Ichvc[iprm]
+                                       << ", Iorgvc=" <<Iorgvc[iprm] << std::endl;
+      }
+
+      // secondary particles
+      std::cout << "------  NEUT secondary info  ------" << std::endl;
+      for (int iscnd=0; iscnd<nscndprt; iscnd++) {
+        std::cout << "[### " << ientry << " ###] Particle[" << iscnd << "]=" << iprtscnd[iscnd]
+                                       << ", iprntprt=" << iprntprt[iscnd]
+                                       << ", iprntidx=" << iprntidx[iscnd] 
+                                       << ", ichildidx=" << ichildidx[iscnd] << std::endl;
+      }
+#endif
+
+
       //Get gamma from mu- capture and make lists of neutrons from mu- capture and neutrino interactions
-      std::vector<int> MuNeutronList;
-      std::vector<int> NuNeutronList;
+      std::cout << "------  NTag info  ------" << std::endl;
+      int mu_thisev = 0;  // Number of muons
+      int n_thisev  = 0;  // Number of neutrons from mu- captures
+      bool MuCapture = false;            // This muon is captured or not?
+      bool MuCapture_wNeutrons = false;  // This muon capture emits neutrons or not?
+      //bool MuBremsstrahlung = false;     // This muon occurs bremsstrahlung
+
       for (UInt_t jentry=0; jentry<PID->size(); ++jentry) {
 
         float d_x = std::fabs(par_x->at(jentry) - vecvx);
@@ -462,162 +506,141 @@ int main(int argc, char **argv) {
           h1_truedistance_particle -> Fill(d/100.);
         }*/
 
-        //Total number of muon
-        if (PID->at(jentry)==13) NumberMu++;
+        std::cout << "[### " << ientry << " ###] Particle[" << jentry << "]=" << PID->at(jentry) 
+                                       << ", ParentPID=" << ParentPID->at(jentry) 
+                                       << ", ParentIndex=" << ParentIndex->at(jentry)
+                                       << ", IntID=" << IntID->at(jentry)
+                                       << std::endl;
+
+        //Total number of mu-
+        if (PID->at(jentry)==13) {
+
+          NumberMu++;   //Total number of muons
+          mu_thisev++;  //Number of muons in this neutrino event
+
+          //Bremsstrahlung from mu- (@ secondary lists)
+          if (mu_thisev==2 && IntID->at(jentry)==9) {
+            //MuBremsstrahlung = true;
+            NumberMu -= 1; //prevent double counting
+          }
+        }
+
+        //Find particles from muon captures
+        if (ParentPID->at(jentry)==13 && IntID->at(jentry)==5) {
+          MuCapture = true;
+        }
 
         //Number of neutrons from muon
-        if (PID->at(jentry)==2112 && ParentPID->at(jentry)==13 && IntID->at(jentry)==5) NumberMuN++; 
+        if (PID->at(jentry)==2112 && ParentPID->at(jentry)==13 && IntID->at(jentry)==5) {
+          MuCapture_wNeutrons = true; //switch on flag at once
+          n_thisev++;
+          NumberMuN++;
+        }
+        
 
         //Number of neutrons from neutrino interaction
         if (PID->at(jentry)==2112 && ParentPID->at(jentry)==0) NumberNuN++;
         //if (!(IntID->at(jentry)==5 && ParentPID->at(jentry)==13) && PID->at(jentry)==2112 && ParentPID->at(jentry)==0) NumberNuN++;
 
-        if (PID->at(jentry)==22 && ParentPID->at(jentry)==22) NumberGdn++;
+        //Number of all neutron captures
+        if (PID->at(jentry)==22 && ParentPID->at(jentry)==2112) NumberNCap++;
 
-        std::cout << "[### " << ientry << " ###] Particle[" << jentry << "]=" << PID->at(jentry) 
-                                       << ", ParentPID=" << ParentPID->at(jentry) 
-                                       << ", ParentIndex=" << ParentIndex->at(jentry) << std::endl;
 
         //Products from mu- capture (either n or gamma)
-        if (IntID->at(jentry)==5 && ParentPID->at(jentry)==13) {
+        /*if (IntID->at(jentry)==5 && ParentPID->at(jentry)==13) {
           //h1_truedistance_mu -> Fill(d/100.);
           if (PID->at(jentry)==22) h1_truedistance_mu_gamma -> Fill(d/100.);
 
           if (PID->at(jentry)==2112) {
-            std::cout << "----------------> MuNeutron[" << jentry << "] ParentPID: " << ParentPID->at(jentry) << std::endl;
+            //std::cout << "----------------> MuNeutron[" << jentry << "] ParentPID: " << ParentPID->at(jentry) << std::endl;
             MuNeutronList.push_back(jentry);
           }
         }
         //Neutrons from neutrino interaction
         else {
           if (PID->at(jentry)==2112 && ParentPID->at(jentry)==0) {
-            std::cout << "----------------> NuNeutron[" << jentry << "] ParentPID: " << ParentPID->at(jentry) << std::endl;
+            //std::cout << "----------------> NuNeutron[" << jentry << "] ParentPID: " << ParentPID->at(jentry) << std::endl;
             NuNeutronList.push_back(jentry);
           }
+        }*/
+        
+        //gamma from neutron capture
+        if (PID->at(jentry)==22) {
+          if (ParentPID->at(jentry)==2112 && ParentIndex->at(jentry)!=-1) {
+            //std::cout << "   !!!! Gamma from neutron !!!!  ParentIndex=" << ParentIndex->at(jentry) << std::endl;
+            //std::cout << "                                 ParentPID=" << ParentPID->at(ParentIndex->at(jentry)) << std::endl;
+            if (ParentPID->at(ParentIndex->at(jentry))==13) {
+              //std::cout << "                                 **** This is n from mu- ****" << std::endl;
+              NumberNCap_MuN++;
+            }
+            else {
+              //std::cout << "                                 **** This is n from nu interaction ****" << std::endl;
+              NumberNCap_NuN++;
+            }
+            
+          }
         }
+
       }
-      expNumberNuN += NuNeutronList.size();
+      h1_MuNeutronMultiplicity -> Fill(n_thisev);
 
 
-      //Get gamma from neutron lists which are obtained the above loop
-      /*
-      int filled_mu_n = 0;
-      int filled_nu_n = 0;
+      //Count number of muons with neutrons
       for (UInt_t jentry=0; jentry<PID->size(); ++jentry) {
 
-        float d_x = std::fabs(par_x->at(jentry) - vecvx);
-        float d_y = std::fabs(par_y->at(jentry) - vecvy);
-        float d_z = std::fabs(par_z->at(jentry) - vecvz);
-        float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
-
-        //Get gamma from neutron captures
-        if (PID->at(jentry)==22 && ParentPID->at(jentry)==2112) {
-
-          //Find neutron captures (n from mu- capture)
-          for (UInt_t imu=0; imu<MuNeutronList.size(); ++imu) {
-            if (ParentIndex->at(jentry) == MuNeutronList.at(imu)) {
-              std::cout << "[### " << jentry << " ###] ParentIndex: " << ParentIndex->at(jentry) << " --- MuNeutron[" << MuNeutronList.at(imu) << "] filled: " << filled_mu_n << std::endl;
-              if (filled_mu_n==0) h1_truedistance_mu_n -> Fill(d/100.);
-              filled_mu_n++;
-            }
-          }
-          std::cout << "--------" << std::endl;
-
-          //Find neutron captures (n from neutrino interaction)
-          for (UInt_t inu=0; inu<NuNeutronList.size(); ++inu) {
-            if (ParentIndex->at(jentry) == NuNeutronList.at(inu)) {
-              std::cout << "[### " << jentry << " ###] ParentIndex: " << ParentIndex->at(jentry) << " --- NuNeutron[" << NuNeutronList.at(inu) << "] filled: " << filled_nu_n << std::endl;
-              if (filled_nu_n==0) h1_truedistance_nu_n -> Fill(d/100.);
-              filled_nu_n++;
-            }
-          }
-
+        //Muon captures
+        if (PID->at(jentry)==13 && MuCapture==true) {
+          NumberMuCap++;
         }
-        
-      }
-      std::cout << " " << std::endl;
-      */
-     
 
-      if (NuNeutronList.size()==0) {
-        std::cout << " " << std::endl;
-        //continue;
-      }
-      else {
-        std::cout << "Start to find neutrons..." << std::endl;
-        int done_nu_n = 0;
-        while(NuNeutronList.size() - done_nu_n != 0) {
-          for (UInt_t inu=0; inu<PID->size(); ++inu) {
-
-            float d_x = std::fabs(par_x->at(inu) - vecvx);
-            float d_y = std::fabs(par_y->at(inu) - vecvy);
-            float d_z = std::fabs(par_z->at(inu) - vecvz);
-            float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
-
-            if (PID->at(inu)==22 && 
-                ParentPID->at(inu)==2112 && 
-                ParentIndex->at(inu)==NuNeutronList[done_nu_n]) {
-              std::cout << "[### " << ientry << " ###] FOUND:" << inu 
-                        << " ParentIndex = " << ParentIndex->at(inu) 
-                        << " --- NuNeutronList[" << done_nu_n << "] = " << NuNeutronList[done_nu_n] << std::endl;
-              h1_truedistance_nu_n -> Fill(d/100.);
-              break;
-            }
-            std::cout << "[### " << ientry << " ###] Searching neutrons from nu... List[" << done_nu_n << "]=" << NuNeutronList[done_nu_n] << " : Particle[" << inu << "]=" << ParentIndex->at(inu) << std::endl;
-          }
-          std::cout << "-------------------------------------------------------------------------------------" << std::endl;
-          done_nu_n++;
-        }
-      }
-
-      if (MuNeutronList.size()==0) {
-        std::cout << " " << std::endl;
-        //continue;
-      }
-      else {
-        std::cout << "Start to find neutrons..." << std::endl;
-        int done_mu_n = 0;
-        while(MuNeutronList.size() - done_mu_n != 0) {
-          for (UInt_t imu=0; imu<PID->size(); ++imu) {
-
-            float d_x = std::fabs(par_x->at(imu) - vecvx);
-            float d_y = std::fabs(par_y->at(imu) - vecvy);
-            float d_z = std::fabs(par_z->at(imu) - vecvz);
-            float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
-
-            if (PID->at(imu)==22 && 
-                ParentPID->at(imu)==2112 && 
-                ParentIndex->at(imu)==MuNeutronList[done_mu_n]) {
-              std::cout << "[### " << ientry << " ###] FOUND:" << imu 
-                        << " ParentIndex = " << ParentIndex->at(imu) 
-                        << " --- MuNeutronList[" << done_mu_n << "] = " << MuNeutronList[done_mu_n] << std::endl;
-              h1_truedistance_mu_n -> Fill(d/100.);
-              break;
-            }
-            std::cout << "[### " << ientry << " ###] Searching neutrons from mu... List[" << done_mu_n << "]=" << MuNeutronList[done_mu_n] << " : Particle[" << imu << "]=" << ParentIndex->at(imu) << std::endl;
-          }
-          std::cout << "-------------------------------------------------------------------------------------" << std::endl;
-          done_mu_n++;
+        //Muon captures with neutrons
+        if (PID->at(jentry)==13 && MuCapture_wNeutrons==true) {
+          NumberMu_wNeutrons++;
         }
       }
       
+      
       std::cout << " " << std::endl;
-
-      //clean up
-      MuNeutronList.clear();
-      NuNeutronList.clear();
 
     } //1R mu selection
 
   } //Event loop
 
 
-  std::cout << "Total number of muon events              : " << NumberMu << std::endl;
-  std::cout << "Total number of neutrons from mu- capture: " << NumberMuN << std::endl;
-  std::cout << "Number of Gd-n (mu- capture)             : " << h1_truedistance_mu_n->Integral() << std::endl;
-  std::cout << "Total number of neutrons from neutrino   : " << NumberNuN << std::endl;
-  std::cout << "Expected number of neutrons from neutrino: " << expNumberNuN << std::endl;
-  std::cout << "Number of Gd-n (neutrino)                : " << h1_truedistance_nu_n->Integral() << std::endl;
+  std::fstream resultfile;
+  resultfile.open(ResultSummary, std::ios_base::out);
+  if (!resultfile.is_open()) {
+    std::cout << "Results can not be written in " << ResultSummary << std::endl;
+  }
+  else {
+    resultfile << "[fiTQun OUTPUT] " << fiTQunFileName << std::endl;
+    resultfile << "[NTag   OUTPUT] " << NtagFileName   << std::endl;
+    resultfile << " " << std::endl;
+
+    for (int i=0; i<SELECTIONCUTS; i++) {
+      resultfile << "[Neutrino] C" << i << ": " << ProtoSelectedParentNeutrinos[i] << " -> " << SelectedParentNeutrinos[i] << std::endl;
+      h1_1RmuonEvents->fArray[i+1]      = (float)SelectedParentNeutrinos[i]/SelectedParentNeutrinos[0];
+      h1_Proto1RmuonEvents->fArray[i+1] = (float)ProtoSelectedParentNeutrinos[i]/ProtoSelectedParentNeutrinos[0];
+    }
+    resultfile << "Selected NC events: " << SelectedNCevents << std::endl;
+  }
+
+
+
+  std::cout << "Total number of muons                    : " << NumberMu       << std::endl;
+  std::cout << "Number of muon captures                  : " << NumberMuCap    
+            << " (fraction of muon captures: " << ((float)NumberMuCap/NumberMu)*100. << " %)" << std::endl;
+  std::cout << "Number of muon captures with neutrons    : " << NumberMu_wNeutrons 
+            << " (fraction of muons with neutrons: " << ((float)NumberMu_wNeutrons/NumberMu)*100. << " %)" << std::endl;
+  std::cout << "Total number of neutrons from mu- capture: " << NumberMuN      
+            << " (Mean number of neutrons from mu-: " << ((float)NumberMuN/NumberMu_wNeutrons)*100. << ")" << std::endl;
+  //std::cout << "Number of Gd-n (mu- capture)             : " << h1_truedistance_mu_n->Integral() << std::endl;
+  std::cout << "Total number of neutrons from neutrino   : " << NumberNuN      << std::endl;
+  std::cout << "Total number of all neutron captures     : " << NumberNCap     << std::endl;
+  std::cout << "Number of captured neutrons (from mu-)   : " << NumberNCap_MuN << std::endl;
+  std::cout << "Number of captured neutrons (from nu)    : " << NumberNCap_NuN << std::endl;
+  //std::cout << "Expected number of neutrons from neutrino: " << expNumberNuN << std::endl;
+  //std::cout << "Number of Gd-n (neutrino)                : " << h1_truedistance_nu_n->Integral() << std::endl;
 
 
   TFile* fout = new TFile(OutputRootName, "RECREATE");

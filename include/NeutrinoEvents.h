@@ -347,3 +347,29 @@ void GetProtoSelectedModeEvents(CC0PiNumu* numu) {
   if (mode>=31) ProtoSelectedNCevents++;
 }
 
+
+void GetNeutrinoInteraction(int ientry, int mode) {
+  if (mode==1) {
+    std::cout << "[### " << ientry << " ###] Neutrino interaction: CCQE" << std::endl;
+  }
+  else if (mode>=2 && mode<=10) {
+    std::cout << "[### " << ientry << " ###] Neutrino interaction: CC 2p2h" << std::endl;
+  }
+  else if (mode==13) {
+    std::cout << "[### " << ientry << " ###] Neutrino interaction: CC RES(Delta+)" << std::endl;
+  }
+  else if (mode==11) {
+    std::cout << "[### " << ientry << " ###] Neutrino interaction: CC RES(Delta++)" << std::endl;
+  }
+  else if (mode==12) {
+    std::cout << "[### " << ientry << " ###] Neutrino interaction: CC RES(Delta0)" << std::endl;
+  }
+  else if (mode>13 && mode<=30) {
+    std::cout << "[### " << ientry << " ###] Neutrino interaction: CC other" << std::endl;
+  }
+  else if (mode>=31) {
+    std::cout << "[### " << ientry << " ###] Neutrino interaction: NC" << std::endl;
+  }
+}
+
+

@@ -27,6 +27,8 @@ TH1F* h1_IntID;
 TH1F* h1_KE;
 TH1F* h1_timediff;  // use @ getNNvariables.cc
 
+TH1F* h1_MuNeutronMultiplicity;
+
 //TH2F* h2_NHits_x_NumAccNoise;
 //TH2F* h2_N200_x_NumAccNoise;
 

@@ -49,8 +49,8 @@ COMMENTOUT
 
 #### neutron classification(mu- vs nu) #####
 #<<COMMENTOUT
-./getNNvariables.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part001.skip0.root\
-                     $NTAGDIR3/tageoption/noinpmt/numu/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part001.skip0.root\
+./getNNvariables.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip0.root\
+                     $NTAGDIR3/tageoption/noinpmt/numu/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip0.root\
                      $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.preNN.ndistance.root\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.preNN.ndistance.txt\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.preNN.ndistance.txt\

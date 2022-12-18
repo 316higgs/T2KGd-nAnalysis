@@ -24,8 +24,10 @@ void mergeEnuOscillation(bool beammode) {
 
   //FHC
 #if fhcflag
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.root");
+  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.003conc.0532.root");
+  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.003conc.0532.root");
   TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
 #endif
 
@@ -303,8 +305,10 @@ void mergeEnuOscillation(bool beammode) {
 
   TLegend* legend1 = new TLegend(0.45, 0.45, 0.87, 0.87);
   legend1 -> SetTextSize(0.04);
-  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
-  else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
+  //if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
+  //else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
+  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.03% Gd)}","");
+  else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.03% Gd)}","");
   legend1 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
   //legend1 -> AddEntry(h1_CCnonQE_numu, "#nu_{#mu} CC non-QE", "F");
@@ -315,9 +319,10 @@ void mergeEnuOscillation(bool beammode) {
   legend1 -> AddEntry(h1_CCOther_numubar, "#bar{#nu}_{#mu} CC-other", "F");
   legend1 -> AddEntry(h1_NC_numu, "NC", "F");
   legend1->SetFillColor(0);
-  legend1->Draw() ;
+  legend1->Draw();
+#endif
 
-
+#if 1
   // NTag separation
   TCanvas* c2 = new TCanvas("c2","c2",900,700);
   c2 -> SetGrid();
@@ -332,8 +337,10 @@ void mergeEnuOscillation(bool beammode) {
 
   TLegend* legend2 = new TLegend(0.45, 0.45, 0.87, 0.87);
   legend2 -> SetTextSize(0.04);
-  if (beammode) legend2->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
-  else legend2->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
+  //if (beammode) legend2->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
+  //else legend2->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
+  if (beammode) legend2->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.03% Gd)}","");
+  else legend2->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.03% Gd)}","");
   legend2->AddEntry((TObject*)0,"#kern[-0.3]{w/ tagged neutrons}","");
   legend2 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
   legend2 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
@@ -361,8 +368,10 @@ void mergeEnuOscillation(bool beammode) {
 
   TLegend* legend3 = new TLegend(0.45, 0.45, 0.87, 0.87);
   legend3 -> SetTextSize(0.04);
-  if (beammode) legend3->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
-  else legend3->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
+  //if (beammode) legend3->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
+  //else legend3->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
+  if (beammode) legend3->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.03% Gd)}","");
+  else legend3->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.03% Gd)}","");
   legend3->AddEntry((TObject*)0,"#kern[-0.3]{w/o tagged neutrons}","");
   legend3 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
   legend3 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");

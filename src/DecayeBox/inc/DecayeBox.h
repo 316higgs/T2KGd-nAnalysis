@@ -11,6 +11,7 @@ TH1F* h1_TaggedDecaye_CCpi;
 TH1F* h1_mintimediff;
 TH1F* h1_pscnd;
 TH1F* h1_iprtscnd;
+TH1F* h1_TrueDecaye[INTERACTIONTYPE];
 
 //dt vs N50 for decay-e cut
 TH2D* h2_dtn50;

@@ -5,4 +5,7 @@
 #include "TText.h"
 
 void DecayeNum() {
+
+	// Categorization of neutrino interactions +
+	// FHC/RHC normalization
 }

@@ -79,16 +79,6 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 ##### FHC numu -> numu Gd MC #####
 #./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/fhc.numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                   $NTAGDIR/tageoption/fhc.numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-#                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.etagOFF.root\
-#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.etagOFF.txt\
-#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.etagOFF.txt\
-#                   -MCType Gd\
-#                   -ETAG OFF\
-#                   -BEAMMODE FHC\
-#                   -OSCCH NUMU
-
-#./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/fhc.numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-#                   $NTAGDIR/tageoption/fhc.numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.etagON.root\
 #                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.etagON.txt\
 #                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.etagON.txt\

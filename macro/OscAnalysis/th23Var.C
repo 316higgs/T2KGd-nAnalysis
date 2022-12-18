@@ -1,8 +1,8 @@
 
 #define NA 6.0221409
 #define FV 22.5
-//#define POTSCALE 1.96  //Run1-10 FHC
-#define POTSCALE 1.63  //Run1-10 RHC
+#define POTSCALE 1.96  //Run1-10 FHC
+//#define POTSCALE 1.63  //Run1-10 RHC
 
 void th23Var(bool beammode, TString outname) {
   int fhcflag = 1;
@@ -20,15 +20,23 @@ void th23Var(bool beammode, TString outname) {
   //==== 0.532 ====
   //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.root");
   //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.003conc.0532.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.003conc.0532.root");
   //==== 0.511 ====
   //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.maximalmix.root");
   //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.maximalmix.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.003conc.0511.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.003conc.0511.root");
   //==== 0.5 ====
   //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.0.5.root");
   //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.0.5.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.003conc.05.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.003conc.05.root");
   //==== 0.55 ====
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.0.55.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.0.55.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.0.55.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.0.55.root");
+  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.003conc.055.root");
+  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.003conc.055.root");
  
   TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
 #endif

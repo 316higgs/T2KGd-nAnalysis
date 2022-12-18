@@ -180,6 +180,8 @@ void NNInputVariables::SetNNinputHisto() {
   h1_KE = new TH1F("h1_KE", "h1_KE; E_{#gamma}[MeV]; Area Normalized", 20, 0, 10);
   h1_timediff = new TH1F("h1_timediff", "h1_timediff; t^{true} - t^{reco}[#musec]; Area Normalized", 50, -0.02, 0.02);
 
+  h1_MuNeutronMultiplicity = new TH1F("h1_MuNeutronMultiplicity", "h1_MuNeutronMultiplicity; # of neutrons/event; Entries", 5, 0, 5);
+
   //h2_tscnd_lmecscnd_NHitsExcess -> SetStats(0);
   //h2_NHits_x_NumAccNoise -> SetStats(0);
   //h2_N200_x_NumAccNoise  -> SetStats(0);
@@ -249,5 +251,7 @@ void NNInputVariables::WritePlots() {
   h1_IntID  -> Write();
   h1_KE -> Write();
   h1_timediff -> Write();
+
+  h1_MuNeutronMultiplicity -> Write();
 }
 

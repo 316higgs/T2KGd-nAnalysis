@@ -10,6 +10,10 @@ void DecayeBox::SetHistoFrame() {
   h1_pscnd             = new TH1F("h1_pscnd", "h1_pscnd; pscnd[MeV]; Number of Events", 80, -80, 80);
   h1_iprtscnd          = new TH1F("h1_iprtscnd", "h1_iprtscnd; iprtscnd; Number of Events", 2490, 10, 2500);
 
+  for (int i=0; i<INTERACTIONTYPE; i++) {
+    h1_TrueDecaye[i] = new TH1F(TString::Format("h1_TrueDecaye_mode%d", i), "h1_TrueDecaye; Number of Truth Decay-e; Number of Neutrino Events", 8, 0, 8);
+  }
+
   h2_reso_x_pscnd = new TH2F("h2_reso_x_pscnd", "h2_reso_x_pscnd; dt - tscnd[#musec]; pscnd[MeV]", 100, 0.8, 1.2, 40, 0, 80);
   h2_reso_x_pscnd -> SetStats(0);
   h2_reso_x_iprtscnd = new TH2F("h2_reso_x_iprtscnd", "h2_reso_x_iprtscnd; dt[#musec]; iprtscnd", 50, 0., 5., 2490, 10, 2500);
@@ -33,6 +37,9 @@ void DecayeBox::SetHistoFormat() {
   h1_TaggedDecaye      -> SetLineWidth(2);
   h1_TaggedDecaye_CCQE -> SetLineWidth(2);
   h1_TaggedDecaye_CCpi -> SetLineWidth(2);
+  for (int i=0; i<INTERACTIONTYPE; i++) {
+    h1_TrueDecaye[i] -> SetLineWidth(2);
+  }
 }
 
 
@@ -334,4 +341,10 @@ void DecayeBox::WritePlots() {
 
   h2_dtn50 -> Scale(1./SelectedParentNeutrinos[5]);
   h2_dtn50 -> Write();
+
+  for (int i=0; i<INTERACTIONTYPE; i++) {
+    Double_t tot_truedecaye = h1_TrueDecaye[i]->Integral();
+    //h1_TrueDecaye[i] -> Scale(1./tot_truedecaye);
+    h1_TrueDecaye[i] -> Write();
+  }
 }
