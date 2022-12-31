@@ -14,15 +14,15 @@ void DistanceViewer::SetHistoFrame() {
   //h1_truedistance_CCRESdeltapp = new TH1F("h1_truedistance_CCRESdeltapp", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
   //h1_truedistance_CCRESdelta0  = new TH1F("h1_truedistance_CCRESdelta0", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
 
-  h1_truedistance_particle = new TH1F("h1_truedistance_particle", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
   h1_truedistance_nu_n     = new TH1F("h1_truedistance_nu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
-  h1_truedistance_mu       = new TH1F("h1_truedistance_mu", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
   h1_truedistance_mu_n     = new TH1F("h1_truedistance_mu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
-  h1_truedistance_mu_gamma = new TH1F("h1_truedistance_mu_gamma", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
 
-  h1_truedistance_decaye   = new TH1F("h1_truedistance_decaye", "Truth distance; Distance from primary vertex[m]; Number of Events", 50, 0, 5);
+  h1_truedistance_decaye   = new TH1F("h1_truedistance_decaye", "Truth distance; Distance from primary vertex[m]; Number of Events", 100, 0, 5);
   h1_truedistance_mudecay = new TH1F("h1_truedistance_mudecay", "Truth distance of #mu decay; Distance from primary vertex[m]; Number of Events", 50, 0, 5);
   h1_truedistance_pidecay = new TH1F("h1_truedistance_pidecay", "Truth distance of #pi^{+} decay; Distance from primary vertex[m]; Number of Events", 50, 0, 5);
+
+  h2_truedistance_x_mom = new TH2F("h2_truedistance_x_mom", "Trueth distance vs momnetum; Truth distance[m]; Truth momentum[MeV]", 50, 0, 5, 20, 0, 80);
+  h2_truedistance_x_mom -> SetStats(0);
 
   h1_Candidatetruedistance = new TH1F("h1_Candidatetruedistance", "Truth Distance From PV; Truth distance[m]; Entries", 10, 0, 5);
   ((TGaxis*)h1_Candidatetruedistance->GetYaxis())->SetMaxDigits(4);
@@ -100,11 +100,11 @@ void DistanceViewer::SetHistoFormat() {
   h1_truedistance_CCRESdelta0 -> SetTitleSize(0.035, "Y");
   h1_truedistance_CCRESdelta0 -> SetLabelSize(0.033, "Y");*/
 
-  h1_truedistance_particle -> SetLineWidth(2);
+  /*h1_truedistance_particle -> SetLineWidth(2);
   h1_truedistance_particle -> SetLineColor(kViolet+8);
   h1_truedistance_particle -> SetTitleOffset(1.4, "Y");
   h1_truedistance_particle -> SetTitleSize(0.035, "Y");
-  h1_truedistance_particle -> SetLabelSize(0.033, "Y");
+  h1_truedistance_particle -> SetLabelSize(0.033, "Y");*/
 
   h1_truedistance_nu_n -> SetLineWidth(2);
   h1_truedistance_nu_n -> SetLineColor(kRed-8);
@@ -112,11 +112,11 @@ void DistanceViewer::SetHistoFormat() {
   h1_truedistance_nu_n -> SetTitleSize(0.035, "Y");
   h1_truedistance_nu_n -> SetLabelSize(0.033, "Y");
 
-  h1_truedistance_mu -> SetLineWidth(2);
+  /*h1_truedistance_mu -> SetLineWidth(2);
   h1_truedistance_mu -> SetLineColor(kCyan-5);
   h1_truedistance_mu -> SetTitleOffset(1.4, "Y");
   h1_truedistance_mu -> SetTitleSize(0.035, "Y");
-  h1_truedistance_mu -> SetLabelSize(0.033, "Y");
+  h1_truedistance_mu -> SetLabelSize(0.033, "Y");*/
 
   h1_truedistance_mu_n -> SetLineWidth(2);
   h1_truedistance_mu_n -> SetLineColor(kCyan-5);
@@ -124,11 +124,11 @@ void DistanceViewer::SetHistoFormat() {
   h1_truedistance_mu_n -> SetTitleSize(0.035, "Y");
   h1_truedistance_mu_n -> SetLabelSize(0.033, "Y");
 
-  h1_truedistance_mu_gamma -> SetLineWidth(2);
+  /*h1_truedistance_mu_gamma -> SetLineWidth(2);
   h1_truedistance_mu_gamma -> SetLineColor(kOrange-2);
   h1_truedistance_mu_gamma -> SetTitleOffset(1.4, "Y");
   h1_truedistance_mu_gamma -> SetTitleSize(0.035, "Y");
-  h1_truedistance_mu_gamma -> SetLabelSize(0.033, "Y");
+  h1_truedistance_mu_gamma -> SetLabelSize(0.033, "Y");*/
 
   for (int i=0; i<CUTSTEP; i++) {
     h1_NNEff_dist[i] -> SetLineWidth(2);
@@ -248,11 +248,10 @@ void DistanceViewer::WritePlots() {
   h1_truedistance_mudecay -> Write();
   h1_truedistance_pidecay -> Write();
 
-  h1_truedistance_particle -> Write();
   h1_truedistance_nu_n -> Write();
-  h1_truedistance_mu   -> Write();
   h1_truedistance_mu_n -> Write();
-  h1_truedistance_mu_gamma -> Write();
+
+  h2_truedistance_x_mom -> Write();
 
   h1_PreEff_dist -> Sumw2();
   h1_PreEff_dist -> Divide(h1_truedistance);

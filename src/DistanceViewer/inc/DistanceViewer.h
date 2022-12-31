@@ -4,6 +4,7 @@
 //#include "/disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu/inc/CC0PiNumu.h"
 #include "/disk02/usr6/sedi/anat2ksk/src/cc0pinumu/inc/CC0PiNumu.h"
 #include "TH1D.h"
+#include "TH2D.h"
 
 
 //Truth distance distribution
@@ -17,16 +18,14 @@ TH1F* h1_truedistance_NC;
 //TH1F* h1_truedistance_CCRESdeltapp;
 //TH1F* h1_truedistance_CCRESdelta0;
 
-TH1F* h1_truedistance_particle; //test
 TH1F* h1_truedistance_nu_n;
-TH1F* h1_truedistance_mu;
 TH1F* h1_truedistance_mu_n;
-TH1F* h1_truedistance_mu_gamma;
 
 TH1F* h1_truedistance_decaye;   // |primary vtx - decay-e genated vertex|
 TH1F* h1_truedistance_mudecay;  // |primary vtx - mu decay vertex|
 TH1F* h1_truedistance_pidecay;  // |primary vtx - pi+ decay vertex|
 
+TH2F* h2_truedistance_x_mom;
 
 //Truth distance distribution of truth neutrons in candidates
 TH1F* h1_Candidatetruedistance;

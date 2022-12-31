@@ -16,7 +16,8 @@ enum class PDGPID
   PROTON = 2212,
   NEUTRON = 2112,
   PIPLUS = 211,
-  PI0 = 111
+  PI0 = 111,
+  KPLUS=321
 };
 
 enum class GEANTPID 
@@ -38,6 +39,7 @@ enum class GEANTPID
 enum class GEANTINT
 {
   DECAY = 5,
+  BREMSS = 9,
   HADRONIC = 12,
   HADRONIC_ELASTIC_COH = 13,
   NEUTRONCAPTURE = 18

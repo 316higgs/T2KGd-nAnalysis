@@ -337,10 +337,11 @@ int main(int argc, char **argv) {
         evsel.pass[2]==true &&
         evsel.pass[3]==true) 
     {
+    //if (evsel.pass[0]==true &&
+    //    evsel.pass[1]==true &&
+    //    evsel.pass[2]==true) 
+    //{
       GetSelectedModeEvents(numu);
-
-      int mode = TMath::Abs(numu->var<int>("mode"));
-      //std::cout << "[### " << ientry << " ###] Neutrino interaction: " << mode << std::endl;
 
       // primary particles
       //std::cout << "------  VECT primary info  ------" << std::endl;
@@ -349,6 +350,8 @@ int main(int argc, char **argv) {
       //std::cout << "[### " << ientry << " ###] posv=[" << posv[0] << ", " << posv[1] << ", " << posv[2] << "]" << std::endl;      
 
       // primary particles
+      int mode = TMath::Abs(numu->var<int>("mode"));
+      //GetNeutrinoInteraction(ientry, mode);
       //std::cout << "------  NEUT primary info  ------" << std::endl;
       //std::cout << "[### " << ientry << " ###] # of particles=" << Npvc << std::endl;
       //for (int iprm=0; iprm<Npvc; iprm++) {
@@ -372,25 +375,35 @@ int main(int argc, char **argv) {
       int e_aftercut_thisev = 0; // # of decay-e(after cut) in this event
       //int decaye_CONVVECT = 0;
       //int mucap_thisev = 0;      // # of mu- captures in this event
-      std::cout << "------  CONVVECT secondary info  ------" << std::endl;
-      std::cout << "[### " << ientry << " ###] # of particles=" << nscndprt << std::endl;
+      //std::cout << "------  CONVVECT secondary info  ------" << std::endl;
       for (int iscnd=0; iscnd<nscndprt; iscnd++) {
-        std::cout << "[### " << ientry << " ###] Particle[" << iscnd << "]=" << iprtscnd[iscnd]
-                                         << ", iprntprt=" << iprntprt[iscnd]
-                                         << ", iprntidx=" << iprntidx[iscnd] 
-                                         << ", ichildidx=" << ichildidx[iscnd] 
-                                         << ", lmecscnd=" << lmecscnd[iscnd] 
-                                         << ", vtxscnd=[" << vtxscnd[iscnd][0] << ", " << vtxscnd[iscnd][1] << ", " << vtxscnd[iscnd][2] << "]" << std::endl;
+        //std::cout << "[### " << ientry << " ###] Particle[" << iscnd << "]=" << iprtscnd[iscnd]
+        //                               << ", iprntprt=" << iprntprt[iscnd]
+        //                               << ", iprntidx=" << iprntidx[iscnd] 
+        //                               << ", ichildidx=" << ichildidx[iscnd] 
+        //                               << ", lmecscnd=" << lmecscnd[iscnd] 
+        //                               << ", vtxscnd=[" << vtxscnd[iscnd][0] << ", " << vtxscnd[iscnd][1] << ", " << vtxscnd[iscnd][2] << "]" << std::endl;
 
+        //if (std::fabs(iprtscnd[iscnd])==static_cast<int>(PDGPID::ELECTRON) && 
+        //    lmecscnd[iscnd]==static_cast<int>(GEANTINT::DECAY) &&
+        //    std::fabs(iprntprt[iscnd])==static_cast<int>(PDGPID::MUON)) {
         if (std::fabs(iprtscnd[iscnd])==static_cast<int>(PDGPID::ELECTRON) && 
-            lmecscnd[iscnd]==static_cast<int>(GEANTINT::DECAY) &&
-            std::fabs(iprntprt[iscnd])==static_cast<int>(PDGPID::MUON)) {
+            lmecscnd[iscnd]==static_cast<int>(GEANTINT::DECAY)) {
+
+          if (iprntprt[ iprntidx[iscnd]-1 ]==static_cast<int>(PDGPID::PIPLUS)) continue; 
+          //if (iprntprt[ iprntidx[iscnd]-1 ]!=static_cast<int>(PDGPID::PIPLUS)) std::cout << "Parent: " << iprntprt[ iprntidx[iscnd]-1 ] << std::endl;
+
           //decaye_CONVVECT++;
           float d_x = vtxscnd[iscnd][0] - posv[0];
           float d_y = vtxscnd[iscnd][1] - posv[1];
           float d_z = vtxscnd[iscnd][2] - posv[2];
           float d   = std::sqrt( d_x*d_x + d_y*d_y + d_z*d_z );
+          //if (d/100 <= 0.3) std::cout << "Parent: " << iprntprt[ iprntidx[iscnd]-1 ] << std::endl;
+          if (d/100 <= 0.3) std::cout << "Parent: " << iprntprt[iscnd] << ", Parent of parent: " << iprntprt[ iprntidx[iscnd]-1 ] << std::endl;
           h1_truedistance_decaye -> Fill(d/100.);
+
+          float mom = std::sqrt( pscnd[iscnd][0]*pscnd[iscnd][0] + pscnd[iscnd][1]*pscnd[iscnd][1] + pscnd[iscnd][2]*pscnd[iscnd][2] );
+          h2_truedistance_x_mom -> Fill(d/100., mom);
         }
 
         
@@ -411,7 +424,7 @@ int main(int argc, char **argv) {
         //if (iprtscnd[iscnd]==2112 && iprntprt[iscnd]==13 && lmecscnd[iscnd]==5) mucap_thisev++;
       }
       //if (decaye_VECT2!=decaye_CONVVECT) std::cout << "[### " << ientry << "###] decaye_VECT2=" << decaye_VECT2 << ", decaye_CONVVECT=" << decaye_CONVVECT << std::endl;
-      std::cout << " " << std::endl;
+      //std::cout << " " << std::endl;
 
       // Fill the # of decay-e in this event
       //std::cout << "Number of decay-e: " << e_thisev << std::endl;

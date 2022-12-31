@@ -61,6 +61,10 @@ VertexSelection.exe: VertexSelection.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
+NeutronVertex.exe: NeutronVertex.o
+	$(RM) .$@
+	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
+
 GdScaling.exe: GdScaling.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
@@ -94,6 +98,9 @@ cleangetPTheta:
 
 cleanVertexSelection:
 	$(RM) VertexSelection.o VertexSelection.exe
+
+cleanNeutronVertex:
+	$(RM) NeutronVertex.o NeutronVertex.exe
 
 cleanGdScaling:
 	$(RM) GdScaling.o GdScaling.exe
