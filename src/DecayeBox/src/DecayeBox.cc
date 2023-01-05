@@ -11,7 +11,8 @@ void DecayeBox::SetHistoFrame() {
   h1_iprtscnd          = new TH1F("h1_iprtscnd", "h1_iprtscnd; iprtscnd; Number of Events", 2490, 10, 2500);
 
   for (int i=0; i<INTERACTIONTYPE; i++) {
-    h1_TrueDecaye[i] = new TH1F(TString::Format("h1_TrueDecaye_mode%d", i), "h1_TrueDecaye; Number of Truth Decay-e; Number of Neutrino Events", 8, 0, 8);
+    h1_TrueDecaye[i] = new TH1F(TString::Format("h1_TrueDecaye_mode%d", i), "TrueDecaye; Number of Truth Decay-e; Number of Neutrino Events", 8, 0, 8);
+    h1_TrueDecaye_vtx[i] = new TH1F(TString::Format("h1_TrueDecaye_vtx_mode%d", i), "TrueDecaye; Number of Truth Decay-e; Number of Neutrino Events", 8, 0, 8);
   }
 
   h2_reso_x_pscnd = new TH2F("h2_reso_x_pscnd", "h2_reso_x_pscnd; dt - tscnd[#musec]; pscnd[MeV]", 100, 0.8, 1.2, 40, 0, 80);
@@ -37,8 +38,10 @@ void DecayeBox::SetHistoFormat() {
   h1_TaggedDecaye      -> SetLineWidth(2);
   h1_TaggedDecaye_CCQE -> SetLineWidth(2);
   h1_TaggedDecaye_CCpi -> SetLineWidth(2);
+
   for (int i=0; i<INTERACTIONTYPE; i++) {
-    h1_TrueDecaye[i] -> SetLineWidth(2);
+    h1_TrueDecaye[i]     -> SetLineWidth(2);
+    h1_TrueDecaye_vtx[i] -> SetLineWidth(2);
   }
 }
 
@@ -296,6 +299,28 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
 }
 
 
+int DecayeBox::GetTruthDecaye(CC0PiNumu* numu, int NumDcyE) {
+  int mode = TMath::Abs(numu->var<int>("mode"));
+
+  //CCQE(1p1h)
+  if (mode==1) h1_TrueDecaye[0] -> Fill(NumDcyE);
+  //CC 2p2h
+  if (mode>=2 && mode<=10) h1_TrueDecaye[1] -> Fill(NumDcyE);
+  //NC
+  if (mode>=31) h1_TrueDecaye[2] -> Fill(NumDcyE);
+  //CC RES (Delta+)
+  if (mode==13) h1_TrueDecaye[3] -> Fill(NumDcyE);
+  //CC RES (Delta++)
+  if (mode==11) h1_TrueDecaye[4] -> Fill(NumDcyE);
+  //CC RES (Delta0)
+  if (mode==12) h1_TrueDecaye[5] -> Fill(NumDcyE);
+  //CC other
+  if (mode>10 && mode<=30) h1_TrueDecaye[6] -> Fill(NumDcyE);
+
+  return NumDcyE;
+}
+
+
 int DecayeBox::GetTaggedDecaye(CC0PiNumu* numu) {
   int mode = TMath::Abs(numu->var<int>("mode"));
   //All interactions
@@ -343,8 +368,12 @@ void DecayeBox::WritePlots() {
   h2_dtn50 -> Write();
 
   for (int i=0; i<INTERACTIONTYPE; i++) {
-    Double_t tot_truedecaye = h1_TrueDecaye[i]->Integral();
+    //Double_t tot_truedecaye = h1_TrueDecaye[i]->Integral();
     //h1_TrueDecaye[i] -> Scale(1./tot_truedecaye);
     h1_TrueDecaye[i] -> Write();
+
+    //Double_t tot_truedecaye_vtx = h1_TrueDecaye_vtx[i]->Integral();
+    //h1_TrueDecaye_vtx[i] -> Scale(1./tot_truedecaye_vtx);
+    h1_TrueDecaye_vtx[i] -> Write();
   }
 }

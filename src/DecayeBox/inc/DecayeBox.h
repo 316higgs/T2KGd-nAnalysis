@@ -11,7 +11,8 @@ TH1F* h1_TaggedDecaye_CCpi;
 TH1F* h1_mintimediff;
 TH1F* h1_pscnd;
 TH1F* h1_iprtscnd;
-TH1F* h1_TrueDecaye[INTERACTIONTYPE];
+TH1F* h1_TrueDecaye[INTERACTIONTYPE];     //original (C1-C3)
+TH1F* h1_TrueDecaye_vtx[INTERACTIONTYPE]; //add vtx cut
 
 //dt vs N50 for decay-e cut
 TH2D* h2_dtn50;
@@ -52,6 +53,7 @@ class DecayeBox {
 	                         float N50CutMin,
 	                         float N50CutMax);
 
+    int GetTruthDecaye(CC0PiNumu* numu, int NumDcyE);
   	int GetTaggedDecaye(CC0PiNumu* numu);
 
   	void SetHistoFrame();

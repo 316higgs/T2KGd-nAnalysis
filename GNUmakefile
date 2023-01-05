@@ -57,7 +57,11 @@ getPTheta.exe: getPTheta.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
-VertexSelection.exe: VertexSelection.o
+VertexSelection_prm_x_dcye.exe: VertexSelection_prm_x_dcye.o
+	$(RM) .$@
+	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
+
+VertexSelection_mu_x_dcye.exe: VertexSelection_mu_x_dcye.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
@@ -96,8 +100,11 @@ cleanDecayeTag:
 cleangetPTheta:
 	$(RM) getPTheta.o getPTheta.exe
 
-cleanVertexSelection:
-	$(RM) VertexSelection.o VertexSelection.exe
+cleanVertexSelection_prm_x_dcye:
+	$(RM) VertexSelection_prm_x_dcye.o VertexSelection_prm_x_dcye.exe
+
+cleanVertexSelection_mu_x_dcye:
+	$(RM) VertexSelection_mu_x_dcye.o VertexSelection_mu_x_dcye.exe
 
 cleanNeutronVertex:
 	$(RM) NeutronVertex.o NeutronVertex.exe
