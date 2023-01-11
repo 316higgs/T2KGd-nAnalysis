@@ -355,6 +355,7 @@ int main(int argc, char **argv) {
       //std::cout << "[### " << ientry << " ###] posv=[" << posv[0] << ", " << posv[1] << ", " << posv[2] << "]" << std::endl;      
 
       // primary particles
+      float OscProb = numu->getOscWgt();
       int mode = TMath::Abs(numu->var<int>("mode"));
       //GetNeutrinoInteraction(ientry, mode);
       //std::cout << "------  NEUT primary info  ------" << std::endl;
@@ -481,8 +482,8 @@ int main(int argc, char **argv) {
 
           //CC other events with one decay-e
           if (mode>10 && mode<=30) {
-            GetNeutrinoInteraction(ientry, mode);
-            std::cout << "PiDcy: " << PiDcy << std::endl;
+            //GetNeutrinoInteraction(ientry, mode);
+            //std::cout << "PiDcy: " << PiDcy << std::endl;
             //for (int iscnd=0; iscnd<nscndprt; iscnd++) {
             //  std::cout << "[### " << ientry << " ###] Particle[" << iscnd << "]=" << iprtscnd[iscnd]
             //                       << ", iprntprt=" << iprntprt[iscnd]
@@ -619,7 +620,8 @@ int main(int argc, char **argv) {
         float d_MuCap_x_PiDcy   = std::sqrt( d_MuCap_x_PiDcy_x*d_MuCap_x_PiDcy_x +
                                              d_MuCap_x_PiDcy_y*d_MuCap_x_PiDcy_y +
                                              d_MuCap_x_PiDcy_z*d_MuCap_x_PiDcy_z );
-        h1_truedistance_pidecay -> Fill(d_MuCap_x_PiDcy/100.);
+        //h1_truedistance_pidecay -> Fill(d_MuCap_x_PiDcy/100.);
+        h1_truedistance_pidecay -> Fill(d_MuCap_x_PiDcy/100., OscProb);
 
         //Vertex cut
         //if (d_MuCap_x_PiDcy/100. < 999.) {
@@ -680,7 +682,8 @@ int main(int argc, char **argv) {
         float d_MuStp_x_MuDcy   = std::sqrt( d_MuStp_x_MuDcy_x*d_MuStp_x_MuDcy_x +
                                              d_MuStp_x_MuDcy_y*d_MuStp_x_MuDcy_y +
                                              d_MuStp_x_MuDcy_z*d_MuStp_x_MuDcy_z );
-        h1_truedistance_mudecay -> Fill(d_MuStp_x_MuDcy/100.);
+        //h1_truedistance_mudecay -> Fill(d_MuStp_x_MuDcy/100.);
+        h1_truedistance_mudecay -> Fill(d_MuStp_x_MuDcy/100., OscProb);
 
         //This is decay-e from mu(signal), so fill the #decay-e
         //CCQE

@@ -235,7 +235,7 @@ int main(int argc, char **argv) {
   Int_t   iprntidx[1000];   //Index of the parent particle (0: no parent(connected from primary particles), n: the parent of n-th secondary particle)
   Int_t   ichildidx[1000];  //Index of the first child particle (0: no childs, n: the first child of n-th secondary particle)
   Int_t   lmecscnd[1000];   //Interaction code of secondary particles based on GEANT
-  Float_t pscnd[1000][3];   //Momentum of the secondary particle
+  //Float_t pscnd[1000][3];   //Momentum of the secondary particle
   tchfQ -> SetBranchAddress("posv", posv);
   tchfQ -> SetBranchAddress("npar", &npar);
   tchfQ -> SetBranchAddress("npar2", &npar2);
@@ -257,7 +257,7 @@ int main(int argc, char **argv) {
   tchfQ -> SetBranchAddress("iprntidx", iprntidx);
   tchfQ -> SetBranchAddress("ichildidx", ichildidx);
   tchfQ -> SetBranchAddress("lmecscnd", lmecscnd);
-  tchfQ -> SetBranchAddress("pscnd", pscnd);
+  //tchfQ -> SetBranchAddress("pscnd", pscnd);
 
   ResetNeutrinoEvents();
 
@@ -355,6 +355,7 @@ int main(int argc, char **argv) {
       //std::cout << "[### " << ientry << " ###] posv=[" << posv[0] << ", " << posv[1] << ", " << posv[2] << "]" << std::endl;      
 
       // primary particles
+      float OscProb = numu->getOscWgt();
       int mode = TMath::Abs(numu->var<int>("mode"));
       //GetNeutrinoInteraction(ientry, mode);
       //std::cout << "------  NEUT primary info  ------" << std::endl;
@@ -608,7 +609,8 @@ int main(int argc, char **argv) {
         float d_Prm_x_PiDcy   = std::sqrt( d_Prm_x_PiDcy_x*d_Prm_x_PiDcy_x +
                                            d_Prm_x_PiDcy_y*d_Prm_x_PiDcy_y +
                                            d_Prm_x_PiDcy_z*d_Prm_x_PiDcy_z );
-        h1_truedistance_pidecay -> Fill(d_Prm_x_PiDcy/100.);
+        //h1_truedistance_pidecay -> Fill(d_Prm_x_PiDcy/100.);
+        h1_truedistance_pidecay -> Fill(d_Prm_x_PiDcy/100., OscProb);
 
         //Vertex cut
         //if (d_Prm_x_PiDcy/100. >= 0.) {
@@ -669,7 +671,8 @@ int main(int argc, char **argv) {
         float d_Prm_x_MuDcy   = std::sqrt( d_Prm_x_MuDcy_x*d_Prm_x_MuDcy_x +
                                            d_Prm_x_MuDcy_y*d_Prm_x_MuDcy_y +
                                            d_Prm_x_MuDcy_z*d_Prm_x_MuDcy_z );
-        h1_truedistance_mudecay -> Fill(d_Prm_x_MuDcy/100.);
+        //h1_truedistance_mudecay -> Fill(d_Prm_x_MuDcy/100.);
+        h1_truedistance_mudecay -> Fill(d_Prm_x_MuDcy/100., OscProb);
 
         //For dump events @ short distance event (debug)
         //if (d_Prm_x_MuDcy/100. < 0.2) {

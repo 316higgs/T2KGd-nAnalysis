@@ -74,6 +74,7 @@ void SubDistance(bool beammode) {
   h1_pidecay -> Add(h1_pidecay_numu, h1_pidecay_numubar, 1., 1.);
   h1_pidecay -> SetLineColor(kRed-7);
   h1_pidecay -> SetLineWidth(3);
+  h1_pidecay -> SetStats(0);
 
 
   /*

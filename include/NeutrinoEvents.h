@@ -23,6 +23,12 @@ int FinalSelectedParentNeutrinos_dtScan[DecayeCutPoint];
 //N50 = 50, , 10 us, 5 us, 3 us
 //int SelectedParentNeutrinos_N50Scan[DecayeCutPoint];
 
+int CCQEwTaggedNeutrons      = 0; // #CCQE events w/ tagged-n
+int CCQEwTaggedNeutrons_prm  = 0; // #CCQE events w/ tagged-n (nonzero truth primary neutrons)
+int CCQEwTaggedNeutrons_scnd = 0; // #CCQE events w/ tagged-n (nonzero truth secondary neutrons)
+int AllPrimaryNeutrons = 0;
+int AllSINeutrons      = 0;
+int AllOtherNeutrons     = 0;
 
 void ResetNeutrinoEvents() {
   for (int i=0; i<SELECTIONCUTS; i++) {

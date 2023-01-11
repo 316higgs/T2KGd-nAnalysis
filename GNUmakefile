@@ -65,7 +65,11 @@ VertexSelection_mu_x_dcye.exe: VertexSelection_mu_x_dcye.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
-NeutronVertex.exe: NeutronVertex.o
+NeutronVertex_prm_x_n.exe: NeutronVertex_prm_x_n.o
+	$(RM) .$@
+	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
+
+NeutronVertex_mu_x_n.exe: NeutronVertex_mu_x_n.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
@@ -106,8 +110,11 @@ cleanVertexSelection_prm_x_dcye:
 cleanVertexSelection_mu_x_dcye:
 	$(RM) VertexSelection_mu_x_dcye.o VertexSelection_mu_x_dcye.exe
 
-cleanNeutronVertex:
-	$(RM) NeutronVertex.o NeutronVertex.exe
+cleanNeutronVertex_prm_x_n:
+	$(RM) NeutronVertex_prm_x_n.o NeutronVertex_prm_x_n.exe
+
+cleanNeutronVertex_mu_x_n:
+	$(RM) NeutronVertex_mu_x_n.o NeutronVertex_mu_x_n.exe
 
 cleanGdScaling:
 	$(RM) GdScaling.o GdScaling.exe

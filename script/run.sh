@@ -98,8 +98,7 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 #                   -OSCCH NUMU
 
 
-
-<<COMMENTOUT
+#<<COMMENTOUT
   #### with muon angle ####
   #### costheta23 = 0.532 ####
 ./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
@@ -111,7 +110,7 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMU
-COMMENTOUT
+#COMMENTOUT
 
 <<COMMENTOUT
   #### with muon angle ####
@@ -266,7 +265,7 @@ COMMENTOUT
                    -OSCCH NUMU
 COMMENTOUT
 
-#<<COMMENTOUT
+<<COMMENTOUT
 ##### RHC numu -> numu MC #####
   #### with muon angle ####
   #### costheta23 = 0.511 ####
@@ -279,7 +278,7 @@ COMMENTOUT
                    -ETAG ON\
                    -BEAMMODE RHC\
                    -OSCCH NUMU
-#COMMENTOUT
+COMMENTOUT
 
 <<COMMENTOUT
 ##### RHC numu -> numu MC #####
@@ -326,7 +325,7 @@ COMMENTOUT
                    -OSCCH NUMUBAR
 COMMENTOUT
 
-#<<COMMENTOUT
+<<COMMENTOUT
 ##### RHC numubar -> numubar MC #####
 #### costheta23 = 0.511 ####
 ./analysis1Rmu.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
@@ -338,7 +337,7 @@ COMMENTOUT
                    -ETAG ON\
                    -BEAMMODE RHC\
                    -OSCCH NUMUBAR
-#COMMENTOUT
+COMMENTOUT
 
 <<COMMENTOUT
 ##### RHC numubar -> numubar MC #####

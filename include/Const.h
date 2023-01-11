@@ -44,3 +44,9 @@ enum class GEANTINT
   HADRONIC_ELASTIC_COH = 13,
   NEUTRONCAPTURE = 18
 };
+
+// MeV
+const float EMASS  = 0.510998;
+const float MUMASS = 105.65836;
+const float NMASS  = 939.565346;
+const float PMASS  = 938.272013;

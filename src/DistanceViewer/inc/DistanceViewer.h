@@ -6,6 +6,7 @@
 #include "TH1D.h"
 #include "TH2D.h"
 
+float DistanceMax = 5.;
 
 //Truth distance distribution
 TH1F* h1_truedistance;
