@@ -24,6 +24,8 @@ void NeutronDistance_mu_x_n(bool beammode) {
 #if fhcflag
   TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.root");
   TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.Enucut.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.Enucut.root");
   TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
 #endif
 
@@ -79,9 +81,9 @@ void NeutronDistance_mu_x_n(bool beammode) {
 
   TCanvas* c = new TCanvas("c", "c", 900, 700);
   c -> SetGrid();
-  //h1_distance_nu_n -> Draw("SAME");
-  h1_distance_mu_n -> Draw("SAME");
   h1_distance_nu_n -> Draw("SAME");
+  h1_distance_mu_n -> Draw("SAME");
+  //h1_distance_nu_n -> Draw("SAME");
   
   TLegend* legend1 = new TLegend(0.35, 0.69, 0.89, 0.89);
   legend1 -> SetTextSize(0.04);
@@ -93,4 +95,11 @@ void NeutronDistance_mu_x_n(bool beammode) {
   //legend1 -> AddEntry(h1_distance_mu_n, "Primary - n(from #mu) capture vtx", "L");
   legend1->SetFillColor(0);
   legend1->Draw();
+
+  TFile* fout = new TFile("NeutronDistance_mu_x_n.osc.root", "RECREATE");
+  //TFile* fout = new TFile("NeutronDistance_mu_x_n.osc.Enucut.root", "RECREATE");
+  fout -> cd();
+  h1_distance_nu_n -> Write();
+  h1_distance_mu_n -> Write();
 }
+

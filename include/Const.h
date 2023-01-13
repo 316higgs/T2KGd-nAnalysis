@@ -45,6 +45,10 @@ enum class GEANTINT
   NEUTRONCAPTURE = 18
 };
 
+//fiTQun
+const int FQ_EHYP = 1;
+const int FQ_MUHYP = 2;
+
 // MeV
 const float EMASS  = 0.510998;
 const float MUMASS = 105.65836;

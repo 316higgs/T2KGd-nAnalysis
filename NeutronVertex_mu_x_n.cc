@@ -372,7 +372,6 @@ int main(int argc, char **argv) {
       PrmVtx[1] = posv[1];
       PrmVtx[2] = posv[2];
 
-
       float MuCapVtx[3] = {0., 0., 0.};  //mu capture vertex
 
       bool  MuDcy = false;               //Primary mu decays?
@@ -384,7 +383,9 @@ int main(int argc, char **argv) {
       float NuNCapVtx[3] = {0., 0., 0.}; //neutron(from primary interaction) capture vertex
 
       //Focus on CC
+      float Enu = numu->var<float>("erec");
       if (mode<31) {
+      //if (mode<31 && Enu/1000.<1.) {
 
         //Find primary mu (use for neutron from primary interaction)
         for (int iscnd=0; iscnd<nscndprt; iscnd++) {
@@ -537,139 +538,6 @@ int main(int argc, char **argv) {
         VtxScndList.clear();
         VtxPrntList.clear();
       }
-
-
-#if 0
-      // Secondary partciles
-      //std::cout << "------  CONVVECT secondary info  ------" << std::endl;
-      int scndmuons = 0;
-      int muonbrems = 0; //Number of bremsstralhung (muonbrems-1)
-      for (int iscnd=0; iscnd<nscndprt; iscnd++) {
-
-        //std::cout << "[### " << ientry << " ###] Particle[" << iscnd << "]=" << iprtscnd[iscnd]
-        //                               << ", iprntprt=" << iprntprt[iscnd]
-        //                               << ", iprntidx=" << iprntidx[iscnd] 
-        //                               << ", ichildidx=" << ichildidx[iscnd] 
-        //                               << ", lmecscnd=" << lmecscnd[iscnd] 
-        //                               << ", vtxscnd=[" << vtxscnd[iscnd][0] << ", " << vtxscnd[iscnd][1] << ", " << vtxscnd[iscnd][2] << "]" 
-        //                               << ", vtxprnt=[" << vtxprnt[iscnd][0] << ", " << vtxprnt[iscnd][1] << ", " << vtxprnt[iscnd][2] << "]" << std::endl;
-
-        //Find muons in secondary interactions
-        if (std::fabs(iprtscnd[iscnd])==static_cast<int>(PDGPID::MUON)) scndmuons++;
-        //Check muon bremsstralhung
-        if (std::fabs(iprtscnd[iscnd])==static_cast<int>(PDGPID::MUON) && 
-            lmecscnd[iscnd]==static_cast<int>(GEANTINT::BREMSS)) muonbrems++;
-      }
-
-
-      //Check fraction of muon captures
-      bool prm_wneutron = false;    //flag for primary muon with neutrons
-      bool prm_wcapneutron = false; //flag for primary muon with captured neutrons
-      float d_nu_x_mucap = 0.; //distance between mu- stopping vertex and primary vertex
-      if (prmmuons!=0) {
-
-        for (int iscnd=0; iscnd<nscndprt; iscnd++) {
-
-          //Find neutrons from muon
-          if (iprtscnd[iscnd]==static_cast<int>(PDGPID::NEUTRON) &&
-              iprntprt[iscnd]==static_cast<int>(PDGPID::MUON) &&
-              lmecscnd[iscnd]==static_cast<int>(GEANTINT::DECAY))
-          {
-            //What is this muon? Primary or secondary
-            //If the parent is primary muon(iprntidx=0), count it
-            //std::cout << "iprntidx of neutron: " << iprntidx[iscnd] << std::endl;
-            if (iprntidx[iscnd]==0) {
-              prm_wneutron = true;
-              Neutron_PrmMuon++;
-
-
-              // n's children is gamma of n-capture?
-              // if so, fill n's vertex
-              //std::cout << "ichildidx of neutron: " << iprtscnd[ ichildidx[iscnd]-1 ] << std::endl;
-              if (iprtscnd[ ichildidx[iscnd]-1 ]==static_cast<int>(PDGPID::GAMMA)) {
-                prm_wcapneutron = true;
-                CapNeutron_PrmMuon++;
-              }
-
-
-              //get n's generated vertex (= mu- stopping vertex)
-              float d_x = vtxscnd[iscnd][0] - posv[0];
-              float d_y = vtxscnd[iscnd][1] - posv[1];
-              float d_z = vtxscnd[iscnd][2] - posv[2];
-              d_nu_x_mucap = std::sqrt( d_x*d_x + d_y*d_y + d_z*d_z);
-            }
-          }
-        }
-      }
-
-
-      //Find neutrons from nu interaction
-      std::vector<float> dlist;  //store different distance neutrons
-      for (int iscnd=0; iscnd<nscndprt; iscnd++) {
-
-        float d_nu_x_ncap = 0.;
-
-        //Find gamma from neutron capture
-        if (iprtscnd[iscnd]==static_cast<int>(PDGPID::GAMMA) &&
-            iprntprt[iscnd]==static_cast<int>(PDGPID::NEUTRON) &&
-            lmecscnd[iscnd]==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) {
-
-          //What is the parent?
-          //If iprntidx=0, it comes from nu interaction
-          if (iprntidx[iscnd]==0) {
-
-            //Fill gamma's vertex per one neutron
-            //distinguish by distance?
-            float d_x = vtxscnd[iscnd][0] - posv[0];
-            float d_y = vtxscnd[iscnd][1] - posv[1];
-            float d_z = vtxscnd[iscnd][2] - posv[2];
-            d_nu_x_ncap = std::sqrt( d_x*d_x + d_y*d_y + d_z*d_z);
-            
-            //If this is first gamma,
-            if (dlist.size()==0) {
-              dlist.push_back(d_nu_x_ncap);
-            }
-            else {
-
-              //Search different distance gamma
-              int diff_count = 0;
-              for (UInt_t ilist=0; ilist<dlist.size(); ilist++) {
-                if (d_nu_x_ncap != dlist.at(ilist)) diff_count++;
-              }
-              if (diff_count!=0) dlist.push_back(d_nu_x_ncap);
-            }
-
-          }
-        }
-      }
-
-
-
-      //if (scndmuons!=0) std::cout << "[### " << ientry << " ###] Secondary muons: " << scndmuons << std::endl;
-      //if (muonbrems!=0) std::cout << "[### " << ientry << " ###] Muon Bremss: " << muonbrems << std::endl;
-      ScndMuons += scndmuons;
-      BremMuons += muonbrems; //correction of double muon counting
-
-      //If it is CC and has the captured primiary mu-
-      if (prm_wneutron) {
-        PrmMuons_wNeutron++;
-        //h1_truedistance_mu_n -> Fill(d_nu_x_mucap/100.);
-      }
-
-      //If it is CC and has the captured primary mu- with captured neutrons
-      if (prm_wneutron && prm_wcapneutron) {
-        PrmMuons_wCapNeutron++;
-        h1_truedistance_mu_n -> Fill(d_nu_x_mucap/100.);
-      }
-
-
-      for (UInt_t in=0; in<dlist.size(); in++) {
-        Neutron_Nu++;
-        h1_truedistance_nu_n -> Fill(dlist.at(in)/100.);
-      }
-
-      //std::cout << " " << std::endl;
-#endif
 
     } //New 1R muon selection
   }

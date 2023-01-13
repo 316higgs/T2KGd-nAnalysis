@@ -10,7 +10,7 @@ TH1F* h1_TaggedDecaye_CCQE;
 TH1F* h1_TaggedDecaye_CCpi;
 TH1F* h1_mintimediff;
 TH1F* h1_pscnd;
-TH1F* h1_iprtscnd;
+//TH1F* h1_iprtscnd;
 TH1F* h1_TrueDecaye[INTERACTIONTYPE];     //original (C1-C3)
 TH1F* h1_TrueDecaye_vtx[INTERACTIONTYPE]; //add vtx cut
 
@@ -20,7 +20,7 @@ TH2D* h2_dtn50;
 TH2F* h2_reso_x_pscnd;
 TH2F* h2_reso_x_iprtscnd;
 TH2F* h2_reso_x_lmecscnd;
-TH2F* h2_iprtscnd_lmecscnd;
+//TH2F* h2_iprtscnd_lmecscnd;
 
 int NumHotSpot = 0;
 int TaggedTrueDecaye = 0;
@@ -45,10 +45,16 @@ class DecayeBox {
   		                     float dtCut,
 	                         float N50CutMin,
 	                         float N50CutMax);*/
+    /*int GetDecayeTagPurity(CC0PiNumu* numu,
+  		                     Float_t *tscnd,
+  		                     Float_t pscnd[][3],
+  		                     Int_t *iprtscnd,
+  		                     float dtCut,
+	                         float N50CutMin,
+	                         float N50CutMax);*/
     int GetDecayeTagPurity(CC0PiNumu* numu,
   		                     Float_t *tscnd,
   		                     Float_t pscnd[][3],
-  		                     Int_t *itrkscnd,
   		                     float dtCut,
 	                         float N50CutMin,
 	                         float N50CutMax);

@@ -273,6 +273,7 @@ int main(int argc, char **argv) {
   nninputs.SetNNinputHisto();
 
   DistanceViewer ndistance;
+  DistanceMax = 5.;
   ndistance.SetHistoFrame();
   ndistance.SetHistoFormat();
 
@@ -342,10 +343,6 @@ int main(int argc, char **argv) {
         evsel.pass[2]==true &&
         evsel.pass[3]==true) 
     {
-    //if (evsel.pass[0]==true &&
-    //    evsel.pass[1]==true &&
-    //    evsel.pass[2]==true) 
-    //{
       GetSelectedModeEvents(numu);
 
       // primary particles
@@ -365,74 +362,6 @@ int main(int argc, char **argv) {
       //                                   << ", Ichvc=" << Ichvc[iprm]
       //                                   << ", Iorgvc=" <<Iorgvc[iprm] << std::endl;
       //}
-
-
-#if 0 
-      // secondary particles
-      /*std::cout << "------  VECT secondary info  ------" << std::endl;
-      std::cout << "[### " << ientry << " ###] # of particles=" << npar2 << std::endl;
-      int decaye_VECT2 = 0;
-      for (int iscnd=0; iscnd<npar2; iscnd++) {
-        std::cout << "[### " << ientry << " ###] Particle[" << iscnd << "]=" << ipv2[iscnd] << "(GEANT), posv2=[" << posv2[iscnd][0] << ", " << posv2[iscnd][1] << ", " << posv2[iscnd][2] << "]" << std::endl;
-        if (ipv2[iscnd]==static_cast<int>(GEANTPID::ELECTRON)) decaye_VECT2++;
-      }*/
-
-      // secondary particles
-      int e_thisev = 0;          // # of decay-e in this event
-      int e_aftercut_thisev = 0; // # of decay-e(after cut) in this event
-      //int decaye_CONVVECT = 0;
-      //int mucap_thisev = 0;      // # of mu- captures in this event
-      //std::cout << "------  CONVVECT secondary info  ------" << std::endl;
-      for (int iscnd=0; iscnd<nscndprt; iscnd++) {
-        //std::cout << "[### " << ientry << " ###] Particle[" << iscnd << "]=" << iprtscnd[iscnd]
-        //                               << ", iprntprt=" << iprntprt[iscnd]
-        //                               << ", iprntidx=" << iprntidx[iscnd] 
-        //                               << ", ichildidx=" << ichildidx[iscnd] 
-        //                               << ", lmecscnd=" << lmecscnd[iscnd] 
-        //                               << ", vtxscnd=[" << vtxscnd[iscnd][0] << ", " << vtxscnd[iscnd][1] << ", " << vtxscnd[iscnd][2] << "]" << std::endl;
-
-        //if (std::fabs(iprtscnd[iscnd])==static_cast<int>(PDGPID::ELECTRON) && 
-        //    lmecscnd[iscnd]==static_cast<int>(GEANTINT::DECAY) &&
-        //    std::fabs(iprntprt[iscnd])==static_cast<int>(PDGPID::MUON)) {
-        if (std::fabs(iprtscnd[iscnd])==static_cast<int>(PDGPID::ELECTRON) && 
-            lmecscnd[iscnd]==static_cast<int>(GEANTINT::DECAY)) {
-
-          if (iprntprt[ iprntidx[iscnd]-1 ]==static_cast<int>(PDGPID::PIPLUS)) continue; 
-          //if (iprntprt[ iprntidx[iscnd]-1 ]!=static_cast<int>(PDGPID::PIPLUS)) std::cout << "Parent: " << iprntprt[ iprntidx[iscnd]-1 ] << std::endl;
-
-          //decaye_CONVVECT++;
-          float d_x = vtxscnd[iscnd][0] - posv[0];
-          float d_y = vtxscnd[iscnd][1] - posv[1];
-          float d_z = vtxscnd[iscnd][2] - posv[2];
-          float d   = std::sqrt( d_x*d_x + d_y*d_y + d_z*d_z );
-          //if (d/100 <= 0.3) std::cout << "Parent: " << iprntprt[ iprntidx[iscnd]-1 ] << std::endl;
-          if (d/100 <= 0.3) std::cout << "Parent: " << iprntprt[iscnd] << ", Parent of parent: " << iprntprt[ iprntidx[iscnd]-1 ] << std::endl;
-          h1_truedistance_decaye -> Fill(d/100.);
-
-          float mom = std::sqrt( pscnd[iscnd][0]*pscnd[iscnd][0] + pscnd[iscnd][1]*pscnd[iscnd][1] + pscnd[iscnd][2]*pscnd[iscnd][2] );
-          h2_truedistance_x_mom -> Fill(d/100., mom);
-        }
-
-        
-        //Find decay-e
-        if (std::fabs(iprtscnd[iscnd])==11 && lmecscnd[iscnd]==5) {
-          e_thisev++;
-
-          //Take the distance between decay-e generated vertex and primary vertex
-          //float d_x = vtxscnd[iscnd][0] - vecvx;
-          //float d_y = vtxscnd[iscnd][1] - vecvy;
-          //float d_z = vtxscnd[iscnd][2] - vecvz;
-          //float d   = std::sqrt( d_x*d_x + d_y*d_y + d_z*d_z );
-
-          //if (d/100. >= 0.04) e_aftercut_thisev++;
-        }
-        
-        //Find neutrons from mu- captures
-        //if (iprtscnd[iscnd]==2112 && iprntprt[iscnd]==13 && lmecscnd[iscnd]==5) mucap_thisev++;
-      }
-      //if (decaye_VECT2!=decaye_CONVVECT) std::cout << "[### " << ientry << "###] decaye_VECT2=" << decaye_VECT2 << ", decaye_CONVVECT=" << decaye_CONVVECT << std::endl;
-      //std::cout << " " << std::endl;
-#endif
 
 
       //Count # of decay-e per event
@@ -609,8 +538,8 @@ int main(int argc, char **argv) {
         float d_Prm_x_PiDcy   = std::sqrt( d_Prm_x_PiDcy_x*d_Prm_x_PiDcy_x +
                                            d_Prm_x_PiDcy_y*d_Prm_x_PiDcy_y +
                                            d_Prm_x_PiDcy_z*d_Prm_x_PiDcy_z );
-        //h1_truedistance_pidecay -> Fill(d_Prm_x_PiDcy/100.);
-        h1_truedistance_pidecay -> Fill(d_Prm_x_PiDcy/100., OscProb);
+        h1_truedistance_pidecay -> Fill(d_Prm_x_PiDcy/100.);
+        //h1_truedistance_pidecay -> Fill(d_Prm_x_PiDcy/100., OscProb);
 
         //Vertex cut
         //if (d_Prm_x_PiDcy/100. >= 0.) {
@@ -671,10 +600,11 @@ int main(int argc, char **argv) {
         float d_Prm_x_MuDcy   = std::sqrt( d_Prm_x_MuDcy_x*d_Prm_x_MuDcy_x +
                                            d_Prm_x_MuDcy_y*d_Prm_x_MuDcy_y +
                                            d_Prm_x_MuDcy_z*d_Prm_x_MuDcy_z );
-        //h1_truedistance_mudecay -> Fill(d_Prm_x_MuDcy/100.);
-        h1_truedistance_mudecay -> Fill(d_Prm_x_MuDcy/100., OscProb);
+        h1_truedistance_mudecay -> Fill(d_Prm_x_MuDcy/100.);
+        //h1_truedistance_mudecay -> Fill(d_Prm_x_MuDcy/100., OscProb);
 
         //For dump events @ short distance event (debug)
+        //Extract only CC0pi events, and it is CC1pi(mu->decay-e, pi->hadronic)
         //if (d_Prm_x_MuDcy/100. < 0.2) {
         //  GetNeutrinoInteraction(ientry, mode);
         //  for (int iscnd=0; iscnd<nscndprt; iscnd++) {
@@ -703,154 +633,6 @@ int main(int argc, char **argv) {
         //CC other
         if (mode>10 && mode<=30) h1_TrueDecaye_vtx[6] -> Fill(NumDcyE);
       }
-
-
-      //Count # of decay-e per event (original)
-      /*int NumDcyE = 0;
-      for (int iscnd=0; iscnd<nscndprt; iscnd++) {
-        if (std::fabs(iprtscnd[iscnd])==static_cast<int>(PDGPID::ELECTRON) && 
-            lmecscnd[iscnd]==static_cast<int>(GEANTINT::DECAY)) {
-
-          //Parent of decay-e is not pi+
-          if (iprntprt[ iprntidx[iscnd]-1 ]==static_cast<int>(PDGPID::PIPLUS)) continue;
-
-          if (std::fabs(iprtscnd[iscnd])==11 && lmecscnd[iscnd]==5) NumDcyE++;
-        }
-      }*/
-
-
-      /*
-      //Muon capture vertex
-      bool  MuCap = false;
-      float MuCapVtx[3] = {0., 0., 0.};
-      //Pion decay vertex
-      bool  PiDcy = false;
-      float PiDcyVtx[3] = {0., 0., 0.};
-      if (prmmuons!=0) {
-        std::cout << "------  CONVVECT secondary info  ------" << std::endl;
-        for (int iscnd=0; iscnd<nscndprt; iscnd++) {
-
-          std::cout << "[### " << ientry << " ###] Particle[" << iscnd << "]=" << iprtscnd[iscnd]
-                                         << ", iprntprt=" << iprntprt[iscnd]
-                                         << ", iprntidx=" << iprntidx[iscnd] 
-                                         << ", ichildidx=" << ichildidx[iscnd] 
-                                         << ", lmecscnd=" << lmecscnd[iscnd] 
-                                         << ", vtxscnd=[" << vtxscnd[iscnd][0] << ", " << vtxscnd[iscnd][1] << ", " << vtxscnd[iscnd][2] << "]" << std::endl;
-
-          //Find neutrons from muon
-          if (iprtscnd[iscnd]==static_cast<int>(PDGPID::NEUTRON) &&
-              iprntprt[iscnd]==static_cast<int>(PDGPID::MUON) &&
-              lmecscnd[iscnd]==static_cast<int>(GEANTINT::DECAY))
-          {
-            //Parent is primary muon
-            if (iprntidx[iscnd]==0) {
-              MuCap = true;
-              MuCapVtx[0] = vtxscnd[iscnd][0];
-              MuCapVtx[1] = vtxscnd[iscnd][1];
-              MuCapVtx[2] = vtxscnd[iscnd][2];
-            }
-          }
-
-
-          //Find decay-e from pi+
-          if (std::fabs(iprtscnd[iscnd])==static_cast<int>(PDGPID::ELECTRON) && 
-              iprntprt[ iprntidx[iscnd]-1 ]==static_cast<int>(PDGPID::PIPLUS) &&
-              lmecscnd[iscnd]==static_cast<int>(GEANTINT::DECAY)) 
-          {
-            PiDcy = true;
-            PiDcyVtx[0] = vtxscnd[iscnd][0];
-            PiDcyVtx[1] = vtxscnd[iscnd][1];
-            PiDcyVtx[2] = vtxscnd[iscnd][2];
-          }
-
-        }
-      }
-      */
-
-
-      /*
-      //Focus on neutrino events with captured primary mu + pi+ decay (CC RES, CC other etc)
-      int NumDcyE_CUT = 0;
-      if (MuCap && PiDcy) {
-        std::cout << "[###" << ientry << "###]  MuCapVtx = [" << MuCapVtx[0] << ", " << MuCapVtx[1] << ", " << MuCapVtx[2] << "]" << std::endl;
-        std::cout << "[###" << ientry << "###]  PiDcyVtx = [" << PiDcyVtx[0] << ", " << PiDcyVtx[1] << ", " << PiDcyVtx[2] << "]" << std::endl;
-
-        //Distance between muon capture vertex and pion decay vertex
-        float d_MuCap_x_PiDcy = 0.;
-        float d_MuCap_x_PiDcy_x = PiDcyVtx[0] - MuCapVtx[0];
-        float d_MuCap_x_PiDcy_y = PiDcyVtx[1] - MuCapVtx[1];
-        float d_MuCap_x_PiDcy_z = PiDcyVtx[2] - MuCapVtx[2];
-        d_MuCap_x_PiDcy = std::sqrt( d_MuCap_x_PiDcy_x*d_MuCap_x_PiDcy_x + 
-                                     d_MuCap_x_PiDcy_y*d_MuCap_x_PiDcy_y +
-                                     d_MuCap_x_PiDcy_z*d_MuCap_x_PiDcy_z );
-        h1_truedistance_decaye -> Fill(d_MuCap_x_PiDcy/100.);
-
-        //Count # of decay-e of this neutrino event if the distance passed the cut
-        if (d_MuCap_x_PiDcy/100. < 0.3) {
-          for (int iscnd=0; iscnd<nscndprt; iscnd++) {
-            if (std::fabs(iprtscnd[iscnd])==static_cast<int>(PDGPID::ELECTRON) && 
-                lmecscnd[iscnd]==static_cast<int>(GEANTINT::DECAY)) {
-
-              //Parent of decay-e is not pi+
-              if (iprntprt[ iprntidx[iscnd]-1 ]==static_cast<int>(PDGPID::PIPLUS)) continue;
-
-              if (std::fabs(iprtscnd[iscnd])==11 && lmecscnd[iscnd]==5) NumDcyE_CUT++;
-            }
-          }
-        }
-      }
-      else {
-        for (int iscnd=0; iscnd<nscndprt; iscnd++) {
-          if (std::fabs(iprtscnd[iscnd])==static_cast<int>(PDGPID::ELECTRON) && 
-              lmecscnd[iscnd]==static_cast<int>(GEANTINT::DECAY)) {
-
-            //Parent of decay-e is not pi+
-            if (iprntprt[ iprntidx[iscnd]-1 ]==static_cast<int>(PDGPID::PIPLUS)) continue;
-
-            if (std::fabs(iprtscnd[iscnd])==11 && lmecscnd[iscnd]==5) NumDcyE_CUT++;
-          }
-        }
-      }
-      std::cout << " " << std::endl;
-      */
-
-
-
-      // Fill the # of decay-e in this event
-      //std::cout << "Number of decay-e: " << e_thisev << std::endl;
-#if 0
-      //CCQE(1p1h)
-      if (mode==1) h1_TrueDecaye[0] -> Fill(NumDcyE);
-      //CC 2p2h
-      if (mode>=2 && mode<=10) h1_TrueDecaye[1] -> Fill(NumDcyE);
-      //NC
-      if (mode>=31) h1_TrueDecaye[2] -> Fill(NumDcyE);
-      //CC RES (Delta+)
-      if (mode>=13) h1_TrueDecaye[3] -> Fill(NumDcyE);
-      //CC RES (Delta++)
-      if (mode>=11) h1_TrueDecaye[4] -> Fill(NumDcyE);
-      //CC RES (Delta0)
-      if (mode>=12) h1_TrueDecaye[5] -> Fill(NumDcyE);
-      //CC other
-      if (mode>=14 && mode<=30) h1_TrueDecaye[6] -> Fill(NumDcyE);
-#endif
-#if 0
-      //CCQE(1p1h)
-      if (mode==1) h1_TrueDecaye[0] -> Fill(NumDcyE_CUT);
-      //CC 2p2h
-      if (mode>=2 && mode<=10) h1_TrueDecaye[1] -> Fill(NumDcyE_CUT);
-      //NC
-      if (mode>=31) h1_TrueDecaye[2] -> Fill(NumDcyE_CUT);
-      //CC RES (Delta+)
-      if (mode>=13) h1_TrueDecaye[3] -> Fill(NumDcyE_CUT);
-      //CC RES (Delta++)
-      if (mode>=11) h1_TrueDecaye[4] -> Fill(NumDcyE_CUT);
-      //CC RES (Delta0)
-      if (mode>=12) h1_TrueDecaye[5] -> Fill(NumDcyE_CUT);
-      //CC other
-      if (mode>=14 && mode<=30) h1_TrueDecaye[6] -> Fill(NumDcyE_CUT);
-#endif
-
 
     } //1R mu selection
 

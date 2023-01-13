@@ -22,15 +22,17 @@ void SubDistance(bool beammode) {
 
   //FHC
 #if fhcflag
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.beforecut.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.beforecut.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.root");
+  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.osc.root");
+  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.osc.root");
   TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
 #endif
 
   //RHC
 #if rhcflag
-  TFile* fin_numu    = new TFile("../../output/rhc/rhc.numu_x_numu.VertexSelection_mu_x_dcye.beforecut.root");
-  TFile* fin_numubar = new TFile("../../output/rhc/rhc.numubar_x_numubar.VertexSelection_mu_x_dcye.beofrecut.root");
+  TFile* fin_numu    = new TFile("../../output/rhc/rhc.numu_x_numu.VertexSelection_mu_x_dcye.root");
+  TFile* fin_numubar = new TFile("../../output/rhc/rhc.numubar_x_numubar.VertexSelection_mu_x_dcye.root");
   TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
 #endif
 
@@ -77,33 +79,6 @@ void SubDistance(bool beammode) {
   h1_pidecay -> SetStats(0);
 
 
-  /*
-  float TrueMuDecay = h1_mudecay->Integral();
-  float TrueMuCap   = h1_mucap->Integral();
-  float TruePiDecay = h1_pidecay->Integral();
-  float CatMuDecay = 0.;
-  float CatMuCap   = 0.;
-  float CatPiDecay = 0.;
-
-  float startd   = 0.;
-  float interval = 0.01;
-  const int BINS = 4;
-  int binnumber = h1_mudecay->FindBin(startd);
-  for (int ibin=0; ibin<BINS; ibin++) {
-    float thisd = startd + ibin*interval;
-    //std::cout << "Distance = " << thisd << " m: " << binnumber << std::endl;
-    //std::cout << "[" << thisd << " m, " << thisd+interval << " m] : " << h1_mudecay->GetBinContent(binnumber) << std::endl; 
-    CatMuDecay += h1_mudecay->GetBinContent(binnumber);
-    CatMuCap   += h1_mucap->GetBinContent(binnumber);
-    CatPiDecay += h1_pidecay->GetBinContent(binnumber);
-    binnumber++;
-  }
-  std::cout << "[###  mu- decay  ###] " << TrueMuDecay << " -> " << TrueMuDecay-CatMuDecay << " (removed " << CatMuDecay << " events)" << std::endl;
-  //std::cout << "[### mu- capture ###] " << TrueMuCap << " -> " << TrueMuCap-CatMuCap << " (removed " << CatMuCap << " events)" << std::endl;
-  std::cout << "[###  pi+ decay  ###] " << TruePiDecay << " -> " << TruePiDecay-CatPiDecay << " (removed " << CatPiDecay << " events)" << std::endl;
-  */
-
-
 #if 1
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
@@ -117,6 +92,7 @@ void SubDistance(bool beammode) {
 
   h1_mudecay -> Draw();
   h1_pidecay -> Draw("SAME");
+  //h1_mudecay -> Draw("SAME");
   c1 -> RedrawAxis();
   
   TLegend* legend1 = new TLegend(0.45, 0.7, 0.89, 0.89);

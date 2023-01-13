@@ -217,14 +217,14 @@ int main(int argc, char **argv) {
   tchfQ -> SetBranchAddress("Iflvc", Iflvc);
   tchfQ -> SetBranchAddress("Iorgvc", Iorgvc);
   //tchfQ -> SetBranchAddress("nscndprt", &nscndprt);
-  tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
+  //tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
   tchfQ -> SetBranchAddress("tscnd", tscnd);
   tchfQ -> SetBranchAddress("vtxscnd", vtxscnd);
-  tchfQ -> SetBranchAddress("iprntprt", iprntprt);
+  //tchfQ -> SetBranchAddress("iprntprt", iprntprt);
   tchfQ -> SetBranchAddress("vtxprnt", vtxprnt);
   tchfQ -> SetBranchAddress("iprntidx", iprntidx);
   tchfQ -> SetBranchAddress("ichildidx", ichildidx);
-  tchfQ -> SetBranchAddress("lmecscnd", lmecscnd);
+  //tchfQ -> SetBranchAddress("lmecscnd", lmecscnd);
   tchfQ -> SetBranchAddress("itrkscnd", itrkscnd);
   tchfQ -> SetBranchAddress("pprntinit", pprntinit);
 
@@ -269,7 +269,6 @@ int main(int argc, char **argv) {
   CLTOptionSummary(ETAGKeyword, ETAG, MCTypeKeyword, MCType);
 
   for (int ientry=0; ientry<processmax; ientry++) {
-  //for (int ientry=0; ientry<1000; ientry++) {
 
   	//Progress meter
     if(ientry>100 && ientry%100==0) std::cout << "[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%" << std::endl;
@@ -315,7 +314,8 @@ int main(int argc, char **argv) {
         prmsel.C4ApplyPmu200MeV(evsel)) {
 
       //if (NTrueN==0)
-        decayebox.GetDecayeTagPurity(numu, tscnd, pscnd, itrkscnd, 20., 50., 400.);
+      std::cout << "[### " << ientry << " ###]" << std::endl; 
+        decayebox.GetDecayeTagPurity(numu, tscnd, pscnd, 20., 50., 400.);
     }
 
     //if (wallv>200) GeneratedEvents++;
@@ -331,10 +331,6 @@ int main(int argc, char **argv) {
     h1_NTrueN[0] -> Fill(NTrueN);
 
     GetSelectedModeEvents(numu);
-    //FillVECTHisto(numu);
-    /*for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
-      h2_iprtscnd_iflgscnd -> Fill( numu->var<int>("iprtscnd", iscnd), iflgscnd[iscnd] );
-    }*/
 
     //New 1R muon selection
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false)) {
@@ -372,15 +368,6 @@ int main(int argc, char **argv) {
       ntagana.GetTruthNeutronsIntType(numu, NTrueN);
       ntagana.GetResolutionwTrueN(numu, NTrueN);
 
-
-      /*std::cout << "Npvc(" << Npvc << ") + nscndprt(" << nscndprt << "): " << Npvc+nscndprt << std::endl;
-      for (UInt_t jentry=0; jentry<PID->size(); ++jentry) {
-        std::cout << "[" << jentry+1 << "] PID: " << PID->at(jentry) << " --- ParentPID: " << ParentPID->at(jentry) << std::endl;
-        if (PID->at(jentry)==22 && PID->at(jentry)==13) {
-
-        }
-      }
-      std::cout << " " << std::endl;*/
 
 
       //Truth distance distribution
@@ -420,14 +407,13 @@ int main(int argc, char **argv) {
         //Primary particles
         bool prmneutron = false;
         int  PrimaryNeutrons = 0;
-        GetNeutrinoInteraction(ientry, intmode);
-        std::cout << "------  VCWORK primary info  ------" << std::endl;
-        //std::cout << "Npvc: " << Npvc << ", numu->Npvc: " << numu->var<int>("Npvc") << std::endl;
+        //GetNeutrinoInteraction(ientry, intmode);
+        //std::cout << "------  VCWORK primary info  ------" << std::endl;
         for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
-          std::cout << "[### " << ientry << " ###] Particle[" << iprm << "]=" << Ipvc[iprm]
-                                         << ", Iflvc=" << Iflvc[iprm] 
-                                         << ", Ichvc=" << Ichvc[iprm]
-                                         << ", Iorgvc=" <<Iorgvc[iprm] << std::endl;
+          //std::cout << "[### " << ientry << " ###] Particle[" << iprm << "]=" << Ipvc[iprm]
+          //                               << ", Iflvc=" << Iflvc[iprm] 
+          //                               << ", Ichvc=" << Ichvc[iprm]
+          //                               << ", Iorgvc=" <<Iorgvc[iprm] << std::endl;
           
           if (Ipvc[iprm]==static_cast<int>(PDGPID::NEUTRON) && 
               Ichvc[iprm]==1) 
@@ -440,7 +426,7 @@ int main(int argc, char **argv) {
                                     PrmNeutronMom_y*PrmNeutronMom_y +
                                     PrmNeutronMom_z*PrmNeutronMom_z;
             float PrmNeutronE = std::sqrt( PrmNeutronMom + NMASS*NMASS );
-            std::cout << "- PrmNeutronE: " << PrmNeutronE << std::endl;
+            //std::cout << "- PrmNeutronE: " << PrmNeutronE << std::endl;
             h1_PrmNeutron  -> Fill(Ipvc[ Iorgvc[iprm]-1 ]);
             if (Ipvc[ Iorgvc[iprm]-1 ]==static_cast<int>(PDGPID::PI0))     h1_PrmNeutronE[0] -> Fill(PrmNeutronE);
             if (Ipvc[ Iorgvc[iprm]-1 ]==static_cast<int>(PDGPID::PIPLUS))  h1_PrmNeutronE[1] -> Fill(PrmNeutronE);
@@ -462,15 +448,15 @@ int main(int argc, char **argv) {
         std::vector<float> VtxScndList;
         std::vector<float> VtxPrntList_FSI;
         std::vector<float> VtxScndList_FSI;
-        std::cout << "------  CONVVECT secondary info  ------" << std::endl;
+        //std::cout << "------  CONVVECT secondary info  ------" << std::endl;
         for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
-          std::cout << "[### " << ientry << " ###] Particle[" << iscnd << "]=" << iprtscnd[iscnd]
-                                         << ", iprntprt=" << iprntprt[iscnd]
-                                         << ", iprntidx=" << iprntidx[iscnd] 
-                                         << ", ichildidx=" << ichildidx[iscnd] 
-                                         << ", lmecscnd=" << lmecscnd[iscnd] 
-                                         << ", vtxscnd=[" << vtxscnd[iscnd][0] << ", " << vtxscnd[iscnd][1] << ", " << vtxscnd[iscnd][2] << "]" 
-                                         << ", vtxprnt=[" << vtxprnt[iscnd][0] << ", " << vtxprnt[iscnd][1] << ", " << vtxprnt[iscnd][2] << "]" << std::endl;
+          //std::cout << "[### " << ientry << " ###] Particle[" << iscnd << "]=" << iprtscnd[iscnd]
+          //                               << ", iprntprt=" << iprntprt[iscnd]
+          //                               << ", iprntidx=" << iprntidx[iscnd] 
+          //                               << ", ichildidx=" << ichildidx[iscnd] 
+          //                               << ", lmecscnd=" << lmecscnd[iscnd] 
+          //                               << ", vtxscnd=[" << vtxscnd[iscnd][0] << ", " << vtxscnd[iscnd][1] << ", " << vtxscnd[iscnd][2] << "]" 
+          //                               << ", vtxprnt=[" << vtxprnt[iscnd][0] << ", " << vtxprnt[iscnd][1] << ", " << vtxprnt[iscnd][2] << "]" << std::endl;
           
           //Find secondary neutrons(SI)
           if (iprtscnd[iscnd]==static_cast<int>(PDGPID::GAMMA) &&
@@ -498,7 +484,7 @@ int main(int argc, char **argv) {
             if (VtxScndList.size()==0) {
               VtxScndList.push_back(d_vtxscnd);
               VtxPrntList.push_back(d_vtxprnt);
-              std::cout << "- ScndNeutronE(SI): " << ScndNeutronE << std::endl;
+              //std::cout << "- ScndNeutronE(SI): " << ScndNeutronE << std::endl;
               h1_ScndNeutron -> Fill(999); //handmade ID for SI
               h1_ScndNeutronE[1] -> Fill(ScndNeutronE);
               h1_OverallN -> Fill(ScndNeutronE);
@@ -522,7 +508,7 @@ int main(int argc, char **argv) {
               if (NewNeutron) {
                 VtxScndList.push_back(d_vtxscnd);
                 VtxPrntList.push_back(d_vtxprnt);
-                std::cout << "- ScndNeutronE(SI): " << ScndNeutronE << std::endl;
+                //std::cout << "- ScndNeutronE(SI): " << ScndNeutronE << std::endl;
                 h1_ScndNeutron -> Fill(999); //handmade ID for SI
                 h1_ScndNeutronE[1] -> Fill(ScndNeutronE);
                 h1_OverallN -> Fill(ScndNeutronE);
@@ -559,7 +545,7 @@ int main(int argc, char **argv) {
             if (VtxScndList_FSI.size()==0) {
               VtxScndList_FSI.push_back(d_vtxscnd);
               VtxPrntList_FSI.push_back(d_vtxprnt);
-              std::cout << "- ScndNeutronE(FSI): " << ScndNeutronE << std::endl;
+              //std::cout << "- ScndNeutronE(FSI): " << ScndNeutronE << std::endl;
               h1_ScndNeutron -> Fill(1999); //handmade ID for FSI
               h1_ScndNeutronE[0] -> Fill(ScndNeutronE);
               h1_OverallN -> Fill(ScndNeutronE);
@@ -581,7 +567,7 @@ int main(int argc, char **argv) {
               if (NewNeutron) {
                 VtxScndList_FSI.push_back(d_vtxscnd);
                 VtxPrntList_FSI.push_back(d_vtxprnt);
-                std::cout << "- ScndNeutronE(FSI): " << ScndNeutronE << std::endl;
+                //std::cout << "- ScndNeutronE(FSI): " << ScndNeutronE << std::endl;
                 h1_ScndNeutron -> Fill(1999); //handmade ID for FSI
                 h1_ScndNeutronE[0] -> Fill(ScndNeutronE);
                 h1_OverallN -> Fill(ScndNeutronE);
@@ -611,7 +597,7 @@ int main(int argc, char **argv) {
               h1_OverallN   -> Fill(ScndNeutronE);
               h1_OtherNFrac -> Fill(ScndNeutronE);
               h1_ScndNeutronE[2] -> Fill(ScndNeutronE);
-              std::cout << "- ScndNeutronE(mu): " << ScndNeutronE << std::endl;
+              //std::cout << "- ScndNeutronE(mu): " << ScndNeutronE << std::endl;
             }
 
             //SI
@@ -624,7 +610,7 @@ int main(int argc, char **argv) {
               h1_SINFrac  -> Fill(ScndNeutronE);
               h1_ScndNeutronE[1] -> Fill(ScndNeutronE);
               SINeutrons++;
-              std::cout << "- ScndNeutronE(SI): " << ScndNeutronE << std::endl;
+              //std::cout << "- ScndNeutronE(SI): " << ScndNeutronE << std::endl;
             } 
               
           }
@@ -633,11 +619,11 @@ int main(int argc, char **argv) {
         VtxPrntList.clear();
         VtxScndList_FSI.clear();
         VtxPrntList_FSI.clear();
-        std::cout << "[### " << ientry << " ###] Primary neutrons: " << PrimaryNeutrons 
-                                       << ", FSI neutrons: " << FSINeutrons
-                                       << ", SI neutrons: " << SINeutrons
-                                       << ", Other neutrons: " << OtherNeutrons << std::endl;
-        std::cout << " " << std::endl;
+        //std::cout << "[### " << ientry << " ###] Primary neutrons: " << PrimaryNeutrons 
+        //                               << ", FSI neutrons: " << FSINeutrons
+        //                               << ", SI neutrons: " << SINeutrons
+        //                               << ", Other neutrons: " << OtherNeutrons << std::endl;
+        //std::cout << " " << std::endl;
 
         //Fraction of each neutron contributions
         //(focus on CCQE events w/ tagged-n & nonzero truth neutrons)

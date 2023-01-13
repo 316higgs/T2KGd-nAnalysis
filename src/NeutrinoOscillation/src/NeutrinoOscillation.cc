@@ -24,6 +24,13 @@ void NeutrinoOscillation::SetHistoFrame() {
     h1_Truecosthetamu[i] = new TH1F(TString::Format("h1_Truecosthetamu_mode%d", i), "Scattering angle; #mu Scattering Angle cos#theta_{#mu}; Number of Neutrino Events", 50, -1, 1);
   }
 
+  for (int i=0; i<4; i++) {
+    h1_PrmVtxReso[i] = new TH1F(TString::Format("h1_PrmVtxReso_mode%d", i), "Primary Vertex Resolution; Reco. - Truth [cm]; Number of Neutrino Events", 2000, 0, 200);
+  }
+  h2_Enu_x_PrmVtxReso = new TH2F("h2_Enu_x_PrmVtxReso", "Primary Vertex Resolution; E_{#nu}[GeV]; d_{Reco. vs True}[cm]", 60, 0, 3, 2000, 0, 200);
+  h2_Enu_x_PrmVtxReso -> SetStats(0);
+
+
   //numu
   h1_AllEnutrue     = new TH1F("h1_AllEnutrue",  "Truth Neutrino Energy; Truth Neutrino Energy E^{true}_{#nu}[GeV]; Number of Neutrino Events", 60, 0, 3);
   h1_AllEnureco     = new TH1F("h1_AllEnureco",  "Truth Neutrino Energy; Reconstructed Neutrino Energy E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, 0, 3);
@@ -116,6 +123,18 @@ void NeutrinoOscillation::SetHistoFormat() {
   h1_Enureso[5] -> SetFillColor(kGray+1);
   h1_Enureso[6] -> SetLineColor(kCyan-6);   //CC other
   h1_Enureso[6] -> SetFillColor(kCyan-6);
+
+  for (int i=0; i<4; i++) h1_PrmVtxReso[i] -> SetLineWidth(2);
+  h1_PrmVtxReso[0] -> SetLineColor(kAzure-1);
+  h1_PrmVtxReso[1] -> SetLineColor(kAzure-5);
+  h1_PrmVtxReso[2] -> SetLineColor(kCyan-8);
+  h1_PrmVtxReso[3] -> SetLineColor(kTeal+9);
+
+  h1_PrmVtxReso[0] -> SetFillColor(kAzure-1);
+  h1_PrmVtxReso[1] -> SetFillColor(kAzure-5);
+  h1_PrmVtxReso[2] -> SetFillColor(kCyan-8);
+  h1_PrmVtxReso[3] -> SetFillColor(kTeal+9);
+
 
   for (int i=0; i<INTERACTIONTYPE; i++) {
     h1_TruthOscProb[i]      -> SetLineWidth(2);
@@ -357,6 +376,39 @@ float NeutrinoOscillation::GetEnuResolution(CC0PiNumu* numu, float theta, float 
   }
 
   return EnuReso;
+}
+
+float NeutrinoOscillation::GetPrmVtxResolution(Float_t* posv, CC0PiNumu* numu) {
+
+  int   mode = TMath::Abs(numu->var<int>("mode"));
+  float RecoEnu = numu->var<float>("erec");
+
+  float PrmVtx[3] = {0., 0., 0.};  //Primary vertex
+  PrmVtx[0] = posv[0];
+  PrmVtx[1] = posv[1];
+  PrmVtx[2] = posv[2];
+
+  const int PrmEvent = 0;
+  float RecoPrmVtx[3] = {0., 0., 0.};  //Reco. primary vertex
+  RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
+  RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
+  RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
+
+  float PrmVtxResoX = RecoPrmVtx[0] - PrmVtx[0];
+  float PrmVtxResoY = RecoPrmVtx[1] - PrmVtx[1];
+  float PrmVtxResoZ = RecoPrmVtx[2] - PrmVtx[2];
+  float PrmVtxReso  = std::sqrt( PrmVtxResoX*PrmVtxResoX +
+                                 PrmVtxResoY*PrmVtxResoY +
+                                 PrmVtxResoZ*PrmVtxResoZ );
+
+  if (mode==1) h1_PrmVtxReso[0] -> Fill(PrmVtxReso);
+  if (mode>=2 && mode<=10) h1_PrmVtxReso[1] -> Fill(PrmVtxReso);
+  if (mode>10 && mode<=30) h1_PrmVtxReso[2] -> Fill(PrmVtxReso);
+  if (mode>=31) h1_PrmVtxReso[3] -> Fill(PrmVtxReso);
+
+  h2_Enu_x_PrmVtxReso -> Fill(RecoEnu/1000., PrmVtxReso);
+
+  return PrmVtxReso;
 }
 
 void NeutrinoOscillation::GetReso_x_TrueEnu(CC0PiNumu* numu) {
@@ -809,6 +861,9 @@ void NeutrinoOscillation::WritePlots() {
 
     h1_Truecosthetamu[i] -> Write();
   }
+  for (int i=0; i<4; i++) h1_PrmVtxReso[i] -> Write();
+  h2_Enu_x_PrmVtxReso -> Write();
+
   h1_OscProbCCnonQE -> Write();
   h1_OscProbCCOther -> Write();
   h1_OscProbCCnonQE_wNeutron  -> Write();

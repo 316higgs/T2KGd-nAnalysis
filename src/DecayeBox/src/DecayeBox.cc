@@ -6,23 +6,23 @@ void DecayeBox::SetHistoFrame() {
   h1_TaggedDecaye = new TH1F("h1_TaggedDecaye", "h1_TaggedDecaye; Number of Tagged Decay-e; Number of Neutrino Events", 6, 0, 6);
   h1_TaggedDecaye_CCQE = new TH1F("h1_TaggedDecaye_CCQE", "h1_TaggedDecaye@CCQE; Number of Tagged Decay-e; Number of Neutrino Events", 6, 0, 6);
   h1_TaggedDecaye_CCpi = new TH1F("h1_TaggedDecaye_CCpi", "h1_TaggedDecaye@CCPi; Number of Tagged Decay-e; Number of Neutrino Events", 6, 0, 6);
-  h1_mintimediff       = new TH1F("h1_mintimediff", "h1_mintimediff; dt-tscnd[#musec]; Number of Events", 100, 0.8, 1.2);
-  h1_pscnd             = new TH1F("h1_pscnd", "h1_pscnd; pscnd[MeV]; Number of Events", 80, -80, 80);
-  h1_iprtscnd          = new TH1F("h1_iprtscnd", "h1_iprtscnd; iprtscnd; Number of Events", 2490, 10, 2500);
+  h1_mintimediff       = new TH1F("h1_mintimediff", "h1_mintimediff; dt-tscnd[#musec]; Number of Events", 100, -0.006, 0.006);
+  h1_pscnd             = new TH1F("h1_pscnd", "h1_pscnd; pscnd[MeV]; Number of Events", 80, 0, 80);
+  //h1_iprtscnd          = new TH1F("h1_iprtscnd", "h1_iprtscnd; iprtscnd; Number of Events", 2490, 10, 2500);
 
   for (int i=0; i<INTERACTIONTYPE; i++) {
     h1_TrueDecaye[i] = new TH1F(TString::Format("h1_TrueDecaye_mode%d", i), "TrueDecaye; Number of Truth Decay-e; Number of Neutrino Events", 8, 0, 8);
     h1_TrueDecaye_vtx[i] = new TH1F(TString::Format("h1_TrueDecaye_vtx_mode%d", i), "TrueDecaye; Number of Truth Decay-e; Number of Neutrino Events", 8, 0, 8);
   }
 
-  h2_reso_x_pscnd = new TH2F("h2_reso_x_pscnd", "h2_reso_x_pscnd; dt - tscnd[#musec]; pscnd[MeV]", 100, 0.8, 1.2, 40, 0, 80);
+  h2_reso_x_pscnd = new TH2F("h2_reso_x_pscnd", "h2_reso_x_pscnd; dt - tscnd[#musec]; pscnd[MeV]", 100, -0.006, 0.006, 80, 0, 80);
   h2_reso_x_pscnd -> SetStats(0);
-  h2_reso_x_iprtscnd = new TH2F("h2_reso_x_iprtscnd", "h2_reso_x_iprtscnd; dt[#musec]; iprtscnd", 50, 0., 5., 2490, 10, 2500);
-  h2_reso_x_iprtscnd -> SetStats(0);
-  h2_reso_x_lmecscnd = new TH2F("h2_reso_x_lmecscnd", "h2_reso_x_lmecscnd; dt[#musec]; lmecscnd", 50, 0., 5., 25, 5, 30);
-  h2_reso_x_lmecscnd -> SetStats(0);
-  h2_iprtscnd_lmecscnd = new TH2F("h2_iprtscnd_lmecscnd", "h2_iprtscnd_lmecscnd; iprtscnd; lmecscnd", 2490, 10, 2500, 25, 5, 30);
-  h2_iprtscnd_lmecscnd -> SetStats(0);
+  //h2_reso_x_iprtscnd = new TH2F("h2_reso_x_iprtscnd", "h2_reso_x_iprtscnd; dt[#musec]; iprtscnd", 50, 0., 5., 2490, 10, 2500);
+  //h2_reso_x_iprtscnd -> SetStats(0);
+  //h2_reso_x_lmecscnd = new TH2F("h2_reso_x_lmecscnd", "h2_reso_x_lmecscnd; dt[#musec]; lmecscnd", 50, 0., 5., 25, 5, 30);
+  //h2_reso_x_lmecscnd -> SetStats(0);
+  //h2_iprtscnd_lmecscnd = new TH2F("h2_iprtscnd_lmecscnd", "h2_iprtscnd_lmecscnd; iprtscnd; lmecscnd", 2490, 10, 2500, 25, 5, 30);
+  //h2_iprtscnd_lmecscnd -> SetStats(0);
 
   h2_dtn50 = new TH2D("h2_dtn50", "dt vs N50; dt[#musec]; N50", 100, 0, 50, 40, 0, 400);
   h2_dtn50 -> SetTitleOffset(1.3, "Y");
@@ -61,7 +61,8 @@ int DecayeBox::GetDecayeInBox(CC0PiNumu* numu,
   //bool fillthem = false;  //for checking of naturalness of dt scan results
   //int fillcounter = 0;    //for checking of naturalness of dt scan results
   for (int jsub=1; jsub<nse; jsub++) {
-    float dt  = numu->var<float>("fq1rt0", 1, jsub) - numu->var<float>("fq1rt0", 2, 0);
+    //float dt  = numu->var<float>("fq1rt0", 1, jsub) - numu->var<float>("fq1rt0", 2, 0);  //wrong
+    float dt  = numu->var<float>("fq1rt0", jsub, 1) - numu->var<float>("fq1rt0", 0, 2);    //new
     float N50 = numu->var<int>("fqn50", jsub);
     //if (histofill==true) std::cout << " [subevent# " << jsub << "]  dt = " << dt/1000. << " us, N50 = " << N50 << std::endl;
     //if (histofill==true && mode==1 && nse==2) h2_dtn50 -> Fill(dt/1000., N50);
@@ -99,10 +100,16 @@ int DecayeBox::GetDecayeInBox(CC0PiNumu* numu,
                                   float dtCut,
                                   float N50CutMin,
                                   float N50CutMax) {*/
+/*int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
+                                  Float_t *tscnd, 
+                                  Float_t pscnd[][3],
+                                  Int_t *iprtscnd,
+                                  float dtCut,
+                                  float N50CutMin,
+                                  float N50CutMax) {*/
 int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
                                   Float_t *tscnd, 
                                   Float_t pscnd[][3],
-                                  Int_t *itrkscnd,
                                   float dtCut,
                                   float N50CutMin,
                                   float N50CutMax) {
@@ -110,33 +117,41 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
   //Check the existence of secondary particles
   int nse_true = numu->var<int>("nscndprt");
   int nse_reco = numu->var<int>("fqnse");
-  if (nse_true==0) return 0;
-  //if (nse_reco==0 || nse_reco==1) return 0;
-  if (nse_reco==1) return 0;
+  if (nse_true==0) return 0;                 //if no secondary particles, skip this event
+  if (nse_reco==0 || nse_reco==1) return 0;  //if no subevents, skip this event
 
 
   //Make tscnd list
   std::vector<float> tscndlist;
+  std::vector<float> pscndlist;
   for (int jsub=0; jsub<nse_true; jsub++) {
-    //std::cout << "[true] push_back tscnd = " << numu->var<float>("tscnd", jsub) << " us" << std::endl;
-    tscndlist.push_back( numu->var<float>("tscnd", jsub) );
+    if (std::fabs(numu->var<int>("iprtscnd", jsub))==static_cast<int>(PDGPID::ELECTRON) &&
+        std::fabs(numu->var<int>("iprntprt", jsub))==static_cast<int>(PDGPID::MUON) &&
+        std::fabs(numu->var<int>("lmecscnd", jsub))==static_cast<int>(GEANTINT::DECAY))
+    {
+      //std::cout << "  [true] push_back numu->tscnd = " << (numu->var<float>("tscnd", jsub))/1000. << " us" << std::endl;
+      //tscndlist.push_back( (numu->var<float>("tscnd", jsub))/1000. );
 
-    //std::cout << "[true] push_back tscnd = " << tscnd[jsub]/1000. << " us" << std::endl;
-    tscndlist.push_back( tscnd[jsub]/1000. );
+      std::cout << "  [true] push_back tscnd = " << tscnd[jsub]/1000. << " us" << std::endl;
+      tscndlist.push_back( tscnd[jsub]/1000. );
+      float pscndmom = std::sqrt(pscnd[jsub][0]*pscnd[jsub][0] +
+                                 pscnd[jsub][1]*pscnd[jsub][1] +
+                                 pscnd[jsub][2]*pscnd[jsub][2]);
+      pscndlist.push_back(pscndmom);
+    }
   }
 
   //Make dt list
   std::vector<float> dtlist;
   for (int jsub=1; jsub<nse_reco; jsub++) {
-    //std::cout << "[reco] push_back dt = " << (numu->var<float>("fq1rt0", 1, jsub) - numu->var<float>("fq1rt0", 2, 0))/1000. << " us" << std::endl;
-    dtlist.push_back( (numu->var<float>("fq1rt0", 1, jsub) - numu->var<float>("fq1rt0", 2, 0))/1000. );
+    std::cout << "  [reco] push_back dt = " << (numu->var<float>("fq1rt0", 1, jsub) - numu->var<float>("fq1rt0", 2, 0))/1000. << " us" << std::endl;
+    dtlist.push_back( (numu->var<float>("fq1rt0", jsub, FQ_EHYP) - numu->var<float>("fq1rt0", 0, FQ_MUHYP))/1000. );
   }
 
   //std::vector<int> skip_itr_reco;
   std::vector<int> fin_itr_true; //final minimum truth
   std::vector<int> fin_itr_reco; //final minimum reco
   
-
   int truecounter = numu->var<int>("nscndprt");
   int recocounter = numu->var<int>("fqnse") - 1; //minus means subtraction of the primary lepton
   bool loopfinisher = false;
@@ -204,11 +219,7 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
     //Truth loop
     float fin_min    = 9999999.;
     float resolution = 0.;
-    float fillthem   = false; //hotspot or not
     float min_pscnd  = 0.;
-    int   min_iprtscnd = 0;
-    int   min_lmecscnd = 0;
-    float min_dt       = 0.;
     for (long unsigned int itrue=0; itrue<tscndlist.size(); itrue++) {
 
       //Check
@@ -218,31 +229,19 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
       }
       if (done_this_true==true) continue;
 
-      float this_iprtscnd = numu->var<int>("iprtscnd", itrue);
-      float this_lmecscnd = numu->var<int>("lmecscnd", itrue);
       float this_tscnd = tscndlist.at(itrue);
-      //if (this_iprtscnd==2112 || this_iprtscnd==22) std::cout << "[true# " << itrue+1 << "]  PID = " << this_iprtscnd << ", interaction code: << " << this_lmecscnd << ", Track# = " << itrkscnd[itrue] << std::endl;
-      //std::cout << "  tscnd = " << this_tscnd << " us" << std::endl;
-
-      /*float this_pscnd = std::sqrt(pscnd[itrue][0]*pscnd[itrue][0] +
-                                   pscnd[itrue][1]*pscnd[itrue][1] +
-                                   pscnd[itrue][2]*pscnd[itrue][2]);*/
-      float this_pscnd = pscnd[itrue][0];
-      
+      float this_pscnd = pscndlist.at(itrue);
 
       //extract pre-minimum
       float this_dt = 999.;
-      float N50     = 0.;
       for (long unsigned int ireco=0; ireco<dtlist.size(); ireco++) {
         if (ireco == (long unsigned int)tmp_itr_reco) {
           //std::cout << "   [reco# " << ireco+1 << "]";
           this_dt = dtlist.at(ireco);
           //std::cout << "  dt = " << this_dt << " us" << std::endl;
-          N50 = numu->var<int>("fqn50", ireco);
         }
       }
 
-      //if (this_dt > 0. && this_dt < 5. && N50 > 0. && N50 < 50.) fillthem = true;
       float tmp_reso = this_dt - this_tscnd;
 
       //Final update
@@ -252,15 +251,7 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
         tmp2_itr_true = itrue;
         resolution    = tmp_reso;
         min_pscnd     = this_pscnd;
-        min_iprtscnd  = this_iprtscnd;
-        min_lmecscnd  = this_lmecscnd;
-        min_dt        = this_dt;
-
-        //Focus on the hotspot
-        if (this_dt > 0. && this_dt < 5. && N50 > 0. && N50 < 50.) fillthem = true;
-        else fillthem = false;
       }
-
     }
 
     //Conclude the final minimum pair
@@ -268,15 +259,16 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
     fin_itr_reco.push_back(tmp_itr_reco);
     //std::cout << "[Final-minimum] true:reco = " << tmp2_itr_true+1 << " : " << tmp_itr_reco+1 << std::endl;
     //std::cout << "                Final-minimum time diff. = " << fin_min << " us" << std::endl;
-    if (fillthem==true) {
+    //if (fillthem==true) {
+    if (resolution!=0) {
       h1_mintimediff  -> Fill(resolution);
       h1_pscnd        -> Fill(min_pscnd);
-      h1_iprtscnd     -> Fill(min_iprtscnd);
+      //h1_iprtscnd     -> Fill(min_iprtscnd);
       h2_reso_x_pscnd -> Fill(resolution, min_pscnd);
       //h2_reso_x_iprtscnd -> Fill(resolution, min_iprtscnd);
-      h2_reso_x_iprtscnd -> Fill(min_dt, min_iprtscnd);
-      h2_reso_x_lmecscnd -> Fill(min_dt, min_lmecscnd);
-      h2_iprtscnd_lmecscnd -> Fill(min_iprtscnd, min_lmecscnd);
+      //h2_reso_x_iprtscnd -> Fill(min_dt, min_iprtscnd);
+      //h2_reso_x_lmecscnd -> Fill(min_dt, min_lmecscnd);
+      //h2_iprtscnd_lmecscnd -> Fill(min_iprtscnd, min_lmecscnd);
     }
 
     //Decrement the number of truth particles at last
@@ -357,12 +349,12 @@ void DecayeBox::WritePlots() {
 
   h1_mintimediff -> Write();
   h1_pscnd       -> Write();
-  h1_iprtscnd    -> Write();
+  //h1_iprtscnd    -> Write();
 
   h2_reso_x_pscnd -> Write();
-  h2_reso_x_iprtscnd -> Write();
-  h2_reso_x_lmecscnd -> Write();
-  h2_iprtscnd_lmecscnd -> Write();
+  //h2_reso_x_iprtscnd -> Write();
+  //h2_reso_x_lmecscnd -> Write();
+  //h2_iprtscnd_lmecscnd -> Write();
 
   h2_dtn50 -> Scale(1./SelectedParentNeutrinos[5]);
   h2_dtn50 -> Write();

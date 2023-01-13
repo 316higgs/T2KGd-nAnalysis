@@ -18,8 +18,8 @@ void DistanceViewer::SetHistoFrame() {
   h1_truedistance_mu_n     = new TH1F("h1_truedistance_mu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
 
   //h1_truedistance_decaye   = new TH1F("h1_truedistance_decaye", "Truth distance; Distance from primary vertex[m]; Number of Events", 20, 0, 5);
-  h1_truedistance_mudecay = new TH1F("h1_truedistance_mudecay", "Truth distance of #mu decay; Distance from primary vertex[m]; Number of Events", 50, 0, 5);
-  h1_truedistance_pidecay = new TH1F("h1_truedistance_pidecay", "Truth distance of #pi^{+} decay; Distance from primary vertex[m]; Number of Events", 50, 0, 5);
+  h1_truedistance_mudecay = new TH1F("h1_truedistance_mudecay", "Truth distance of #mu decay; Distance from primary vertex[m]; Number of Events", 50, 0, DistanceMax);
+  h1_truedistance_pidecay = new TH1F("h1_truedistance_pidecay", "Truth distance of #pi^{+} decay; Distance from primary vertex[m]; Number of Events", 50, 0, DistanceMax);
 
   h2_truedistance_x_mom = new TH2F("h2_truedistance_x_mom", "Trueth distance vs momnetum; Truth distance[m]; Truth momentum[MeV]", 50, 0, 5, 20, 0, 80);
   h2_truedistance_x_mom -> SetStats(0);
