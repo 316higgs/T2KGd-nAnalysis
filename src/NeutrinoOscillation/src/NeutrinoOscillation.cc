@@ -29,19 +29,19 @@ void NeutrinoOscillation::SetHistoFrame() {
   }
   h2_Enu_x_PrmVtxReso = new TH2F("h2_Enu_x_PrmVtxReso", "Primary Vertex Resolution; E_{#nu}[GeV]; d_{Reco. vs True}[cm]", 60, 0, 3, 2000, 0, 200);
   h2_Enu_x_PrmVtxReso -> SetStats(0);
-
+  h1_PrmMuMomReso = new TH1F("h1_PrmMuMomReso", "Primary #mu Momentum Resolution; (P^{true}_{#mu}-P^{reco}_{#mu})/P^{true}_{#mu}; Number of Events", 2000, -0.2, 0.2);
+  h1_PrmMuEndVtxReso = new TH1F("h1_PrmMuEndVtxReso", "Primary #mu Stopping Vertex Resolution; Reco. - Truth [cm]; Number of Neutrino Events", 2000, 0, 2000);
+  h2_PrmMuEndVtxReso = new TH2F("h2_PrmMuEndVtxReso", "Primary #mu Stopping Vertex Resolution; Truth [cm]; Reco [cm]", 200, 0, 4000, 200, 0, 4000);
 
   //numu
   h1_AllEnutrue     = new TH1F("h1_AllEnutrue",  "Truth Neutrino Energy; Truth Neutrino Energy E^{true}_{#nu}[GeV]; Number of Neutrino Events", 60, 0, 3);
   h1_AllEnureco     = new TH1F("h1_AllEnureco",  "Truth Neutrino Energy; Reconstructed Neutrino Energy E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, 0, 3);
   h1_AllEnureso     = new TH1F("h1_AllEnureso",  "Neutrino Energy Resolution; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 50, -0.8, 0.8);
   h1_EnuresoCCnonQE = new TH1F("h1_EnuresoCCnonQE", "Neutrino Energy Resolution; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
- 
   h2_Reso_x_TrueEnu = new TH2F("h2_Reso_x_TrueEnu", "Resolution vs Truth Neutrino Energy; Truth Neutrino Energy E^{true}_{#nu}[GeV]; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}", 60, 0, 3, 60, -1, 1);
 
   //numu
   h1_All_NoOsc                = new TH1F("h1_All_NoOsc", "No Oscillation; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
-  //h1_NoOscCCOther             = new TH1F("h1_NoOscCCOther", "No Oscillation; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
   h1_All_NoOsc_woTruthNeutron = new TH1F("h1_All_NoOsc_woTruthNeutron", "No Oscillation w/o Truth Neutrons; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
   h1_All_NoOsc_woNeutron      = new TH1F("h1_All_NoOsc_woNeutron", "No Oscillation w/o Tagged Neutrons; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
 
@@ -378,17 +378,23 @@ float NeutrinoOscillation::GetEnuResolution(CC0PiNumu* numu, float theta, float 
   return EnuReso;
 }
 
-float NeutrinoOscillation::GetPrmVtxResolution(Float_t* posv, CC0PiNumu* numu) {
+//Get truth primary vertex
+void NeutrinoOscillation::GetTruePrmVtx(CC0PiNumu *numu, float *PrmVtx) {
+  PrmVtx[0] = numu->var<float>("posv", 0);
+  PrmVtx[1] = numu->var<float>("posv", 1);
+  PrmVtx[2] = numu->var<float>("posv", 2);
+}
+
+float NeutrinoOscillation::GetPrmVtxResolution(CC0PiNumu* numu) {
 
   int   mode = TMath::Abs(numu->var<int>("mode"));
   float RecoEnu = numu->var<float>("erec");
 
   float PrmVtx[3] = {0., 0., 0.};  //Primary vertex
-  PrmVtx[0] = posv[0];
-  PrmVtx[1] = posv[1];
-  PrmVtx[2] = posv[2];
+  PrmVtx[0] = numu->var<float>("posv", 0);
+  PrmVtx[1] = numu->var<float>("posv", 1);
+  PrmVtx[2] = numu->var<float>("posv", 2);
 
-  const int PrmEvent = 0;
   float RecoPrmVtx[3] = {0., 0., 0.};  //Reco. primary vertex
   RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
   RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
@@ -418,13 +424,16 @@ void NeutrinoOscillation::GetReso_x_TrueEnu(CC0PiNumu* numu) {
   h2_Reso_x_TrueEnu -> Fill(TrueEnu, EnuReso);
 }
 
+float NeutrinoOscillation::GetPrmMuMomResolution(CC0PiNumu* numu, float *MuMom) {
+  float RecoMuMom = numu->var<float>("fq1rmom", 0, FQ_MUHYP);
+  float TrueMuMom = std::sqrt( MuMom[0]*MuMom[0] + MuMom[1]*MuMom[1] + MuMom[2]*MuMom[2] );
+  //float PrmMuReso = std::fabs(RecoMuMom - TrueMuMom);
+  float PrmMuReso = (TrueMuMom - RecoMuMom)/TrueMuMom;
+  h1_PrmMuMomReso -> Fill(PrmMuReso);
+  return PrmMuReso;
+}
 
-/*float NeutrinoOscillation::GetTrueMuDirection(CC0PiNumu* numu, 
-                                              Int_t   Npvc, 
-                                              Int_t*  Ipvc,
-                                              Float_t Pvc[][3],
-                                              Int_t*  Iflvc,
-                                              Int_t*  Ichvc) {*/
+
 float NeutrinoOscillation::GetTrueMuDirection(CC0PiNumu* numu, Float_t Pvc[][3], Int_t* Iflvc) {
   int mode = TMath::Abs(numu->var<int>("mode"));
   
@@ -448,11 +457,9 @@ float NeutrinoOscillation::GetTrueMuDirection(CC0PiNumu* numu, Float_t Pvc[][3],
 
     //Truth muon direction
     //Truth primary particles loop
-    //for (Int_t iprm=0; iprm<Npvc; iprm++) {
     for (Int_t iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
 
       //Truth muon from mu-neutrino
-      //if (std::abs(Ipvc[iprm])==13 && Ichvc[iprm]==1) {
       if (std::abs(numu->var<int>("Ipvc", iprm))==13 && numu->var<int>("Ichvc", iprm)==1) {
 
         //Momentum
@@ -863,6 +870,9 @@ void NeutrinoOscillation::WritePlots() {
   }
   for (int i=0; i<4; i++) h1_PrmVtxReso[i] -> Write();
   h2_Enu_x_PrmVtxReso -> Write();
+  h1_PrmMuMomReso -> Write();
+  h1_PrmMuEndVtxReso -> Write();
+  h2_PrmMuEndVtxReso -> Write();
 
   h1_OscProbCCnonQE -> Write();
   h1_OscProbCCOther -> Write();

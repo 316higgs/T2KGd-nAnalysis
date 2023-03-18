@@ -28,7 +28,7 @@ int CCQEwTaggedNeutrons_prm  = 0; // #CCQE events w/ tagged-n (nonzero truth pri
 int CCQEwTaggedNeutrons_scnd = 0; // #CCQE events w/ tagged-n (nonzero truth secondary neutrons)
 int AllPrimaryNeutrons = 0;
 int AllSINeutrons      = 0;
-int AllOtherNeutrons     = 0;
+int AllOtherNeutrons   = 0;
 
 void ResetNeutrinoEvents() {
   for (int i=0; i<SELECTIONCUTS; i++) {
@@ -45,7 +45,9 @@ void ResetNeutrinoEvents() {
 int ProtoSelectedCCQEevents    = 0;
 int ProtoSelectedCCnonQEevents = 0;
 int ProtoSelectedNCevents      = 0;
+
 int SelectedCCQEevents    = 0;
+int SelectedCC2p2hevents  = 0;
 int SelectedCCnonQEevents = 0;
 int SelectedNCevents      = 0;
 
@@ -339,10 +341,12 @@ void Sequencial1RmuonSelection_Pion(Gd1RmuonSelection prmsel,
 }
 
 
+//Count #neutrino events with respect to neutrino interactions
 void GetSelectedModeEvents(CC0PiNumu* numu) {
   int mode = TMath::Abs(numu->var<int>("mode"));
   if (mode==1) SelectedCCQEevents++;
-  if (mode>=2 && mode<=30) SelectedCCnonQEevents++;
+  if (mode>=2 && mode<=10) SelectedCC2p2hevents++;
+  if (mode>10 && mode<=30) SelectedCCnonQEevents++;
   if (mode>=31) SelectedNCevents++;
 }
 
@@ -376,6 +380,22 @@ void GetNeutrinoInteraction(int ientry, int mode) {
   else if (mode>=31) {
     std::cout << "[### " << ientry << " ###] Neutrino interaction: NC" << std::endl;
   }
+}
+
+
+int GetCCPiTopology(CC0PiNumu* numu) {
+  int NumCCPi = 0;
+  int mode = TMath::Abs(numu->var<int>("mode"));
+  if (mode<=30) {
+    for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+      //std::cout << "Particle[" << iprm << "]=" << numu->var<int>("Ipvc", iprm)
+      //                                         << ", Ichvc=" << numu->var<int>("Ichvc", iprm) << std::endl;
+      if (std::fabs(numu->var<int>("Ipvc", iprm))==static_cast<int>(PDGPID::PIPLUS) ||
+          std::fabs(numu->var<int>("Ipvc", iprm))==static_cast<int>(PDGPID::PI0))
+        NumCCPi++;
+    }
+  }
+  return NumCCPi;
 }
 
 

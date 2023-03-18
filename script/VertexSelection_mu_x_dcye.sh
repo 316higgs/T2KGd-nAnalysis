@@ -23,43 +23,17 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 # 8th index: decay-e-tagging ON/OFF
 ######
 
-#### FHC numu x numu #####
-<<COMMENTOUT
-./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.root\
-                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.VertexSelection_mu_x_dcye.txt\
-                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.VertexSelection_mu_x_dcye.txt\
-                     -MCType Gd\
-                     -ETAG ON\
-                     -BEAMMODE FHC\
-                     -OSCCH NUMU
-COMMENTOUT
-
-
-##### FHC numubar -> numubar MC #####
-<<COMMENTOUT
-./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   ./output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.root\
-                   ./result/fhc/fhc.numubar_x_numubar.neutrino.VertexSelection_mu_x_dcye.txt\
-                   ./result/fhc/fhc.numubar_x_numubar.ntag.VertexSelection_mu_x_dcye.txt\
-                   -MCType Gd\
-                   -ETAG ON\
-                   -BEAMMODE FHC\
-                   -OSCCH NUMUBAR
-COMMENTOUT
 
 ###########################################
 ###########################################
 
-### Oscillated
+### fiTQun decay-e
 
 #### FHC numu x numu #####
 #<<COMMENTOUT
 ./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                      $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.osc.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.fqdcye.root\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.VertexSelection_mu_x_dcye.txt\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.VertexSelection_mu_x_dcye.txt\
                      -MCType Gd\
@@ -73,26 +47,25 @@ COMMENTOUT
 #<<COMMENTOUT
 ./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   ./output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.osc.root\
-                   ./result/fhc/fhc.numubar_x_numubar.neutrino.VertexSelection_mu_x_dcye.txt\
-                   ./result/fhc/fhc.numubar_x_numubar.ntag.VertexSelection_mu_x_dcye.txt\
+                   $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.fqdcye.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.VertexSelection_mu_x_dcye.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.VertexSelection_mu_x_dcye.txt\
                    -MCType Gd\
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
 #COMMENTOUT
 
-
 ###########################################
 ###########################################
 
-### All truth decay-e
+### fiTQun decay-e
 
 #### FHC numu x numu #####
 <<COMMENTOUT
 ./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                      $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.alldcye.root\
+                     $ANALYSISSTAGE/output/fhc/test.numu.dcyecut2.final.root\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.VertexSelection_mu_x_dcye.txt\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.VertexSelection_mu_x_dcye.txt\
                      -MCType Gd\
@@ -106,12 +79,141 @@ COMMENTOUT
 <<COMMENTOUT
 ./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   ./output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.alldcye.root\
-                   ./result/fhc/fhc.numubar_x_numubar.neutrino.VertexSelection_mu_x_dcye.txt\
-                   ./result/fhc/fhc.numubar_x_numubar.ntag.VertexSelection_mu_x_dcye.txt\
+                   $ANALYSISSTAGE/output/fhc/test.numubar.dcyecut2.final.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.VertexSelection_mu_x_dcye.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.VertexSelection_mu_x_dcye.txt\
                    -MCType Gd\
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
 COMMENTOUT
 
+
+###########################################
+###########################################
+
+### Enu < 1 GeV
+
+#### FHC numu x numu #####
+<<COMMENTOUT
+./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.fqdcye.belowEnucut.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.VertexSelection_mu_x_dcye.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.VertexSelection_mu_x_dcye.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUMU
+COMMENTOUT
+
+
+##### FHC numubar -> numubar MC #####
+<<COMMENTOUT
+./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.fqdcye.belowEnucut.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.VertexSelection_mu_x_dcye.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.VertexSelection_mu_x_dcye.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMUBAR
+COMMENTOUT
+
+###########################################
+###########################################
+
+### Enu > 1 GeV
+
+#### FHC numu x numu #####
+<<COMMENTOUT
+./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.fqdcye.aboveEnucut.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.VertexSelection_mu_x_dcye.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.VertexSelection_mu_x_dcye.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUMU
+COMMENTOUT
+
+
+##### FHC numubar -> numubar MC #####
+<<COMMENTOUT
+./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.fqdcye.aboveEnucut.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.VertexSelection_mu_x_dcye.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.VertexSelection_mu_x_dcye.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMUBAR
+COMMENTOUT
+
+
+###########################################
+###########################################
+
+### Pmu < 0.7 GeV
+
+#### FHC numu x numu #####
+<<COMMENTOUT
+./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.fqdcye.belowPmucut.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.VertexSelection_mu_x_dcye.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.VertexSelection_mu_x_dcye.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUMU
+COMMENTOUT
+
+
+##### FHC numubar -> numubar MC #####
+<<COMMENTOUT
+./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.fqdcye.belowPmucut.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.VertexSelection_mu_x_dcye.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.VertexSelection_mu_x_dcye.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMUBAR
+COMMENTOUT
+
+###########################################
+###########################################
+
+### Pmu > 0.7 GeV
+
+#### FHC numu x numu #####
+<<COMMENTOUT
+./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.fqdcye.abovePmucut.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.VertexSelection_mu_x_dcye.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.VertexSelection_mu_x_dcye.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUMU
+COMMENTOUT
+
+
+##### FHC numubar -> numubar MC #####
+<<COMMENTOUT
+./VertexSelection_mu_x_dcye.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.fqdcye.abovePmucut.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.VertexSelection_mu_x_dcye.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.VertexSelection_mu_x_dcye.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMUBAR
+COMMENTOUT

@@ -10,19 +10,46 @@ void DistanceViewer::SetHistoFrame() {
   h1_truedistance_CCOther = new TH1F("h1_truedistance_CCOther", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
   h1_truedistance_CCnonQE = new TH1F("h1_truedistance_CCnonQE", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
   h1_truedistance_NC      = new TH1F("h1_truedistance_NC", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
-  //h1_truedistance_CCRESdeltap  = new TH1F("h1_truedistance_CCRESdeltap", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
-  //h1_truedistance_CCRESdeltapp = new TH1F("h1_truedistance_CCRESdeltapp", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
-  //h1_truedistance_CCRESdelta0  = new TH1F("h1_truedistance_CCRESdelta0", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
 
-  h1_truedistance_nu_n     = new TH1F("h1_truedistance_nu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
-  h1_truedistance_mu_n     = new TH1F("h1_truedistance_mu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
+  h1_truedistance_nu_n      = new TH1F("h1_truedistance_nu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
+  h1_truedistance_mu_n      = new TH1F("h1_truedistance_mu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
+  h1_truedistance_prm_nu_n  = new TH1F("h1_truedistance_prm_nu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
+  h1_truedistance_prm_mu_n  = new TH1F("h1_truedistance_prm_mu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
+  h1_truedistance_nu_BefSIn = new TH1F("h1_truedistance_nu_BefSIn", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
+  h1_truedistance_nu_SIn    = new TH1F("h1_truedistance_nu_SIn", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
+  //h1_TruePrmMuEnd_x_TagNCap = new TH1F("h1_TruePrmMuEnd_x_TagNCap", "Neutron-related distance; Distance[m]; Number of Events", 50, 0, DistanceMax);
 
-  //h1_truedistance_decaye   = new TH1F("h1_truedistance_decaye", "Truth distance; Distance from primary vertex[m]; Number of Events", 20, 0, 5);
-  h1_truedistance_mudecay = new TH1F("h1_truedistance_mudecay", "Truth distance of #mu decay; Distance from primary vertex[m]; Number of Events", 50, 0, DistanceMax);
-  h1_truedistance_pidecay = new TH1F("h1_truedistance_pidecay", "Truth distance of #pi^{+} decay; Distance from primary vertex[m]; Number of Events", 50, 0, DistanceMax);
+  h1_truedistance_mudecay = new TH1F("h1_truedistance_mudecay", "Truth distance of #mu decay; Distance[m]; Number of Events", 100, 0, DistanceMax);
+  h1_truedistance_pidecay = new TH1F("h1_truedistance_pidecay", "Truth distance of #pi^{+} decay; Distance[m]; Number of Events", 100, 0, DistanceMax);
+  for (int i=0; i<6; i++) {
+    h1_TruePrmMuEnd_x_TagNCap[i] = new TH1F(TString::Format("h1_TruePrmMuEnd_x_TagNCap_mode%d", i), "Neutron-related distance; Distance[m]; Number of Events", 50, 0, DistanceMax);
+    h1_Erec[i] = new TH1F(TString::Format("h1_Erec_mode%d", i), "Reco. #nu Energy; Reconstructed #nu Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
+  }
+  h1_TruePrmMuEnd_x_TagNCap_MuN   = new TH1F("h1_TruePrmMuEnd_x_TagNCap_MuN", "Neutron-related distance; Distance[m]; Number of Events", 50, 0, DistanceMax);
+  h1_TruePrmMuEnd_x_TagNCap_NuN   = new TH1F("h1_TruePrmMuEnd_x_TagNCap_NuN", "Neutron-related distance; Distance[m]; Number of Events", 50, 0, DistanceMax);
+  h2_TruePrmMuEnd_x_TagNCap_x_Pmu = new TH2F("h2_TruePrmMuEnd_x_TagNCap_x_Pmu", "Neutron-related distance; Reconstructed Muon Momemtum[MeV]; Distance[m]", 30, 0, 3, 140, 0, 14);
+  h2_TruePrmMuEnd_x_TagNCap_x_Pmu -> SetStats(0);
+  h2_Prm_NCap_x_MuStp_x_NCap = new TH2F("h2_Prm_NCap_x_MuStp_x_NCap", "Neutron-related distance; Distance from Primary Vertex [m]; Distance from #mu Stopping Vertex [m]", 50, 0, 10, 50, 0, 10);
+  h2_Prm_NCap_x_MuStp_x_NCap -> SetStats(0);
 
-  h2_truedistance_x_mom = new TH2F("h2_truedistance_x_mom", "Trueth distance vs momnetum; Truth distance[m]; Truth momentum[MeV]", 50, 0, 5, 20, 0, 80);
-  h2_truedistance_x_mom -> SetStats(0);
+
+  for (int i=0; i<7; i++) {
+    h1_TruePrmMuEnd_x_fQDcyE[i]  = new TH1F(TString::Format("h1_TruePrmMuEnd_x_fQDcyE_mode%d", i), "Decay-e-related distance; Distance[m]; Number of Events", 100, 0, DistanceMax);
+  }
+  h1_TruePrmMuEnd_x_fQDcyE_MuDcy = new TH1F("h1_TruePrmMuEnd_x_fQDcyE_MuDcy", "Decay-e-related distance; Distance[m]; Number of Events", 100, 0, DistanceMax);
+  h1_TruePrmMuEnd_x_fQDcyE_PiDcy = new TH1F("h1_TruePrmMuEnd_x_fQDcyE_PiDcy", "Decay-e-related distance; Distance[m]; Number of Events", 100, 0, DistanceMax);
+  h2_TruePrmMuEnd_x_fQDcyE_x_Pmu = new TH2F("h2_TruePrmMuEnd_x_fQDcyE_x_Pmu", "Decay-e-related distance; Reconstructed Muon Momemtum[GeV]; Distance[m]", 30, 0, 3, 140, 0, 14);
+  //h2_TruePrmMuEnd_x_fQDcyE_x_Pmu = new TH2F("h2_TruePrmMuEnd_x_fQDcyE_x_Pmu", "Decay-e-related distance; Reconstructed Muon Momemtum[GeV]; Distance[m]", 30, 0, 3, 120, 0, 6);
+  //h2_TruePrmMuEnd_x_fQDcyE_x_Pmu = new TH2F("h2_TruePrmMuEnd_x_fQDcyE_x_Pmu", "Decay-e-related distance; Reconstructed Muon Momemtum[GeV]; Distance[m]", 20, 0, 0.1, 120, 0, 6);
+  h2_TruePrmMuEnd_x_fQDcyE_x_Pmu -> SetStats(0);
+  h2_TruePrmMuEnd_x_fQDcyE_x_Enu = new TH2F("h2_TruePrmMuEnd_x_fQDcyE_x_Enu", "Decay-e-related distance; Reconstructed Neutrino Energy[GeV]; Distance[m]", 60, 0, 3, 140, 0, 14);
+  h2_TruePrmMuEnd_x_fQDcyE_x_Enu -> SetStats(0);
+  
+
+  h2_TruePmu_x_TrueRange = new TH2F("h2_TruePmu_x_TrueRange", "h2_TruePmu_x_TrueRange; Truth #mu momentum[MeV]; Truth range[m]", 1000, 0, 1000, 200, 0, 5);
+  h2_TruePmu_x_TrueRange -> SetStats(0);
+  h2_RecoPmu_x_RecoRange = new TH2F("h2_RecoPmu_x_RecoRange", "h2_RecoPmu_x_RecoRange; Reconstructed #mu momentum[MeV]; Reconstructed range[m]", 1000, 0, 1000, 200, 0, 5);
+  h2_RecoPmu_x_RecoRange -> SetStats(0);
 
   h1_Candidatetruedistance = new TH1F("h1_Candidatetruedistance", "Truth Distance From PV; Truth distance[m]; Entries", 10, 0, 5);
   ((TGaxis*)h1_Candidatetruedistance->GetYaxis())->SetMaxDigits(4);
@@ -79,32 +106,6 @@ void DistanceViewer::SetHistoFormat() {
   h1_truedistance_NC -> SetTitleSize(0.035, "Y");
   h1_truedistance_NC -> SetLabelSize(0.033, "Y");
 
-  /*h1_truedistance_CCRESdeltap -> SetLineWidth(2);
-  h1_truedistance_CCRESdeltap -> SetLineColor(kPink+1);
-  h1_truedistance_CCRESdeltap -> SetFillColor(kPink+1);
-  h1_truedistance_CCRESdeltap -> SetTitleOffset(1.4, "Y");
-  h1_truedistance_CCRESdeltap -> SetTitleSize(0.035, "Y");
-  h1_truedistance_CCRESdeltap -> SetLabelSize(0.033, "Y");
-
-  h1_truedistance_CCRESdeltapp -> SetLineWidth(2);
-  h1_truedistance_CCRESdeltapp -> SetLineColor(kPink-8);
-  h1_truedistance_CCRESdeltapp -> SetFillColor(kPink-8);
-  h1_truedistance_CCRESdeltapp -> SetTitleOffset(1.4, "Y");
-  h1_truedistance_CCRESdeltapp -> SetTitleSize(0.035, "Y");
-  h1_truedistance_CCRESdeltapp -> SetLabelSize(0.033, "Y");
-
-  h1_truedistance_CCRESdelta0 -> SetLineWidth(2);
-  h1_truedistance_CCRESdelta0 -> SetLineColor(kGray+1);
-  h1_truedistance_CCRESdelta0 -> SetFillColor(kGray+1);
-  h1_truedistance_CCRESdelta0 -> SetTitleOffset(1.4, "Y");
-  h1_truedistance_CCRESdelta0 -> SetTitleSize(0.035, "Y");
-  h1_truedistance_CCRESdelta0 -> SetLabelSize(0.033, "Y");*/
-
-  /*h1_truedistance_particle -> SetLineWidth(2);
-  h1_truedistance_particle -> SetLineColor(kViolet+8);
-  h1_truedistance_particle -> SetTitleOffset(1.4, "Y");
-  h1_truedistance_particle -> SetTitleSize(0.035, "Y");
-  h1_truedistance_particle -> SetLabelSize(0.033, "Y");*/
 
   h1_truedistance_nu_n -> SetLineWidth(2);
   h1_truedistance_nu_n -> SetLineColor(kRed-8);
@@ -112,23 +113,11 @@ void DistanceViewer::SetHistoFormat() {
   h1_truedistance_nu_n -> SetTitleSize(0.035, "Y");
   h1_truedistance_nu_n -> SetLabelSize(0.033, "Y");
 
-  /*h1_truedistance_mu -> SetLineWidth(2);
-  h1_truedistance_mu -> SetLineColor(kCyan-5);
-  h1_truedistance_mu -> SetTitleOffset(1.4, "Y");
-  h1_truedistance_mu -> SetTitleSize(0.035, "Y");
-  h1_truedistance_mu -> SetLabelSize(0.033, "Y");*/
-
   h1_truedistance_mu_n -> SetLineWidth(2);
   h1_truedistance_mu_n -> SetLineColor(kCyan-5);
   h1_truedistance_mu_n -> SetTitleOffset(1.4, "Y");
   h1_truedistance_mu_n -> SetTitleSize(0.035, "Y");
   h1_truedistance_mu_n -> SetLabelSize(0.033, "Y");
-
-  /*h1_truedistance_mu_gamma -> SetLineWidth(2);
-  h1_truedistance_mu_gamma -> SetLineColor(kOrange-2);
-  h1_truedistance_mu_gamma -> SetTitleOffset(1.4, "Y");
-  h1_truedistance_mu_gamma -> SetTitleSize(0.035, "Y");
-  h1_truedistance_mu_gamma -> SetLabelSize(0.033, "Y");*/
 
   for (int i=0; i<CUTSTEP; i++) {
     h1_NNEff_dist[i] -> SetLineWidth(2);
@@ -145,6 +134,29 @@ void DistanceViewer::SetHistoFormat() {
     h1_OverallEff_dist[i] -> SetTitleSize(0.035, "Y");
     h1_OverallEff_dist[i] -> SetLabelSize(0.033, "Y");
   }
+}
+
+
+float DistanceViewer::TakeDistance(float *Vtx1, float *Vtx2) {
+  //std::cout << "Vtx1 = [" << Vtx1[0] << ", " << Vtx1[1] << ", " << Vtx1[2] << "]" << std::endl;
+  //std::cout << "Vtx2 = [" << Vtx2[0] << ", " << Vtx2[1] << ", " << Vtx2[2] << "]" << std::endl;
+  float d_x = Vtx1[0] - Vtx2[0];
+  float d_y = Vtx1[1] - Vtx2[1];
+  float d_z = Vtx1[2] - Vtx2[2];
+  float d   = std::sqrt( d_x*d_x + d_y*d_y + d_z*d_z ); 
+  //std::cout << "Distance: " << d << std::endl;
+  return d;
+}
+
+float DistanceViewer::TakeTransversalDistance(float *Dir, float *Vtx1, float *Vtx2) {
+  float d_x = Vtx1[0] - Vtx2[0];
+  float d_y = Vtx1[1] - Vtx2[1];
+  float d_z = Vtx1[2] - Vtx2[2];
+  float d   = std::sqrt( d_x*d_x + d_y*d_y + d_z*d_z );
+  //std::cout << " norm: " << std::sqrt( Dir[0]*Dir[0] + Dir[1]*Dir[1] + Dir[2]*Dir[2] ) << std::endl;
+  float InnerProd = d_x*Dir[0] + d_y*Dir[1] + d_z*Dir[2];
+  float dT = d * std::sin( std::acos( InnerProd / d ) );
+  return dT;
 }
 
 
@@ -240,18 +252,35 @@ void DistanceViewer::WritePlots() {
   h1_truedistance_CCOther -> Write();
   h1_truedistance_CCnonQE -> Write();
   h1_truedistance_NC      -> Write();
-  //h1_truedistance_CCRESdeltap  -> Write();
-  //h1_truedistance_CCRESdeltapp -> Write();
-  //h1_truedistance_CCRESdelta0  -> Write();
 
-  //h1_truedistance_decaye  -> Write();
-  h1_truedistance_mudecay -> Write();
-  h1_truedistance_pidecay -> Write();
+  h1_truedistance_mudecay   -> Write();
+  h1_truedistance_pidecay   -> Write();
+  h1_truedistance_nu_n      -> Write();
+  h1_truedistance_mu_n      -> Write();
+  h1_truedistance_prm_nu_n  -> Write();
+  h1_truedistance_prm_mu_n  -> Write();
+  h1_truedistance_nu_BefSIn -> Write();
+  h1_truedistance_nu_SIn    -> Write();
 
-  h1_truedistance_nu_n -> Write();
-  h1_truedistance_mu_n -> Write();
 
-  h2_truedistance_x_mom -> Write();
+  for (int i=0; i<6; i++) {
+    h1_TruePrmMuEnd_x_TagNCap[i] -> Write();
+    h1_Erec[i] -> Write();
+  }
+  h1_TruePrmMuEnd_x_TagNCap_MuN -> Write();
+  h1_TruePrmMuEnd_x_TagNCap_NuN -> Write();
+
+  for (int i=0; i<7; i++) {
+    h1_TruePrmMuEnd_x_fQDcyE[i]  -> Write();
+  }
+  h1_TruePrmMuEnd_x_fQDcyE_MuDcy -> Write();
+  h1_TruePrmMuEnd_x_fQDcyE_PiDcy -> Write();
+  h2_TruePmu_x_TrueRange -> Write();
+  h2_RecoPmu_x_RecoRange -> Write();
+  h2_TruePrmMuEnd_x_fQDcyE_x_Enu  -> Write();
+  h2_TruePrmMuEnd_x_fQDcyE_x_Pmu  -> Write();
+  h2_TruePrmMuEnd_x_TagNCap_x_Pmu -> Write();
+  h2_Prm_NCap_x_MuStp_x_NCap -> Write();
 
   h1_PreEff_dist -> Sumw2();
   h1_PreEff_dist -> Divide(h1_truedistance);

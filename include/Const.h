@@ -8,9 +8,11 @@
 
 enum class PDGPID
 {
-  ENU = 11,
+  ENU = 12,
   ELECTRON = 11,
+  POSITRON = -11,
   MUON = 13,
+  ANTIMUON = -13,
   MUNU = 14,
   GAMMA = 22,
   PROTON = 2212,
@@ -35,6 +37,20 @@ enum class GEANTPID
   PROTON = 14
 };
 
+// for Iflvc
+enum class NEUTINT
+{
+  INITIAL = -1,
+  DETERMINEDLATER = 0,
+  DECAY = 1,
+  ESCAPE = 2,
+  ABSORPTION = 3,
+  CHARGEEXCHANGE = 4,
+  NOTCONSIDER = 5,
+  EMSHOWER = 6,
+  HADRONPROD = 7
+};
+
 // for lmecscnd, IntID...
 enum class GEANTINT
 {
@@ -45,12 +61,20 @@ enum class GEANTINT
   NEUTRONCAPTURE = 18
 };
 
+//SK geometry constant
+const float tankR = 16.9; // m
+const float tankZ = 18.1; // m
+
 //fiTQun
 const int FQ_EHYP = 1;
 const int FQ_MUHYP = 2;
 
+const int PrmEvent = 0;
+
 // MeV
-const float EMASS  = 0.510998;
-const float MUMASS = 105.65836;
-const float NMASS  = 939.565346;
-const float PMASS  = 938.272013;
+const float EMASS  = 0.510998;   // MeV
+const float MUMASS = 105.65836;  // MeV
+const float NMASS  = 939.565346; // MeV
+const float PMASS  = 938.272013; // MeV
+
+

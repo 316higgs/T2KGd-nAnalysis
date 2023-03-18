@@ -24,8 +24,13 @@ void NeutronDistance_mu_x_n(bool beammode) {
 #if fhcflag
   TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.root");
   TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root");
+  
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.noPrmN.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.noPrmN.root");
+
   //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.Enucut.root");
   //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.Enucut.root");
+
   TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
 #endif
 
@@ -69,21 +74,21 @@ void NeutronDistance_mu_x_n(bool beammode) {
 
   TH1F* h1_distance_nu_n = new TH1F("h1_distance_nu_n", "Truth distance; Distance[m]; Number of Events", 50, 0, 5.);
   h1_distance_nu_n -> Add(h1_truedistance_nu_n_numu, h1_truedistance_nu_n_numubar, 1., 1.);
-  h1_distance_nu_n -> SetLineColor(kAzure+9);
+  h1_distance_nu_n -> SetLineColor(kRed-7);
   h1_distance_nu_n -> SetLineWidth(3);
   h1_distance_nu_n -> SetStats(0);
 
   TH1F* h1_distance_mu_n = new TH1F("h1_distance_mu_n", "Truth distance; Distance[m]; Number of Events", 50, 0, 5.);
   h1_distance_mu_n -> Add(h1_truedistance_mu_n_numu, h1_truedistance_mu_n_numubar, 1., 1.);
-  h1_distance_mu_n -> SetLineColor(kRed-7);
+  h1_distance_mu_n -> SetLineColor(kAzure+9);
   h1_distance_mu_n -> SetLineWidth(3);
   h1_distance_mu_n -> SetStats(0);
 
   TCanvas* c = new TCanvas("c", "c", 900, 700);
   c -> SetGrid();
-  h1_distance_nu_n -> Draw("SAME");
-  h1_distance_mu_n -> Draw("SAME");
   //h1_distance_nu_n -> Draw("SAME");
+  h1_distance_mu_n -> Draw("SAME");
+  h1_distance_nu_n -> Draw("SAME");
   
   TLegend* legend1 = new TLegend(0.35, 0.69, 0.89, 0.89);
   legend1 -> SetTextSize(0.04);

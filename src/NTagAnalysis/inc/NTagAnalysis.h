@@ -18,8 +18,18 @@
 #define NOISECUT 18
 
 TH1F* h1_NTrueN[TRUETYPE];
-TH1F* h1_TrueNmultiplicity[INTERACTIONTYPE];
+TH1F* h1_TrueNmultiplicity[INTERACTIONTYPE]; //# of truth captured neutrons (neutrino interactions)
+TH1F* h1_TrueMuN;  //# of truth captured neutrons (neutrons from mu capture)
+TH1F* h1_TrueNuN;  //# of truth captured neutrons (neutrons from neutrino interactions)
 TH1F* h1_TotGammaE;
+int NTrueN_CCQE    = 0;
+int NTrueN_CC2p2h  = 0;
+int NTrueN_CCOther = 0;
+int NTrueN_NC      = 0;
+float NTrueN_CCQE_osc    = 0.;
+float NTrueN_CC2p2h_osc  = 0.;
+float NTrueN_CCOther_osc = 0.;
+float NTrueN_NC_osc      = 0.;
 
 //Neutrino energy resolution w/ truth neutrons & w/o truth neutrons
 TH1F* h1_Enureso_CCQE_trueN[2];
@@ -40,8 +50,6 @@ TH1F* h1_Enureso_CCRES_deltapp[2];
 TH1F* h1_Enureso_CCRES_delta0[2];
 TH1F* h1_Enureso_CCOther[2];
 TH1F* h1_Enureso_NC[2];
-//TH1F* h1_Enureso_CCnonQE_wTagN;
-//TH1F* h1_Enureso_CCnonQE_woTagN;
 
 //Noise rate and efficiencies for window optimization
 TGraphErrors* g_NoiseRate[WINSTEP];
@@ -62,6 +70,16 @@ TGraphErrors* g_OverallGdEff;
 
 TGraphErrors* g_Purity;
 TGraphErrors* g_FillNoiseRate;
+
+TH1F* h1_GenPrmNeutrons;
+TH1F* h1_GenAftFSINeutrons;
+TH1F* h1_GenAftSINeutrons;  // = h1_GenBefSINeutrons + h1_GenAtSINeutrons
+TH1F* h1_GenBefSINeutrons;  // captured neutrons from nu+FSI
+TH1F* h1_GenAtSINeutrons;   // captured neutrons from SI
+int AllBefSINeutrons = 0;
+int CapBefSINeutrons = 0;
+TH1F* h1_GenBefSInE;
+TH1F* h1_GenSInE;
 
 int test1 = 0;
 int test2 = 0;
@@ -111,6 +129,7 @@ void FlagReset() {
   OnlyOneisDecaye       = false;
   OnlyOneNlike          = false;
 }
+
 
 
 class NTagAnalysis {
@@ -249,6 +268,18 @@ class NTagAnalysis {
 
     void InitNeutrons();
 
+    //Get the number of truth neutrons based on NEUT variables
+    //int GetGenPrmNeutrons(CC0PiNumu *numu, Int_t *Iorgvc, Int_t *Iflvc);
+    //int GetGenAftFSINeutrons(CC0PiNumu *numu);
+    //int GetGenAftSINeutrons(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
+    //int GetGenSINeutrons(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
+
+    float GetGenBefSIMom(CC0PiNumu *numu, Int_t *Iorgvc, Int_t *Iflvc);
+
+    int GetTrueNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
+    int GetTrueNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
+
+    //Get the number of truth neutrons based on NTag variables
     void GetTruthNeutrons(float NTrueN,
                           CC0PiNumu* numu, 
                           std::vector<int> *Type,
@@ -331,6 +362,22 @@ class NTagAnalysis {
     void GetNNEfficiency(int windowstep);
     void GetOverallEfficiency(int windowstep);
     void GetPurity(int windowstep);
+
+    //
+    bool GetTrueMuNCapVtx(int iscnd, CC0PiNumu* numu, Int_t *ichildidx, float *MuNCapVtx);
+    int  LabelTrueMuN(CC0PiNumu* numu, bool PrmMuEnd, Int_t *ichildidx);
+    bool GetTrueNuNCapVtx(int iscnd, CC0PiNumu* numu, Int_t *iprntidx, Float_t vtxprnt[][3], std::vector<float> *VtxPrntList, std::vector<float> *VtxScndList, float *NuNCapVtx);
+    int  LabelTrueNuN(CC0PiNumu* numu, bool PrmMuEnd, Int_t *iprntidx, Float_t vtxprnt[][3], std::vector<float> *VtxPrntList, std::vector<float> *VtxScndList);
+    bool GetRecoNeutronCapVtx(UInt_t ican, 
+                              float Threshold, 
+                              std::vector<float> *NHits,
+                              std::vector<float> *FitT, 
+                              std::vector<float> *TagOut,
+                              std::vector<float> *dvx, 
+                              std::vector<float> *dvy, 
+                              std::vector<float> *dvz, 
+                              float *NCapVtx,
+                              bool etagmode);
 
     void SetHistoFrame();
     void SetHistoFormat();

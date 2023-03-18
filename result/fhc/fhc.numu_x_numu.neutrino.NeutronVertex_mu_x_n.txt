@@ -5,5 +5,27 @@
 [Neutrino] C1: 91838 -> 91838
 [Neutrino] C2: 88228 -> 88228
 [Neutrino] C3: 88132 -> 88132
-[Neutrino] C4: 61680 -> 82354
-[Neutrino] C5: 60488 -> 80522
+[Neutrino] C4: 61680 -> 82459
+[Neutrino] C5: 60488 -> 80624
+[Neutrino] Oscillated CCQE Events     : 9090.53
+           w/ tagged neutrons         : 1425.29, w/o tagged neutrons:7665.28
+ 
+[Neutrino] Oscillated CC(2p2h) Events : 1221.7
+           w/ tagged neutrons         : 400.555, w/o tagged neutrons:821.146
+ 
+[Neutrino] Oscillated All CCRES Events: 1465.37
+           w/ tagged neutrons         : 651.552, w/o tagged neutrons:813.816
+ 
+[Neutrino] Oscillated CC Other Events : 170.505
+           w/ tagged neutrons         : 92.284, w/o tagged neutrons:78.2214
+ 
+[Neutrino] NC Events                  : 574
+           w/ tagged neutrons         : 343, w/o tagged neutrons:231
+[Neutron] True captured neutrons at CCQE         : 58166
+[Neutron]                           CCQE(osc.)   : 11786.7
+[Neutron] True captured neutrons at CC2p2h       : 11499
+[Neutron]                           CC2ph2(osc.) : 3479.38
+[Neutron] True captured neutrons at CCOther      : 19683
+[Neutron]                           CCOther(osc.): 9903.73
+[Neutron] True captured neutrons at NC           : 1648
+[Neutron]                           NC(osc.)     : 1648

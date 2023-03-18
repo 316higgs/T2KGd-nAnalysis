@@ -22,10 +22,10 @@ void SubDistance(bool beammode) {
 
   //FHC
 #if fhcflag
-  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.root");
-  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.root");
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.osc.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.osc.root");
+  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.fqdcye.root");
+  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.fqdcye.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.fqdcye.Enucut.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.fqdcye.Enucut.root");
   TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
 #endif
 
@@ -66,13 +66,13 @@ void SubDistance(bool beammode) {
   h1_pidecay_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_pidecay_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
 
-  TH1F* h1_mudecay = new TH1F("h1_mudecay", "Truth distance; Distance[m]; Number of Events", 50, 0, 5);
+  TH1F* h1_mudecay = new TH1F("h1_mudecay", "Truth distance; Distance[m]; Number of Events", 100, 0, 3);
   h1_mudecay -> Add(h1_mudecay_numu, h1_mudecay_numubar, 1., 1.);
   h1_mudecay -> SetLineColor(kAzure+9);
   h1_mudecay -> SetLineWidth(3);
   h1_mudecay -> SetStats(0);
 
-  TH1F* h1_pidecay = new TH1F("h1_pidecay", "Truth distance; Distance[m]; Number of Events", 50, 0, 5);
+  TH1F* h1_pidecay = new TH1F("h1_pidecay", "Truth distance; Distance[m]; Number of Events", 100, 0, 3);
   h1_pidecay -> Add(h1_pidecay_numu, h1_pidecay_numubar, 1., 1.);
   h1_pidecay -> SetLineColor(kRed-7);
   h1_pidecay -> SetLineWidth(3);
@@ -83,16 +83,16 @@ void SubDistance(bool beammode) {
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
-  c1 -> SetLogy();
+  //c1 -> SetLogy();
 
   Double_t tot_mudecay = h1_mudecay->Integral();
   Double_t tot_pidecay = h1_pidecay->Integral();
   //h1_mudecay -> Scale(1./tot_mudecay);
   //h1_pidecay -> Scale(1./tot_pidecay);
 
-  h1_mudecay -> Draw();
+  //h1_mudecay -> Draw();
   h1_pidecay -> Draw("SAME");
-  //h1_mudecay -> Draw("SAME");
+  h1_mudecay -> Draw("SAME");
   c1 -> RedrawAxis();
   
   TLegend* legend1 = new TLegend(0.45, 0.7, 0.89, 0.89);

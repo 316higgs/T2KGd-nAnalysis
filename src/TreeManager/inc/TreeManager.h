@@ -7,6 +7,7 @@
 
 
 //=== Tree ===
+TTree* AnaTuple;
 TTree* Ntuple;
 TTree* woTagNtuple;
 TTree* wTagNtuple;
@@ -375,6 +376,19 @@ Double_t DeltaPForEmiss0_NoNTag;
 Double_t DeltaPForEmiss0_woTagN;
 Double_t DeltaPForEmiss0_wTagN;
 
+//----------------------------------------------------------
+
+// === Analysis ===
+Int_t ana_mode;
+
+Float_t ana_GenBefSIE;
+Float_t ana_BefSInMom[3];
+Float_t ana_SInMom[3];
+
+Float_t ana_TruePrmMuMom[3];
+Float_t ana_TruePrmMuAbsMom;
+Float_t ana_TrueMuEndVtx[3];
+Float_t ana_RecoMuEndVtx[3];
 
 class TreeManager {
   public:
@@ -385,12 +399,17 @@ class TreeManager {
       if (TagID==0) woTagNtuple = new TTree("mtuple", "");
       else if (TagID==1) wTagNtuple = new TTree("mtuple", "");
       else Ntuple = new TTree("mtuple", "");
+
+      AnaTuple = new TTree("AnaTuple", "");
   	};
   	virtual ~TreeManager(){};
 
     void FillBrankTree(int TagID);
 
     void SetBranch(int TagID);
+    void SetAnaBranch();
   	void FillTree(int TagID);
+    void FillAnaTree();
     void WriteTree(TString OutName, int TagID);
+    void WriteAnaTree();
 };

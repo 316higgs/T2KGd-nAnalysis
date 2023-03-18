@@ -10,5 +10,6 @@ BEAMMODE=true
 #BEAMMODE=false
 
 #root -l 'SimpleDecaye.C('${BEAMMODE}')'
+root -l 'CCPiDecaye.C('${BEAMMODE}')'
 
-root -l 'VtxCutDecaye.C('${BEAMMODE}')'
+#root -l 'VtxCutDecaye.C('${BEAMMODE}')'

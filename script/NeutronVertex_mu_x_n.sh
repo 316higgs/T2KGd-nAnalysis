@@ -38,27 +38,29 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 
 
 ##### FHC numubar -> numubar MC #####
-#<<COMMENTOUT
+<<COMMENTOUT
 ./NeutronVertex_mu_x_n.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   ./output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root\
-                   ./result/fhc/fhc.numubar_x_numubar.neutrino.NeutrinoVertex_mu_x_n.txt\
-                   ./result/fhc/fhc.numubar_x_numubar.ntag.NeutrinoVertex_mu_x_n.txt\
+                   $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.NeutrinoVertex_mu_x_n.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.NeutrinoVertex_mu_x_n.txt\
                    -MCType Gd\
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
-#COMMENTOUT
+COMMENTOUT
 
 ###########################################
 
+#### no NEUT neutron
+
 #### FHC numu x numu #####
 <<COMMENTOUT
-./VertexSelection.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+./NeutronVertex_mu_x_n.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                      $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.VertexSelection.aftercut.root\
-                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.VertexSelection.txt\
-                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.VertexSelection.txt\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.noPrmN.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.NeutronVertex_mu_x_n.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.NeutronVertex_mu_x_n.txt\
                      -MCType Gd\
                      -ETAG ON\
                      -BEAMMODE FHC\
@@ -68,13 +70,119 @@ COMMENTOUT
 
 ##### FHC numubar -> numubar MC #####
 <<COMMENTOUT
-./VertexSelection.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+./NeutronVertex_mu_x_n.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   ./output/fhc/fhc.numubar_x_numubar.VertexSelection.aftercut.root\
-                   ./result/fhc/fhc.numubar_x_numubar.neutrino.VertexSelection.txt\
-                   ./result/fhc/fhc.numubar_x_numubar.ntag.VertexSelection.txt\
+                   $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.noPrmN.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.NeutrinoVertex_mu_x_n.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.NeutrinoVertex_mu_x_n.txt\
                    -MCType Gd\
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
 COMMENTOUT
+
+###########################################
+
+#### no SKDETSIM neutron
+
+#### FHC numu x numu #####
+<<COMMENTOUT
+./NeutronVertex_mu_x_n.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.noSIN.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.NeutronVertex_mu_x_n.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.NeutronVertex_mu_x_n.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUMU
+COMMENTOUT
+
+
+##### FHC numubar -> numubar MC #####
+<<COMMENTOUT
+./NeutronVertex_mu_x_n.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.noSIN.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.NeutrinoVertex_mu_x_n.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.NeutrinoVertex_mu_x_n.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMUBAR
+COMMENTOUT
+
+###########################################
+
+#### Enu < 0.7 GeV
+
+#### FHC numu x numu #####
+<<COMMENTOUT
+./NeutronVertex_mu_x_n.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.Enucut.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.NeutronVertex_mu_x_n.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.NeutronVertex_mu_x_n.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUMU
+COMMENTOUT
+
+
+##### FHC numubar -> numubar MC #####
+<<COMMENTOUT
+./NeutronVertex_mu_x_n.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.Enucut.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.NeutrinoVertex_mu_x_n.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.NeutrinoVertex_mu_x_n.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMUBAR
+COMMENTOUT
+
+###########################################
+
+#### Enu < 1 GeV
+
+#### FHC numu x numu #####
+<<COMMENTOUT
+./NeutronVertex_mu_x_n.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.Enucut1GeV.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.NeutronVertex_mu_x_n.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.NeutronVertex_mu_x_n.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUMU
+COMMENTOUT
+
+
+##### FHC numubar -> numubar MC #####
+<<COMMENTOUT
+./NeutronVertex_mu_x_n.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.Enucut1GeV.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.NeutrinoVertex_mu_x_n.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.NeutrinoVertex_mu_x_n.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMUBAR
+COMMENTOUT
+
+
+
+
+
+
+
+
+
+
+
+
+

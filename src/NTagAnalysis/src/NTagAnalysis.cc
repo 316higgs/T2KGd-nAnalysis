@@ -9,7 +9,29 @@ void NTagAnalysis::SetHistoFrame() {
   }
   for (int i=0; i<INTERACTIONTYPE; i++) {
     h1_TrueNmultiplicity[i] = new TH1F(TString::Format("h1_TrueNmultiplicity_mode%d", i), "Truth Capture Neutrons; NTrueN; Entries", 20, 0, 20);
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(1, "0");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(2, "1");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(3, "2");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(4, "3");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(5, "4");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(6, "5");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(7, "6");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(8, "7");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(9, "8");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(10, "9");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(11, "10");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(12, "11");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(13, "12");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(14, "13");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(15, "14");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(16, "15");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(17, "16");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(18, "17");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(19, "18");
+    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(20, "19");
   }
+  h1_TrueMuN = new TH1F("h1_TrueMuN", "h1_TrueMuN; Truth Capture Neutrons; Number of Neutrino Events", 10, 0, 10);
+  h1_TrueNuN = new TH1F("h1_TrueNuN", "h1_TrueNuN; Truth Capture Neutrons; Number of Neutrino Events", 10, 0, 10);
   h1_TotGammaE   = new TH1F("h1_TotGammaE", "Truth Total Gamma Energy; E[MeV]; Entries", 20, 0, 10);
   for (int i=0; i<2; i++) {
     if (i==0) {
@@ -52,8 +74,15 @@ void NTagAnalysis::SetHistoFrame() {
     }
   }
 
-  //h1_Enureso_CCnonQE_wTagN  = new Th1F("h1_Enureso_CCnonQE_wTagN", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-  //h1_Enureso_CCnonQE_woTagN = new Th1F("h1_Enureso_CCnonQE_woTagN", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+  h1_GenPrmNeutrons    = new TH1F("h1_GenPrmNeutrons", "h1_GenPrmNeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
+  h1_GenAftFSINeutrons = new TH1F("h1_GenAftFSINeutrons", "h1_GenAftFSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
+  h1_GenAftSINeutrons  = new TH1F("h1_GenAftSINeutrons", "h1_GenAftSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
+  h1_GenAtSINeutrons   = new TH1F("h1_GenAtSINeutrons", "h1_GenAtSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
+  h1_GenBefSINeutrons  = new TH1F("h1_GenBefSINeutrons", "h1_GenBefSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
+  //h1_GenBefSInE        = new TH1F("h1_GenBefSInE", "h1_GenBefSInE; Truth Neutron Energy[MeV]; Number of Events", 63, 939, 960);
+  //h1_GenSInE           = new TH1F("h1_GenSInE", "h1_GenSInE; Truth Neutron Energy[MeV]; Number of Events", 63, 939, 960);
+  h1_GenBefSInE        = new TH1F("h1_GenBefSInE", "h1_GenBefSInE; Truth Neutron Energy[MeV]; Number of Events", 50, 0, 200);
+  h1_GenSInE           = new TH1F("h1_GenSInE", "h1_GenSInE; Truth Neutron Energy[MeV]; Number of Events", 50, 0, 200);
 }
 
 void NTagAnalysis::SetHistoFormat() {
@@ -134,11 +163,8 @@ void NTagAnalysis::SetHistoFormat() {
     h1_Enureso_CCOther_trueN[i]       -> SetFillColor(kCyan-6);
     h1_Enureso_NC_trueN[i]            -> SetFillColor(kTeal+9);
   }
-  //h1_Enureso_CCnonQE_wTagN  -> SetLineColor(kCyan-8);
-  //h1_Enureso_CCnonQE_wTagN  -> SetFillColor(kCyan-8);
-  //h1_Enureso_CCnonQE_woTagN -> SetLineColor(kCyan-8);
-  //h1_Enureso_CCnonQE_woTagN -> SetFillColor(kCyan-8);
 }
+
 
 
 void NTagAnalysis::InitNeutrons() {
@@ -273,6 +299,315 @@ void NTagAnalysis::InitNeutrons() {
   }
 }
 
+//Get truth neutrons at neutrino interaction
+/*int NTagAnalysis::GetGenPrmNeutrons(CC0PiNumu *numu, Int_t *Iorgvc, Int_t *Iflvc) {
+
+  int GenPrmNeutrons = 0;
+  std::vector<int> intermediatelist;
+
+  //Number of truth neutrons (neutrino interaction)
+  for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+    //std::cout << "Particle[" << iprm << "]=" << numu->var<int>("Ipvc", iprm)
+    //                                         << ", Iflvc=" << Iflvc[iprm] 
+    //                                         << ", Ichvc=" << numu->var<int>("Ichvc", iprm)
+    //                                         << ", Iorgvc=" <<Iorgvc[iprm] << std::endl;
+
+    if (numu->var<int>("Ipvc", iprm)==static_cast<int>(PDGPID::NEUTRON) && Iorgvc[iprm]!=0) {
+      GenPrmNeutrons++;
+      if (numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::NEUTRON) &&
+          Iflvc[iprm]==static_cast<int>(NEUTINT::HADRONPROD)) 
+      {
+        //std::cout << " --> intermediate n" << std::endl;
+        GenPrmNeutrons--;
+      }
+    }
+  }
+  return GenPrmNeutrons;
+}
+
+//Get truth neutrons after FSI (neutrino interaction+FSI)
+int NTagAnalysis::GetGenAftFSINeutrons(CC0PiNumu *numu) {
+  
+  //Number of truth neutrons based on NEUT variables
+  int GenAftFSINeutrons = 0;
+
+  for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+
+    if (numu->var<int>("Ipvc", iprm)==static_cast<int>(PDGPID::NEUTRON) &&
+        numu->var<int>("Ichvc", iprm)==1) 
+    {
+      GenAftFSINeutrons++;
+    }
+  }
+  //std::cout << "  Generated neutrons from nu+FSI: " << GenAftFSINeutrons << std::endl;
+  AllBefSINeutrons += GenAftFSINeutrons;
+  return GenAftFSINeutrons;
+}
+
+//Get truth neutrons after SI (neutrino interaction+FSI+SI)
+int NTagAnalysis::GetGenAftSINeutrons(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]) {
+
+  int GenAftSINeutrons = 0;
+  int GenAtSINeutrons  = 0;
+  int GenBefSINeutrons = 0;
+
+  std::vector<float> VtxPrntList;
+  std::vector<float> VtxScndList;
+  for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
+    if (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) && 
+        numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
+        std::fabs(numu->var<int>("iprntprt", iprntidx[iscnd]-1))!=static_cast<int>(PDGPID::MUON) &&
+        numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) 
+    {
+
+      //Find gamma from different neutrons
+      float d_vtxprnt = std::sqrt( vtxprnt[iscnd][0]*vtxprnt[iscnd][0] +
+                                   vtxprnt[iscnd][1]*vtxprnt[iscnd][1] +
+                                   vtxprnt[iscnd][2]*vtxprnt[iscnd][2] );
+      float vtxscndX  = numu->var<float>("vtxscnd", iscnd, 0);
+      float vtxscndY  = numu->var<float>("vtxscnd", iscnd, 1);
+      float vtxscndZ  = numu->var<float>("vtxscnd", iscnd, 2);
+      float d_vtxscnd = std::sqrt( vtxscndX*vtxscndX +
+                                   vtxscndY*vtxscndY +
+                                   vtxscndZ*vtxscndZ );
+      //First gamma
+      if (VtxScndList.size()==0) {
+        VtxPrntList.push_back(d_vtxprnt);
+        VtxScndList.push_back(d_vtxscnd);
+        GenAftSINeutrons++;
+        //std::cout << "  Captured neutron parent: " << iprntidx[ iprntidx[iscnd]-1 ] << std::endl;
+        if (iprntidx[ iprntidx[iscnd]-1 ]<0) GenBefSINeutrons++;
+        else GenAtSINeutrons++;
+      }
+      else {
+        bool NewNeutron = false;
+        for (UInt_t in=0; in<VtxPrntList.size(); in++) {
+          if (VtxPrntList.at(in)!=d_vtxprnt) NewNeutron = true;
+          else {
+            for (UInt_t jn=0; jn<VtxScndList.size(); jn++) {
+              if (VtxScndList.at(jn)!=d_vtxscnd) NewNeutron = true;
+              else NewNeutron = false;
+            }
+          }
+        }
+  
+        if (NewNeutron) {
+          VtxScndList.push_back(d_vtxscnd);
+          VtxPrntList.push_back(d_vtxprnt);
+          GenAftSINeutrons++;
+          //std::cout << "  Captured neutron parent: " << iprntidx[ iprntidx[iscnd]-1 ] << std::endl;
+          if (iprntidx[ iprntidx[iscnd]-1 ]<0) GenBefSINeutrons++;
+          else GenAtSINeutrons++;
+        }
+      }
+
+    }
+  }
+  VtxPrntList.clear();
+  VtxScndList.clear();
+
+  //std::cout << "  Captured neutrons from nu+FSI: " << GenBefSINeutrons 
+  //          << ", Captured neutrons from SI: " << GenAtSINeutrons 
+  //          << ", After SI: " << GenAftSINeutrons << std::endl; 
+  if (GenBefSINeutrons!=0) h1_GenBefSINeutrons -> Fill(GenBefSINeutrons);
+  if (GenAtSINeutrons!=0) h1_GenAtSINeutrons  -> Fill(GenAtSINeutrons);
+  CapBefSINeutrons += GenBefSINeutrons;
+
+  return GenAftSINeutrons;
+}
+
+//Get truth neutrons after SI (SI only)
+int NTagAnalysis::GetGenSINeutrons(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]) {
+
+  int GenSINeutrons = 0;
+
+  std::vector<float> VtxPrntList;
+  std::vector<float> VtxScndList;
+  for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
+    if (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) && 
+        numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
+        std::fabs(numu->var<int>("iprntprt", iprntidx[iscnd]-1))!=static_cast<int>(PDGPID::MUON) &&
+        numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) 
+    {
+
+      //Find gamma from different neutrons
+      float d_vtxprnt = std::sqrt( vtxprnt[iscnd][0]*vtxprnt[iscnd][0] +
+                                   vtxprnt[iscnd][1]*vtxprnt[iscnd][1] +
+                                   vtxprnt[iscnd][2]*vtxprnt[iscnd][2] );
+      float vtxscndX  = numu->var<float>("vtxscnd", iscnd, 0);
+      float vtxscndY  = numu->var<float>("vtxscnd", iscnd, 1);
+      float vtxscndZ  = numu->var<float>("vtxscnd", iscnd, 2);
+      float d_vtxscnd = std::sqrt( vtxscndX*vtxscndX +
+                                   vtxscndY*vtxscndY +
+                                   vtxscndZ*vtxscndZ );
+      //First gamma
+      if (VtxScndList.size()==0) {
+        VtxPrntList.push_back(d_vtxprnt);
+        VtxScndList.push_back(d_vtxscnd);
+        if (iprntidx[ iprntidx[iscnd]-1 ]==0) GenSINeutrons++;
+      }
+      else {
+        bool NewNeutron = false;
+        for (UInt_t in=0; in<VtxPrntList.size(); in++) {
+          if (VtxPrntList.at(in)!=d_vtxprnt) NewNeutron = true;
+          else {
+            for (UInt_t jn=0; jn<VtxScndList.size(); jn++) {
+              if (VtxScndList.at(jn)!=d_vtxscnd) NewNeutron = true;
+              else NewNeutron = false;
+            }
+          }
+        }
+  
+        if (NewNeutron) {
+          VtxScndList.push_back(d_vtxscnd);
+          VtxPrntList.push_back(d_vtxprnt);
+          if (iprntidx[ iprntidx[iscnd]-1 ]==0) GenSINeutrons++;
+        }
+      }
+
+    }
+  }
+  VtxPrntList.clear();
+  VtxScndList.clear();
+
+  return GenSINeutrons;
+}*/
+
+//Generated neutrons, but not nessariliry captured neutrons
+float NTagAnalysis::GetGenBefSIMom(CC0PiNumu *numu, Int_t *Iorgvc, Int_t *Iflvc) {
+  float NeutronMom = 0.;
+  for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+    //std::cout << "Particle[" << iprm << "]=" << numu->var<int>("Ipvc", iprm)
+    //                                         << ", Iflvc=" << Iflvc[iprm] 
+    //                                         << ", Ichvc=" << numu->var<int>("Ichvc", iprm)
+    //                                         << ", Iorgvc=" <<Iorgvc[iprm] << std::endl;
+    if (numu->var<int>("Ipvc", iprm)==static_cast<int>(PDGPID::NEUTRON) && Iorgvc[iprm]!=0) {
+      //GenPrmNeutrons++;
+      if (numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::NEUTRON) &&
+          Iflvc[iprm]==static_cast<int>(NEUTINT::HADRONPROD)) 
+      {
+        //std::cout << " --> intermediate n" << std::endl;
+        //GenPrmNeutrons--;
+      }
+      else {
+        NeutronMom = numu->var<float>("Abspvc", iprm);
+      }
+    }
+
+  }
+  return NeutronMom;
+}
+
+int NTagAnalysis::GetTrueNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]) {
+//int NTagAnalysis::GetTrueNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pscnd[][3]) {
+  int TrueNBefSI = 0;
+
+  std::vector<float> VtxPrntList;
+  std::vector<float> VtxScndList;
+  for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
+    if (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) && 
+        numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
+        std::fabs(numu->var<int>("iprntprt", iprntidx[iscnd]-1))!=static_cast<int>(PDGPID::MUON) &&
+        numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::NEUTRONCAPTURE) &&
+        iprntidx[iscnd]<0) 
+    {
+      //Find gamma from different neutrons
+      float d_vtxprnt = std::sqrt( vtxprnt[iscnd][0]*vtxprnt[iscnd][0] +
+                                   vtxprnt[iscnd][1]*vtxprnt[iscnd][1] +
+                                   vtxprnt[iscnd][2]*vtxprnt[iscnd][2] );
+      float vtxscndX  = numu->var<float>("vtxscnd", iscnd, 0);
+      float vtxscndY  = numu->var<float>("vtxscnd", iscnd, 1);
+      float vtxscndZ  = numu->var<float>("vtxscnd", iscnd, 2);
+      float d_vtxscnd = std::sqrt( vtxscndX*vtxscndX +
+                                   vtxscndY*vtxscndY +
+                                   vtxscndZ*vtxscndZ );
+
+      //First gamma
+      if (VtxScndList.size()==0) {
+        VtxPrntList.push_back(d_vtxprnt);
+        VtxScndList.push_back(d_vtxscnd);
+        if (iprntidx[ iprntidx[iscnd]-1 ]==0) TrueNBefSI++;
+      }
+      else {
+        bool NewNeutron = false;
+        for (UInt_t in=0; in<VtxPrntList.size(); in++) {
+          if (VtxPrntList.at(in)!=d_vtxprnt) NewNeutron = true;
+          else {
+            for (UInt_t jn=0; jn<VtxScndList.size(); jn++) {
+              if (VtxScndList.at(jn)!=d_vtxscnd) NewNeutron = true;
+              else NewNeutron = false;
+            }
+          }
+        }
+  
+        if (NewNeutron) {
+          VtxScndList.push_back(d_vtxscnd);
+          VtxPrntList.push_back(d_vtxprnt);
+          if (iprntidx[ iprntidx[iscnd]-1 ]==0) TrueNBefSI++;
+        }
+      }
+
+    }
+  }
+  return TrueNBefSI;
+}
+
+int NTagAnalysis::GetTrueNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]) {
+//int NTagAnalysis::GetTrueNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pscnd[][3]) {
+  int TrueNAftSI = 0;
+
+  std::vector<float> VtxPrntList;
+  std::vector<float> VtxScndList;
+  for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
+    if (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) && 
+        numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
+        std::fabs(numu->var<int>("iprntprt", iprntidx[iscnd]-1))!=static_cast<int>(PDGPID::MUON) &&
+        numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::NEUTRONCAPTURE) &&
+        iprntidx[iscnd]>=0) 
+    {
+      //Find gamma from different neutrons
+      float d_vtxprnt = std::sqrt( vtxprnt[iscnd][0]*vtxprnt[iscnd][0] +
+                                   vtxprnt[iscnd][1]*vtxprnt[iscnd][1] +
+                                   vtxprnt[iscnd][2]*vtxprnt[iscnd][2] );
+      float vtxscndX  = numu->var<float>("vtxscnd", iscnd, 0);
+      float vtxscndY  = numu->var<float>("vtxscnd", iscnd, 1);
+      float vtxscndZ  = numu->var<float>("vtxscnd", iscnd, 2);
+      float d_vtxscnd = std::sqrt( vtxscndX*vtxscndX +
+                                   vtxscndY*vtxscndY +
+                                   vtxscndZ*vtxscndZ );
+
+      //First gamma
+      if (VtxScndList.size()==0) {
+        VtxPrntList.push_back(d_vtxprnt);
+        VtxScndList.push_back(d_vtxscnd);
+        //if (iprntidx[ iprntidx[iscnd]-1 ]==0) TrueNAftSI++;
+        if (iprntidx[iscnd]>=0) TrueNAftSI++;
+      }
+      else {
+        bool NewNeutron = false;
+        for (UInt_t in=0; in<VtxPrntList.size(); in++) {
+          if (VtxPrntList.at(in)!=d_vtxprnt) NewNeutron = true;
+          else {
+            for (UInt_t jn=0; jn<VtxScndList.size(); jn++) {
+              if (VtxScndList.at(jn)!=d_vtxscnd) NewNeutron = true;
+              else NewNeutron = false;
+            }
+          }
+        }
+  
+        if (NewNeutron) {
+          VtxScndList.push_back(d_vtxscnd);
+          VtxPrntList.push_back(d_vtxprnt);
+          //if (iprntidx[ iprntidx[iscnd]-1 ]==0) TrueNAftSI++;
+          if (iprntidx[iscnd]>=0) TrueNAftSI++;
+        }
+      }
+
+    }
+  }
+  return TrueNAftSI;
+}
+
 
 void NTagAnalysis::GetTruthNeutrons(float NTrueN,
                                     CC0PiNumu* numu, 
@@ -339,24 +674,32 @@ void NTagAnalysis::GetTruthNeutrons(float NTrueN,
 
 void NTagAnalysis::GetTruthNeutronsIntType(CC0PiNumu* numu, float NTrueN) {
   int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
 
   //CCQE(1p1h)
-  if (mode==1) h1_TrueNmultiplicity[0] -> Fill(NTrueN);
-
-  //CC non-QE
-  if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) h1_TrueNmultiplicity[1] -> Fill(NTrueN);
-
-  //CC RES (Delta+)
-  if (mode==13) h1_TrueNmultiplicity[2] -> Fill(NTrueN);
-
-  //CC RES (Delta++)
-  if (mode==11) h1_TrueNmultiplicity[3] -> Fill(NTrueN);
-
-  //CC RES (Delta0)
-  if (mode==12) h1_TrueNmultiplicity[4] -> Fill(NTrueN);
-
+  if (mode==1) {
+    NTrueN_CCQE += NTrueN;
+    NTrueN_CCQE_osc += NTrueN*OscProb;
+    h1_TrueNmultiplicity[0] -> Fill(NTrueN, OscProb);
+  }
+  //CC 2p2h
+  if (mode>=2 && mode<=10) {
+    NTrueN_CC2p2h += NTrueN;
+    NTrueN_CC2p2h_osc += NTrueN*OscProb;
+    h1_TrueNmultiplicity[1] -> Fill(NTrueN, OscProb);
+  }
+  //CC other
+  if (mode>10 && mode<=30) {
+    NTrueN_CCOther += NTrueN;
+    NTrueN_CCOther_osc += NTrueN*OscProb;
+    h1_TrueNmultiplicity[2] -> Fill(NTrueN, OscProb);
+  }
   //NC
-  if (mode>=31) h1_TrueNmultiplicity[5] -> Fill(NTrueN);
+  if (mode>=31) {
+    NTrueN_NC += NTrueN;
+    NTrueN_NC_osc += NTrueN;
+    h1_TrueNmultiplicity[3] -> Fill(NTrueN);
+  }
 }
 
 
@@ -1380,17 +1723,270 @@ float NTagAnalysis::GetTaggedNeutrons(std::vector<float> *TagOut,
 }
 
 
+bool NTagAnalysis::GetTrueMuNCapVtx(int iscnd, CC0PiNumu* numu, Int_t *ichildidx, float *MuNCapVtx) {
+  bool MuNCap = false;
+
+  if (std::fabs(numu->var<int>("iprtscnd", iscnd))==static_cast<int>(PDGPID::NEUTRON) &&
+      numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::DECAY)) 
+  {
+    if (std::fabs(numu->var<int>("iprntprt", iscnd))==static_cast<int>(PDGPID::MUON) && 
+        numu->var<int>("lmecscnd", ichildidx[iscnd]-1)==static_cast<int>(GEANTINT::NEUTRONCAPTURE))
+    {
+      MuNCap = true;
+      MuNCapVtx[0] = numu->var<float>("vtxscnd", ichildidx[iscnd]-1, 0);
+      MuNCapVtx[1] = numu->var<float>("vtxscnd", ichildidx[iscnd]-1, 1);
+      MuNCapVtx[2] = numu->var<float>("vtxscnd", ichildidx[iscnd]-1, 2);
+      //std::cout << "  MuNCapVtx=[" << MuNCapVtx[0] << ", " << MuNCapVtx[1] << ", " << MuNCapVtx[2] << "]" << std::endl;
+    }
+  } 
+  return MuNCap;
+}
+
+int NTagAnalysis::LabelTrueMuN(CC0PiNumu* numu, bool PrmMuEnd, Int_t *ichildidx) {
+  int TrueMuN = 0;
+  float MuNCapVtx[3] = {0., 0., 0.};  //neutron(from mu capture) capture vertex
+  for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
+    bool PrmMuCap = this->GetTrueMuNCapVtx(iscnd, numu, ichildidx, MuNCapVtx);
+    if (PrmMuEnd && PrmMuCap) TrueMuN++;
+  }
+  return TrueMuN;
+}
+
+bool NTagAnalysis::GetTrueNuNCapVtx(int iscnd, CC0PiNumu* numu, Int_t *iprntidx, Float_t vtxprnt[][3], std::vector<float> *VtxPrntList, std::vector<float> *VtxScndList, float *NuNCapVtx) 
+{
+  bool NuNCap = false;
+
+  if (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) && 
+      numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
+      std::fabs(numu->var<int>("iprntprt", iprntidx[iscnd]-1))!=static_cast<int>(PDGPID::MUON) &&
+      numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) 
+  {
+
+    //Find gamma from different neutrons
+    float d_vtxprnt = std::sqrt( vtxprnt[iscnd][0]*vtxprnt[iscnd][0] +
+                                 vtxprnt[iscnd][1]*vtxprnt[iscnd][1] +
+                                 vtxprnt[iscnd][2]*vtxprnt[iscnd][2] );
+    float vtxscndX  = numu->var<float>("vtxscnd", iscnd, 0);
+    float vtxscndY  = numu->var<float>("vtxscnd", iscnd, 1);
+    float vtxscndZ  = numu->var<float>("vtxscnd", iscnd, 2);
+    float d_vtxscnd = std::sqrt( vtxscndX*vtxscndX +
+                                 vtxscndY*vtxscndY +
+                                 vtxscndZ*vtxscndZ );
+    //First gamma
+    if (VtxScndList->size()==0) {
+      NuNCap = true;
+      VtxPrntList->push_back(d_vtxprnt);
+      VtxScndList->push_back(d_vtxscnd);
+      NuNCapVtx[0] = numu->var<float>("vtxscnd", iscnd, 0);
+      NuNCapVtx[1] = numu->var<float>("vtxscnd", iscnd, 1);
+      NuNCapVtx[2] = numu->var<float>("vtxscnd", iscnd, 2);
+      //std::cout << "  NuNCapVtx=[" << NuNCapVtx[0] << ", " << NuNCapVtx[1] << ", " << NuNCapVtx[2] << "]" << std::endl;
+    }
+    else {
+      bool NewNeutron = false;
+      for (UInt_t in=0; in<VtxPrntList->size(); in++) {
+        if (VtxPrntList->at(in)!=d_vtxprnt) NewNeutron = true;
+        else {
+          for (UInt_t jn=0; jn<VtxScndList->size(); jn++) {
+            if (VtxScndList->at(jn)!=d_vtxscnd) NewNeutron = true;
+            else NewNeutron = false;
+          }
+        }
+      }
+
+      if (NewNeutron) {
+        NuNCap = true;
+        VtxScndList->push_back(d_vtxscnd);
+        VtxPrntList->push_back(d_vtxprnt);
+        NuNCapVtx[0] = numu->var<float>("vtxscnd", iscnd, 0);
+        NuNCapVtx[1] = numu->var<float>("vtxscnd", iscnd, 1);
+        NuNCapVtx[2] = numu->var<float>("vtxscnd", iscnd, 2);
+        //std::cout << "  NuNCapVtx=[" << NuNCapVtx[0] << ", " << NuNCapVtx[1] << ", " << NuNCapVtx[2] << "]" << std::endl;
+      }
+    }
+
+  }
+  return NuNCap;
+}
+
+int NTagAnalysis::LabelTrueNuN(CC0PiNumu* numu, bool PrmMuEnd, Int_t *iprntidx, Float_t vtxprnt[][3], std::vector<float> *VtxPrntList, std::vector<float> *VtxScndList) 
+{
+  int TrueNuN = 0;
+  float NuNCapVtx[3] = {0., 0., 0.};  //neutron(from primary interaction) capture vertex
+  for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
+    bool NuNCap = this->GetTrueNuNCapVtx(iscnd, numu, iprntidx, vtxprnt, VtxPrntList, VtxScndList, NuNCapVtx);
+    if (PrmMuEnd && NuNCap) TrueNuN++;
+  }
+  return TrueNuN;
+}
+
+bool NTagAnalysis::GetRecoNeutronCapVtx(UInt_t ican, 
+                                        float Threshold, 
+                                        std::vector<float> *NHits,
+                                        std::vector<float> *FitT, 
+                                        std::vector<float> *TagOut,
+                                        std::vector<float> *dvx, 
+                                        std::vector<float> *dvy, 
+                                        std::vector<float> *dvz, 
+                                        float *NCapVtx,
+                                        bool etagmode) 
+{
+  bool NCap = false;
+
+  bool etagboxin = false;
+  if (etagmode){
+    if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+
+    if (TagOut->at(ican)>Threshold && etagboxin==false) {
+      NCap = true;
+      NCapVtx[0] = dvx->at(ican);
+      NCapVtx[1] = dvy->at(ican);
+      NCapVtx[2] = dvz->at(ican);
+      //std::cout << "[### " << ican <<" ###]  NCapVtx=[" << NCapVtx[0] << ", " << NCapVtx[1] << ", " << NCapVtx[2] << "]" << std::endl;
+    }
+  }
+  else {
+    if (TagOut->at(ican)>Threshold) {
+      NCap = true;
+      NCapVtx[0] = dvx->at(ican);
+      NCapVtx[1] = dvy->at(ican);
+      NCapVtx[2] = dvz->at(ican);
+      //std::cout << "[### " << ican <<" ###]  NCapVtx=[" << NCapVtx[0] << ", " << NCapVtx[1] << ", " << NCapVtx[2] << "]" << std::endl;
+    }
+  }
+  return NCap;
+}
+
+
+/*
+//void NTagAnalysis::NCapVtxResEstimator(int TrueMuN, int TrueNuN, int* ichildidx, std::vector<float> FitT) {
+void NTagAnalysis::NCapVtxResEstimator(int NTrueN, int* ichildidx, std::vector<float> FitT) {
+
+  //check the existence of neutrons in a neutrino event
+  //if (TrueMuN==0) return 0;
+  //if (TrueNuN==0) return 0;
+  if (NTrueN==0) return 0;
+
+  //Make truth neutron list
+  std::vector<float> tscndlist;
+  for (int jsub=0; jsub<numu->var<int>("nscndprt"); jsub++) {
+    //Find neutrons drectly or gamma from neutron capture
+    if ( (std::fabs(numu->var<int>("iprtscnd", iscnd))==static_cast<int>(PDGPID::NEUTRON) &&
+          numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::DECAY) &&
+          numu->var<int>("lmecscnd", ichildidx[iscnd]-1))==static_cast<int>(GEANTINT::NEUTRONCAPTURE) ||
+         (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) && 
+          numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
+          numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) )
+    {
+      tscndlist.push_back( tscnd[iscnd]/1000. );
+    }
+  }
+
+  //Make reco neutron list
+  std::vector<float> FitTlist;
+  for (UInt_t jcan=0; jcan<TagOut->size(); jcan++) {
+    FitTlist.push_back(FitT->at(jcan));
+  }
+
+  std::vector<int> fin_itr_true; //final minimum pair true
+  std::vector<int> fin_itr_reco; //final minimum pair reco
+
+  int truecounter = numu->var<int>("nscndprt");
+  int recocounter = numu->var<int>("fqnse") - 1;
+  bool loopfinisher = false;
+  while (loopfinisher==false) {
+
+    ///////////////////////////////////
+    //1. Find pre-minimum pair
+    //  1 truth -> all reco
+    ///////////////////////////////////
+    int tmp_itr_true = 999; //pre-minimum true
+    int tmp_itr_reco = 999; //pre-minimum reco
+    //Truth loop
+    float prm_min = 9999999.; //time difference of the minimum reco particle for the itrue-th particle
+    for (long unsigned int itrue=0; itrue<; itrue++) {
+
+      //Check 
+      bool done_this_true = false;
+      for (long unsigned int imin=0; imin<fin_itr_true.size(); imin++) {
+        if (itrue == (long unsigned int)fin_itr_true.at(imin)) done_this_true = true;
+      }
+      if (done_this_true==true) continue;
+
+      float this_tscnd = tscndlist.at(itrue);
+
+      //Reco loop
+      for (long unsigned int ireco=0; ireco<FitTlist.size(); ireco++) {
+
+        //Check
+        bool done_this_reco = false;
+        for (long unsigned int imin=0; imin<fin_itr_reco.size(); imin++) {
+          if (ireco == (long unsigned int)fin_itr_reco.at(imin)) done_this_reco = true;
+        }
+        if (done_this_reco==true) continue;
+
+        float this_FitT = FitTlist.at(ireco);
+
+        float timediff = std::fabs( this_FitT - this_tscnd );
+
+        //update (pre-minimum pair)
+        if (pre_min > timediff) {
+          pre_min = timediff;
+          tmp_itr_true = itrue;
+          tmp_itr_reco = ireco;
+        }
+      }
+
+    }
+
+    ///////////////////////////////////
+    //2. Conclude minimum pair
+    //  pre-minimum reco -> all truth
+    ///////////////////////////////////
+
+
+  } 
+}
+//*/
+
+
 void NTagAnalysis::cdNTagAnalysis(TFile* fout) {
   fout -> mkdir("NTagAnalysis");
   fout -> cd("NTagAnalysis");
 }
 
 void NTagAnalysis::WritePlots() {
+
+  Double_t tot_GenPrmNeutrons = h1_GenPrmNeutrons->Integral();
+  h1_GenPrmNeutrons    -> Scale(1./tot_GenPrmNeutrons);
+  h1_GenPrmNeutrons    -> Write();
+
+  Double_t tot_GenAftFSINeutrons = h1_GenAftFSINeutrons->Integral();
+  h1_GenAftFSINeutrons -> Scale(1./tot_GenAftFSINeutrons);
+  h1_GenAftFSINeutrons -> Write();
+
+  Double_t tot_GenAftSINeutrons = h1_GenAftSINeutrons->Integral();
+  h1_GenAftSINeutrons  -> Scale(1./tot_GenAftSINeutrons);
+  h1_GenAftSINeutrons  -> Write();
+
+  Double_t tot_GenAtSINeutrons = h1_GenAtSINeutrons->Integral();
+  //h1_GenAtSINeutrons  -> Scale(1./tot_GenAtSINeutrons);
+  h1_GenAtSINeutrons  -> Write();
+
+  Double_t tot_GenBefSINeutrons = h1_GenBefSINeutrons->Integral();
+  //h1_GenBefSINeutrons  -> Scale(1./tot_GenBefSINeutrons);
+  h1_GenBefSINeutrons  -> Write();
+
+  h1_GenBefSInE -> Write();
+  h1_GenSInE    -> Write();
+
   for (int i=0; i<TRUETYPE; i++) {
     Double_t tot = h1_NTrueN[i]->Integral();
     //h1_NTrueN[i] -> Scale(1./tot);
     h1_NTrueN[i] -> Write();
   }
+  h1_TrueMuN -> Write();
+  h1_TrueNuN -> Write();
   h1_TotGammaE -> Write();
 
   for (int i=0; i<2; i++) {

@@ -26,8 +26,17 @@ void mergeEnuOscillation(bool beammode) {
 #if fhcflag
   //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.root");
   //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.root");
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.003conc.0532.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.003conc.0532.root");
+  //TFile* fin_numu    = new TFile("../../output/test.numu.root");
+  //TFile* fin_numubar = new TFile("../../output/test.numubar.root");
+  
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root");
+  
+  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.fqdcye.root");
+  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.fqdcye.root");
+
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.003conc.0532.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.003conc.0532.root");
   TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
 #endif
 
@@ -58,16 +67,55 @@ void mergeEnuOscillation(bool beammode) {
   TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProb_mode0");
   TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProb_mode1");
   TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProbCCOther");
-  TH1F* h1_CCnonQE_numu = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProbCCnonQE");
+  //TH1F* h1_CCnonQE_numu = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProbCCnonQE");
   TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProb_mode2");
   h1_CCQE_numu -> SetStats(0);
 
   TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProb_mode0");
   TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProb_mode1");
   TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProbCCOther");
-  TH1F* h1_CCnonQE_numubar = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProbCCnonQE");
+  //TH1F* h1_CCnonQE_numubar = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProbCCnonQE");
   TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProb_mode2");
   h1_CCQE_numubar -> SetStats(0);
+
+  /*float start    = 0.;   // start value
+  float maximum  = 3.;   // histo end [GeV]
+  const int BINS = 60;   // Number of bins
+  float interval = (maximum - start)/BINS;   // bin witdh [cm]
+  int   binnumber = h1_CCQE_numu->FindBin(start); // get bin number
+  float CCQE_numu       = 0.;
+  float CCQE_numubar    = 0.;
+  float CC2p2h_numu     = 0.;
+  float CC2p2h_numubar  = 0.;
+  float CCOther_numu    = 0.;
+  float CCOther_numubar = 0.;
+  float NC_numu         = 0.;
+  float NC_numubar      = 0.;
+  for (int ibin=0; ibin<BINS; ibin++) {
+    float thisvalue = start+ibin*interval; // value of this bin
+    //std::cout << "Energy: " << thisvalue << std::endl;
+    //if (thisvalue < 1.) {
+      CCQE_numu       += h1_CCQE_numu->GetBinContent(binnumber);
+      CCQE_numubar    += h1_CCQE_numubar->GetBinContent(binnumber);
+      CC2p2h_numu     += h1_CC2p2h_numu->GetBinContent(binnumber);
+      CC2p2h_numubar  += h1_CC2p2h_numubar->GetBinContent(binnumber);
+      CCOther_numu    += h1_CCOther_numu->GetBinContent(binnumber);
+      CCOther_numubar += h1_CCOther_numubar->GetBinContent(binnumber);
+      NC_numu         += h1_NC_numu->GetBinContent(binnumber);
+      NC_numubar      += h1_NC_numubar->GetBinContent(binnumber);
+    //}
+    binnumber++;
+  }
+  std::cout << "--numu--" << std::endl;
+  std::cout << "  CCQE   : " << CCQE_numu << std::endl;
+  std::cout << "  CC2p2h : " << CC2p2h_numu << std::endl;
+  std::cout << "  CCnonQE: " << CCOther_numu << std::endl;
+  std::cout << "  NC     : " << NC_numu << std::endl;
+  std::cout << "--numubar--" << std::endl;
+  std::cout << "  CCQE   : " << CCQE_numubar << std::endl;
+  std::cout << "  CC2p2h : " << CC2p2h_numubar << std::endl;
+  std::cout << "  CCnonQE: " << CCOther_numubar << std::endl;
+  std::cout << "  NC     : " << NC_numubar << std::endl;*/
 
   h1_CCOther_numu -> SetLineColor(kCyan-8);
   h1_CCOther_numu -> SetFillColor(kCyan-8);
@@ -80,8 +128,8 @@ void mergeEnuOscillation(bool beammode) {
   h1_CC2p2h_numubar -> SetLineColor(kOrange+6);
   h1_CCOther_numubar -> SetLineColor(kOrange+0);
   h1_CCOther_numubar -> SetLineColor(kOrange+0);
-  h1_CCnonQE_numubar -> SetLineColor(kOrange+0);
-  h1_CCnonQE_numubar -> SetLineColor(kOrange+0);
+  //h1_CCnonQE_numubar -> SetLineColor(kOrange+0);
+  //h1_CCnonQE_numubar -> SetLineColor(kOrange+0);
   h1_NC_numubar      -> SetLineColor(kSpring-9);
 
   h1_CCQE_numubar   -> SetFillColor(kOrange+7);
@@ -90,8 +138,8 @@ void mergeEnuOscillation(bool beammode) {
   h1_CC2p2h_numubar -> SetFillColor(kOrange+6);
   h1_CCOther_numubar -> SetFillColor(kOrange+0);
   h1_CCOther_numubar -> SetFillColor(kOrange+0);
-  h1_CCnonQE_numubar -> SetFillColor(kOrange+0);
-  h1_CCnonQE_numubar -> SetFillColor(kOrange+0);
+  //h1_CCnonQE_numubar -> SetFillColor(kOrange+0);
+  //h1_CCnonQE_numubar -> SetFillColor(kOrange+0);
   h1_NC_numubar      -> SetFillColor(kSpring-9);
 
   h1_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -100,8 +148,8 @@ void mergeEnuOscillation(bool beammode) {
   h1_CC2p2h_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_CCOther_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_CCnonQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CCnonQE_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  //h1_CCnonQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  //h1_CCnonQE_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_NC_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_NC_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
 
@@ -136,14 +184,14 @@ void mergeEnuOscillation(bool beammode) {
   TH1F* h1_CCQE_numu_wTagN    = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProb_wNeutron_mode0");
   TH1F* h1_CC2p2h_numu_wTagN  = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProb_wNeutron_mode1");
   TH1F* h1_CCOther_numu_wTagN = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProbCCOther_wNeutron");
-  TH1F* h1_CCnonQE_numu_wTagN = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProbCCnonQE_wNeutron");
+  //TH1F* h1_CCnonQE_numu_wTagN = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProbCCnonQE_wNeutron");
   TH1F* h1_NC_numu_wTagN      = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProb_wNeutron_mode2");
   h1_CCQE_numu_wTagN -> SetStats(0);
 
   TH1F* h1_CCQE_numubar_wTagN    = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProb_wNeutron_mode0");
   TH1F* h1_CC2p2h_numubar_wTagN  = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProb_wNeutron_mode1");
   TH1F* h1_CCOther_numubar_wTagN = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProbCCOther_wNeutron");
-  TH1F* h1_CCnonQE_numubar_wTagN = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProbCCnonQE_wNeutron");
+  //TH1F* h1_CCnonQE_numubar_wTagN = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProbCCnonQE_wNeutron");
   TH1F* h1_NC_numubar_wTagN      = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProb_wNeutron_mode2");
   h1_CCQE_numubar_wTagN -> SetStats(0);
 
@@ -158,8 +206,8 @@ void mergeEnuOscillation(bool beammode) {
   h1_CC2p2h_numubar_wTagN  -> SetLineColor(kOrange+6);
   h1_CCOther_numubar_wTagN -> SetLineColor(kOrange+0);
   h1_CCOther_numubar_wTagN -> SetLineColor(kOrange+0);
-  h1_CCnonQE_numubar_wTagN -> SetLineColor(kOrange+0);
-  h1_CCnonQE_numubar_wTagN -> SetLineColor(kOrange+0);
+  //h1_CCnonQE_numubar_wTagN -> SetLineColor(kOrange+0);
+  //h1_CCnonQE_numubar_wTagN -> SetLineColor(kOrange+0);
   h1_NC_numubar_wTagN      -> SetLineColor(kSpring-9);
 
   h1_CCQE_numubar_wTagN    -> SetFillColor(kOrange+7);
@@ -168,8 +216,8 @@ void mergeEnuOscillation(bool beammode) {
   h1_CC2p2h_numubar_wTagN  -> SetFillColor(kOrange+6);
   h1_CCOther_numubar_wTagN -> SetFillColor(kOrange+0);
   h1_CCOther_numubar_wTagN -> SetFillColor(kOrange+0);
-  h1_CCnonQE_numubar_wTagN -> SetFillColor(kOrange+0);
-  h1_CCnonQE_numubar_wTagN -> SetFillColor(kOrange+0);
+  //h1_CCnonQE_numubar_wTagN -> SetFillColor(kOrange+0);
+  //h1_CCnonQE_numubar_wTagN -> SetFillColor(kOrange+0);
   h1_NC_numubar_wTagN      -> SetFillColor(kSpring-9);
 
   h1_CCQE_numu_wTagN       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -178,8 +226,8 @@ void mergeEnuOscillation(bool beammode) {
   h1_CC2p2h_numubar_wTagN  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_CCOther_numu_wTagN    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CCOther_numubar_wTagN -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_CCnonQE_numu_wTagN    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CCnonQE_numubar_wTagN -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  //h1_CCnonQE_numu_wTagN    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  //h1_CCnonQE_numubar_wTagN -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_NC_numu_wTagN         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_NC_numubar_wTagN      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
 
@@ -214,14 +262,14 @@ void mergeEnuOscillation(bool beammode) {
   TH1F* h1_CCQE_numu_woTagN    = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProb_woNeutron_mode0");
   TH1F* h1_CC2p2h_numu_woTagN  = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProb_woNeutron_mode1");
   TH1F* h1_CCOther_numu_woTagN = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProbCCOther_woNeutron");
-  TH1F* h1_CCnonQE_numu_woTagN = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProbCCnonQE_woNeutron");
+  //TH1F* h1_CCnonQE_numu_woTagN = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProbCCnonQE_woNeutron");
   TH1F* h1_NC_numu_woTagN      = (TH1F*)fin_numu->Get("NeutrinoOscillation/h1_OscProb_woNeutron_mode2");
   h1_CCQE_numu_woTagN -> SetStats(0);
 
   TH1F* h1_CCQE_numubar_woTagN    = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProb_woNeutron_mode0");
   TH1F* h1_CC2p2h_numubar_woTagN  = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProb_woNeutron_mode1");
   TH1F* h1_CCOther_numubar_woTagN = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProbCCOther_woNeutron");
-  TH1F* h1_CCnonQE_numubar_woTagN = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProbCCnonQE_woNeutron");
+  //TH1F* h1_CCnonQE_numubar_woTagN = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProbCCnonQE_woNeutron");
   TH1F* h1_NC_numubar_woTagN      = (TH1F*)fin_numubar->Get("NeutrinoOscillation/h1_OscProb_woNeutron_mode2");
   h1_CCQE_numubar_woTagN -> SetStats(0);
 
@@ -236,8 +284,8 @@ void mergeEnuOscillation(bool beammode) {
   h1_CC2p2h_numubar_woTagN  -> SetLineColor(kOrange+6);
   h1_CCOther_numubar_woTagN -> SetLineColor(kOrange+0);
   h1_CCOther_numubar_woTagN -> SetLineColor(kOrange+0);
-  h1_CCnonQE_numubar_woTagN -> SetLineColor(kOrange+0);
-  h1_CCnonQE_numubar_woTagN -> SetLineColor(kOrange+0);
+  //h1_CCnonQE_numubar_woTagN -> SetLineColor(kOrange+0);
+  //h1_CCnonQE_numubar_woTagN -> SetLineColor(kOrange+0);
   h1_NC_numubar_woTagN      -> SetLineColor(kSpring-9);
 
   h1_CCQE_numubar_woTagN    -> SetFillColor(kOrange+7);
@@ -246,8 +294,8 @@ void mergeEnuOscillation(bool beammode) {
   h1_CC2p2h_numubar_woTagN  -> SetFillColor(kOrange+6);
   h1_CCOther_numubar_woTagN -> SetFillColor(kOrange+0);
   h1_CCOther_numubar_woTagN -> SetFillColor(kOrange+0);
-  h1_CCnonQE_numubar_woTagN -> SetFillColor(kOrange+0);
-  h1_CCnonQE_numubar_woTagN -> SetFillColor(kOrange+0);
+  //h1_CCnonQE_numubar_woTagN -> SetFillColor(kOrange+0);
+  //h1_CCnonQE_numubar_woTagN -> SetFillColor(kOrange+0);
   h1_NC_numubar_woTagN      -> SetFillColor(kSpring-9);
 
   h1_CCQE_numu_woTagN       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -256,8 +304,8 @@ void mergeEnuOscillation(bool beammode) {
   h1_CC2p2h_numubar_woTagN  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_CCOther_numu_woTagN    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CCOther_numubar_woTagN -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_CCnonQE_numu_woTagN    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CCnonQE_numubar_woTagN -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  //h1_CCnonQE_numu_woTagN    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  //h1_CCnonQE_numubar_woTagN -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_NC_numu_woTagN         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_NC_numubar_woTagN      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
 
@@ -305,10 +353,10 @@ void mergeEnuOscillation(bool beammode) {
 
   TLegend* legend1 = new TLegend(0.45, 0.45, 0.87, 0.87);
   legend1 -> SetTextSize(0.04);
-  //if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
-  //else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
-  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.03% Gd)}","");
-  else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.03% Gd)}","");
+  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
+  else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
+  //if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.03% Gd)}","");
+  //else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.03% Gd)}","");
   legend1 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
   //legend1 -> AddEntry(h1_CCnonQE_numu, "#nu_{#mu} CC non-QE", "F");
@@ -322,7 +370,7 @@ void mergeEnuOscillation(bool beammode) {
   legend1->Draw();
 #endif
 
-#if 1
+#if 0
   // NTag separation
   TCanvas* c2 = new TCanvas("c2","c2",900,700);
   c2 -> SetGrid();
@@ -337,10 +385,10 @@ void mergeEnuOscillation(bool beammode) {
 
   TLegend* legend2 = new TLegend(0.45, 0.45, 0.87, 0.87);
   legend2 -> SetTextSize(0.04);
-  //if (beammode) legend2->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
-  //else legend2->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
-  if (beammode) legend2->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.03% Gd)}","");
-  else legend2->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.03% Gd)}","");
+  if (beammode) legend2->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
+  else legend2->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
+  //if (beammode) legend2->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.03% Gd)}","");
+  //else legend2->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.03% Gd)}","");
   legend2->AddEntry((TObject*)0,"#kern[-0.3]{w/ tagged neutrons}","");
   legend2 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
   legend2 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
@@ -368,10 +416,10 @@ void mergeEnuOscillation(bool beammode) {
 
   TLegend* legend3 = new TLegend(0.45, 0.45, 0.87, 0.87);
   legend3 -> SetTextSize(0.04);
-  //if (beammode) legend3->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
-  //else legend3->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
-  if (beammode) legend3->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.03% Gd)}","");
-  else legend3->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.03% Gd)}","");
+  if (beammode) legend3->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
+  else legend3->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
+  //if (beammode) legend3->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.03% Gd)}","");
+  //else legend3->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.03% Gd)}","");
   legend3->AddEntry((TObject*)0,"#kern[-0.3]{w/o tagged neutrons}","");
   legend3 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
   legend3 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");

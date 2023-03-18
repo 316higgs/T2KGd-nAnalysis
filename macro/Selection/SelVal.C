@@ -5,6 +5,11 @@
 #include "TText.h"
 #include "TLatex.h"
 
+#define NA 6.0221409
+#define FV 22.5
+#define POTSCALE 1.96  //Run1-10 FHC
+//#define POTSCALE 1.63  //Run1-10 RHC
+
 TH1F* h1_C1_CCQE_numu;
 TH1F* h1_C1_CC2p2h_numu;
 TH1F* h1_C1_CCOther_numu;
@@ -66,24 +71,45 @@ Double_t GenN_numubar_x_numubar;
 
 
 void SetHistoColor();
-void ScaleHisto();
+void ScaleHisto(int step);
 
-void SelVal() {
+void SelVal(bool beammode) {
+
+  int fhcflag = 1;
+  int rhcflag = 0;
+  if (!beammode) {
+    std::cout << "[### Beam mode ###] RHC" << std::endl;
+    fhcflag = 0;
+    rhcflag = 1;
+  }
+  else std::cout << "[### Beam mode ###] FHC" << std::endl;
+
+
   //FHC
+#if fhcflag
   //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.root");
   //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.root");
-  //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
+  TFile* fin_numu    = new TFile("../../output/test.numu.root");
+  TFile* fin_numubar = new TFile("../../output/test.numubar.root");
+  TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
+#endif
 
   //RHC
+#if rhcflag
   TFile* fin_numu    = new TFile("../../output/rhc/rhc.numu_x_numu.etagON.cut1.root");
   TFile* fin_numubar = new TFile("../../output/rhc/rhc.numubar_x_numubar.etagON.root");
   TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
+#endif
 
   //Normalization
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
   TH1F* h1_skrate_numubar_x_numubar = (TH1F*)fin_skrate->Get("skrate_numu_bar_x_numu_bar");
-  ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral();
-  ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral();
+  //ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral();
+  //ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral();
+  //Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
+  //Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
+  ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   GenN_numu_x_numu         = 190292;
   GenN_numubar_x_numubar   = 190909;
   std::cout << "ExpN_numu_x_numu = " << ExpN_numu_x_numu << std::endl;
@@ -108,7 +134,8 @@ void SelVal() {
   h1_C1_CCQE_numubar -> SetStats(0);
 
   THStack* hs_C1 = new THStack("hs_C1", "Dwall; fiTQun Dwall[cm]; ");
-  /*
+  ScaleHisto(1);
+#if fhcflag
   hs_C1 -> Add(h1_C1_NC_numubar);
   hs_C1 -> Add(h1_C1_NC_numu);
   hs_C1 -> Add(h1_C1_CCOther_numubar);
@@ -117,7 +144,8 @@ void SelVal() {
   hs_C1 -> Add(h1_C1_CC2p2h_numu);
   hs_C1 -> Add(h1_C1_CCQE_numubar);
   hs_C1 -> Add(h1_C1_CCQE_numu);
-  */
+#endif
+#if rhcflag
   hs_C1 -> Add(h1_C1_NC_numu);
   hs_C1 -> Add(h1_C1_NC_numubar);
   hs_C1 -> Add(h1_C1_CCOther_numu);
@@ -126,6 +154,7 @@ void SelVal() {
   hs_C1 -> Add(h1_C1_CC2p2h_numubar);
   hs_C1 -> Add(h1_C1_CCQE_numu);
   hs_C1 -> Add(h1_C1_CCQE_numubar);
+#endif
 
   //--- Nring ------------------------
   h1_C2_CCQE_numu    = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_Nring_mode0");
@@ -141,7 +170,8 @@ void SelVal() {
   h1_C2_CCQE_numubar -> SetStats(0);
 
   THStack* hs_C2 = new THStack("hs_C2", "1R; Number of Rings; ");
-  /*
+  ScaleHisto(2);
+#if fhcflag
   hs_C2 -> Add(h1_C2_NC_numubar);
   hs_C2 -> Add(h1_C2_NC_numu);
   hs_C2 -> Add(h1_C2_CCOther_numubar);
@@ -150,7 +180,8 @@ void SelVal() {
   hs_C2 -> Add(h1_C2_CC2p2h_numu);
   hs_C2 -> Add(h1_C2_CCQE_numubar);
   hs_C2 -> Add(h1_C2_CCQE_numu);
-  */
+#endif
+#if rhcflag
   hs_C2 -> Add(h1_C2_NC_numu);
   hs_C2 -> Add(h1_C2_NC_numubar);
   hs_C2 -> Add(h1_C2_CCOther_numu);
@@ -159,6 +190,7 @@ void SelVal() {
   hs_C2 -> Add(h1_C2_CC2p2h_numubar);
   hs_C2 -> Add(h1_C2_CCQE_numu);
   hs_C2 -> Add(h1_C2_CCQE_numubar);
+#endif
 
 
   //--- mu/e PID ------------------------
@@ -175,7 +207,8 @@ void SelVal() {
   h1_C3_CCQE_numubar -> SetStats(0);
   
   THStack* hs_C3 = new THStack("hs_C3", "#mu-like; e-#mu PID; ");
-  /*
+  ScaleHisto(3);
+#if fhcflag
   hs_C3 -> Add(h1_C3_NC_numubar);
   hs_C3 -> Add(h1_C3_NC_numu);
   hs_C3 -> Add(h1_C3_CCOther_numubar);
@@ -184,7 +217,8 @@ void SelVal() {
   hs_C3 -> Add(h1_C3_CC2p2h_numu);
   hs_C3 -> Add(h1_C3_CCQE_numubar);
   hs_C3 -> Add(h1_C3_CCQE_numu);
-  */
+#endif
+#if rhcflag
   hs_C3 -> Add(h1_C3_NC_numu);
   hs_C3 -> Add(h1_C3_NC_numubar);
   hs_C3 -> Add(h1_C3_CCOther_numu);
@@ -193,39 +227,7 @@ void SelVal() {
   hs_C3 -> Add(h1_C3_CC2p2h_numubar);
   hs_C3 -> Add(h1_C3_CCQE_numu);
   hs_C3 -> Add(h1_C3_CCQE_numubar);
-
-  //--- mu momentum ------------------------
-  h1_C4_CCQE_numu    = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_emulikelihood_mode0");
-  h1_C4_CC2p2h_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_emulikelihood_mode1");
-  h1_C4_CCOther_numu = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_emulikelihood_mode3");
-  h1_C4_NC_numu      = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_emulikelihood_mode2");
-  h1_C4_CCQE_numu -> SetStats(0);
-
-  h1_C4_CCQE_numubar    = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_emulikelihood_mode0");
-  h1_C4_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_emulikelihood_mode1");
-  h1_C4_CCOther_numubar = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_emulikelihood_mode3");
-  h1_C4_NC_numubar      = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_emulikelihood_mode2");
-  h1_C4_CCQE_numubar -> SetStats(0);
-  
-  THStack* hs_C4 = new THStack("hs_C4", "P_{#mu}; #mu Momentum[MeV/c]; ");
-  /*
-  hs_C4 -> Add(h1_C4_NC_numubar);
-  hs_C4 -> Add(h1_C4_NC_numu);
-  hs_C4 -> Add(h1_C4_CCOther_numubar);
-  hs_C4 -> Add(h1_C4_CCOther_numu);
-  hs_C4 -> Add(h1_C4_CC2p2h_numubar);
-  hs_C4 -> Add(h1_C4_CC2p2h_numu);
-  hs_C4 -> Add(h1_C4_CCQE_numubar);
-  hs_C4 -> Add(h1_C4_CCQE_numu);
-  */
-  hs_C4 -> Add(h1_C4_NC_numu);
-  hs_C4 -> Add(h1_C4_NC_numubar);
-  hs_C4 -> Add(h1_C4_CCOther_numu);
-  hs_C4 -> Add(h1_C4_CCOther_numubar);
-  hs_C4 -> Add(h1_C4_CC2p2h_numu);
-  hs_C4 -> Add(h1_C4_CC2p2h_numubar);
-  hs_C4 -> Add(h1_C4_CCQE_numu);
-  hs_C4 -> Add(h1_C4_CCQE_numubar);
+#endif
 
   //--- mu momentum ------------------------
   h1_C4_CCQE_numu    = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_Pmu_mode0");
@@ -241,7 +243,8 @@ void SelVal() {
   h1_C4_CCQE_numubar -> SetStats(0);
   
   THStack* hs_C4 = new THStack("hs_C4", "P_{#mu}; #mu momentum[MeV/c]; ");
-  /*
+  ScaleHisto(4);
+#if fhcflag
   hs_C4 -> Add(h1_C4_NC_numubar);
   hs_C4 -> Add(h1_C4_NC_numu);
   hs_C4 -> Add(h1_C4_CCOther_numubar);
@@ -250,7 +253,8 @@ void SelVal() {
   hs_C4 -> Add(h1_C4_CC2p2h_numu);
   hs_C4 -> Add(h1_C4_CCQE_numubar);
   hs_C4 -> Add(h1_C4_CCQE_numu);
-  */
+#endif
+#if rhcflag
   hs_C4 -> Add(h1_C4_NC_numu);
   hs_C4 -> Add(h1_C4_NC_numubar);
   hs_C4 -> Add(h1_C4_CCOther_numu);
@@ -259,6 +263,7 @@ void SelVal() {
   hs_C4 -> Add(h1_C4_CC2p2h_numubar);
   hs_C4 -> Add(h1_C4_CCQE_numu);
   hs_C4 -> Add(h1_C4_CCQE_numubar);
+#endif
 
   //--- Decay-e ------------------------
   h1_C5_CCQE_numu    = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_Decaye_mode0");
@@ -274,7 +279,8 @@ void SelVal() {
   h1_C5_CCQE_numubar -> SetStats(0);
   
   THStack* hs_C5 = new THStack("hs_C5", "Decay-e; Number of Decay-e; ");
-  /*
+  ScaleHisto(5);
+#if fhcflag
   hs_C5 -> Add(h1_C5_NC_numubar);
   hs_C5 -> Add(h1_C5_NC_numu);
   hs_C5 -> Add(h1_C5_CCOther_numubar);
@@ -283,7 +289,8 @@ void SelVal() {
   hs_C5 -> Add(h1_C5_CC2p2h_numu);
   hs_C5 -> Add(h1_C5_CCQE_numubar);
   hs_C5 -> Add(h1_C5_CCQE_numu);
-  */
+#endif
+#if rhcflag
   hs_C5 -> Add(h1_C5_NC_numu);
   hs_C5 -> Add(h1_C5_NC_numubar);
   hs_C5 -> Add(h1_C5_CCOther_numu);
@@ -292,6 +299,7 @@ void SelVal() {
   hs_C5 -> Add(h1_C5_CC2p2h_numubar);
   hs_C5 -> Add(h1_C5_CCQE_numu);
   hs_C5 -> Add(h1_C5_CCQE_numubar);
+#endif
 
   //--- pi/mu likelihood ------------------------
   h1_C6_CCQE_numu    = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_pimulikelihood_mode0");
@@ -307,7 +315,8 @@ void SelVal() {
   h1_C6_CCQE_numubar -> SetStats(0);
   
   THStack* hs_C6 = new THStack("hs_C6", "Not#pi^{#pm}like; #pi^{#pm}-#mu PID; ");
-  /*
+  ScaleHisto(6);
+#if fhcflag
   hs_C6 -> Add(h1_C6_NC_numubar);
   hs_C6 -> Add(h1_C6_NC_numu);
   hs_C6 -> Add(h1_C6_CCOther_numubar);
@@ -316,7 +325,8 @@ void SelVal() {
   hs_C6 -> Add(h1_C6_CC2p2h_numu);
   hs_C6 -> Add(h1_C6_CCQE_numubar);
   hs_C6 -> Add(h1_C6_CCQE_numu);
-  */
+#endif
+#if rhcflag
   hs_C6 -> Add(h1_C6_NC_numu);
   hs_C6 -> Add(h1_C6_NC_numubar);
   hs_C6 -> Add(h1_C6_CCOther_numu);
@@ -325,10 +335,10 @@ void SelVal() {
   hs_C6 -> Add(h1_C6_CC2p2h_numubar);
   hs_C6 -> Add(h1_C6_CCQE_numu);
   hs_C6 -> Add(h1_C6_CCQE_numubar);
+#endif
 
 
   SetHistColor();
-  ScaleHisto();
 
 
   gROOT -> SetStyle("Plain");
@@ -353,7 +363,7 @@ void SelVal() {
   hs_C1 ->GetYaxis()->SetTitleOffset(1.3);
   hs_C1 ->GetYaxis()->SetLabelSize(0.036);
   hs_C1 -> Draw();
-  //legend1->Draw();
+  legend1->Draw();
 
   c -> cd(2) -> SetGrid();
   hs_C2 -> Draw();
@@ -390,6 +400,7 @@ void SelVal() {
   hs_C6 ->GetYaxis()->SetLabelSize(0.036);
   hs_C6 -> Draw();
 }
+
 
 void SetHistColor() {
   h1_C1_CCQE_numu    -> SetLineColor(kAzure-1);
@@ -501,60 +512,71 @@ void SetHistColor() {
   h1_C6_NC_numubar      -> SetFillColor(kSpring-9);
 }
 
-void ScaleHisto() {
-  h1_C1_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C1_CC2p2h_numu  -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C1_CCOther_numu -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C1_NC_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C1_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C1_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C1_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C1_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-
-  h1_C2_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C2_CC2p2h_numu  -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C2_CCOther_numu -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C2_NC_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C2_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C2_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C2_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C2_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-
-  h1_C3_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C3_CC2p2h_numu  -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C3_CCOther_numu -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C3_NC_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C3_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C3_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C3_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C3_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-
-  h1_C4_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C4_CC2p2h_numu  -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C4_CCOther_numu -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C4_NC_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C4_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C4_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C4_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C4_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-
-  h1_C5_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C5_CC2p2h_numu  -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C5_CCOther_numu -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C5_NC_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C5_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C5_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C5_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C5_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-
-  h1_C6_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C6_CC2p2h_numu  -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C6_CCOther_numu -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C6_NC_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_C6_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C6_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C6_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_C6_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+void ScaleHisto(int step) {
+  switch (step) {
+    case 1:
+      h1_C1_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C1_CC2p2h_numu  -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C1_CCOther_numu -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C1_NC_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C1_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C1_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C1_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C1_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      break;
+    case 2:
+      h1_C2_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C2_CC2p2h_numu  -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C2_CCOther_numu -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C2_NC_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C2_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C2_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C2_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C2_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      break;
+    case 3:
+      h1_C3_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C3_CC2p2h_numu  -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C3_CCOther_numu -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C3_NC_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C3_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C3_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C3_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C3_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      break;
+    case 4:
+      h1_C4_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C4_CC2p2h_numu  -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C4_CCOther_numu -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C4_NC_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C4_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C4_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C4_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C4_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      break;
+    case 5:
+      h1_C5_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C5_CC2p2h_numu  -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C5_CCOther_numu -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C5_NC_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C5_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C5_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C5_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C5_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      break;
+    case 6:
+      h1_C6_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C6_CC2p2h_numu  -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C6_CCOther_numu -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C6_NC_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+      h1_C6_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C6_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C6_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C6_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      break;
+    default:
+      break;
+  }
 }
 
 

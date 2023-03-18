@@ -18,12 +18,14 @@ TH1F* h1_AllEnureso;
 
 TH1F* h1_PrmVtxReso[4];
 TH2F* h2_Enu_x_PrmVtxReso;
+TH1F* h1_PrmMuMomReso;
+TH1F* h1_PrmMuEndVtxReso;
+TH2F* h2_PrmMuEndVtxReso;
 
 TH1F* h1_EnuresoCCnonQE;
 TH1F* h1_EnuresoCCRES_deltap;
 TH1F* h1_EnuresoCCRES_deltapp;
 TH1F* h1_EnuresoCCRES_delta0;
-
 TH2F* h2_Reso_x_TrueEnu;
 
 //Truth neutrino events as a function of neutrino energy
@@ -31,7 +33,6 @@ TH1F* h1_TruthOscProb[INTERACTIONTYPE];
 
 //Reconstructed neutrino events as a funtion of neutrino energy
 TH1F* h1_NoOsc[INTERACTIONTYPE];
-//TH1F* h1_NoOscCCOther;           //CC RES + CC other
 
 TH1F* h1_OscProb[INTERACTIONTYPE];
 TH1F* h1_OscProbCCnonQE;                     //All CC non-QE
@@ -83,7 +84,9 @@ class NeutrinoOscillation {
     float GetTrueEnu(CC0PiNumu* numu);
     float GetRecoEnu(CC0PiNumu* numu);
     float GetEnuResolution(CC0PiNumu* numu, float theta, float thetamin, float thetamax);
-    float GetPrmVtxResolution(Float_t* posv, CC0PiNumu* numu);
+    void  GetTruePrmVtx(CC0PiNumu *numu, float *PrmVtx);
+    float GetPrmVtxResolution(CC0PiNumu* numu);
+    float GetPrmMuMomResolution(CC0PiNumu* numu, float *MuMom);
     void  GetReso_x_TrueEnu(CC0PiNumu* numu);
     /*float GetTrueMuDirection(CC0PiNumu* numu, 
                              Int_t Npvc, 

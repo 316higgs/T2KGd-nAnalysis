@@ -320,6 +320,18 @@ void TreeManager::SetBranch(int TagID) {
 }
 
 
+void TreeManager::SetAnaBranch() {
+  AnaTuple -> Branch("ana_GenBefSIE", &ana_GenBefSIE, "ana_GenBefSIE/F");
+  AnaTuple -> Branch("ana_mode", &ana_mode, "ana_mode/I");
+  AnaTuple -> Branch("ana_BefSInMom", ana_BefSInMom, "ana_BefSInMom[3]/F");
+  AnaTuple -> Branch("ana_SInMom", ana_SInMom, "ana_SInMom[3]/F");
+  AnaTuple -> Branch("ana_TruePrmMuMom", ana_TruePrmMuMom, "ana_TruePrmMuMom[3]/F");
+  AnaTuple -> Branch("ana_TruePrmMuAbsMom", &ana_TruePrmMuAbsMom, "ana_TruePrmMuAbsMom/F");
+  AnaTuple -> Branch("ana_TrueMuEndVtx", ana_TrueMuEndVtx, "ana_TrueMuEndVtx[3]/F");
+  AnaTuple -> Branch("ana_RecoMuEndVtx", ana_RecoMuEndVtx, "ana_RecoMuEndVtx[3]/F");
+}
+
+
 void TreeManager::FillBrankTree(int TagID) {
 
   //Make empty 100 events
@@ -933,6 +945,11 @@ void TreeManager::FillTree(int TagID) {
   else Ntuple -> Fill();
 }
 
+void TreeManager::FillAnaTree() {
+  AnaTuple -> Fill();
+}
+
+
 void TreeManager::WriteTree(TString OutName, int TagID) {
   TFile* fout = new TFile(OutName, "RECREATE");
   fout -> cd();
@@ -940,3 +957,8 @@ void TreeManager::WriteTree(TString OutName, int TagID) {
   else if (TagID==1) wTagNtuple -> Write();
   else Ntuple -> Write();
 }
+
+void TreeManager::WriteAnaTree() {
+  AnaTuple -> Write();
+}
+

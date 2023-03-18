@@ -22,8 +22,8 @@ void SimpleDecaye(bool beammode) {
 
   //FHC
 #if fhcflag
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.beforecut.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.beforecut.root");
+  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.fqdcye.root");
+  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.fqdcye.root");
   //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.VertexSelection.aftercut.root");
   //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.VertexSelection.aftercut.root");
   TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
@@ -55,40 +55,42 @@ void SimpleDecaye(bool beammode) {
   std::cout << "Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
 
 
-  TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("DecayeBox/h1_TrueDecaye_mode0");
-  TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("DecayeBox/h1_TrueDecaye_mode1");
-  TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("DecayeBox/h1_TrueDecaye_mode2");
-  TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("DecayeBox/h1_TrueDecaye_mode6");
+  //TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("DecayeBox/h1_TrueDecaye_mode0");
+  //TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("DecayeBox/h1_TrueDecaye_mode1");
+  //TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("DecayeBox/h1_TrueDecaye_mode2");
+  //TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("DecayeBox/h1_TrueDecaye_mode6");
+  TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("DecayeBox/h1_TaggedDecaye_mode0");
+  TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("DecayeBox/h1_TaggedDecaye_mode1");
+  TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("DecayeBox/h1_TaggedDecaye_mode3");
+  TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("DecayeBox/h1_TaggedDecaye_mode2");
   h1_CCQE_numu -> SetStats(0);
 
-  TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("DecayeBox/h1_TrueDecaye_mode0");
-  TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("DecayeBox/h1_TrueDecaye_mode1");
-  TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("DecayeBox/h1_TrueDecaye_mode2");
-  TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get("DecayeBox/h1_TrueDecaye_mode6");
+  //TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("DecayeBox/h1_TrueDecaye_mode0");
+  //TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("DecayeBox/h1_TrueDecaye_mode1");
+  //TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("DecayeBox/h1_TrueDecaye_mode2");
+  //TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get("DecayeBox/h1_TrueDecaye_mode6");
+  TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("DecayeBox/h1_TaggedDecaye_mode0");
+  TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("DecayeBox/h1_TaggedDecaye_mode1");
+  TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("DecayeBox/h1_TaggedDecaye_mode3");
+  TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get("DecayeBox/h1_TaggedDecaye_mode2");
   h1_CCQE_numubar -> SetStats(0);
 
   h1_CCQE_numu    -> SetLineColor(kAzure-1);
-  //h1_CC2p2h_numu  -> SetLineColor(kAzure-5);
   h1_CC2p2h_numu  -> SetLineColor(kOrange+0);
-  //h1_CCOther_numu -> SetLineColor(kCyan-8);
   h1_CCOther_numu -> SetLineColor(kOrange+0);
   h1_NC_numu      -> SetLineColor(kSpring-9);
 
   h1_CCQE_numu    -> SetFillColor(kAzure-1);
-  //h1_CC2p2h_numu  -> SetFillColor(kAzure-5);
   h1_CC2p2h_numu  -> SetFillColor(kOrange+0);
-  //h1_CCOther_numu -> SetFillColor(kCyan-8);
   h1_CCOther_numu -> SetFillColor(kOrange+0);
   h1_NC_numu      -> SetFillColor(kSpring-9);
 
   h1_CCQE_numubar    -> SetLineColor(kOrange+7);
-  //h1_CC2p2h_numubar  -> SetLineColor(kOrange+6);
   h1_CC2p2h_numubar  -> SetLineColor(kOrange+0);
   h1_CCOther_numubar -> SetLineColor(kOrange+0);
   h1_NC_numubar      -> SetLineColor(kSpring-9);
 
   h1_CCQE_numubar    -> SetFillColor(kOrange+7);
-  //h1_CC2p2h_numubar  -> SetFillColor(kOrange+6);
   h1_CC2p2h_numubar  -> SetFillColor(kOrange+0);
   h1_CCOther_numubar -> SetFillColor(kOrange+0);
   h1_NC_numubar      -> SetFillColor(kSpring-9);
@@ -102,27 +104,8 @@ void SimpleDecaye(bool beammode) {
   h1_NC_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
 
-  std::cout << "numu    CCQE: " << h1_CCQE_numu->Integral() << std::endl;
-  std::cout << "numubar CCQE: " << h1_CCQE_numubar->Integral() << std::endl;
-  std::cout << "CC non-QE   : " << h1_CC2p2h_numu->Integral()+h1_CC2p2h_numubar->Integral()+h1_CCOther_numu->Integral()+h1_CCOther_numubar->Integral() << std::endl;
-  std::cout << "NC          : " << h1_NC_numu->Integral()+h1_NC_numubar->Integral() << std::endl;
 
-  float start   = 0.;
-  float interval = 1.;
-  const int BINS = 3;
-  int binnumber = h1_CCQE_numu->FindBin(start);
-  for (int ibin=0; ibin<BINS; ibin++) {
-    float thisdecaye = start + ibin*interval;
-    std::cout << "# of decay-e = " <<  thisdecaye << std::endl;
-    std::cout << "  numu    CCQE: " << h1_CCQE_numu->GetBinContent(binnumber) << std::endl; 
-    std::cout << "  numubar CCQE: " << h1_CCQE_numubar->GetBinContent(binnumber) << std::endl; 
-    std::cout << "  CC non-QE   : " << h1_CC2p2h_numu->GetBinContent(binnumber)+h1_CC2p2h_numubar->GetBinContent(binnumber)+h1_CCOther_numu->GetBinContent(binnumber)+h1_CCOther_numubar->GetBinContent(binnumber) << std::endl;
-    std::cout << "  NC          : " << h1_NC_numu->GetBinContent(binnumber)+h1_NC_numubar->GetBinContent(binnumber) << std::endl;
-    binnumber++;
-  }
-
-
-  THStack* hs_TrueDecaye = new THStack("hs_TrueDecaye", "Number of Decay-e; Number of Truth Decay-e; Number of Events");
+  THStack* hs_TrueDecaye = new THStack("hs_TrueDecaye", "Number of Decay-e; Number of Decay-e; Number of Events");
 #if fhcflag
   hs_TrueDecaye -> Add(h1_NC_numubar);
   hs_TrueDecaye -> Add(h1_NC_numu);
@@ -170,7 +153,7 @@ void SimpleDecaye(bool beammode) {
   legend1 -> AddEntry(h1_CCOther_numubar, "#nu_{#mu}+#bar{#nu}_{#mu} CC non-QE", "F");
   legend1 -> AddEntry(h1_NC_numu, "NC", "F");
   legend1->SetFillColor(0);
-  legend1->Draw() ;
+  //legend1->Draw() ;
 #endif
 
 }

@@ -9,7 +9,7 @@
 #include "THStack.h"
 //#include "CC0PiNumu.h"  //src: /disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu
 #include "DefBeamMode.h"
-#include "DefOscChannels.h"
+//#include "DefOscChannels.h"
 
 #include "include/NeutrinoEvents.h"
 #include "include/NTagVariables.h"
@@ -22,6 +22,7 @@
 #include "src/NeutrinoOscillation/inc/NeutrinoOscillation.h"
 #include "src/DistanceViewer/inc/DistanceViewer.h"
 #include "src/NTagAnalysis/inc/NTagAnalysis.h"
+#include "src/TreeManager/inc/TreeManager.h"
 #include "src/NNInputVariables/inc/NNInputVariables.h"
 
 #define NLIKETHRESHOLD 0.75
@@ -48,6 +49,18 @@ int main(int argc, char **argv) {
   eMode = CLTOptionBeamMode(BeamKeyword, Beam);
   eOsc  = CLTOptionOscMode(OscKeyword, Osc);
   CLTOptionETAG(ETAGKeyword, ETAG);
+
+  float thetamin = -1.;
+  //float thetamin = 0.;
+  //float thetamin = 0.2;
+  //float thetamin = 0.4;
+  //float thetamin = 0.6;
+  //float thetamin = 0.8;
+  float thetamax = 1.;
+
+  //TTree
+  TreeManager* AnaTuple = new TreeManager(3);
+  AnaTuple -> SetAnaBranch();
 
   //=========  fiTQun output (TTree: h1)  ============
   TChain *tchfQ = new TChain("h1");
@@ -237,28 +250,21 @@ int main(int argc, char **argv) {
   Int_t   ichildidx[1000];  //Index of the first child particle (0: no childs, n: the first child of n-th secondary particle)
   Int_t   lmecscnd[1000];   //Interaction code of secondary particles based on GEANT
   Float_t pscnd[1000][3];   //Momentum of the secondary particle
-  tchfQ -> SetBranchAddress("posv", posv);
-  tchfQ -> SetBranchAddress("npar", &npar);
+  Float_t pprntinit[1000][3];
+
   tchfQ -> SetBranchAddress("npar2", &npar2);
   tchfQ -> SetBranchAddress("posv2", posv2);
   tchfQ -> SetBranchAddress("ipv2", ipv2);
-  tchfQ -> SetBranchAddress("Npvc", &Npvc);
   tchfQ -> SetBranchAddress("Pvc", Pvc);
-  tchfQ -> SetBranchAddress("Ipvc", Ipvc);
-  tchfQ -> SetBranchAddress("Ichvc", Ichvc);
   tchfQ -> SetBranchAddress("Iflvc", Iflvc);
   tchfQ -> SetBranchAddress("Iorgvc", Iorgvc);
-  tchfQ -> SetBranchAddress("nscndprt", &nscndprt);
-  //tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
   tchfQ -> SetBranchAddress("tscnd", tscnd);
-  tchfQ -> SetBranchAddress("vtxscnd", vtxscnd);
-  //tchfQ -> SetBranchAddress("iprntprt", iprntprt);
   tchfQ -> SetBranchAddress("iorgprt", iorgprt);
   tchfQ -> SetBranchAddress("iprnttrk", iprnttrk);
   tchfQ -> SetBranchAddress("iprntidx", iprntidx);
   tchfQ -> SetBranchAddress("ichildidx", ichildidx);
-  //tchfQ -> SetBranchAddress("lmecscnd", lmecscnd);
   tchfQ -> SetBranchAddress("pscnd", pscnd);
+  tchfQ -> SetBranchAddress("pprntinit", pprntinit);
 
   ResetNeutrinoEvents();
   SetVECTHisto();
@@ -279,16 +285,44 @@ int main(int argc, char **argv) {
   nninputs.SetNNinputHisto();
 
   DistanceViewer ndistance;
-  DistanceMax = 5.;
+  DistanceMax = 3.;
   ndistance.SetHistoFrame();
   ndistance.SetHistoFormat();
 
 
   int Neutrinos_OneDcye = 0;
-  int Neutrinos_PiDcy = 0;
-  int Neutrinos_PiDcy_x_MuCap = 0;
-  int Neutrinos_MuDcy = 0;
+  int Neutrinos_MuDcye = 0;
+  int Neutrinos_PiDcye = 0;
+  int Neutrinos_NotCC0Pi = 0;
 
+  int RecoDcyE_CCQE    = 0;
+  int RecoDcyE_CCnonQE = 0;
+  int RecoDcyE_NC      = 0;
+
+  int NoPrmMuEnd_CCQE = 0;
+  int NoPrmMuEnd_CCnonQE = 0;
+  int NoPrmMuEnd_NC = 0;
+
+  const int DCYENUM = 1;
+  const float DistanceCutThreshold = 0.;
+
+  int CC1PiPlusOther_1TruePiLikeDcyE = 0;
+  int CC1PiPlusOther_1TrueMuLikeDcyE = 0;
+  int CC1PiPlusOther_1TrueMuLikeDcyE_Decay    = 0;
+  int CC1PiPlusOther_1TrueMuLikeDcyE_Abs      = 0;
+  int CC1PiPlusOther_1TrueMuLikeDcyE_Hadronic = 0;
+
+  int Num1Rmu             = 0;
+  int Num1Rmu_dcydistance = 0;
+
+  int NumCCQE_FCFV    = 0;
+  int NumCC2p2h_FCFV  = 0;
+  int NumCCOther_FCFV = 0;
+  int NumNC_FCFV      = 0;
+  float NumOscCCQE_FCFV    = 0.;
+  float NumOscCC2p2h_FCFV  = 0.;
+  float NumOscCCOther_FCFV = 0.;
+  float NumOscNC_FCFV      = 0.;
 
   //Process
   CLTOptionSummary(ETAGKeyword, ETAG, MCTypeKeyword, MCType);
@@ -341,6 +375,28 @@ int main(int argc, char **argv) {
 
     //Number of selected neutrino events
     Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
+    prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
+
+    if (evsel.pass[0]==true) {
+      float OscProb = numu->getOscWgt();
+      int mode = TMath::Abs(numu->var<int>("mode"));
+      if (mode==1) {
+        NumCCQE_FCFV++;
+        NumOscCCQE_FCFV += OscProb;
+      }
+      if (mode>=2 && mode<=10) {
+        NumCC2p2h_FCFV++;
+        NumOscCC2p2h_FCFV += OscProb;
+      }
+      if (mode>10 && mode<=30) {
+        NumCCOther_FCFV++;
+        NumOscCCOther_FCFV += OscProb;
+      }
+      if (mode>=31) {
+        NumNC_FCFV++;
+        NumOscNC_FCFV += OscProb;
+      }
+    }
 
     //New 1R muon selection
     //if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., true)) {
@@ -349,47 +405,458 @@ int main(int argc, char **argv) {
         evsel.pass[2]==true &&
         evsel.pass[3]==true) 
     {
-      GetSelectedModeEvents(numu);
-
-      // primary particles
-      //std::cout << "------  VECT primary info  ------" << std::endl;
-      //std::cout << "[### " << ientry << " ###] # of particles=" << npar << std::endl;
-      //std::cout << "[### " << ientry << " ###] vecvx=[" << vecvx << ", " << vecvy << ", " << vecvz << "]" << std::endl;
-      //std::cout << "[### " << ientry << " ###] posv=[" << posv[0] << ", " << posv[1] << ", " << posv[2] << "]" << std::endl;      
+      //GetSelectedModeEvents(numu);     
 
       // primary particles
       float OscProb = numu->getOscWgt();
       int mode = TMath::Abs(numu->var<int>("mode"));
-      //GetNeutrinoInteraction(ientry, mode);
-      //std::cout << "------  NEUT primary info  ------" << std::endl;
-      //for (int iprm=0; iprm<Npvc; iprm++) {
-      //  std::cout << "[### " << ientry << " ###] Particle[" << iprm << "]=" << Ipvc[iprm]
-      //                                   << ", Iflvc=" << Iflvc[iprm] 
-      //                                   << ", Ichvc=" << Ichvc[iprm]
-      //                                   << ", Iorgvc=" <<Iorgvc[iprm] << std::endl;
-      //}
+      float recothetamu = neuosc.GetRecoMuDirection(numu);
 
-      neuosc.GetPrmVtxResolution(posv, numu);
+      neuosc.GetPrmVtxResolution(numu);
+      decayebox.GetDecayeTagPurity(numu, tscnd, pscnd, 20., 50., 400.);
 
-      //Count # of decay-e per event
+      //# of reconstructed decay-e per event
+      int FQDcyE = numu->var<int>("fqnse") - 1;
+      int FQDcyE_Box = decayebox.GetDecayeInBox(numu, eMode, eOsc, 20., 50., 400., false);
+      int NumCCPi = GetCCPiTopology(numu);
+
+      //Count # of truth decay-e per event
       int NumDcyE = 0;
-      for (int iscnd=0; iscnd<nscndprt; iscnd++) {
+      for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
         if (std::fabs(numu->var<int>("iprtscnd", iscnd))==static_cast<int>(PDGPID::ELECTRON) && 
             numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::DECAY)) NumDcyE++;
       }
-      decayebox.GetTruthDecaye(numu, NumDcyE);
+      if (NumCCPi==1) decayebox.GetTruthDecaye(numu, NumDcyE);
 
-      bool  PiDcy = false;               //This event has a decay-e from pi+?
-      bool  OtherPiDcy = false;          //pi decays to other particles?
-      float PiDcyVtx[3] = {0., 0., 0.};  //pi+ decay vertex
+      //# of CC pions (for CC topology)
+      //GetNeutrinoInteraction(ientry, mode);
+      if (mode>10 && mode<=30) {
+        if (FQDcyE_Box==DCYENUM) h1_mode -> Fill(mode);
+        if (NumCCPi==0) h1_TaggedDecaye_CCPiTopo[0] -> Fill(FQDcyE_Box);
+        if (NumCCPi==1) h1_TaggedDecaye_CCPiTopo[1] -> Fill(FQDcyE_Box);
+        if (NumCCPi>1)  h1_TaggedDecaye_CCPiTopo[2] -> Fill(FQDcyE_Box);
+      }
 
-      bool  MuCap = false;               //This event has a muon capture?
-      float MuCapVtx[3] = {0., 0., 0.};  //mu capture vertex
 
-      bool  MuDcy = false;               //This event has a muon decay?
-      float MuStpVtx[3] = {0., 0., 0.};  //mu stopping vertex
-      float MuDcyVtx[3] = {0., 0., 0.};  //mu decay vertex
+      bool  PrmMuEnd = false;
+      bool  PiDcy    = false; //This event has a decay-e from pi+?
+      bool  PrmMuDcy = false;
+      bool  CC0Pi    = false;
+      bool  RecoDcyE = false;
 
+      float PrmMuEndVtx[3] = {0., 0., 0.}; //mu end vertex
+      float PrmVtx[3]      = {0., 0., 0.}; //primary vertex
+
+      int PiDcySubEvents = 0;  //pi->decay-e events per neutrino events
+      int MuDcySubEvents = 0;  //mu->decay-e events per neutrino events
+      int OtherSubEvents = 0;  //other events
+
+      //Reconstructed neutrino energy
+      float Enu = numu->var<float>("erec");
+
+      int PiLikeDcyE = 0;
+      bool AppliedEDistanceCut = false;
+
+#if 1
+      //Focus on CC 
+      if (mode<31) {
+      //if (mode<31 && Enu/1000. >= 0.5 && Enu/1000. <= 0.7) {
+
+        //----- True information -----
+        PrmVtx[0] = numu->var<float>("posv", 0);
+        PrmVtx[1] = numu->var<float>("posv", 1);
+        PrmVtx[2] = numu->var<float>("posv", 2);
+
+        float PrmMuMom[3] = {0., 0., 0.}; //primary mu momentum
+        bool PrmMu = decayebox.GetTruePrmMuMom(Pvc, numu, PrmMuMom);
+        neuosc.GetPrmMuMomResolution(numu, PrmMuMom);
+
+        //Focus on #decay-e=1
+        //(Events with #decay-e>1 will be cut via #decay-e cut)
+        if (NumDcyE==1) {
+
+          //Oscillation probability check
+          neuosc.OscProbCalculator(numu, true);
+
+          // Get truth mu end vertex
+          PrmMuEnd = decayebox.GetTrueMuEndVtx(eOsc, iprntidx, numu, PrmMuEndVtx); //Get truth mu end vertex
+          CC0Pi    = decayebox.CC0PiFilter(numu); //Is this event CC0pi?
+
+          /*
+          //CCQE & below 200 MeV
+          if (mode==1 && !CC0Pi) {
+            for (int iprm=0; iprm<numu->var<int>("npar"); iprm++) {
+              std::cout << " Particle[" << iprm << "] = " << numu->var<int>("ipv", iprm) << ", pmomv: " << numu->var<float>("pmomv", iprm) << std::endl;
+              if (std::fabs(numu->var<int>("ipv", iprm))==static_cast<int>(GEANTPID::MUMINUS)) {
+                std::cout << " fill it" << std::endl;
+                h1_TrueMuMom -> Fill(numu->var<float>("pmomv", iprm));
+              }
+            }
+          }
+          */
+
+
+          //if (mode>10 && mode<=30 && NumCCPi==1) Neutrinos_OneDcye++;
+          if (PrmMuEnd && mode>10 && mode<=30 && NumCCPi==1) Neutrinos_OneDcye++;
+          bool piplus = false;
+          bool fate_decay    = false;
+          bool fate_abs      = false;
+          bool fate_hadronic = false;
+          float PiPlusMom = 0.;
+          for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+            if ( numu->var<int>("Ipvc", iprm)==static_cast<int>(PDGPID::PIPLUS) ) {
+              piplus = true;
+              PiPlusMom = numu->var<float>("Abspvc", iprm);
+              if ( Iflvc[iprm]==3 ) fate_abs      = true;
+              if ( Iflvc[iprm]==0 ) fate_hadronic = true;
+            }
+          }
+
+          for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
+
+            float PiDcyVtx[3]    = {0., 0., 0.}; //pi+ decay vertex
+            float PrmMuDcyVtx[3] = {0., 0., 0.}; //primary mu decay vertex
+
+            //Truth stopping range vs muon momentum
+            if (PrmMuEnd) {
+              if (PrmMu) {
+                float MuMom = std::sqrt( PrmMuMom[0]*PrmMuMom[0] + PrmMuMom[1]*PrmMuMom[1] + PrmMuMom[2]*PrmMuMom[2] );
+                ana_TruePrmMuAbsMom = MuMom;
+                float d_PrmMuRange = ndistance.TakeDistance(PrmVtx, PrmMuEndVtx);
+                h2_TruePmu_x_TrueRange -> Fill(MuMom, d_PrmMuRange/100.);
+              }
+            }
+
+            PiDcy = decayebox.GetTruePiDcyVtx(eOsc, iscnd, iprntidx, numu, PiDcyVtx);
+            if (PrmMuEnd && PiDcy) {
+              //if (mode>10 && mode<=30 && NumCCPi==1) std::cout << "---> Pion Decay-e" << std::endl;
+              float d_MuEnd_x_PiDcy = ndistance.TakeDistance(PrmMuEndVtx, PiDcyVtx);
+              float d_Prm_x_PiDcy   = ndistance.TakeDistance(PrmVtx, PiDcyVtx);
+              //h1_truedistance_pidecay -> Fill(d_MuEnd_x_PiDcy/100., OscProb);
+              //h1_truedistance_pidecay -> Fill(d_Prm_x_PiDcy/100., OscProb);
+
+              if (mode>10 && mode<=30 && NumCCPi==1) {
+                //GetNeutrinoInteraction(ientry, mode);
+                h1_truedistance_pidecay -> Fill(d_MuEnd_x_PiDcy/100., OscProb);
+                
+                if (piplus) {
+                  CC1PiPlusOther_1TruePiLikeDcyE++;
+                  h1_PiPlusMom_PiDcy -> Fill(PiPlusMom, OscProb);
+                  h2_PiPlusMom_x_Enu -> Fill(Enu/1000., PiPlusMom, OscProb);
+                }
+                
+              }
+
+              PiDcySubEvents++;
+              Neutrinos_PiDcye++;
+            }
+
+            PrmMuDcy = decayebox.GetTruePrmMuDcyVtx(eOsc, iscnd, iprntidx, numu, PrmMuDcyVtx);
+            if (PrmMuEnd && PrmMuDcy) {
+            //if (PrmMuEnd && PrmMuDcy && !CC0Pi) {
+              //if (mode>10 && mode<=30 && NumCCPi==1) std::cout << "---> Muon Decay-e" << std::endl;
+              float d_PrmMuEnd_x_PrmMuDcy = ndistance.TakeDistance(PrmMuEndVtx, PrmMuDcyVtx);
+              float d_Prm_x_PrmMuDcy      = ndistance.TakeDistance(PrmVtx, PrmMuDcyVtx);
+              //h1_truedistance_mudecay -> Fill(d_PrmMuEnd_x_PrmMuDcy/100., OscProb);
+              //h1_truedistance_mudecay -> Fill(d_Prm_x_PrmMuDcy/100., OscProb);
+
+              if (mode>10 && mode<=30 && NumCCPi==1) {
+                //GetNeutrinoInteraction(ientry, mode);
+                h1_truedistance_mudecay -> Fill(d_PrmMuEnd_x_PrmMuDcy/100., OscProb);
+                //std::cout << "------- Primary particles ---------" << std::endl;
+                for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+                  //std::cout << "Particle[" << iprm << "]=" << numu->var<int>("Ipvc", iprm)
+                  //                                         << ", Iflvc=" << Iflvc[iprm] 
+                  //                                         << ", Ichvc=" << numu->var<int>("Ichvc", iprm)
+                  //                                         << ", Iorgvc=" << Iorgvc[iprm] << std::endl;
+                  //if (std::fabs(numu->var<int>("Ipvc", iprm))==static_cast<int>(PDGPID::PIPLUS)) {
+                  if ( numu->var<int>("Ipvc", iprm)==static_cast<int>(PDGPID::PIPLUS) ) {
+                    piplus = true;
+                    //std::cout << "  Muon Decay-e, PiPlus (Fate: " << Iflvc[iprm] << " )" << std::endl;
+                    //float PiPlusMom = numu->var<float>("Abspvc", iprm);
+                    ana_mode = Iflvc[iprm];
+                    //h1_PiPlusMom -> Fill(PiPlusMom);
+                    //std::cout << "  Fill PiPlus Mom: " << PiPlusMom << " MeV" << std::endl;
+                  }
+                }
+                if (piplus) {
+                  CC1PiPlusOther_1TrueMuLikeDcyE++;
+                  if (fate_abs) {
+                    CC1PiPlusOther_1TrueMuLikeDcyE_Abs++;
+                    h1_PiPlusMom_PiAbs -> Fill(PiPlusMom, OscProb);
+                    h2_PiPlusMom_x_Enu -> Fill(Enu/1000., PiPlusMom, OscProb);
+                  }
+                  if (fate_hadronic) {
+                    CC1PiPlusOther_1TrueMuLikeDcyE_Hadronic++;
+                    h1_PiPlusMom_PiHad -> Fill(PiPlusMom, OscProb);
+                    h2_PiPlusMom_x_Enu -> Fill(Enu/1000., PiPlusMom, OscProb);
+                  }
+                }
+
+
+                int piplusfate = 0;
+                std::vector<int> PiDaughterList;
+                //std::cout << "------- Secondary particles ---------" << std::endl;
+                for (int jscnd=0; jscnd<numu->var<int>("nscndprt"); jscnd++) {
+                  //std::cout << "Particle[" << jscnd << "]=" << numu->var<int>("iprtscnd", jscnd)
+                  //          << ", iprntprt=" << numu->var<int>("iprntprt", jscnd)
+                  //          << ", iprntidx=" << iprntidx[jscnd]  
+                  //          << ", lmecscnd=" << numu->var<int>("lmecscnd", jscnd) << std::endl;
+                  if (std::fabs(numu->var<int>("iprntprt", jscnd))==static_cast<int>(PDGPID::PIPLUS)) {
+                    //std::cout << "  PiPlus -> " << numu->var<int>("iprtscnd", jscnd) << std::endl;
+                    piplusfate++;
+
+                    if (PiDaughterList.size()==0) {
+                      PiDaughterList.push_back(numu->var<int>("iprtscnd", jscnd));
+                      h1_PiPlusFate -> Fill(std::fabs(numu->var<int>("iprtscnd", jscnd)));
+                    }
+                    else {
+                      bool NewDaughter = false;
+                      int listcheck = 0;
+                      for (UInt_t ipi=0; ipi<PiDaughterList.size(); ipi++) {
+                        if (PiDaughterList.at(ipi)!=numu->var<int>("iprtscnd", jscnd)) listcheck++;
+                      }
+                      if (listcheck==PiDaughterList.size()) {
+                        PiDaughterList.push_back(numu->var<int>("iprtscnd", jscnd));
+                        h1_PiPlusFate -> Fill(std::fabs(numu->var<int>("iprtscnd", jscnd)));
+                      }
+                    }
+                    
+                  }
+                }
+                if (piplusfate==0) {
+                  //std::cout << "  PiPlus -> Nothing." << std::endl;
+                  h1_PiPlusFate -> Fill(0);
+                }
+              }
+
+              MuDcySubEvents++;
+              Neutrinos_MuDcye++;
+            }
+          }
+          if (PiDcySubEvents==0 && MuDcySubEvents==0) {
+            /*if (mode>10 && mode<=30 && NumCCPi==1 && PrmMuEnd) {
+              std::cout << "---> OtherSubEvents" << std::endl;
+              GetNeutrinoInteraction(ientry, mode);
+              std::cout << "------- Primary particles ---------" << std::endl;
+              for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+                std::cout << "Particle[" << iprm << "]=" << numu->var<int>("Ipvc", iprm)
+                                                         << ", Iflvc=" << Iflvc[iprm] 
+                                                         << ", Ichvc=" << numu->var<int>("Ichvc", iprm)
+                                                         << ", Iorgvc=" << Iorgvc[iprm] << std::endl;
+              }
+              std::cout << "------- Secondary particles ---------" << std::endl;
+              for (int jscnd=0; jscnd<numu->var<int>("nscndprt"); jscnd++) {
+                std::cout << "Particle[" << jscnd << "]=" << numu->var<int>("iprtscnd", jscnd)
+                          << ", iprntprt=" << numu->var<int>("iprntprt", jscnd)
+                          << ", iprntidx=" << iprntidx[jscnd]  
+                          << ", lmecscnd=" << numu->var<int>("lmecscnd", jscnd) << std::endl;
+              }
+            }*/
+
+            if (PrmMuEnd && CC0Pi) {
+              Neutrinos_NotCC0Pi++;
+              //std::cout << " (Not CC0PI) " << std::endl;
+            }
+            //else if (!PrmMuEnd) std::cout << " (Mu end vertex was not found) " << std::endl;
+            //else std::cout << " (Others) " << std::endl;
+            OtherSubEvents++;
+          }
+          /*if (mode>10 && mode<=30 && NumCCPi==1 && PrmMuEnd) {
+            std::cout << "[### " << ientry << " ###]  PiDcyE: " << PiDcySubEvents 
+                      << ", PrmMuDcyE: " << MuDcySubEvents 
+                      << ", OtherSubEvents: " << OtherSubEvents 
+                      << ", Total: " << PiDcySubEvents+MuDcySubEvents+OtherSubEvents << std::endl;
+            std::cout << " " << std::endl;
+          }*/
+        }
+
+
+        //----- Reconstrued information -----
+        //Energy distributon (C1-C4 + decay-e cut)
+        //if (FQDcyE_Box==DCYENUM) {
+        if (FQDcyE_Box<=DCYENUM) {
+          if (prmsel.C6Applynotpionlike(evsel)) {
+            if (mode==1) h1_Erec[0] -> Fill(Enu/1000., OscProb);
+            if (mode>=2 && mode<=10) h1_Erec[1] -> Fill(Enu/1000., OscProb);
+            if (mode>10 && mode<=30) h1_Erec[2] -> Fill(Enu/1000., OscProb);
+            if (mode==11 || mode==12 || mode==13) h1_Erec[4] -> Fill(Enu/1000., OscProb);
+            if (mode>13 && mode<=30) h1_Erec[5] -> Fill(Enu/1000., OscProb);
+          }
+        }
+
+        //Energy distributon (C1-C4)
+        //if (mode==1) h1_Erec[0] -> Fill(Enu/1000., OscProb);
+        //if (mode>=2 && mode<=10) h1_Erec[1] -> Fill(Enu/1000., OscProb);
+        //if (mode>10 && mode<=30) h1_Erec[2] -> Fill(Enu/1000., OscProb);
+      }
+      if (mode>=31) {
+        //Energy distribution (C1-C4)
+        //h1_Erec[3] -> Fill(Enu/1000.);
+
+        //Energy distributon (C1-C4 + decay-e cut)
+        //if (FQDcyE_Box==DCYENUM) h1_Erec[3] -> Fill(Enu/1000.);
+        if (FQDcyE_Box<=DCYENUM) {
+          if (prmsel.C6Applynotpionlike(evsel)) {
+            h1_Erec[3] -> Fill(Enu/1000.);
+          }
+        }
+      }
+      //std::cout << " " << std::endl;
+
+
+      if (FQDcyE_Box==DCYENUM) {
+        
+        //GetNeutrinoInteraction(ientry, mode);
+        PrmMuEnd = decayebox.GetTrueMuEndVtx(eOsc, iprntidx, numu, PrmMuEndVtx); //Get truth mu end vertex
+        float RecoMuEndVtx[3] = {0., 0., 0.};
+        float RecoMuRange = decayebox.GetRecoMuEndVtx(numu, RecoMuEndVtx);
+        float d_MuEndVtxReso = ndistance.TakeDistance(PrmMuEndVtx, RecoMuEndVtx);
+        float OrgnVtx[3] = {0., 0., 0.};
+        float d_TrueMuEndVtx = ndistance.TakeDistance(OrgnVtx, PrmMuEndVtx);
+        float d_RecoMuEndVtx = ndistance.TakeDistance(OrgnVtx, RecoMuEndVtx);
+        float Pmu = numu->var<float>("fq1rmom", 0, FQ_MUHYP); //primary muon momentum
+        float RecoPrmVtx[3] = {0., 0., 0.};
+        RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
+        RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
+        RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
+        float RecoMuDir[3] = {0., 0., 0.};
+        RecoMuDir[0]  = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 0);
+        RecoMuDir[1]  = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 1);
+        RecoMuDir[2]  = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 2);
+        if (PrmMuEnd) {
+          h2_RecoPmu_x_RecoRange -> Fill(Pmu, RecoMuRange/100.);
+          h1_PrmMuEndVtxReso -> Fill(d_MuEndVtxReso);
+          h2_PrmMuEndVtxReso -> Fill(d_TrueMuEndVtx, d_RecoMuEndVtx);
+          for (int idim=0; idim<3; idim++) {
+            ana_RecoMuEndVtx[idim] = RecoMuEndVtx[idim];
+            ana_TrueMuEndVtx[idim] = PrmMuEndVtx[idim];
+          }
+        }
+
+        if (!PrmMuEnd) {
+          //std::cout << "[### " << ientry << " ###] !!! Primary muon does not stop !!!" << std::endl;
+          //GetNeutrinoInteraction(ientry, mode);
+
+          //h2_PrmVtx_XY -> Fill(PrmVtx[0]/100., PrmVtx[1]/100.);
+          //h2_PrmVtx_RZ -> Fill((PrmVtx[0]*PrmVtx[0]+PrmVtx[1]*PrmVtx[1])/10000., PrmVtx[2]/100.);
+          for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+
+            if (std::fabs(numu->var<int>("Ipvc", iprm))==static_cast<int>(PDGPID::MUON)) {
+              //std::cout << " ---> Mu Momentum: " << numu->var<float>("Abspvc", iprm) << " MeV" << std::endl;
+              if (mode==1) h1_TrueMuMom[0] -> Fill(numu->var<float>("Abspvc", iprm));
+              if (mode>=2 && mode<=30) h1_TrueMuMom[1] -> Fill(numu->var<float>("Abspvc", iprm));
+              if (mode>=31) h1_TrueMuMom[2] -> Fill(numu->var<float>("Abspvc", iprm));
+            }
+
+            if (std::fabs(numu->var<int>("Ipvc", iprm))==static_cast<int>(PDGPID::PIPLUS) ||
+                numu->var<int>("Ipvc", iprm)==static_cast<int>(PDGPID::PI0)) 
+            {
+              //std::cout << " ---> Pi Momentum: " << numu->var<float>("Abspvc", iprm) << " MeV" << std::endl;
+              if (mode==1) h1_TruePiMom[0] -> Fill(numu->var<float>("Abspvc", iprm));
+              if (mode>=2 && mode<=30) h1_TruePiMom[1] -> Fill(numu->var<float>("Abspvc", iprm));
+              if (mode>=31) h1_TruePiMom[2] -> Fill(numu->var<float>("Abspvc", iprm));
+            }
+          }
+
+          if (mode==1) NoPrmMuEnd_CCQE++;
+          if (mode>=2 && mode<=30) NoPrmMuEnd_CCnonQE++;
+          if (mode>=31) NoPrmMuEnd_NC++;
+        }
+
+        // Get the reco decay-e generation vertex
+        //std::cout << "PiDcySubEvents:MuDcySubEvents = ["  << PiDcySubEvents << " : " << MuDcySubEvents << "]" << std::endl;
+        //GetSelectedModeEvents(numu);
+
+        for (int iscnd=1; iscnd<numu->var<int>("fqnse"); iscnd++) {
+
+          float RecoDcyEVtx[3] = {0., 0., 0.}; //fiTQun decay-e generation vertex
+
+          RecoDcyE = decayebox.GetRecoDcyEGenVtx(iscnd, numu, RecoDcyEVtx);
+          if (PrmMuEnd && RecoDcyE) {
+          //if (PrmMuEnd && RecoDcyE && Enu/1000. <= 1.) {
+          //if (PrmMuEnd && RecoDcyE && Enu/1000. > 1.) {
+          //if (PrmMuEnd && RecoDcyE && Pmu/1000. <= 0.7) {
+          //if (PrmMuEnd && RecoDcyE && Pmu/1000. > 0.7) {
+            float Pdcye = numu->var<float>("fq1rmom", iscnd, FQ_EHYP); // decay-e momentum
+
+            //std::cout << "[### " << ientry << " ###] fiTQun decay-e vertex" << std::endl;
+            float d_MuEnd_x_fQDcyE = ndistance.TakeDistance(PrmMuEndVtx, RecoDcyEVtx);
+            //float d_MuEnd_x_fQDcyE = ndistance.TakeTransversalDistance(RecoMuDir, RecoPrmVtx, RecoDcyEVtx);
+
+            ////// 1:1 labeling ///////
+            //Mu-induced decay-e
+            if (MuDcySubEvents==1) {
+              //if (mode<=30) h1_TruePrmMuEnd_x_fQDcyE_MuDcy -> Fill(d_MuEnd_x_fQDcyE/100., OscProb);
+              //if (mode>=31) h1_TruePrmMuEnd_x_fQDcyE_MuDcy -> Fill(d_MuEnd_x_fQDcyE/100.);
+              if (mode>10 && mode<=30 && NumCCPi==1) h1_TruePrmMuEnd_x_fQDcyE_MuDcy -> Fill(d_MuEnd_x_fQDcyE/100., OscProb);
+            }
+            //Pi-induced decay-e
+            if (PiDcySubEvents==1) {
+              //ana_mode = mode;
+              //if (mode<=30) h1_TruePrmMuEnd_x_fQDcyE_PiDcy -> Fill(d_MuEnd_x_fQDcyE/100., OscProb);
+              //if (mode>=31) h1_TruePrmMuEnd_x_fQDcyE_PiDcy -> Fill(d_MuEnd_x_fQDcyE/100.);
+              if (mode>10 && mode<=30 && NumCCPi==1) h1_TruePrmMuEnd_x_fQDcyE_PiDcy -> Fill(d_MuEnd_x_fQDcyE/100., OscProb);
+            }
+
+            GetSelectedModeEvents(numu);
+            if (mode==1) h1_TruePrmMuEnd_x_fQDcyE[0] -> Fill(d_MuEnd_x_fQDcyE/100., OscProb);
+            if (mode>=2 && mode<=10) h1_TruePrmMuEnd_x_fQDcyE[1] -> Fill(d_MuEnd_x_fQDcyE/100., OscProb);
+            if (mode>10 && mode<=30) h1_TruePrmMuEnd_x_fQDcyE[2] -> Fill(d_MuEnd_x_fQDcyE/100., OscProb);
+            if (mode>10 && mode<=30) {
+              //ana_mode = mode;
+              if (NumCCPi==0) h1_TruePrmMuEnd_x_fQDcyE[4] -> Fill(d_MuEnd_x_fQDcyE/100., OscProb);
+              if (NumCCPi==1) h1_TruePrmMuEnd_x_fQDcyE[5] -> Fill(d_MuEnd_x_fQDcyE/100., OscProb);
+              if (NumCCPi>1)  h1_TruePrmMuEnd_x_fQDcyE[6] -> Fill(d_MuEnd_x_fQDcyE/100., OscProb);
+            }
+            if (mode>=31) h1_TruePrmMuEnd_x_fQDcyE[3] -> Fill(d_MuEnd_x_fQDcyE/100.);
+            h2_TruePrmMuEnd_x_fQDcyE_x_Pmu -> Fill(Pmu/1000., d_MuEnd_x_fQDcyE/100., OscProb);
+            h2_TruePrmMuEnd_x_fQDcyE_x_Enu -> Fill(Enu/1000., d_MuEnd_x_fQDcyE/100., OscProb);
+
+            //Energy distributon
+            //if (mode==1) h1_Erec[0] -> Fill(Enu/1000., OscProb);
+            //if (mode>=2 && mode<=10) h1_Erec[1] -> Fill(Enu/1000., OscProb);
+            //if (mode>10 && mode<=30) h1_Erec[2] -> Fill(Enu/1000., OscProb);
+
+
+            ///////// Cut Implementation //////////
+            if (d_MuEnd_x_fQDcyE/100. > DistanceCutThreshold) PiLikeDcyE++;
+            AppliedEDistanceCut = true;
+          }
+        }
+      }
+#endif
+
+
+      //==== Present sample definition ====
+      if (FQDcyE_Box<=1 && prmsel.C6Applynotpionlike(evsel))  {
+        Num1Rmu++;
+        //neuosc.GetWgtNeutrino(numu, recothetamu, thetamin, thetamax);
+      }
+
+      //===== Sample definition with distance cut =====
+      //Distance cut is available (mainly CC)
+      if (AppliedEDistanceCut) {
+        if ( FQDcyE_Box==0 || (FQDcyE_Box==1 && PiLikeDcyE==0) ) {
+          if (prmsel.C6Applynotpionlike(evsel)) {
+            Num1Rmu_dcydistance++;
+            neuosc.GetWgtNeutrino(numu, recothetamu, thetamin, thetamax);
+          }
+        }
+      }
+      //Distance cut is non-available (mainly NC)
+      else {
+        if ( FQDcyE_Box<=1 ) {
+          if (prmsel.C6Applynotpionlike(evsel)) {
+            Num1Rmu_dcydistance++;
+            neuosc.GetWgtNeutrino(numu, recothetamu, thetamin, thetamax);
+          }
+        }
+      }
+
+
+
+#if 0
       //Focus on CC (#decay-e <= 1)
       //CC events with #decay-e>1 will be cut via #decay-e cut
       //if (mode<31 && NumDcyE<=1) {
@@ -684,16 +1151,44 @@ int main(int argc, char **argv) {
         //CC other
         if (mode>10 && mode<=30) h1_TrueDecaye_vtx[6] -> Fill(NumDcyE);
       }
+#endif
 
     } //1R mu selection
-
+    AnaTuple -> FillAnaTree();
   } //Event loop
 
 
-  std::cout << "Neutrinos_OneDcye: " << Neutrinos_OneDcye << std::endl;
-  std::cout << "Neutrinos_PiDcy: " << Neutrinos_PiDcy << std::endl;
-  std::cout << "Neutrinos_PiDcy_x_MuCap: " << Neutrinos_PiDcy_x_MuCap << std::endl;
-  std::cout << "Neutrinos_MuDcy: " << Neutrinos_MuDcy << std::endl;
+  std::cout << "Stopped primary muon: " << Neutrinos_OneDcye << std::endl;
+  std::cout << "No mu stop CCQE   : " << NoPrmMuEnd_CCQE << std::endl;
+  std::cout << "No mu stop CCnonQE: " << NoPrmMuEnd_CCnonQE << std::endl;
+  std::cout << "No mu stop NC     : " << NoPrmMuEnd_NC << std::endl;
+  std::cout << "Found Decay-e vertex(CCQE)   : " << DcyE_CCQE    << std::endl;
+  std::cout << "Found Decay-e vertex(CC2p2h) : " << DcyE_CC2p2h  << std::endl;
+  std::cout << "Found Decay-e vertex(CCnonQE): " << DcyE_CCnonQE << std::endl;
+  std::cout << "Found Decay-e vertex(NC).    : " << DcyE_NC      << std::endl;
+
+  std::cout << "--- Box cut performance ---" << std::endl;
+  std::cout << " All truth decay-e                : " << AllTrueDcye   << std::endl;
+  std::cout << " All fiTQun decay-e               : " << AllfQdcye     << std::endl;
+  std::cout << " fiTQun decya-e in the box        : " << BoxfQdcye     << std::endl;
+  std::cout << " Matched fiTQun decya-e in the box: " << MatchedfQdcye << std::endl;
+
+  std::cout << "Generated CCQE events   : " << SelectedCCQEevents    << std::endl;
+  std::cout << "Generated CCnonQE events: " << SelectedCCnonQEevents << std::endl;
+  std::cout << "Generated NC events     : " << SelectedNCevents      << std::endl;
+
+  std::cout << "  CC-Other, 1pi+, #true decay-e = 1(mu): " << CC1PiPlusOther_1TrueMuLikeDcyE << std::endl;
+  std::cout << "    Absorption: " << CC1PiPlusOther_1TrueMuLikeDcyE_Abs << std::endl;
+  std::cout << "    Hadronic  : " << CC1PiPlusOther_1TrueMuLikeDcyE_Hadronic << std::endl;
+  std::cout << "  CC-Other, 1pi+, #true decay-e = 1(pi): " << CC1PiPlusOther_1TruePiLikeDcyE << std::endl;
+
+  std::cout << "1Rmu events          : " << Num1Rmu << std::endl;
+  std::cout << "Redefined 1Rmu events: " << Num1Rmu_dcydistance << std::endl;
+  std::cout << "CCQE events after FCFV   : " << NumCCQE_FCFV << " (osc: " << NumOscCCQE_FCFV << ")" << std::endl;
+  std::cout << "CC2p2h events after FCFV : " << NumCC2p2h_FCFV << " (osc: " << NumOscCC2p2h_FCFV << ")" << std::endl;
+  std::cout << "CCOther events after FCFV: " << NumCCOther_FCFV << " (osc: " << NumOscCCOther_FCFV << ")" << std::endl;
+  std::cout << "NC events after FCFV     : " << NumNC_FCFV << " (osc: " << NumOscNC_FCFV << ")" << std::endl;
+
 
 
   std::fstream resultfile;
@@ -711,6 +1206,56 @@ int main(int argc, char **argv) {
       h1_1RmuonEvents->fArray[i+1]      = (float)SelectedParentNeutrinos[i]/SelectedParentNeutrinos[0];
       h1_Proto1RmuonEvents->fArray[i+1] = (float)ProtoSelectedParentNeutrinos[i]/ProtoSelectedParentNeutrinos[0];
     }
+    resultfile << "Generated CCQE events   : " << SelectedCCQEevents    << std::endl;
+    resultfile << "Generated CC2p2h events : " << SelectedCC2p2hevents  << std::endl;
+    resultfile << "Generated CCnonQE events: " << SelectedCCnonQEevents << std::endl;
+    resultfile << "Generated NC events     : " << SelectedNCevents      << std::endl;
+    resultfile << " " << std::endl;
+
+    resultfile << "1Rmu events          : " << Num1Rmu << std::endl;
+    resultfile << "Redefined 1Rmu events: " << Num1Rmu_dcydistance << std::endl;
+    resultfile << "CCQE events after FCFV   : " << NumCCQE_FCFV << " (osc: " << NumOscCCQE_FCFV << ")" << std::endl;
+    resultfile << "CC2p2h events after FCFV : " << NumCC2p2h_FCFV << " (osc: " << NumOscCC2p2h_FCFV << ")" << std::endl;
+    resultfile << "CCOther events after FCFV: " << NumCCOther_FCFV << " (osc: " << NumOscCCOther_FCFV << ")" << std::endl;
+    resultfile << "NC events after FCFV     : " << NumNC_FCFV << " (osc: " << NumOscNC_FCFV << ")" << std::endl;
+    resultfile << " " << std::endl;
+
+    float TotalEventsNoNeutronAnalysis = OscillatedCCQE 
+                                       + OscillatedCCnonQE 
+                                       + OscillatedCCRESp
+                                       + OscillatedCCRESpp
+                                       + OscillatedCCRES0
+                                       + OscillatedCCOther
+                                       + OscillatedNC;
+    float TotalEventswTagN = OscillatedCCQE_wTagN
+                           + OscillatedCCnonQE_wTagN
+                           + OscillatedCCRESp_wTagN
+                           + OscillatedCCRESpp_wTagN
+                           + OscillatedCCRES0_wTagN
+                           + OscillatedCCOther_wTagN
+                           + OscillatedNC_wTagN;
+    float TotalEventswoTagN = OscillatedCCQE_woTagN
+                            + OscillatedCCnonQE_woTagN
+                            + OscillatedCCRESp_woTagN
+                            + OscillatedCCRESpp_woTagN
+                            + OscillatedCCRES0_woTagN
+                            + OscillatedCCOther_woTagN
+                            + OscillatedNC_woTagN;
+    resultfile << "[Neutrino] Oscillated CCQE Events     : " << OscillatedCCQE  << std::endl;
+    resultfile << "           w/ tagged neutrons         : " << OscillatedCCQE_wTagN << ", w/o tagged neutrons:" << OscillatedCCQE_woTagN << std::endl;
+    resultfile << " " << std::endl;
+    resultfile << "[Neutrino] Oscillated CC(2p2h) Events : " << OscillatedCCnonQE << std::endl;
+    resultfile << "           w/ tagged neutrons         : " << OscillatedCCnonQE_wTagN << ", w/o tagged neutrons:" << OscillatedCCnonQE_woTagN << std::endl;
+    resultfile << " " << std::endl;
+    resultfile << "[Neutrino] Oscillated All CCRES Events: " << OscillatedCCRES0 + OscillatedCCRESp + OscillatedCCRESpp << std::endl;
+    resultfile << "           w/ tagged neutrons         : " << OscillatedCCRES0_wTagN  + OscillatedCCRESp_wTagN  + OscillatedCCRESpp_wTagN 
+               << ", w/o tagged neutrons:" << OscillatedCCRES0_woTagN  + OscillatedCCRESp_woTagN  + OscillatedCCRESpp_woTagN << std::endl;
+    resultfile << " " << std::endl;
+    resultfile << "[Neutrino] Oscillated CC Other Events : " << OscillatedCCOther << std::endl;
+    resultfile << "           w/ tagged neutrons         : " << OscillatedCCOther_wTagN << ", w/o tagged neutrons:" << OscillatedCCOther_woTagN << std::endl;
+    resultfile << " " << std::endl;
+    resultfile << "[Neutrino] NC Events                  : " << OscillatedNC << std::endl;
+    resultfile << "           w/ tagged neutrons         : " << OscillatedNC_wTagN << ", w/o tagged neutrons:" << OscillatedNC_woTagN << std::endl;
   }
 
 
@@ -738,5 +1283,7 @@ int main(int argc, char **argv) {
   gDirectory -> cd("..");
 
   WriteVECTHisto();
+
+  AnaTuple -> WriteAnaTree();
 
 }
