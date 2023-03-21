@@ -74,6 +74,11 @@ void NTagAnalysis::SetHistoFrame() {
     }
   }
 
+  h1_TrueNCapTime     = new TH1F("h1_TrueNCapTime", "h1_TrueNCapTime; True Capture Time[#musec]; Number of Events", 1000, 0., 1000);
+  h1_RecoNCapTime     = new TH1F("h1_RecoNCapTime", "h1_RecoNCapTime; Reco Capture Time[#musec]; Number of Events", 1000, 0., 1000);
+  h1_mintimediff_NCap = new TH1F("h1_mintimediff_NCap", "h1_mintimediff_NCap; tscnd-FitT[#musec]; Number of Events", 1000, 0., 1000);
+  h1_NCapVtxReso      = new TH1F("h1_NCapVtxReso", "h1_NCapVtxReso; Neutron Capture Vertex Resolution [cm]; Number of Events", 2000, 0, 200);
+
   h1_GenPrmNeutrons    = new TH1F("h1_GenPrmNeutrons", "h1_GenPrmNeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
   h1_GenAftFSINeutrons = new TH1F("h1_GenAftFSINeutrons", "h1_GenAftFSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
   h1_GenAftSINeutrons  = new TH1F("h1_GenAftSINeutrons", "h1_GenAftSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
@@ -1858,41 +1863,118 @@ bool NTagAnalysis::GetRecoNeutronCapVtx(UInt_t ican,
 }
 
 
-/*
-//void NTagAnalysis::NCapVtxResEstimator(int TrueMuN, int TrueNuN, int* ichildidx, std::vector<float> FitT) {
-void NTagAnalysis::NCapVtxResEstimator(int NTrueN, int* ichildidx, std::vector<float> FitT) {
 
-  //check the existence of neutrons in a neutrino event
-  //if (TrueMuN==0) return 0;
-  //if (TrueNuN==0) return 0;
+int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscnd, Float_t vtxprnt[][3], 
+                                      bool etagmode, std::vector<float> *FitT, std::vector<float> *NHits, std::vector<float> *TagOut, 
+                                      float TMVAThreshold, std::vector<float> *dvx, std::vector<float> *dvy, std::vector<float> *dvz) 
+{
+
+  //check the existence of true capture neutrons in a neutrino event
   if (NTrueN==0) return 0;
 
   //Make truth neutron list
+  int TrueNCap = 0;
   std::vector<float> tscndlist;
+  std::vector<float> vtxscndXlist;
+  std::vector<float> vtxscndYlist;
+  std::vector<float> vtxscndZlist;
   for (int jsub=0; jsub<numu->var<int>("nscndprt"); jsub++) {
-    //Find neutrons drectly or gamma from neutron capture
-    if ( (std::fabs(numu->var<int>("iprtscnd", iscnd))==static_cast<int>(PDGPID::NEUTRON) &&
-          numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::DECAY) &&
-          numu->var<int>("lmecscnd", ichildidx[iscnd]-1))==static_cast<int>(GEANTINT::NEUTRONCAPTURE) ||
-         (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) && 
-          numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
-          numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) )
+    //std::cout << "Particle[" << jsub << "] = " << numu->var<int>("iprtscnd", jsub)
+    //          << ", Parent = " << numu->var<int>("iprntprt", jsub) 
+    //          << ", lmecscnd = " << numu->var<int>("lmecscnd", jsub) 
+    //          << ", [" << numu->var<float>("vtxscnd", jsub, 0) << ", "
+    //                   << numu->var<float>("vtxscnd", jsub, 1) << ", "
+    //                   << numu->var<float>("vtxscnd", jsub, 2) << "], tscnd = " << tscnd[jsub]/1000. << " us" << std::endl;
+
+    //Find gamma from neutron capture (do not remove muon capture neutrons)
+    if ( std::fabs(numu->var<int>("iprtscnd", jsub))==static_cast<int>(PDGPID::GAMMA) &&
+         numu->var<int>("iprntprt", jsub)==static_cast<int>(PDGPID::NEUTRON) &&
+         numu->var<int>("lmecscnd", jsub)==static_cast<int>(GEANTINT::NEUTRONCAPTURE) )
     {
-      tscndlist.push_back( tscnd[iscnd]/1000. );
+      //tscndlist.push_back( tscnd[iscnd]/1000. );
+      float vtxscndX  = numu->var<float>("vtxscnd", jsub, 0);
+      float vtxscndY  = numu->var<float>("vtxscnd", jsub, 1);
+      float vtxscndZ  = numu->var<float>("vtxscnd", jsub, 2);
+
+      //First gamma
+      if (vtxscndXlist.size()==0) {
+        vtxscndXlist.push_back(vtxscndX);
+        vtxscndYlist.push_back(vtxscndY);
+        vtxscndZlist.push_back(vtxscndZ);
+        tscndlist.push_back(tscnd[jsub]/1000.);
+        TrueNCap++;
+        h1_mintimediff_NCap -> Fill(tscnd[jsub]/1000.);
+      }
+      else {
+        bool NewNeutron = false;
+        for (UInt_t jn=0; jn<vtxscndXlist.size(); jn++) {
+          if (std::fabs(tscndlist.at(jn)-tscnd[jsub]/1000.) > 1.e-4 && 
+              (vtxscndXlist.at(jn)!=vtxscndX || vtxscndYlist.at(jn)!=vtxscndY || vtxscndZlist.at(jn)!=vtxscndZ)) 
+          {
+            NewNeutron = true;
+          }
+          else NewNeutron = false;
+          //std::cout << "  Time difference: " << std::fabs(tscndlist.at(jn)-tscnd[jsub]/1000.) << ", NewNeutron: " << NewNeutron <<  std::endl;
+        }
+
+        if (NewNeutron) {
+          vtxscndXlist.push_back(vtxscndX);
+          vtxscndYlist.push_back(vtxscndY);
+          vtxscndZlist.push_back(vtxscndZ);
+          tscndlist.push_back(tscnd[jsub]/1000.);
+          TrueNCap++;
+          h1_TrueNCapTime -> Fill(tscnd[jsub]/1000.);
+        }
+      }
+
+    }
+  }
+  //if (NTrueN!=TrueNCap) std::cout << "NTrueN != TrueNCap" << std::endl;
+  //std::cout << "NTrueN: " << NTrueN << ", TrueNCap: " << TrueNCap << ", tscndlist: " << tscndlist.size() << std::endl;
+  //std::cout << " " << std::endl;
+
+
+
+  //check the exostence of reco capture neutrons in a neutrino event
+  if (TagOut->size()==0) return 0;
+
+  //Make reco neutron list
+  int RecoNCap = 0;
+  std::vector<float> FitTlist;
+  std::vector<float> dvxlist;
+  std::vector<float> dvylist;
+  std::vector<float> dvzlist;
+  for (UInt_t ican=0; ican<TagOut->size(); ican++) {
+    bool etagboxin = false;
+    if (etagmode){
+      if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+      if (TagOut->at(ican)>TMVAThreshold && etagboxin==false) {
+        RecoNCap++;
+        //std::cout << "FitT: " << FitT->at(ican) << std::endl;
+        FitTlist.push_back(FitT->at(ican));
+        dvxlist.push_back(dvx->at(ican));
+        dvylist.push_back(dvy->at(ican));
+        dvzlist.push_back(dvz->at(ican));
+        h1_RecoNCapTime -> Fill(FitT->at(ican));
+      }
+    }
+    else {
+      if (TagOut->at(ican)>TMVAThreshold) {
+        RecoNCap++;
+        FitTlist.push_back(FitT->at(ican));
+        dvxlist.push_back(dvx->at(ican));
+        dvylist.push_back(dvy->at(ican));
+        dvzlist.push_back(dvz->at(ican));
+      }
     }
   }
 
-  //Make reco neutron list
-  std::vector<float> FitTlist;
-  for (UInt_t jcan=0; jcan<TagOut->size(); jcan++) {
-    FitTlist.push_back(FitT->at(jcan));
-  }
-
+  ///*
   std::vector<int> fin_itr_true; //final minimum pair true
   std::vector<int> fin_itr_reco; //final minimum pair reco
 
-  int truecounter = numu->var<int>("nscndprt");
-  int recocounter = numu->var<int>("fqnse") - 1;
+  int truecounter = TrueNCap;
+  int recocounter = RecoNCap;
   bool loopfinisher = false;
   while (loopfinisher==false) {
 
@@ -1903,8 +1985,8 @@ void NTagAnalysis::NCapVtxResEstimator(int NTrueN, int* ichildidx, std::vector<f
     int tmp_itr_true = 999; //pre-minimum true
     int tmp_itr_reco = 999; //pre-minimum reco
     //Truth loop
-    float prm_min = 9999999.; //time difference of the minimum reco particle for the itrue-th particle
-    for (long unsigned int itrue=0; itrue<; itrue++) {
+    float pre_min = 9999999.; //time difference of the minimum reco particle for the itrue-th particle
+    for (long unsigned int itrue=0; itrue<tscndlist.size(); itrue++) {
 
       //Check 
       bool done_this_true = false;
@@ -1938,16 +2020,91 @@ void NTagAnalysis::NCapVtxResEstimator(int NTrueN, int* ichildidx, std::vector<f
       }
 
     }
+    //std::cout << "[Pre-minimum] true:reco = " << tmp_itr_true+1 << " : " << tmp_itr_reco+1 << std::endl;
+    //std::cout << "              Pre-minimum time diff. = " << pre_min << " us" << std::endl;
+
 
     ///////////////////////////////////
     //2. Conclude minimum pair
     //  pre-minimum reco -> all truth
     ///////////////////////////////////
+    int tmp2_itr_true = 999; //tentative final-minimum truth
+    //Truth loop
+    float fin_min       = 9999999.;
+    //float min_dt        = 0.;
+    //float min_N50       = 0.;
+    float resolution    = 0.;
+    float vtxresolution = 0.;
+    for (long unsigned int itrue=0; itrue<tscndlist.size(); itrue++) {
 
+      //Check
+      bool done_this_true = false;
+      for (long unsigned int imin=0; imin<fin_itr_true.size(); imin++) {
+        if (itrue == (long unsigned int)fin_itr_true.at(imin)) done_this_true = true;
+      }
+      if (done_this_true==true) continue;
 
-  } 
+      float this_tscnd    = tscndlist.at(itrue);
+      float this_vtxscndX = vtxscndXlist.at(itrue);
+      float this_vtxscndY = vtxscndYlist.at(itrue);
+      float this_vtxscndZ = vtxscndZlist.at(itrue);
+      //std::cout << "  vtxscnd=[" << this_vtxscndX << ", " << this_vtxscndY << ", " << this_vtxscndZ << "]" << std::endl;
+
+      //extract pre-minimum
+      float this_dt  = 999.;
+      float this_dvx = 0.;
+      float this_dvy = 0.;
+      float this_dvz = 0.;
+      for (long unsigned int ireco=0; ireco<FitTlist.size(); ireco++) {
+        if (ireco == (long unsigned int)tmp_itr_reco) {
+          //std::cout << "   [reco# " << ireco+1 << "]";
+          this_dt  = FitTlist.at(ireco);
+          this_dvx = dvxlist.at(ireco);
+          this_dvy = dvylist.at(ireco);
+          this_dvz = dvzlist.at(ireco);
+        }
+      }
+
+      float tmp_reso     = this_dt - this_tscnd;
+      float tmp_vtxresoX = this_vtxscndX - this_dvx;
+      float tmp_vtxresoY = this_vtxscndY - this_dvy;
+      float tmp_vtxresoZ = this_vtxscndZ - this_dvz;
+      float tmp_vtxreso  = std::sqrt( tmp_vtxresoX*tmp_vtxresoX +
+                                      tmp_vtxresoY*tmp_vtxresoY +
+                                      tmp_vtxresoZ*tmp_vtxresoZ );
+
+      //Final update (minimal time difference pair)
+      float timediff = std::fabs( this_dt - this_tscnd );
+      if (fin_min > timediff) {
+        fin_min       = timediff;
+        tmp2_itr_true = itrue;
+        resolution    = tmp_reso;
+        vtxresolution = tmp_vtxreso;
+      }
+    }
+
+    //Conclude the final minimum pair
+    fin_itr_true.push_back(tmp2_itr_true);
+    fin_itr_reco.push_back(tmp_itr_reco);
+    //std::cout << "[Final-minimum] true:reco = " << tmp2_itr_true+1 << " : " << tmp_itr_reco+1 << std::endl;
+    //std::cout << "                Final-minimum time diff. = " << fin_min << " us" << std::endl;
+    //if (fillthem==true) {
+    if (resolution!=0) {
+      //h1_mintimediff_NCap -> Fill(resolution);
+      h1_NCapVtxReso      -> Fill(vtxresolution);
+    }
+
+    //Decrement the number of truth particles at last
+    truecounter -= 1;
+    recocounter -= 1;
+
+    loopfinisher = (truecounter==0 || recocounter==0);
+    //std::cout << "-----------------" << std::endl;
+
+  }//*/
+
+  return 0;
 }
-//*/
 
 
 void NTagAnalysis::cdNTagAnalysis(TFile* fout) {
@@ -1976,6 +2133,11 @@ void NTagAnalysis::WritePlots() {
   Double_t tot_GenBefSINeutrons = h1_GenBefSINeutrons->Integral();
   //h1_GenBefSINeutrons  -> Scale(1./tot_GenBefSINeutrons);
   h1_GenBefSINeutrons  -> Write();
+
+  h1_TrueNCapTime -> Write();
+  h1_RecoNCapTime -> Write();
+  h1_mintimediff_NCap -> Write();
+  h1_NCapVtxReso -> Write();
 
   h1_GenBefSInE -> Write();
   h1_GenSInE    -> Write();

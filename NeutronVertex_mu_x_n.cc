@@ -366,6 +366,7 @@ int main(int argc, char **argv) {
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false)) {
       //GetSelectedModeEvents(numu);
       float recothetamu = neuosc.GetRecoMuDirection(numu);
+      ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, NHits, TagOut, 0.75, dvx, dvy, dvz);
     
     
       // Primary particles

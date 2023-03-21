@@ -71,6 +71,12 @@ TGraphErrors* g_OverallGdEff;
 TGraphErrors* g_Purity;
 TGraphErrors* g_FillNoiseRate;
 
+//Capture vertex resolution
+TH1F* h1_TrueNCapTime;
+TH1F* h1_RecoNCapTime;
+TH1F* h1_mintimediff_NCap;
+TH1F* h1_NCapVtxReso;
+
 TH1F* h1_GenPrmNeutrons;
 TH1F* h1_GenAftFSINeutrons;
 TH1F* h1_GenAftSINeutrons;  // = h1_GenBefSINeutrons + h1_GenAtSINeutrons
@@ -378,6 +384,9 @@ class NTagAnalysis {
                               std::vector<float> *dvz, 
                               float *NCapVtx,
                               bool etagmode);
+    int NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscnd, Float_t vtxprnt[][3], 
+                            bool etagmode, std::vector<float> *FitT, std::vector<float> *NHits, std::vector<float> *TagOut, 
+                            float TMVAThreshold, std::vector<float> *dvx, std::vector<float> *dvy, std::vector<float> *dvz);
 
     void SetHistoFrame();
     void SetHistoFormat();
