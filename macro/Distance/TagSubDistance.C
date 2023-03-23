@@ -22,11 +22,11 @@ void TagSubDistance(bool beammode) {
 
   //FHC
 #if fhcflag
-  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.root");
-  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root");
+  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.root");
+  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root");
 
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.noPrmN.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.noPrmN.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.noPrmN.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.noPrmN.root");
 
   //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.Enucut.root");
   //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.Enucut.root");
@@ -60,15 +60,23 @@ void TagSubDistance(bool beammode) {
   std::cout << "Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
 
 
-  TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode0");
-  TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode1");
-  TH1F* h1_CCnonQE_numu = (TH1F*)fin_numu->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode2");
-  TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode3");
+  //TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode0");
+  //TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode1");
+  //TH1F* h1_CCnonQE_numu = (TH1F*)fin_numu->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode2");
+  //TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode3");
+  TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("DistanceViewer/h1_RecoPrmMuEnd_x_TagNCap_mode0");
+  TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("DistanceViewer/h1_RecoPrmMuEnd_x_TagNCap_mode1");
+  TH1F* h1_CCnonQE_numu = (TH1F*)fin_numu->Get("DistanceViewer/h1_RecoPrmMuEnd_x_TagNCap_mode2");
+  TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("DistanceViewer/h1_RecoPrmMuEnd_x_TagNCap_mode3");
 
-  TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode0");
-  TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode1");
-  TH1F* h1_CCnonQE_numubar = (TH1F*)fin_numubar->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode2");
-  TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode3");
+  //TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode0");
+  //TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode1");
+  //TH1F* h1_CCnonQE_numubar = (TH1F*)fin_numubar->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode2");
+  //TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_mode3");
+  TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("DistanceViewer/h1_RecoPrmMuEnd_x_TagNCap_mode0");
+  TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("DistanceViewer/h1_RecoPrmMuEnd_x_TagNCap_mode1");
+  TH1F* h1_CCnonQE_numubar = (TH1F*)fin_numubar->Get("DistanceViewer/h1_RecoPrmMuEnd_x_TagNCap_mode2");
+  TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("DistanceViewer/h1_RecoPrmMuEnd_x_TagNCap_mode3");
 
   h1_CCQE_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
@@ -121,7 +129,8 @@ void TagSubDistance(bool beammode) {
   hs_TruePrmMuEnd_x_TagNCap -> Add(h1_CCQE_numubar);
 #endif
 
-  TH1F* h1_TruePrmMuEnd_x_TagNCap = new TH1F("h1_TruePrmMuEnd_x_TagNCap", "Neutron-related distance; Distance from #mu end vertex[m]; Number of Events", 50, 0, 5);
+  //TH1F* h1_TruePrmMuEnd_x_TagNCap = new TH1F("h1_TruePrmMuEnd_x_TagNCap", "Neutron-related distance; Distance from #mu end vertex[m]; Number of Events", 50, 0, 5);
+  TH1F* h1_TruePrmMuEnd_x_TagNCap = new TH1F("h1_TruePrmMuEnd_x_TagNCap", "Neutron-related distance; Distance from #mu end vertex[m]; Number of Events", 70, 0, 7);
   h1_TruePrmMuEnd_x_TagNCap -> Add(h1_CCQE_numu, 1.);
   h1_TruePrmMuEnd_x_TagNCap -> Add(h1_CCQE_numubar, 1.);
   h1_TruePrmMuEnd_x_TagNCap -> Add(h1_CC2p2h_numu, 1.);

@@ -30,8 +30,9 @@ void NeutrinoOscillation::SetHistoFrame() {
   h2_Enu_x_PrmVtxReso = new TH2F("h2_Enu_x_PrmVtxReso", "Primary Vertex Resolution; E_{#nu}[GeV]; d_{Reco. vs True}[cm]", 60, 0, 3, 2000, 0, 200);
   h2_Enu_x_PrmVtxReso -> SetStats(0);
   h1_PrmMuMomReso = new TH1F("h1_PrmMuMomReso", "Primary #mu Momentum Resolution; (P^{true}_{#mu}-P^{reco}_{#mu})/P^{true}_{#mu}; Number of Events", 2000, -0.2, 0.2);
-  h1_PrmMuEndVtxReso = new TH1F("h1_PrmMuEndVtxReso", "Primary #mu Stopping Vertex Resolution; Reco. - Truth [cm]; Number of Neutrino Events", 2000, 0, 2000);
-  h2_PrmMuEndVtxReso = new TH2F("h2_PrmMuEndVtxReso", "Primary #mu Stopping Vertex Resolution; Truth [cm]; Reco [cm]", 200, 0, 4000, 200, 0, 4000);
+  h1_PrmMuEndVtxReso = new TH1F("h1_PrmMuEndVtxReso", "Primary #mu Stopping Vertex Resolution; Reco. - Truth [cm]; Number of Neutrino Events", 2000, 0, 200);
+  h2_PrmMuEndVtxReso = new TH2F("h2_PrmMuEndVtxReso", "Primary #mu Stopping Vertex Resolution; Truth [cm]; Reco [cm]", 300, 0, 3000, 300, 0, 3000);
+  h2_PrmMuEndVtxReso -> SetStats(0);
 
   //numu
   h1_AllEnutrue     = new TH1F("h1_AllEnutrue",  "Truth Neutrino Energy; Truth Neutrino Energy E^{true}_{#nu}[GeV]; Number of Neutrino Events", 60, 0, 3);

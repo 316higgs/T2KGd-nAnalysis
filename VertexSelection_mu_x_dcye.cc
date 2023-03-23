@@ -710,11 +710,13 @@ int main(int argc, char **argv) {
         //GetNeutrinoInteraction(ientry, mode);
         PrmMuEnd = decayebox.GetTrueMuEndVtx(eOsc, iprntidx, numu, PrmMuEndVtx); //Get truth mu end vertex
         float RecoMuEndVtx[3] = {0., 0., 0.};
-        float RecoMuRange = decayebox.GetRecoMuEndVtx(numu, RecoMuEndVtx);
+        float RecoMuRange = decayebox.GetRecoMuEndVtx(numu, RecoMuEndVtx);       
         float d_MuEndVtxReso = ndistance.TakeDistance(PrmMuEndVtx, RecoMuEndVtx);
+
         float OrgnVtx[3] = {0., 0., 0.};
-        float d_TrueMuEndVtx = ndistance.TakeDistance(OrgnVtx, PrmMuEndVtx);
-        float d_RecoMuEndVtx = ndistance.TakeDistance(OrgnVtx, RecoMuEndVtx);
+        float d_TrueMuEndVtx = ndistance.TakeDistance(OrgnVtx, PrmMuEndVtx);  // [cm]
+        float d_RecoMuEndVtx = ndistance.TakeDistance(OrgnVtx, RecoMuEndVtx); // [cm]
+
         float Pmu = numu->var<float>("fq1rmom", 0, FQ_MUHYP); //primary muon momentum
         float RecoPrmVtx[3] = {0., 0., 0.};
         RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
@@ -725,13 +727,9 @@ int main(int argc, char **argv) {
         RecoMuDir[1]  = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 1);
         RecoMuDir[2]  = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 2);
         if (PrmMuEnd) {
-          h2_RecoPmu_x_RecoRange -> Fill(Pmu, RecoMuRange/100.);
-          h1_PrmMuEndVtxReso -> Fill(d_MuEndVtxReso);
-          h2_PrmMuEndVtxReso -> Fill(d_TrueMuEndVtx, d_RecoMuEndVtx);
-          for (int idim=0; idim<3; idim++) {
-            ana_RecoMuEndVtx[idim] = RecoMuEndVtx[idim];
-            ana_TrueMuEndVtx[idim] = PrmMuEndVtx[idim];
-          }
+          h2_RecoPmu_x_RecoRange -> Fill(Pmu, RecoMuRange/100.);           //Reco mu range vs reco mu momentum
+          h1_PrmMuEndVtxReso     -> Fill(d_MuEndVtxReso);                  //Mu stopping vertex resolution
+          h2_PrmMuEndVtxReso     -> Fill(d_TrueMuEndVtx, d_RecoMuEndVtx);  //True vs Reco
         }
 
         if (!PrmMuEnd) {

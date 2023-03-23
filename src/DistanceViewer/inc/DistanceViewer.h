@@ -29,6 +29,9 @@ TH1F* h1_TruePrmMuEnd_x_TagNCap_MuN;
 TH1F* h1_TruePrmMuEnd_x_TagNCap_NuN;
 TH2F* h2_TruePrmMuEnd_x_TagNCap_x_Pmu;
 TH2F* h2_Prm_NCap_x_MuStp_x_NCap;
+TH1F* h1_RecoPrmMuEnd_x_TagNCap[4];
+TH1F* h1_RecoPrmMuEnd_x_TagNCap_MuN;
+TH1F* h1_RecoPrmMuEnd_x_TagNCap_NuN;
 
 TH1F* h1_truedistance_mudecay;  // |primary vtx - mu decay vertex|
 TH1F* h1_truedistance_pidecay;  // |primary vtx - pi+ decay vertex|

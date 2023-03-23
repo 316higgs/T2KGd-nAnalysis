@@ -52,7 +52,7 @@ void DcyVtxResolution(bool beammode) {
 
 
   TH1F* h1_DcyVtxReso_numu    = (TH1F*)fin_numu->Get("DecayeBox/h1_DcyVtxReso");
-  TH1F* h1_DcyVtxReso_numubar    = (TH1F*)fin_numubar->Get("DecayeBox/h1_DcyVtxReso");
+  TH1F* h1_DcyVtxReso_numubar = (TH1F*)fin_numubar->Get("DecayeBox/h1_DcyVtxReso");
 
   h1_DcyVtxReso_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_DcyVtxReso_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );

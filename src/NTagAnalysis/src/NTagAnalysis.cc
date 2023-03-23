@@ -74,10 +74,14 @@ void NTagAnalysis::SetHistoFrame() {
     }
   }
 
-  h1_TrueNCapTime     = new TH1F("h1_TrueNCapTime", "h1_TrueNCapTime; True Capture Time[#musec]; Number of Events", 1000, 0., 1000);
-  h1_RecoNCapTime     = new TH1F("h1_RecoNCapTime", "h1_RecoNCapTime; Reco Capture Time[#musec]; Number of Events", 1000, 0., 1000);
-  h1_mintimediff_NCap = new TH1F("h1_mintimediff_NCap", "h1_mintimediff_NCap; tscnd-FitT[#musec]; Number of Events", 1000, 0., 1000);
-  h1_NCapVtxReso      = new TH1F("h1_NCapVtxReso", "h1_NCapVtxReso; Neutron Capture Vertex Resolution [cm]; Number of Events", 2000, 0, 200);
+  h1_TrueNCapTime = new TH1F("h1_TrueNCapTime", "h1_TrueNCapTime; True Capture Time[#musec]; Number of Events", 535, 0., 535);
+  for (int i=0; i<4; i++) {
+    //h1_RecoNCapTime[i] = new TH1F(TString::Format("h1_RecoNCapTime_type%d", i), "h1_RecoNCapTime; Reco Capture Time[#musec]; Number of Events", 250, 0., 535);
+    h1_RecoNCapTime[i] = new TH1F(TString::Format("h1_RecoNCapTime_type%d", i), "h1_RecoNCapTime; Reco Capture Time[#musec]; Number of Events", 40, 0., 20);
+    h1_N50[i] = new TH1F(TString::Format("h1_N50_type%d", i), "h1_N50; N50; Number of Events", 80, 0., 80);
+  }
+  h1_mintimediff_NCap = new TH1F("h1_mintimediff_NCap", "h1_mintimediff_NCap; tscnd-FitT[#musec]; Number of Events", 200, -0.2, 0.2);
+  h1_NCapVtxReso      = new TH1F("h1_NCapVtxReso", "h1_NCapVtxReso; Neutron Capture Vertex Resolution [cm]; Number of Events", 3000, 0, 300);
 
   h1_GenPrmNeutrons    = new TH1F("h1_GenPrmNeutrons", "h1_GenPrmNeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
   h1_GenAftFSINeutrons = new TH1F("h1_GenAftFSINeutrons", "h1_GenAftFSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
@@ -1865,7 +1869,7 @@ bool NTagAnalysis::GetRecoNeutronCapVtx(UInt_t ican,
 
 
 int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscnd, Float_t vtxprnt[][3], 
-                                      bool etagmode, std::vector<float> *FitT, std::vector<float> *NHits, std::vector<float> *TagOut, 
+                                      bool etagmode, std::vector<float> *FitT, std::vector<float> *NHits, std::vector<float> *Label, std::vector<float> *TagOut, 
                                       float TMVAThreshold, std::vector<float> *dvx, std::vector<float> *dvy, std::vector<float> *dvz) 
 {
 
@@ -1903,7 +1907,8 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
         vtxscndZlist.push_back(vtxscndZ);
         tscndlist.push_back(tscnd[jsub]/1000.);
         TrueNCap++;
-        h1_mintimediff_NCap -> Fill(tscnd[jsub]/1000.);
+        //h1_mintimediff_NCap -> Fill(tscnd[jsub]/1000.);
+        h1_TrueNCapTime -> Fill(tscnd[jsub]/1000.);
       }
       else {
         bool NewNeutron = false;
@@ -1947,6 +1952,11 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
   for (UInt_t ican=0; ican<TagOut->size(); ican++) {
     bool etagboxin = false;
     if (etagmode){
+      //if (Label->at(ican)==0) h1_N50[0] -> Fill(NHits->at(ican));
+      //if (Label->at(ican)==1) h1_N50[1] -> Fill(NHits->at(ican));
+      //if (Label->at(ican)==2) h1_N50[2] -> Fill(NHits->at(ican));
+      //if (Label->at(ican)==3) h1_N50[3] -> Fill(NHits->at(ican));
+
       if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
       if (TagOut->at(ican)>TMVAThreshold && etagboxin==false) {
         RecoNCap++;
@@ -1955,7 +1965,15 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
         dvxlist.push_back(dvx->at(ican));
         dvylist.push_back(dvy->at(ican));
         dvzlist.push_back(dvz->at(ican));
-        h1_RecoNCapTime -> Fill(FitT->at(ican));
+        if (Label->at(ican)==0) h1_RecoNCapTime[0] -> Fill(FitT->at(ican));  //noise
+        if (Label->at(ican)==1) h1_RecoNCapTime[1] -> Fill(FitT->at(ican));  //decay-e
+        if (Label->at(ican)==2) h1_RecoNCapTime[2] -> Fill(FitT->at(ican));  //H-n
+        if (Label->at(ican)==3) h1_RecoNCapTime[3] -> Fill(FitT->at(ican));  //Gd-n
+
+        if (Label->at(ican)==0) h1_N50[0] -> Fill(NHits->at(ican));
+        if (Label->at(ican)==1) h1_N50[1] -> Fill(NHits->at(ican));
+        if (Label->at(ican)==2) h1_N50[2] -> Fill(NHits->at(ican));
+        if (Label->at(ican)==3) h1_N50[3] -> Fill(NHits->at(ican));
       }
     }
     else {
@@ -2089,10 +2107,10 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
     //std::cout << "[Final-minimum] true:reco = " << tmp2_itr_true+1 << " : " << tmp_itr_reco+1 << std::endl;
     //std::cout << "                Final-minimum time diff. = " << fin_min << " us" << std::endl;
     //if (fillthem==true) {
-    if (resolution!=0) {
-      //h1_mintimediff_NCap -> Fill(resolution);
+    //if (resolution!=0) {
+      h1_mintimediff_NCap -> Fill(resolution);
       h1_NCapVtxReso      -> Fill(vtxresolution);
-    }
+    //}
 
     //Decrement the number of truth particles at last
     truecounter -= 1;
@@ -2135,7 +2153,10 @@ void NTagAnalysis::WritePlots() {
   h1_GenBefSINeutrons  -> Write();
 
   h1_TrueNCapTime -> Write();
-  h1_RecoNCapTime -> Write();
+  for (int i=0; i<4; i++) {
+    h1_RecoNCapTime[i] -> Write();
+    h1_N50[i] -> Write();
+  }
   h1_mintimediff_NCap -> Write();
   h1_NCapVtxReso -> Write();
 

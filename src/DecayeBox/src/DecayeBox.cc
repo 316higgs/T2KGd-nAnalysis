@@ -252,23 +252,33 @@ float DecayeBox::GetRecoMuEndVtx(CC0PiNumu* numu, float *MuEndVtx) {
   RecoMuDir[1] = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 1);
   RecoMuDir[2] = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 2);
   float RecoPrmVtx[3] = {0., 0., 0.};
-  RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
-  RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
-  RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
+  RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0); // [cm]
+  RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1); // [cm]
+  RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2); // [cm]
 
   //fitting parameters (determined through true mu momentum vs mu range)
-  // Format: R[cm] = A x Pmu^B
-  const float A = 0.04;
-  const float B = 1.35;
-
-  //Predicted mu stopping vertex
-  MuEndVtx[0] = RecoPrmVtx[0] - A*std::pow(RecoMuMom, B)*RecoMuDir[0];
-  MuEndVtx[1] = RecoPrmVtx[1] - A*std::pow(RecoMuMom, B)*RecoMuDir[1];
-  MuEndVtx[2] = RecoPrmVtx[2] - A*std::pow(RecoMuMom, B)*RecoMuDir[2];
+  if (RecoMuMom<200) {
+    // Format: R[cm] = A x Pmu^B
+    const float A = 1.04e-6;
+    const float B = 2.43;
+    //Predicted mu stopping vertex
+    MuEndVtx[0] = RecoPrmVtx[0] + A*std::pow(RecoMuMom, B)*100.*RecoMuDir[0]; // [cm]
+    MuEndVtx[1] = RecoPrmVtx[1] + A*std::pow(RecoMuMom, B)*100.*RecoMuDir[1]; // [cm]
+    MuEndVtx[2] = RecoPrmVtx[2] + A*std::pow(RecoMuMom, B)*100.*RecoMuDir[2]; // [cm]
+  }
+  else if (RecoMuMom>=200) {
+    // Format: R[cm] = A x Pmu + B
+    const float A = 0.00482;
+    const float B = -0.611;
+    //Predicted mu stopping vertex
+    MuEndVtx[0] = RecoPrmVtx[0] + (A*RecoMuMom + B)*100.*RecoMuDir[0]; // [cm]
+    MuEndVtx[1] = RecoPrmVtx[1] + (A*RecoMuMom + B)*100.*RecoMuDir[1]; // [cm]
+    MuEndVtx[2] = RecoPrmVtx[2] + (A*RecoMuMom + B)*100.*RecoMuDir[2]; // [cm]
+  }
   //std::cout << "  MuEndVtx = [" << MuEndVtx[0] << ", " << MuEndVtx[1] << ", " << MuEndVtx[2] << "]" << std::endl;
 
   //Return the predicted mu range
-  float RecoMuRange = GetSimpleDistance(RecoPrmVtx, MuEndVtx);
+  float RecoMuRange = GetSimpleDistance(RecoPrmVtx, MuEndVtx); // [cm]
 
   return RecoMuRange;
 }

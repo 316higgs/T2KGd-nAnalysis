@@ -58,10 +58,14 @@ void TrueLabelDistance(bool beammode) {
 
   TH1F* h1_MuN_numu = (TH1F*)fin_numu->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_MuN");
   TH1F* h1_NuN_numu = (TH1F*)fin_numu->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_NuN");
+  //TH1F* h1_MuN_numu = (TH1F*)fin_numu->Get("DistanceViewer/h1_RecoPrmMuEnd_x_TagNCap_MuN");
+  //TH1F* h1_NuN_numu = (TH1F*)fin_numu->Get("DistanceViewer/h1_RecoPrmMuEnd_x_TagNCap_NuN");
   h1_MuN_numu -> SetStats(0);
 
   TH1F* h1_MuN_numubar = (TH1F*)fin_numubar->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_MuN");
   TH1F* h1_NuN_numubar = (TH1F*)fin_numubar->Get("DistanceViewer/h1_TruePrmMuEnd_x_TagNCap_NuN");
+  //TH1F* h1_MuN_numubar = (TH1F*)fin_numubar->Get("DistanceViewer/h1_RecoPrmMuEnd_x_TagNCap_MuN");
+  //TH1F* h1_NuN_numubar = (TH1F*)fin_numubar->Get("DistanceViewer/h1_RecoPrmMuEnd_x_TagNCap_NuN");
   h1_MuN_numubar -> SetStats(0);
 
   h1_MuN_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -70,12 +74,14 @@ void TrueLabelDistance(bool beammode) {
   h1_NuN_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
 
   TH1F* h1_MuN = new TH1F("h1_MuN", "Truth distance; Distance[m]; Number of Events", 50, 0, 5);
+  //TH1F* h1_MuN = new TH1F("h1_MuN", "Truth distance; Distance[m]; Number of Events", 70, 0,7);
   h1_MuN -> Add(h1_MuN_numu, h1_MuN_numubar, 1., 1.);
   h1_MuN -> SetLineColor(kAzure+9);
   h1_MuN -> SetLineWidth(3);
   h1_MuN -> SetStats(0);
 
   TH1F* h1_NuN = new TH1F("h1_NuN", "Truth distance; Distance from #mu Stop Vertex[m]; Number of Events", 50, 0, 5);
+  //TH1F* h1_NuN = new TH1F("h1_NuN", "Truth distance; Distance from #mu Stop Vertex[m]; Number of Events", 70, 0, 7);
   h1_NuN -> Add(h1_NuN_numu, h1_NuN_numubar, 1., 1.);
   h1_NuN -> SetLineColor(kRed-7);
   h1_NuN -> SetLineWidth(3);
@@ -93,7 +99,8 @@ void TrueLabelDistance(bool beammode) {
   //h1_MuN -> Scale(1./tot_mudecay);
   //h1_NuN -> Scale(1./tot_pidecay);
 
-  h1_NuN -> SetMaximum(5.2);
+  //h1_NuN -> SetMaximum(5.2);
+  h1_NuN -> SetMaximum(1.);
   //h1_MuN -> Draw();
   h1_NuN -> Draw("SAME");
   h1_MuN -> Draw("SAME");

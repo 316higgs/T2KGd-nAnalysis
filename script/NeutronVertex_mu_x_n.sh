@@ -38,7 +38,7 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 
 
 ##### FHC numubar -> numubar MC #####
-<<COMMENTOUT
+#<<COMMENTOUT
 ./NeutronVertex_mu_x_n.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root\
@@ -48,7 +48,7 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
-COMMENTOUT
+#COMMENTOUT
 
 ###########################################
 

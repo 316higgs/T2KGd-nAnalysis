@@ -23,10 +23,13 @@ void DistanceViewer::SetHistoFrame() {
   h1_truedistance_pidecay = new TH1F("h1_truedistance_pidecay", "Truth distance of #pi^{+} decay; Distance[m]; Number of Events", 100, 0, DistanceMax);
   for (int i=0; i<6; i++) {
     h1_TruePrmMuEnd_x_TagNCap[i] = new TH1F(TString::Format("h1_TruePrmMuEnd_x_TagNCap_mode%d", i), "Neutron-related distance; Distance[m]; Number of Events", 50, 0, DistanceMax);
+    h1_RecoPrmMuEnd_x_TagNCap[i] = new TH1F(TString::Format("h1_RecoPrmMuEnd_x_TagNCap_mode%d", i), "Neutron-related distance; Distance[m]; Number of Events", 50, 0, 5);
     h1_Erec[i] = new TH1F(TString::Format("h1_Erec_mode%d", i), "Reco. #nu Energy; Reconstructed #nu Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
   }
   h1_TruePrmMuEnd_x_TagNCap_MuN   = new TH1F("h1_TruePrmMuEnd_x_TagNCap_MuN", "Neutron-related distance; Distance[m]; Number of Events", 50, 0, DistanceMax);
   h1_TruePrmMuEnd_x_TagNCap_NuN   = new TH1F("h1_TruePrmMuEnd_x_TagNCap_NuN", "Neutron-related distance; Distance[m]; Number of Events", 50, 0, DistanceMax);
+  h1_RecoPrmMuEnd_x_TagNCap_MuN   = new TH1F("h1_RecoPrmMuEnd_x_TagNCap_MuN", "Neutron-related distance; Distance[m]; Number of Events", 50, 0, 5);
+  h1_RecoPrmMuEnd_x_TagNCap_NuN   = new TH1F("h1_RecoPrmMuEnd_x_TagNCap_NuN", "Neutron-related distance; Distance[m]; Number of Events", 50, 0, 5);
   h2_TruePrmMuEnd_x_TagNCap_x_Pmu = new TH2F("h2_TruePrmMuEnd_x_TagNCap_x_Pmu", "Neutron-related distance; Reconstructed Muon Momemtum[MeV]; Distance[m]", 30, 0, 3, 140, 0, 14);
   h2_TruePrmMuEnd_x_TagNCap_x_Pmu -> SetStats(0);
   h2_Prm_NCap_x_MuStp_x_NCap = new TH2F("h2_Prm_NCap_x_MuStp_x_NCap", "Neutron-related distance; Distance from Primary Vertex [m]; Distance from #mu Stopping Vertex [m]", 50, 0, 10, 50, 0, 10);
@@ -262,13 +265,15 @@ void DistanceViewer::WritePlots() {
   h1_truedistance_nu_BefSIn -> Write();
   h1_truedistance_nu_SIn    -> Write();
 
-
   for (int i=0; i<6; i++) {
     h1_TruePrmMuEnd_x_TagNCap[i] -> Write();
+    h1_RecoPrmMuEnd_x_TagNCap[i] -> Write();
     h1_Erec[i] -> Write();
   }
   h1_TruePrmMuEnd_x_TagNCap_MuN -> Write();
   h1_TruePrmMuEnd_x_TagNCap_NuN -> Write();
+  h1_RecoPrmMuEnd_x_TagNCap_MuN -> Write();
+  h1_RecoPrmMuEnd_x_TagNCap_NuN -> Write();
 
   for (int i=0; i<7; i++) {
     h1_TruePrmMuEnd_x_fQDcyE[i]  -> Write();

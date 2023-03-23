@@ -182,6 +182,8 @@ int main(int argc, char **argv) {
   TBranch *bTagDWall = 0;
   std::vector<float> *NHits = 0;
   TBranch *bNHits = 0;
+  std::vector<float> *N50 = 0;
+  TBranch *bN50 = 0;
   std::vector<float> *TagIndex = 0;
   TBranch *bTagIndex = 0;
   std::vector<float> *TagOut = 0;
@@ -197,6 +199,7 @@ int main(int argc, char **argv) {
   tchntag->SetBranchAddress("FitT", &FitT, &bFitT);
   tchntag->SetBranchAddress("DWall", &TagDWall, &bTagDWall);
   tchntag->SetBranchAddress("NHits", &NHits, &bNHits);
+  tchntag->SetBranchAddress("N50", &N50, &bN50);
   tchntag->SetBranchAddress("TagIndex", &TagIndex, &bTagIndex);
   tchntag->SetBranchAddress("TagOut", &TagOut, &bTagOut);
   tchntag->SetBranchAddress("dvx", &dvx, &bdvx);
@@ -310,9 +313,12 @@ int main(int argc, char **argv) {
   int TrueCapNNCEvents = 0; //NC with NTrueN=1
   int MuCapturedEvents = 0;
 
+  int NoTrueMuEnd = 0;
+
   // Neurtino events
   int Num1Rmu        = 0;
   int Num1Rmu_w_N    = 0;
+  int Num1Rmu_w_1N   = 0;
   int Num1Rmu_w_NuN  = 0;
   int Num1Rmu_wo_N   = 0;
   int Num1Rmu_wo_NuN = 0;
@@ -348,6 +354,7 @@ int main(int argc, char **argv) {
     bFitT       -> GetEntry(tentry);
     bTagDWall   -> GetEntry(tentry);
     bNHits      -> GetEntry(tentry);
+    bN50        -> GetEntry(tentry);
     bTagIndex   -> GetEntry(tentry);
     bTagOut     -> GetEntry(tentry);
     bdvx        -> GetEntry(tentry);
@@ -366,8 +373,9 @@ int main(int argc, char **argv) {
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false)) {
       //GetSelectedModeEvents(numu);
       float recothetamu = neuosc.GetRecoMuDirection(numu);
-      ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, NHits, TagOut, 0.75, dvx, dvy, dvz);
-    
+      neuosc.GetPrmVtxResolution(numu);
+      ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, NHits, Label, TagOut, 0.75, dvx, dvy, dvz);
+      
     
       // Primary particles
       float OscProb = numu->getOscWgt();
@@ -428,7 +436,32 @@ int main(int argc, char **argv) {
       //h1_NTrueN[0] -> Fill(NTrueN);
       ntagana.GetTruthNeutronsIntType(numu, NTrueN);
 
+
       PrmMuEnd = decayebox.GetTrueMuEndVtx(eOsc, iprntidx, numu, PrmMuEndVtx); //Get truth mu end vertex
+      float RecoMuEndVtx[3] = {0., 0., 0.};
+      float RecoMuRange = decayebox.GetRecoMuEndVtx(numu, RecoMuEndVtx);       
+      
+      float d_MuEndVtxReso = ndistance.TakeDistance(PrmMuEndVtx, RecoMuEndVtx);
+
+      float OrgnVtx[3] = {0., 0., 0.};
+      float d_TrueMuEndVtx = ndistance.TakeDistance(OrgnVtx, PrmMuEndVtx);  // [cm]
+      float d_RecoMuEndVtx = ndistance.TakeDistance(OrgnVtx, RecoMuEndVtx); // [cm]
+
+      float Pmu = numu->var<float>("fq1rmom", 0, FQ_MUHYP); //primary muon momentum
+      float RecoPrmVtx[3] = {0., 0., 0.};
+      RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
+      RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
+      RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
+      float RecoMuDir[3] = {0., 0., 0.};
+      RecoMuDir[0]  = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 0);
+      RecoMuDir[1]  = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 1);
+      RecoMuDir[2]  = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 2);
+      if (PrmMuEnd) {
+        h2_RecoPmu_x_RecoRange -> Fill(Pmu, RecoMuRange/100.);           //Reco mu range vs reco mu momentum
+        h1_PrmMuEndVtxReso     -> Fill(d_MuEndVtxReso);                  //Mu stopping vertex resolution
+        h2_PrmMuEndVtxReso     -> Fill(d_TrueMuEndVtx, d_RecoMuEndVtx);  //True vs Reco
+      }
+
 
       if (NTrueN==1) {
         TrueCapNEvents++;
@@ -527,6 +560,7 @@ int main(int argc, char **argv) {
 
       //----- Reconstructed information -----
       if (numtaggedneutrons==1) {
+        Num1Rmu_w_1N++;
         float Pmu = numu->var<float>("fq1rmom", 0, FQ_MUHYP); //primary muon momentum
         float RecoPrmVtx[3] = {0., 0., 0.};
         RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
@@ -582,6 +616,53 @@ int main(int argc, char **argv) {
             if (d_PrmMuEnd_x_NCap/100. > DistanceCutThreshold) NuLikeTagN++;
             AppliedNDistanceCut = true;
           }
+          if (!PrmMuEnd && NCap) {
+            NoTrueMuEnd++;
+          }
+
+
+          if (NCap) {
+            float d_PrmMuEnd_x_NCap = ndistance.TakeDistance(RecoMuEndVtx, NCapVtx);
+#if 0
+            if (NTrueN!=0) {
+              //Mu capture neutrons only
+              if (TrueNuN==0) {
+                if (mode<=30) h1_RecoPrmMuEnd_x_TagNCap_MuN -> Fill(d_PrmMuEnd_x_NCap/100., OscProb);
+                if (mode>=31) h1_RecoPrmMuEnd_x_TagNCap_MuN -> Fill(d_PrmMuEnd_x_NCap/100.);
+              }
+              //Neutrino interaction neutrons also exist
+              else {
+                if (mode<=30) h1_RecoPrmMuEnd_x_TagNCap_NuN -> Fill(d_PrmMuEnd_x_NCap/100., OscProb);
+                if (mode>=31) h1_RecoPrmMuEnd_x_TagNCap_NuN -> Fill(d_PrmMuEnd_x_NCap/100.);
+              }
+            }
+            //Neutrino interaction neutrons
+            else if (TrueMuN==0 && TrueNuN==1) {
+              if (mode<=30) h1_RecoPrmMuEnd_x_TagNCap_NuN -> Fill(d_PrmMuEnd_x_NCap/100., OscProb);
+              if (mode>=31) h1_RecoPrmMuEnd_x_TagNCap_NuN -> Fill(d_PrmMuEnd_x_NCap/100.);
+            }
+#endif
+
+#if 1
+            ////// 1:1 labeling ///////
+            //Mu capture neutrons
+            if (TrueMuN==1 && TrueNuN==0) {
+              if (mode<=30) h1_RecoPrmMuEnd_x_TagNCap_MuN -> Fill(d_PrmMuEnd_x_NCap/100., OscProb);
+              if (mode>=31) h1_RecoPrmMuEnd_x_TagNCap_MuN -> Fill(d_PrmMuEnd_x_NCap/100.);
+            }
+            //Neutrino interaction neutrons
+            else if (TrueMuN==0 && TrueNuN==1) {
+              if (mode<=30) h1_RecoPrmMuEnd_x_TagNCap_NuN -> Fill(d_PrmMuEnd_x_NCap/100., OscProb);
+              if (mode>=31) h1_RecoPrmMuEnd_x_TagNCap_NuN -> Fill(d_PrmMuEnd_x_NCap/100.);
+            }
+#endif
+
+            if (mode==1) h1_RecoPrmMuEnd_x_TagNCap[0] -> Fill(d_PrmMuEnd_x_NCap/100., OscProb);
+            if (mode>=2 && mode<=10) h1_RecoPrmMuEnd_x_TagNCap[1] -> Fill(d_PrmMuEnd_x_NCap/100., OscProb);
+            if (mode>10 && mode<=30) h1_RecoPrmMuEnd_x_TagNCap[2] -> Fill(d_PrmMuEnd_x_NCap/100., OscProb);
+            if (mode>=31) h1_RecoPrmMuEnd_x_TagNCap[3] -> Fill(d_PrmMuEnd_x_NCap/100.);
+          }
+
         }
       }
         
@@ -813,9 +894,12 @@ int main(int argc, char **argv) {
   std::cout << "Neutrino events with NTrueN=1: " << TrueCapNEvents << std::endl;
   std::cout << "NC events with NTrueN=1      : " << TrueCapNNCEvents << std::endl;
 
-  std::cout << "1Rmu       events: " << Num1Rmu << std::endl;
-  std::cout << "1Rmu w/  n events: " << Num1Rmu_w_N << std::endl;
-  std::cout << "1Rmu w/o n events: " << Num1Rmu_wo_N << std::endl;
+  std::cout << "No true mu end vertex : " << NoTrueMuEnd << std::endl;
+
+  std::cout << "1Rmu       events : " << Num1Rmu << std::endl;
+  std::cout << "1Rmu w/  n events : " << Num1Rmu_w_N << std::endl;
+  std::cout << "1Rmu w/  1n events: " << Num1Rmu_w_1N << std::endl;
+  std::cout << "1Rmu w/o n events : " << Num1Rmu_wo_N << std::endl;
   std::cout << "1Rmu w/  nu-induced n events: " << Num1Rmu_w_NuN << std::endl;
   std::cout << "1Rmu w/o nu-induced n events: " << Num1Rmu_wo_NuN << std::endl;
 
