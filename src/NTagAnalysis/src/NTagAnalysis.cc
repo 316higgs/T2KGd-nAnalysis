@@ -92,6 +92,10 @@ void NTagAnalysis::SetHistoFrame() {
   //h1_GenSInE           = new TH1F("h1_GenSInE", "h1_GenSInE; Truth Neutron Energy[MeV]; Number of Events", 63, 939, 960);
   h1_GenBefSInE        = new TH1F("h1_GenBefSInE", "h1_GenBefSInE; Truth Neutron Energy[MeV]; Number of Events", 50, 0, 200);
   h1_GenSInE           = new TH1F("h1_GenSInE", "h1_GenSInE; Truth Neutron Energy[MeV]; Number of Events", 50, 0, 200);
+
+  h1_N1Rmu_x_Enu = new TH1F("h1_N1Rmu_x_Enu", "N1Rmu_x_Enu; Reco Neutrino Energy [GeV]; Number of #nu Events", binnumber_nu-1, xEnubins);
+  h1_N1Rmu_x_MuMom = new TH1F("h1_N1Rmu_x_MuMom", "N1Rmu_x_MuMom; Reco #mu Momentum [GeV]; Number of #nu Events", binnumber_mu-1, xMuMombins);
+  h1_N1Rmu_x_MuPt  = new TH1F("h1_N1Rmu_x_MuPt", "N1Rmu_x_MuPt; Reco #mu Transverse Momentum [GeV]; Number of #nu Events", binnumber_mu-1, xMuPtbins);
 }
 
 void NTagAnalysis::SetHistoFormat() {
@@ -1939,7 +1943,6 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
   //std::cout << " " << std::endl;
 
 
-
   //check the exostence of reco capture neutrons in a neutrino event
   if (TagOut->size()==0) return 0;
 
@@ -2124,6 +2127,40 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
   return 0;
 }
 
+void NTagAnalysis::N1Rmu_x_kinematics(float knmtcs, double* xbins, int* N1Rmu_x_knmtcs, TH1F* h1, int bintype) {
+  switch (bintype) {
+    case 0:
+      for (int ibin=0; ibin<binnumber_nu-1; ibin++) {
+        if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
+          N1Rmu_x_knmtcs[ibin]++;
+          h1 -> Fill(knmtcs);
+        }
+      }
+      if (knmtcs>xbins[binnumber_nu-1]) {
+        N1Rmu_x_knmtcs[binnumber_nu-1]++;
+        h1 -> Fill(knmtcs);
+      }
+      break;
+    case 1:
+      for (int ibin=0; ibin<binnumber_mu-1; ibin++) {
+        if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
+          N1Rmu_x_knmtcs[ibin]++;
+          h1 -> Fill(knmtcs);
+        }
+      }
+      if (knmtcs>xbins[binnumber_mu-1]) {
+        N1Rmu_x_knmtcs[binnumber_mu-1]++;
+        h1 -> Fill(knmtcs);
+      }
+      break;
+    default:
+      break;
+  }
+}
+
+//float NTagAnalysis::AveTaggedN_x_kinematics(CC0PiNumu* numu, float knmtcs, float rnoise, TH1F* h1) {
+//}
+
 
 void NTagAnalysis::cdNTagAnalysis(TFile* fout) {
   fout -> mkdir("NTagAnalysis");
@@ -2162,6 +2199,10 @@ void NTagAnalysis::WritePlots() {
 
   h1_GenBefSInE -> Write();
   h1_GenSInE    -> Write();
+
+  h1_N1Rmu_x_Enu   -> Write();
+  h1_N1Rmu_x_MuMom -> Write();
+  h1_N1Rmu_x_MuPt  -> Write();
 
   for (int i=0; i<TRUETYPE; i++) {
     Double_t tot = h1_NTrueN[i]->Integral();

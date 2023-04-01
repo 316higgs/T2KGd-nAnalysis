@@ -581,8 +581,23 @@ float NeutrinoOscillation::GetRecoMuDirection(CC0PiNumu* numu) {
 float NeutrinoOscillation::GetMuDirResolution(float truecostheta, float recocostheta) {
   float thetareso = (truecostheta - recocostheta)/truecostheta;
   h1_Resocosthetamu -> Fill(thetareso);
-
   return thetareso;
+}
+
+float NeutrinoOscillation::GetMuonPt(CC0PiNumu* numu) {
+  float nudirx = beamDir[0];
+  float nudiry = beamDir[1];
+  float nudirz = beamDir[2];
+  float nudir  = std::sqrt(nudirx*nudirx + nudiry*nudiry + nudirz*nudirz);  //should be 1
+  float mudirx = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 0);
+  float mudiry = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 1);
+  float mudirz = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 2);
+  float mudir  = std::sqrt(mudirx*mudirx + mudiry*mudiry + mudirz*mudirz);  //should be 1
+  float InnerProduct = nudirx*mudirx + nudiry*mudiry + nudirz*mudirz;
+  float costhetamu   = InnerProduct/(nudir * mudir);
+  float Pmu = numu->var<float>("fq1rmom", PrmEvent, FQ_MUHYP); // [MeV]
+  float Pt  = Pmu * std::sin( std::acos(costhetamu) );
+  return Pt;
 }
 
 

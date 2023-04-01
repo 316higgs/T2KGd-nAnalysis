@@ -246,7 +246,7 @@ bool DecayeBox::GetTruePrmMuDcyVtx(OscChan::E_OSC_CHAN eOsc, int iscnd, Int_t *i
 float DecayeBox::GetRecoMuEndVtx(CC0PiNumu* numu, float *MuEndVtx) {
 
   //fiTQun parameters
-  float RecoMuMom = numu->var<float>("fq1rmom", PrmEvent, FQ_MUHYP);
+  float RecoMuMom = numu->var<float>("fq1rmom", PrmEvent, FQ_MUHYP); // [MeV]
   float RecoMuDir[3] = {0., 0., 0.};
   RecoMuDir[0] = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 0);
   RecoMuDir[1] = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 1);

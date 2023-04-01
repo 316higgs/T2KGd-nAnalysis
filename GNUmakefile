@@ -77,6 +77,10 @@ GdScaling.exe: GdScaling.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
+NeutronMultiplicity.exe: NeutronMultiplicity.o
+	$(RM) .$@
+	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
+
 cleananalysis1Rmu:
 	$(RM) analysis1Rmu.o analysis1Rmu.exe
 
@@ -118,6 +122,9 @@ cleanNeutronVertex_mu_x_n:
 
 cleanGdScaling:
 	$(RM) GdScaling.o GdScaling.exe
+
+cleanNeutronMultiplicity:
+	$(RM) NeutronMultiplicity.o NeutronMultiplicity.exe
 
 clean:
 	$(RM) *.o *.exe

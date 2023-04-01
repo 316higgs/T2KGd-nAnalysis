@@ -88,17 +88,14 @@ class NeutrinoOscillation {
     float GetPrmVtxResolution(CC0PiNumu* numu);
     float GetPrmMuMomResolution(CC0PiNumu* numu, float *MuMom);
     void  GetReso_x_TrueEnu(CC0PiNumu* numu);
-    /*float GetTrueMuDirection(CC0PiNumu* numu, 
-                             Int_t Npvc, 
-                             Int_t* Ipvc,
-                             Float_t Pvc[][3],
-                             Int_t*  Iflvc,
-                             Int_t*  Ichvc);*/
+
     float GetTrueMuDirection(CC0PiNumu* numu, Float_t Pvc[][3], Int_t* Iflvc);
     float GetEnuRecoPrediction(float pmu, float costhetamu);
     float GetEnuResoPrediction(CC0PiNumu* numu, float Enu);
     float GetRecoMuDirection(CC0PiNumu* numu);
     float GetMuDirResolution(float truecostheta, float recocostheta);
+
+    float GetMuonPt(CC0PiNumu* numu);
 
     float OscProbCalculator(CC0PiNumu* numu, bool histfill);
     float GetWgtNeutrino(CC0PiNumu* numuC, float theta, float thetamin, float thetamax);

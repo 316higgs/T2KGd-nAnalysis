@@ -12,16 +12,16 @@ Generated CC2p2h events : 7355
 Generated CCnonQE events: 7763
 Generated NC events     : 577
 [Decay-e Cut Scan] 
-[Decay-e Cut Scan] dt = 20 us: 82459
-                             : 80624
-[Decay-e Cut Scan] dt = 15 us: 82470
-                             : 80634
-[Decay-e Cut Scan] dt = 10 us: 82549
-                             : 80710
-[Decay-e Cut Scan] dt =  5 us: 83425
-                             : 81543
-[Decay-e Cut Scan] dt =  3 us: 84891
-                             : 82936
+[Decay-e Cut Scan] dt = 20 us: 0
+                             : 0
+[Decay-e Cut Scan] dt = 15 us: 0
+                             : 0
+[Decay-e Cut Scan] dt = 10 us: 0
+                             : 0
+[Decay-e Cut Scan] dt =  5 us: 0
+                             : 0
+[Decay-e Cut Scan] dt =  3 us: 0
+                             : 0
 [Neutrino] All Parent Neutrino Events          : 299460
 [Neutrino] Generated Neutrino Events(wallv>200): 190292
 [Neutrino] Generated 1Rmu Events (Oscillated)  : 17454.7
@@ -41,3 +41,23 @@ Generated NC events     : 577
            Only CCQE(1p1h)    : 9090.53(Osc)/61261(No Osc) = 0.14839
            w/o truth neutrons : 5831.66(Osc)/37584(No Osc) = 0.155163
            w/o tagged neutrons: 8284.51(Osc)/52088(No Osc) = 0.159048
+ 
+===== #1Rmu as a function of Enu =====
+#1Rmu @ Enu [0, 0.5): 16940
+#1Rmu @ Enu [0.5, 1): 50336
+#1Rmu @ Enu [1, 1.5): 7358
+#1Rmu @ Enu [1.5, 2.5): 3312
+#1Rmu @ Enu [2.5, 5): 2345
+#1Rmu @ Enu > 5: 333
+===== #1Rmu as a function of Pmu =====
+#1Rmu @ Pmu [0, 0.5): 46941
+#1Rmu @ Pmu [0.5, 1): 25916
+#1Rmu @ Pmu [1, 2): 4658
+#1Rmu @ Pmu [2, 6): 3057
+#1Rmu @ Pmu > 6: 52
+===== #1Rmu as a function of Pt =====
+#1Rmu @ Pt [0, 0.5): 21481
+#1Rmu @ Pt [0.5, 1): 51467
+#1Rmu @ Pt [1, 2): 6580
+#1Rmu @ Pt [2, 6): 1086
+#1Rmu @ Pt > 6: 10

@@ -91,6 +91,19 @@ TH1F* h1_GenSInE;
 int test1 = 0;
 int test2 = 0;
 
+const int binnumber_nu = 6;
+const int binnumber_mu = 5;
+double xEnubins[binnumber_nu]   = {0, 0.5, 1., 1.5, 2.5, 5.};
+double xMuMombins[binnumber_mu] = {0, 0.5, 1.0, 2.0, 6.0};
+double xMuPtbins[binnumber_mu]  = {0, 0.25, 0.5, 0.75, 1.5};
+int N1Rmu_x_Enu[binnumber_nu]   = {0};
+int N1Rmu_x_MuMom[binnumber_mu] = {0};
+int N1Rmu_x_MuPt[binnumber_mu]  = {0};
+TH1F* h1_N1Rmu_x_Enu;
+TH1F* h1_N1Rmu_x_MuMom;
+TH1F* h1_N1Rmu_x_MuPt;
+
+
 int varwindowmax = 9999;
 
 void SetWindowMax(int i) {
@@ -388,6 +401,8 @@ class NTagAnalysis {
     int NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscnd, Float_t vtxprnt[][3], 
                             bool etagmode, std::vector<float> *FitT, std::vector<float> *NHits, std::vector<float> *Label, std::vector<float> *TagOut, 
                             float TMVAThreshold, std::vector<float> *dvx, std::vector<float> *dvy, std::vector<float> *dvz);
+    
+    void N1Rmu_x_kinematics(float knmtcs, double* xbins, int* N1Rmu_x_knmtcs, TH1F* h1, int bintype);
 
     void SetHistoFrame();
     void SetHistoFormat();
