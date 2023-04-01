@@ -96,6 +96,7 @@ class NeutrinoOscillation {
     float GetMuDirResolution(float truecostheta, float recocostheta);
 
     float GetMuonPt(CC0PiNumu* numu);
+    float GetQsquare(CC0PiNumu* numu);
 
     float OscProbCalculator(CC0PiNumu* numu, bool histfill);
     float GetWgtNeutrino(CC0PiNumu* numuC, float theta, float thetamin, float thetamax);

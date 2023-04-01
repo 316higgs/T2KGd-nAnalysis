@@ -61,3 +61,46 @@ Generated NC events     : 577
 #1Rmu @ Pt [1, 2): 6580
 #1Rmu @ Pt [2, 6): 1086
 #1Rmu @ Pt > 6: 10
+===== #1Rmu as a function of Q2 =====
+#1Rmu @ Q2 [0, 0.25): 42631
+#1Rmu @ Q2 [0.25, 0.5): 23574
+#1Rmu @ Q2 [0.5, 0.75): 8491
+#1Rmu @ Q2 [0.75, 3): 5864
+#1Rmu @ Q2 > 3: 64
+===== #1Rmu as a function of costheta =====
+#1Rmu @ costheta [-1, -0.5): 4442
+#1Rmu @ costheta [-0.5, 0): 8810
+#1Rmu @ costheta [0, 0.5): 18529
+#1Rmu @ costheta [0.5, 1): 48843
+ 
+Total #tagged neutrons: 37309
+===== #tagged-n as a function of Enu =====
+#tagged-n @ Enu [0, 0.5): 8099
+#tagged-n @ Enu [0.5, 1): 20441
+#tagged-n @ Enu [1, 1.5): 3959
+#tagged-n @ Enu [1.5, 2.5): 2328
+#tagged-n @ Enu [2.5, 5): 2015
+#tagged-n @ Enu > 5: 467
+===== #tagged neutrons as a function of Pmu =====
+#tagged-n @ Pmu [0, 0.5): 22769
+#tagged-n @ Pmu [0.5, 1): 10644
+#tagged-n @ Pmu [1, 2): 2996
+#tagged-n @ Pmu [2, 6): 2667
+#tagged-n @ Pmu > 6: 54
+===== #tagged neutrons as a function of Pt =====
+#tagged-n @ Pt [0, 0.5): 10072
+#tagged-n @ Pt [0.5, 1): 23090
+#tagged-n @ Pt [1, 2): 4369
+#tagged-n @ Pt [2, 6): 1558
+#tagged-n @ Pt > 6: 41
+===== #tagged neutrons as a function of Q2 =====
+#tagged-n @ Q2 [0, 0.25): 18135
+#tagged-n @ Q2 [0.25, 0.5): 11541
+#tagged-n @ Q2 [0.5, 0.75): 4901
+#tagged-n @ Q2 [0.75, 3): 4446
+#tagged-n @ Q2 > 3: 107
+===== #1Rmu as a function of costheta =====
+#tagged-n @ costheta [-1, -0.5): 2531
+#tagged-n @ costheta [-0.5, 0): 4749
+#tagged-n @ costheta [0, 0.5): 9149
+#tagged-n @ costheta [0.5, 1): 22701

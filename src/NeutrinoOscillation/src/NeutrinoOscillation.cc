@@ -600,6 +600,24 @@ float NeutrinoOscillation::GetMuonPt(CC0PiNumu* numu) {
   return Pt;
 }
 
+float NeutrinoOscillation::GetQsquare(CC0PiNumu* numu) {
+  float nudirx = beamDir[0];
+  float nudiry = beamDir[1];
+  float nudirz = beamDir[2];
+  float nudir  = std::sqrt(nudirx*nudirx + nudiry*nudiry + nudirz*nudirz);  //should be 1
+  float mudirx = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 0);
+  float mudiry = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 1);
+  float mudirz = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 2);
+  float mudir  = std::sqrt(mudirx*mudirx + mudiry*mudiry + mudirz*mudirz);  //should be 1
+  float InnerProduct = nudirx*mudirx + nudiry*mudiry + nudirz*mudirz;
+  float costhetamu   = InnerProduct/(nudir * mudir);
+  float Pmu = numu->var<float>("fq1rmom", PrmEvent, FQ_MUHYP); // [MeV]
+  float Emu = std::sqrt(Pmu*Pmu + MUMASS*MUMASS );
+  float Enu = numu->var<float>("erec"); // [MeV]
+  float Qsquare = 2*Enu*(Emu - Pmu*costhetamu) - MUMASS*MUMASS;
+  return Qsquare;
+}
+
 
 
 float NeutrinoOscillation::OscProbCalculator(CC0PiNumu* numu, bool histfill) {

@@ -246,6 +246,7 @@ int main(int argc, char **argv) {
   int NoPrmMuEnd_NC = 0;
   const int DCYENUM = 1;
 
+  int TotlTaggedN = 0;
 
   //Process
   if (MCTypeKeyword=="-MCType") {
@@ -370,6 +371,8 @@ int main(int argc, char **argv) {
 
       //Number of tagged-neutrons
       int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
+      TotlTaggedN += numtaggedneutrons;
+      int numtaggednoise = ntagana.GetTaggedNoise(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
 
       //Pre-selection
       for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
@@ -431,9 +434,20 @@ int main(int argc, char **argv) {
 
       float Pmu = numu->var<float>("fq1rmom", PrmEvent, FQ_MUHYP);
       float Pt  = neuosc.GetMuonPt(numu);
-      ntagana.N1Rmu_x_kinematics(Pmu/1000., xMuMombins, N1Rmu_x_MuMom, h1_N1Rmu_x_MuMom, 1);
-      ntagana.N1Rmu_x_kinematics(Pt/1000., xMuPtbins, N1Rmu_x_MuPt, h1_N1Rmu_x_MuPt, 1);
-      ntagana.N1Rmu_x_kinematics(Enu/1000., xEnubins, N1Rmu_x_Enu, h1_N1Rmu_x_Enu, 0);
+      float Qsquare = neuosc.GetQsquare(numu);
+      ntagana.N1Rmu_x_kinematics(numu, Pmu/1000., xMuMombins, N1Rmu_x_MuMom, h1_N1Rmu_x_MuMom, 1);
+      ntagana.N1Rmu_x_kinematics(numu, Pt/1000., xMuPtbins, N1Rmu_x_MuPt, h1_N1Rmu_x_MuPt, 1);
+      ntagana.N1Rmu_x_kinematics(numu, Enu/1000., xEnubins, N1Rmu_x_Enu, h1_N1Rmu_x_Enu, 0);
+      ntagana.N1Rmu_x_kinematics(numu, Qsquare/1000000., xQ2bins, N1Rmu_x_Q2, h1_N1Rmu_x_Q2, 1);
+      ntagana.N1Rmu_x_kinematics(numu, recothetamu, xMuAnglebins, N1Rmu_x_MuAngle, h1_N1Rmu_x_MuAngle, 1);
+
+      ntagana.TaggedN_x_kinematics(numu, numtaggedneutrons, numtaggednoise, Enu/1000., xEnubins, TaggedN_x_Enu, h1_TaggedN_x_Enu, 0);
+      ntagana.TaggedN_x_kinematics(numu, numtaggedneutrons, numtaggednoise, Pmu/1000., xMuMombins, TaggedN_x_MuMom, h1_TaggedN_x_MuMom, 1);
+      ntagana.TaggedN_x_kinematics(numu, numtaggedneutrons, numtaggednoise, Pt/1000., xMuPtbins, TaggedN_x_MuPt, h1_TaggedN_x_MuPt, 1);
+      ntagana.TaggedN_x_kinematics(numu, numtaggedneutrons, numtaggednoise, Qsquare/1000000., xQ2bins, TaggedN_x_Q2, h1_TaggedN_x_Q2, 1);
+      ntagana.TaggedN_x_kinematics(numu, numtaggedneutrons, numtaggednoise, recothetamu, xMuAnglebins, TaggedN_x_MuAngle, h1_TaggedN_x_MuAngle, 1);
+
+      //ntagana.TrueN_x_kinematics(numu, Type, Enu/1000., xEnubins, TrueN_x_Enu, h1_TrueN_x_Enu, 0);
 
     } //New 1R muon selection
 
@@ -570,6 +584,47 @@ int main(int argc, char **argv) {
       if (ibin<binnumber_mu-1) resultfile << "#1Rmu @ Pt [" << xMuMombins[ibin] << ", " << xMuMombins[ibin+1] << "): " << N1Rmu_x_MuPt[ibin] << std::endl;
       else resultfile << "#1Rmu @ Pt > " << xMuMombins[ibin] << ": " << N1Rmu_x_MuPt[ibin] << std::endl;
     }
+    resultfile << "===== #1Rmu as a function of Q2 =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_mu; ibin++) {
+      if (ibin<binnumber_mu-1) resultfile << "#1Rmu @ Q2 [" << xQ2bins[ibin] << ", " << xQ2bins[ibin+1] << "): " << N1Rmu_x_Q2[ibin] << std::endl;
+      else resultfile << "#1Rmu @ Q2 > " << xQ2bins[ibin] << ": " << N1Rmu_x_Q2[ibin] << std::endl;
+    }
+    resultfile << "===== #1Rmu as a function of costheta =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_mu; ibin++) {
+      if (ibin<binnumber_mu-1) resultfile << "#1Rmu @ costheta [" << xMuAnglebins[ibin] << ", " << xMuAnglebins[ibin+1] << "): " << N1Rmu_x_MuAngle[ibin] << std::endl;
+    }
+    resultfile << " " << std::endl;
+    resultfile << "Total #tagged neutrons: " << TotlTaggedN << std::endl;
+    resultfile << "===== #tagged-n as a function of Enu =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_nu; ibin++) {
+      if (ibin<binnumber_nu-1) resultfile << "#tagged-n @ Enu [" << xEnubins[ibin] << ", " << xEnubins[ibin+1] << "): " << TaggedN_x_Enu[ibin] << std::endl;
+      else resultfile << "#tagged-n @ Enu > " << xEnubins[ibin] << ": " << TaggedN_x_Enu[ibin] << std::endl;
+    }
+    resultfile << "===== #tagged neutrons as a function of Pmu =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_mu; ibin++) {
+      if (ibin<binnumber_mu-1) resultfile << "#tagged-n @ Pmu [" << xMuMombins[ibin] << ", " << xMuMombins[ibin+1] << "): " << TaggedN_x_MuMom[ibin] << std::endl;
+      else resultfile << "#tagged-n @ Pmu > " << xMuMombins[ibin] << ": " << TaggedN_x_MuMom[ibin] << std::endl;
+    }
+    resultfile << "===== #tagged neutrons as a function of Pt =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_mu; ibin++) {
+      if (ibin<binnumber_mu-1) resultfile << "#tagged-n @ Pt [" << xMuMombins[ibin] << ", " << xMuMombins[ibin+1] << "): " << TaggedN_x_MuPt[ibin] << std::endl;
+      else resultfile << "#tagged-n @ Pt > " << xMuMombins[ibin] << ": " << TaggedN_x_MuPt[ibin] << std::endl;
+    }
+    resultfile << "===== #tagged neutrons as a function of Q2 =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_mu; ibin++) {
+      if (ibin<binnumber_mu-1) resultfile << "#tagged-n @ Q2 [" << xQ2bins[ibin] << ", " << xQ2bins[ibin+1] << "): " << TaggedN_x_Q2[ibin] << std::endl;
+      else resultfile << "#tagged-n @ Q2 > " << xQ2bins[ibin] << ": " << TaggedN_x_Q2[ibin] << std::endl;
+    }
+    resultfile << "===== #1Rmu as a function of costheta =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_mu; ibin++) {
+      if (ibin<binnumber_mu-1) resultfile << "#tagged-n @ costheta [" << xMuAnglebins[ibin] << ", " << xMuAnglebins[ibin+1] << "): " << TaggedN_x_MuAngle[ibin] << std::endl;
+    }
+    /*resultfile << " " << std::endl;
+    resultfile << "===== #truth neutrons as a function of Enu =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_nu; ibin++) {
+      if (ibin<binnumber_nu-1) resultfile << "#truth n @ Enu [" << xEnubins[ibin] << ", " << xEnubins[ibin+1] << "): " << TrueN_x_Enu[ibin] << std::endl;
+      else resultfile << "#truth n @ Enu > " << xEnubins[ibin] << ": " << TrueN_x_Enu[ibin] << std::endl;
+    }*/
 
     ntagana.SummaryTruthInfoinSearch(3., NTagSummary);
   }

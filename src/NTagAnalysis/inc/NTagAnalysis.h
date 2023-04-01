@@ -96,13 +96,32 @@ const int binnumber_mu = 5;
 double xEnubins[binnumber_nu]   = {0, 0.5, 1., 1.5, 2.5, 5.};
 double xMuMombins[binnumber_mu] = {0, 0.5, 1.0, 2.0, 6.0};
 double xMuPtbins[binnumber_mu]  = {0, 0.25, 0.5, 0.75, 1.5};
+double xQ2bins[binnumber_mu]    = {0, 0.25, 0.5, 0.75, 3.};
+double xMuAnglebins[binnumber_mu] = {-1, -0.5, 0., 0.5, 1.};
 int N1Rmu_x_Enu[binnumber_nu]   = {0};
 int N1Rmu_x_MuMom[binnumber_mu] = {0};
 int N1Rmu_x_MuPt[binnumber_mu]  = {0};
-TH1F* h1_N1Rmu_x_Enu;
-TH1F* h1_N1Rmu_x_MuMom;
-TH1F* h1_N1Rmu_x_MuPt;
+int N1Rmu_x_Q2[binnumber_mu]    = {0};
+int N1Rmu_x_MuAngle[binnumber_mu] = {0};
+TH1F* h1_N1Rmu_x_Enu[4];
+TH1F* h1_N1Rmu_x_MuMom[4];
+TH1F* h1_N1Rmu_x_MuPt[4];
+TH1F* h1_N1Rmu_x_Q2[4];
+TH1F* h1_N1Rmu_x_MuAngle[4];
 
+int TaggedN_x_Enu[binnumber_nu] = {0};
+int TaggedN_x_MuMom[binnumber_mu] = {0};
+int TaggedN_x_MuPt[binnumber_mu]  = {0};
+int TaggedN_x_Q2[binnumber_mu]    = {0};
+int TaggedN_x_MuAngle[binnumber_mu] = {0};
+TH1F* h1_TaggedN_x_Enu[5];
+TH1F* h1_TaggedN_x_MuMom[5];
+TH1F* h1_TaggedN_x_MuPt[5];
+TH1F* h1_TaggedN_x_Q2[5];
+TH1F* h1_TaggedN_x_MuAngle[5];
+
+int TrueN_x_Enu[binnumber_nu] = {0};
+TH1F* h1_TrueN_x_Enu[4];
 
 int varwindowmax = 9999;
 
@@ -371,6 +390,13 @@ class NTagAnalysis {
                             std::vector<float> *FitT,
                             std::vector<float> *Label,
                             bool etagmode);
+    float GetTaggedNoise(std::vector<float> *TagOut,
+                         float Threshold,
+                         std::vector<float> *TagIndex,
+                         std::vector<float> *NHits,
+                         std::vector<float> *FitT,
+                         std::vector<float> *Label,
+                         bool etagmode);
 
     //Noise rate and efficiencies for window optimization
     void SetNoiseRateGraph();
@@ -402,7 +428,9 @@ class NTagAnalysis {
                             bool etagmode, std::vector<float> *FitT, std::vector<float> *NHits, std::vector<float> *Label, std::vector<float> *TagOut, 
                             float TMVAThreshold, std::vector<float> *dvx, std::vector<float> *dvy, std::vector<float> *dvz);
     
-    void N1Rmu_x_kinematics(float knmtcs, double* xbins, int* N1Rmu_x_knmtcs, TH1F* h1, int bintype);
+    void N1Rmu_x_kinematics(CC0PiNumu* numu, float knmtcs, double* xbins, int* N1Rmu_x_knmtcs, TH1F** h1, int bintype);
+    void TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int TaggedNoise, float knmtcs, double* xbins, int* TaggedN_x_knmtcs, TH1F** h1, int bintype);
+    void TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, float knmtcs, double* xbins, int* TrueN_x_knmtcs, TH1F** h1, int bintype);
 
     void SetHistoFrame();
     void SetHistoFormat();
