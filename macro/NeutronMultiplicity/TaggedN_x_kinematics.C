@@ -52,11 +52,11 @@ void TaggedN_x_kinematics(bool beammode) {
   std::cout << "Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
 
 
-  TString KnmtcName = "Enu";
+  //TString KnmtcName = "Enu";
   //TString KnmtcName = "MuMom";
   //TString KnmtcName = "MuPt";
   //TString KnmtcName = "Q2";
-  //TString KnmtcName = "MuAngle";
+  TString KnmtcName = "MuAngle";
 
   TString Prefix      = "NTagAnalysis/h1_TaggedN_x_";
   TString CCQEName    = "_mode0";
@@ -81,7 +81,7 @@ void TaggedN_x_kinematics(bool beammode) {
   TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get(FileCC2p2hName);
   TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get(FileCCOtherName);
   TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get(FileNCName);
-  TH1F* h1_Noise_numubar   = (TH1F*)fin_numu->Get(FileNoiseName);
+  TH1F* h1_Noise_numubar   = (TH1F*)fin_numubar->Get(FileNoiseName);
   h1_CCQE_numubar -> SetStats(0);
 
   h1_CCQE_numu    -> SetLineColor(kAzure-1);
@@ -150,23 +150,24 @@ void TaggedN_x_kinematics(bool beammode) {
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
-  hs_merge -> SetMaximum(8);
-  //hs_merge -> SetMaximum(18);
+  //hs_merge -> SetMaximum(8);
+  //hs_merge -> SetMaximum(10);
+  hs_merge -> SetMaximum(16);
   hs_merge -> Draw();
   hs_merge ->GetYaxis()->SetTitleSize(0.038);
   hs_merge ->GetYaxis()->SetTitleOffset(1.1);
   hs_merge ->GetYaxis()->SetLabelSize(0.036);
-  hs_merge->GetXaxis()->SetTitle("Reconstructed Neutrino Energy [GeV]");
+  //hs_merge->GetXaxis()->SetTitle("Reconstructed Neutrino Energy [GeV]");
   //hs_merge->GetXaxis()->SetTitle("Reconstructed #mu Momentum [GeV]");
   //hs_merge->GetXaxis()->SetTitle("Reconstructed #mu Transverse Momentum [GeV]");
   //hs_merge->GetXaxis()->SetTitle("Reconstructed Q^{2}(CCQE Assumption) [GeV^{2}]");
-  //hs_merge->GetXaxis()->SetTitle("Cosine of Angle b/w #mu and Beam Directions");
+  hs_merge->GetXaxis()->SetTitle("Cosine of Angle b/w #mu and Beam Directions");
   hs_merge->GetYaxis()->SetTitle("Number of Tagged Neutrons");
   hs_merge -> Draw();
   c1->RedrawAxis();
   
-  TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
-  //TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);
+  //TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
+  TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);
   legend1 -> SetTextSize(0.04);
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");
   else legend1->AddEntry((TObject*)0,"#kern[-0.25]{RHC 1R #mu sample (0.01% Gd)}","");
@@ -178,7 +179,7 @@ void TaggedN_x_kinematics(bool beammode) {
   legend1 -> AddEntry(h1_CCOther_numubar, "#bar{#nu}_{#mu} CC-other", "F");
   //legend1 -> AddEntry(h1_CCOther_numubar, "#nu_{#mu}+#bar{#nu}_{#mu} CC non-QE", "F");
   legend1 -> AddEntry(h1_NC_numu, "NC", "F");
-  legend1 -> AddEntry(h1_Noise_numu, "Noise", "F");
+  legend1 -> AddEntry(h1_Noise_numu, "Acc. bkg. + decay-e", "F");
   legend1->SetFillColor(0);
   legend1->Draw() ;
 #endif

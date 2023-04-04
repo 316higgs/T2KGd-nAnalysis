@@ -4,8 +4,10 @@
 #include "../../../include/NeutrinoEvents.h"
 
 void NTagAnalysis::SetHistoFrame() {
+
   for (int i=0; i<TRUETYPE; i++) {
-    h1_NTrueN[i] = new TH1F(TString::Format("h1_NTrueN_type%d", i), "Truth Capture Neutrons; NTrueN; Entries", 12, 0, 12);
+    h1_hitsearch[i] = new TH1F(TString::Format("h1_hitsearch_type%d", i), "Hit cluster search; Hit time [#musec]; Entries", 535, 0, 535);
+    h1_NTrueN[i]    = new TH1F(TString::Format("h1_NTrueN_type%d", i), "Truth Capture Neutrons; NTrueN; Entries", 12, 0, 12);
   }
   for (int i=0; i<INTERACTIONTYPE; i++) {
     h1_TrueNmultiplicity[i] = new TH1F(TString::Format("h1_TrueNmultiplicity_mode%d", i), "Truth Capture Neutrons; NTrueN; Entries", 20, 0, 20);
@@ -97,6 +99,12 @@ void NTagAnalysis::SetHistoFrame() {
     h1_N1Rmu_x_MuPt[i]    = new TH1F(TString::Format("h1_N1Rmu_x_MuPt_mode%d", i), "N1Rmu_x_MuPt; Reco #mu Transverse Momentum [GeV]; Number of #nu Events", binnumber_mu-1, xMuPtbins);
     h1_N1Rmu_x_Q2[i]      = new TH1F(TString::Format("h1_N1Rmu_x_Q2_mode%d", i), "N1Rmu_x_Q2; Reco Q^{2} [GeV^{2}]; Number of #nu Events", binnumber_mu-1, xQ2bins);
     h1_N1Rmu_x_MuAngle[i] = new TH1F(TString::Format("h1_N1Rmu_x_MuAngle_mode%d", i), "N1Rmu_x_MuAngle; Cosince of angle b/w #mu and beam directions; Number of #nu Events", binnumber_mu-1, xMuAnglebins);
+
+    h1_TrueN_x_Enu[i]     = new TH1F(TString::Format("h1_TrueN_x_Enu_mode%d", i), "TrueN_x_Enu; Reco Neutrino Energy [GeV]; Number of Truth Neutrons", binnumber_nu-1, xEnubins);
+    h1_TrueN_x_MuMom[i]   = new TH1F(TString::Format("h1_TrueN_x_MuMom_mode%d", i), "TrueN_x_MuMom; Reco #mu Momentum [GeV]; Number of Truth Neutrons", binnumber_mu-1, xMuMombins);
+    h1_TrueN_x_MuPt[i]    = new TH1F(TString::Format("h1_TrueN_x_MuPt_mode%d", i), "TrueN_x_MuPt; Reco #mu Transverse Momentum [GeV]; Number of #nu Events", binnumber_mu-1, xMuPtbins);
+    h1_TrueN_x_Q2[i]      = new TH1F(TString::Format("h1_TrueN_x_Q2_mode%d", i), "TrueN_x_Q2; Reco Q^{2} [GeV^{2}]; Number of #nu Events", binnumber_mu-1, xQ2bins);
+    h1_TrueN_x_MuAngle[i] = new TH1F(TString::Format("h1_TrueN_x_MuAngle_mode%d", i), "TrueN_x_MuAngle; Cosince of angle b/w #mu and beam directions; Number of #nu Events", binnumber_mu-1, xMuAnglebins);
   }
   for (int i=0; i<5; i++) {
     h1_TaggedN_x_Enu[i]     = new TH1F(TString::Format("h1_TaggedN_x_Enu_mode%d", i), "TaggedN_x_Enu; Reco Neutrino Energy [GeV]; Number of Tagged Neutrons", binnumber_nu-1, xEnubins);
@@ -807,15 +815,16 @@ void NTagAnalysis::TruthBreakdowninWindow(std::vector<float> *TagClass,
   for (int iwin=0; iwin<WINSTEP; iwin++) {
     SetWindowMax(iwin);
     for (UInt_t ican=0; ican<TagClass->size(); ++ican) {
+
+      if (Label->at(ican)==0) h1_hitsearch[0] -> Fill(FitT->at(ican));
+      if (Label->at(ican)==1) h1_hitsearch[1] -> Fill(FitT->at(ican));
+      if (Label->at(ican)==2 || Label->at(ican)==3) h1_hitsearch[2] -> Fill(FitT->at(ican));
       
-      //Flag that indicates this candidate is in the time window, or not.
-      bool inwindow = false;
-      //Flag that indicates this candidate is in FV, or not.
-      bool inFV     = false;
+      bool inwindow = false;  //Flag that indicates this candidate is in the time window, or not.
+      bool inFV     = false;  //Flag that indicates this candidate is in FV, or not.
       //Find corresponded truth info that matches with ican candidate
       for (UInt_t jentry=0; jentry<t->size(); ++jentry) {
         if (TagIndex->at(ican)!=-1 && jentry==(UInt_t)TagIndex->at(ican)) {
-
           //Check this candidate is in the time window, or not through true time info
           //if not, skip this ican
           if (t->at(jentry) < varwindowmax) inwindow = true;
@@ -850,6 +859,7 @@ void NTagAnalysis::TruthBreakdowninWindow(std::vector<float> *TagClass,
           if (Label->at(ican)==0) TruthAccNoiseinCandidatesinWinFV[iwin]++;
         }
       }
+
     }
   }
 }
@@ -1368,10 +1378,10 @@ void NTagAnalysis::SummaryTruthInfoinSearch(float WinMin, TString outputname) {
   ofs << "[Truth Info] Truth CCQE H-n Neutrons       : " << TruthCCQEHNeutrons       << std::endl;
   ofs << "[Truth Info] Truth CCQE Gd-n Neutrons      : " << TruthCCQEGdNeutrons      << std::endl;
 
-  ofs << "[Truth Info] All Truth Neutrons(Gd+H) in FV: " << AllTruthNeutronsinFV << std::endl;
-  ofs << "[Truth Info] Truth H-n Neutrons in FV      : " << TruthHNeutronsinFV   << std::endl;
-  ofs << "[Truth Info] Truth Gd-n Neutrons in FV     : " << TruthGdNeutronsinFV  << std::endl;
-  ofs << " " << std::endl;
+  //ofs << "[Truth Info] All Truth Neutrons(Gd+H) in FV: " << AllTruthNeutronsinFV << std::endl;
+  //ofs << "[Truth Info] Truth H-n Neutrons in FV      : " << TruthHNeutronsinFV   << std::endl;
+  //ofs << "[Truth Info] Truth Gd-n Neutrons in FV     : " << TruthGdNeutronsinFV  << std::endl;
+  //ofs << " " << std::endl;
   for (int iwin=0; iwin<WINSTEP; iwin++) {
     SetWindowMax(iwin);
     ofs << "===== [" << WinMin << " us, " << varwindowmax << " us] =====" << std::endl;
@@ -1380,9 +1390,9 @@ void NTagAnalysis::SummaryTruthInfoinSearch(float WinMin, TString outputname) {
     ofs << "[Truth Info] Truth Neutrons in [" << WinMin << " us, " << varwindowmax << " us]: " << TruthGdNeutronsinSearch[iwin] << std::endl;
     ofs << "[Truth Info] Truth Decay e in [" << WinMin << " us, " << varwindowmax << " us] : " << TruthDecayeinSearch[iwin]   << std::endl;
 
-    ofs << "[Truth Info] Truth Neutrons in [" << WinMin << " us, " << varwindowmax << " us] in FV: " << AllTruthNeutronsinSearchFV[iwin] << std::endl;
-    ofs << "[Truth Info] Truth Neutrons in [" << WinMin << " us, " << varwindowmax << " us] in FV: " << TruthHNeutronsinSearchFV[iwin] << std::endl;
-    ofs << "[Truth Info] Truth Neutrons in [" << WinMin << " us, " << varwindowmax << " us] in FV: " << TruthGdNeutronsinSearchFV[iwin] << std::endl;
+    //ofs << "[Truth Info] Truth Neutrons in [" << WinMin << " us, " << varwindowmax << " us] in FV: " << AllTruthNeutronsinSearchFV[iwin] << std::endl;
+    //ofs << "[Truth Info] Truth Neutrons in [" << WinMin << " us, " << varwindowmax << " us] in FV: " << TruthHNeutronsinSearchFV[iwin] << std::endl;
+    //ofs << "[Truth Info] Truth Neutrons in [" << WinMin << " us, " << varwindowmax << " us] in FV: " << TruthGdNeutronsinSearchFV[iwin] << std::endl;
 
     ofs << "[Candidates] Truth Neutrons in Candidates in [" << WinMin << " us, " << varwindowmax << " us]     : " << TruthNeutroninCandidatesinWin[iwin]   << std::endl;
     ofs << "[Candidates] Truth H-n Neutrons in Candidates in [" << WinMin << " us, " << varwindowmax << " us] : " << TruthHNeutroninCandidatesinWin[iwin]  << std::endl;
@@ -1391,20 +1401,20 @@ void NTagAnalysis::SummaryTruthInfoinSearch(float WinMin, TString outputname) {
     ofs << "[Candidates] Truth Acc. Noise in Candidates in [" << WinMin << " us, " << varwindowmax << " us]   : " << TruthAccNoiseinCandidatesinWin[iwin]  << std::endl;
     ofs << "[Candidates] All Candidates in [" << WinMin << " us, " << varwindowmax << " us]   : " << AllCandidatesinWin[iwin] << std::endl;
 
-    ofs << "[Candidates] Truth Neutrons in Candidates in [" << WinMin << " us, " << varwindowmax << " us] in FV     : " << TruthNeutroninCandidatesinWinFV[iwin]   << std::endl;
-    ofs << "[Candidates] Truth H-n Neutrons in Candidates in [" << WinMin << " us, " << varwindowmax << " us] in FV : " << TruthHNeutroninCandidatesinWinFV[iwin]  << std::endl;
-    ofs << "[Candidates] Truth Gd-n Neutrons in Candidates in [" << WinMin << " us, " << varwindowmax << " us] in FV: " << TruthGdNeutroninCandidatesinWinFV[iwin] << std::endl;
-    ofs << "[Candidates] Truth Decay e in Candidates in [" << WinMin << " us, " << varwindowmax << " us] in FV      : " << TruthDecayeinCandidatesinWinFV[iwin]    << std::endl;
-    ofs << "[Candidates] Truth Acc. Noise in Candidates in [" << WinMin << " us, " << varwindowmax << " us] in FV   : " << TruthAccNoiseinCandidatesinWinFV[iwin]  << std::endl;
-    ofs << "[Candidates] All Candidates in [" << WinMin << " us, " << varwindowmax << " us]   : " << AllCandidatesinWinFV[iwin] << std::endl;
+    //ofs << "[Candidates] Truth Neutrons in Candidates in [" << WinMin << " us, " << varwindowmax << " us] in FV     : " << TruthNeutroninCandidatesinWinFV[iwin]   << std::endl;
+    //ofs << "[Candidates] Truth H-n Neutrons in Candidates in [" << WinMin << " us, " << varwindowmax << " us] in FV : " << TruthHNeutroninCandidatesinWinFV[iwin]  << std::endl;
+    //ofs << "[Candidates] Truth Gd-n Neutrons in Candidates in [" << WinMin << " us, " << varwindowmax << " us] in FV: " << TruthGdNeutroninCandidatesinWinFV[iwin] << std::endl;
+    //ofs << "[Candidates] Truth Decay e in Candidates in [" << WinMin << " us, " << varwindowmax << " us] in FV      : " << TruthDecayeinCandidatesinWinFV[iwin]    << std::endl;
+    //ofs << "[Candidates] Truth Acc. Noise in Candidates in [" << WinMin << " us, " << varwindowmax << " us] in FV   : " << TruthAccNoiseinCandidatesinWinFV[iwin]  << std::endl;
+    //ofs << "[Candidates] All Candidates in [" << WinMin << " us, " << varwindowmax << " us]   : " << AllCandidatesinWinFV[iwin] << std::endl;
 
     GetPreEfficiency(iwin);
     ofs << "[   Pre    ] Pre-selection Efficiency(Gd+H): " << PreEff*100 << " %" << std::endl;
     ofs << "[   Pre    ] Pre-selection Efficiency(H)   : " << PreHEff*100 << " %" << std::endl;
     ofs << "[   Pre    ] Pre-selection Efficiency(Gd)  : " << PreGdEff*100 << " %" << std::endl;
-    ofs << "[   Pre    ] Pre-selection Efficiency(Gd+H) in FV: " << PreEffinFV*100 << " %" << std::endl;
-    ofs << "[   Pre    ] Pre-selection Efficiency(H) in FV   : " << PreHEffinFV*100 << " %" << std::endl;
-    ofs << "[   Pre    ] Pre-selection Efficiency(Gd) in FV  : " << PreGdEffinFV*100 << " %" << std::endl;
+    //ofs << "[   Pre    ] Pre-selection Efficiency(Gd+H) in FV: " << PreEffinFV*100 << " %" << std::endl;
+    //ofs << "[   Pre    ] Pre-selection Efficiency(H) in FV   : " << PreHEffinFV*100 << " %" << std::endl;
+    //ofs << "[   Pre    ] Pre-selection Efficiency(Gd) in FV  : " << PreGdEffinFV*100 << " %" << std::endl;
 
     for (int ith=0; ith<CUTSTEP; ith++) {
       if (CUTSTEP==11) TMVATH[ith] = 0.1*ith;
@@ -1421,15 +1431,15 @@ void NTagAnalysis::SummaryTruthInfoinSearch(float WinMin, TString outputname) {
                                     + MisTaggedAccNoiseinNlike[iwin][ith];
       ofs << "[    NN    ] All Tagged Neutrons (n-like candidates)     : " << AllNlikeCandidates[iwin][ith] << std::endl;
 
-      ofs << "[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window in FV: " << TaggedTruthNeutronsinWinFV[iwin][ith]   << std::endl;
-      ofs << "[    NN    ] Tagged Truth H-n Neutrons in Search Window in FV  : " << TaggedTruthHNeutronsinWinFV[iwin][ith]  << std::endl;
-      ofs << "[    NN    ] Tagged Truth Gd-n Neutrons in Search Window in FV : " << TaggedTruthGdNeutronsinWinFV[iwin][ith] << std::endl;
-      ofs << "[    NN    ] Mis-tagged Truth Decay-e in Search Window in FV   : " << MisTaggedDecayeinNlikeFV[iwin][ith]     << std::endl;
-      ofs << "[    NN    ] Mis-tagged Acc. Noise in Search Window in FV      : " << MisTaggedAccNoiseinNlikeFV[iwin][ith]   << std::endl;
-      AllNlikeCandidatesFV[iwin][ith] = TaggedTruthNeutronsinWinFV[iwin][ith] 
-                                      + MisTaggedDecayeinNlikeFV[iwin][ith]
-                                      + MisTaggedAccNoiseinNlikeFV[iwin][ith];
-      ofs << "[    NN    ] All Tagged Neutrons (n-like candidates)     : " << AllNlikeCandidatesFV[iwin][ith] << std::endl;
+      //ofs << "[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window in FV: " << TaggedTruthNeutronsinWinFV[iwin][ith]   << std::endl;
+      //ofs << "[    NN    ] Tagged Truth H-n Neutrons in Search Window in FV  : " << TaggedTruthHNeutronsinWinFV[iwin][ith]  << std::endl;
+      //ofs << "[    NN    ] Tagged Truth Gd-n Neutrons in Search Window in FV : " << TaggedTruthGdNeutronsinWinFV[iwin][ith] << std::endl;
+      //ofs << "[    NN    ] Mis-tagged Truth Decay-e in Search Window in FV   : " << MisTaggedDecayeinNlikeFV[iwin][ith]     << std::endl;
+      //ofs << "[    NN    ] Mis-tagged Acc. Noise in Search Window in FV      : " << MisTaggedAccNoiseinNlikeFV[iwin][ith]   << std::endl;
+      //AllNlikeCandidatesFV[iwin][ith] = TaggedTruthNeutronsinWinFV[iwin][ith] 
+      //                                + MisTaggedDecayeinNlikeFV[iwin][ith]
+      //                                + MisTaggedAccNoiseinNlikeFV[iwin][ith];
+      //ofs << "[    NN    ] All Tagged Neutrons (n-like candidates)     : " << AllNlikeCandidatesFV[iwin][ith] << std::endl;
 
       NoiseRate[iwin][ith] = GetNoiseRate(MisTaggedDecayeinNlike[iwin][ith], MisTaggedAccNoiseinNlike[iwin][ith], SelectedParentNeutrinos[5],
                                           varwindowmax, WINDOWMIN, NOISECUT);
@@ -1449,17 +1459,17 @@ void NTagAnalysis::SummaryTruthInfoinSearch(float WinMin, TString outputname) {
       ofs << "[    NN    ] NN Efficiency(Gd+H): " << NNEff[ith]*100 << " %" << std::endl;
       ofs << "[    NN    ] NN Efficiency(H)   : " << NNHEff[ith]*100 << " %" << std::endl;
       ofs << "[    NN    ] NN Efficiency(Gd)  : " << NNGdEff[ith]*100 << " %" << std::endl;
-      ofs << "[    NN    ] NN Efficiency(Gd+H) in FV: " << NNEffinFV[ith]*100 << " %" << std::endl;
-      ofs << "[    NN    ] NN Efficiency(H) in FV   : " << NNHEffinFV[ith]*100 << " %" << std::endl;
-      ofs << "[    NN    ] NN Efficiency(Gd) in FV  : " << NNGdEffinFV[ith]*100 << " %" << std::endl;
+      //ofs << "[    NN    ] NN Efficiency(Gd+H) in FV: " << NNEffinFV[ith]*100 << " %" << std::endl;
+      //ofs << "[    NN    ] NN Efficiency(H) in FV   : " << NNHEffinFV[ith]*100 << " %" << std::endl;
+      //ofs << "[    NN    ] NN Efficiency(Gd) in FV  : " << NNGdEffinFV[ith]*100 << " %" << std::endl;
 
       GetOverallEfficiency(iwin);
       ofs << "[  Overall ] Overall Efficiency(Gd+H): " << OverallEff[ith]*100 << " %" << std::endl;
       ofs << "[  Overall ] Overall Efficiency(H)   : " << OverallHEff[ith]*100 << " %" << std::endl;
       ofs << "[  Overall ] Overall Efficiency(Gd)  : " << OverallGdEff[ith]*100 << " %" << std::endl;
-      ofs << "[  Overall ] Overall Efficiency(Gd+H) in FV: " << OverallEffinFV[ith]*100 << " %" << std::endl;
-      ofs << "[  Overall ] Overall Efficiency(H) in FV   : " << OverallHEffinFV[ith]*100 << " %" << std::endl;
-      ofs << "[  Overall ] Overall Efficiency(Gd) in FV  : " << OverallGdEffinFV[ith]*100 << " %" << std::endl;
+      //ofs << "[  Overall ] Overall Efficiency(Gd+H) in FV: " << OverallEffinFV[ith]*100 << " %" << std::endl;
+      //ofs << "[  Overall ] Overall Efficiency(H) in FV   : " << OverallHEffinFV[ith]*100 << " %" << std::endl;
+      //ofs << "[  Overall ] Overall Efficiency(Gd) in FV  : " << OverallGdEffinFV[ith]*100 << " %" << std::endl;
       GetPurity(iwin);
       ofs << "[  Purity  ] Purity: " << Purity[ith]*100 << std::endl;
     }
@@ -1576,6 +1586,7 @@ void NTagAnalysis::GetEfficiencyforWinOpt() {
 void NTagAnalysis::GetPreEfficiency(int windowstep) {
   //Pre-selection
   PreEff       = (float)TruthNeutroninCandidatesinWin[windowstep] / AllTruthNeutronsinSearch[windowstep];
+  //PreEff       = (float)TruthNeutroninCandidatesinWin[windowstep] / AllTruthNeutrons;
   PreHEff      = (float)TruthHNeutroninCandidatesinWin[windowstep] / TruthHNeutronsinSearch[windowstep];
   PreGdEff     = (float)TruthGdNeutroninCandidatesinWin[windowstep] / TruthGdNeutronsinSearch[windowstep];
 
@@ -1599,6 +1610,7 @@ void NTagAnalysis::GetNNEfficiency(int windowstep) {
 void NTagAnalysis::GetOverallEfficiency(int windowstep) {
   for (int ith=0; ith<CUTSTEP; ith++) {
     OverallEff[ith]       = (float)TaggedTruthNeutronsinWin[windowstep][ith] / AllTruthNeutronsinSearch[windowstep];
+    //OverallEff[ith]       = (float)TaggedTruthNeutronsinWin[windowstep][ith] / AllTruthNeutrons;
     OverallHEff[ith]      = (float)TaggedTruthHNeutronsinWin[windowstep][ith] / TruthHNeutronsinSearch[windowstep];
     OverallGdEff[ith]     = (float)TaggedTruthGdNeutronsinWin[windowstep][ith] / TruthGdNeutronsinSearch[windowstep];
 
@@ -2167,36 +2179,36 @@ void NTagAnalysis::N1Rmu_x_kinematics(CC0PiNumu* numu, float knmtcs, double* xbi
       for (int ibin=0; ibin<binnumber_nu-1; ibin++) {
         if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
           N1Rmu_x_knmtcs[ibin]++;
-          if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
-          if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
+          if (mode==1)             h1[0] -> Fill(knmtcs, OscProb);
+          if (mode>=2 && mode<=10) h1[1] -> Fill(knmtcs, OscProb);
           if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
-          if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
+          if (mode>=31)            h1[3] -> Fill(knmtcs, OscProb);
         }
       }
       if (knmtcs>xbins[binnumber_nu-1]) {
         N1Rmu_x_knmtcs[binnumber_nu-1]++;
-        if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
-        if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
+        if (mode==1)             h1[0] -> Fill(knmtcs, OscProb);
+        if (mode>=2 && mode<=10) h1[1] -> Fill(knmtcs, OscProb);
         if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
-        if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
+        if (mode>=31)            h1[3] -> Fill(knmtcs, OscProb);
       }
       break;
     case 1:
       for (int ibin=0; ibin<binnumber_mu-1; ibin++) {
         if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
           N1Rmu_x_knmtcs[ibin]++;
-          if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
-          if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
+          if (mode==1)             h1[0] -> Fill(knmtcs, OscProb);
+          if (mode>=2 && mode<=10) h1[1] -> Fill(knmtcs, OscProb);
           if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
-          if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
+          if (mode>=31)            h1[3] -> Fill(knmtcs, OscProb);
         }
       }
       if (knmtcs>xbins[binnumber_mu-1]) {
         N1Rmu_x_knmtcs[binnumber_mu-1]++;
-        if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
-        if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
+        if (mode==1)             h1[0] -> Fill(knmtcs, OscProb);
+        if (mode>=2 && mode<=10) h1[1] -> Fill(knmtcs, OscProb);
         if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
-        if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
+        if (mode>=31)            h1[3] -> Fill(knmtcs, OscProb);
       }
       break;
     default:
@@ -2216,7 +2228,7 @@ void NTagAnalysis::TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int Tagged
             TaggedN_x_knmtcs[ibin]++;
             if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
             if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
-            if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
+            if (mode>10 && mode<=30)  h1[2] -> Fill(knmtcs, OscProb);
             if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
           }
           //Tagged noise
@@ -2231,7 +2243,7 @@ void NTagAnalysis::TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int Tagged
           TaggedN_x_knmtcs[binnumber_nu-1]++;
           if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
           if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
-          if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
+          if (mode>10 && mode<=30)  h1[2] -> Fill(knmtcs, OscProb);
           if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
         }
         for (int itagn=0; itagn<TaggedNoise; itagn++) {
@@ -2243,11 +2255,11 @@ void NTagAnalysis::TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int Tagged
     case 1:
       for (int ibin=0; ibin<binnumber_mu-1; ibin++) {
         if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
-          for (int itagn=0; itagn<TaggedN; itagn++) {
+          for (int itagn=0; itagn<TaggedN-TaggedNoise; itagn++) {
             TaggedN_x_knmtcs[ibin]++;
             if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
             if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
-            if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
+            if (mode>10 && mode<=30)  h1[2] -> Fill(knmtcs, OscProb);
             if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
           }
           for (int itagn=0; itagn<TaggedNoise; itagn++) {
@@ -2257,11 +2269,11 @@ void NTagAnalysis::TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int Tagged
         }
       }
       if (knmtcs>xbins[binnumber_mu-1]) {
-        for (int itagn=0; itagn<TaggedN; itagn++) {
+        for (int itagn=0; itagn<TaggedN-TaggedNoise; itagn++) {
           TaggedN_x_knmtcs[binnumber_mu-1]++;
           if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
           if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
-          if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
+          if (mode>10 && mode<=30)  h1[2] -> Fill(knmtcs, OscProb);
           if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
         }
         for (int itagn=0; itagn<TaggedNoise; itagn++) {
@@ -2275,10 +2287,11 @@ void NTagAnalysis::TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int Tagged
   }
 }
 
-void NTagAnalysis::TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, float knmtcs, double* xbins, int* TrueN_x_knmtcs, TH1F** h1, int bintype) {
+void NTagAnalysis::TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, std::vector<float> *t, float WinMin, float knmtcs, double* xbins, int* TrueN_x_knmtcs, TH1F** h1, int bintype) {
+  if (Type->size()==0) return;
   int TrueN = 0;
   for (UInt_t itrue=0; itrue<Type->size(); itrue++) {
-    if (Type->at(itrue)==2) TrueN++;
+    if (Type->at(itrue)==2 && t->at(itrue)>WinMin) TrueN++;
   }
 
   int mode = TMath::Abs(numu->var<int>("mode"));
@@ -2287,21 +2300,21 @@ void NTagAnalysis::TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, f
     case 0:
       for (int ibin=0; ibin<binnumber_nu-1; ibin++) {
         if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
-          for (int itagn=0; itagn<TrueN; itagn++) {
+          for (int itruen=0; itruen<TrueN; itruen++) {
             TrueN_x_knmtcs[ibin]++;
             if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
             if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
-            if (mode>=14 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
+            if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
             if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
           }
         }
       }
       if (knmtcs>xbins[binnumber_nu-1]) {
-        for (int itagn=0; itagn<TrueN; itagn++) {
+        for (int itruen=0; itruen<TrueN; itruen++) {
           TrueN_x_knmtcs[binnumber_nu-1]++;
           if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
           if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
-          if (mode>=14 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
+          if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
           if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
         }
       }
@@ -2309,21 +2322,21 @@ void NTagAnalysis::TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, f
     case 1:
       for (int ibin=0; ibin<binnumber_mu-1; ibin++) {
         if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
-          for (int itagn=0; itagn<TrueN; itagn++) {
+          for (int itruen=0; itruen<TrueN; itruen++) {
             TrueN_x_knmtcs[ibin]++;
             if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
             if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
-            if (mode>=14 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
+            if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
             if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
           }
         }
       }
       if (knmtcs>xbins[binnumber_mu-1]) {
-        for (int itagn=0; itagn<TrueN; itagn++) {
+        for (int itruen=0; itruen<TrueN; itruen++) {
           TrueN_x_knmtcs[binnumber_mu-1]++;
           if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
           if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
-          if (mode>=14 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
+          if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
           if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
         }
       }
@@ -2340,7 +2353,6 @@ void NTagAnalysis::cdNTagAnalysis(TFile* fout) {
 }
 
 void NTagAnalysis::WritePlots() {
-
   Double_t tot_GenPrmNeutrons = h1_GenPrmNeutrons->Integral();
   h1_GenPrmNeutrons    -> Scale(1./tot_GenPrmNeutrons);
   h1_GenPrmNeutrons    -> Write();
@@ -2378,6 +2390,12 @@ void NTagAnalysis::WritePlots() {
     h1_N1Rmu_x_MuPt[i]    -> Write();
     h1_N1Rmu_x_Q2[i]      -> Write();
     h1_N1Rmu_x_MuAngle[i] -> Write();
+
+    h1_TrueN_x_Enu[i]     -> Write();
+    h1_TrueN_x_MuMom[i]   -> Write();
+    h1_TrueN_x_MuPt[i]    -> Write();
+    h1_TrueN_x_Q2[i]      -> Write();
+    h1_TrueN_x_MuAngle[i] -> Write();
   }
 
   for (int i=0; i<5; i++) {
@@ -2392,6 +2410,7 @@ void NTagAnalysis::WritePlots() {
     Double_t tot = h1_NTrueN[i]->Integral();
     //h1_NTrueN[i] -> Scale(1./tot);
     h1_NTrueN[i] -> Write();
+    h1_hitsearch[i] -> Write();
   }
   h1_TrueMuN -> Write();
   h1_TrueNuN -> Write();

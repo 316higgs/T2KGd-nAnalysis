@@ -17,6 +17,8 @@
 #define WINDOWMIN 3
 #define NOISECUT 18
 
+TH1F* h1_hitsearch[TRUETYPE];
+
 TH1F* h1_NTrueN[TRUETYPE];
 TH1F* h1_TrueNmultiplicity[INTERACTIONTYPE]; //# of truth captured neutrons (neutrino interactions)
 TH1F* h1_TrueMuN;  //# of truth captured neutrons (neutrons from mu capture)
@@ -120,8 +122,16 @@ TH1F* h1_TaggedN_x_MuPt[5];
 TH1F* h1_TaggedN_x_Q2[5];
 TH1F* h1_TaggedN_x_MuAngle[5];
 
-int TrueN_x_Enu[binnumber_nu] = {0};
+int TrueN_x_Enu[binnumber_nu]   = {0};
+int TrueN_x_MuMom[binnumber_nu] = {0};
+int TrueN_x_MuPt[binnumber_nu] = {0};
+int TrueN_x_Q2[binnumber_nu] = {0};
+int TrueN_x_MuAngle[binnumber_nu] = {0};
 TH1F* h1_TrueN_x_Enu[4];
+TH1F* h1_TrueN_x_MuMom[4];
+TH1F* h1_TrueN_x_MuPt[4];
+TH1F* h1_TrueN_x_Q2[4];
+TH1F* h1_TrueN_x_MuAngle[4];
 
 int varwindowmax = 9999;
 
@@ -430,7 +440,7 @@ class NTagAnalysis {
     
     void N1Rmu_x_kinematics(CC0PiNumu* numu, float knmtcs, double* xbins, int* N1Rmu_x_knmtcs, TH1F** h1, int bintype);
     void TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int TaggedNoise, float knmtcs, double* xbins, int* TaggedN_x_knmtcs, TH1F** h1, int bintype);
-    void TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, float knmtcs, double* xbins, int* TrueN_x_knmtcs, TH1F** h1, int bintype);
+    void TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, std::vector<float> *t, float WinMin, float knmtcs, double* xbins, int* TrueN_x_knmtcs, TH1F** h1, int bintype);
 
     void SetHistoFrame();
     void SetHistoFormat();
