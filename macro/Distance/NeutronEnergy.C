@@ -90,8 +90,8 @@ void NeutronEnergy(bool beammode) {
 #endif
 
 
-  h1_BefSIn_numu -> SetLineColor(kAzure-9);
-  h1_SIn_numu    -> SetLineColor(kAzure+1);
+  //h1_BefSIn_numu -> SetLineColor(kAzure-9);
+  //h1_SIn_numu    -> SetLineColor(kAzure+1);
 
 #if 0
   h1_BefSIn_numu -> SetFillColor(kAzure-9);

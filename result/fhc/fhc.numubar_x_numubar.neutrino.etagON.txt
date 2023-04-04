@@ -112,3 +112,12 @@ Total #tagged neutrons: 72646
 #truth n @ Enu [1.5, 2.5): 43205
 #truth n @ Enu [2.5, 5): 27772
 #truth n @ Enu > 5: 3200
+ 
+===== #tagged neutrons as a function of dn =====
+#truth n @ dn [0, 100): 28004
+#truth n @ dn [100, 200): 25849
+#truth n @ dn [200, 400): 14496
+#truth n @ dn [400, 600): 2868
+#truth n @ dn [600, 1000): 817
+#truth n @ dn [1000, 1500): 195
+#truth n @ dn > 1500: 417

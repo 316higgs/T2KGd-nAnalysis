@@ -21,6 +21,7 @@ TH1F* h1_hitsearch[TRUETYPE];
 
 TH1F* h1_NTrueN[TRUETYPE];
 TH1F* h1_TrueNmultiplicity[INTERACTIONTYPE]; //# of truth captured neutrons (neutrino interactions)
+TH1F* h1_TagNmultiplicity[INTERACTIONTYPE];  //# of tagged captured neutrons (neutrino interactions)
 TH1F* h1_TrueMuN;  //# of truth captured neutrons (neutrons from mu capture)
 TH1F* h1_TrueNuN;  //# of truth captured neutrons (neutrons from neutrino interactions)
 TH1F* h1_TotGammaE;
@@ -95,11 +96,14 @@ int test2 = 0;
 
 const int binnumber_nu = 6;
 const int binnumber_mu = 5;
+const int binnumber_n  = 7;
 double xEnubins[binnumber_nu]   = {0, 0.5, 1., 1.5, 2.5, 5.};
 double xMuMombins[binnumber_mu] = {0, 0.5, 1.0, 2.0, 6.0};
 double xMuPtbins[binnumber_mu]  = {0, 0.25, 0.5, 0.75, 1.5};
 double xQ2bins[binnumber_mu]    = {0, 0.25, 0.5, 0.75, 3.};
 double xMuAnglebins[binnumber_mu] = {-1, -0.5, 0., 0.5, 1.};
+double xnTraveldbins[binnumber_n] = {0, 100., 200., 400., 600., 1000., 1500.};
+
 int N1Rmu_x_Enu[binnumber_nu]   = {0};
 int N1Rmu_x_MuMom[binnumber_mu] = {0};
 int N1Rmu_x_MuPt[binnumber_mu]  = {0};
@@ -116,11 +120,13 @@ int TaggedN_x_MuMom[binnumber_mu] = {0};
 int TaggedN_x_MuPt[binnumber_mu]  = {0};
 int TaggedN_x_Q2[binnumber_mu]    = {0};
 int TaggedN_x_MuAngle[binnumber_mu] = {0};
+int TaggedN_x_nTraveld[binnumber_n] = {0};
 TH1F* h1_TaggedN_x_Enu[5];
 TH1F* h1_TaggedN_x_MuMom[5];
 TH1F* h1_TaggedN_x_MuPt[5];
 TH1F* h1_TaggedN_x_Q2[5];
 TH1F* h1_TaggedN_x_MuAngle[5];
+TH1F* h1_TaggedN_x_nTraveld[5];
 
 int TrueN_x_Enu[binnumber_nu]   = {0};
 int TrueN_x_MuMom[binnumber_nu] = {0};
@@ -441,6 +447,7 @@ class NTagAnalysis {
     void N1Rmu_x_kinematics(CC0PiNumu* numu, float knmtcs, double* xbins, int* N1Rmu_x_knmtcs, TH1F** h1, int bintype);
     void TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int TaggedNoise, float knmtcs, double* xbins, int* TaggedN_x_knmtcs, TH1F** h1, int bintype);
     void TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, std::vector<float> *t, float WinMin, float knmtcs, double* xbins, int* TrueN_x_knmtcs, TH1F** h1, int bintype);
+    void TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<float> *Label, UInt_t ican, float knmtcs, double* xbins, int* TaggedN_x_knmtcs, TH1F** h1, int bintype);
 
     void SetHistoFrame();
     void SetHistoFormat();

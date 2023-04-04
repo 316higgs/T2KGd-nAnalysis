@@ -193,7 +193,7 @@ void TrueMuRange_x_Mom(bool beammode) {
   g_onesigma -> SetLineStyle(7);
 
 #if 1
-  TCanvas* c = new TCanvas("c", "c", 700, 500);
+  TCanvas* c = new TCanvas("c", "c", 900, 700);
   c -> SetGrid();
   h1_PrmMuEndVtxReso -> Draw("SAME");
   g_onesigma   -> Draw("SAME");

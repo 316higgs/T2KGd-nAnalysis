@@ -175,6 +175,12 @@ int main(int argc, char **argv) {
   TBranch *bTagIndex = 0;
   std::vector<float> *TagOut = 0;
   TBranch *bTagOut = 0;
+  std::vector<float> *dvx = 0;
+  TBranch *bdvx = 0;
+  std::vector<float> *dvy = 0;
+  TBranch *bdvy = 0;
+  std::vector<float> *dvz = 0;
+  TBranch *bdvz = 0;
   tchntag->SetBranchAddress("Label", &Label, &bLabel);
   tchntag->SetBranchAddress("TagClass", &TagClass, &bTagClass);
   tchntag->SetBranchAddress("FitT", &FitT, &bFitT);
@@ -182,6 +188,9 @@ int main(int argc, char **argv) {
   tchntag->SetBranchAddress("NHits", &NHits, &bNHits);
   tchntag->SetBranchAddress("TagIndex", &TagIndex, &bTagIndex);
   tchntag->SetBranchAddress("TagOut", &TagOut, &bTagOut);
+  tchntag->SetBranchAddress("dvx", &dvx, &bdvx);
+  tchntag->SetBranchAddress("dvy", &dvy, &bdvy);
+  tchntag->SetBranchAddress("dvz", &dvz, &bdvz);
 
   Float_t pscnd[1000][3];   //Momentum of the secondary particle
   tchfQ -> SetBranchAddress("pscnd", pscnd);
@@ -293,6 +302,9 @@ int main(int argc, char **argv) {
     bNHits      -> GetEntry(tentry);
     bTagIndex   -> GetEntry(tentry);
     bTagOut     -> GetEntry(tentry);
+    bdvx        -> GetEntry(tentry);
+    bdvy        -> GetEntry(tentry);
+    bdvz        -> GetEntry(tentry);
 
 
     numu->computeCC0PiVariables();
@@ -434,6 +446,11 @@ int main(int argc, char **argv) {
 
       } //threshold scan
 
+      if (intmode==1)                 h1_TagNmultiplicity[0]->Fill(numtaggedneutrons);
+      if (intmode>=2 && intmode<=10)  h1_TagNmultiplicity[1]->Fill(numtaggedneutrons);
+      if (intmode>10 && intmode<=30)  h1_TagNmultiplicity[2]->Fill(numtaggedneutrons);
+      if (intmode>=31)                h1_TagNmultiplicity[3]->Fill(numtaggedneutrons);
+
       float Pmu = numu->var<float>("fq1rmom", PrmEvent, FQ_MUHYP);
       float Pt  = neuosc.GetMuonPt(numu);
       float Qsquare = neuosc.GetQsquare(numu);
@@ -454,6 +471,22 @@ int main(int argc, char **argv) {
       ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Pt/1000., xMuPtbins, TrueN_x_MuPt, h1_TrueN_x_MuPt, 1);
       ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Qsquare/1000000., xQ2bins, TrueN_x_Q2, h1_TrueN_x_Q2, 1);
       ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, recothetamu, xMuAnglebins, TrueN_x_MuAngle, h1_TrueN_x_MuAngle, 1);
+
+      float RecoPrmVtx[3] = {0., 0., 0.};
+      RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
+      RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
+      RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
+      for (UInt_t ican=0; ican<TagOut->size(); ican++) {
+        if (etagmode){
+          if (TagOut->at(ican)>0.75 && ntagana.DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican))==false) {
+            float NCapVtx[3] = {dvx->at(ican), dvy->at(ican), dvz->at(ican)};
+            float nTraveld = ndistance.TakeDistance(RecoPrmVtx, NCapVtx);
+            ntagana.TaggedN_x_Neutronkinematics(numu, Label, ican, nTraveld, xnTraveldbins, TaggedN_x_nTraveld, h1_TaggedN_x_nTraveld, 0);
+          }
+        }
+        else {
+        }
+      }
 
     } //New 1R muon selection
 
@@ -630,6 +663,12 @@ int main(int argc, char **argv) {
     for (int ibin=0; ibin<binnumber_nu; ibin++) {
       if (ibin<binnumber_nu-1) resultfile << "#truth n @ Enu [" << xEnubins[ibin] << ", " << xEnubins[ibin+1] << "): " << TrueN_x_Enu[ibin] << std::endl;
       else resultfile << "#truth n @ Enu > " << xEnubins[ibin] << ": " << TrueN_x_Enu[ibin] << std::endl;
+    }
+    resultfile << " " << std::endl;
+    resultfile << "===== #tagged neutrons as a function of dn =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_n; ibin++) {
+      if (ibin<binnumber_n-1) resultfile << "#truth n @ dn [" << xnTraveldbins[ibin] << ", " << xnTraveldbins[ibin+1] << "): " << TaggedN_x_nTraveld[ibin] << std::endl;
+      else resultfile << "#truth n @ dn > " << xnTraveldbins[ibin] << ": " << TaggedN_x_nTraveld[ibin] << std::endl;
     }
 
     ntagana.SummaryTruthInfoinSearch(WinMin, NTagSummary);
