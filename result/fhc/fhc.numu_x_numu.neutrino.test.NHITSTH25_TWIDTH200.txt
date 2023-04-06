@@ -1,0 +1,43 @@
+[fiTQun OUTPUT] /disk02/usr6/sedi/fiTQun/converted_output/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0*.part00*.skip*.root
+[NTag   OUTPUT] /disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0*.part00*.skip*.root
+ 
+[Neutrino] C0: 132656 -> 132656
+[Neutrino] C1: 91838 -> 91838
+[Neutrino] C2: 88228 -> 88228
+[Neutrino] C3: 88132 -> 88132
+[Neutrino] C4: 61680 -> 82459
+[Neutrino] C5: 60488 -> 80624
+Generated CCQE events   : 64929
+Generated CC2p2h events : 7355
+Generated CCnonQE events: 7763
+Generated NC events     : 577
+[Decay-e Cut Scan] 
+[Decay-e Cut Scan] dt = 20 us: 82459
+                             : 80624
+[Decay-e Cut Scan] dt = 15 us: 82470
+                             : 80634
+[Decay-e Cut Scan] dt = 10 us: 82549
+                             : 80710
+[Decay-e Cut Scan] dt =  5 us: 83425
+                             : 81543
+[Decay-e Cut Scan] dt =  3 us: 84891
+                             : 82936
+[Neutrino] All Parent Neutrino Events          : 299460
+[Neutrino] Generated Neutrino Events(wallv>200): 190292
+[Neutrino] Generated 1Rmu Events (Oscillated)  : 17454.7
+ 
+[Neutrino] Oscillated CCQE Events     : 9090.53(72.5959 %)
+           w/ tagged neutrons: 2391.1(56.4256 %), w/o tagged neutrons:6699.49(80.8673 %)
+[Neutrino] Oscillated CC(2p2h) Events : 1221.7(9.75633 %)
+           w/ tagged neutrons: 543.806(12.8328 %), w/o tagged neutrons:677.893(8.18262 %)
+[Neutrino] Oscillated All CCRES Events: 1465.37(11.7023 %)
+           w/ tagged neutrons: 852.256(20.1117 %), w/o tagged neutrons:613.113(7.40067 %)
+[Neutrino] Oscillated CC Other Events : 170.505(1.36164 %)
+           w/ tagged neutrons: 107.452(2.53566 %), w/o tagged neutrons:63.0538(0.7611 %)
+[Neutrino] Oscillated NC Events       : 574(4.5839 %)
+           w/ tagged neutrons: 343(8.09418 %), w/o tagged neutrons:231(2.78832 %)
+[Neutrino] Oscillated Neutrino Events within [0.25 GeV, 1.5 GeV]
+           Legacy Analysis    : 12522.3(Osc)/74634(No Osc) = 0.167782
+           Only CCQE(1p1h)    : 9090.53(Osc)/61261(No Osc) = 0.14839
+           w/o truth neutrons : 5831.66(Osc)/37584(No Osc) = 0.155163
+           w/o tagged neutrons: 8284.51(Osc)/52088(No Osc) = 0.159048

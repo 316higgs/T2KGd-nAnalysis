@@ -14,7 +14,7 @@ void Purity() {
   TCanvas* c = new TCanvas("c","c",800,800);
   c -> SetGrid();
   TH1F* frame = gPad->DrawFrame(0., 0., 1., 1.);
-  frame -> SetXTitle("TMVAOutput");
+  frame -> SetXTitle("n-likethreshold");
   //frame -> SetYTitle("Mis-tagged Noise Rate");
   frame -> SetTitleOffset(1.1, "Y");
   g_NoiseRate -> Draw("PL");

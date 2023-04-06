@@ -16,7 +16,7 @@ enum OscChan::E_OSC_CHAN CLTOptionOscMode(TString OscKeyWord, TString Osc) {
     else if (Osc=="NUEBAR" || Osc=="nuebar") eOscMode = eNUEBAR;          //nuebar_x_nuebar
     else {
       std::cout << " " << std::endl;
-      std::cout << "[!!!CLT error!!!] Oscillation channel can not be found. --- input NUMU/NUMUBAR" << std::endl;
+      std::cout << "\e[38;5;A0m\e[1m[!!!CLT error!!!] Oscillation channel can not be found. --- input NUMU/NUMUBAR\e[0m" << std::endl;
       exit(-1);
     }
   }
@@ -30,7 +30,7 @@ enum BeamMode::E_BEAM_MODE CLTOptionBeamMode(TString BeamKeyWord, TString Beam) 
     else if (Beam=="RHC") eBeamMode = eRHC;
     else {
       std::cout << " " << std::endl;
-      std::cout << "[!!!CLT error!!!] Oscillation channel can not be found. --- input FHC or RHC" << std::endl;
+      std::cout << "\e[38;5;A0m\e[1m[!!!CLT error!!!] Oscillation channel can not be found. --- input FHC or RHC\e[0m" << std::endl;
       exit(-1);
     }
   }
@@ -43,7 +43,7 @@ void CLTOptionETAG(TString ETAGKeyword, TString ETAG) {
     else if (ETAG=="OFF" || ETAG=="Off" || ETAG=="off") etagmode = false;
     else {
       std::cout << " " << std::endl;
-      std::cout << "[!!!CLT error!!!] Decay-e tagging mode can not be found. --- input ON or OFF" << std::endl;
+      std::cout << "\e[38;5;A0m\e[1m[!!!CLT error!!!] Decay-e tagging mode can not be found. --- input ON or OFF\e[0m" << std::endl;
       exit(-1);
     }
   }
@@ -51,35 +51,35 @@ void CLTOptionETAG(TString ETAGKeyword, TString ETAG) {
 
 void CLTOptionPrePara(TString PreParaKeyword, TString PrePara) {
   if (PreParaKeyword=="-TWIDTH" || PreParaKeyword=="-NHITSTH") {
-    std::cout << "[### CLT Option Summary ###] " << PreParaKeyword << ": " << PrePara << std::endl;
+    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] " << PreParaKeyword << ": " << PrePara << std::endl;
   }
   else {
-    std::cout << "[!!!CLT error!!!] Pre-selection parameter should be specified at command line." << std::endl;
-    std::cout << "                  Please specify values with " << PreParaKeyword << " option." << std::endl;
+    std::cout << "\e[38;5;A0m\e[1m[!!!CLT error!!!] Pre-selection parameter should be specified at command line.\e[0m" << std::endl;
+    std::cout << "\e[38;5;A0m\e[1m                  Please specify values with " << PreParaKeyword << " option.\e[0m" << std::endl;
     exit(-1);
   }
 }
 
 void CLTOptionWindow(TString WINDOWKeyword, TString WINDOW) {
   if (WINDOWKeyword=="-WINDOW") {
-    std::cout << "[### CLT Option Summary ###] " << WINDOWKeyword << ": " << WINDOW << std::endl;
+    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] " << WINDOWKeyword << ": " << WINDOW << std::endl;
   }
   else {
-    std::cout << "[!!!CLT error!!!] Window size should be specified at command line." << std::endl;
-    std::cout << "                  Please specify values with " << WINDOWKeyword << " option." << std::endl;
+    std::cout << "\e[38;5;A0m\e[1m[!!!CLT error!!!] Window size should be specified at command line.\e[0m" << std::endl;
+    std::cout << "\e[38;5;A0m\e[1m                  Please specify values with " << WINDOWKeyword << " option.\e[0m" << std::endl;
     exit(-1);
   }
 }
 
 bool CLTOptionSample(TString SampleKeyword, TString Sample) {
   if (SampleKeyword=="-SAMPLE") {
-    std::cout << "[### CLT Option Summary ###] " << SampleKeyword << ": " << Sample << std::endl;
+    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] " << SampleKeyword << ": " << Sample << std::endl;
     if (Sample=="NO" || Sample=="No" || Sample=="no") nosample = false;
     else nosample = true;
   }
   else {
-    std::cout << "[!!!CLT error!!!] Existence of input files should be specified at command line." << std::endl;
-    std::cout << "                  Please specify values with " << SampleKeyword << " option." << std::endl;
+    std::cout << "\e[38;5;A0m\e[1m[!!!CLT error!!!] Existence of input files should be specified at command line.\e[0m" << std::endl;
+    std::cout << "\e[38;5;A0m\e[1m                  Please specify values with " << SampleKeyword << " option.\e[0m" << std::endl;
     exit(-1);
   }
   return nosample;
@@ -87,13 +87,13 @@ bool CLTOptionSample(TString SampleKeyword, TString Sample) {
 
 bool CLTOptionNTagInfo(TString NTagInfoKeyword, TString NTagInfo) {
   if (NTagInfoKeyword=="-NTAGINFO") {
-    std::cout << "[### CLT Option Summary ###] " << NTagInfoKeyword << ": " << NTagInfo << std::endl;
+    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] " << NTagInfoKeyword << ": " << NTagInfo << std::endl;
     if (NTagInfo=="NO" || NTagInfo=="No" || NTagInfo=="no") ntaginfo = false;
     else ntaginfo = true;
   }
   else {
-    std::cout << "[!!!CLT error!!!] Existence of input files should be specified at command line." << std::endl;
-    std::cout << "                  Please specify values with " << NTagInfoKeyword << " option." << std::endl;
+    std::cout << "\e[38;5;A0m\e[1m[!!!CLT error!!!] Existence of input files should be specified at command line.\e[0m" << std::endl;
+    std::cout << "\e[38;5;A0m\e[1m                  Please specify values with " << NTagInfoKeyword << " option.\e[0m" << std::endl;
     exit(-1);
   }
   return ntaginfo;
@@ -141,17 +141,17 @@ void CLTOptionSummary(TString ETAGKeyword, TString ETAG,
   bool etagoption = false;
   if (ETAGKeyword=="-ETAG") {
     etagoption = true;
-    std::cout << "[### CLT Option Summary ###] e-tagging: " << ETAG << std::endl;
+    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] e-tagging: " << ETAG << std::endl;
   }
   bool mctypeoption = false;
   if (MCTypeKeyword=="-MCType") {
     mctypeoption = true;
-    std::cout << "[### CLT Option Summary ###] MC type: " << MCType << std::endl;
+    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] MC type: " << MCType << std::endl;
   }
 
   if (etagoption==false && mctypeoption==false) {
     std::cout << " " << std::endl;
-    std::cout << "[### CLT Option Summary ###] No option" << std::endl;
+    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] No option" << std::endl;
   }
   
 }

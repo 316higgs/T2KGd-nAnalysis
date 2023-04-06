@@ -84,6 +84,9 @@ NeutronMultiplicity.exe: NeutronMultiplicity.o
 cleananalysis1Rmu:
 	$(RM) analysis1Rmu.o analysis1Rmu.exe
 
+cleanPreScan:
+	$(RM) PreScan.o PreScan.exe
+
 cleananalysis1Re:
 	$(RM) analysis1Re.o analysis1Re.exe
 

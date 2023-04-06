@@ -328,7 +328,7 @@ int main(int argc, char **argv) {
   for (int ientry=0; ientry<processmax; ientry++) {
 
   	//Progress meter
-    if(ientry>100 && ientry%100==0) std::cout << "[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%" << std::endl;
+    if(ientry>100 && ientry%100==0) std::cout << "\e[38;5;23m\e[1m[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%\e[0m" << std::endl;
 
     //All neutrino events
     AllParentNeutrinos++;
@@ -534,13 +534,13 @@ int main(int argc, char **argv) {
         VtxPrntList.clear();
         VtxScndList.clear();
 
-        if (PrmMuEnd) {
+        /*if (PrmMuEnd) {
           ana_mode = mode;
           //std::cout << "[### " << ientry << " ###]  Before SI cap-n: " << TrueBefSI 
           //          << ", SI cap-n: " << TrueAftSI 
           //          << " (Total nu neutrons: " << TrueBefSI+TrueAftSI << ") TrueNuN: " << TrueNuN 
           //          << ", TrueMuN: " << TrueMuN << std::endl;
-        }
+        }*/
 
         ////// For 1:1 labeling ///////
         TrueMuN = ntagana.LabelTrueMuN(numu, PrmMuEnd, ichildidx);
@@ -574,7 +574,11 @@ int main(int argc, char **argv) {
             float d_Prm_x_NCap      = ndistance.TakeDistance(RecoPrmVtx, NCapVtx);
             //h1_TruePrmMuEnd_x_TagNCap -> Fill(d_PrmMuEnd_x_NCap/100., OscProb);
 
-            h2_Prm_NCap_x_MuStp_x_NCap -> Fill(d_Prm_x_NCap/100., d_PrmMuEnd_x_NCap/100.);
+            //h2_Prm_NCap_x_MuStp_x_NCap -> Fill(d_Prm_x_NCap/100., d_PrmMuEnd_x_NCap/100.);
+            //if (TrueMuN==1 && TrueNuN==0) h2_Prm_NCap_x_MuStp_x_NCap -> Fill(d_Prm_x_NCap/100., d_PrmMuEnd_x_NCap/100.); //Only mu neutron
+            //if (Enu<1000. && TrueMuN==1 && TrueNuN==0) h2_Prm_NCap_x_MuStp_x_NCap -> Fill(d_Prm_x_NCap/100., d_PrmMuEnd_x_NCap/100.); //Only mu neutron & low energy
+            //if (TrueMuN==0 && TrueNuN==1) h2_Prm_NCap_x_MuStp_x_NCap -> Fill(d_Prm_x_NCap/100., d_PrmMuEnd_x_NCap/100.); //Only nu neutron
+            if (Enu<1000. && TrueMuN==0 && TrueNuN==1) h2_Prm_NCap_x_MuStp_x_NCap -> Fill(d_Prm_x_NCap/100., d_PrmMuEnd_x_NCap/100.); //Only nu neutron & low Enu region
 
 #if 0
             if (NTrueN!=0) {
@@ -588,7 +592,7 @@ int main(int argc, char **argv) {
                 if (mode<=30) h1_TruePrmMuEnd_x_TagNCap_NuN -> Fill(d_PrmMuEnd_x_NCap/100., OscProb);
                 if (mode>=31) h1_TruePrmMuEnd_x_TagNCap_NuN -> Fill(d_PrmMuEnd_x_NCap/100.);
               }
-            } 
+            }
 #endif
 
 #if 1

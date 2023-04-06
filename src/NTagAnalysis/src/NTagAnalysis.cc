@@ -6,7 +6,7 @@
 void NTagAnalysis::SetHistoFrame() {
 
   for (int i=0; i<TRUETYPE; i++) {
-    h1_hitsearch[i] = new TH1F(TString::Format("h1_hitsearch_type%d", i), "Hit cluster search; Hit time [#musec]; Entries", 535, 0, 535);
+    //h1_hitsearch[i] = new TH1F(TString::Format("h1_hitsearch_type%d", i), "Hit cluster search; Hit time [#musec]; Entries", 535, 0, 535);
     h1_NTrueN[i]    = new TH1F(TString::Format("h1_NTrueN_type%d", i), "Truth Capture Neutrons; NTrueN; Entries", 12, 0, 12);
   }
   for (int i=0; i<INTERACTIONTYPE; i++) {
@@ -16,21 +16,6 @@ void NTagAnalysis::SetHistoFrame() {
     h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(3, "2");
     h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(4, "3");
     h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(5, "4");
-    /*h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(6, "5");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(7, "6");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(8, "7");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(9, "8");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(10, "9");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(11, "10");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(12, "11");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(13, "12");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(14, "13");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(15, "14");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(16, "15");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(17, "16");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(18, "17");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(19, "18");
-    h1_TrueNmultiplicity[i] ->GetXaxis()->SetBinLabel(20, "19");*/
 
     h1_TagNmultiplicity[i] = new TH1F(TString::Format("h1_TagNmultiplicity_mode%d", i), "Tagged Capture Neutrons; NTagN; Entries", 5, 0, 5);
     h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(1, "0");
@@ -38,25 +23,10 @@ void NTagAnalysis::SetHistoFrame() {
     h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(3, "2");
     h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(4, "3");
     h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(5, "4");
-    /*h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(6, "5");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(7, "6");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(8, "7");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(9, "8");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(10, "9");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(11, "10");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(12, "11");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(13, "12");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(14, "13");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(15, "14");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(16, "15");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(17, "16");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(18, "17");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(19, "18");
-    h1_TagNmultiplicity[i] ->GetXaxis()->SetBinLabel(20, "19");*/
   }
   h1_TrueMuN = new TH1F("h1_TrueMuN", "h1_TrueMuN; Truth Capture Neutrons; Number of Neutrino Events", 10, 0, 10);
   h1_TrueNuN = new TH1F("h1_TrueNuN", "h1_TrueNuN; Truth Capture Neutrons; Number of Neutrino Events", 10, 0, 10);
-  h1_TotGammaE   = new TH1F("h1_TotGammaE", "Truth Total Gamma Energy; E[MeV]; Entries", 20, 0, 10);
+  h1_TotGammaE   = new TH1F("h1_TotGammaE", "Truth Total Gamma Energy; E[MeV]; Entries", 100, 0, 10);
   for (int i=0; i<2; i++) {
     if (i==0) {
       h1_Enureso_All[i]           = new TH1F("h1_Enureso_All_woTagN", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
@@ -102,16 +72,36 @@ void NTagAnalysis::SetHistoFrame() {
   for (int i=0; i<4; i++) {
     //h1_RecoNCapTime[i] = new TH1F(TString::Format("h1_RecoNCapTime_type%d", i), "h1_RecoNCapTime; Reco Capture Time[#musec]; Number of Events", 250, 0., 535);
     h1_RecoNCapTime[i] = new TH1F(TString::Format("h1_RecoNCapTime_type%d", i), "h1_RecoNCapTime; Reco Capture Time[#musec]; Number of Events", 40, 0., 20);
-    h1_N50[i] = new TH1F(TString::Format("h1_N50_type%d", i), "h1_N50; N50; Number of Events", 80, 0., 80);
+    //h1_N50[i] = new TH1F(TString::Format("h1_N50_type%d", i), "h1_N50; N50; Number of Events", 80, 0., 80);
   }
   h1_mintimediff_NCap = new TH1F("h1_mintimediff_NCap", "h1_mintimediff_NCap; tscnd-FitT[#musec]; Number of Events", 200, -0.2, 0.2);
   h1_NCapVtxReso      = new TH1F("h1_NCapVtxReso", "h1_NCapVtxReso; Neutron Capture Vertex Resolution [cm]; Number of Events", 3000, 0, 300);
 
   h1_GenPrmNeutrons    = new TH1F("h1_GenPrmNeutrons", "h1_GenPrmNeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
-  h1_GenAftFSINeutrons = new TH1F("h1_GenAftFSINeutrons", "h1_GenAftFSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
+  //h1_GenAftFSINeutrons = new TH1F("h1_GenAftFSINeutrons", "h1_GenAftFSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
   h1_GenAftSINeutrons  = new TH1F("h1_GenAftSINeutrons", "h1_GenAftSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
-  h1_GenAtSINeutrons   = new TH1F("h1_GenAtSINeutrons", "h1_GenAtSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
+  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(1, "0");
+  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(2, "1");
+  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(3, "2");
+  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(4, "3");
+  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(5, "4");
+  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(6, "5");
+  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(7, "6");
+  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(8, "7");
+  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(9, "8");
+  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(10, "9");
+  //h1_GenAtSINeutrons   = new TH1F("h1_GenAtSINeutrons", "h1_GenAtSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
   h1_GenBefSINeutrons  = new TH1F("h1_GenBefSINeutrons", "h1_GenBefSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
+  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(1, "0");
+  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(2, "1");
+  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(3, "2");
+  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(4, "3");
+  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(5, "4");
+  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(6, "5");
+  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(7, "6");
+  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(8, "7");
+  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(9, "8");
+  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(10, "9");
   h1_GenBefSInE        = new TH1F("h1_GenBefSInE", "h1_GenBefSInE; Truth Neutron Energy[MeV]; Number of Events", 50, 0, 200);
   h1_GenSInE           = new TH1F("h1_GenSInE", "h1_GenSInE; Truth Neutron Energy[MeV]; Number of Events", 50, 0, 200);
 
@@ -135,7 +125,8 @@ void NTagAnalysis::SetHistoFrame() {
     h1_TaggedN_x_Q2[i]      = new TH1F(TString::Format("h1_TaggedN_x_Q2_mode%d", i), "TaggedN_x_Q2; Reco Q^{2} [GeV^{2}]; Number of #nu Events", binnumber_mu-1, xQ2bins);
     h1_TaggedN_x_MuAngle[i] = new TH1F(TString::Format("h1_TaggedN_x_MuAngle_mode%d", i), "TaggedN_x_MuAngle; Cosince of angle b/w #mu and beam directions; Number of #nu Events", binnumber_mu-1, xMuAnglebins);
 
-    h1_TaggedN_x_nTraveld[i] = new TH1F(TString::Format("h1_TaggedN_x_nTraveld_mode%d", i), "Tagged_x_nTranveld; Neutron Travel Distance [cm]; Number of tagged neutrons", binnumber_n-1, xnTraveldbins);
+    h1_TaggedN_x_nTraveld[i]   = new TH1F(TString::Format("h1_TaggedN_x_nTraveld_mode%d", i), "Tagged_x_nTranveld; Neutron Travel Distance [cm]; Number of tagged neutrons", binnumber_n-1, xnTraveldbins);
+    h1_TaggedN_x_MuStp_NCap[i] = new TH1F(TString::Format("h1_TaggedN_x_MuStp_NCap_mode%d", i), "Tagged_x_MuStp_NCap; Distance b/w #mu Stopping and n Capture vertices [cm]; Number of tagged neutrons", binnumber_n-1, xMuStp_NCapbins);
   }
   
 }
@@ -354,179 +345,6 @@ void NTagAnalysis::InitNeutrons() {
   }
 }
 
-//Get truth neutrons at neutrino interaction
-/*int NTagAnalysis::GetGenPrmNeutrons(CC0PiNumu *numu, Int_t *Iorgvc, Int_t *Iflvc) {
-
-  int GenPrmNeutrons = 0;
-  std::vector<int> intermediatelist;
-
-  //Number of truth neutrons (neutrino interaction)
-  for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
-    //std::cout << "Particle[" << iprm << "]=" << numu->var<int>("Ipvc", iprm)
-    //                                         << ", Iflvc=" << Iflvc[iprm] 
-    //                                         << ", Ichvc=" << numu->var<int>("Ichvc", iprm)
-    //                                         << ", Iorgvc=" <<Iorgvc[iprm] << std::endl;
-
-    if (numu->var<int>("Ipvc", iprm)==static_cast<int>(PDGPID::NEUTRON) && Iorgvc[iprm]!=0) {
-      GenPrmNeutrons++;
-      if (numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::NEUTRON) &&
-          Iflvc[iprm]==static_cast<int>(NEUTINT::HADRONPROD)) 
-      {
-        //std::cout << " --> intermediate n" << std::endl;
-        GenPrmNeutrons--;
-      }
-    }
-  }
-  return GenPrmNeutrons;
-}
-
-//Get truth neutrons after FSI (neutrino interaction+FSI)
-int NTagAnalysis::GetGenAftFSINeutrons(CC0PiNumu *numu) {
-  
-  //Number of truth neutrons based on NEUT variables
-  int GenAftFSINeutrons = 0;
-
-  for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
-
-    if (numu->var<int>("Ipvc", iprm)==static_cast<int>(PDGPID::NEUTRON) &&
-        numu->var<int>("Ichvc", iprm)==1) 
-    {
-      GenAftFSINeutrons++;
-    }
-  }
-  //std::cout << "  Generated neutrons from nu+FSI: " << GenAftFSINeutrons << std::endl;
-  AllBefSINeutrons += GenAftFSINeutrons;
-  return GenAftFSINeutrons;
-}
-
-//Get truth neutrons after SI (neutrino interaction+FSI+SI)
-int NTagAnalysis::GetGenAftSINeutrons(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]) {
-
-  int GenAftSINeutrons = 0;
-  int GenAtSINeutrons  = 0;
-  int GenBefSINeutrons = 0;
-
-  std::vector<float> VtxPrntList;
-  std::vector<float> VtxScndList;
-  for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
-    if (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) && 
-        numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
-        std::fabs(numu->var<int>("iprntprt", iprntidx[iscnd]-1))!=static_cast<int>(PDGPID::MUON) &&
-        numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) 
-    {
-
-      //Find gamma from different neutrons
-      float d_vtxprnt = std::sqrt( vtxprnt[iscnd][0]*vtxprnt[iscnd][0] +
-                                   vtxprnt[iscnd][1]*vtxprnt[iscnd][1] +
-                                   vtxprnt[iscnd][2]*vtxprnt[iscnd][2] );
-      float vtxscndX  = numu->var<float>("vtxscnd", iscnd, 0);
-      float vtxscndY  = numu->var<float>("vtxscnd", iscnd, 1);
-      float vtxscndZ  = numu->var<float>("vtxscnd", iscnd, 2);
-      float d_vtxscnd = std::sqrt( vtxscndX*vtxscndX +
-                                   vtxscndY*vtxscndY +
-                                   vtxscndZ*vtxscndZ );
-      //First gamma
-      if (VtxScndList.size()==0) {
-        VtxPrntList.push_back(d_vtxprnt);
-        VtxScndList.push_back(d_vtxscnd);
-        GenAftSINeutrons++;
-        //std::cout << "  Captured neutron parent: " << iprntidx[ iprntidx[iscnd]-1 ] << std::endl;
-        if (iprntidx[ iprntidx[iscnd]-1 ]<0) GenBefSINeutrons++;
-        else GenAtSINeutrons++;
-      }
-      else {
-        bool NewNeutron = false;
-        for (UInt_t in=0; in<VtxPrntList.size(); in++) {
-          if (VtxPrntList.at(in)!=d_vtxprnt) NewNeutron = true;
-          else {
-            for (UInt_t jn=0; jn<VtxScndList.size(); jn++) {
-              if (VtxScndList.at(jn)!=d_vtxscnd) NewNeutron = true;
-              else NewNeutron = false;
-            }
-          }
-        }
-  
-        if (NewNeutron) {
-          VtxScndList.push_back(d_vtxscnd);
-          VtxPrntList.push_back(d_vtxprnt);
-          GenAftSINeutrons++;
-          //std::cout << "  Captured neutron parent: " << iprntidx[ iprntidx[iscnd]-1 ] << std::endl;
-          if (iprntidx[ iprntidx[iscnd]-1 ]<0) GenBefSINeutrons++;
-          else GenAtSINeutrons++;
-        }
-      }
-
-    }
-  }
-  VtxPrntList.clear();
-  VtxScndList.clear();
-
-  //std::cout << "  Captured neutrons from nu+FSI: " << GenBefSINeutrons 
-  //          << ", Captured neutrons from SI: " << GenAtSINeutrons 
-  //          << ", After SI: " << GenAftSINeutrons << std::endl; 
-  if (GenBefSINeutrons!=0) h1_GenBefSINeutrons -> Fill(GenBefSINeutrons);
-  if (GenAtSINeutrons!=0) h1_GenAtSINeutrons  -> Fill(GenAtSINeutrons);
-  CapBefSINeutrons += GenBefSINeutrons;
-
-  return GenAftSINeutrons;
-}
-
-//Get truth neutrons after SI (SI only)
-int NTagAnalysis::GetGenSINeutrons(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]) {
-
-  int GenSINeutrons = 0;
-
-  std::vector<float> VtxPrntList;
-  std::vector<float> VtxScndList;
-  for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
-    if (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) && 
-        numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
-        std::fabs(numu->var<int>("iprntprt", iprntidx[iscnd]-1))!=static_cast<int>(PDGPID::MUON) &&
-        numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) 
-    {
-
-      //Find gamma from different neutrons
-      float d_vtxprnt = std::sqrt( vtxprnt[iscnd][0]*vtxprnt[iscnd][0] +
-                                   vtxprnt[iscnd][1]*vtxprnt[iscnd][1] +
-                                   vtxprnt[iscnd][2]*vtxprnt[iscnd][2] );
-      float vtxscndX  = numu->var<float>("vtxscnd", iscnd, 0);
-      float vtxscndY  = numu->var<float>("vtxscnd", iscnd, 1);
-      float vtxscndZ  = numu->var<float>("vtxscnd", iscnd, 2);
-      float d_vtxscnd = std::sqrt( vtxscndX*vtxscndX +
-                                   vtxscndY*vtxscndY +
-                                   vtxscndZ*vtxscndZ );
-      //First gamma
-      if (VtxScndList.size()==0) {
-        VtxPrntList.push_back(d_vtxprnt);
-        VtxScndList.push_back(d_vtxscnd);
-        if (iprntidx[ iprntidx[iscnd]-1 ]==0) GenSINeutrons++;
-      }
-      else {
-        bool NewNeutron = false;
-        for (UInt_t in=0; in<VtxPrntList.size(); in++) {
-          if (VtxPrntList.at(in)!=d_vtxprnt) NewNeutron = true;
-          else {
-            for (UInt_t jn=0; jn<VtxScndList.size(); jn++) {
-              if (VtxScndList.at(jn)!=d_vtxscnd) NewNeutron = true;
-              else NewNeutron = false;
-            }
-          }
-        }
-  
-        if (NewNeutron) {
-          VtxScndList.push_back(d_vtxscnd);
-          VtxPrntList.push_back(d_vtxprnt);
-          if (iprntidx[ iprntidx[iscnd]-1 ]==0) GenSINeutrons++;
-        }
-      }
-
-    }
-  }
-  VtxPrntList.clear();
-  VtxScndList.clear();
-
-  return GenSINeutrons;
-}*/
 
 //Generated neutrons, but not nessariliry captured neutrons
 float NTagAnalysis::GetGenBefSIMom(CC0PiNumu *numu, Int_t *Iorgvc, Int_t *Iflvc) {
@@ -840,9 +658,9 @@ void NTagAnalysis::TruthBreakdowninWindow(std::vector<float> *TagClass,
     SetWindowMax(iwin);
     for (UInt_t ican=0; ican<TagClass->size(); ++ican) {
 
-      if (Label->at(ican)==0) h1_hitsearch[0] -> Fill(FitT->at(ican));
-      if (Label->at(ican)==1) h1_hitsearch[1] -> Fill(FitT->at(ican));
-      if (Label->at(ican)==2 || Label->at(ican)==3) h1_hitsearch[2] -> Fill(FitT->at(ican));
+      //if (Label->at(ican)==0) h1_hitsearch[0] -> Fill(FitT->at(ican));
+      //if (Label->at(ican)==1) h1_hitsearch[1] -> Fill(FitT->at(ican));
+      //if (Label->at(ican)==2 || Label->at(ican)==3) h1_hitsearch[2] -> Fill(FitT->at(ican));
       
       bool inwindow = false;  //Flag that indicates this candidate is in the time window, or not.
       bool inFV     = false;  //Flag that indicates this candidate is in FV, or not.
@@ -906,7 +724,7 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(std::vector<float> *t,
       //Flag that indicates this candidate is in the time window, or not.
       bool inwindow = false;
       //Flag that indicates this candidate is in FV, or not.
-      bool inFV     = false;
+      //bool inFV     = false;
       //Find corresponded truth info that matches with ican candidate
       for (UInt_t jentry=0; jentry<t->size(); ++jentry) {
         if (TagIndex->at(ican)!=-1 && jentry==(UInt_t)TagIndex->at(ican)) {
@@ -914,7 +732,7 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(std::vector<float> *t,
           //Check this candidate is in the time window, or not through true time info
           //if not, skip this ican
           if (t->at(jentry) < varwindowmax) inwindow = true;
-          if (DWall->at(jentry) > 0.) inFV = true;
+          //if (DWall->at(jentry) > 0.) inFV = true;
         }
       }
 
@@ -937,12 +755,12 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(std::vector<float> *t,
             if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==3) TaggedTruthGdNeutronsinWin[iwin][ith]++;
             if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==1) MisTaggedDecayeinNlike[iwin][ith]++;
 
-            if (inFV) {
-              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWinFV[iwin][ith]++;
-              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==2) TaggedTruthHNeutronsinWinFV[iwin][ith]++;
-              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==3) TaggedTruthGdNeutronsinWinFV[iwin][ith]++;
-              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==1) MisTaggedDecayeinNlikeFV[iwin][ith]++;
-            }
+            //if (inFV) {
+            //  if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWinFV[iwin][ith]++;
+            //  if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==2) TaggedTruthHNeutronsinWinFV[iwin][ith]++;
+            //  if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==3) TaggedTruthGdNeutronsinWinFV[iwin][ith]++;
+            //  if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==1) MisTaggedDecayeinNlikeFV[iwin][ith]++;
+            //}
           }
           else {
             if (TagOut->at(ican)>TMVATH[ith] && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWin[iwin][ith]++;
@@ -950,12 +768,12 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(std::vector<float> *t,
             if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==3) TaggedTruthGdNeutronsinWin[iwin][ith]++;
             if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==1) MisTaggedDecayeinNlike[iwin][ith]++;
 
-            if (inFV) {
-              if (TagOut->at(ican)>TMVATH[ith] && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWinFV[iwin][ith]++;
-              if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==2) TaggedTruthHNeutronsinWinFV[iwin][ith]++;
-              if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==3) TaggedTruthGdNeutronsinWinFV[iwin][ith]++;
-              if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==1) MisTaggedDecayeinNlikeFV[iwin][ith]++;
-            }
+            //if (inFV) {
+            //  if (TagOut->at(ican)>TMVATH[ith] && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWinFV[iwin][ith]++;
+            //  if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==2) TaggedTruthHNeutronsinWinFV[iwin][ith]++;
+            //  if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==3) TaggedTruthGdNeutronsinWinFV[iwin][ith]++;
+            //  if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==1) MisTaggedDecayeinNlikeFV[iwin][ith]++;
+            //}
           }
 
         } //threshold scan
@@ -970,15 +788,15 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(std::vector<float> *t,
               if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
             }
             if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==0) MisTaggedAccNoiseinNlike[iwin][ith]++;
-            if (TagDWall->at(ican) > 0.) {
-              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==0) MisTaggedAccNoiseinNlikeFV[iwin][ith]++;
-            }
+            //if (TagDWall->at(ican) > 0.) {
+            //  if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==0) MisTaggedAccNoiseinNlikeFV[iwin][ith]++;
+            //}
           }
           else {
             if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==0) MisTaggedAccNoiseinNlike[iwin][ith]++;
-            if (TagDWall->at(ican) > 0.) {
-              if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==0) MisTaggedAccNoiseinNlikeFV[iwin][ith]++;
-            }
+            //if (TagDWall->at(ican) > 0.) {
+            //  if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==0) MisTaggedAccNoiseinNlikeFV[iwin][ith]++;
+            //}
           }
         }
       }
@@ -1081,12 +899,10 @@ void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float the
     if (mode==1) {
       if (NoNlike) {
         h1_OscProb_woNeutron[0] -> Fill(RecoEnu/1000., OscProb);
-
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCQE_woTagN += OscProb;
       }
       else {
         h1_OscProb_wNeutron[0] -> Fill(RecoEnu/1000., OscProb);
-
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCQE_wTagN += OscProb;
       }
     }
@@ -1095,12 +911,10 @@ void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float the
     if (mode>=2 && mode<=10) {
       if (NoNlike) {
         h1_OscProb_woNeutron[1] -> Fill(RecoEnu/1000., OscProb);
-
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCnonQE_woTagN += OscProb;
       }
       else {
         h1_OscProb_wNeutron[1] -> Fill(RecoEnu/1000., OscProb);
-
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCnonQE_wTagN += OscProb;
       }
     }
@@ -1121,12 +935,10 @@ void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float the
     if (mode==13) {
       if (NoNlike) {
         h1_OscProb_woNeutron[3]      -> Fill(RecoEnu/1000., OscProb);
-
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCRESp_woTagN += OscProb;
       }
       else {
         h1_OscProb_wNeutron[3]      -> Fill(RecoEnu/1000., OscProb);
-
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCRESp_wTagN += OscProb;
       }
     }
@@ -1134,12 +946,10 @@ void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float the
     if (mode==11) {
       if (NoNlike) {
         h1_OscProb_woNeutron[4]      -> Fill(RecoEnu/1000., OscProb);
-
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCRESpp_woTagN += OscProb;
       }
       else {
         h1_OscProb_wNeutron[4]      -> Fill(RecoEnu/1000., OscProb);
-
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCRESpp_wTagN += OscProb;
       }
     }
@@ -1147,12 +957,10 @@ void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float the
     if (mode==12) {
       if (NoNlike) {
         h1_OscProb_woNeutron[5]      -> Fill(RecoEnu/1000., OscProb);
-
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCRES0_woTagN += OscProb;
       }
       else {
         h1_OscProb_wNeutron[5]      -> Fill(RecoEnu/1000., OscProb);
-
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCRES0_wTagN += OscProb;
       }
     }
@@ -1161,12 +969,10 @@ void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float the
     if (mode>=14 && mode<=30) {
       if (NoNlike) {
         h1_OscProb_woNeutron[6]      -> Fill(RecoEnu/1000., OscProb);
-
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCOther_woTagN += OscProb;
       }
       else {
         h1_OscProb_wNeutron[6]      -> Fill(RecoEnu/1000., OscProb);
-
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) OscillatedCCOther_wTagN += OscProb;
       }
     }
@@ -1551,6 +1357,7 @@ void NTagAnalysis::SetNoiseRateGraph() {
   }
 }
 
+//Estimate efficiencies as a funxtion of time window and n-llikelihood
 void NTagAnalysis::GetEfficiencyforWinOpt() {
   //Threshold that noise rate becomes ~2%
   //note that this loop inverts the order of time window!(starts from 200 us, but not 535 us)
@@ -1608,15 +1415,17 @@ void NTagAnalysis::GetEfficiencyforWinOpt() {
 }
 
 void NTagAnalysis::GetPreEfficiency(int windowstep) {
-  //Pre-selection
-  PreEff       = (float)TruthNeutroninCandidatesinWin[windowstep] / AllTruthNeutronsinSearch[windowstep];
-  //PreEff       = (float)TruthNeutroninCandidatesinWin[windowstep] / AllTruthNeutrons;
-  PreHEff      = (float)TruthHNeutroninCandidatesinWin[windowstep] / TruthHNeutronsinSearch[windowstep];
-  PreGdEff     = (float)TruthGdNeutroninCandidatesinWin[windowstep] / TruthGdNeutronsinSearch[windowstep];
+  //Pre-selection (count truth neutrons from 3 usec up to windowstep maximum)
+  //PreEff       = (float)TruthNeutroninCandidatesinWin[windowstep] / AllTruthNeutronsinSearch[windowstep];
+  //PreHEff      = (float)TruthHNeutroninCandidatesinWin[windowstep] / TruthHNeutronsinSearch[windowstep];
+  //PreGdEff     = (float)TruthGdNeutroninCandidatesinWin[windowstep] / TruthGdNeutronsinSearch[windowstep];
+  PreEff       = (float)TruthNeutroninCandidatesinWin[windowstep] / AllTruthNeutrons;
+  PreHEff      = (float)TruthHNeutroninCandidatesinWin[windowstep] / TruthHNeutrons;
+  PreGdEff     = (float)TruthGdNeutroninCandidatesinWin[windowstep] / TruthGdNeutrons;
 
-  PreEffinFV   = (float)TruthNeutroninCandidatesinWinFV[windowstep] / AllTruthNeutronsinSearchFV[windowstep];
-  PreHEffinFV  = (float)TruthHNeutroninCandidatesinWinFV[windowstep] / TruthHNeutronsinSearchFV[windowstep];
-  PreGdEffinFV = (float)TruthGdNeutroninCandidatesinWinFV[windowstep] / TruthGdNeutronsinSearchFV[windowstep];
+  //PreEffinFV   = (float)TruthNeutroninCandidatesinWinFV[windowstep] / AllTruthNeutronsinSearchFV[windowstep];
+  //PreHEffinFV  = (float)TruthHNeutroninCandidatesinWinFV[windowstep] / TruthHNeutronsinSearchFV[windowstep];
+  //PreGdEffinFV = (float)TruthGdNeutroninCandidatesinWinFV[windowstep] / TruthGdNeutronsinSearchFV[windowstep];
 }
 
 void NTagAnalysis::GetNNEfficiency(int windowstep) {
@@ -1625,22 +1434,24 @@ void NTagAnalysis::GetNNEfficiency(int windowstep) {
     NNHEff[ith]      = (float)TaggedTruthHNeutronsinWin[windowstep][ith] / TruthHNeutroninCandidatesinWin[windowstep];
     NNGdEff[ith]     = (float)TaggedTruthGdNeutronsinWin[windowstep][ith] / TruthGdNeutroninCandidatesinWin[windowstep];
 
-    NNEffinFV[ith]   = (float)TaggedTruthNeutronsinWinFV[windowstep][ith] / TruthNeutroninCandidatesinWinFV[windowstep];
-    NNHEffinFV[ith]  = (float)TaggedTruthHNeutronsinWinFV[windowstep][ith] / TruthHNeutroninCandidatesinWinFV[windowstep];
-    NNGdEffinFV[ith] = (float)TaggedTruthGdNeutronsinWinFV[windowstep][ith] / TruthGdNeutroninCandidatesinWinFV[windowstep];
+    //NNEffinFV[ith]   = (float)TaggedTruthNeutronsinWinFV[windowstep][ith] / TruthNeutroninCandidatesinWinFV[windowstep];
+    //NNHEffinFV[ith]  = (float)TaggedTruthHNeutronsinWinFV[windowstep][ith] / TruthHNeutroninCandidatesinWinFV[windowstep];
+    //NNGdEffinFV[ith] = (float)TaggedTruthGdNeutronsinWinFV[windowstep][ith] / TruthGdNeutroninCandidatesinWinFV[windowstep];
   }
 }
 
 void NTagAnalysis::GetOverallEfficiency(int windowstep) {
   for (int ith=0; ith<CUTSTEP; ith++) {
-    OverallEff[ith]       = (float)TaggedTruthNeutronsinWin[windowstep][ith] / AllTruthNeutronsinSearch[windowstep];
-    //OverallEff[ith]       = (float)TaggedTruthNeutronsinWin[windowstep][ith] / AllTruthNeutrons;
-    OverallHEff[ith]      = (float)TaggedTruthHNeutronsinWin[windowstep][ith] / TruthHNeutronsinSearch[windowstep];
-    OverallGdEff[ith]     = (float)TaggedTruthGdNeutronsinWin[windowstep][ith] / TruthGdNeutronsinSearch[windowstep];
+    //OverallEff[ith]       = (float)TaggedTruthNeutronsinWin[windowstep][ith] / AllTruthNeutronsinSearch[windowstep];
+    //OverallHEff[ith]      = (float)TaggedTruthHNeutronsinWin[windowstep][ith] / TruthHNeutronsinSearch[windowstep];
+    //OverallGdEff[ith]     = (float)TaggedTruthGdNeutronsinWin[windowstep][ith] / TruthGdNeutronsinSearch[windowstep];
+    OverallEff[ith]       = (float)TaggedTruthNeutronsinWin[windowstep][ith] / AllTruthNeutrons;
+    OverallHEff[ith]      = (float)TaggedTruthHNeutronsinWin[windowstep][ith] / TruthHNeutrons;
+    OverallGdEff[ith]     = (float)TaggedTruthGdNeutronsinWin[windowstep][ith] / TruthGdNeutrons;
 
-    OverallEffinFV[ith]   = (float)TaggedTruthNeutronsinWinFV[windowstep][ith] / AllTruthNeutronsinSearchFV[windowstep];
-    OverallHEffinFV[ith]  = (float)TaggedTruthHNeutronsinWinFV[windowstep][ith] / TruthHNeutronsinSearchFV[windowstep];
-    OverallGdEffinFV[ith] = (float)TaggedTruthGdNeutronsinWinFV[windowstep][ith] / TruthGdNeutronsinSearchFV[windowstep];
+    //OverallEffinFV[ith]   = (float)TaggedTruthNeutronsinWinFV[windowstep][ith] / AllTruthNeutronsinSearchFV[windowstep];
+    //OverallHEffinFV[ith]  = (float)TaggedTruthHNeutronsinWinFV[windowstep][ith] / TruthHNeutronsinSearchFV[windowstep];
+    //OverallGdEffinFV[ith] = (float)TaggedTruthGdNeutronsinWinFV[windowstep][ith] / TruthGdNeutronsinSearchFV[windowstep];
   }
 }
 
@@ -1980,7 +1791,7 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
         tscndlist.push_back(tscnd[jsub]/1000.);
         TrueNCap++;
         //h1_mintimediff_NCap -> Fill(tscnd[jsub]/1000.);
-        h1_TrueNCapTime -> Fill(tscnd[jsub]/1000.);
+        //h1_TrueNCapTime -> Fill(tscnd[jsub]/1000.);
       }
       else {
         bool NewNeutron = false;
@@ -2000,7 +1811,7 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
           vtxscndZlist.push_back(vtxscndZ);
           tscndlist.push_back(tscnd[jsub]/1000.);
           TrueNCap++;
-          h1_TrueNCapTime -> Fill(tscnd[jsub]/1000.);
+          //h1_TrueNCapTime -> Fill(tscnd[jsub]/1000.);
         }
       }
 
@@ -2041,10 +1852,10 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
         if (Label->at(ican)==2) h1_RecoNCapTime[2] -> Fill(FitT->at(ican));  //H-n
         if (Label->at(ican)==3) h1_RecoNCapTime[3] -> Fill(FitT->at(ican));  //Gd-n
 
-        if (Label->at(ican)==0) h1_N50[0] -> Fill(NHits->at(ican));
-        if (Label->at(ican)==1) h1_N50[1] -> Fill(NHits->at(ican));
-        if (Label->at(ican)==2) h1_N50[2] -> Fill(NHits->at(ican));
-        if (Label->at(ican)==3) h1_N50[3] -> Fill(NHits->at(ican));
+        //if (Label->at(ican)==0) h1_N50[0] -> Fill(NHits->at(ican));
+        //if (Label->at(ican)==1) h1_N50[1] -> Fill(NHits->at(ican));
+        //if (Label->at(ican)==2) h1_N50[2] -> Fill(NHits->at(ican));
+        //if (Label->at(ican)==3) h1_N50[3] -> Fill(NHits->at(ican));
       }
     }
     else {
@@ -2071,7 +1882,7 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
     //1. Find pre-minimum pair
     //  1 truth -> all reco
     ///////////////////////////////////
-    int tmp_itr_true = 999; //pre-minimum true
+    //int tmp_itr_true = 999; //pre-minimum true
     int tmp_itr_reco = 999; //pre-minimum reco
     //Truth loop
     float pre_min = 9999999.; //time difference of the minimum reco particle for the itrue-th particle
@@ -2103,7 +1914,7 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
         //update (pre-minimum pair)
         if (pre_min > timediff) {
           pre_min = timediff;
-          tmp_itr_true = itrue;
+          //tmp_itr_true = itrue;
           tmp_itr_reco = ireco;
         }
       }
@@ -2371,51 +2182,6 @@ void NTagAnalysis::TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, s
 }
 
 
-/*void NTagAnalysis::N1Rmu_x_Neutronkinematics(CC0PiNumu* numu, float knmtcs, double* xbins, int* N1Rmu_x_knmtcs, TH1F** h1, int bintype) {
-  int mode = TMath::Abs(numu->var<int>("mode"));
-  float OscProb = numu->getOscWgt();
-  switch (bintype) {
-    case 0:
-      for (int ibin=0; ibin<binnumber_nu-1; ibin++) {
-        if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
-          N1Rmu_x_knmtcs[ibin]++;
-          if (mode==1)             h1[0] -> Fill(knmtcs, OscProb);
-          if (mode>=2 && mode<=10) h1[1] -> Fill(knmtcs, OscProb);
-          if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
-          if (mode>=31)            h1[3] -> Fill(knmtcs, OscProb);
-        }
-      }
-      if (knmtcs>xbins[binnumber_nu-1]) {
-        N1Rmu_x_knmtcs[binnumber_nu-1]++;
-        if (mode==1)             h1[0] -> Fill(knmtcs, OscProb);
-        if (mode>=2 && mode<=10) h1[1] -> Fill(knmtcs, OscProb);
-        if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
-        if (mode>=31)            h1[3] -> Fill(knmtcs, OscProb);
-      }
-      break;
-    case 1:
-      for (int ibin=0; ibin<binnumber_mu-1; ibin++) {
-        if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
-          N1Rmu_x_knmtcs[ibin]++;
-          if (mode==1)             h1[0] -> Fill(knmtcs, OscProb);
-          if (mode>=2 && mode<=10) h1[1] -> Fill(knmtcs, OscProb);
-          if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
-          if (mode>=31)            h1[3] -> Fill(knmtcs, OscProb);
-        }
-      }
-      if (knmtcs>xbins[binnumber_mu-1]) {
-        N1Rmu_x_knmtcs[binnumber_mu-1]++;
-        if (mode==1)             h1[0] -> Fill(knmtcs, OscProb);
-        if (mode>=2 && mode<=10) h1[1] -> Fill(knmtcs, OscProb);
-        if (mode>10 && mode<=30) h1[2] -> Fill(knmtcs, OscProb);
-        if (mode>=31)            h1[3] -> Fill(knmtcs, OscProb);
-      }
-      break;
-    default:
-      break;
-  }
-}*/
-
 void NTagAnalysis::TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<float> *Label, UInt_t ican, float knmtcs, double* xbins, int* TaggedN_x_knmtcs, TH1F** h1, int bintype) {
   int mode = TMath::Abs(numu->var<int>("mode"));
   float OscProb = numu->getOscWgt();
@@ -2512,30 +2278,15 @@ void NTagAnalysis::cdNTagAnalysis(TFile* fout) {
 }
 
 void NTagAnalysis::WritePlots() {
-  Double_t tot_GenPrmNeutrons = h1_GenPrmNeutrons->Integral();
-  h1_GenPrmNeutrons    -> Scale(1./tot_GenPrmNeutrons);
+
   h1_GenPrmNeutrons    -> Write();
-
-  Double_t tot_GenAftFSINeutrons = h1_GenAftFSINeutrons->Integral();
-  h1_GenAftFSINeutrons -> Scale(1./tot_GenAftFSINeutrons);
-  h1_GenAftFSINeutrons -> Write();
-
-  Double_t tot_GenAftSINeutrons = h1_GenAftSINeutrons->Integral();
-  h1_GenAftSINeutrons  -> Scale(1./tot_GenAftSINeutrons);
   h1_GenAftSINeutrons  -> Write();
-
-  Double_t tot_GenAtSINeutrons = h1_GenAtSINeutrons->Integral();
-  //h1_GenAtSINeutrons  -> Scale(1./tot_GenAtSINeutrons);
-  h1_GenAtSINeutrons  -> Write();
-
-  Double_t tot_GenBefSINeutrons = h1_GenBefSINeutrons->Integral();
-  //h1_GenBefSINeutrons  -> Scale(1./tot_GenBefSINeutrons);
   h1_GenBefSINeutrons  -> Write();
 
   h1_TrueNCapTime -> Write();
   for (int i=0; i<4; i++) {
     h1_RecoNCapTime[i] -> Write();
-    h1_N50[i] -> Write();
+    //h1_N50[i] -> Write();
   }
   h1_mintimediff_NCap -> Write();
   h1_NCapVtxReso -> Write();
@@ -2565,13 +2316,14 @@ void NTagAnalysis::WritePlots() {
     h1_TaggedN_x_MuAngle[i] -> Write();
 
     h1_TaggedN_x_nTraveld[i] -> Write();
+    h1_TaggedN_x_MuStp_NCap[i] -> Write();
   }
   
   for (int i=0; i<TRUETYPE; i++) {
-    Double_t tot = h1_NTrueN[i]->Integral();
+  //  Double_t tot = h1_NTrueN[i]->Integral();
     //h1_NTrueN[i] -> Scale(1./tot);
     h1_NTrueN[i] -> Write();
-    h1_hitsearch[i] -> Write();
+    //h1_hitsearch[i] -> Write();
   }
   h1_TrueMuN -> Write();
   h1_TrueNuN -> Write();
@@ -2604,23 +2356,26 @@ void NTagAnalysis::WritePlots() {
     h1_TagNmultiplicity[i]  -> Write();
   }
 
-  for (int i=0; i<WINSTEP; i++) {
-    g_NoiseRate[i] -> Write();
-  }
-  g_NNEffwin        -> Write();
-  g_NNHEffwin       -> Write();
-  g_NNGdEffwin      -> Write();
-  g_OverallEffwin   -> Write();
-  g_OverallHEffwin  -> Write();
-  g_OverallGdEffwin -> Write();
+  //Noise rate as a function of TagOut for each time window
+  for (int i=0; i<WINSTEP; i++) g_NoiseRate[i] -> Write();  //Graph1-6
+  //Efficiency as a function of the maximum of time window
+  g_NNEffwin        -> Write();  //Graph7
+  g_NNHEffwin       -> Write();  //Graph8
+  g_NNGdEffwin      -> Write();  //Graph9
+  g_OverallEffwin   -> Write();  //Graph10
+  g_OverallHEffwin  -> Write();  //Graph11
+  g_OverallGdEffwin -> Write();  //Graph12
 
-  g_NNEff         -> Write();
-  g_NNHEff        -> Write();
-  g_NNGdEff       -> Write();
-  g_OverallEff    -> Write();
-  g_OverallHEff   -> Write();
-  g_OverallGdEff  -> Write();
-  g_Purity        -> Write();
-  g_FillNoiseRate -> Write();
+  //Efficiency as a funtcion of TagOut
+  g_NNEff         -> Write();  //Graph13
+  g_NNHEff        -> Write();  //Graph14
+  g_NNGdEff       -> Write();  //Graph15
+  g_OverallEff    -> Write();  //Graph16
+  g_OverallHEff   -> Write();  //Graph17
+  g_OverallGdEff  -> Write();  //Graph18
+  //Purity as a funtcion of TagOut
+  g_Purity        -> Write();  //Graph19
+  //Noise rate as a funtcion of TagOut at a ceratin time window
+  g_FillNoiseRate -> Write();  //Graph20
 }
 

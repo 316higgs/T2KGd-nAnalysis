@@ -7,13 +7,15 @@
 #include "TGaxis.h"
 #include "TPaveStats.h"
 #include "THStack.h"
-#include "CC0PiNumu.h"  //src: /disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu
+//#include "CC0PiNumu.h"  //src: /disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu
 #include "DefBeamMode.h"
-#include "DefOscChannels.h"
+//#include "DefOscChannels.h"
 
 #include "include/NeutrinoEvents.h"
 #include "include/NTagVariables.h"
 #include "include/CLTOption.h"
+#include "include/ResultSummary.h"
+#include "include/VECTChannelChecker.h"
 
 #include "src/DecayeBox/inc/DecayeBox.h"
 #include "src/Gd1RmuonSelection/inc/Gd1RmuonSelection.h"
@@ -189,6 +191,7 @@ int main(int argc, char **argv) {
   ntagana.SetHistoFrame();
   ntagana.SetHistoFormat();
 
+  float WinMin = 3.;
 
   //Process
   if (MCTypeKeyword=="-MCType") {
@@ -205,7 +208,7 @@ int main(int argc, char **argv) {
   for (int ientry=0; ientry<processmax; ientry++) {
 
   	//Progress meter
-    if(ientry>100 && ientry%100==0) std::cout << "[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%" << std::endl;
+    if(ientry>100 && ientry%100==0) std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%\e[0m" << std::endl;
 
     tchfQ       -> GetEntry(ientry);
     tchev       -> GetEntry(ientry);
@@ -239,7 +242,7 @@ int main(int argc, char **argv) {
 
       if (MCType=="Water" || MCType=="water") continue;
 
-      ntagana.GetTruthNeutrons(NTrueN, E->size(), Type, E, DWall);
+      ntagana.GetTruthNeutrons(NTrueN, numu, Type, E, DWall);
 
       //need?
       //if (NTrueN==0) continue;
@@ -252,8 +255,8 @@ int main(int argc, char **argv) {
         }
       }
 
-      ntagana.GetTruthNeutronsinSearch(t->size(), Type, t, 3., E, DWall);
-      ntagana.GetTruthDecayeinSearch(t->size(), Type, t, 3.);
+      ntagana.GetTruthNeutronsinSearch(t->size(), Type, t, WinMin, E, DWall);
+      ntagana.GetTruthDecayeinSearch(t->size(), Type, t, WinMin);
 
 
       //Check truth breakdown(H-n/Gd-n/Decay-e/Acc.Noise) of candidates in the time window
@@ -283,7 +286,7 @@ int main(int argc, char **argv) {
   TString outputname  = OutputRootName + ".TWIDTH" + TWIDTH + ".NHITSTH" + NHITSTH + ".root";
 
   //ntagana.SummaryTruthInfoinSearch(3., ResultSummary);
-  ntagana.SummaryTruthInfoinSearch(3., summaryname);
+  ntagana.SummaryTruthInfoinSearch(WinMin, summaryname);
 
   TFile* fout = new TFile(outputname, "RECREATE");
   std::cout << "Output: " << outputname << std::endl;

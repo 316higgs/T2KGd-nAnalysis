@@ -77,17 +77,17 @@ TGraphErrors* g_FillNoiseRate;
 //Capture vertex resolution
 TH1F* h1_TrueNCapTime;
 TH1F* h1_RecoNCapTime[4];
-TH1F* h1_N50[4];
+//TH1F* h1_N50[4];
 TH1F* h1_mintimediff_NCap;
 TH1F* h1_NCapVtxReso;
 
 TH1F* h1_GenPrmNeutrons;
-TH1F* h1_GenAftFSINeutrons;
+//TH1F* h1_GenAftFSINeutrons;
 TH1F* h1_GenAftSINeutrons;  // = h1_GenBefSINeutrons + h1_GenAtSINeutrons
 TH1F* h1_GenBefSINeutrons;  // captured neutrons from nu+FSI
-TH1F* h1_GenAtSINeutrons;   // captured neutrons from SI
-int AllBefSINeutrons = 0;
-int CapBefSINeutrons = 0;
+//TH1F* h1_GenAtSINeutrons;   // captured neutrons from SI
+//int AllBefSINeutrons = 0;
+//int CapBefSINeutrons = 0;
 TH1F* h1_GenBefSInE;
 TH1F* h1_GenSInE;
 
@@ -103,6 +103,7 @@ double xMuPtbins[binnumber_mu]  = {0, 0.25, 0.5, 0.75, 1.5};
 double xQ2bins[binnumber_mu]    = {0, 0.25, 0.5, 0.75, 3.};
 double xMuAnglebins[binnumber_mu] = {-1, -0.5, 0., 0.5, 1.};
 double xnTraveldbins[binnumber_n] = {0, 100., 200., 400., 600., 1000., 1500.};
+double xMuStp_NCapbins[binnumber_n] = {0, 100., 200., 400., 600., 1000., 1500.};
 
 int N1Rmu_x_Enu[binnumber_nu]   = {0};
 int N1Rmu_x_MuMom[binnumber_mu] = {0};
@@ -121,12 +122,14 @@ int TaggedN_x_MuPt[binnumber_mu]  = {0};
 int TaggedN_x_Q2[binnumber_mu]    = {0};
 int TaggedN_x_MuAngle[binnumber_mu] = {0};
 int TaggedN_x_nTraveld[binnumber_n] = {0};
+int TaggedN_x_MuStp_NCap[binnumber_n] = {0};
 TH1F* h1_TaggedN_x_Enu[5];
 TH1F* h1_TaggedN_x_MuMom[5];
 TH1F* h1_TaggedN_x_MuPt[5];
 TH1F* h1_TaggedN_x_Q2[5];
 TH1F* h1_TaggedN_x_MuAngle[5];
 TH1F* h1_TaggedN_x_nTraveld[5];
+TH1F* h1_TaggedN_x_MuStp_NCap[5];
 
 int TrueN_x_Enu[binnumber_nu]   = {0};
 int TrueN_x_MuMom[binnumber_nu] = {0};

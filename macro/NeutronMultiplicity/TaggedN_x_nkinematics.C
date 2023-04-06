@@ -52,7 +52,8 @@ void TaggedN_x_nkinematics(bool beammode) {
   std::cout << "Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
 
 
-  TString KnmtcName = "nTraveld";
+  //TString KnmtcName = "nTraveld";
+  TString KnmtcName = "MuStp_NCap";
 
   TString Prefix      = "NTagAnalysis/h1_TaggedN_x_";
   TString CCQEName    = "_mode0";
@@ -152,6 +153,7 @@ void TaggedN_x_nkinematics(bool beammode) {
   hs_merge ->GetYaxis()->SetTitleOffset(1.1);
   hs_merge ->GetYaxis()->SetLabelSize(0.036);
   if (KnmtcName=="nTraveld") hs_merge->GetXaxis()->SetTitle("Reconstructed Neutron Travel Distance [cm]");
+  if (KnmtcName=="MuStp_NCap") hs_merge->GetXaxis()->SetTitle("Distance b/w #mu Stopping and n Capture Vertices [cm]");
   hs_merge->GetYaxis()->SetTitle("Number of Tagged Neutrons");
   hs_merge -> Draw();
   c1->RedrawAxis();

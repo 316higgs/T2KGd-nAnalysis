@@ -7,7 +7,9 @@
 void Efficiency() {
   //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagOFF.root");
   //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.root");
-  TFile* fin = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.noinpmt.root");
+  //TFile* fin = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.noinpmt.root");
+
+  TFile* fin = new TFile("../../output/TWIDTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH25.root");
 
   TGraphErrors* g_NNEff    = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;13");
   TGraphErrors* g_NNHEff   = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;14");
@@ -39,8 +41,8 @@ void Efficiency() {
 
   TLegend* legend1 = new TLegend(0.7, 0.85, 0.85, 0.87);
   legend1 -> SetTextSize(0.04);
-  //legend1->AddEntry((TObject*)0,"#kern[-0.5]{FHC #nu_{#mu}#rightarrow#nu_{#mu} MC}","");
-  legend1->AddEntry((TObject*)0,"#kern[-0.5]{FHC #bar{#nu}_{#mu}#rightarrow#bar{#nu}_{#mu} MC}","");
+  legend1->AddEntry((TObject*)0,"#kern[-0.5]{FHC #nu_{#mu}#rightarrow#nu_{#mu} MC}","");
+  //legend1->AddEntry((TObject*)0,"#kern[-0.5]{FHC #bar{#nu}_{#mu}#rightarrow#bar{#nu}_{#mu} MC}","");
   legend1->SetLineColor(0);
   legend1->SetFillColor(0);
   legend1->SetFillStyle(0);

@@ -59,48 +59,48 @@ int main(int argc, char **argv) {
   TChain *tchfQ = new TChain("h1");
   int nfQFiles = tchfQ->Add( fiTQunFileName );
   if ( nfQFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree h1 from: " << fiTQunFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree h1 from: \e[0m" << fiTQunFileName << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //=========  Event info (TTree: event)  ============
   TChain *tchev = new TChain("event");
   int nevFiles = tchev->Add( NtagFileName );
   if ( nevFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree event from: " << NtagFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree event from: \e[0m" << NtagFileName << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //=========  Event info (TTree: particle)  ============
   TChain *tchpar = new TChain("particle");
   int nparFiles = tchpar->Add( NtagFileName );
   if ( nparFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree particle from: " << NtagFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree particle from: \e[0m" << NtagFileName << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //=========  Delayed info (TTree: taggable)  ============
   TChain *tchtaggable = new TChain("taggable");
   int ntaggableFiles = tchtaggable->Add( NtagFileName );
   if ( ntaggableFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree taggable from: " << NtagFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree taggable from: \e[0m" << NtagFileName << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //=========  NTag output (TTree: ntag)  ============
   TChain *tchntag = new TChain("ntag");
   int ntagFiles = tchntag->Add( NtagFileName );
   if ( ntagFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree ntag from: " << NtagFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree ntag from: \e[0m" << NtagFileName << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //Load succeed
-  std::cout << "[### analysis1Rmu ###]  Loaded " << nfQFiles       << " files from: " << fiTQunFileName << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Loaded " << nevFiles       << " files from: " << NtagFileName   << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Loaded " << nparFiles      << " files from: " << NtagFileName   << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Loaded " << ntaggableFiles << " files from: " << NtagFileName   << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Loaded " << ntagFiles      << " files from: " << NtagFileName   << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << nfQFiles       << " files from: \e[0m" << fiTQunFileName << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << nevFiles       << " files from: \e[0m" << NtagFileName   << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << nparFiles      << " files from: \e[0m" << NtagFileName   << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << ntaggableFiles << " files from: \e[0m" << NtagFileName   << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << ntagFiles      << " files from: \e[0m" << NtagFileName   << std::endl;
 
 
   const int nfQEntries       = tchfQ->GetEntries();       //total entries of TTree h1
@@ -108,11 +108,11 @@ int main(int argc, char **argv) {
   const int nparEntries      = tchpar->GetEntries();       //total entries of TTree particle
   const int ntaggableEntries = tchtaggable->GetEntries(); //total entries of TTree taggable
   const int ntagEntries      = tchntag->GetEntries();     //total entries of TTree ntag
-  std::cout << "[### analysis1Rmu ###]  fiTQun output     : Processing " << nfQEntries       <<" entries..." << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Event info        : Processing " << nevEntries       <<" entries..." << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Particle info     : Processing " << nparEntries      <<" entries..." << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Delayed info      : Processing " << ntaggableEntries <<" entries..." << std::endl;
-  std::cout << "[### analysis1Rmu ###]  NTag output       : Processing " << ntagEntries      <<" entries..." << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  fiTQun output     : Processing " << nfQEntries       <<" entries...\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Event info        : Processing " << nevEntries       <<" entries...\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Particle info     : Processing " << nparEntries      <<" entries...\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Delayed info      : Processing " << ntaggableEntries <<" entries...\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  NTag output       : Processing " << ntagEntries      <<" entries...\e[0m" << std::endl;
 
 
   //=========  TTree event variables  ============
@@ -268,7 +268,7 @@ int main(int argc, char **argv) {
     else if (MCType=="Water" || MCType=="water") processmax = nfQEntries;
     else {
       std::cout << " " << std::endl;
-      std::cout << "[!!!CLT error!!!] MC type can not be found. --- input Gd or Water" << std::endl;
+      std::cout << "\e[38;5;A0m\e[1m[!!!CLT error!!!] MC type can not be found. --- input Gd or Water\e[0m" << std::endl;
       exit(-1); 
     }
   }
@@ -277,7 +277,7 @@ int main(int argc, char **argv) {
   for (int ientry=0; ientry<processmax; ientry++) {
 
   	//Progress meter
-    if(ientry>100 && ientry%100==0) std::cout << "[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%" << std::endl;
+    if(ientry>100 && ientry%100==0) std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%\e[0m" << std::endl;
 
     //All neutrino events
     AllParentNeutrinos++;
@@ -939,7 +939,7 @@ int main(int argc, char **argv) {
   //noise rate and efficiency for window optimization
   ntagana.SetNoiseRateGraph();
   ntagana.GetEfficiencyforWinOpt();
-  ntagana.SetEfficiencyGraph(0);
+  ntagana.SetEfficiencyGraph(0);  //0 for [3 us, 535 us]
 
   ntagana.cdNTagAnalysis(fout);
   ntagana.WritePlots();
