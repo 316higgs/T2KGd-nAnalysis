@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../include/Const.h"
+//#include "../../../include/Const.h"
 
 float GetDWall(float *Vtx) {
   float dwall = 0.;
@@ -49,4 +49,9 @@ float GetSimpleDistance(float *Vtx1, float *Vtx2) {
   float d   = std::sqrt( d_x*d_x + d_y*d_y + d_z*d_z ); 
   //std::cout << "Distance: " << d << std::endl;
   return d;
+}
+
+float GetInnerProduct(float *Vtx1, float *Vtx2) {
+  float IP = Vtx1[0]*Vtx2[0] + Vtx1[1]*Vtx2[1] + Vtx1[2]*Vtx2[2];
+  return IP;
 }

@@ -12,6 +12,8 @@
 //Selected events by 1R muon selection
 TH1F* h1_1RmuonEvents;
 TH1F* h1_Proto1RmuonEvents;
+TH1F* h1_SelNuEvents[4];
+TH1F* h1_SelTagN[4];
 
 
 TH1F* h1_dwall[INTERACTIONTYPE];

@@ -15,9 +15,9 @@
 [Candidates] Truth Decay e in Candidates in [3 us, 535 us]      : 12450
 [Candidates] Truth Acc. Noise in Candidates in [3 us, 535 us]   : 6459029
 [Candidates] All Candidates in [3 us, 535 us]   : 6586527
-[   Pre    ] Pre-selection Efficiency(Gd+H): 57.2604 %
-[   Pre    ] Pre-selection Efficiency(H)   : 23.6452 %
-[   Pre    ] Pre-selection Efficiency(Gd)  : 89.3996 %
+[   Pre    ] Pre-selection Efficiency(Gd+H): 56.375 %
+[   Pre    ] Pre-selection Efficiency(H)   : 23.0365 %
+[   Pre    ] Pre-selection Efficiency(Gd)  : 88.9142 %
 [    NN    ] ===== Threshold: 0 =====
 [    NN    ]  ----------- n-like candidates -----------
 [    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 51295
@@ -37,9 +37,9 @@
 [    NN    ] NN Efficiency(Gd+H): 99.9922 %
 [    NN    ] NN Efficiency(H)   : 100 %
 [    NN    ] NN Efficiency(Gd)  : 99.9902 %
-[  Overall ] Overall Efficiency(Gd+H): 57.2559 %
-[  Overall ] Overall Efficiency(H)   : 23.6452 %
-[  Overall ] Overall Efficiency(Gd)  : 89.3908 %
+[  Overall ] Overall Efficiency(Gd+H): 56.3706 %
+[  Overall ] Overall Efficiency(H)   : 23.0365 %
+[  Overall ] Overall Efficiency(Gd)  : 88.9055 %
 [  Purity  ] Purity: 0.787899
 [    NN    ] ===== Threshold: 0.05 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -60,9 +60,9 @@
 [    NN    ] NN Efficiency(Gd+H): 83.1186 %
 [    NN    ] NN Efficiency(H)   : 35.3873 %
 [    NN    ] NN Efficiency(Gd)  : 95.1887 %
-[  Overall ] Overall Efficiency(Gd+H): 47.594 %
-[  Overall ] Overall Efficiency(H)   : 8.3674 %
-[  Overall ] Overall Efficiency(Gd)  : 85.0983 %
+[  Overall ] Overall Efficiency(Gd+H): 46.8581 %
+[  Overall ] Overall Efficiency(H)   : 8.152 %
+[  Overall ] Overall Efficiency(Gd)  : 84.6363 %
 [  Purity  ] Purity: 49.7109
 [    NN    ] ===== Threshold: 0.1 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -83,9 +83,9 @@
 [    NN    ] NN Efficiency(Gd+H): 80.5357 %
 [    NN    ] NN Efficiency(H)   : 28.4335 %
 [    NN    ] NN Efficiency(Gd)  : 93.7111 %
-[  Overall ] Overall Efficiency(Gd+H): 46.115 %
-[  Overall ] Overall Efficiency(H)   : 6.72315 %
-[  Overall ] Overall Efficiency(Gd)  : 83.7773 %
+[  Overall ] Overall Efficiency(Gd+H): 45.402 %
+[  Overall ] Overall Efficiency(H)   : 6.55008 %
+[  Overall ] Overall Efficiency(Gd)  : 83.3225 %
 [  Purity  ] Purity: 69.4003
 [    NN    ] ===== Threshold: 0.15 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -106,9 +106,9 @@
 [    NN    ] NN Efficiency(Gd+H): 78.9937 %
 [    NN    ] NN Efficiency(H)   : 25.0918 %
 [    NN    ] NN Efficiency(Gd)  : 92.6243 %
-[  Overall ] Overall Efficiency(Gd+H): 45.2321 %
-[  Overall ] Overall Efficiency(H)   : 5.933 %
-[  Overall ] Overall Efficiency(Gd)  : 82.8057 %
+[  Overall ] Overall Efficiency(Gd+H): 44.5327 %
+[  Overall ] Overall Efficiency(H)   : 5.78027 %
+[  Overall ] Overall Efficiency(Gd)  : 82.3561 %
 [  Purity  ] Purity: 78.0279
 [    NN    ] ===== Threshold: 0.2 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -129,9 +129,9 @@
 [    NN    ] NN Efficiency(Gd+H): 77.83 %
 [    NN    ] NN Efficiency(H)   : 22.7159 %
 [    NN    ] NN Efficiency(Gd)  : 91.767 %
-[  Overall ] Overall Efficiency(Gd+H): 44.5657 %
-[  Overall ] Overall Efficiency(H)   : 5.37121 %
-[  Overall ] Overall Efficiency(Gd)  : 82.0393 %
+[  Overall ] Overall Efficiency(Gd+H): 43.8767 %
+[  Overall ] Overall Efficiency(H)   : 5.23295 %
+[  Overall ] Overall Efficiency(Gd)  : 81.5939 %
 [  Purity  ] Purity: 82.9355
 [    NN    ] ===== Threshold: 0.25 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -152,9 +152,9 @@
 [    NN    ] NN Efficiency(Gd+H): 76.8826 %
 [    NN    ] NN Efficiency(H)   : 20.8036 %
 [    NN    ] NN Efficiency(Gd)  : 91.0636 %
-[  Overall ] Overall Efficiency(Gd+H): 44.0233 %
-[  Overall ] Overall Efficiency(H)   : 4.91904 %
-[  Overall ] Overall Efficiency(Gd)  : 81.4105 %
+[  Overall ] Overall Efficiency(Gd+H): 43.3426 %
+[  Overall ] Overall Efficiency(H)   : 4.79242 %
+[  Overall ] Overall Efficiency(Gd)  : 80.9685 %
 [  Purity  ] Purity: 85.9372
 [    NN    ] ===== Threshold: 0.3 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -175,9 +175,9 @@
 [    NN    ] NN Efficiency(Gd+H): 76.0229 %
 [    NN    ] NN Efficiency(H)   : 19.2196 %
 [    NN    ] NN Efficiency(Gd)  : 90.3871 %
-[  Overall ] Overall Efficiency(Gd+H): 43.531 %
-[  Overall ] Overall Efficiency(H)   : 4.54452 %
-[  Overall ] Overall Efficiency(Gd)  : 80.8057 %
+[  Overall ] Overall Efficiency(Gd+H): 42.8579 %
+[  Overall ] Overall Efficiency(H)   : 4.42754 %
+[  Overall ] Overall Efficiency(Gd)  : 80.367 %
 [  Purity  ] Purity: 88.1015
 [    NN    ] ===== Threshold: 0.35 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -198,9 +198,9 @@
 [    NN    ] NN Efficiency(Gd+H): 75.2042 %
 [    NN    ] NN Efficiency(H)   : 17.9254 %
 [    NN    ] NN Efficiency(Gd)  : 89.6886 %
-[  Overall ] Overall Efficiency(Gd+H): 43.0622 %
-[  Overall ] Overall Efficiency(H)   : 4.23851 %
-[  Overall ] Overall Efficiency(Gd)  : 80.1812 %
+[  Overall ] Overall Efficiency(Gd+H): 42.3964 %
+[  Overall ] Overall Efficiency(H)   : 4.1294 %
+[  Overall ] Overall Efficiency(Gd)  : 79.7459 %
 [  Purity  ] Purity: 89.7061
 [    NN    ] ===== Threshold: 0.4 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -221,9 +221,9 @@
 [    NN    ] NN Efficiency(Gd+H): 74.5258 %
 [    NN    ] NN Efficiency(H)   : 16.8437 %
 [    NN    ] NN Efficiency(Gd)  : 89.1122 %
-[  Overall ] Overall Efficiency(Gd+H): 42.6738 %
-[  Overall ] Overall Efficiency(H)   : 3.98274 %
-[  Overall ] Overall Efficiency(Gd)  : 79.6659 %
+[  Overall ] Overall Efficiency(Gd+H): 42.0139 %
+[  Overall ] Overall Efficiency(H)   : 3.88021 %
+[  Overall ] Overall Efficiency(Gd)  : 79.2334 %
 [  Purity  ] Purity: 90.9526
 [    NN    ] ===== Threshold: 0.45 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -244,9 +244,9 @@
 [    NN    ] NN Efficiency(Gd+H): 73.7792 %
 [    NN    ] NN Efficiency(H)   : 15.6461 %
 [    NN    ] NN Efficiency(Gd)  : 88.4797 %
-[  Overall ] Overall Efficiency(Gd+H): 42.2463 %
-[  Overall ] Overall Efficiency(H)   : 3.69956 %
-[  Overall ] Overall Efficiency(Gd)  : 79.1004 %
+[  Overall ] Overall Efficiency(Gd+H): 41.593 %
+[  Overall ] Overall Efficiency(H)   : 3.60433 %
+[  Overall ] Overall Efficiency(Gd)  : 78.671 %
 [  Purity  ] Purity: 91.8864
 [    NN    ] ===== Threshold: 0.5 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -267,9 +267,9 @@
 [    NN    ] NN Efficiency(Gd+H): 73.0852 %
 [    NN    ] NN Efficiency(H)   : 14.6417 %
 [    NN    ] NN Efficiency(Gd)  : 87.8642 %
-[  Overall ] Overall Efficiency(Gd+H): 41.8489 %
-[  Overall ] Overall Efficiency(H)   : 3.46206 %
-[  Overall ] Overall Efficiency(Gd)  : 78.5502 %
+[  Overall ] Overall Efficiency(Gd+H): 41.2018 %
+[  Overall ] Overall Efficiency(H)   : 3.37294 %
+[  Overall ] Overall Efficiency(Gd)  : 78.1238 %
 [  Purity  ] Purity: 92.6804
 [    NN    ] ===== Threshold: 0.55 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -290,9 +290,9 @@
 [    NN    ] NN Efficiency(Gd+H): 72.4088 %
 [    NN    ] NN Efficiency(H)   : 13.6372 %
 [    NN    ] NN Efficiency(Gd)  : 87.2707 %
-[  Overall ] Overall Efficiency(Gd+H): 41.4616 %
-[  Overall ] Overall Efficiency(H)   : 3.22455 %
-[  Overall ] Overall Efficiency(Gd)  : 78.0196 %
+[  Overall ] Overall Efficiency(Gd+H): 40.8205 %
+[  Overall ] Overall Efficiency(H)   : 3.14155 %
+[  Overall ] Overall Efficiency(Gd)  : 77.5961 %
 [  Purity  ] Purity: 93.2729
 [    NN    ] ===== Threshold: 0.6 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -313,9 +313,9 @@
 [    NN    ] NN Efficiency(Gd+H): 71.6856 %
 [    NN    ] NN Efficiency(H)   : 12.5749 %
 [    NN    ] NN Efficiency(Gd)  : 86.6333 %
-[  Overall ] Overall Efficiency(Gd+H): 41.0475 %
-[  Overall ] Overall Efficiency(H)   : 2.97335 %
-[  Overall ] Overall Efficiency(Gd)  : 77.4498 %
+[  Overall ] Overall Efficiency(Gd+H): 40.4128 %
+[  Overall ] Overall Efficiency(H)   : 2.89681 %
+[  Overall ] Overall Efficiency(Gd)  : 77.0293 %
 [  Purity  ] Purity: 93.8328
 [    NN    ] ===== Threshold: 0.65 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -336,9 +336,9 @@
 [    NN    ] NN Efficiency(Gd+H): 70.9332 %
 [    NN    ] NN Efficiency(H)   : 11.638 %
 [    NN    ] NN Efficiency(Gd)  : 85.9275 %
-[  Overall ] Overall Efficiency(Gd+H): 40.6166 %
-[  Overall ] Overall Efficiency(H)   : 2.75183 %
-[  Overall ] Overall Efficiency(Gd)  : 76.8188 %
+[  Overall ] Overall Efficiency(Gd+H): 39.9886 %
+[  Overall ] Overall Efficiency(H)   : 2.68099 %
+[  Overall ] Overall Efficiency(Gd)  : 76.4017 %
 [  Purity  ] Purity: 94.2377
 [    NN    ] ===== Threshold: 0.7 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -359,9 +359,9 @@
 [    NN    ] NN Efficiency(Gd+H): 70.1047 %
 [    NN    ] NN Efficiency(H)   : 10.7784 %
 [    NN    ] NN Efficiency(Gd)  : 85.1068 %
-[  Overall ] Overall Efficiency(Gd+H): 40.1422 %
-[  Overall ] Overall Efficiency(H)   : 2.54859 %
-[  Overall ] Overall Efficiency(Gd)  : 76.0852 %
+[  Overall ] Overall Efficiency(Gd+H): 39.5215 %
+[  Overall ] Overall Efficiency(H)   : 2.48298 %
+[  Overall ] Overall Efficiency(Gd)  : 75.6721 %
 [  Purity  ] Purity: 94.6494
 [    NN    ] ===== Threshold: 0.75 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -382,9 +382,9 @@
 [    NN    ] NN Efficiency(Gd+H): 69.1787 %
 [    NN    ] NN Efficiency(H)   : 9.81263 %
 [    NN    ] NN Efficiency(Gd)  : 84.191 %
-[  Overall ] Overall Efficiency(Gd+H): 39.612 %
-[  Overall ] Overall Efficiency(H)   : 2.32022 %
-[  Overall ] Overall Efficiency(Gd)  : 75.2664 %
+[  Overall ] Overall Efficiency(Gd+H): 38.9995 %
+[  Overall ] Overall Efficiency(H)   : 2.26049 %
+[  Overall ] Overall Efficiency(Gd)  : 74.8578 %
 [  Purity  ] Purity: 95.1191
 [    NN    ] ===== Threshold: 0.8 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -405,9 +405,9 @@
 [    NN    ] NN Efficiency(Gd+H): 68.13 %
 [    NN    ] NN Efficiency(H)   : 8.72127 %
 [    NN    ] NN Efficiency(Gd)  : 83.153 %
-[  Overall ] Overall Efficiency(Gd+H): 39.0115 %
-[  Overall ] Overall Efficiency(H)   : 2.06216 %
-[  Overall ] Overall Efficiency(Gd)  : 74.3384 %
+[  Overall ] Overall Efficiency(Gd+H): 38.4083 %
+[  Overall ] Overall Efficiency(H)   : 2.00908 %
+[  Overall ] Overall Efficiency(Gd)  : 73.9349 %
 [  Purity  ] Purity: 95.4553
 [    NN    ] ===== Threshold: 0.85 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -428,9 +428,9 @@
 [    NN    ] NN Efficiency(Gd+H): 66.7713 %
 [    NN    ] NN Efficiency(H)   : 7.48503 %
 [    NN    ] NN Efficiency(Gd)  : 81.7633 %
-[  Overall ] Overall Efficiency(Gd+H): 38.2335 %
-[  Overall ] Overall Efficiency(H)   : 1.76985 %
-[  Overall ] Overall Efficiency(Gd)  : 73.0961 %
+[  Overall ] Overall Efficiency(Gd+H): 37.6423 %
+[  Overall ] Overall Efficiency(H)   : 1.72429 %
+[  Overall ] Overall Efficiency(Gd)  : 72.6992 %
 [  Purity  ] Purity: 95.7938
 [    NN    ] ===== Threshold: 0.9 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -451,9 +451,9 @@
 [    NN    ] NN Efficiency(Gd+H): 64.6582 %
 [    NN    ] NN Efficiency(H)   : 6.11358 %
 [    NN    ] NN Efficiency(Gd)  : 79.4627 %
-[  Overall ] Overall Efficiency(Gd+H): 37.0235 %
-[  Overall ] Overall Efficiency(H)   : 1.44557 %
-[  Overall ] Overall Efficiency(Gd)  : 71.0393 %
+[  Overall ] Overall Efficiency(Gd+H): 36.4511 %
+[  Overall ] Overall Efficiency(H)   : 1.40836 %
+[  Overall ] Overall Efficiency(Gd)  : 70.6536 %
 [  Purity  ] Purity: 96.195
 [    NN    ] ===== Threshold: 0.95 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -474,9 +474,9 @@
 [    NN    ] NN Efficiency(Gd+H): 60.3579 %
 [    NN    ] NN Efficiency(H)   : 3.80529 %
 [    NN    ] NN Efficiency(Gd)  : 74.6587 %
-[  Overall ] Overall Efficiency(Gd+H): 34.5612 %
-[  Overall ] Overall Efficiency(H)   : 0.899769 %
-[  Overall ] Overall Efficiency(Gd)  : 66.7445 %
+[  Overall ] Overall Efficiency(Gd+H): 34.0268 %
+[  Overall ] Overall Efficiency(H)   : 0.876607 %
+[  Overall ] Overall Efficiency(Gd)  : 66.3822 %
 [  Purity  ] Purity: 96.7473
 [    NN    ] ===== Threshold: 1 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -513,9 +513,9 @@
 [Candidates] Truth Decay e in Candidates in [3 us, 400 us]      : 12450
 [Candidates] Truth Acc. Noise in Candidates in [3 us, 400 us]   : 4989668
 [Candidates] All Candidates in [3 us, 400 us]   : 5115266
-[   Pre    ] Pre-selection Efficiency(Gd+H): 57.9084 %
-[   Pre    ] Pre-selection Efficiency(H)   : 23.9216 %
-[   Pre    ] Pre-selection Efficiency(Gd)  : 90.3652 %
+[   Pre    ] Pre-selection Efficiency(Gd+H): 55.331 %
+[   Pre    ] Pre-selection Efficiency(H)   : 22.6049 %
+[   Pre    ] Pre-selection Efficiency(Gd)  : 87.2725 %
 [    NN    ] ===== Threshold: 0 =====
 [    NN    ]  ----------- n-like candidates -----------
 [    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 50345
@@ -535,9 +535,9 @@
 [    NN    ] NN Efficiency(Gd+H): 99.9921 %
 [    NN    ] NN Efficiency(H)   : 100 %
 [    NN    ] NN Efficiency(Gd)  : 99.99 %
-[  Overall ] Overall Efficiency(Gd+H): 57.9038 %
-[  Overall ] Overall Efficiency(H)   : 23.9216 %
-[  Overall ] Overall Efficiency(Gd)  : 90.3562 %
+[  Overall ] Overall Efficiency(Gd+H): 55.3266 %
+[  Overall ] Overall Efficiency(H)   : 22.6049 %
+[  Overall ] Overall Efficiency(Gd)  : 87.2638 %
 [  Purity  ] Purity: 0.998896
 [    NN    ] ===== Threshold: 0.05 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -558,9 +558,9 @@
 [    NN    ] NN Efficiency(Gd+H): 83.1278 %
 [    NN    ] NN Efficiency(H)   : 35.3937 %
 [    NN    ] NN Efficiency(Gd)  : 95.1952 %
-[  Overall ] Overall Efficiency(Gd+H): 48.1379 %
-[  Overall ] Overall Efficiency(H)   : 8.46675 %
-[  Overall ] Overall Efficiency(Gd)  : 86.0233 %
+[  Overall ] Overall Efficiency(Gd+H): 45.9954 %
+[  Overall ] Overall Efficiency(H)   : 8.00071 %
+[  Overall ] Overall Efficiency(Gd)  : 83.0793 %
 [  Purity  ] Purity: 55.3361
 [    NN    ] ===== Threshold: 0.1 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -581,9 +581,9 @@
 [    NN    ] NN Efficiency(Gd+H): 80.5418 %
 [    NN    ] NN Efficiency(H)   : 28.435 %
 [    NN    ] NN Efficiency(Gd)  : 93.7147 %
-[  Overall ] Overall Efficiency(Gd+H): 46.6404 %
-[  Overall ] Overall Efficiency(H)   : 6.80213 %
-[  Overall ] Overall Efficiency(Gd)  : 84.6854 %
+[  Overall ] Overall Efficiency(Gd+H): 44.5646 %
+[  Overall ] Overall Efficiency(H)   : 6.42771 %
+[  Overall ] Overall Efficiency(Gd)  : 81.7872 %
 [  Purity  ] Purity: 73.6211
 [    NN    ] ===== Threshold: 0.15 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -604,9 +604,9 @@
 [    NN    ] NN Efficiency(Gd+H): 79.0085 %
 [    NN    ] NN Efficiency(H)   : 25.1083 %
 [    NN    ] NN Efficiency(Gd)  : 92.6348 %
-[  Overall ] Overall Efficiency(Gd+H): 45.7525 %
-[  Overall ] Overall Efficiency(H)   : 6.00631 %
-[  Overall ] Overall Efficiency(Gd)  : 83.7096 %
+[  Overall ] Overall Efficiency(Gd+H): 43.7162 %
+[  Overall ] Overall Efficiency(H)   : 5.6757 %
+[  Overall ] Overall Efficiency(Gd)  : 80.8447 %
 [  Purity  ] Purity: 81.1804
 [    NN    ] ===== Threshold: 0.2 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -627,9 +627,9 @@
 [    NN    ] NN Efficiency(Gd+H): 77.8446 %
 [    NN    ] NN Efficiency(H)   : 22.7067 %
 [    NN    ] NN Efficiency(Gd)  : 91.7838 %
-[  Overall ] Overall Efficiency(Gd+H): 45.0786 %
-[  Overall ] Overall Efficiency(H)   : 5.43181 %
-[  Overall ] Overall Efficiency(Gd)  : 82.9406 %
+[  Overall ] Overall Efficiency(Gd+H): 43.0722 %
+[  Overall ] Overall Efficiency(H)   : 5.13283 %
+[  Overall ] Overall Efficiency(Gd)  : 80.1021 %
 [  Purity  ] Purity: 85.3677
 [    NN    ] ===== Threshold: 0.25 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -650,9 +650,9 @@
 [    NN    ] NN Efficiency(Gd+H): 76.8913 %
 [    NN    ] NN Efficiency(H)   : 20.7776 %
 [    NN    ] NN Efficiency(Gd)  : 91.0772 %
-[  Overall ] Overall Efficiency(Gd+H): 44.5265 %
-[  Overall ] Overall Efficiency(H)   : 4.97033 %
-[  Overall ] Overall Efficiency(Gd)  : 82.302 %
+[  Overall ] Overall Efficiency(Gd+H): 42.5447 %
+[  Overall ] Overall Efficiency(H)   : 4.69675 %
+[  Overall ] Overall Efficiency(Gd)  : 79.4853 %
 [  Purity  ] Purity: 87.8267
 [    NN    ] ===== Threshold: 0.3 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -673,9 +673,9 @@
 [    NN    ] NN Efficiency(Gd+H): 76.0273 %
 [    NN    ] NN Efficiency(H)   : 19.1732 %
 [    NN    ] NN Efficiency(Gd)  : 90.4004 %
-[  Overall ] Overall Efficiency(Gd+H): 44.0262 %
-[  Overall ] Overall Efficiency(H)   : 4.58655 %
-[  Overall ] Overall Efficiency(Gd)  : 81.6904 %
+[  Overall ] Overall Efficiency(Gd+H): 42.0667 %
+[  Overall ] Overall Efficiency(H)   : 4.33409 %
+[  Overall ] Overall Efficiency(Gd)  : 78.8947 %
 [  Purity  ] Purity: 89.6086
 [    NN    ] ===== Threshold: 0.35 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -696,9 +696,9 @@
 [    NN    ] NN Efficiency(Gd+H): 75.213 %
 [    NN    ] NN Efficiency(H)   : 17.9035 %
 [    NN    ] NN Efficiency(Gd)  : 89.7012 %
-[  Overall ] Overall Efficiency(Gd+H): 43.5546 %
-[  Overall ] Overall Efficiency(H)   : 4.28282 %
-[  Overall ] Overall Efficiency(Gd)  : 81.0586 %
+[  Overall ] Overall Efficiency(Gd+H): 41.6161 %
+[  Overall ] Overall Efficiency(H)   : 4.04708 %
+[  Overall ] Overall Efficiency(Gd)  : 78.2845 %
 [  Purity  ] Purity: 90.9591
 [    NN    ] ===== Threshold: 0.4 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -719,9 +719,9 @@
 [    NN    ] NN Efficiency(Gd+H): 74.5298 %
 [    NN    ] NN Efficiency(H)   : 16.8012 %
 [    NN    ] NN Efficiency(Gd)  : 89.1239 %
-[  Overall ] Overall Efficiency(Gd+H): 43.159 %
-[  Overall ] Overall Efficiency(H)   : 4.01912 %
-[  Overall ] Overall Efficiency(Gd)  : 80.5369 %
+[  Overall ] Overall Efficiency(Gd+H): 41.2381 %
+[  Overall ] Overall Efficiency(H)   : 3.79789 %
+[  Overall ] Overall Efficiency(Gd)  : 77.7807 %
 [  Purity  ] Purity: 91.9775
 [    NN    ] ===== Threshold: 0.45 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -742,9 +742,9 @@
 [    NN    ] NN Efficiency(Gd+H): 73.783 %
 [    NN    ] NN Efficiency(H)   : 15.5906 %
 [    NN    ] NN Efficiency(Gd)  : 88.4944 %
-[  Overall ] Overall Efficiency(Gd+H): 42.7265 %
-[  Overall ] Overall Efficiency(H)   : 3.72952 %
-[  Overall ] Overall Efficiency(Gd)  : 79.9681 %
+[  Overall ] Overall Efficiency(Gd+H): 40.8249 %
+[  Overall ] Overall Efficiency(H)   : 3.52423 %
+[  Overall ] Overall Efficiency(Gd)  : 77.2313 %
 [  Purity  ] Purity: 92.7496
 [    NN    ] ===== Threshold: 0.5 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -765,9 +765,9 @@
 [    NN    ] NN Efficiency(Gd+H): 73.0918 %
 [    NN    ] NN Efficiency(H)   : 14.6063 %
 [    NN    ] NN Efficiency(Gd)  : 87.8773 %
-[  Overall ] Overall Efficiency(Gd+H): 42.3263 %
-[  Overall ] Overall Efficiency(H)   : 3.49407 %
-[  Overall ] Overall Efficiency(Gd)  : 79.4104 %
+[  Overall ] Overall Efficiency(Gd+H): 40.4424 %
+[  Overall ] Overall Efficiency(H)   : 3.30174 %
+[  Overall ] Overall Efficiency(Gd)  : 76.6927 %
 [  Purity  ] Purity: 93.3893
 [    NN    ] ===== Threshold: 0.55 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -788,9 +788,9 @@
 [    NN    ] NN Efficiency(Gd+H): 72.4284 %
 [    NN    ] NN Efficiency(H)   : 13.5925 %
 [    NN    ] NN Efficiency(Gd)  : 87.3025 %
-[  Overall ] Overall Efficiency(Gd+H): 41.9421 %
-[  Overall ] Overall Efficiency(H)   : 3.25155 %
-[  Overall ] Overall Efficiency(Gd)  : 78.891 %
+[  Overall ] Overall Efficiency(Gd+H): 40.0754 %
+[  Overall ] Overall Efficiency(H)   : 3.07258 %
+[  Overall ] Overall Efficiency(Gd)  : 76.1911 %
 [  Purity  ] Purity: 93.8589
 [    NN    ] ===== Threshold: 0.6 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -811,9 +811,9 @@
 [    NN    ] NN Efficiency(Gd+H): 71.6975 %
 [    NN    ] NN Efficiency(H)   : 12.5295 %
 [    NN    ] NN Efficiency(Gd)  : 86.6555 %
-[  Overall ] Overall Efficiency(Gd+H): 41.5189 %
-[  Overall ] Overall Efficiency(H)   : 2.99727 %
-[  Overall ] Overall Efficiency(Gd)  : 78.3064 %
+[  Overall ] Overall Efficiency(Gd+H): 39.671 %
+[  Overall ] Overall Efficiency(H)   : 2.83229 %
+[  Overall ] Overall Efficiency(Gd)  : 75.6265 %
 [  Purity  ] Purity: 94.3124
 [    NN    ] ===== Threshold: 0.65 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -834,9 +834,9 @@
 [    NN    ] NN Efficiency(Gd+H): 70.9528 %
 [    NN    ] NN Efficiency(H)   : 11.6043 %
 [    NN    ] NN Efficiency(Gd)  : 85.9564 %
-[  Overall ] Overall Efficiency(Gd+H): 41.0876 %
-[  Overall ] Overall Efficiency(H)   : 2.77595 %
-[  Overall ] Overall Efficiency(Gd)  : 77.6746 %
+[  Overall ] Overall Efficiency(Gd+H): 39.2589 %
+[  Overall ] Overall Efficiency(H)   : 2.62315 %
+[  Overall ] Overall Efficiency(Gd)  : 75.0163 %
 [  Purity  ] Purity: 94.6281
 [    NN    ] ===== Threshold: 0.7 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -857,9 +857,9 @@
 [    NN    ] NN Efficiency(Gd+H): 70.1206 %
 [    NN    ] NN Efficiency(H)   : 10.748 %
 [    NN    ] NN Efficiency(Gd)  : 85.1303 %
-[  Overall ] Overall Efficiency(Gd+H): 40.6057 %
-[  Overall ] Overall Efficiency(H)   : 2.57111 %
-[  Overall ] Overall Efficiency(Gd)  : 76.9281 %
+[  Overall ] Overall Efficiency(Gd+H): 38.7984 %
+[  Overall ] Overall Efficiency(H)   : 2.42958 %
+[  Overall ] Overall Efficiency(Gd)  : 74.2953 %
 [  Purity  ] Purity: 94.9723
 [    NN    ] ===== Threshold: 0.75 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -880,9 +880,9 @@
 [    NN    ] NN Efficiency(Gd+H): 69.193 %
 [    NN    ] NN Efficiency(H)   : 9.78346 %
 [    NN    ] NN Efficiency(Gd)  : 84.2121 %
-[  Overall ] Overall Efficiency(Gd+H): 40.0686 %
-[  Overall ] Overall Efficiency(H)   : 2.34037 %
-[  Overall ] Overall Efficiency(Gd)  : 76.0984 %
+[  Overall ] Overall Efficiency(Gd+H): 38.2852 %
+[  Overall ] Overall Efficiency(H)   : 2.21154 %
+[  Overall ] Overall Efficiency(Gd)  : 73.494 %
 [  Purity  ] Purity: 95.3264
 [    NN    ] ===== Threshold: 0.8 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -903,9 +903,9 @@
 [    NN    ] NN Efficiency(Gd+H): 68.1543 %
 [    NN    ] NN Efficiency(H)   : 8.69094 %
 [    NN    ] NN Efficiency(Gd)  : 83.1869 %
-[  Overall ] Overall Efficiency(Gd+H): 39.467 %
-[  Overall ] Overall Efficiency(H)   : 2.07902 %
-[  Overall ] Overall Efficiency(Gd)  : 75.172 %
+[  Overall ] Overall Efficiency(Gd+H): 37.7104 %
+[  Overall ] Overall Efficiency(H)   : 1.96458 %
+[  Overall ] Overall Efficiency(Gd)  : 72.5993 %
 [  Purity  ] Purity: 95.5983
 [    NN    ] ===== Threshold: 0.85 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -926,9 +926,9 @@
 [    NN    ] NN Efficiency(Gd+H): 66.8017 %
 [    NN    ] NN Efficiency(H)   : 7.47047 %
 [    NN    ] NN Efficiency(Gd)  : 81.801 %
-[  Overall ] Overall Efficiency(Gd+H): 38.6838 %
-[  Overall ] Overall Efficiency(H)   : 1.78706 %
-[  Overall ] Overall Efficiency(Gd)  : 73.9196 %
+[  Overall ] Overall Efficiency(Gd+H): 36.9621 %
+[  Overall ] Overall Efficiency(H)   : 1.68869 %
+[  Overall ] Overall Efficiency(Gd)  : 71.3898 %
 [  Purity  ] Purity: 95.8944
 [    NN    ] ===== Threshold: 0.9 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -949,9 +949,9 @@
 [    NN    ] NN Efficiency(Gd+H): 64.6785 %
 [    NN    ] NN Efficiency(H)   : 6.11221 %
 [    NN    ] NN Efficiency(Gd)  : 79.4844 %
-[  Overall ] Overall Efficiency(Gd+H): 37.4543 %
-[  Overall ] Overall Efficiency(H)   : 1.46214 %
-[  Overall ] Overall Efficiency(Gd)  : 71.8262 %
+[  Overall ] Overall Efficiency(Gd+H): 35.7873 %
+[  Overall ] Overall Efficiency(H)   : 1.38166 %
+[  Overall ] Overall Efficiency(Gd)  : 69.3681 %
 [  Purity  ] Purity: 96.238
 [    NN    ] ===== Threshold: 0.95 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -972,9 +972,9 @@
 [    NN    ] NN Efficiency(Gd+H): 60.3845 %
 [    NN    ] NN Efficiency(H)   : 3.80905 %
 [    NN    ] NN Efficiency(Gd)  : 74.6871 %
-[  Overall ] Overall Efficiency(Gd+H): 34.9677 %
-[  Overall ] Overall Efficiency(H)   : 0.911189 %
-[  Overall ] Overall Efficiency(Gd)  : 67.4911 %
+[  Overall ] Overall Efficiency(Gd+H): 33.4114 %
+[  Overall ] Overall Efficiency(H)   : 0.861033 %
+[  Overall ] Overall Efficiency(Gd)  : 65.1813 %
 [  Purity  ] Purity: 96.7478
 [    NN    ] ===== Threshold: 1 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1011,9 +1011,9 @@
 [Candidates] Truth Decay e in Candidates in [3 us, 350 us]      : 12450
 [Candidates] Truth Acc. Noise in Candidates in [3 us, 350 us]   : 4339141
 [Candidates] All Candidates in [3 us, 350 us]   : 4462959
-[   Pre    ] Pre-selection Efficiency(Gd+H): 57.8881 %
-[   Pre    ] Pre-selection Efficiency(H)   : 23.8935 %
-[   Pre    ] Pre-selection Efficiency(Gd)  : 90.345 %
+[   Pre    ] Pre-selection Efficiency(Gd+H): 54.3529 %
+[   Pre    ] Pre-selection Efficiency(H)   : 22.1844 %
+[   Pre    ] Pre-selection Efficiency(Gd)  : 85.7503 %
 [    NN    ] ===== Threshold: 0 =====
 [    NN    ]  ----------- n-like candidates -----------
 [    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 49455
@@ -1033,9 +1033,9 @@
 [    NN    ] NN Efficiency(Gd+H): 99.9919 %
 [    NN    ] NN Efficiency(H)   : 100 %
 [    NN    ] NN Efficiency(Gd)  : 99.9899 %
-[  Overall ] Overall Efficiency(Gd+H): 57.8834 %
-[  Overall ] Overall Efficiency(H)   : 23.8935 %
-[  Overall ] Overall Efficiency(Gd)  : 90.3359 %
+[  Overall ] Overall Efficiency(Gd+H): 54.3485 %
+[  Overall ] Overall Efficiency(H)   : 22.1844 %
+[  Overall ] Overall Efficiency(Gd)  : 85.7416 %
 [  Purity  ] Purity: 1.12688
 [    NN    ] ===== Threshold: 0.05 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1056,9 +1056,9 @@
 [    NN    ] NN Efficiency(Gd+H): 83.1274 %
 [    NN    ] NN Efficiency(H)   : 35.3325 %
 [    NN    ] NN Efficiency(Gd)  : 95.196 %
-[  Overall ] Overall Efficiency(Gd+H): 48.1209 %
-[  Overall ] Overall Efficiency(H)   : 8.44217 %
-[  Overall ] Overall Efficiency(Gd)  : 86.0049 %
+[  Overall ] Overall Efficiency(Gd+H): 45.1822 %
+[  Overall ] Overall Efficiency(H)   : 7.83829 %
+[  Overall ] Overall Efficiency(Gd)  : 81.6308 %
 [  Purity  ] Purity: 58.1437
 [    NN    ] ===== Threshold: 0.1 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1079,9 +1079,9 @@
 [    NN    ] NN Efficiency(Gd+H): 80.5495 %
 [    NN    ] NN Efficiency(H)   : 28.4024 %
 [    NN    ] NN Efficiency(Gd)  : 93.7171 %
-[  Overall ] Overall Efficiency(Gd+H): 46.6286 %
-[  Overall ] Overall Efficiency(H)   : 6.78632 %
-[  Overall ] Overall Efficiency(Gd)  : 84.6687 %
+[  Overall ] Overall Efficiency(Gd+H): 43.781 %
+[  Overall ] Overall Efficiency(H)   : 6.30089 %
+[  Overall ] Overall Efficiency(Gd)  : 80.3626 %
 [  Purity  ] Purity: 75.6719
 [    NN    ] ===== Threshold: 0.15 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1102,9 +1102,9 @@
 [    NN    ] NN Efficiency(Gd+H): 79.019 %
 [    NN    ] NN Efficiency(H)   : 25.0928 %
 [    NN    ] NN Efficiency(Gd)  : 92.6357 %
-[  Overall ] Overall Efficiency(Gd+H): 45.7426 %
-[  Overall ] Overall Efficiency(H)   : 5.99554 %
-[  Overall ] Overall Efficiency(Gd)  : 83.6918 %
+[  Overall ] Overall Efficiency(Gd+H): 42.9491 %
+[  Overall ] Overall Efficiency(H)   : 5.56668 %
+[  Overall ] Overall Efficiency(Gd)  : 79.4354 %
 [  Purity  ] Purity: 82.6677
 [    NN    ] ===== Threshold: 0.2 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1125,9 +1125,9 @@
 [    NN    ] NN Efficiency(Gd+H): 77.8584 %
 [    NN    ] NN Efficiency(H)   : 22.7159 %
 [    NN    ] NN Efficiency(Gd)  : 91.7823 %
-[  Overall ] Overall Efficiency(Gd+H): 45.0708 %
-[  Overall ] Overall Efficiency(H)   : 5.42762 %
-[  Overall ] Overall Efficiency(Gd)  : 82.9207 %
+[  Overall ] Overall Efficiency(Gd+H): 42.3183 %
+[  Overall ] Overall Efficiency(H)   : 5.03938 %
+[  Overall ] Overall Efficiency(Gd)  : 78.7036 %
 [  Purity  ] Purity: 86.4688
 [    NN    ] ===== Threshold: 0.25 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1148,9 +1148,9 @@
 [    NN    ] NN Efficiency(Gd+H): 76.9021 %
 [    NN    ] NN Efficiency(H)   : 20.8003 %
 [    NN    ] NN Efficiency(Gd)  : 91.0682 %
-[  Overall ] Overall Efficiency(Gd+H): 44.5171 %
-[  Overall ] Overall Efficiency(H)   : 4.96993 %
-[  Overall ] Overall Efficiency(Gd)  : 82.2756 %
+[  Overall ] Overall Efficiency(Gd+H): 41.7985 %
+[  Overall ] Overall Efficiency(H)   : 4.61443 %
+[  Overall ] Overall Efficiency(Gd)  : 78.0912 %
 [  Purity  ] Purity: 88.67
 [    NN    ] ===== Threshold: 0.3 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1171,9 +1171,9 @@
 [    NN    ] NN Efficiency(Gd+H): 76.0468 %
 [    NN    ] NN Efficiency(H)   : 19.2057 %
 [    NN    ] NN Efficiency(Gd)  : 90.3996 %
-[  Overall ] Overall Efficiency(Gd+H): 44.022 %
-[  Overall ] Overall Efficiency(H)   : 4.58891 %
-[  Overall ] Overall Efficiency(Gd)  : 81.6715 %
+[  Overall ] Overall Efficiency(Gd+H): 41.3337 %
+[  Overall ] Overall Efficiency(H)   : 4.26067 %
+[  Overall ] Overall Efficiency(Gd)  : 77.5179 %
 [  Purity  ] Purity: 90.2984
 [    NN    ] ===== Threshold: 0.35 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1194,9 +1194,9 @@
 [    NN    ] NN Efficiency(Gd+H): 75.2239 %
 [    NN    ] NN Efficiency(H)   : 17.922 %
 [    NN    ] NN Efficiency(Gd)  : 89.6931 %
-[  Overall ] Overall Efficiency(Gd+H): 43.5457 %
-[  Overall ] Overall Efficiency(H)   : 4.28219 %
-[  Overall ] Overall Efficiency(Gd)  : 81.0332 %
+[  Overall ] Overall Efficiency(Gd+H): 40.8864 %
+[  Overall ] Overall Efficiency(H)   : 3.97588 %
+[  Overall ] Overall Efficiency(Gd)  : 76.912 %
 [  Purity  ] Purity: 91.5252
 [    NN    ] ===== Threshold: 0.4 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1217,9 +1217,9 @@
 [    NN    ] NN Efficiency(Gd+H): 74.5446 %
 [    NN    ] NN Efficiency(H)   : 16.8288 %
 [    NN    ] NN Efficiency(Gd)  : 89.1182 %
-[  Overall ] Overall Efficiency(Gd+H): 43.1524 %
-[  Overall ] Overall Efficiency(H)   : 4.02099 %
-[  Overall ] Overall Efficiency(Gd)  : 80.5139 %
+[  Overall ] Overall Efficiency(Gd+H): 40.5172 %
+[  Overall ] Overall Efficiency(H)   : 3.73337 %
+[  Overall ] Overall Efficiency(Gd)  : 76.4191 %
 [  Purity  ] Purity: 92.4452
 [    NN    ] ===== Threshold: 0.45 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1240,9 +1240,9 @@
 [    NN    ] NN Efficiency(Gd+H): 73.8046 %
 [    NN    ] NN Efficiency(H)   : 15.6353 %
 [    NN    ] NN Efficiency(Gd)  : 88.4927 %
-[  Overall ] Overall Efficiency(Gd+H): 42.724 %
-[  Overall ] Overall Efficiency(H)   : 3.73583 %
-[  Overall ] Overall Efficiency(Gd)  : 79.9488 %
+[  Overall ] Overall Efficiency(Gd+H): 40.115 %
+[  Overall ] Overall Efficiency(H)   : 3.46861 %
+[  Overall ] Overall Efficiency(Gd)  : 75.8827 %
 [  Purity  ] Purity: 93.1199
 [    NN    ] ===== Threshold: 0.5 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1263,9 +1263,9 @@
 [    NN    ] NN Efficiency(Gd+H): 73.1171 %
 [    NN    ] NN Efficiency(H)   : 14.6324 %
 [    NN    ] NN Efficiency(Gd)  : 87.8849 %
-[  Overall ] Overall Efficiency(Gd+H): 42.3261 %
-[  Overall ] Overall Efficiency(H)   : 3.4962 %
-[  Overall ] Overall Efficiency(Gd)  : 79.3997 %
+[  Overall ] Overall Efficiency(Gd+H): 39.7413 %
+[  Overall ] Overall Efficiency(H)   : 3.24612 %
+[  Overall ] Overall Efficiency(Gd)  : 75.3616 %
 [  Purity  ] Purity: 93.6865
 [    NN    ] ===== Threshold: 0.55 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1286,9 +1286,9 @@
 [    NN    ] NN Efficiency(Gd+H): 72.4539 %
 [    NN    ] NN Efficiency(H)   : 13.6295 %
 [    NN    ] NN Efficiency(Gd)  : 87.3075 %
-[  Overall ] Overall Efficiency(Gd+H): 41.9422 %
-[  Overall ] Overall Efficiency(H)   : 3.25657 %
-[  Overall ] Overall Efficiency(Gd)  : 78.878 %
+[  Overall ] Overall Efficiency(Gd+H): 39.3809 %
+[  Overall ] Overall Efficiency(H)   : 3.02363 %
+[  Overall ] Overall Efficiency(Gd)  : 74.8664 %
 [  Purity  ] Purity: 94.0971
 [    NN    ] ===== Threshold: 0.6 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1309,9 +1309,9 @@
 [    NN    ] NN Efficiency(Gd+H): 71.7139 %
 [    NN    ] NN Efficiency(H)   : 12.5664 %
 [    NN    ] NN Efficiency(Gd)  : 86.6491 %
-[  Overall ] Overall Efficiency(Gd+H): 41.5138 %
-[  Overall ] Overall Efficiency(H)   : 3.00256 %
-[  Overall ] Overall Efficiency(Gd)  : 78.2831 %
+[  Overall ] Overall Efficiency(Gd+H): 38.9786 %
+[  Overall ] Overall Efficiency(H)   : 2.78779 %
+[  Overall ] Overall Efficiency(Gd)  : 74.3018 %
 [  Purity  ] Purity: 94.4883
 [    NN    ] ===== Threshold: 0.65 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1332,9 +1332,9 @@
 [    NN    ] NN Efficiency(Gd+H): 70.9699 %
 [    NN    ] NN Efficiency(H)   : 11.6538 %
 [    NN    ] NN Efficiency(Gd)  : 85.9476 %
-[  Overall ] Overall Efficiency(Gd+H): 41.0831 %
-[  Overall ] Overall Efficiency(H)   : 2.7845 %
-[  Overall ] Overall Efficiency(Gd)  : 77.6494 %
+[  Overall ] Overall Efficiency(Gd+H): 38.5742 %
+[  Overall ] Overall Efficiency(H)   : 2.58532 %
+[  Overall ] Overall Efficiency(Gd)  : 73.7003 %
 [  Purity  ] Purity: 94.7702
 [    NN    ] ===== Threshold: 0.7 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1355,9 +1355,9 @@
 [    NN    ] NN Efficiency(Gd+H): 70.1369 %
 [    NN    ] NN Efficiency(H)   : 10.8013 %
 [    NN    ] NN Efficiency(Gd)  : 85.1195 %
-[  Overall ] Overall Efficiency(Gd+H): 40.6009 %
-[  Overall ] Overall Efficiency(H)   : 2.58082 %
-[  Overall ] Overall Efficiency(Gd)  : 76.9013 %
+[  Overall ] Overall Efficiency(Gd+H): 38.1215 %
+[  Overall ] Overall Efficiency(H)   : 2.39621 %
+[  Overall ] Overall Efficiency(Gd)  : 72.9902 %
 [  Purity  ] Purity: 95.0852
 [    NN    ] ===== Threshold: 0.75 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1378,9 +1378,9 @@
 [    NN    ] NN Efficiency(Gd+H): 69.2109 %
 [    NN    ] NN Efficiency(H)   : 9.81847 %
 [    NN    ] NN Efficiency(Gd)  : 84.2079 %
-[  Overall ] Overall Efficiency(Gd+H): 40.0648 %
-[  Overall ] Overall Efficiency(H)   : 2.34598 %
-[  Overall ] Overall Efficiency(Gd)  : 76.0776 %
+[  Overall ] Overall Efficiency(Gd+H): 37.6181 %
+[  Overall ] Overall Efficiency(H)   : 2.17817 %
+[  Overall ] Overall Efficiency(Gd)  : 72.2085 %
 [  Purity  ] Purity: 95.3935
 [    NN    ] ===== Threshold: 0.8 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1401,9 +1401,9 @@
 [    NN    ] NN Efficiency(Gd+H): 68.1736 %
 [    NN    ] NN Efficiency(H)   : 8.71527 %
 [    NN    ] NN Efficiency(Gd)  : 83.1873 %
-[  Overall ] Overall Efficiency(Gd+H): 39.4644 %
-[  Overall ] Overall Efficiency(H)   : 2.08238 %
-[  Overall ] Overall Efficiency(Gd)  : 75.1556 %
+[  Overall ] Overall Efficiency(Gd+H): 37.0544 %
+[  Overall ] Overall Efficiency(H)   : 1.93343 %
+[  Overall ] Overall Efficiency(Gd)  : 71.3333 %
 [  Purity  ] Purity: 95.6186
 [    NN    ] ===== Threshold: 0.85 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1424,9 +1424,9 @@
 [    NN    ] NN Efficiency(Gd+H): 66.825 %
 [    NN    ] NN Efficiency(H)   : 7.4817 %
 [    NN    ] NN Efficiency(Gd)  : 81.8097 %
-[  Overall ] Overall Efficiency(Gd+H): 38.6837 %
-[  Overall ] Overall Efficiency(H)   : 1.78764 %
-[  Overall ] Overall Efficiency(Gd)  : 73.9109 %
+[  Overall ] Overall Efficiency(Gd+H): 36.3214 %
+[  Overall ] Overall Efficiency(H)   : 1.65977 %
+[  Overall ] Overall Efficiency(Gd)  : 70.152 %
 [  Purity  ] Purity: 95.8806
 [    NN    ] ===== Threshold: 0.9 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1447,9 +1447,9 @@
 [    NN    ] NN Efficiency(Gd+H): 64.7041 %
 [    NN    ] NN Efficiency(H)   : 6.10771 %
 [    NN    ] NN Efficiency(Gd)  : 79.5001 %
-[  Overall ] Overall Efficiency(Gd+H): 37.456 %
-[  Overall ] Overall Efficiency(H)   : 1.45935 %
-[  Overall ] Overall Efficiency(Gd)  : 71.8244 %
+[  Overall ] Overall Efficiency(Gd+H): 35.1686 %
+[  Overall ] Overall Efficiency(H)   : 1.35496 %
+[  Overall ] Overall Efficiency(Gd)  : 68.1716 %
 [  Purity  ] Purity: 96.1917
 [    NN    ] ===== Threshold: 0.95 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1470,9 +1470,9 @@
 [    NN    ] NN Efficiency(Gd+H): 60.4137 %
 [    NN    ] NN Efficiency(H)   : 3.80102 %
 [    NN    ] NN Efficiency(Gd)  : 74.7088 %
-[  Overall ] Overall Efficiency(Gd+H): 34.9723 %
-[  Overall ] Overall Efficiency(H)   : 0.908198 %
-[  Overall ] Overall Efficiency(Gd)  : 67.4957 %
+[  Overall ] Overall Efficiency(Gd+H): 32.8366 %
+[  Overall ] Overall Efficiency(H)   : 0.843234 %
+[  Overall ] Overall Efficiency(Gd)  : 64.063 %
 [  Purity  ] Purity: 96.7084
 [    NN    ] ===== Threshold: 1 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1509,9 +1509,9 @@
 [Candidates] Truth Decay e in Candidates in [3 us, 300 us]      : 12450
 [Candidates] Truth Acc. Noise in Candidates in [3 us, 300 us]   : 3687555
 [Candidates] All Candidates in [3 us, 300 us]   : 3808718
-[   Pre    ] Pre-selection Efficiency(Gd+H): 57.8213 %
-[   Pre    ] Pre-selection Efficiency(H)   : 23.8133 %
-[   Pre    ] Pre-selection Efficiency(Gd)  : 90.2919 %
+[   Pre    ] Pre-selection Efficiency(Gd+H): 52.8935 %
+[   Pre    ] Pre-selection Efficiency(H)   : 21.5414 %
+[   Pre    ] Pre-selection Efficiency(Gd)  : 83.494 %
 [    NN    ] ===== Threshold: 0 =====
 [    NN    ]  ----------- n-like candidates -----------
 [    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 48127
@@ -1531,9 +1531,9 @@
 [    NN    ] NN Efficiency(Gd+H): 99.9917 %
 [    NN    ] NN Efficiency(H)   : 100 %
 [    NN    ] NN Efficiency(Gd)  : 99.9896 %
-[  Overall ] Overall Efficiency(Gd+H): 57.8165 %
-[  Overall ] Overall Efficiency(H)   : 23.8133 %
-[  Overall ] Overall Efficiency(Gd)  : 90.2825 %
+[  Overall ] Overall Efficiency(Gd+H): 52.8891 %
+[  Overall ] Overall Efficiency(H)   : 21.5414 %
+[  Overall ] Overall Efficiency(Gd)  : 83.4853 %
 [  Purity  ] Purity: 1.28828
 [    NN    ] ===== Threshold: 0.05 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1554,9 +1554,9 @@
 [    NN    ] NN Efficiency(Gd+H): 83.173 %
 [    NN    ] NN Efficiency(H)   : 35.3646 %
 [    NN    ] NN Efficiency(Gd)  : 95.2118 %
-[  Overall ] Overall Efficiency(Gd+H): 48.0917 %
-[  Overall ] Overall Efficiency(H)   : 8.42147 %
-[  Overall ] Overall Efficiency(Gd)  : 85.9686 %
+[  Overall ] Overall Efficiency(Gd+H): 43.9931 %
+[  Overall ] Overall Efficiency(H)   : 7.61803 %
+[  Overall ] Overall Efficiency(Gd)  : 79.4962 %
 [  Purity  ] Purity: 61.1886
 [    NN    ] ===== Threshold: 0.1 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1577,9 +1577,9 @@
 [    NN    ] NN Efficiency(Gd+H): 80.5946 %
 [    NN    ] NN Efficiency(H)   : 28.4032 %
 [    NN    ] NN Efficiency(Gd)  : 93.7372 %
-[  Overall ] Overall Efficiency(Gd+H): 46.6008 %
-[  Overall ] Overall Efficiency(H)   : 6.76374 %
-[  Overall ] Overall Efficiency(Gd)  : 84.6371 %
+[  Overall ] Overall Efficiency(Gd+H): 42.6293 %
+[  Overall ] Overall Efficiency(H)   : 6.11845 %
+[  Overall ] Overall Efficiency(Gd)  : 78.2649 %
 [  Purity  ] Purity: 77.6426
 [    NN    ] ===== Threshold: 0.15 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1600,9 +1600,9 @@
 [    NN    ] NN Efficiency(Gd+H): 79.0717 %
 [    NN    ] NN Efficiency(H)   : 25.0981 %
 [    NN    ] NN Efficiency(Gd)  : 92.663 %
-[  Overall ] Overall Efficiency(Gd+H): 45.7203 %
-[  Overall ] Overall Efficiency(H)   : 5.97668 %
-[  Overall ] Overall Efficiency(Gd)  : 83.6672 %
+[  Overall ] Overall Efficiency(Gd+H): 41.8238 %
+[  Overall ] Overall Efficiency(H)   : 5.40649 %
+[  Overall ] Overall Efficiency(Gd)  : 77.3681 %
 [  Purity  ] Purity: 84.0541
 [    NN    ] ===== Threshold: 0.2 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1623,9 +1623,9 @@
 [    NN    ] NN Efficiency(Gd+H): 77.9103 %
 [    NN    ] NN Efficiency(H)   : 22.7019 %
 [    NN    ] NN Efficiency(Gd)  : 91.8125 %
-[  Overall ] Overall Efficiency(Gd+H): 45.0487 %
-[  Overall ] Overall Efficiency(H)   : 5.40607 %
-[  Overall ] Overall Efficiency(Gd)  : 82.8993 %
+[  Overall ] Overall Efficiency(Gd+H): 41.2095 %
+[  Overall ] Overall Efficiency(H)   : 4.89031 %
+[  Overall ] Overall Efficiency(Gd)  : 76.658 %
 [  Purity  ] Purity: 87.5163
 [    NN    ] ===== Threshold: 0.25 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1646,9 +1646,9 @@
 [    NN    ] NN Efficiency(Gd+H): 76.9587 %
 [    NN    ] NN Efficiency(H)   : 20.7912 %
 [    NN    ] NN Efficiency(Gd)  : 91.1025 %
-[  Overall ] Overall Efficiency(Gd+H): 44.4985 %
-[  Overall ] Overall Efficiency(H)   : 4.95106 %
-[  Overall ] Overall Efficiency(Gd)  : 82.2582 %
+[  Overall ] Overall Efficiency(Gd+H): 40.7062 %
+[  Overall ] Overall Efficiency(H)   : 4.47871 %
+[  Overall ] Overall Efficiency(Gd)  : 76.0651 %
 [  Purity  ] Purity: 89.5229
 [    NN    ] ===== Threshold: 0.3 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1669,9 +1669,9 @@
 [    NN    ] NN Efficiency(Gd+H): 76.1069 %
 [    NN    ] NN Efficiency(H)   : 19.2006 %
 [    NN    ] NN Efficiency(Gd)  : 90.4367 %
-[  Overall ] Overall Efficiency(Gd+H): 44.006 %
-[  Overall ] Overall Efficiency(H)   : 4.57229 %
-[  Overall ] Overall Efficiency(Gd)  : 81.657 %
+[  Overall ] Overall Efficiency(Gd+H): 40.2556 %
+[  Overall ] Overall Efficiency(H)   : 4.13607 %
+[  Overall ] Overall Efficiency(Gd)  : 75.5092 %
 [  Purity  ] Purity: 90.9635
 [    NN    ] ===== Threshold: 0.35 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1692,9 +1692,9 @@
 [    NN    ] NN Efficiency(Gd+H): 75.2862 %
 [    NN    ] NN Efficiency(H)   : 17.9095 %
 [    NN    ] NN Efficiency(Gd)  : 89.7345 %
-[  Overall ] Overall Efficiency(Gd+H): 43.5314 %
-[  Overall ] Overall Efficiency(H)   : 4.26484 %
-[  Overall ] Overall Efficiency(Gd)  : 81.0229 %
+[  Overall ] Overall Efficiency(Gd+H): 39.8215 %
+[  Overall ] Overall Efficiency(H)   : 3.85796 %
+[  Overall ] Overall Efficiency(Gd)  : 74.9229 %
 [  Purity  ] Purity: 92.0513
 [    NN    ] ===== Threshold: 0.4 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1715,9 +1715,9 @@
 [    NN    ] NN Efficiency(Gd+H): 74.6068 %
 [    NN    ] NN Efficiency(H)   : 16.8147 %
 [    NN    ] NN Efficiency(Gd)  : 89.1597 %
-[  Overall ] Overall Efficiency(Gd+H): 43.1386 %
-[  Overall ] Overall Efficiency(H)   : 4.00413 %
-[  Overall ] Overall Efficiency(Gd)  : 80.504 %
+[  Overall ] Overall Efficiency(Gd+H): 39.4622 %
+[  Overall ] Overall Efficiency(H)   : 3.62212 %
+[  Overall ] Overall Efficiency(Gd)  : 74.443 %
 [  Purity  ] Purity: 92.8553
 [    NN    ] ===== Threshold: 0.45 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1738,9 +1738,9 @@
 [    NN    ] NN Efficiency(Gd+H): 73.8734 %
 [    NN    ] NN Efficiency(H)   : 15.6269 %
 [    NN    ] NN Efficiency(Gd)  : 88.5407 %
-[  Overall ] Overall Efficiency(Gd+H): 42.7145 %
-[  Overall ] Overall Efficiency(H)   : 3.72128 %
-[  Overall ] Overall Efficiency(Gd)  : 79.945 %
+[  Overall ] Overall Efficiency(Gd+H): 39.0742 %
+[  Overall ] Overall Efficiency(H)   : 3.36626 %
+[  Overall ] Overall Efficiency(Gd)  : 73.9262 %
 [  Purity  ] Purity: 93.4381
 [    NN    ] ===== Threshold: 0.5 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1761,9 +1761,9 @@
 [    NN    ] NN Efficiency(Gd+H): 73.1878 %
 [    NN    ] NN Efficiency(H)   : 14.6044 %
 [    NN    ] NN Efficiency(Gd)  : 87.9399 %
-[  Overall ] Overall Efficiency(Gd+H): 42.3181 %
-[  Overall ] Overall Efficiency(H)   : 3.47779 %
-[  Overall ] Overall Efficiency(Gd)  : 79.4026 %
+[  Overall ] Overall Efficiency(Gd+H): 38.7116 %
+[  Overall ] Overall Efficiency(H)   : 3.146 %
+[  Overall ] Overall Efficiency(Gd)  : 73.4245 %
 [  Purity  ] Purity: 93.9435
 [    NN    ] ===== Threshold: 0.55 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1784,9 +1784,9 @@
 [    NN    ] NN Efficiency(Gd+H): 72.5312 %
 [    NN    ] NN Efficiency(H)   : 13.6335 %
 [    NN    ] NN Efficiency(Gd)  : 87.3625 %
-[  Overall ] Overall Efficiency(Gd+H): 41.9385 %
-[  Overall ] Overall Efficiency(H)   : 3.24659 %
-[  Overall ] Overall Efficiency(Gd)  : 78.8812 %
+[  Overall ] Overall Efficiency(Gd+H): 38.3643 %
+[  Overall ] Overall Efficiency(H)   : 2.93686 %
+[  Overall ] Overall Efficiency(Gd)  : 72.9425 %
 [  Purity  ] Purity: 94.3182
 [    NN    ] ===== Threshold: 0.6 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1807,9 +1807,9 @@
 [    NN    ] NN Efficiency(Gd+H): 71.7895 %
 [    NN    ] NN Efficiency(H)   : 12.5387 %
 [    NN    ] NN Efficiency(Gd)  : 86.7097 %
-[  Overall ] Overall Efficiency(Gd+H): 41.5096 %
-[  Overall ] Overall Efficiency(H)   : 2.98588 %
-[  Overall ] Overall Efficiency(Gd)  : 78.2918 %
+[  Overall ] Overall Efficiency(Gd+H): 37.972 %
+[  Overall ] Overall Efficiency(H)   : 2.70102 %
+[  Overall ] Overall Efficiency(Gd)  : 72.3974 %
 [  Purity  ] Purity: 94.645
 [    NN    ] ===== Threshold: 0.65 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1830,9 +1830,9 @@
 [    NN    ] NN Efficiency(Gd+H): 71.0457 %
 [    NN    ] NN Efficiency(H)   : 11.6298 %
 [    NN    ] NN Efficiency(Gd)  : 86.0074 %
-[  Overall ] Overall Efficiency(Gd+H): 41.0795 %
-[  Overall ] Overall Efficiency(H)   : 2.76944 %
-[  Overall ] Overall Efficiency(Gd)  : 77.6578 %
+[  Overall ] Overall Efficiency(Gd+H): 37.5786 %
+[  Overall ] Overall Efficiency(H)   : 2.50523 %
+[  Overall ] Overall Efficiency(Gd)  : 71.8111 %
 [  Purity  ] Purity: 94.8991
 [    NN    ] ===== Threshold: 0.7 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1853,9 +1853,9 @@
 [    NN    ] NN Efficiency(Gd+H): 70.2125 %
 [    NN    ] NN Efficiency(H)   : 10.7829 %
 [    NN    ] NN Efficiency(Gd)  : 85.1778 %
-[  Overall ] Overall Efficiency(Gd+H): 40.5978 %
-[  Overall ] Overall Efficiency(H)   : 2.56776 %
-[  Overall ] Overall Efficiency(Gd)  : 76.9086 %
+[  Overall ] Overall Efficiency(Gd+H): 37.1379 %
+[  Overall ] Overall Efficiency(H)   : 2.32279 %
+[  Overall ] Overall Efficiency(Gd)  : 71.1183 %
 [  Purity  ] Purity: 95.1729
 [    NN    ] ===== Threshold: 0.75 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1876,9 +1876,9 @@
 [    NN    ] NN Efficiency(Gd+H): 69.2859 %
 [    NN    ] NN Efficiency(H)   : 9.79137 %
 [    NN    ] NN Efficiency(Gd)  : 84.2675 %
-[  Overall ] Overall Efficiency(Gd+H): 40.062 %
-[  Overall ] Overall Efficiency(H)   : 2.33164 %
-[  Overall ] Overall Efficiency(Gd)  : 76.0867 %
+[  Overall ] Overall Efficiency(Gd+H): 36.6478 %
+[  Overall ] Overall Efficiency(H)   : 2.1092 %
+[  Overall ] Overall Efficiency(Gd)  : 70.3583 %
 [  Purity  ] Purity: 95.4436
 [    NN    ] ===== Threshold: 0.8 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1899,9 +1899,9 @@
 [    NN    ] NN Efficiency(Gd+H): 68.2471 %
 [    NN    ] NN Efficiency(H)   : 8.69655 %
 [    NN    ] NN Efficiency(Gd)  : 83.2427 %
-[  Overall ] Overall Efficiency(Gd+H): 39.4613 %
-[  Overall ] Overall Efficiency(H)   : 2.07093 %
-[  Overall ] Overall Efficiency(Gd)  : 75.1615 %
+[  Overall ] Overall Efficiency(Gd+H): 36.0983 %
+[  Overall ] Overall Efficiency(H)   : 1.87336 %
+[  Overall ] Overall Efficiency(Gd)  : 69.5027 %
 [  Purity  ] Purity: 95.6413
 [    NN    ] ===== Threshold: 0.85 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1922,9 +1922,9 @@
 [    NN    ] NN Efficiency(Gd+H): 66.8883 %
 [    NN    ] NN Efficiency(H)   : 7.46746 %
 [    NN    ] NN Efficiency(Gd)  : 81.8513 %
-[  Overall ] Overall Efficiency(Gd+H): 38.6757 %
-[  Overall ] Overall Efficiency(H)   : 1.77825 %
-[  Overall ] Overall Efficiency(Gd)  : 73.9051 %
+[  Overall ] Overall Efficiency(Gd+H): 35.3796 %
+[  Overall ] Overall Efficiency(H)   : 1.6086 %
+[  Overall ] Overall Efficiency(Gd)  : 68.3409 %
 [  Purity  ] Purity: 95.864
 [    NN    ] ===== Threshold: 0.9 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1945,9 +1945,9 @@
 [    NN    ] NN Efficiency(Gd+H): 64.7608 %
 [    NN    ] NN Efficiency(H)   : 6.11444 %
 [    NN    ] NN Efficiency(Gd)  : 79.5287 %
-[  Overall ] Overall Efficiency(Gd+H): 37.4455 %
-[  Overall ] Overall Efficiency(H)   : 1.45605 %
-[  Overall ] Overall Efficiency(Gd)  : 71.808 %
+[  Overall ] Overall Efficiency(Gd+H): 34.2543 %
+[  Overall ] Overall Efficiency(H)   : 1.31714 %
+[  Overall ] Overall Efficiency(Gd)  : 66.4017 %
 [  Purity  ] Purity: 96.1473
 [    NN    ] ===== Threshold: 0.95 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -1968,9 +1968,9 @@
 [    NN    ] NN Efficiency(Gd+H): 60.4683 %
 [    NN    ] NN Efficiency(H)   : 3.8112 %
 [    NN    ] NN Efficiency(Gd)  : 74.7354 %
-[  Overall ] Overall Efficiency(Gd+H): 34.9635 %
-[  Overall ] Overall Efficiency(H)   : 0.90757 %
-[  Overall ] Overall Efficiency(Gd)  : 67.48 %
+[  Overall ] Overall Efficiency(Gd+H): 31.9838 %
+[  Overall ] Overall Efficiency(H)   : 0.820985 %
+[  Overall ] Overall Efficiency(Gd)  : 62.3996 %
 [  Purity  ] Purity: 96.6429
 [    NN    ] ===== Threshold: 1 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2007,9 +2007,9 @@
 [Candidates] Truth Decay e in Candidates in [3 us, 250 us]      : 12450
 [Candidates] Truth Acc. Noise in Candidates in [3 us, 250 us]   : 3037926
 [Candidates] All Candidates in [3 us, 250 us]   : 3154802
-[   Pre    ] Pre-selection Efficiency(Gd+H): 57.7688 %
-[   Pre    ] Pre-selection Efficiency(H)   : 23.762 %
-[   Pre    ] Pre-selection Efficiency(Gd)  : 90.2905 %
+[   Pre    ] Pre-selection Efficiency(Gd+H): 50.5385 %
+[   Pre    ] Pre-selection Efficiency(H)   : 20.5736 %
+[   Pre    ] Pre-selection Efficiency(Gd)  : 79.785 %
 [    NN    ] ===== Threshold: 0 =====
 [    NN    ]  ----------- n-like candidates -----------
 [    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 45984
@@ -2029,9 +2029,9 @@
 [    NN    ] NN Efficiency(Gd+H): 99.9913 %
 [    NN    ] NN Efficiency(H)   : 100 %
 [    NN    ] NN Efficiency(Gd)  : 99.9891 %
-[  Overall ] Overall Efficiency(Gd+H): 57.7638 %
-[  Overall ] Overall Efficiency(H)   : 23.762 %
-[  Overall ] Overall Efficiency(Gd)  : 90.2806 %
+[  Overall ] Overall Efficiency(Gd+H): 50.5341 %
+[  Overall ] Overall Efficiency(H)   : 20.5736 %
+[  Overall ] Overall Efficiency(Gd)  : 79.7763 %
 [  Purity  ] Purity: 1.49105
 [    NN    ] ===== Threshold: 0.05 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2052,9 +2052,9 @@
 [    NN    ] NN Efficiency(Gd+H): 83.1869 %
 [    NN    ] NN Efficiency(H)   : 35.4602 %
 [    NN    ] NN Efficiency(Gd)  : 95.1988 %
-[  Overall ] Overall Efficiency(Gd+H): 48.0561 %
-[  Overall ] Overall Efficiency(H)   : 8.42606 %
-[  Overall ] Overall Efficiency(Gd)  : 85.9555 %
+[  Overall ] Overall Efficiency(Gd+H): 42.0414 %
+[  Overall ] Overall Efficiency(H)   : 7.29542 %
+[  Overall ] Overall Efficiency(Gd)  : 75.9544 %
 [  Purity  ] Purity: 64.2904
 [    NN    ] ===== Threshold: 0.1 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2075,9 +2075,9 @@
 [    NN    ] NN Efficiency(Gd+H): 80.5754 %
 [    NN    ] NN Efficiency(H)   : 28.4308 %
 [    NN    ] NN Efficiency(Gd)  : 93.6991 %
-[  Overall ] Overall Efficiency(Gd+H): 46.5474 %
-[  Overall ] Overall Efficiency(H)   : 6.75575 %
-[  Overall ] Overall Efficiency(Gd)  : 84.6014 %
+[  Overall ] Overall Efficiency(Gd+H): 40.7216 %
+[  Overall ] Overall Efficiency(H)   : 5.84924 %
+[  Overall ] Overall Efficiency(Gd)  : 74.7579 %
 [  Purity  ] Purity: 79.6933
 [    NN    ] ===== Threshold: 0.15 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2098,9 +2098,9 @@
 [    NN    ] NN Efficiency(Gd+H): 79.0402 %
 [    NN    ] NN Efficiency(H)   : 25.1217 %
 [    NN    ] NN Efficiency(Gd)  : 92.6104 %
-[  Overall ] Overall Efficiency(Gd+H): 45.6606 %
-[  Overall ] Overall Efficiency(H)   : 5.96942 %
-[  Overall ] Overall Efficiency(Gd)  : 83.6184 %
+[  Overall ] Overall Efficiency(Gd+H): 39.9457 %
+[  Overall ] Overall Efficiency(H)   : 5.16842 %
+[  Overall ] Overall Efficiency(Gd)  : 73.8893 %
 [  Purity  ] Purity: 85.4446
 [    NN    ] ===== Threshold: 0.2 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2121,9 +2121,9 @@
 [    NN    ] NN Efficiency(Gd+H): 77.8812 %
 [    NN    ] NN Efficiency(H)   : 22.7641 %
 [    NN    ] NN Efficiency(Gd)  : 91.7531 %
-[  Overall ] Overall Efficiency(Gd+H): 44.991 %
-[  Overall ] Overall Efficiency(H)   : 5.40922 %
-[  Overall ] Overall Efficiency(Gd)  : 82.8443 %
+[  Overall ] Overall Efficiency(Gd+H): 39.36 %
+[  Overall ] Overall Efficiency(H)   : 4.6834 %
+[  Overall ] Overall Efficiency(Gd)  : 73.2052 %
 [  Purity  ] Purity: 88.5286
 [    NN    ] ===== Threshold: 0.25 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2144,9 +2144,9 @@
 [    NN    ] NN Efficiency(Gd+H): 76.9353 %
 [    NN    ] NN Efficiency(H)   : 20.8608 %
 [    NN    ] NN Efficiency(Gd)  : 91.0481 %
-[  Overall ] Overall Efficiency(Gd+H): 44.4446 %
-[  Overall ] Overall Efficiency(H)   : 4.95696 %
-[  Overall ] Overall Efficiency(Gd)  : 82.2078 %
+[  Overall ] Overall Efficiency(Gd+H): 38.8819 %
+[  Overall ] Overall Efficiency(H)   : 4.29182 %
+[  Overall ] Overall Efficiency(Gd)  : 72.6428 %
 [  Purity  ] Purity: 90.3291
 [    NN    ] ===== Threshold: 0.3 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2167,9 +2167,9 @@
 [    NN    ] NN Efficiency(Gd+H): 76.0655 %
 [    NN    ] NN Efficiency(H)   : 19.217 %
 [    NN    ] NN Efficiency(Gd)  : 90.3732 %
-[  Overall ] Overall Efficiency(Gd+H): 43.9421 %
-[  Overall ] Overall Efficiency(H)   : 4.56636 %
-[  Overall ] Overall Efficiency(Gd)  : 81.5984 %
+[  Overall ] Overall Efficiency(Gd+H): 38.4423 %
+[  Overall ] Overall Efficiency(H)   : 3.95363 %
+[  Overall ] Overall Efficiency(Gd)  : 72.1042 %
 [  Purity  ] Purity: 91.5733
 [    NN    ] ===== Threshold: 0.35 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2190,9 +2190,9 @@
 [    NN    ] NN Efficiency(Gd+H): 75.2479 %
 [    NN    ] NN Efficiency(H)   : 17.941 %
 [    NN    ] NN Efficiency(Gd)  : 89.6709 %
-[  Overall ] Overall Efficiency(Gd+H): 43.4698 %
-[  Overall ] Overall Efficiency(H)   : 4.26314 %
-[  Overall ] Overall Efficiency(Gd)  : 80.9643 %
+[  Overall ] Overall Efficiency(Gd+H): 38.0291 %
+[  Overall ] Overall Efficiency(H)   : 3.6911 %
+[  Overall ] Overall Efficiency(Gd)  : 71.544 %
 [  Purity  ] Purity: 92.5317
 [    NN    ] ===== Threshold: 0.4 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2213,9 +2213,9 @@
 [    NN    ] NN Efficiency(Gd+H): 74.5673 %
 [    NN    ] NN Efficiency(H)   : 16.8379 %
 [    NN    ] NN Efficiency(Gd)  : 89.0966 %
-[  Overall ] Overall Efficiency(Gd+H): 43.0766 %
-[  Overall ] Overall Efficiency(H)   : 4.00103 %
-[  Overall ] Overall Efficiency(Gd)  : 80.4458 %
+[  Overall ] Overall Efficiency(Gd+H): 37.6852 %
+[  Overall ] Overall Efficiency(H)   : 3.46416 %
+[  Overall ] Overall Efficiency(Gd)  : 71.0858 %
 [  Purity  ] Purity: 93.1873
 [    NN    ] ===== Threshold: 0.45 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2236,9 +2236,9 @@
 [    NN    ] NN Efficiency(Gd+H): 73.8279 %
 [    NN    ] NN Efficiency(H)   : 15.6699 %
 [    NN    ] NN Efficiency(Gd)  : 88.4652 %
-[  Overall ] Overall Efficiency(Gd+H): 42.6495 %
-[  Overall ] Overall Efficiency(H)   : 3.7235 %
-[  Overall ] Overall Efficiency(Gd)  : 79.8757 %
+[  Overall ] Overall Efficiency(Gd+H): 37.3115 %
+[  Overall ] Overall Efficiency(H)   : 3.22387 %
+[  Overall ] Overall Efficiency(Gd)  : 70.582 %
 [  Purity  ] Purity: 93.6814
 [    NN    ] ===== Threshold: 0.5 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2259,9 +2259,9 @@
 [    NN    ] NN Efficiency(Gd+H): 73.1386 %
 [    NN    ] NN Efficiency(H)   : 14.6534 %
 [    NN    ] NN Efficiency(Gd)  : 87.8583 %
-[  Overall ] Overall Efficiency(Gd+H): 42.2513 %
-[  Overall ] Overall Efficiency(H)   : 3.48195 %
-[  Overall ] Overall Efficiency(Gd)  : 79.3276 %
+[  Overall ] Overall Efficiency(Gd+H): 36.9632 %
+[  Overall ] Overall Efficiency(H)   : 3.01473 %
+[  Overall ] Overall Efficiency(Gd)  : 70.0977 %
 [  Purity  ] Purity: 94.126
 [    NN    ] ===== Threshold: 0.55 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2282,9 +2282,9 @@
 [    NN    ] NN Efficiency(Gd+H): 72.4863 %
 [    NN    ] NN Efficiency(H)   : 13.6801 %
 [    NN    ] NN Efficiency(Gd)  : 87.2867 %
-[  Overall ] Overall Efficiency(Gd+H): 41.8745 %
-[  Overall ] Overall Efficiency(H)   : 3.25067 %
-[  Overall ] Overall Efficiency(Gd)  : 78.8116 %
+[  Overall ] Overall Efficiency(Gd+H): 36.6335 %
+[  Overall ] Overall Efficiency(H)   : 2.81449 %
+[  Overall ] Overall Efficiency(Gd)  : 69.6417 %
 [  Purity  ] Purity: 94.4334
 [    NN    ] ===== Threshold: 0.6 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2305,9 +2305,9 @@
 [    NN    ] NN Efficiency(Gd+H): 71.7361 %
 [    NN    ] NN Efficiency(H)   : 12.5662 %
 [    NN    ] NN Efficiency(Gd)  : 86.628 %
-[  Overall ] Overall Efficiency(Gd+H): 41.4411 %
-[  Overall ] Overall Efficiency(H)   : 2.986 %
-[  Overall ] Overall Efficiency(Gd)  : 78.2169 %
+[  Overall ] Overall Efficiency(Gd+H): 36.2543 %
+[  Overall ] Overall Efficiency(H)   : 2.58532 %
+[  Overall ] Overall Efficiency(Gd)  : 69.1162 %
 [  Purity  ] Purity: 94.7063
 [    NN    ] ===== Threshold: 0.65 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2328,9 +2328,9 @@
 [    NN    ] NN Efficiency(Gd+H): 70.9946 %
 [    NN    ] NN Efficiency(H)   : 11.7119 %
 [    NN    ] NN Efficiency(Gd)  : 85.9149 %
-[  Overall ] Overall Efficiency(Gd+H): 41.0127 %
-[  Overall ] Overall Efficiency(H)   : 2.78299 %
-[  Overall ] Overall Efficiency(Gd)  : 77.573 %
+[  Overall ] Overall Efficiency(Gd+H): 35.8796 %
+[  Overall ] Overall Efficiency(H)   : 2.40956 %
+[  Overall ] Overall Efficiency(Gd)  : 68.5472 %
 [  Purity  ] Purity: 94.9209
 [    NN    ] ===== Threshold: 0.7 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2351,9 +2351,9 @@
 [    NN    ] NN Efficiency(Gd+H): 70.1531 %
 [    NN    ] NN Efficiency(H)   : 10.8576 %
 [    NN    ] NN Efficiency(Gd)  : 85.0766 %
-[  Overall ] Overall Efficiency(Gd+H): 40.5266 %
-[  Overall ] Overall Efficiency(H)   : 2.57998 %
-[  Overall ] Overall Efficiency(Gd)  : 76.8161 %
+[  Overall ] Overall Efficiency(Gd+H): 35.4543 %
+[  Overall ] Overall Efficiency(H)   : 2.23379 %
+[  Overall ] Overall Efficiency(Gd)  : 67.8784 %
 [  Purity  ] Purity: 95.171
 [    NN    ] ===== Threshold: 0.75 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2374,9 +2374,9 @@
 [    NN    ] NN Efficiency(Gd+H): 69.2094 %
 [    NN    ] NN Efficiency(H)   : 9.84103 %
 [    NN    ] NN Efficiency(Gd)  : 84.1512 %
-[  Overall ] Overall Efficiency(Gd+H): 39.9814 %
-[  Overall ] Overall Efficiency(H)   : 2.33843 %
-[  Overall ] Overall Efficiency(Gd)  : 75.9805 %
+[  Overall ] Overall Efficiency(Gd+H): 34.9774 %
+[  Overall ] Overall Efficiency(H)   : 2.02465 %
+[  Overall ] Overall Efficiency(Gd)  : 67.1401 %
 [  Purity  ] Purity: 95.3848
 [    NN    ] ===== Threshold: 0.8 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2397,9 +2397,9 @@
 [    NN    ] NN Efficiency(Gd+H): 68.1721 %
 [    NN    ] NN Efficiency(H)   : 8.70553 %
 [    NN    ] NN Efficiency(Gd)  : 83.1387 %
-[  Overall ] Overall Efficiency(Gd+H): 39.3822 %
-[  Overall ] Overall Efficiency(H)   : 2.06861 %
-[  Overall ] Overall Efficiency(Gd)  : 75.0664 %
+[  Overall ] Overall Efficiency(Gd+H): 34.4532 %
+[  Overall ] Overall Efficiency(H)   : 1.79104 %
+[  Overall ] Overall Efficiency(Gd)  : 66.3322 %
 [  Purity  ] Purity: 95.5707
 [    NN    ] ===== Threshold: 0.85 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2420,9 +2420,9 @@
 [    NN    ] NN Efficiency(Gd+H): 66.8261 %
 [    NN    ] NN Efficiency(H)   : 7.49432 %
 [    NN    ] NN Efficiency(Gd)  : 81.7588 %
-[  Overall ] Overall Efficiency(Gd+H): 38.6046 %
-[  Overall ] Overall Efficiency(H)   : 1.7808 %
-[  Overall ] Overall Efficiency(Gd)  : 73.8204 %
+[  Overall ] Overall Efficiency(Gd+H): 33.7729 %
+[  Overall ] Overall Efficiency(H)   : 1.54185 %
+[  Overall ] Overall Efficiency(Gd)  : 65.2313 %
 [  Purity  ] Purity: 95.7652
 [    NN    ] ===== Threshold: 0.9 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2443,9 +2443,9 @@
 [    NN    ] NN Efficiency(Gd+H): 64.7104 %
 [    NN    ] NN Efficiency(H)   : 6.15335 %
 [    NN    ] NN Efficiency(Gd)  : 79.448 %
-[  Overall ] Overall Efficiency(Gd+H): 37.3824 %
-[  Overall ] Overall Efficiency(H)   : 1.46216 %
-[  Overall ] Overall Efficiency(Gd)  : 71.734 %
+[  Overall ] Overall Efficiency(Gd+H): 32.7036 %
+[  Overall ] Overall Efficiency(H)   : 1.26596 %
+[  Overall ] Overall Efficiency(Gd)  : 63.3876 %
 [  Purity  ] Purity: 96.0308
 [    NN    ] ===== Threshold: 0.95 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2466,9 +2466,9 @@
 [    NN    ] NN Efficiency(Gd+H): 60.4201 %
 [    NN    ] NN Efficiency(H)   : 3.8499 %
 [    NN    ] NN Efficiency(Gd)  : 74.6577 %
-[  Overall ] Overall Efficiency(Gd+H): 34.904 %
-[  Overall ] Overall Efficiency(H)   : 0.914814 %
-[  Overall ] Overall Efficiency(Gd)  : 67.4088 %
+[  Overall ] Overall Efficiency(Gd+H): 30.5354 %
+[  Overall ] Overall Efficiency(H)   : 0.792062 %
+[  Overall ] Overall Efficiency(Gd)  : 59.5657 %
 [  Purity  ] Purity: 96.5127
 [    NN    ] ===== Threshold: 1 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2505,9 +2505,9 @@
 [Candidates] Truth Decay e in Candidates in [3 us, 200 us]      : 12450
 [Candidates] Truth Acc. Noise in Candidates in [3 us, 200 us]   : 2387405
 [Candidates] All Candidates in [3 us, 200 us]   : 2497659
-[   Pre    ] Pre-selection Efficiency(Gd+H): 57.7294 %
-[   Pre    ] Pre-selection Efficiency(H)   : 23.7214 %
-[   Pre    ] Pre-selection Efficiency(Gd)  : 90.2418 %
+[   Pre    ] Pre-selection Efficiency(Gd+H): 46.8999 %
+[   Pre    ] Pre-selection Efficiency(H)   : 19.0695 %
+[   Pre    ] Pre-selection Efficiency(Gd)  : 74.063 %
 [    NN    ] ===== Threshold: 0 =====
 [    NN    ]  ----------- n-like candidates -----------
 [    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 42673
@@ -2527,9 +2527,9 @@
 [    NN    ] NN Efficiency(Gd+H): 99.9906 %
 [    NN    ] NN Efficiency(H)   : 100 %
 [    NN    ] NN Efficiency(Gd)  : 99.9883 %
-[  Overall ] Overall Efficiency(Gd+H): 57.7239 %
-[  Overall ] Overall Efficiency(H)   : 23.7214 %
-[  Overall ] Overall Efficiency(Gd)  : 90.2313 %
+[  Overall ] Overall Efficiency(Gd+H): 46.8955 %
+[  Overall ] Overall Efficiency(H)   : 19.0695 %
+[  Overall ] Overall Efficiency(Gd)  : 74.0543 %
 [  Purity  ] Purity: 1.75597
 [    NN    ] ===== Threshold: 0.05 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2550,9 +2550,9 @@
 [    NN    ] NN Efficiency(Gd+H): 83.2111 %
 [    NN    ] NN Efficiency(H)   : 35.4218 %
 [    NN    ] NN Efficiency(Gd)  : 95.2208 %
-[  Overall ] Overall Efficiency(Gd+H): 48.0372 %
-[  Overall ] Overall Efficiency(H)   : 8.40252 %
-[  Overall ] Overall Efficiency(Gd)  : 85.929 %
+[  Overall ] Overall Efficiency(Gd+H): 39.0259 %
+[  Overall ] Overall Efficiency(H)   : 6.75477 %
+[  Overall ] Overall Efficiency(Gd)  : 70.5233 %
 [  Purity  ] Purity: 67.6445
 [    NN    ] ===== Threshold: 0.1 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2573,9 +2573,9 @@
 [    NN    ] NN Efficiency(Gd+H): 80.6031 %
 [    NN    ] NN Efficiency(H)   : 28.3631 %
 [    NN    ] NN Efficiency(Gd)  : 93.7313 %
-[  Overall ] Overall Efficiency(Gd+H): 46.5317 %
-[  Overall ] Overall Efficiency(H)   : 6.72811 %
-[  Overall ] Overall Efficiency(Gd)  : 84.5849 %
+[  Overall ] Overall Efficiency(Gd+H): 37.8028 %
+[  Overall ] Overall Efficiency(H)   : 5.40871 %
+[  Overall ] Overall Efficiency(Gd)  : 69.4202 %
 [  Purity  ] Purity: 81.6148
 [    NN    ] ===== Threshold: 0.15 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2596,9 +2596,9 @@
 [    NN    ] NN Efficiency(Gd+H): 79.1058 %
 [    NN    ] NN Efficiency(H)   : 25.2013 %
 [    NN    ] NN Efficiency(Gd)  : 92.6523 %
-[  Overall ] Overall Efficiency(Gd+H): 45.6673 %
-[  Overall ] Overall Efficiency(H)   : 5.97808 %
-[  Overall ] Overall Efficiency(Gd)  : 83.6112 %
+[  Overall ] Overall Efficiency(Gd+H): 37.1005 %
+[  Overall ] Overall Efficiency(H)   : 4.80577 %
+[  Overall ] Overall Efficiency(Gd)  : 68.6211 %
 [  Purity  ] Purity: 86.6797
 [    NN    ] ===== Threshold: 0.2 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2619,9 +2619,9 @@
 [    NN    ] NN Efficiency(Gd+H): 77.9319 %
 [    NN    ] NN Efficiency(H)   : 22.8095 %
 [    NN    ] NN Efficiency(Gd)  : 91.7844 %
-[  Overall ] Overall Efficiency(Gd+H): 44.9896 %
-[  Overall ] Overall Efficiency(H)   : 5.41072 %
-[  Overall ] Overall Efficiency(Gd)  : 82.828 %
+[  Overall ] Overall Efficiency(Gd+H): 36.55 %
+[  Overall ] Overall Efficiency(H)   : 4.34966 %
+[  Overall ] Overall Efficiency(Gd)  : 67.9783 %
 [  Purity  ] Purity: 89.3195
 [    NN    ] ===== Threshold: 0.25 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2642,9 +2642,9 @@
 [    NN    ] NN Efficiency(Gd+H): 76.9876 %
 [    NN    ] NN Efficiency(H)   : 20.9427 %
 [    NN    ] NN Efficiency(Gd)  : 91.072 %
-[  Overall ] Overall Efficiency(Gd+H): 44.4444 %
-[  Overall ] Overall Efficiency(H)   : 4.9679 %
-[  Overall ] Overall Efficiency(Gd)  : 82.185 %
+[  Overall ] Overall Efficiency(Gd+H): 36.1071 %
+[  Overall ] Overall Efficiency(H)   : 3.99368 %
+[  Overall ] Overall Efficiency(Gd)  : 67.4506 %
 [  Purity  ] Purity: 90.8503
 [    NN    ] ===== Threshold: 0.3 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2665,9 +2665,9 @@
 [    NN    ] NN Efficiency(Gd+H): 76.1136 %
 [    NN    ] NN Efficiency(H)   : 19.2743 %
 [    NN    ] NN Efficiency(Gd)  : 90.3976 %
-[  Overall ] Overall Efficiency(Gd+H): 43.9399 %
-[  Overall ] Overall Efficiency(H)   : 4.57212 %
-[  Overall ] Overall Efficiency(Gd)  : 81.5764 %
+[  Overall ] Overall Efficiency(Gd+H): 35.6972 %
+[  Overall ] Overall Efficiency(H)   : 3.67552 %
+[  Overall ] Overall Efficiency(Gd)  : 66.9511 %
 [  Purity  ] Purity: 91.9547
 [    NN    ] ===== Threshold: 0.35 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2688,9 +2688,9 @@
 [    NN    ] NN Efficiency(Gd+H): 75.2794 %
 [    NN    ] NN Efficiency(H)   : 17.9442 %
 [    NN    ] NN Efficiency(Gd)  : 89.688 %
-[  Overall ] Overall Efficiency(Gd+H): 43.4583 %
-[  Overall ] Overall Efficiency(H)   : 4.25661 %
-[  Overall ] Overall Efficiency(Gd)  : 80.9361 %
+[  Overall ] Overall Efficiency(Gd+H): 35.3059 %
+[  Overall ] Overall Efficiency(H)   : 3.42188 %
+[  Overall ] Overall Efficiency(Gd)  : 66.4256 %
 [  Purity  ] Purity: 92.7722
 [    NN    ] ===== Threshold: 0.4 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2711,9 +2711,9 @@
 [    NN    ] NN Efficiency(Gd+H): 74.5952 %
 [    NN    ] NN Efficiency(H)   : 16.8708 %
 [    NN    ] NN Efficiency(Gd)  : 89.1016 %
-[  Overall ] Overall Efficiency(Gd+H): 43.0633 %
-[  Overall ] Overall Efficiency(H)   : 4.00199 %
-[  Overall ] Overall Efficiency(Gd)  : 80.4069 %
+[  Overall ] Overall Efficiency(Gd+H): 34.9851 %
+[  Overall ] Overall Efficiency(H)   : 3.21719 %
+[  Overall ] Overall Efficiency(Gd)  : 65.9913 %
 [  Purity  ] Purity: 93.3523
 [    NN    ] ===== Threshold: 0.45 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2734,9 +2734,9 @@
 [    NN    ] NN Efficiency(Gd+H): 73.8501 %
 [    NN    ] NN Efficiency(H)   : 15.6808 %
 [    NN    ] NN Efficiency(Gd)  : 88.4683 %
-[  Overall ] Overall Efficiency(Gd+H): 42.6332 %
-[  Overall ] Overall Efficiency(H)   : 3.71969 %
-[  Overall ] Overall Efficiency(Gd)  : 79.8354 %
+[  Overall ] Overall Efficiency(Gd+H): 34.6356 %
+[  Overall ] Overall Efficiency(H)   : 2.99025 %
+[  Overall ] Overall Efficiency(Gd)  : 65.5223 %
 [  Purity  ] Purity: 93.7755
 [    NN    ] ===== Threshold: 0.5 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2757,9 +2757,9 @@
 [    NN    ] NN Efficiency(Gd+H): 73.1635 %
 [    NN    ] NN Efficiency(H)   : 14.6191 %
 [    NN    ] NN Efficiency(Gd)  : 87.876 %
-[  Overall ] Overall Efficiency(Gd+H): 42.2368 %
-[  Overall ] Overall Efficiency(H)   : 3.46784 %
-[  Overall ] Overall Efficiency(Gd)  : 79.3009 %
+[  Overall ] Overall Efficiency(Gd+H): 34.3136 %
+[  Overall ] Overall Efficiency(H)   : 2.78779 %
+[  Overall ] Overall Efficiency(Gd)  : 65.0836 %
 [  Purity  ] Purity: 94.1503
 [    NN    ] ===== Threshold: 0.55 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2780,9 +2780,9 @@
 [    NN    ] NN Efficiency(Gd+H): 72.5004 %
 [    NN    ] NN Efficiency(H)   : 13.604 %
 [    NN    ] NN Efficiency(Gd)  : 87.3014 %
-[  Overall ] Overall Efficiency(Gd+H): 41.854 %
-[  Overall ] Overall Efficiency(H)   : 3.22706 %
-[  Overall ] Overall Efficiency(Gd)  : 78.7823 %
+[  Overall ] Overall Efficiency(Gd+H): 34.0026 %
+[  Overall ] Overall Efficiency(H)   : 2.59422 %
+[  Overall ] Overall Efficiency(Gd)  : 64.658 %
 [  Purity  ] Purity: 94.41
 [    NN    ] ===== Threshold: 0.6 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2803,9 +2803,9 @@
 [    NN    ] NN Efficiency(Gd+H): 71.7529 %
 [    NN    ] NN Efficiency(H)   : 12.4606 %
 [    NN    ] NN Efficiency(Gd)  : 86.6534 %
-[  Overall ] Overall Efficiency(Gd+H): 41.4225 %
-[  Overall ] Overall Efficiency(H)   : 2.95583 %
-[  Overall ] Overall Efficiency(Gd)  : 78.1976 %
+[  Overall ] Overall Efficiency(Gd+H): 33.652 %
+[  Overall ] Overall Efficiency(H)   : 2.37618 %
+[  Overall ] Overall Efficiency(Gd)  : 64.1781 %
 [  Purity  ] Purity: 94.6438
 [    NN    ] ===== Threshold: 0.65 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2826,9 +2826,9 @@
 [    NN    ] NN Efficiency(Gd+H): 71.0148 %
 [    NN    ] NN Efficiency(H)   : 11.6206 %
 [    NN    ] NN Efficiency(Gd)  : 85.9409 %
-[  Overall ] Overall Efficiency(Gd+H): 40.9964 %
-[  Overall ] Overall Efficiency(H)   : 2.75656 %
-[  Overall ] Overall Efficiency(Gd)  : 77.5546 %
+[  Overall ] Overall Efficiency(Gd+H): 33.3059 %
+[  Overall ] Overall Efficiency(H)   : 2.21599 %
+[  Overall ] Overall Efficiency(Gd)  : 63.6504 %
 [  Purity  ] Purity: 94.8309
 [    NN    ] ===== Threshold: 0.7 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2849,9 +2849,9 @@
 [    NN    ] NN Efficiency(Gd+H): 70.1596 %
 [    NN    ] NN Efficiency(H)   : 10.7455 %
 [    NN    ] NN Efficiency(Gd)  : 85.0906 %
-[  Overall ] Overall Efficiency(Gd+H): 40.5027 %
-[  Overall ] Overall Efficiency(H)   : 2.54899 %
-[  Overall ] Overall Efficiency(Gd)  : 76.7873 %
+[  Overall ] Overall Efficiency(Gd+H): 32.9047 %
+[  Overall ] Overall Efficiency(H)   : 2.04913 %
+[  Overall ] Overall Efficiency(Gd)  : 63.0206 %
 [  Purity  ] Purity: 95.054
 [    NN    ] ===== Threshold: 0.75 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2872,9 +2872,9 @@
 [    NN    ] NN Efficiency(Gd+H): 69.2106 %
 [    NN    ] NN Efficiency(H)   : 9.71882 %
 [    NN    ] NN Efficiency(Gd)  : 84.1611 %
-[  Overall ] Overall Efficiency(Gd+H): 39.9548 %
-[  Overall ] Overall Efficiency(H)   : 2.30544 %
-[  Overall ] Overall Efficiency(Gd)  : 75.9486 %
+[  Overall ] Overall Efficiency(Gd+H): 32.4597 %
+[  Overall ] Overall Efficiency(H)   : 1.85334 %
+[  Overall ] Overall Efficiency(Gd)  : 62.3322 %
 [  Purity  ] Purity: 95.2346
 [    NN    ] ===== Threshold: 0.8 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2895,9 +2895,9 @@
 [    NN    ] NN Efficiency(Gd+H): 68.1725 %
 [    NN    ] NN Efficiency(H)   : 8.57543 %
 [    NN    ] NN Efficiency(Gd)  : 83.1496 %
-[  Overall ] Overall Efficiency(Gd+H): 39.3556 %
-[  Overall ] Overall Efficiency(H)   : 2.03421 %
-[  Overall ] Overall Efficiency(Gd)  : 75.0357 %
+[  Overall ] Overall Efficiency(Gd+H): 31.9728 %
+[  Overall ] Overall Efficiency(H)   : 1.6353 %
+[  Overall ] Overall Efficiency(Gd)  : 61.5831 %
 [  Purity  ] Purity: 95.4089
 [    NN    ] ===== Threshold: 0.85 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2918,9 +2918,9 @@
 [    NN    ] NN Efficiency(Gd+H): 66.8276 %
 [    NN    ] NN Efficiency(H)   : 7.35037 %
 [    NN    ] NN Efficiency(Gd)  : 81.7745 %
-[  Overall ] Overall Efficiency(Gd+H): 38.5791 %
-[  Overall ] Overall Efficiency(H)   : 1.74361 %
-[  Overall ] Overall Efficiency(Gd)  : 73.7948 %
+[  Overall ] Overall Efficiency(Gd+H): 31.342 %
+[  Overall ] Overall Efficiency(H)   : 1.40168 %
+[  Overall ] Overall Efficiency(Gd)  : 60.5646 %
 [  Purity  ] Purity: 95.5732
 [    NN    ] ===== Threshold: 0.9 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2941,9 +2941,9 @@
 [    NN    ] NN Efficiency(Gd+H): 64.6835 %
 [    NN    ] NN Efficiency(H)   : 5.96196 %
 [    NN    ] NN Efficiency(Gd)  : 79.4406 %
-[  Overall ] Overall Efficiency(Gd+H): 37.3414 %
-[  Overall ] Overall Efficiency(H)   : 1.41426 %
-[  Overall ] Overall Efficiency(Gd)  : 71.6886 %
+[  Overall ] Overall Efficiency(Gd+H): 30.3365 %
+[  Overall ] Overall Efficiency(H)   : 1.13692 %
+[  Overall ] Overall Efficiency(Gd)  : 58.836 %
 [  Purity  ] Purity: 95.8108
 [    NN    ] ===== Threshold: 0.95 =====
 [    NN    ]  ----------- n-like candidates -----------
@@ -2964,9 +2964,9 @@
 [    NN    ] NN Efficiency(Gd+H): 60.4096 %
 [    NN    ] NN Efficiency(H)   : 3.71019 %
 [    NN    ] NN Efficiency(Gd)  : 74.6584 %
-[  Overall ] Overall Efficiency(Gd+H): 34.8741 %
-[  Overall ] Overall Efficiency(H)   : 0.880106 %
-[  Overall ] Overall Efficiency(Gd)  : 67.3731 %
+[  Overall ] Overall Efficiency(Gd+H): 28.332 %
+[  Overall ] Overall Efficiency(H)   : 0.707516 %
+[  Overall ] Overall Efficiency(Gd)  : 55.2942 %
 [  Purity  ] Purity: 96.284
 [    NN    ] ===== Threshold: 1 =====
 [    NN    ]  ----------- n-like candidates -----------

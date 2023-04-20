@@ -8,19 +8,19 @@
 [Neutrino] C4: 37842 -> 73048
 [Neutrino] C5: 37008 -> 71452
 [Neutrino] Oscillated CCQE Events     : 10233.1
-           w/ tagged neutrons         : 4830.66, w/o tagged neutrons:5402.44
+           w/ tagged neutrons         : 5279.64, w/o tagged neutrons:4953.46
  
 [Neutrino] Oscillated CC(2p2h) Events : 2155.53
-           w/ tagged neutrons         : 1485.39, w/o tagged neutrons:670.143
+           w/ tagged neutrons         : 1570.19, w/o tagged neutrons:585.339
  
 [Neutrino] Oscillated All CCRES Events: 2888.76
-           w/ tagged neutrons         : 2172.74, w/o tagged neutrons:716.019
+           w/ tagged neutrons         : 2267.65, w/o tagged neutrons:621.107
  
 [Neutrino] Oscillated CC Other Events : 733.534
-           w/ tagged neutrons         : 410.114, w/o tagged neutrons:323.42
+           w/ tagged neutrons         : 432.168, w/o tagged neutrons:301.365
  
 [Neutrino] NC Events                  : 823
-           w/ tagged neutrons         : 495, w/o tagged neutrons:328
+           w/ tagged neutrons         : 417, w/o tagged neutrons:406
 [Neutron] True captured neutrons at CCQE         : 99579
 [Neutron]                           CCQE(osc.)   : 52124.7
 [Neutron] True captured neutrons at CC2p2h       : 27324
@@ -29,3 +29,12 @@
 [Neutron]                           CCOther(osc.): 38028.9
 [Neutron] True captured neutrons at NC           : 2328
 [Neutron]                           NC(osc.)     : 2328
+Neutrino events with NTrueN=1: 22619
+NC events with NTrueN=1      : 220
+No true mu end vertex : 282
+1Rmu       events : 71452
+1Rmu w/  n events : 43749
+1Rmu w/  1n events: 25972
+1Rmu w/o n events : 27703
+1Rmu w/  nu-induced n-like events: 42871
+1Rmu w/o nu-induced n-like events: 28581

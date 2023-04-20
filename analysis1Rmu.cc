@@ -341,7 +341,8 @@ int main(int argc, char **argv) {
 
     h1_NTrueN[0] -> Fill(NTrueN);
 
-    //GetSelectedModeEvents(numu);
+    int TagN = ntagana.GetTaggedNeutrons(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
+    GetSelectedTagN(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false, TagN);
 
     //New 1R muon selection
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false)) {
@@ -799,11 +800,19 @@ int main(int argc, char **argv) {
       resultfile << "[Neutrino] C" << i << ": " << ProtoSelectedParentNeutrinos[i] << " -> " << SelectedParentNeutrinos[i] << std::endl;
       h1_1RmuonEvents->fArray[i+1]      = (float)SelectedParentNeutrinos[i]/SelectedParentNeutrinos[0];
       h1_Proto1RmuonEvents->fArray[i+1] = (float)ProtoSelectedParentNeutrinos[i]/ProtoSelectedParentNeutrinos[0];
+      h1_SelNuEvents[0]->fArray[i+1]    = SelectedCCQENeutrinos[i];
+      h1_SelNuEvents[1]->fArray[i+1]    = SelectedCC2p2hNeutrinos[i];
+      h1_SelNuEvents[2]->fArray[i+1]    = SelectedCCnonQENeutrinos[i];
+      h1_SelNuEvents[3]->fArray[i+1]    = SelectedNCNeutrinos[i];
+      h1_SelTagN[0]->fArray[i+1]        = SelectedCCQETagN[i];
+      h1_SelTagN[1]->fArray[i+1]        = SelectedCC2p2hTagN[i];
+      h1_SelTagN[2]->fArray[i+1]        = SelectedCCnonQETagN[i];
+      h1_SelTagN[3]->fArray[i+1]        = SelectedNCTagN[i];
     }
-    resultfile << "Generated CCQE events   : " << SelectedCCQEevents    << std::endl;
-    resultfile << "Generated CC2p2h events : " << SelectedCC2p2hevents  << std::endl;
-    resultfile << "Generated CCnonQE events: " << SelectedCCnonQEevents << std::endl;
-    resultfile << "Generated NC events     : " << SelectedNCevents      << std::endl;
+    //resultfile << "Generated CCQE events   : " << SelectedCCQEevents    << std::endl;
+    //resultfile << "Generated CC2p2h events : " << SelectedCC2p2hevents  << std::endl;
+    //resultfile << "Generated CCnonQE events: " << SelectedCCnonQEevents << std::endl;
+    //resultfile << "Generated NC events     : " << SelectedNCevents      << std::endl;
     resultfile << "[Decay-e Cut Scan] " << std::endl;
     resultfile << "[Decay-e Cut Scan] dt = 20 us: " << SelectedParentNeutrinos_dtScan[0]      << std::endl;
     resultfile << "                             : " << FinalSelectedParentNeutrinos_dtScan[0] << std::endl;

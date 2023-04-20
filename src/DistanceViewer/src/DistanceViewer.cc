@@ -34,6 +34,11 @@ void DistanceViewer::SetHistoFrame() {
   h2_TruePrmMuEnd_x_TagNCap_x_Pmu -> SetStats(0);
   h2_Prm_NCap_x_MuStp_x_NCap = new TH2F("h2_Prm_NCap_x_MuStp_x_NCap", "Neutron-related distance; Distance from Primary Vertex [m]; Distance from #mu Stopping Vertex [m]", 50, 0, 10, 50, 0, 10);
   h2_Prm_NCap_x_MuStp_x_NCap -> SetStats(0);
+  h1_RecoMuTrack = new TH1F("h1_RecoMuTrack", "; Distance b/w Primary and #mu Stopping Vertices[m]; Number of Events", 50, 0, 10);
+  h2_MuTrack_x_MuStp_x_NCap = new TH2F("h2_MuTrack_x_MuStp_x_NCap", "; #mu Stopping Range[m]; Distance from #mu Stopping Vertex[m]", 50, 0, 10, 50, 0, 10);
+  h2_MuTrack_x_MuStp_x_NCap -> SetStats(0);
+  h2_MuTrack_x_Prm_NCap = new TH2F("h2_MuTrack_x_Prm_NCap", "; #mu Stopping Range[m]; Distance from Primary Vertex[m]", 50, 0, 10, 50, 0, 10);
+  h2_MuTrack_x_Prm_NCap -> SetStats(0);
 
 
   for (int i=0; i<7; i++) {
@@ -286,6 +291,9 @@ void DistanceViewer::WritePlots() {
   h2_TruePrmMuEnd_x_fQDcyE_x_Pmu  -> Write();
   h2_TruePrmMuEnd_x_TagNCap_x_Pmu -> Write();
   h2_Prm_NCap_x_MuStp_x_NCap -> Write();
+  h1_RecoMuTrack -> Write();
+  h2_MuTrack_x_Prm_NCap -> Write();
+  h2_MuTrack_x_MuStp_x_NCap -> Write();
 
   h1_PreEff_dist -> Sumw2();
   h1_PreEff_dist -> Divide(h1_truedistance);

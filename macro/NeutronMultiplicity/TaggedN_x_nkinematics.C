@@ -53,7 +53,10 @@ void TaggedN_x_nkinematics(bool beammode) {
 
 
   //TString KnmtcName = "nTraveld";
-  TString KnmtcName = "MuStp_NCap";
+  //TString KnmtcName = "nTraveldL";
+  //TString KnmtcName = "nTraveldT";
+  TString KnmtcName = "nAngle";
+  //TString KnmtcName = "MuStp_NCap";
 
   TString Prefix      = "NTagAnalysis/h1_TaggedN_x_";
   TString CCQEName    = "_mode0";
@@ -152,14 +155,18 @@ void TaggedN_x_nkinematics(bool beammode) {
   hs_merge ->GetYaxis()->SetTitleSize(0.038);
   hs_merge ->GetYaxis()->SetTitleOffset(1.1);
   hs_merge ->GetYaxis()->SetLabelSize(0.036);
-  if (KnmtcName=="nTraveld") hs_merge->GetXaxis()->SetTitle("Reconstructed Neutron Travel Distance [cm]");
+  if (KnmtcName=="nTraveld")   hs_merge->GetXaxis()->SetTitle("Reconstructed Neutron Travel Distance [cm]");
+  if (KnmtcName=="nTraveldL")  hs_merge->GetXaxis()->SetTitle("Reconstructed Longitidinal Travel Distance [cm]");
+  if (KnmtcName=="nTraveldT")  hs_merge->GetXaxis()->SetTitle("Reconstructed Transverse Travel Distance [cm]");
+  if (KnmtcName=="nAngle")     hs_merge->GetXaxis()->SetTitle("Cosine of Angle b/w n and Beam Directions");
   if (KnmtcName=="MuStp_NCap") hs_merge->GetXaxis()->SetTitle("Distance b/w #mu Stopping and n Capture Vertices [cm]");
-  hs_merge->GetYaxis()->SetTitle("Number of Tagged Neutrons");
+  hs_merge ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
   hs_merge -> Draw();
-  c1->RedrawAxis();
+  c1 -> RedrawAxis();
   
-  TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
-  //TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);
+  //TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
+  TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);
+  //TLegend* legend1 = new TLegend(0.105, 0.45, 0.495, 0.89);
   legend1 -> SetTextSize(0.04);
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");
   else legend1->AddEntry((TObject*)0,"#kern[-0.25]{RHC 1R #mu sample (0.01% Gd)}","");
@@ -172,8 +179,8 @@ void TaggedN_x_nkinematics(bool beammode) {
   //legend1 -> AddEntry(h1_CCOther_numubar, "#nu_{#mu}+#bar{#nu}_{#mu} CC non-QE", "F");
   legend1 -> AddEntry(h1_NC_numu, "NC", "F");
   //legend1 -> AddEntry(h1_Noise_numu, "Acc. bkg. + decay-e", "F");
-  legend1->SetFillColor(0);
-  legend1->Draw() ;
+  legend1 -> SetFillColor(0);
+  legend1 -> Draw() ;
 #endif
 
 }

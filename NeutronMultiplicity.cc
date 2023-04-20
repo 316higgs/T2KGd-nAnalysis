@@ -16,6 +16,7 @@
 #include "include/CLTOption.h"
 #include "include/ResultSummary.h"
 #include "include/VECTChannelChecker.h"
+#include "include/CommonTool.h"
 
 #include "src/DecayeBox/inc/DecayeBox.h"
 #include "src/Gd1RmuonSelection/inc/Gd1RmuonSelection.h"
@@ -483,17 +484,31 @@ int main(int argc, char **argv) {
       RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
       RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
       RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
+      float NuBeamDir[3] = {0., 0., 0.};
+      NuBeamDir[0] = beamDir[0];
+      NuBeamDir[1] = beamDir[1];
+      NuBeamDir[2] = beamDir[2];
       float RecoMuStpVtx[3] = {0., 0., 0.};
       float RecoMuRange = decayebox.GetRecoMuEndVtx(numu, RecoMuStpVtx);
 
       for (UInt_t ican=0; ican<TagOut->size(); ican++) {
         if (etagmode){
           if (TagOut->at(ican)>0.75 && ntagana.DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican))==false) {
-            float NCapVtx[3] = {dvx->at(ican), dvy->at(ican), dvz->at(ican)};
-            float nTraveld = ndistance.TakeDistance(RecoPrmVtx, NCapVtx);
-            float d_MuStp_NCap = ndistance.TakeDistance(RecoMuStpVtx, NCapVtx);
+            float NCapVtx[3]   = {dvx->at(ican), dvy->at(ican), dvz->at(ican)};  //Neutron capture vertex
+            float nTraveld     = ndistance.TakeDistance(RecoPrmVtx, NCapVtx);  //Neutron flight distance
+            float d_MuStp_NCap = ndistance.TakeDistance(RecoMuStpVtx, NCapVtx);  //Distance b/w muon stopping and neutron capture vertices
+            float nTraveldv[3]  = {0., 0., 0.};  //Neutron flight distance vector
+            nTraveldv[0] = NCapVtx[0] - RecoPrmVtx[0];
+            nTraveldv[1] = NCapVtx[1] - RecoPrmVtx[1];
+            nTraveldv[2] = NCapVtx[2] - RecoPrmVtx[2];
+            float nTraveldL = GetInnerProduct(nTraveldv, NuBeamDir);  //Longitudinal neutron flight distance
+            float nTraveldT = nTraveld*std::sin( std::acos( nTraveldL/nTraveld ) );
+            float ncostheta = nTraveldL/nTraveld;
             ntagana.TaggedN_x_Neutronkinematics(numu, Label, ican, nTraveld, xnTraveldbins, TaggedN_x_nTraveld, h1_TaggedN_x_nTraveld, 0);
             ntagana.TaggedN_x_Neutronkinematics(numu, Label, ican, d_MuStp_NCap, xMuStp_NCapbins, TaggedN_x_MuStp_NCap, h1_TaggedN_x_MuStp_NCap, 0);
+            ntagana.TaggedN_x_Neutronkinematics(numu, Label, ican, nTraveldL, xnTraveldLbins, TaggedN_x_nTraveldL, h1_TaggedN_x_nTraveldL, 1);
+            ntagana.TaggedN_x_Neutronkinematics(numu, Label, ican, nTraveldT, xnTraveldTbins, TaggedN_x_nTraveldT, h1_TaggedN_x_nTraveldT, 0);
+            ntagana.TaggedN_x_Neutronkinematics(numu, Label, ican, ncostheta, xnAnglebins, TaggedN_x_nAngle, h1_TaggedN_x_nAngle, 2);
           }
         }
       }
@@ -582,32 +597,22 @@ int main(int argc, char **argv) {
                             + OscillatedCCOther_woTagN
                             + OscillatedNC_woTagN;
     resultfile << "[Neutrino] Oscillated CCQE Events     : " << OscillatedCCQE << "(" << (OscillatedCCQE/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
-    //resultfile << "           w/ truth neutrons : " << OscillatedCCQE_wTrueN << " (" << (OscillatedCCQE_wTrueN/TotalEventswTrueN)*100 
-    //           << " %), w/o truth neutrons :" << OscillatedCCQE_woTrueN << " (" << (OscillatedCCQE_woTrueN/TotalEventswoTrueN)*100 << " %)" << std::endl;
     resultfile << "           w/ tagged neutrons: " << OscillatedCCQE_wTagN << "(" << (OscillatedCCQE_wTagN/TotalEventswTagN)*100
                << " %), w/o tagged neutrons:" << OscillatedCCQE_woTagN << "(" << (OscillatedCCQE_woTagN/TotalEventswoTagN)*100 << " %)" << std::endl;
 
     resultfile << "[Neutrino] Oscillated CC(2p2h) Events : " << OscillatedCCnonQE << "(" << (OscillatedCCnonQE/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
-    //resultfile << "           w/ truth neutrons : " << OscillatedCCnonQE_wTrueN << " (" << (OscillatedCCnonQE_wTrueN/TotalEventswTrueN)*100 
-    //           << " %), w/o truth neutrons :" << OscillatedCCnonQE_woTrueN << " (" << (OscillatedCCnonQE_woTrueN/TotalEventswoTrueN)*100 << " %)" << std::endl;
     resultfile << "           w/ tagged neutrons: " << OscillatedCCnonQE_wTagN << "(" << (OscillatedCCnonQE_wTagN/TotalEventswTagN)*100
                << " %), w/o tagged neutrons:" << OscillatedCCnonQE_woTagN << "(" << (OscillatedCCnonQE_woTagN/TotalEventswoTagN)*100 << " %)" << std::endl;
 
     resultfile << "[Neutrino] Oscillated All CCRES Events: " << OscillatedCCRES0 + OscillatedCCRESp + OscillatedCCRESpp << "(" << ((OscillatedCCRES0 + OscillatedCCRESp + OscillatedCCRESpp)/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
-    //resultfile << "           w/ truth neutrons : " << OscillatedCCRES0_wTrueN + OscillatedCCRESp_wTrueN + OscillatedCCRESpp_wTrueN << " (" << ((OscillatedCCRES0_wTrueN + OscillatedCCRESp_wTrueN + OscillatedCCRESpp_wTrueN)/TotalEventswTrueN)*100 
-    //           << " %), w/o truth neutrons :" << OscillatedCCRES0_woTrueN + OscillatedCCRESp_woTrueN + OscillatedCCRESpp_woTrueN << " (" << ((OscillatedCCRES0_woTrueN + OscillatedCCRESp_woTrueN + OscillatedCCRESpp_woTrueN)/TotalEventswoTrueN)*100 << " %)" << std::endl;
     resultfile << "           w/ tagged neutrons: " << OscillatedCCRES0_wTagN  + OscillatedCCRESp_wTagN  + OscillatedCCRESpp_wTagN << "(" << ((OscillatedCCRES0_wTagN  + OscillatedCCRESp_wTagN  + OscillatedCCRESpp_wTagN)/TotalEventswTagN)*100
                << " %), w/o tagged neutrons:" << OscillatedCCRES0_woTagN  + OscillatedCCRESp_woTagN  + OscillatedCCRESpp_woTagN << "(" << ((OscillatedCCRES0_woTagN  + OscillatedCCRESp_woTagN  + OscillatedCCRESpp_woTagN)/TotalEventswoTagN)*100 << " %)" << std::endl;
 
     resultfile << "[Neutrino] Oscillated CC Other Events : " << OscillatedCCOther << "(" << (OscillatedCCOther/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
-    //resultfile << "           w/ truth neutrons : " << OscillatedCCOther_wTrueN << " (" << (OscillatedCCOther_wTrueN/TotalEventswTrueN)*100 
-    //           << " %), w/o truth neutrons :" << OscillatedCCOther_woTrueN << " (" << (OscillatedCCOther_woTrueN/TotalEventswoTrueN)*100 << " %)" << std::endl;
     resultfile << "           w/ tagged neutrons: " << OscillatedCCOther_wTagN << "(" << (OscillatedCCOther_wTagN/TotalEventswTagN)*100
                << " %), w/o tagged neutrons:" << OscillatedCCOther_woTagN << "(" << (OscillatedCCOther_woTagN/TotalEventswoTagN)*100 << " %)" << std::endl;
 
     resultfile << "[Neutrino] Oscillated NC Events       : " << OscillatedNC << "(" << (OscillatedNC/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
-    //resultfile << "           w/ truth neutrons : " << OscillatedNC_wTrueN << " (" << (OscillatedNC_wTrueN/TotalEventswTrueN)*100 
-    //           << " %), w/o truth neutrons :" << OscillatedNC_woTrueN << " (" << (OscillatedNC_woTrueN/TotalEventswoTrueN)*100 << " %)" << std::endl;
     resultfile << "           w/ tagged neutrons: " << OscillatedNC_wTagN << "(" << (OscillatedNC_wTagN/TotalEventswTagN)*100
                << " %), w/o tagged neutrons:" << OscillatedNC_woTagN << "(" << (OscillatedNC_woTagN/TotalEventswoTagN)*100 << " %)" << std::endl;
 

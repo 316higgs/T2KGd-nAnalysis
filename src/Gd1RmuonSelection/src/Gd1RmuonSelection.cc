@@ -4,6 +4,10 @@
 void Gd1RmuonSelection::SetHistoFrame() {
   h1_1RmuonEvents = new TH1F("h1_1RmuonEvents", "Selected Neutrino Events by 1R muon Selection; ; Selection Efficiency", 6, 0, 6);
   h1_Proto1RmuonEvents = new TH1F("h1_Proto1RmuonEvents", "Selected Neutrino Events by 1R muon Selection; ; Selection Efficiency", 6, 0, 6);
+  for (int i=0; i<4; i++) {
+    h1_SelNuEvents[i] = new TH1F(TString::Format("h1_1RmuonEvents_mode%d", i), "Selected Neutrino Events by 1R muon Selection; ; Number of #nu Events", 6, 0, 6);
+    h1_SelTagN[i]     = new TH1F(TString::Format("h1_SelTagN_mode%d", i), "Selected Neutrino Events by 1R muon Selection; ; Number of Tagged Neutrons", 6, 0, 6);
+  }
 
   for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
     h1_dwall[i]          = new TH1F(TString::Format("h1_dwall_mode%d", i), "h1_dwall; fiTQun Dwall[cm]; Number of Neutrino Events", 30, 0, 600);
@@ -42,6 +46,32 @@ void Gd1RmuonSelection::SetHistoFormat() {
   h1_Proto1RmuonEvents -> GetXaxis()->SetBinLabel(5, "C5.#decay-e#leq1");
   h1_Proto1RmuonEvents -> GetXaxis()->SetBinLabel(6, "C6.Not #pi^{#pm}-like");
   h1_Proto1RmuonEvents -> SetStats(0);
+
+  for (int i=0; i<4; i++) {
+    h1_SelNuEvents[i] -> SetLineWidth(2);
+    h1_SelNuEvents[i] -> SetTitleOffset(1.4, "Y");
+    h1_SelNuEvents[i] -> SetTitleSize(0.035, "Y");
+    h1_SelNuEvents[i] -> SetLabelSize(0.033, "Y");
+    h1_SelNuEvents[i] -> GetXaxis()->SetBinLabel(1, "C1.FCFV");
+    h1_SelNuEvents[i] -> GetXaxis()->SetBinLabel(2, "C2.#Ring=1");
+    h1_SelNuEvents[i] -> GetXaxis()->SetBinLabel(3, "C3.#mu-like");
+    h1_SelNuEvents[i] -> GetXaxis()->SetBinLabel(4, "C4.P_{#mu}> 200 MeV/c");
+    h1_SelNuEvents[i] -> GetXaxis()->SetBinLabel(5, "C5.#decay-e#leq1");
+    h1_SelNuEvents[i] -> GetXaxis()->SetBinLabel(6, "C6.Not #pi^{#pm}-like");
+    h1_SelNuEvents[i] -> SetStats(0);
+
+    h1_SelTagN[i] -> SetLineWidth(2);
+    h1_SelTagN[i] -> SetTitleOffset(1.4, "Y");
+    h1_SelTagN[i] -> SetTitleSize(0.035, "Y");
+    h1_SelTagN[i] -> SetLabelSize(0.033, "Y");
+    h1_SelTagN[i] -> GetXaxis()->SetBinLabel(1, "C1.FCFV");
+    h1_SelTagN[i] -> GetXaxis()->SetBinLabel(2, "C2.#Ring=1");
+    h1_SelTagN[i] -> GetXaxis()->SetBinLabel(3, "C3.#mu-like");
+    h1_SelTagN[i] -> GetXaxis()->SetBinLabel(4, "C4.P_{#mu}> 200 MeV/c");
+    h1_SelTagN[i] -> GetXaxis()->SetBinLabel(5, "C5.#decay-e#leq1");
+    h1_SelTagN[i] -> GetXaxis()->SetBinLabel(6, "C6.Not #pi^{#pm}-like");
+    h1_SelTagN[i] -> SetStats(0);
+  }
 
   for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
     h1_Nring[i] -> GetXaxis()->SetBinLabel(1, "1");
@@ -272,6 +302,10 @@ void Gd1RmuonSelection::cdGd1RmuonSelection(TFile* fout) {
 void Gd1RmuonSelection::WritePlots() {
   h1_1RmuonEvents      -> Write();
   h1_Proto1RmuonEvents -> Write();
+  for (int i=0; i<4; i++) {
+    h1_SelNuEvents[i] -> Write();
+    h1_SelTagN[i]     -> Write();
+  }
 
   for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
     h1_dwall[i]          -> Write();

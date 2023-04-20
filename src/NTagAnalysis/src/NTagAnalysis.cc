@@ -126,7 +126,10 @@ void NTagAnalysis::SetHistoFrame() {
     h1_TaggedN_x_MuAngle[i] = new TH1F(TString::Format("h1_TaggedN_x_MuAngle_mode%d", i), "TaggedN_x_MuAngle; Cosince of angle b/w #mu and beam directions; Number of #nu Events", binnumber_mu-1, xMuAnglebins);
 
     h1_TaggedN_x_nTraveld[i]   = new TH1F(TString::Format("h1_TaggedN_x_nTraveld_mode%d", i), "Tagged_x_nTranveld; Neutron Travel Distance [cm]; Number of tagged neutrons", binnumber_n-1, xnTraveldbins);
+    h1_TaggedN_x_nTraveldL[i]  = new TH1F(TString::Format("h1_TaggedN_x_nTraveldL_mode%d", i), "Tagged_x_nTranveldL; Longitudinal Neutron Travel Distance [cm]; Number of tagged neutrons", binnumber_n2-1, xnTraveldLbins);
+    h1_TaggedN_x_nTraveldT[i]  = new TH1F(TString::Format("h1_TaggedN_x_nTraveldT_mode%d", i), "Tagged_x_nTranveldT; Transverse Neutron Travel Distance [cm]; Number of tagged neutrons", binnumber_n-1, xnTraveldTbins);
     h1_TaggedN_x_MuStp_NCap[i] = new TH1F(TString::Format("h1_TaggedN_x_MuStp_NCap_mode%d", i), "Tagged_x_MuStp_NCap; Distance b/w #mu Stopping and n Capture vertices [cm]; Number of tagged neutrons", binnumber_n-1, xMuStp_NCapbins);
+    h1_TaggedN_x_nAngle[i]     = new TH1F(TString::Format("h1_TaggedN_x_nAngle_mode%d", i), "Tagged_x_nAngle; Cosince of angle b/w n and beam directions; Number of tagged neutrons", binnumber_n3-1, xnAnglebins);
   }
   
 }
@@ -2212,7 +2215,7 @@ void NTagAnalysis::TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<floa
       if (knmtcs>xbins[binnumber_n-1]) {
         //for (int itagn=0; itagn<TaggedN-TaggedNoise; itagn++) {
         if (Label->at(ican)==2 || Label->at(ican)==3) {
-          TaggedN_x_knmtcs[binnumber_nu-1]++;
+          TaggedN_x_knmtcs[binnumber_n-1]++;
           if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
           if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
           if (mode>10 && mode<=30)  h1[2] -> Fill(knmtcs, OscProb);
@@ -2228,8 +2231,9 @@ void NTagAnalysis::TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<floa
       }
       break;
     case 1:
-      for (int ibin=0; ibin<binnumber_mu-1; ibin++) {
+      for (int ibin=0; ibin<binnumber_n2-1; ibin++) {
         if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
+          //Tagged truth neutrons
           //for (int itagn=0; itagn<TaggedN-TaggedNoise; itagn++) {
           if (Label->at(ican)==2 || Label->at(ican)==3) {
             TaggedN_x_knmtcs[ibin]++;
@@ -2239,6 +2243,7 @@ void NTagAnalysis::TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<floa
             if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
           }
           //}
+          //Tagged noise
           //for (int itagn=0; itagn<TaggedNoise; itagn++) {
           else {
             TaggedN_x_knmtcs[ibin]++;
@@ -2247,10 +2252,11 @@ void NTagAnalysis::TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<floa
           //}
         }
       }
-      if (knmtcs>xbins[binnumber_mu-1]) {
+      //out of visual range
+      if (knmtcs>xbins[binnumber_n2-1]) {
         //for (int itagn=0; itagn<TaggedN-TaggedNoise; itagn++) {
         if (Label->at(ican)==2 || Label->at(ican)==3) {
-          TaggedN_x_knmtcs[binnumber_mu-1]++;
+          TaggedN_x_knmtcs[binnumber_n2-1]++;
           if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
           if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
           if (mode>10 && mode<=30)  h1[2] -> Fill(knmtcs, OscProb);
@@ -2259,7 +2265,48 @@ void NTagAnalysis::TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<floa
         //}
         //for (int itagn=0; itagn<TaggedNoise; itagn++) {
         else {
-          TaggedN_x_knmtcs[binnumber_mu-1]++;
+          TaggedN_x_knmtcs[binnumber_n2-1]++;
+          h1[4] -> Fill(knmtcs, OscProb);
+        }
+        //}
+      }
+      break;
+    case 2:
+      for (int ibin=0; ibin<binnumber_n3-1; ibin++) {
+        if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
+          //Tagged truth neutrons
+          //for (int itagn=0; itagn<TaggedN-TaggedNoise; itagn++) {
+          if (Label->at(ican)==2 || Label->at(ican)==3) {
+            TaggedN_x_knmtcs[ibin]++;
+            if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
+            if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
+            if (mode>10 && mode<=30)  h1[2] -> Fill(knmtcs, OscProb);
+            if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
+          }
+          //}
+          //Tagged noise
+          //for (int itagn=0; itagn<TaggedNoise; itagn++) {
+          else {
+            TaggedN_x_knmtcs[ibin]++;
+            h1[4] -> Fill(knmtcs, OscProb);
+          }
+          //}
+        }
+      }
+      //out of visual range
+      if (knmtcs>xbins[binnumber_n3-1]) {
+        //for (int itagn=0; itagn<TaggedN-TaggedNoise; itagn++) {
+        if (Label->at(ican)==2 || Label->at(ican)==3) {
+          TaggedN_x_knmtcs[binnumber_n3-1]++;
+          if (mode==1)              h1[0] -> Fill(knmtcs, OscProb);
+          if (mode>=2 && mode<=10)  h1[1] -> Fill(knmtcs, OscProb);
+          if (mode>10 && mode<=30)  h1[2] -> Fill(knmtcs, OscProb);
+          if (mode>=31)             h1[3] -> Fill(knmtcs, OscProb);
+        }
+        //}
+        //for (int itagn=0; itagn<TaggedNoise; itagn++) {
+        else {
+          TaggedN_x_knmtcs[binnumber_n3-1]++;
           h1[4] -> Fill(knmtcs, OscProb);
         }
         //}
@@ -2315,8 +2362,11 @@ void NTagAnalysis::WritePlots() {
     h1_TaggedN_x_Q2[i]      -> Write();
     h1_TaggedN_x_MuAngle[i] -> Write();
 
-    h1_TaggedN_x_nTraveld[i] -> Write();
+    h1_TaggedN_x_nTraveld[i]   -> Write();
+    h1_TaggedN_x_nTraveldL[i]  -> Write();
+    h1_TaggedN_x_nTraveldT[i]  -> Write();
     h1_TaggedN_x_MuStp_NCap[i] -> Write();
+    h1_TaggedN_x_nAngle[i]     -> Write();
   }
   
   for (int i=0; i<TRUETYPE; i++) {
