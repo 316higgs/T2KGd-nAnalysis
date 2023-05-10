@@ -39,7 +39,7 @@ void DecayeBox::SetHistoFrame() {
   h2_DcyVtxReso_x_dwall = new TH2F("h2_DcyVtxReso_x_dwall", "h2_DcyVtxReso_x_dwall; Decay-e Vertex Resolution[cm]; Dwall[cm]", 100, 0, 200, 40, 0, 20);
   h2_DcyVtxReso_x_dwall -> SetStats(0);
 
-  h2_dtn50 = new TH2D("h2_dtn50", "dt vs N50; dt[#musec]; N50", 100, 0, 50, 40, 0, 400);
+  h2_dtn50 = new TH2D("h2_dtn50", "", 100, 0, 50, 40, 0, 400);
   h2_dtn50 -> SetTitleOffset(1.3, "Y");
   h2_dtn50 -> SetTitleSize(0.035, "Y");
   h2_dtn50 -> SetLabelSize(0.035, "Y");
@@ -307,7 +307,8 @@ bool DecayeBox::GetRecoDcyEGenVtx(int iscnd, CC0PiNumu* numu, float *RecoDcyEVtx
   /// If this subevent is in the box, get its fq1rpos
   float dt  = numu->var<float>("fq1rt0", iscnd, FQ_EHYP) - numu->var<float>("fq1rt0", 0, FQ_MUHYP);
   float N50 = numu->var<int>("fqn50", iscnd);
-  if (dt/1000. < 20. && N50 >= 50. && N50 <= 400.) {
+  //if (dt/1000. < 20. && N50 >= 50. && N50 <= 400.) {
+  if (dt/1000. < 10. && N50 >= 50. && N50 <= 400.) {
     RecoDcyE = true;
 
     RecoDcyEVtx[0] = numu->var<float>("fq1rpos", iscnd, FQ_EHYP, 0);
@@ -515,6 +516,7 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
     float vtxresolution = 0.;
     float min_pscnd     = 0.;
     float dwall         = 0.;
+    bool  inbox         = false;
     for (long unsigned int itrue=0; itrue<tscndlist.size(); itrue++) {
 
       //Check
@@ -572,6 +574,9 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
         vtxresolution = tmp_vtxreso;
         min_pscnd     = this_pscnd;
         dwall         = tmp_dwall;
+
+        //This minimum reco is in the box
+        if (min_dt < dtCut && min_N50 >= N50CutMin && min_N50 <= N50CutMax) inbox = true;
       }
     }
 
@@ -580,6 +585,8 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
     fin_itr_reco.push_back(tmp_itr_reco);
     //std::cout << "[Final-minimum] true:reco = " << tmp2_itr_true+1 << " : " << tmp_itr_reco+1 << std::endl;
     //std::cout << "                Final-minimum time diff. = " << fin_min << " us" << std::endl;
+
+    // Fill minimum pair info
     //if (fillthem==true) {
     if (resolution!=0) {
       h1_mintimediff  -> Fill(resolution);
@@ -589,7 +596,8 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
       h2_DcyVtxReso_x_pscnd -> Fill(vtxresolution, min_pscnd);
       h2_DcyVtxReso_x_dwall -> Fill(vtxresolution, dwall/100.);
 
-      if (min_dt/1000. < dtCut && min_N50 >= N50CutMin && min_N50 <= N50CutMax) MatchedfQdcye++;
+      //if (min_dt/1000. < dtCut && min_N50 >= N50CutMin && min_N50 <= N50CutMax) MatchedfQdcye++;
+      if (inbox==true) MatchedfQdcye++;
     }
 
     //Decrement the number of truth particles at last
@@ -686,7 +694,8 @@ void DecayeBox::WritePlots() {
   h2_DcyVtxReso_x_pscnd -> Write();
   h2_DcyVtxReso_x_dwall -> Write();
 
-  h2_dtn50 -> Scale(1./SelectedParentNeutrinos[5]);
+  //h2_dtn50 -> Scale(1./SelectedParentNeutrinos[5]);
+  h2_dtn50 -> Scale(1./SelectedParentNeutrinos[3]);
   h2_dtn50 -> Write();
 
   for (int i=0; i<INTERACTIONTYPE; i++) {

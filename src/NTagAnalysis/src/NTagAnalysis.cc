@@ -70,7 +70,7 @@ void NTagAnalysis::SetHistoFrame() {
   h2_TrueNCapVtxXY = new TH2F("h2_TrueNCapVtxXY", "", 100, -20, 20, 100, -20, 20);
   h2_TrueNCapVtxRZ = new TH2F("h2_TrueNCapVtxRZ", "", 100, 0, 400, 100, -20, 20);
 
-  h1_TrueNCapTime = new TH1F("h1_TrueNCapTime", "", 1000, 0., 535);
+  h1_TrueNCapTime = new TH1F("h1_TrueNCapTime", "", 535, 0., 535);
   for (int i=0; i<4; i++) {
     //h1_RecoNCapTime[i] = new TH1F(TString::Format("h1_RecoNCapTime_type%d", i), "h1_RecoNCapTime; Reco Capture Time[#musec]; Number of Events", 250, 0., 535);
     h1_RecoNCapTime[i] = new TH1F(TString::Format("h1_RecoNCapTime_type%d", i), "h1_RecoNCapTime; Reco Capture Time[#musec]; Number of Events", 40, 0., 20);

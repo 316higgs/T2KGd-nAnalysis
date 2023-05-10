@@ -23,6 +23,7 @@ void Breakdown() {
 
   TH1F* h1_1R_Gd      = (TH1F*)finGd->Get("Gd1RmuonSelection/h1_1RmuonEvents");
   TH1F* h1_Proto1R_Gd = (TH1F*)finGd->Get("Gd1RmuonSelection/h1_Proto1RmuonEvents");
+  h1_1R_Gd -> SetYTitle("Selection Efficiency");
 
   TH1F* h1_Proto1R_PW = (TH1F*)finPW->Get("Gd1RmuonSelection/h1_Proto1RmuonEvents");
 

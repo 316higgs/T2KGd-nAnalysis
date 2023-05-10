@@ -58,7 +58,7 @@ void CaptureTime() {
 
   TLegend* legend1 = new TLegend(0.4, 0.55, 0.89, 0.89);
   legend1 -> SetTextSize(0.05);
-  legend1 -> AddEntry((TObject*)0,"#kern[-0.65]{FHC 1R #mu sample (#nu_{#mu}#rightarrow#nu_{#mu})}","");
+  legend1 -> AddEntry((TObject*)0,"#kern[-0.3]{FHC 1R #mu sample (#nu_{#mu}#rightarrow#nu_{#mu})}","");
   legend1 -> AddEntry(h1_TrueCapTime_numu, "0.01% Gd MC", "L");
   legend1 -> AddEntry(f1_CapTime, "A*(1-e^{-B*t})*exp(-x/C)+D", "L");
   legend1 -> AddEntry((TObject*)0,TString::Format("#kern[-0.2]{Capture time = %.1f #pm %.1f #musec}", CapTime, CapTimeErr),"");

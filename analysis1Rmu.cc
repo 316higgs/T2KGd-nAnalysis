@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
   //float thetamin = 0.8;
   float thetamax = 1.;
 
-  float dtMax  = 20.;
+  float dtMax  = 10.;
   float N50Min = 50.;
   float N50Max = 400.;
 
@@ -362,6 +362,7 @@ int main(int argc, char **argv) {
       float TruePrmVtx[3] = {0., 0., 0.,};
       neuosc.GetTruePrmVtx(numu, TruePrmVtx);
       ntagana.TrueNCapVtxProfile(Type, tagvx, tagvy, tagvz);
+      ntagana.GetTrueNCapTime(t, Type);
 
       //Muon angle information
       //float truethetamu = neuosc.GetTrueMuDirection(numu, Npvc, Ipvc, Pvc, Iflvc, Ichvc);

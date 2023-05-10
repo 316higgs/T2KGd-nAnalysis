@@ -2,11 +2,11 @@
 #include "../../../include/NeutrinoEvents.h"
 
 void Gd1RmuonSelection::SetHistoFrame() {
-  h1_1RmuonEvents = new TH1F("h1_1RmuonEvents", "Selected Neutrino Events by 1R muon Selection; ; Selection Efficiency", 6, 0, 6);
-  h1_Proto1RmuonEvents = new TH1F("h1_Proto1RmuonEvents", "Selected Neutrino Events by 1R muon Selection; ; Selection Efficiency", 6, 0, 6);
+  h1_1RmuonEvents = new TH1F("h1_1RmuonEvents", "", 6, 0, 6);
+  h1_Proto1RmuonEvents = new TH1F("h1_Proto1RmuonEvents", "", 6, 0, 6);
   for (int i=0; i<4; i++) {
-    h1_SelNuEvents[i] = new TH1F(TString::Format("h1_1RmuonEvents_mode%d", i), "Selected Neutrino Events by 1R muon Selection; ; Number of #nu Events", 6, 0, 6);
-    h1_SelTagN[i]     = new TH1F(TString::Format("h1_SelTagN_mode%d", i), "Selected Neutrino Events by 1R muon Selection; ; Number of Tagged Neutrons", 6, 0, 6);
+    h1_SelNuEvents[i] = new TH1F(TString::Format("h1_SelNuEvents_mode%d", i), "", 6, 0, 6);
+    h1_SelTagN[i]     = new TH1F(TString::Format("h1_SelTagN_mode%d", i), "", 6, 0, 6);
   }
 
   for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {

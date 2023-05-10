@@ -25,8 +25,11 @@ void SelectedEvents(bool beammode) {
 
   //FHC
 #if fhcflag
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.root");
   TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.root");
+
+  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+
   TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
 #endif
 
@@ -55,10 +58,10 @@ void SelectedEvents(bool beammode) {
 
 //Neutrino events
 #if 1
-  TH1F* h1_CCQE_numu     = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_1RmuonEvents_mode0");
-  TH1F* h1_CC2p2h_numu   = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_1RmuonEvents_mode1");
-  TH1F* h1_CCOther_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_1RmuonEvents_mode2");
-  TH1F* h1_NC_numu       = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_1RmuonEvents_mode3");
+  TH1F* h1_CCQE_numu     = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode0");
+  TH1F* h1_CC2p2h_numu   = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode1");
+  TH1F* h1_CCOther_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode2");
+  TH1F* h1_NC_numu       = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode3");
   h1_CCQE_numu -> SetStats(0);
 
   TH1F* h1_CCQE_numubar     = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_1RmuonEvents_mode0");
@@ -100,7 +103,8 @@ void SelectedEvents(bool beammode) {
   h1_CCOther_numubar -> SetFillColor(kOrange+0);
   h1_NC_numubar      -> SetLineColor(kSpring-9);
   h1_NC_numubar      -> SetFillColor(kSpring-9);
-  
+
+#if 0
   h1_CCQE_numu        -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CCQE_numubar     -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_CC2p2h_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -109,16 +113,17 @@ void SelectedEvents(bool beammode) {
   h1_CCOther_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_NC_numu          -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_NC_numubar       -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+#endif
 
   THStack* hs_NuEvt = new THStack("hs_NuEvt", "");
 #if fhcflag
-  hs_NuEvt -> Add(h1_NC_numubar);
+  //hs_NuEvt -> Add(h1_NC_numubar);
   hs_NuEvt -> Add(h1_NC_numu);
-  hs_NuEvt -> Add(h1_CCOther_numubar);
+  //hs_NuEvt -> Add(h1_CCOther_numubar);
   hs_NuEvt -> Add(h1_CCOther_numu);
-  hs_NuEvt -> Add(h1_CC2p2h_numubar);
+  //hs_NuEvt -> Add(h1_CC2p2h_numubar);
   hs_NuEvt -> Add(h1_CC2p2h_numu);
-  hs_NuEvt -> Add(h1_CCQE_numubar);
+  //hs_NuEvt -> Add(h1_CCQE_numubar);
   hs_NuEvt -> Add(h1_CCQE_numu);
 #endif
 #if rhcflag
@@ -187,11 +192,13 @@ void SelectedEvents(bool beammode) {
 
 
 #if 1
-  // No NTag separation
+  // Number of Events
+
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1","c1", 1000,700);
   c1 -> SetGrid();
-  if (beammode) hs_NuEvt -> SetMaximum(130);
+  hs_NuEvt -> SetMaximum(20000);
+  //if (beammode) hs_NuEvt -> SetMaximum(130);
   //if (beammode) hs_NuEvt -> SetMaximum(16);
   //else hs_NuEvt -> SetMaximum(10);
   hs_NuEvt -> Draw();
@@ -205,20 +212,23 @@ void SelectedEvents(bool beammode) {
 
   TLegend* legend1 = new TLegend(0.47, 0.42, 0.89, 0.89);
   legend1 -> SetTextSize(0.04);
-  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
-  else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
+  legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC #nu_{#mu}#rightarrow#nu_{#mu} MC (0.01% Gd)}","");
+  //if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
+  //else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
   legend1 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
-  legend1 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
+  //legend1 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CC2p2h_numu, "#nu_{#mu} CC-2p2h", "F");
-  legend1 -> AddEntry(h1_CC2p2h_numubar, "#bar{#nu}_{#mu} CC-2p2h", "F");
+  //legend1 -> AddEntry(h1_CC2p2h_numubar, "#bar{#nu}_{#mu} CC-2p2h", "F");
   legend1 -> AddEntry(h1_CCOther_numu, "#nu_{#mu} CC-other", "F");
-  legend1 -> AddEntry(h1_CCOther_numubar, "#bar{#nu}_{#mu} CC-other", "F");
+  //legend1 -> AddEntry(h1_CCOther_numubar, "#bar{#nu}_{#mu} CC-other", "F");
   legend1 -> AddEntry(h1_NC_numu, "NC", "F");
   legend1->SetFillColor(0);
   legend1->Draw();
 #endif
 
-#if 1
+#if 0
+  //Selection efficiency
+
   TCanvas* c2 = new TCanvas("c2","c2",1000,700);
   c2 -> SetGrid();
   h1_SelEff_merge -> SetMinimum(0.);
