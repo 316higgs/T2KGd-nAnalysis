@@ -256,7 +256,8 @@ int main(int argc, char **argv) {
   int NoPrmMuEnd_NC = 0;
   const int DCYENUM = 1;
 
-  int TotlTaggedN = 0;
+  int TotalTrueN   = 0;
+  int TotalTaggedN = 0;
 
   float WinMin = 3.;
 
@@ -358,6 +359,7 @@ int main(int argc, char **argv) {
 
       //Truth neutrons
       h1_NTrueN[0] -> Fill(NTrueN);
+      TotalTrueN += NTrueN;
       int TrueBefSI = ntagana.GetTrueNBefSI(numu, iprntidx, vtxprnt);
       int TrueAftSI = ntagana.GetTrueNAftSI(numu, iprntidx, vtxprnt);
       if (intmode==1) {
@@ -393,7 +395,7 @@ int main(int argc, char **argv) {
 
       //Number of tagged-neutrons
       int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
-      TotlTaggedN += numtaggedneutrons;
+      TotalTaggedN += numtaggedneutrons;
       int numtaggednoise = ntagana.GetTaggedNoise(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
 
       //Pre-selection
@@ -454,6 +456,11 @@ int main(int argc, char **argv) {
 
       } //threshold scan
 
+      if (intmode==1)                 h1_TrueNmultiplicity[0]->Fill(NTrueN);
+      if (intmode>=2 && intmode<=10)  h1_TrueNmultiplicity[1]->Fill(NTrueN);
+      if (intmode>10 && intmode<=30)  h1_TrueNmultiplicity[2]->Fill(NTrueN);
+      if (intmode>=31)                h1_TrueNmultiplicity[3]->Fill(NTrueN);
+
       if (intmode==1)                 h1_TagNmultiplicity[0]->Fill(numtaggedneutrons);
       if (intmode>=2 && intmode<=10)  h1_TagNmultiplicity[1]->Fill(numtaggedneutrons);
       if (intmode>10 && intmode<=30)  h1_TagNmultiplicity[2]->Fill(numtaggedneutrons);
@@ -480,16 +487,53 @@ int main(int argc, char **argv) {
       ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Qsquare/1000000., xQ2bins, TrueN_x_Q2, h1_TrueN_x_Q2, 1);
       ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, recothetamu, xMuAnglebins, TrueN_x_MuAngle, h1_TrueN_x_MuAngle, 1);
 
-      float RecoPrmVtx[3] = {0., 0., 0.};
-      RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
-      RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
-      RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
+      ///////////  Truth  //////////////
+      float TruePrmVtx[3] = {0., 0., 0.};
+      TruePrmVtx[0] = numu->var<float>("posv", 0);
+      TruePrmVtx[1] = numu->var<float>("posv", 1);
+      TruePrmVtx[2] = numu->var<float>("posv", 2);
       float NuBeamDir[3] = {0., 0., 0.};
       NuBeamDir[0] = beamDir[0];
       NuBeamDir[1] = beamDir[1];
       NuBeamDir[2] = beamDir[2];
+      float TrueMuStpVtx[3] = {0., 0., 0.};
+      bool  TrueMuEnd       = decayebox.GetTrueMuEndVtx(eOsc, iprntidx, numu, TrueMuStpVtx);
+      
+      for (UInt_t itaggable=0; itaggable<Type->size(); itaggable++) {
+        //Neutron
+        if (Type->at(itaggable)==2) {
+          float NCapVtx[3]   = {tagvx->at(itaggable), tagvy->at(itaggable), tagvz->at(itaggable)};
+          float nTraveld     = ndistance.TakeDistance(TruePrmVtx, NCapVtx);
+          float nTraveldv[3] = {0., 0., 0.};
+          nTraveldv[0]       = NCapVtx[0] - TruePrmVtx[0];
+          nTraveldv[1]       = NCapVtx[1] - TruePrmVtx[1];
+          nTraveldv[2]       = NCapVtx[2] - TruePrmVtx[2];
+          float nTraveldL    = GetInnerProduct(nTraveldv, NuBeamDir);
+          float nTraveldT    = nTraveld*std::sin( std::acos( nTraveldL/nTraveld ) );
+          float ncostheta    = nTraveldL/nTraveld;
+          ntagana.TrueN_x_Neutronkinematics(numu, nTraveld, xnTraveldbins, TrueN_x_nTraveld, h1_TrueN_x_nTraveld, 0); 
+          ntagana.TrueN_x_Neutronkinematics(numu, nTraveldL, xnTraveldLbins, TrueN_x_nTraveldL, h1_TrueN_x_nTraveldL, 1);
+          ntagana.TrueN_x_Neutronkinematics(numu, nTraveldT, xnTraveldTbins, TrueN_x_nTraveldT, h1_TrueN_x_nTraveldT, 0);
+          ntagana.TrueN_x_Neutronkinematics(numu, ncostheta, xnAnglebins, TrueN_x_nAngle, h1_TrueN_x_nAngle, 2);
+          if (TrueMuEnd) {
+            float d_MuStp_NCap = ndistance.TakeDistance(TrueMuStpVtx, NCapVtx);
+            ntagana.TrueN_x_Neutronkinematics(numu, d_MuStp_NCap, xMuStp_NCapbins, TrueN_x_MuStp_NCap, h1_TrueN_x_MuStp_NCap, 0);
+          }
+        }
+      }
+
+
+      ///////////  Reconstructed  //////////////
+      float RecoPrmVtx[3] = {0., 0., 0.};
+      RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
+      RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
+      RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
+      /*float NuBeamDir[3] = {0., 0., 0.};
+      NuBeamDir[0] = beamDir[0];
+      NuBeamDir[1] = beamDir[1];
+      NuBeamDir[2] = beamDir[2];*/
       float RecoMuStpVtx[3] = {0., 0., 0.};
-      float RecoMuRange = decayebox.GetRecoMuEndVtx(numu, RecoMuStpVtx);
+      float RecoMuRange     = decayebox.GetRecoMuEndVtx(numu, RecoMuStpVtx);
 
       for (UInt_t ican=0; ican<TagOut->size(); ican++) {
         if (etagmode){
@@ -497,13 +541,13 @@ int main(int argc, char **argv) {
             float NCapVtx[3]   = {dvx->at(ican), dvy->at(ican), dvz->at(ican)};  //Neutron capture vertex
             float nTraveld     = ndistance.TakeDistance(RecoPrmVtx, NCapVtx);  //Neutron flight distance
             float d_MuStp_NCap = ndistance.TakeDistance(RecoMuStpVtx, NCapVtx);  //Distance b/w muon stopping and neutron capture vertices
-            float nTraveldv[3]  = {0., 0., 0.};  //Neutron flight distance vector
-            nTraveldv[0] = NCapVtx[0] - RecoPrmVtx[0];
-            nTraveldv[1] = NCapVtx[1] - RecoPrmVtx[1];
-            nTraveldv[2] = NCapVtx[2] - RecoPrmVtx[2];
-            float nTraveldL = GetInnerProduct(nTraveldv, NuBeamDir);  //Longitudinal neutron flight distance
-            float nTraveldT = nTraveld*std::sin( std::acos( nTraveldL/nTraveld ) );
-            float ncostheta = nTraveldL/nTraveld;
+            float nTraveldv[3] = {0., 0., 0.};  //Neutron flight distance vector
+            nTraveldv[0]       = NCapVtx[0] - RecoPrmVtx[0];
+            nTraveldv[1]       = NCapVtx[1] - RecoPrmVtx[1];
+            nTraveldv[2]       = NCapVtx[2] - RecoPrmVtx[2];
+            float nTraveldL    = GetInnerProduct(nTraveldv, NuBeamDir);  //Longitudinal neutron flight distance
+            float nTraveldT    = nTraveld*std::sin( std::acos( nTraveldL/nTraveld ) );
+            float ncostheta    = nTraveldL/nTraveld;
             ntagana.TaggedN_x_Neutronkinematics(numu, Label, ican, nTraveld, xnTraveldbins, TaggedN_x_nTraveld, h1_TaggedN_x_nTraveld, 0);
             ntagana.TaggedN_x_Neutronkinematics(numu, Label, ican, d_MuStp_NCap, xMuStp_NCapbins, TaggedN_x_MuStp_NCap, h1_TaggedN_x_MuStp_NCap, 0);
             ntagana.TaggedN_x_Neutronkinematics(numu, Label, ican, nTraveldL, xnTraveldLbins, TaggedN_x_nTraveldL, h1_TaggedN_x_nTraveldL, 1);
@@ -648,7 +692,7 @@ int main(int argc, char **argv) {
       if (ibin<binnumber_mu-1) resultfile << "#1Rmu @ costheta [" << xMuAnglebins[ibin] << ", " << xMuAnglebins[ibin+1] << "): " << N1Rmu_x_MuAngle[ibin] << std::endl;
     }
     resultfile << " " << std::endl;
-    resultfile << "Total #tagged neutrons: " << TotlTaggedN << std::endl;
+    resultfile << "Total #tagged neutrons: " << TotalTaggedN << std::endl;
     resultfile << "===== #tagged-n as a function of Enu =====" << std::endl;
     for (int ibin=0; ibin<binnumber_nu; ibin++) {
       if (ibin<binnumber_nu-1) resultfile << "#tagged-n @ Enu [" << xEnubins[ibin] << ", " << xEnubins[ibin+1] << "): " << TaggedN_x_Enu[ibin] << std::endl;
@@ -674,10 +718,17 @@ int main(int argc, char **argv) {
       if (ibin<binnumber_mu-1) resultfile << "#tagged-n @ costheta [" << xMuAnglebins[ibin] << ", " << xMuAnglebins[ibin+1] << "): " << TaggedN_x_MuAngle[ibin] << std::endl;
     }
     resultfile << " " << std::endl;
+    resultfile << "Total #truth neutrons: " << TotalTrueN << std::endl;
     resultfile << "===== #truth neutrons as a function of Enu =====" << std::endl;
     for (int ibin=0; ibin<binnumber_nu; ibin++) {
       if (ibin<binnumber_nu-1) resultfile << "#truth n @ Enu [" << xEnubins[ibin] << ", " << xEnubins[ibin+1] << "): " << TrueN_x_Enu[ibin] << std::endl;
       else resultfile << "#truth n @ Enu > " << xEnubins[ibin] << ": " << TrueN_x_Enu[ibin] << std::endl;
+    }
+    resultfile << " " << std::endl;
+    resultfile << "===== #truth neutrons as a function of dn =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_n; ibin++) {
+      if (ibin<binnumber_n-1) resultfile << "#truth n @ dn [" << xnTraveldbins[ibin] << ", " << xnTraveldbins[ibin+1] << "): " << TrueN_x_nTraveld[ibin] << std::endl;
+      else resultfile << "#truth n @ dn > " << xnTraveldbins[ibin] << ": " << TrueN_x_nTraveld[ibin] << std::endl;
     }
     resultfile << " " << std::endl;
     resultfile << "===== #tagged neutrons as a function of dn =====" << std::endl;

@@ -54,6 +54,10 @@ int main(int argc, char **argv) {
   //float thetamin = 0.8;
   float thetamax = 1.;
 
+  float dtMax  = 20.;
+  float N50Min = 50.;
+  float N50Max = 400.;
+
 
   //=========  fiTQun output (TTree: h1)  ============
   TChain *tchfQ = new TChain("h1");
@@ -310,8 +314,8 @@ int main(int argc, char **argv) {
     numu->computeCC0PiVariables();
     numu->applyfQ1RCC0PiNumuCut();
     const EvSelVar_t evsel = numu->getEvSelVar();
-    Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
-    //Sequencial1RmuonSelection_Pion(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
+    Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false);
+    //Sequencial1RmuonSelection_Pion(prmsel, evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false);
     //if (numu->var<int>("fqnse")==3) 
       DecayeCutScan(prmsel, evsel, numu, decayebox, eMode, eOsc);
     if (prmsel.C1ApplyFCFV(evsel)     && 
@@ -320,7 +324,7 @@ int main(int argc, char **argv) {
         prmsel.C4ApplyPmu200MeV(evsel)) 
     {
 
-      decayebox.GetDecayeTagPurity(numu, tscnd, pscnd, 20., 50., 400.);
+      decayebox.GetDecayeTagPurity(numu, tscnd, pscnd, dtMax, N50Min, N50Max);
 
       //Reconstructed neutrino energy
       float Enu = numu->var<float>("erec");
@@ -338,20 +342,26 @@ int main(int argc, char **argv) {
 
 
     //if (prmsel.C1ApplyFCFV(evsel)) neuosc.GetTrueEnu(numu);
+    //float TruePrmVtx[3] = {0., 0., 0.,};
+    //neuosc.GetTruePrmVtx(numu, TruePrmVtx);
+    //ntagana.TrueNCapVtxProfile(Type, tagvx, tagvy, tagvz);
 
     h1_NTrueN[0] -> Fill(NTrueN);
 
     int TagN = ntagana.GetTaggedNeutrons(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
-    GetSelectedTagN(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false, TagN);
+    GetSelectedTagN(prmsel, evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false, TagN);
 
     //New 1R muon selection
-    if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false)) {
+    if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false)) {
       GetSelectedModeEvents(numu);
 
       //Neutrino energy distribution
       neuosc.GetTrueEnu(numu);
       neuosc.GetRecoEnu(numu);
       neuosc.GetPrmVtxResolution(numu);
+      float TruePrmVtx[3] = {0., 0., 0.,};
+      neuosc.GetTruePrmVtx(numu, TruePrmVtx);
+      ntagana.TrueNCapVtxProfile(Type, tagvx, tagvy, tagvz);
 
       //Muon angle information
       //float truethetamu = neuosc.GetTrueMuDirection(numu, Npvc, Ipvc, Pvc, Iflvc, Ichvc);
@@ -381,7 +391,7 @@ int main(int argc, char **argv) {
       float Enu = numu->var<float>("erec");
 
       //decay-e distance @ C1-C6
-      int FQDcyE_Box = decayebox.GetDecayeInBox(numu, eMode, eOsc, 20., 50., 400., false);
+      int FQDcyE_Box = decayebox.GetDecayeInBox(numu, eMode, eOsc, dtMax, N50Min, N50Max, false);
       bool  PrmMuEnd = false;
       bool  RecoDcyE = false;
       float PrmMuEndVtx[3] = {0., 0., 0.}; //mu end vertex
@@ -809,10 +819,14 @@ int main(int argc, char **argv) {
       h1_SelTagN[2]->fArray[i+1]        = SelectedCCnonQETagN[i];
       h1_SelTagN[3]->fArray[i+1]        = SelectedNCTagN[i];
     }
-    //resultfile << "Generated CCQE events   : " << SelectedCCQEevents    << std::endl;
-    //resultfile << "Generated CC2p2h events : " << SelectedCC2p2hevents  << std::endl;
-    //resultfile << "Generated CCnonQE events: " << SelectedCCnonQEevents << std::endl;
-    //resultfile << "Generated NC events     : " << SelectedNCevents      << std::endl;
+    
+    resultfile << "--- Box cut performance ---" << std::endl;
+    resultfile << " 0 < dt[usec] < " << dtMax << ", " << N50Min << " < N50 < " << N50Max << std::endl;
+    resultfile << " All truth decay-e                : " << AllTrueDcye   << std::endl;
+    resultfile << " All fiTQun decay-e               : " << AllfQdcye     << std::endl;
+    resultfile << " fiTQun decya-e in the box        : " << BoxfQdcye     << std::endl;
+    resultfile << " Matched fiTQun decya-e in the box: " << MatchedfQdcye << std::endl;
+
     resultfile << "[Decay-e Cut Scan] " << std::endl;
     resultfile << "[Decay-e Cut Scan] dt = 20 us: " << SelectedParentNeutrinos_dtScan[0]      << std::endl;
     resultfile << "                             : " << FinalSelectedParentNeutrinos_dtScan[0] << std::endl;

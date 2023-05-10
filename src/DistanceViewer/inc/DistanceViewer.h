@@ -47,6 +47,9 @@ TH2F* h2_RecoPmu_x_RecoRange;
 TH1F* h1_RecoMuTrack;
 TH2F* h2_MuTrack_x_Prm_NCap;
 TH2F* h2_MuTrack_x_MuStp_x_NCap;
+TH2F* h2_Enu_x_MuTrack;
+TH2F* h2_Enu_x_Prm_NCap;
+TH2F* h2_Enu_x_MuStp_NCap;
 
 //TH2F* h2_truedistance_x_mom;
 

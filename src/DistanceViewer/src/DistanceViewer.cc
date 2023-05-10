@@ -39,6 +39,12 @@ void DistanceViewer::SetHistoFrame() {
   h2_MuTrack_x_MuStp_x_NCap -> SetStats(0);
   h2_MuTrack_x_Prm_NCap = new TH2F("h2_MuTrack_x_Prm_NCap", "; #mu Stopping Range[m]; Distance from Primary Vertex[m]", 50, 0, 10, 50, 0, 10);
   h2_MuTrack_x_Prm_NCap -> SetStats(0);
+  h2_Enu_x_MuTrack = new TH2F("h2_Enu_x_MuTrack", "; Reconstructed #nu Energy[GeV]; #mu Stopping Range[m]", 60, 0, 3, 50, 0, 10);
+  h2_Enu_x_MuTrack -> SetStats(0);
+  h2_Enu_x_Prm_NCap = new TH2F("h2_Enu_x_Prm_NCap", "; Reconstructed #nu Energy[GeV]; Distance from Primary Vertex[m]", 60, 0, 3, 50, 0, 10);
+  h2_Enu_x_Prm_NCap -> SetStats(0);
+  h2_Enu_x_MuStp_NCap = new TH2F("h2_Enu_x_MuStp_NCap", "; Reconstructed #nu Energy[GeV]; Distance from #mu Stopping Vertex[m]", 60, 0, 3, 50, 0, 10);
+  h2_Enu_x_MuStp_NCap -> SetStats(0);
 
 
   for (int i=0; i<7; i++) {
@@ -294,6 +300,9 @@ void DistanceViewer::WritePlots() {
   h1_RecoMuTrack -> Write();
   h2_MuTrack_x_Prm_NCap -> Write();
   h2_MuTrack_x_MuStp_x_NCap -> Write();
+  h2_Enu_x_MuTrack -> Write();
+  h2_Enu_x_Prm_NCap -> Write();
+  h2_Enu_x_MuStp_NCap -> Write();
 
   h1_PreEff_dist -> Sumw2();
   h1_PreEff_dist -> Divide(h1_truedistance);

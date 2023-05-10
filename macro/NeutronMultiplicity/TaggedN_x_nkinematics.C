@@ -6,9 +6,12 @@
 
 #define NA 6.0221409
 #define FV 22.5
+#define POTSCALE 1.49  //Run1-9 FHC
 //#define POTSCALE 1.96  //Run1-10 FHC
-#define POTSCALE 0.17  //Run11 FHC
+//#define POTSCALE 0.17  //Run11 FHC
 //#define POTSCALE 1.63  //Run1-10 RHC
+
+// Normalized with the same Run1-9 POT
 
 void TaggedN_x_nkinematics(bool beammode) {
 
@@ -52,10 +55,10 @@ void TaggedN_x_nkinematics(bool beammode) {
   std::cout << "Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
 
 
-  //TString KnmtcName = "nTraveld";
+  TString KnmtcName = "nTraveld";
   //TString KnmtcName = "nTraveldL";
   //TString KnmtcName = "nTraveldT";
-  TString KnmtcName = "nAngle";
+  //TString KnmtcName = "nAngle";
   //TString KnmtcName = "MuStp_NCap";
 
   TString Prefix      = "NTagAnalysis/h1_TaggedN_x_";
@@ -108,6 +111,7 @@ void TaggedN_x_nkinematics(bool beammode) {
   h1_NC_numubar      -> SetFillColor(kSpring-9);
   h1_Noise_numubar   -> SetFillColor(kYellow+2);
 
+#if 1
   h1_CCQE_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_CC2p2h_numu     -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -118,6 +122,21 @@ void TaggedN_x_nkinematics(bool beammode) {
   h1_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_Noise_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_Noise_numubar   -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+#endif
+
+#if 0
+  Double_t tot_CCQE_numu       = h1_CCQE_numu->Integral();
+  Double_t tot_CCQE_numubar    = h1_CCQE_numubar->Integral();
+  Double_t tot_CC2p2h_numu     = h1_CC2p2h_numu->Integral();
+  Double_t tot_CC2p2h_numubar  = h1_CC2p2h_numubar->Integral();
+  Double_t tot_CCOther_numu    = h1_CCOther_numu->Integral();
+  Double_t tot_CCOther_numubar = h1_CCOther_numubar->Integral();
+  Double_t tot_NC_numu         = h1_NC_numu->Integral();
+  Double_t tot_NC_numubar      = h1_NC_numubar->Integral();
+  Double_t tot_Noise_numu      = h1_Noise_numu->Integral();
+  Double_t tot_Noise_numubar   = h1_Noise_numubar->Integral();
+#endif
+
 
 
   THStack* hs_merge = new THStack("hs_merge", "");
@@ -150,7 +169,8 @@ void TaggedN_x_nkinematics(bool beammode) {
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
-  hs_merge -> SetMaximum(10);
+  //hs_merge -> SetMaximum(10);
+  hs_merge -> SetMaximum(70);
   hs_merge -> Draw();
   hs_merge ->GetYaxis()->SetTitleSize(0.038);
   hs_merge ->GetYaxis()->SetTitleOffset(1.1);
@@ -164,8 +184,8 @@ void TaggedN_x_nkinematics(bool beammode) {
   hs_merge -> Draw();
   c1 -> RedrawAxis();
   
-  //TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
-  TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);
+  TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
+  //TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);
   //TLegend* legend1 = new TLegend(0.105, 0.45, 0.495, 0.89);
   legend1 -> SetTextSize(0.04);
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");
@@ -176,9 +196,8 @@ void TaggedN_x_nkinematics(bool beammode) {
   legend1 -> AddEntry(h1_CC2p2h_numubar, "#bar{#nu}_{#mu} CC-2p2h", "F");
   legend1 -> AddEntry(h1_CCOther_numu, "#nu_{#mu} CC-other", "F");
   legend1 -> AddEntry(h1_CCOther_numubar, "#bar{#nu}_{#mu} CC-other", "F");
-  //legend1 -> AddEntry(h1_CCOther_numubar, "#nu_{#mu}+#bar{#nu}_{#mu} CC non-QE", "F");
   legend1 -> AddEntry(h1_NC_numu, "NC", "F");
-  //legend1 -> AddEntry(h1_Noise_numu, "Acc. bkg. + decay-e", "F");
+  legend1 -> AddEntry(h1_Noise_numu, "Acc. bkg. + decay-e", "F");
   legend1 -> SetFillColor(0);
   legend1 -> Draw() ;
 #endif

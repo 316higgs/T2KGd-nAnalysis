@@ -17,7 +17,7 @@
 #define WINDOWMIN 3
 #define NOISECUT 18
 
-TH1F* h1_hitsearch[TRUETYPE];
+TH1F* h1_TrueCapTime;
 
 TH1F* h1_NTrueN[TRUETYPE];
 TH1F* h1_TrueNmultiplicity[INTERACTIONTYPE]; //# of truth captured neutrons (neutrino interactions)
@@ -33,6 +33,9 @@ float NTrueN_CCQE_osc    = 0.;
 float NTrueN_CC2p2h_osc  = 0.;
 float NTrueN_CCOther_osc = 0.;
 float NTrueN_NC_osc      = 0.;
+
+TH2F* h2_TrueNCapVtxXY;
+TH2F* h2_TrueNCapVtxRZ;
 
 //Neutrino energy resolution w/ truth neutrons & w/o truth neutrons
 TH1F* h1_Enureso_CCQE_trueN[2];
@@ -121,6 +124,17 @@ TH1F* h1_N1Rmu_x_MuMom[4];
 TH1F* h1_N1Rmu_x_MuPt[4];
 TH1F* h1_N1Rmu_x_Q2[4];
 TH1F* h1_N1Rmu_x_MuAngle[4];
+
+int TrueN_x_nTraveld[binnumber_n]   = {0};  //n-related kinematics: neutron flight distance
+int TrueN_x_nTraveldL[binnumber_n2] = {0};  //n-related kinematics: longitudinal neutron flight distance
+int TrueN_x_nTraveldT[binnumber_n]  = {0};  //n-related kinematics: transverse neutron flight distance
+int TrueN_x_MuStp_NCap[binnumber_n] = {0};  //n-related kinematics: distance b/w muon stopping and neutron capture vertices
+int TrueN_x_nAngle[binnumber_n3]    = {0};  //n-related kinematics: cosince of angle b/w neutron motion and beam directions
+TH1F* h1_TrueN_x_nTraveld[4];  //CCQE, CC 2p2h, CC other, NC
+TH1F* h1_TrueN_x_nTraveldL[4];
+TH1F* h1_TrueN_x_nTraveldT[4];
+TH1F* h1_TrueN_x_MuStp_NCap[4];
+TH1F* h1_TrueN_x_nAngle[4];
 
 int TaggedN_x_Enu[binnumber_nu]       = {0};  //prompt-related kinematics: neutrino energy
 int TaggedN_x_MuMom[binnumber_mu]     = {0};  //prompt-related kinematics: muon momentum
@@ -358,6 +372,10 @@ class NTagAnalysis {
 
     void GetTruthNeutronsIntType(CC0PiNumu* numu, float NTrueN);
 
+    void TrueNCapVtxProfile(std::vector<int> *Type, std::vector<float> *tagvx, 
+                                                std::vector<float> *tagvy, 
+                                                std::vector<float> *tagvz);
+
     void GetTruthNeutronsinSearch(UInt_t truthneutrons, 
                                   std::vector<int> *Type,
                                   std::vector<float> *t,
@@ -458,10 +476,13 @@ class NTagAnalysis {
     int NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscnd, Float_t vtxprnt[][3], 
                             bool etagmode, std::vector<float> *FitT, std::vector<float> *NHits, std::vector<float> *Label, std::vector<float> *TagOut, 
                             float TMVAThreshold, std::vector<float> *dvx, std::vector<float> *dvy, std::vector<float> *dvz);
+
+    void GetTrueNCapTime(std::vector<float> *t, std::vector<int> *Type);
     
     void N1Rmu_x_kinematics(CC0PiNumu* numu, float knmtcs, double* xbins, int* N1Rmu_x_knmtcs, TH1F** h1, int bintype);
     void TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int TaggedNoise, float knmtcs, double* xbins, int* TaggedN_x_knmtcs, TH1F** h1, int bintype);
     void TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, std::vector<float> *t, float WinMin, float knmtcs, double* xbins, int* TrueN_x_knmtcs, TH1F** h1, int bintype);
+    void TrueN_x_Neutronkinematics(CC0PiNumu* numu, float knmtcs, double* xbins, int* TaggedN_x_knmtcs, TH1F** h1, int bintype);
     void TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<float> *Label, UInt_t ican, float knmtcs, double* xbins, int* TaggedN_x_knmtcs, TH1F** h1, int bintype);
 
     void SetHistoFrame();

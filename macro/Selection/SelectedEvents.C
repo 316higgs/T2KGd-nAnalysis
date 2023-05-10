@@ -218,6 +218,7 @@ void SelectedEvents(bool beammode) {
   legend1->Draw();
 #endif
 
+#if 1
   TCanvas* c2 = new TCanvas("c2","c2",1000,700);
   c2 -> SetGrid();
   h1_SelEff_merge -> SetMinimum(0.);
@@ -243,4 +244,5 @@ void SelectedEvents(bool beammode) {
   text1 -> Draw();
   text2 -> Draw();
   text3 -> Draw();
+#endif
 }

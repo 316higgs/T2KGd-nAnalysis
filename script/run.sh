@@ -13,6 +13,9 @@ NTAGDIR=/disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining
 NTAGDIR3=/disk03/usr8/sedi/Ntag/output/w.mccomb/sk6/NNtraining
 ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis
 
+DISK3=/disk03/usr8/sedi
+FITQUNVER=fiTQun_v4
+
 ######
 # 1st index: fiTQun input
 # 2nd index: NTag input
@@ -23,17 +26,8 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 # 7th index: -ETAG(fixed)
 # 8th index: decay-e-tagging ON/OFF
 ######
-#./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/fhc.numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-#                   $NTAGDIR/noToFoption/fhc.numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-#                   ./output/fhc/fhc.numu.etagOFF.root\
-#                   ./result/fhc/fhc.numu.neutrino.etagOFF.txt\
-#                   ./result/fhc/fhc.numu.ntag.etagOFF.txt\
-#                   -MCType Gd\
-#                   -ETAG OFF\
-#                   -BEAMMODE FHC\
-#                   -OSCCH NUMU
 
-#<<COMMENTOUT
+<<COMMENTOUT
 ./analysis1Rmu.exe $PUREWATER/fhc/numu_x_numu/neut.fhc.numu_x_numu.00\*.0\*.t2kfcFQ.root\
                    $NTAGDIR/tageoption/fhc.numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $ANALYSISSTAGE/output/fhc/numu_x_numu.water.root\
@@ -43,7 +37,7 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
                    -ETAG OFF\
                    -BEAMMODE FHC\
                    -OSCCH NUMU
-#COMMENTOUT
+COMMENTOUT
 
 #./analysis1Rmu.exe $PUREWATER/fhc/numu_x_nue/neut.fhc.numu_x_nue.01\*.0\*.t2kfcFQ.root\
 #                   $NTAGDIR/tageoption/fhc.numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
@@ -55,7 +49,7 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 #                   -BEAMMODE FHC\
 #                   -OSCCH NUESIG
 
-#<<COMMENTOUT
+<<COMMENTOUT
 ./analysis1Rmu.exe $PUREWATER/fhc/numubar_x_numubar/neut.fhc.numubar_x_numubar.02\*.0\*.t2kfcFQ.root\
                    $NTAGDIR/tageoption/fhc.numu.ntag.0026Gd.NEUTcount000.part001.skip0.root\
                    $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.water.root\
@@ -65,7 +59,7 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
                    -ETAG OFF\
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
-#COMMENTOUT
+COMMENTOUT
 
 #./analysis1Rmu.exe $PUREWATER/rhc/numubar_x_numubar/neut.rhc.numubar_x_numubar.0\*.0\*.t2kfcFQ.root\
 #                   $NTAGDIR/tageoption/fhc.numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
@@ -80,6 +74,19 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 
 
 ##### FHC numu -> numu Gd MC #####
+#<<COMMENTOUT
+#####  new Gd MC  ######
+./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
+                   ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
+                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.newGdMC.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.newGdMC.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.newGdMC.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMU
+#COMMENTOUT
+
 <<COMMENTOUT
 ./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
@@ -93,7 +100,6 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 COMMENTOUT
 
 <<COMMENTOUT
-#### test ####
 ./analysis1Rmu.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.root\

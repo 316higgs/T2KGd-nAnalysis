@@ -2,14 +2,18 @@
 
 void CaptureTime() {
 
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.root");
+  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root");
 
   TH1F* h1_TrueCapTime_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueNCapTime");
   h1_TrueCapTime_numu -> SetLineColor(kViolet-6);
+  h1_TrueCapTime_numu -> SetLineWidth(2);
   h1_TrueCapTime_numu -> SetStats(0);
+  h1_TrueCapTime_numu -> SetXTitle("True Capture Time [#musec]");
+  h1_TrueCapTime_numu -> SetYTitle("Number of Captured Neutrons");
   Double_t tot_True = h1_TrueCapTime_numu->Integral();
-  h1_TrueCapTime_numu -> Scale(1./tot_True);
+  //h1_TrueCapTime_numu -> Scale(1./tot_True);
 
   TH1F* h1_RecoCapTime_Accnoise_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_RecoNCapTime_type0");
   h1_RecoCapTime_Accnoise_numu -> SetFillColor(kGray+2);
@@ -35,16 +39,31 @@ void CaptureTime() {
   f1_CapTime -> SetParameter(1, 10);
   f1_CapTime -> SetParameter(2, 150);
   f1_CapTime -> SetParameter(3, 10);
-  f1_CapTime -> SetLineColor(kViolet+2);
+  f1_CapTime -> SetLineColor(kPink-9);
 
 
+  gStyle->SetOptFit(1111);
   /////////// True Capture Time //////////
-#if 0
+#if 1
   TCanvas* c1 = new TCanvas("c1", "c1", 700, 500);
   c1 -> SetGrid();
+  h1_TrueCapTime_numu -> Fit(f1_CapTime);
   //h1_TrueCapTime_numu -> Fit(f1_CapTime);
   h1_TrueCapTime_numu -> Draw();
-  c1->RedrawAxis();
+  f1_CapTime -> Draw("SAME");
+  //c1->RedrawAxis();
+
+  Double_t CapTime = f1_CapTime->GetParameter(2);
+  Double_t CapTimeErr = f1_CapTime->GetParError(2);
+
+  TLegend* legend1 = new TLegend(0.4, 0.55, 0.89, 0.89);
+  legend1 -> SetTextSize(0.05);
+  legend1 -> AddEntry((TObject*)0,"#kern[-0.65]{FHC 1R #mu sample (#nu_{#mu}#rightarrow#nu_{#mu})}","");
+  legend1 -> AddEntry(h1_TrueCapTime_numu, "0.01% Gd MC", "L");
+  legend1 -> AddEntry(f1_CapTime, "A*(1-e^{-B*t})*exp(-x/C)+D", "L");
+  legend1 -> AddEntry((TObject*)0,TString::Format("#kern[-0.2]{Capture time = %.1f #pm %.1f #musec}", CapTime, CapTimeErr),"");
+  legend1 -> SetFillColor(0);
+  legend1 -> Draw();
 #endif
 
   /////////// Reco Capture Time //////////
@@ -94,7 +113,7 @@ void CaptureTime() {
 
 
   /////////// Only noise study //////////
-#if 1
+#if 0
   TH1F* h1_NHits_Accnoise_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_N50_type0");
   h1_NHits_Accnoise_numu -> SetFillColor(kGray+2);
   h1_NHits_Accnoise_numu -> SetLineColor(kGray+2);

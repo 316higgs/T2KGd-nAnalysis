@@ -7,13 +7,14 @@
 void Breakdown() {
   //fhc
   TFile* finPW = new TFile("../../output/fhc/fhc.numu_x_numu.water.root");
-  TFile* finGd = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.root");
+  //TFile* finGd = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.root");
+  TFile* finGd = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
 
   //TFile* finPW = new TFile("../../output/fhc/fhc.numubar_x_numubar.water.root");
   //TFile* finGd = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.root");
 
-  TFile* finPW = new TFile("../../output/fhc/fhc.numu_x_numu.water.root");
-  TFile* finGd = new TFile("../../output/fhc/fhc.numu_x_nue.1ReSelection.root");
+  //TFile* finPW = new TFile("../../output/fhc/fhc.numu_x_numu.water.root");
+  //TFile* finGd = new TFile("../../output/fhc/fhc.numu_x_nue.1ReSelection.root");
 
   //rhc
   //TFile* finPW = new TFile("../../output/numubar.water.root");
@@ -45,19 +46,19 @@ void Breakdown() {
   h1_1R_Gd -> GetYaxis() -> SetRangeUser(0., 1.1);
   h1_1R_Gd -> GetXaxis() -> SetLabelSize(0.045);
   h1_1R_Gd -> Draw();
-  //h1_Proto1R_Gd -> Draw("SAME");  
-  //h1_Proto1R_PW -> Draw("SAME");
+  h1_Proto1R_Gd -> Draw("SAME");  
+  h1_Proto1R_PW -> Draw("SAME");
 
-  TLegend* legend = new TLegend(0.4, 0.65, 0.85, 0.85);
-  legend -> SetTextSize(0.03);
-  //legend->AddEntry((TObject*)0,"#kern[-0.6]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC}","");
+  TLegend* legend = new TLegend(0.35, 0.65, 0.89, 0.89);
+  legend -> SetTextSize(0.04);
+  legend->AddEntry((TObject*)0,"#kern[-0.6]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC}","");
   //legend->AddEntry((TObject*)0,"#kern[-0.6]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
-  legend->AddEntry((TObject*)0,"#kern[-0.6]{ FHC #nu_{#mu} #rightarrow #nu_{e} MC}","");
+  //legend->AddEntry((TObject*)0,"#kern[-0.6]{ FHC #nu_{#mu} #rightarrow #nu_{e} MC}","");
   //legend->AddEntry((TObject*)0,"#kern[-0.6]{ RHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
-  legend -> AddEntry(h1_1R_Gd, "Gd MC: Decay-e cut with dt vs N50", "L");
-  //legend -> AddEntry(h1_Proto1R_Gd, "Gd MC: Decay-e #leq 1", "L");
-  //legend -> AddEntry(h1_Proto1R_PW, "Pure water MC: Decay-e #leq 1", "L");
+  legend -> AddEntry(h1_1R_Gd, "Gd MC: Decay-e #leq 1 on dt vs N50", "L");
+  legend -> AddEntry(h1_Proto1R_Gd, "Gd MC: Decay-e #leq 1", "L");
+  legend -> AddEntry(h1_Proto1R_PW, "Pure water MC: Decay-e #leq 1", "L");
   legend->SetFillColor(0);
-  legend->Draw() ;
+  legend->Draw();
 
 }

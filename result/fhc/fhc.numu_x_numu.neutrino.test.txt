@@ -105,6 +105,7 @@ Total #tagged neutrons: 37309
 #tagged-n @ costheta [0, 0.5): 8760
 #tagged-n @ costheta [0.5, 1): 21566
  
+Total #truth neutrons: 90996
 ===== #truth neutrons as a function of Enu =====
 #truth n @ Enu [0, 0.5): 19398
 #truth n @ Enu [0.5, 1): 48641
@@ -112,6 +113,15 @@ Total #tagged neutrons: 37309
 #truth n @ Enu [1.5, 2.5): 5737
 #truth n @ Enu [2.5, 5): 5165
 #truth n @ Enu > 5: 1149
+ 
+===== #truth neutrons as a function of dn =====
+#truth n @ dn [0, 100): 53352
+#truth n @ dn [100, 200): 21773
+#truth n @ dn [200, 400): 12219
+#truth n @ dn [400, 600): 2031
+#truth n @ dn [600, 1000): 896
+#truth n @ dn [1000, 1500): 421
+#truth n @ dn > 1500: 304
  
 ===== #tagged neutrons as a function of dn =====
 #truth n @ dn [0, 100): 13912

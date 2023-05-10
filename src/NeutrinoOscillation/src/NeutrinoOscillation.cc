@@ -58,6 +58,9 @@ void NeutrinoOscillation::SetHistoFrame() {
   h1_OscProbCCnonQE_wNeutron         = new TH1F("h1_OscProbCCnonQE_wNeutron", "Oscillation Probability w/ Tagged Neutrons; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
   h1_OscProbCCnonQE_woNeutron        = new TH1F("h1_OscProbCCnonQE_woNeutron", "Oscillation Probability w/o Tagged Neutrons; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
 
+  h2_TruePrmVtxXY = new TH2F("h2_TruePrmVtxXY", "", 100, -20, 20, 100, -20, 20);
+  h2_TruePrmVtxRZ = new TH2F("h2_TruePrmVtxRZ", "", 100, 0, 400, 100, -20, 20);
+
   h2_TrueMuDirectionXY = new TH2F("h2_TrueMuDirectionXY", "Truth Dir; X #mu direction; Y #mu direction ", 100, -1, 1, 100, -1, 1);
   h2_TrueMuDirectionRZ = new TH2F("h2_TrueMuDirectionRZ", "Truth Dir; R^{2} #mu direction; Z #mu direction ", 100, 0, 2, 100, -1, 1);
   h2_RecoMuDirectionXY = new TH2F("h2_RecoMuDirectionXY", "fq1rdir; X #mu direction; Y #mu direction ", 100, -1, 1, 100, -1, 1);
@@ -384,6 +387,9 @@ void NeutrinoOscillation::GetTruePrmVtx(CC0PiNumu *numu, float *PrmVtx) {
   PrmVtx[0] = numu->var<float>("posv", 0);
   PrmVtx[1] = numu->var<float>("posv", 1);
   PrmVtx[2] = numu->var<float>("posv", 2);
+
+  h2_TruePrmVtxXY -> Fill(PrmVtx[0]/100., PrmVtx[1]/100.);
+  h2_TruePrmVtxRZ -> Fill( (PrmVtx[0]*PrmVtx[0]+PrmVtx[1]*PrmVtx[1])/10000., PrmVtx[2]/100. );
 }
 
 float NeutrinoOscillation::GetPrmVtxResolution(CC0PiNumu* numu) {
@@ -914,6 +920,9 @@ void NeutrinoOscillation::WritePlots() {
   h1_OscProbCCnonQE_woNeutron -> Write();
   h1_OscProbCCOther_wNeutron  -> Write();
   h1_OscProbCCOther_woNeutron -> Write();
+
+  h2_TruePrmVtxXY -> Write();
+  h2_TruePrmVtxRZ -> Write();
 
   h2_TrueMuDirectionXY -> Write();
   h2_TrueMuDirectionRZ -> Write();

@@ -6,9 +6,10 @@
 
 #define NA 6.0221409
 #define FV 22.5
+//#define POTSCALE 1.49  //Run1-9 FHC
 //#define POTSCALE 1.96  //Run1-10 FHC
 //#define POTSCALE 1.63  //Run1-10 RHC
-#define POTSCALE 0.17  //Run1-10 FHC
+#define POTSCALE 0.17  //Run11 FHC
 
 void SimpleNeutron(bool beammode) {
 
@@ -56,24 +57,24 @@ void SimpleNeutron(bool beammode) {
   std::cout << "Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
 
 
-  //TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueNmultiplicity_mode0");
-  //TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueNmultiplicity_mode1");
-  //TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueNmultiplicity_mode2");
-  //TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueNmultiplicity_mode3");
-  TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagNmultiplicity_mode0");
-  TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagNmultiplicity_mode1");
-  TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagNmultiplicity_mode2");
-  TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagNmultiplicity_mode3");
+  TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueNmultiplicity_mode0");
+  TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueNmultiplicity_mode1");
+  TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueNmultiplicity_mode2");
+  TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueNmultiplicity_mode3");
+  //TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagNmultiplicity_mode0");
+  //TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagNmultiplicity_mode1");
+  //TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagNmultiplicity_mode2");
+  //TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagNmultiplicity_mode3");
   h1_CCQE_numu -> SetStats(0);
 
-  //TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TrueNmultiplicity_mode0");
-  //TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TrueNmultiplicity_mode1");
-  //TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TrueNmultiplicity_mode2");
-  //TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TrueNmultiplicity_mode3");
-  TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TagNmultiplicity_mode0");
-  TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TagNmultiplicity_mode1");
-  TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TagNmultiplicity_mode2");
-  TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TagNmultiplicity_mode3");
+  TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TrueNmultiplicity_mode0");
+  TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TrueNmultiplicity_mode1");
+  TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TrueNmultiplicity_mode2");
+  TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TrueNmultiplicity_mode3");
+  //TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TagNmultiplicity_mode0");
+  //TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TagNmultiplicity_mode1");
+  //TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TagNmultiplicity_mode2");
+  //TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TagNmultiplicity_mode3");
   h1_CCQE_numubar -> SetStats(0);
 
   h1_CCQE_numu    -> SetLineColor(kAzure-1);
@@ -133,12 +134,13 @@ void SimpleNeutron(bool beammode) {
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
   hs_TrueNeutron -> SetMaximum(110);
+  //hs_TrueNeutron -> SetMaximum(610);
   hs_TrueNeutron -> Draw();
   hs_TrueNeutron ->GetYaxis()->SetTitleSize(0.038);
   hs_TrueNeutron ->GetYaxis()->SetTitleOffset(1.3);
   hs_TrueNeutron ->GetYaxis()->SetLabelSize(0.036);
-  //hs_TrueNeutron ->GetXaxis()->SetTitle("Truth Neutron Multiplicity");
-  hs_TrueNeutron ->GetXaxis()->SetTitle("Tagged Neutron Multiplicity");
+  hs_TrueNeutron ->GetXaxis()->SetTitle("Truth Neutron Multiplicity");
+  //hs_TrueNeutron ->GetXaxis()->SetTitle("Tagged Neutron Multiplicity");
   hs_TrueNeutron ->GetYaxis()->SetTitle("Number of #nu Events");
   hs_TrueNeutron -> Draw();
   c1->RedrawAxis();
@@ -151,7 +153,7 @@ void SimpleNeutron(bool beammode) {
   legend1 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CC2p2h_numu, "#nu_{#mu} CC-2p2h", "F");
   legend1 -> AddEntry(h1_CC2p2h_numubar, "#bar{#nu}_{#mu} CC-2p2h", "F");
-  legend1 -> AddEntry(h1_CCOther_numu, "#nu_{#mu} CC-other", "F");
+  legend1 -> AddEntry(h1_CCOther_numu, "#nu_{#mu} CC-グラニーズother", "F");
   legend1 -> AddEntry(h1_CCOther_numubar, "#bar{#nu}_{#mu} CC-other", "F");
   //legend1 -> AddEntry(h1_CCOther_numubar, "#nu_{#mu}+#bar{#nu}_{#mu} CC non-QE", "F");
   legend1 -> AddEntry(h1_NC_numu, "NC", "F");

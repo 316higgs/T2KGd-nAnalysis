@@ -9,5 +9,5 @@
 BEAMMODE=true
 #BEAMMODE=false
 
-#root -l 'SimpleNeutron.C('${BEAMMODE}')'
-root -l 'GenNeutron.C('${BEAMMODE}')'
+root -l 'SimpleNeutron.C('${BEAMMODE}')'
+#root -l 'GenNeutron.C('${BEAMMODE}')'

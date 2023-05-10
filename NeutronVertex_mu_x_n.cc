@@ -439,6 +439,10 @@ int main(int argc, char **argv) {
       PrmVtx[1] = numu->var<float>("posv", 1);
       PrmVtx[2] = numu->var<float>("posv", 2);
 
+      float PrmMuMom[3] = {0., 0., 0.}; //primary mu momentum
+      bool PrmMu = decayebox.GetTruePrmMuMom(Pvc, numu, PrmMuMom);
+      neuosc.GetPrmMuMomResolution(numu, PrmMuMom);
+
       std::vector<float> VtxPrntList;
       std::vector<float> VtxScndList;
       int TrueMuN = 0;  //mu capture neutrons per neutrino event
@@ -446,6 +450,7 @@ int main(int argc, char **argv) {
       int MuCapCheck = 0;
       //h1_NTrueN[0] -> Fill(NTrueN);
       ntagana.GetTruthNeutronsIntType(numu, NTrueN);
+      float TrueEnu = neuosc.GetTrueEnu(numu);
 
 
       PrmMuEnd = decayebox.GetTrueMuEndVtx(eOsc, iprntidx, numu, PrmMuEndVtx); //Get truth mu end vertex
@@ -495,13 +500,23 @@ int main(int argc, char **argv) {
           PrmMuDcy = decayebox.GetTruePrmMuDcyVtx(eOsc, iscnd, iprntidx, numu, PrmMuDcyVtx);
           if (PrmMuDcy) MuCapCheck++; //Count muon decay
 
+          if (PrmMuEnd) {
+            if (PrmMu) {
+              float MuMom = std::sqrt( PrmMuMom[0]*PrmMuMom[0] + PrmMuMom[1]*PrmMuMom[1] + PrmMuMom[2]*PrmMuMom[2] );
+              float d_PrmMuRange = ndistance.TakeDistance(PrmVtx, PrmMuEndVtx);
+              h2_TruePmu_x_TrueRange -> Fill(MuMom, d_PrmMuRange/100.);
+              h2_Enu_x_MuTrack -> Fill(TrueEnu, d_PrmMuRange/100.);
+            }
+          }
+
           PrmMuCap = ntagana.GetTrueMuNCapVtx(iscnd, numu, ichildidx, MuNCapVtx);
           if (PrmMuEnd && PrmMuCap) {
             float d_PrmMuEnd_x_PrmMuCap = ndistance.TakeDistance(PrmMuEndVtx, MuNCapVtx);
             float d_Prm_x_PrmMuCap      = ndistance.TakeDistance(PrmVtx, MuNCapVtx);
             h1_truedistance_mu_n     -> Fill(d_PrmMuEnd_x_PrmMuCap/100., OscProb);
             h1_truedistance_prm_mu_n -> Fill(d_Prm_x_PrmMuCap/100., OscProb);
-            if (Enu/1000.<0.4) h2_Prm_NCap_x_MuStp_x_NCap -> Fill(d_Prm_x_PrmMuCap/100., d_PrmMuEnd_x_PrmMuCap/100.);
+            h2_Prm_NCap_x_MuStp_x_NCap -> Fill(d_Prm_x_PrmMuCap/100., d_PrmMuEnd_x_PrmMuCap/100.);
+            //if (Enu/1000.<0.4) h2_Prm_NCap_x_MuStp_x_NCap -> Fill(d_Prm_x_PrmMuCap/100., d_PrmMuEnd_x_PrmMuCap/100.);
           }
 	        //if (!PrmMuEnd && PrmMuCap) std::cout << " MuCapN, but no MuEndVtx." << std::endl;
 
@@ -511,7 +526,8 @@ int main(int argc, char **argv) {
             float d_Prm_x_NuNCap      = ndistance.TakeDistance(PrmVtx, NuNCapVtx);
             h1_truedistance_nu_n     -> Fill(d_PrmMuEnd_x_NuNCap/100., OscProb);
             h1_truedistance_prm_nu_n -> Fill(d_Prm_x_NuNCap/100., OscProb);
-            if (Enu/1000.<0.4) h2_Prm_NCap_x_MuStp_x_NCap -> Fill(d_Prm_x_NuNCap/100., d_PrmMuEnd_x_NuNCap/100.);
+            //h2_Prm_NCap_x_MuStp_x_NCap -> Fill(d_Prm_x_NuNCap/100., d_PrmMuEnd_x_NuNCap/100.);
+            //if (Enu/1000.<0.4) h2_Prm_NCap_x_MuStp_x_NCap -> Fill(d_Prm_x_NuNCap/100., d_PrmMuEnd_x_NuNCap/100.);
 
             float nMomSq = pprntinit[iscnd][0]*pprntinit[iscnd][0] +
                            pprntinit[iscnd][1]*pprntinit[iscnd][1] +
@@ -554,6 +570,7 @@ int main(int argc, char **argv) {
         ////// For 1:1 labeling ///////
         TrueMuN = ntagana.LabelTrueMuN(numu, PrmMuEnd, ichildidx);
         TrueNuN = ntagana.LabelTrueNuN(numu, PrmMuEnd, iprntidx, vtxprnt, &VtxPrntList, &VtxScndList);
+
       } //#true n = 1
 
       //TrueMuN = ntagana.LabelTrueMuN(numu, PrmMuEnd, ichildidx);
@@ -588,6 +605,9 @@ int main(int argc, char **argv) {
             h1_RecoMuTrack -> Fill(RecoMuRange/100., OscProb);
             h2_MuTrack_x_Prm_NCap -> Fill(RecoMuRange/100., d_Prm_x_NCap/100.);
             h2_MuTrack_x_MuStp_x_NCap -> Fill(RecoMuRange/100., d_PrmMuEnd_x_NCap/100.);
+            //h2_Enu_x_MuTrack -> Fill(Enu/1000., RecoMuRange/100.);
+            h2_Enu_x_Prm_NCap -> Fill(Enu/1000., d_Prm_x_NCap/100.);
+            h2_Enu_x_MuStp_NCap -> Fill(Enu/1000., d_PrmMuEnd_x_NCap/100.);
             //h1_TruePrmMuEnd_x_TagNCap -> Fill(d_PrmMuEnd_x_NCap/100., OscProb);
 
 #if 0
