@@ -308,7 +308,10 @@ bool DecayeBox::GetRecoDcyEGenVtx(int iscnd, CC0PiNumu* numu, float *RecoDcyEVtx
   float dt  = numu->var<float>("fq1rt0", iscnd, FQ_EHYP) - numu->var<float>("fq1rt0", 0, FQ_MUHYP);
   float N50 = numu->var<int>("fqn50", iscnd);
   //if (dt/1000. < 20. && N50 >= 50. && N50 <= 400.) {
-  if (dt/1000. < 10. && N50 >= 50. && N50 <= 400.) {
+  bool inbox = false;
+  if ( dt/1000. < 1.5 ) inbox = true;
+  else if ( dt/1000. < 20. && dt/1000. < 0.25*N50-7.5 ) inbox = true;
+  if (inbox==true) {
     RecoDcyE = true;
 
     RecoDcyEVtx[0] = numu->var<float>("fq1rpos", iscnd, FQ_EHYP, 0);
@@ -356,7 +359,9 @@ int DecayeBox::GetDecayeInBox(CC0PiNumu* numu,
     //if (dt/1000. > 15. && dt/1000. < 20.) fillthem = true;
     //if (dt/1000. > 15. && dt/1000. < 20. && N50 >=50 && N50 <= 400) fillcounter++;
 
-    if (dt/1000. < dtCut && N50 >= N50CutMin && N50 <= N50CutMax) Decaye++;
+    //if (dt/1000. < dtCut && N50 >= N50CutMin && N50 <= N50CutMax) Decaye++;
+    if ( dt/1000. < 1.5 ) Decaye++;
+    else if ( dt/1000. < 20. && dt/1000. < 0.25*N50-7.5 ) Decaye++;
   }
 
   TaggedDecayeinBox += Decaye;
@@ -439,7 +444,9 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
     float N50 = numu->var<int>("fqn50", jsub);
     //if (dt/1000. < dtCut && N50 >= N50CutMin && N50 <= N50CutMax) AllfQdcye++;
     AllfQdcye++;
-    if (dt/1000. < dtCut && N50 >= N50CutMin && N50 <= N50CutMax) BoxfQdcye++;
+    //if (dt/1000. < dtCut && N50 >= N50CutMin && N50 <= N50CutMax) BoxfQdcye++;
+    if ( dt/1000. < 1.5 ) BoxfQdcye++;
+    else if ( dt/1000. < 20. && dt/1000. < 0.25*N50-7.5 ) BoxfQdcye++;
   }
 
   //std::vector<int> skip_itr_reco;
@@ -576,7 +583,9 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
         dwall         = tmp_dwall;
 
         //This minimum reco is in the box
-        if (min_dt < dtCut && min_N50 >= N50CutMin && min_N50 <= N50CutMax) inbox = true;
+        //if (min_dt < dtCut && min_N50 >= N50CutMin && min_N50 <= N50CutMax) inbox = true;
+        if ( min_dt < 1.5 ) inbox = true;
+        else if ( min_dt < 20. && min_dt < 0.25*min_N50-7.5 ) inbox = true;
       }
     }
 

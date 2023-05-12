@@ -128,7 +128,8 @@ int main(int argc, char **argv) {
 
   //=========  TTree event variables  ============
   std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  SetBranchAddress of event...  \e[0m";
-  float NTrueN = 0.;
+  //float NTrueN = 0.;
+  int NTrueN = 0.;
   float vecvx  = 0.;
   float vecvy  = 0.;
   float vecvz  = 0.;
@@ -195,12 +196,15 @@ int main(int argc, char **argv) {
   TBranch *bTagIndex = 0;
   std::vector<float> *TagOut = 0;
   TBranch *bTagOut = 0;
-  std::vector<float> *dvx = 0;
-  TBranch *bdvx = 0;
-  std::vector<float> *dvy = 0;
-  TBranch *bdvy = 0;
-  std::vector<float> *dvz = 0;
-  TBranch *bdvz = 0;
+  //std::vector<float> *dvx = 0;
+  //std::vector<float> *dvy = 0;
+  //std::vector<float> *dvz = 0;
+  std::vector<float> *fvx = 0;
+  std::vector<float> *fvy = 0;
+  std::vector<float> *fvz = 0;
+  TBranch *bfvx = 0;
+  TBranch *bfvy = 0;
+  TBranch *bfvz = 0;
   tchntag->SetBranchAddress("Label", &Label, &bLabel);
   tchntag->SetBranchAddress("TagClass", &TagClass, &bTagClass);
   tchntag->SetBranchAddress("FitT", &FitT, &bFitT);
@@ -209,9 +213,9 @@ int main(int argc, char **argv) {
   tchntag->SetBranchAddress("N50", &N50, &bN50);
   tchntag->SetBranchAddress("TagIndex", &TagIndex, &bTagIndex);
   tchntag->SetBranchAddress("TagOut", &TagOut, &bTagOut);
-  tchntag->SetBranchAddress("dvx", &dvx, &bdvx);
-  tchntag->SetBranchAddress("dvy", &dvy, &bdvy);
-  tchntag->SetBranchAddress("dvz", &dvz, &bdvz);
+  tchntag->SetBranchAddress("fvx", &fvx, &bfvx);
+  tchntag->SetBranchAddress("fvy", &fvy, &bfvy);
+  tchntag->SetBranchAddress("fvz", &fvz, &bfvz);
   std::cout << "\e[38;5;70m\e[1m done!  \e[0m" << std::endl;
 
   Float_t pscnd[1000][3];   //Momentum of the secondary particle
@@ -368,9 +372,9 @@ int main(int argc, char **argv) {
     bN50        -> GetEntry(tentry);
     bTagIndex   -> GetEntry(tentry);
     bTagOut     -> GetEntry(tentry);
-    bdvx        -> GetEntry(tentry);
-    bdvy        -> GetEntry(tentry);
-    bdvz        -> GetEntry(tentry);
+    bfvx        -> GetEntry(tentry);
+    bfvy        -> GetEntry(tentry);
+    bfvz        -> GetEntry(tentry);
 
 
     numu->computeCC0PiVariables();
@@ -385,7 +389,8 @@ int main(int argc, char **argv) {
       //GetSelectedModeEvents(numu);
       float recothetamu = neuosc.GetRecoMuDirection(numu);
       neuosc.GetPrmVtxResolution(numu);
-      ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, NHits, Label, TagOut, 0.75, dvx, dvy, dvz);
+      //ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, NHits, Label, TagOut, 0.75, dvx, dvy, dvz);
+      ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, NHits, Label, TagOut, 0.75, fvx, fvy, fvz);
       
     
       // Primary particles
@@ -596,7 +601,8 @@ int main(int argc, char **argv) {
         float RecoMuRange = decayebox.GetRecoMuEndVtx(numu, RecoMuEndVtx);
 
         for (UInt_t ican=0; ican<TagOut->size(); ican++) {
-          NCap = ntagana.GetRecoNeutronCapVtx(ican, 0.75, NHits, FitT, TagOut, dvx, dvy, dvz, NCapVtx, etagmode); //BONSAI fit vertex
+          //NCap = ntagana.GetRecoNeutronCapVtx(ican, 0.75, NHits, FitT, TagOut, dvx, dvy, dvz, NCapVtx, etagmode); //BONSAI fit vertex
+          NCap = ntagana.GetRecoNeutronCapVtx(ican, 0.75, NHits, FitT, TagOut, fvx, fvy, fvz, NCapVtx, etagmode); //BONSAI fit vertex
           //if (PrmMuEnd && NCap) {
           if (NCap) {
             //float d_PrmMuEnd_x_NCap = ndistance.TakeDistance(PrmMuEndVtx, NCapVtx);

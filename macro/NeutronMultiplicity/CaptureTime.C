@@ -40,6 +40,7 @@ void CaptureTime() {
   f1_CapTime -> SetParameter(2, 150);
   f1_CapTime -> SetParameter(3, 10);
   f1_CapTime -> SetLineColor(kPink-9);
+  f1_CapTime -> SetNpx(10000);
 
 
   gStyle->SetOptFit(1111);

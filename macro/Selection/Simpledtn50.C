@@ -18,22 +18,22 @@ void Simpledtn50() {
   h2_dtn50 -> SetXTitle("Timing difference from the prompt event dt [#musec]");
   h2_dtn50 -> SetYTitle("#hits in 50 nsec time window N50");
 
-  TF1* f1_upr = new TF1("f1_upr", "400.", 0., 10.);
-  TF1* f1_btm = new TF1("f1_btm", "50.", 0., 10.);
-  f1_upr -> SetLineStyle(7);
-  f1_upr -> SetLineWidth(3);
-  f1_upr -> SetLineColor(kOrange+7);
+  //TF1* f1_upr = new TF1("f1_upr", "400.", 0., 10.);
+  TF1* f1_btm = new TF1("f1_btm", "4*x+30.0", 1.5, 20.);
+  //f1_upr -> SetLineStyle(7);
+  //f1_upr -> SetLineWidth(3);
+  //f1_upr -> SetLineColor(kOrange+7);
   f1_btm -> SetLineStyle(7);
   f1_btm -> SetLineWidth(3);
   f1_btm -> SetLineColor(kOrange+7);
-  float x1[2] = {10., 10.};
-  float y1[2] = {50., 400.};
+  float x1[2] = {1.5, 1.5};
+  float y1[2] = {0., 36.0};
   TGraph* g1_side1 = new TGraph(2, x1, y1);
   g1_side1 -> SetLineStyle(7);
   g1_side1 -> SetLineWidth(3);
   g1_side1 -> SetLineColor(kOrange+7);
-  float x2[2] = {0., 0.};
-  float y2[2] = {50., 400.};
+  float x2[2] = {20., 20.};
+  float y2[2] = {110., 400.};
   TGraph* g1_side2 = new TGraph(2, x2, y2);
   g1_side2 -> SetLineStyle(7);
   g1_side2 -> SetLineWidth(3);
@@ -48,7 +48,7 @@ void Simpledtn50() {
   c1 -> SetGrid();
   h2_dtn50 -> Draw("COLZ");
   f1_btm -> Draw("SAME");
-  f1_upr -> Draw("SAME");
+  //f1_upr -> Draw("SAME");
   g1_side1 -> Draw("SAME");
   g1_side2 -> Draw("SAME");
 
@@ -60,5 +60,4 @@ void Simpledtn50() {
   text2 -> SetNDC(1);
   text2 -> SetTextSize(0.04);
   text2 -> Draw();
-
 }

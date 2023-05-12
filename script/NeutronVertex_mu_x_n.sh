@@ -12,6 +12,9 @@ NTAGDIR=/disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining
 NTAGDIR3=/disk03/usr8/sedi/Ntag/output/w.mccomb/sk6/NNtraining
 ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis
 
+DISK3=/disk03/usr8/sedi
+FITQUNVER=fiTQun_v4
+
 ######
 # 1st index: fiTQun input
 # 2nd index: NTag input
@@ -24,7 +27,7 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 ######
 
 #### FHC numu x numu #####
-#<<COMMENTOUT
+<<COMMENTOUT
 ./NeutronVertex_mu_x_n.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                      $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                      $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.root\
@@ -34,6 +37,17 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
                      -ETAG ON\
                      -BEAMMODE FHC\
                      -OSCCH NUMU
+COMMENTOUT
+
+./NeutronVertex_mu_x_n.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.000.root\
+                   ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.000.root\
+                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.newGdMC.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.newGdMC.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.newGdMC.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMU
 #COMMENTOUT
 
 

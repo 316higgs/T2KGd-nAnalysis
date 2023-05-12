@@ -120,7 +120,8 @@ int main(int argc, char **argv) {
 
 
   //=========  TTree event variables  ============
-  float NTrueN = 0.;
+  //float NTrueN = 0.;
+  int NTrueN = 0.;
   float vecvx  = 0.;
   float vecvy  = 0.;
   float vecvz  = 0.;

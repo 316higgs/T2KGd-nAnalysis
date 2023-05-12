@@ -1,45 +1,40 @@
-[fiTQun OUTPUT] /disk03/usr8/sedi/fiTQun_v4/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.*.root
-[NTag   OUTPUT] /disk03/usr8/sedi/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.*.root
+[fiTQun OUTPUT] /disk03/usr8/sedi/fiTQun_v4/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.000.root
+[NTag   OUTPUT] /disk03/usr8/sedi/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.000.root
  
-[Neutrino] C0: 42804 -> 42804
-[Neutrino] C1: 29619 -> 29619
-[Neutrino] C2: 28448 -> 28448
-[Neutrino] C3: 28426 -> 28426
-[Neutrino] C4: 18491 -> 26412
-[Neutrino] C5: 18165 -> 25860
---- Box cut performance ---
- 0 < dt[usec] < 10, 50 < N50 < 400
- All truth decay-e                : 25860
- All fiTQun decay-e               : 41217
- fiTQun decya-e in the box        : 24406
- Matched fiTQun decya-e in the box: 24009
-[Decay-e Cut Scan] 
-[Decay-e Cut Scan] dt = 20 us: 26380
-                             : 25830
-[Decay-e Cut Scan] dt = 15 us: 26385
-                             : 25835
-[Decay-e Cut Scan] dt = 10 us: 26412
-                             : 25860
-[Decay-e Cut Scan] dt =  5 us: 26736
-                             : 26173
-[Decay-e Cut Scan] dt =  3 us: 27211
-                             : 26627
-[Neutrino] All Parent Neutrino Events          : 100000
-[Neutrino] Generated Neutrino Events(wallv>200): 63576
-[Neutrino] Generated 1Rmu Events (Oscillated)  : 5832.66
+[Neutrino] C0: 43 -> 43
+[Neutrino] C1: 34 -> 34
+[Neutrino] C2: 34 -> 34
+[Neutrino] C3: 34 -> 34
+[Neutrino] C4: 27 -> 34
+[Neutrino] C5: 26 -> 33
+[Neutrino] Oscillated CCQE Events     : 5.75117
+           w/ tagged neutrons         : 1.11189, w/o tagged neutrons:4.63928
  
-[Neutrino] Oscillated CCQE Events     : 2782.27(66.9551 %)
-           w/ tagged neutrons: 844.158(52.3615 %), w/o tagged neutrons:1938.12(76.206 %)
-[Neutrino] Oscillated CC(2p2h) Events : 477.182(11.4833 %)
-           w/ tagged neutrons: 234.696(14.5578 %), w/o tagged neutrons:242.486(9.53446 %)
-[Neutrino] Oscillated All CCRES Events: 661.527(15.9196 %)
-           w/ tagged neutrons: 386.601(23.9801 %), w/o tagged neutrons:274.926(10.81 %)
-[Neutrino] Oscillated CC Other Events : 54.45(1.31033 %)
-           w/ tagged neutrons: 44.7174(2.77373 %), w/o tagged neutrons:9.7326(0.382682 %)
-[Neutrino] Oscillated NC Events       : 180(4.33168 %)
-           w/ tagged neutrons: 102(6.32686 %), w/o tagged neutrons:78(3.06693 %)
-[Neutrino] Oscillated Neutrino Events within [0.25 GeV, 1.5 GeV]
-           Legacy Analysis    : 4155.45(Osc)/23854(No Osc) = 0.174203
-           Only CCQE(1p1h)    : 2782.27(Osc)/18475(No Osc) = 0.150597
-           w/o truth neutrons : 1633.08(Osc)/10288(No Osc) = 0.158736
-           w/o tagged neutrons: 2543.26(Osc)/15450(No Osc) = 0.164613
+[Neutrino] Oscillated CC(2p2h) Events : 0
+           w/ tagged neutrons         : 0, w/o tagged neutrons:0
+ 
+[Neutrino] Oscillated All CCRES Events: 0.0961642
+           w/ tagged neutrons         : 0, w/o tagged neutrons:0.0961642
+ 
+[Neutrino] Oscillated CC Other Events : 0
+           w/ tagged neutrons         : 0, w/o tagged neutrons:0
+ 
+[Neutrino] NC Events                  : 0
+           w/ tagged neutrons         : 0, w/o tagged neutrons:0
+[Neutron] True captured neutrons at CCQE         : 30
+[Neutron]                           CCQE(osc.)   : 7.24763
+[Neutron] True captured neutrons at CC2p2h       : 0
+[Neutron]                           CC2ph2(osc.) : 0
+[Neutron] True captured neutrons at CCOther      : 6
+[Neutron]                           CCOther(osc.): 2.03126
+[Neutron] True captured neutrons at NC           : 0
+[Neutron]                           NC(osc.)     : 0
+Neutrino events with NTrueN=1: 5
+NC events with NTrueN=1      : 0
+No true mu end vertex : 0
+1Rmu       events : 33
+1Rmu w/  n events : 10
+1Rmu w/  1n events: 9
+1Rmu w/o n events : 23
+1Rmu w/  nu-induced n-like events: 7
+1Rmu w/o nu-induced n-like events: 26
