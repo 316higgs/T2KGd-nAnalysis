@@ -26,7 +26,10 @@ void SimpleNeutron(bool beammode) {
 #if fhcflag
   //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.root");
   //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root");
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronMultiplicity.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronMultiplicity.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronMultiplicity.root");
+
+  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
   TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronMultiplicity.root");
   TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
 #endif
@@ -97,6 +100,7 @@ void SimpleNeutron(bool beammode) {
   h1_CCOther_numubar -> SetFillColor(kOrange+0);
   h1_NC_numubar      -> SetFillColor(kSpring-9);
 
+#if 0
   h1_CCQE_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_CC2p2h_numu     -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -105,17 +109,18 @@ void SimpleNeutron(bool beammode) {
   h1_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_NC_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+#endif
 
 
   THStack* hs_TrueNeutron = new THStack("hs_TrueNeutron", "");
 #if fhcflag
-  hs_TrueNeutron -> Add(h1_NC_numubar);
+  //hs_TrueNeutron -> Add(h1_NC_numubar);
   hs_TrueNeutron -> Add(h1_NC_numu);
-  hs_TrueNeutron -> Add(h1_CCOther_numubar);
+  //hs_TrueNeutron -> Add(h1_CCOther_numubar);
   hs_TrueNeutron -> Add(h1_CCOther_numu);
-  hs_TrueNeutron -> Add(h1_CC2p2h_numubar);
+  //hs_TrueNeutron -> Add(h1_CC2p2h_numubar);
   hs_TrueNeutron -> Add(h1_CC2p2h_numu);
-  hs_TrueNeutron -> Add(h1_CCQE_numubar);
+  //hs_TrueNeutron -> Add(h1_CCQE_numubar);
   hs_TrueNeutron -> Add(h1_CCQE_numu);
 #endif
 #if rhcflag
@@ -133,7 +138,7 @@ void SimpleNeutron(bool beammode) {
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
-  hs_TrueNeutron -> SetMaximum(110);
+  //hs_TrueNeutron -> SetMaximum(110);
   //hs_TrueNeutron -> SetMaximum(610);
   hs_TrueNeutron -> Draw();
   hs_TrueNeutron ->GetYaxis()->SetTitleSize(0.038);
@@ -150,11 +155,11 @@ void SimpleNeutron(bool beammode) {
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");
   else legend1->AddEntry((TObject*)0,"#kern[-0.25]{RHC 1R #mu sample (0.01% Gd)}","");
   legend1 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
-  legend1 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
+  //legend1 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CC2p2h_numu, "#nu_{#mu} CC-2p2h", "F");
-  legend1 -> AddEntry(h1_CC2p2h_numubar, "#bar{#nu}_{#mu} CC-2p2h", "F");
-  legend1 -> AddEntry(h1_CCOther_numu, "#nu_{#mu} CC-グラニーズother", "F");
-  legend1 -> AddEntry(h1_CCOther_numubar, "#bar{#nu}_{#mu} CC-other", "F");
+  //legend1 -> AddEntry(h1_CC2p2h_numubar, "#bar{#nu}_{#mu} CC-2p2h", "F");
+  legend1 -> AddEntry(h1_CCOther_numu, "#nu_{#mu} CC-other", "F");
+  //legend1 -> AddEntry(h1_CCOther_numubar, "#bar{#nu}_{#mu} CC-other", "F");
   //legend1 -> AddEntry(h1_CCOther_numubar, "#nu_{#mu}+#bar{#nu}_{#mu} CC non-QE", "F");
   legend1 -> AddEntry(h1_NC_numu, "NC", "F");
   legend1->SetFillColor(0);

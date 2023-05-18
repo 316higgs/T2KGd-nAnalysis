@@ -1,5 +1,5 @@
 [fiTQun OUTPUT] /disk03/usr8/sedi/fiTQun_v4/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.*.root
-[NTag   OUTPUT] /disk03/usr8/sedi/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.*.root
+[NTag   OUTPUT] /disk03/usr8/sedi/Ntag/output/wToF/fhc.numu_x_numu.13a.ntag0026Gd.*.root
  
 [Neutrino] C0: 42804 -> 42804
 [Neutrino] C1: 29619 -> 29619
@@ -29,17 +29,17 @@
 [Neutrino] Generated 1Rmu Events (Oscillated)  : 5757.37
  
 [Neutrino] Oscillated CCQE Events     : 2779.25(67.5438 %)
-           w/ tagged neutrons: 826.899(52.8792 %), w/o tagged neutrons:1952.35(76.5332 %)
+           w/ tagged neutrons: 841.608(52.8474 %), w/o tagged neutrons:1937.64(76.8232 %)
 [Neutrino] Oscillated CC(2p2h) Events : 477.052(11.5937 %)
-           w/ tagged neutrons: 231.07(14.7767 %), w/o tagged neutrons:245.982(9.64262 %)
+           w/ tagged neutrons: 231.912(14.5625 %), w/o tagged neutrons:245.14(9.71926 %)
 [Neutrino] Oscillated All CCRES Events: 627.565(15.2517 %)
-           w/ tagged neutrons: 359.645(22.9989 %), w/o tagged neutrons:267.92(10.5026 %)
+           w/ tagged neutrons: 375.138(23.5562 %), w/o tagged neutrons:252.427(10.0082 %)
 [Neutrino] Oscillated CC Other Events : 50.8671(1.23622 %)
-           w/ tagged neutrons: 41.1361(2.6306 %), w/o tagged neutrons:9.73101(0.381461 %)
+           w/ tagged neutrons: 41.8682(2.62904 %), w/o tagged neutrons:8.99887(0.356786 %)
 [Neutrino] Oscillated NC Events       : 180(4.37453 %)
-           w/ tagged neutrons: 105(6.71463 %), w/o tagged neutrons:75(2.94004 %)
+           w/ tagged neutrons: 102(6.40492 %), w/o tagged neutrons:78(3.09253 %)
 [Neutrino] Oscillated Neutrino Events within [0.25 GeV, 1.5 GeV]
            Legacy Analysis    : 4114.74(Osc)/23704(No Osc) = 0.173588
            Only CCQE(1p1h)    : 2779.25(Osc)/18464(No Osc) = 0.150522
            w/o truth neutrons : 1624.2(Osc)/10255(No Osc) = 0.158381
-           w/o tagged neutrons: 2550.99(Osc)/15503(No Osc) = 0.164548
+           w/o tagged neutrons: 2522.21(Osc)/15185(No Osc) = 0.166099

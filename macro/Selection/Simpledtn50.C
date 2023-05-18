@@ -52,12 +52,28 @@ void Simpledtn50() {
   g1_side1 -> Draw("SAME");
   g1_side2 -> Draw("SAME");
 
-  TLatex* text1 = new TLatex(0.48, 0.75, "C1-C4 applied");
+  TLatex* text1 = new TLatex(0.44, 0.85, "C1-C4 applied");
   text1 -> SetNDC(1);
-  text1 -> SetTextSize(0.04);
+  text1 -> SetTextSize(0.045);
   text1 -> Draw();
-  TLatex* text2 = new TLatex(0.48, 0.7, "Normalized with ##nu events@C1-C4");
+  TLatex* text2 = new TLatex(0.44, 0.8, "Normalized with ##nu events@C1-C4");
   text2 -> SetNDC(1);
-  text2 -> SetTextSize(0.04);
+  text2 -> SetTextSize(0.045);
   text2 -> Draw();
+  TLatex* text3 = new TLatex(0.44, 0.7, "Decay-e definition:");
+  text3 -> SetNDC(1);
+  text3 -> SetTextSize(0.045);
+  text3 -> Draw();
+  TLatex* text4 = new TLatex(0.44, 0.65, "- All for dt < 1.5 #musec");
+  text4 -> SetNDC(1);
+  text4 -> SetTextSize(0.045);
+  text4 -> Draw();
+  TLatex* text5 = new TLatex(0.44, 0.6, "- dt < 0.25#upointN50-7.5");
+  text5 -> SetNDC(1);
+  text5 -> SetTextSize(0.045);
+  text5 -> Draw();
+  TLatex* text5 = new TLatex(0.44, 0.55, "  for 1.5 #musec < dt < 20 #musec");
+  text5 -> SetNDC(1);
+  text5 -> SetTextSize(0.045);
+  text5 -> Draw();
 }

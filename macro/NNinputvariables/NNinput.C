@@ -1,6 +1,7 @@
 void NNinput() {
 
-  TFile* finnumu = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.root");
+  TFile* finnumu = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
+  //TFile* finnumu = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.newGdMC.root");
 
   TH1F* h1_NNvar_Gd_numu[12];
   TH1F* h1_NNvar_H_numu[12];
@@ -13,10 +14,24 @@ void NNinput() {
     h1_NNvar_AccNoise_numu[i] = (TH1F*)finnumu->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
     h1_NNvar_Decaye_numu[i]   = (TH1F*)finnumu->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
 
-    h1_NNvar_Gd_numu[i]    -> SetStats(0);
-    h1_NNvar_H_numu[i]     -> SetStats(0);
+    Double_t tot_Gd;
+    Double_t tot_H;
+    Double_t tot_AccNoise;
+    Double_t tot_Decaye;
+    tot_Gd       = h1_NNvar_Gd_numu[i]       -> Integral();
+    tot_H        = h1_NNvar_H_numu[i]        -> Integral();
+    tot_AccNoise = h1_NNvar_AccNoise_numu[i] -> Integral();
+    tot_Decaye   = h1_NNvar_Decaye_numu[i]   -> Integral();
+
+    h1_NNvar_Gd_numu[i]       -> Scale(1./tot_Gd);
+    h1_NNvar_H_numu[i]        -> Scale(1./tot_H);
+    h1_NNvar_AccNoise_numu[i] -> Scale(1./tot_AccNoise);
+    h1_NNvar_Decaye_numu[i]   -> Scale(1./tot_Decaye); 
+
+    h1_NNvar_Gd_numu[i]       -> SetStats(0);
+    h1_NNvar_H_numu[i]        -> SetStats(0);
     h1_NNvar_AccNoise_numu[i] -> SetStats(0);
-    h1_NNvar_Decaye_numu[i] -> SetStats(0);
+    h1_NNvar_Decaye_numu[i]   -> SetStats(0);
   }
 
   TLegend* legend = new TLegend(0.4, 0.4, 0.87, 0.87);
@@ -26,9 +41,6 @@ void NNinput() {
   legend -> AddEntry(h1_NNvar_Decaye_numu[0], "Decay-e", "L");
   legend -> AddEntry(h1_NNvar_AccNoise_numu[0], "Acc. noise", "L");
   legend -> SetFillColor(0);
-  //legend->SetLineColor(0);
-  //legend->SetFillColor(0);
-  //legend->SetFillStyle(0);
   legend->SetBorderSize(0);
 
   gROOT -> SetStyle("Plain");
@@ -43,7 +55,6 @@ void NNinput() {
       h1_NNvar_H_numu[i]        -> Draw("SAME");
       h1_NNvar_Gd_numu[i]       -> Draw("SAME");
       h1_NNvar_Decaye_numu[i]   -> Draw("SAME");
-      if (i==0) legend -> Draw();
     }
 
     else {
@@ -51,6 +62,7 @@ void NNinput() {
       h1_NNvar_Gd_numu[i]       -> Draw("SAME");
       h1_NNvar_H_numu[i]        -> Draw("SAME");
       h1_NNvar_AccNoise_numu[i] -> Draw("SAME");
+      if (i==11) legend -> Draw();
     }
     
   }

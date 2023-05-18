@@ -9,7 +9,7 @@
 #include "THStack.h"
 //#include "CC0PiNumu.h"  //src: /disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu
 #include "DefBeamMode.h"
-#include "DefOscChannels.h"
+//#include "DefOscChannels.h"
 
 #include "include/NeutrinoEvents.h"
 #include "include/NTagVariables.h"
@@ -23,7 +23,7 @@
 #include "src/NTagAnalysis/inc/NTagAnalysis.h"
 #include "src/NNInputVariables/inc/NNInputVariables.h"
 
-#define NLIKETHRESHOLD 0.75
+#define NLIKETHRESHOLD 0.55
 
 
 int main(int argc, char **argv) {
@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
 
 
   //=========  TTree event variables  ============
-  float NTrueN = 0.;
+  int NTrueN = 0.;
   float vecvx  = 0.;
   float vecvy  = 0.;
   float vecvz  = 0.;
@@ -148,7 +148,7 @@ int main(int argc, char **argv) {
   tchpar->SetBranchAddress("ParentPID", &ParentPID, &bParentPID);
   tchpar->SetBranchAddress("ParentIndex", &ParentIndex, &bParentIndex); //avalable at NTag1.1.2
   tchpar->SetBranchAddress("IntID", &IntID, &bIntID);
-  tchpar->SetBranchAddress("t", par_t);
+  //tchpar->SetBranchAddress("t", &par_t);
   tchpar->SetBranchAddress("t", &par_t, &bpar_t);
   tchpar->SetBranchAddress("x", &par_x, &bpar_x);
   tchpar->SetBranchAddress("y", &par_y, &bpar_y);
@@ -401,7 +401,7 @@ int main(int argc, char **argv) {
           }
 
           //Pre-NN
-#if 1
+#if 0
           if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
           if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar);
           if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar);
@@ -409,11 +409,14 @@ int main(int argc, char **argv) {
 #endif
 
           //Post-NN
-#if 0
-          if (Label->at(jentry)==0 && TagOut->at(jentry) > NLIKETHRESHOLD) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
-          if (Label->at(jentry)==1 && TagOut->at(jentry) > NLIKETHRESHOLD) h1_NNvar_Decaye[ivar]   -> Fill(NNVar);
-          if (Label->at(jentry)==2 && TagOut->at(jentry) > NLIKETHRESHOLD) h1_NNvar_H[ivar]        -> Fill(NNVar);
-          if (Label->at(jentry)==3 && TagOut->at(jentry) > NLIKETHRESHOLD) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
+#if 1
+          bool etagboxin = false;
+          if (NHits->at(jentry)>50 && FitT->at(jentry)<20) etagboxin = true;
+
+          if (Label->at(jentry)==0 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
+          if (Label->at(jentry)==1 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Decaye[ivar]   -> Fill(NNVar);
+          if (Label->at(jentry)==2 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_H[ivar]        -> Fill(NNVar);
+          if (Label->at(jentry)==3 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
 #endif
         }
 
@@ -486,6 +489,7 @@ int main(int argc, char **argv) {
 #endif
 
 
+#if 0
       //Get gamma from mu- capture and make lists of neutrons from mu- capture and neutrino interactions
       std::cout << "------  NTag info  ------" << std::endl;
       int mu_thisev = 0;  // Number of muons
@@ -601,6 +605,7 @@ int main(int argc, char **argv) {
       
       
       std::cout << " " << std::endl;
+#endif
 
     } //1R mu selection
 

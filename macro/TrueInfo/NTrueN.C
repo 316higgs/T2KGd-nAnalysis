@@ -5,7 +5,10 @@
 #include "TText.h"
 
 void NTrueN() {
-  TFile* finnumu    = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.root");
+  //TFile* finnumu    = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.root");
+  //TFile* finnumubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.root");
+
+  TFile* finnumu    = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
   TFile* finnumubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.root");
 
   TH1F* h1_NTrueN_numu    = (TH1F*)finnumu->Get("NTagAnalysis/h1_NTrueN_type0");

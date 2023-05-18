@@ -26,7 +26,7 @@ void Efficiency() {
   TCanvas* c = new TCanvas("c","c",800,800);
   c -> SetGrid();
   TH1F* frame = gPad->DrawFrame(0., 0., 1., 1.);
-  frame -> SetXTitle("TMVAOutput");
+  frame -> SetXTitle("n-likelihood");
   frame -> SetYTitle("Overall Tagging Efficiency");
   frame -> SetTitleOffset(1.2, "Y");
   g_OverallEff   -> Draw("PL");
@@ -39,7 +39,7 @@ void Efficiency() {
   legend->SetLineColor(0);
   legend->SetFillColor(0);
   legend->SetBorderSize(0);
-  legend->Draw() ;
+  //legend->Draw() ;
 
   TLegend* legend1 = new TLegend(0.7, 0.85, 0.85, 0.87);
   legend1 -> SetTextSize(0.04);
@@ -51,16 +51,49 @@ void Efficiency() {
   legend1->SetBorderSize(0);
   legend1->Draw() ;
 
+  TLegend* legend2 = new TLegend(0.42, 0.9, 0.68, 0.95);
+  legend2 -> SetTextSize(0.04);
+  legend2 -> AddEntry(g_OverallEff, "Gd+H", "PL");
+  legend2->SetLineColor(0);
+  legend2->SetFillColor(0);
+  legend2->SetFillStyle(0);
+  legend2->SetBorderSize(0);
+  legend2->Draw() ;
+
+  TLegend* legend3 = new TLegend(0.6, 0.9, 0.88, 0.95);
+  legend3 -> SetTextSize(0.04);
+  legend3 -> AddEntry(g_OverallHEff, "H", "PL");
+  legend3->SetLineColor(0);
+  legend3->SetFillColor(0);
+  legend3->SetFillStyle(0);
+  legend3->SetBorderSize(0);
+  legend3->Draw() ;
+
+  TLegend* legend4 = new TLegend(0.7, 0.9, 0.98, 0.95);
+  legend4 -> SetTextSize(0.04);
+  legend4 -> AddEntry(g_OverallGdEff, "Gd", "PL");
+  legend4->SetLineColor(0);
+  legend4->SetFillColor(0);
+  legend4->SetFillStyle(0);
+  legend4->SetBorderSize(0);
+  legend4->Draw() ;
+
+#if 1
   TCanvas* cNN = new TCanvas("cNN","cNN",800,800);
   cNN -> SetGrid();
   TH1F* frameNN = gPad->DrawFrame(0., 0., 1., 1.);
-  frameNN -> SetXTitle("TMVAOutput");
+  frameNN -> SetXTitle("n-likelihood");
   frameNN -> SetYTitle("NN Classification Efficiency");
   frameNN -> SetTitleOffset(1.2, "Y");
   g_NNEff   -> Draw("PL");
   g_NNHEff  -> Draw("SAMEPL");
   g_NNGdEff -> Draw("SAMEPL");
+  //legend->Draw() ;
+  legend1 -> Draw();
+  legend2 -> Draw();
+  legend3 -> Draw();
+  legend4 -> Draw();
 
-  legend->Draw() ;
-  legend1->Draw() ;
+#endif
 }
+

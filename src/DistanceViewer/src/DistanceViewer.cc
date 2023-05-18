@@ -5,11 +5,11 @@ void DistanceViewer::SetHistoFrame() {
   h1_truedistance = new TH1F("h1_truedistance", "Truth Distance From PV; Truth distance[m]; Entries", 10, 0, 5);
   ((TGaxis*)h1_truedistance->GetYaxis())->SetMaxDigits(4);
 
-  h1_truedistance_CCQE    = new TH1F("h1_truedistance_CCQE", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
-  h1_truedistance_CC2p2h  = new TH1F("h1_truedistance_CC2p2h", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
-  h1_truedistance_CCOther = new TH1F("h1_truedistance_CCOther", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
-  h1_truedistance_CCnonQE = new TH1F("h1_truedistance_CCnonQE", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
-  h1_truedistance_NC      = new TH1F("h1_truedistance_NC", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
+  h1_truedistance_CCQE    = new TH1F("h1_truedistance_CCQE", "", 10, 0, 5);
+  h1_truedistance_CC2p2h  = new TH1F("h1_truedistance_CC2p2h", "", 10, 0, 5);
+  h1_truedistance_CCOther = new TH1F("h1_truedistance_CCOther", "", 10, 0, 5);
+  h1_truedistance_CCnonQE = new TH1F("h1_truedistance_CCnonQE", "", 10, 0, 5);
+  h1_truedistance_NC      = new TH1F("h1_truedistance_NC", "", 10, 0, 5);
 
   h1_truedistance_nu_n      = new TH1F("h1_truedistance_nu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
   h1_truedistance_mu_n      = new TH1F("h1_truedistance_mu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
@@ -72,10 +72,10 @@ void DistanceViewer::SetHistoFrame() {
     h1_Tagtruedistance[i] = new TH1F(TString::Format("h1_Tagtruedistance_thr%d", i), "Truth Distance of Tagged Truth Neutrons; Truth distance[m]; Entries", 10, 0, 5);
     ((TGaxis*)h1_Tagtruedistance[i]->GetYaxis())->SetMaxDigits(4);
 
-    h1_NNEff_dist[i]      = new TH1F(TString::Format("h1_NNEff_dist_thr%d", i), "NN Classification Efficiency; Truth distance[m]; NN Classification Efficiency", 10, 0, 5);
-    h1_OverallEff_dist[i] = new TH1F(TString::Format("h1_OverallEff_dist_thr%d", i), "Overall Tagging Efficiency; Truth distance[m]; Overall Tagging Efficiency", 10, 0, 5);
+    h1_NNEff_dist[i]      = new TH1F(TString::Format("h1_NNEff_dist_thr%d", i), "", 10, 0, 5);
+    h1_OverallEff_dist[i] = new TH1F(TString::Format("h1_OverallEff_dist_thr%d", i), "", 10, 0, 5);
   }
-  h1_PreEff_dist = new TH1F("h1_PreEff_dist", "Pre-seletion Efficiency; Truth distance[m]; Pre-selection Efficiency", 10, 0, 5); 
+  h1_PreEff_dist = new TH1F("h1_PreEff_dist", "", 10, 0, 5); 
 }
 
 void DistanceViewer::SetHistoFormat() {

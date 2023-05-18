@@ -15,6 +15,9 @@ NTAGDIR=/disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining
 NTAGDIR3=/disk03/usr8/sedi/Ntag/output/w.mccomb/sk6/NNtraining
 ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis
 
+DISK3=/disk03/usr8/sedi
+FITQUNVER=fiTQun_v4
+
 ##### FHC numu -> numu Gd MC #####
 ####### Pre-eff best point ########
 <<COMMENTOUT
@@ -31,6 +34,18 @@ COMMENTOUT
 
 
 ########## TWIDTH scan ############
+#<<COMMENTOUT
+./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
+                   ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
+                   $ANALYSISSTAGE/output/TWIDTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH160.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.TWIDTH160.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.TWIDTH160.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMU
+#COMMENTOUT
+
 <<COMMENTOUT
 ./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/PreScan/TWIDTHScan/EtagON/Scan2/fhc.numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
