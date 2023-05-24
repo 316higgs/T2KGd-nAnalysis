@@ -15,7 +15,17 @@ int AllParentNeutrinos = 0;
 //1R muon selection
 int ProtoSelectedParentNeutrinos[SELECTIONCUTS];
 int SelectedParentNeutrinos[SELECTIONCUTS];
-float SelectedCCQENeutrinos[SELECTIONCUTS];
+
+int SelectedNoOscCCQENeutrinos[SELECTIONCUTS];     // No osc.
+int SelectedNoOscCC2p2hNeutrinos[SELECTIONCUTS];
+int SelectedNoOscCCnonQENeutrinos[SELECTIONCUTS];
+int SelectedNoOscNCNeutrinos[SELECTIONCUTS];
+int SelectedNoOscCCQETagN[SELECTIONCUTS];
+int SelectedNoOscCC2p2hTagN[SELECTIONCUTS];
+int SelectedNoOscCCnonQETagN[SELECTIONCUTS];
+int SelectedNoOscNCTagN[SELECTIONCUTS];
+
+float SelectedCCQENeutrinos[SELECTIONCUTS];     // osc.
 float SelectedCC2p2hNeutrinos[SELECTIONCUTS];
 float SelectedCCnonQENeutrinos[SELECTIONCUTS];
 float SelectedNCNeutrinos[SELECTIONCUTS];
@@ -42,6 +52,24 @@ void ResetNeutrinoEvents() {
   for (int i=0; i<SELECTIONCUTS; i++) {
     ProtoSelectedParentNeutrinos[i] = 0;
     SelectedParentNeutrinos[i]      = 0;
+
+    SelectedNoOscCCQENeutrinos[i]    = 0.;
+    SelectedNoOscCC2p2hNeutrinos[i]  = 0.;
+    SelectedNoOscCCnonQENeutrinos[i] = 0.;
+    SelectedNoOscNCNeutrinos[i]      = 0.;
+    SelectedNoOscCCQETagN[i]         = 0.;
+    SelectedNoOscCC2p2hTagN[i]       = 0.;
+    SelectedNoOscCCnonQETagN[i]      = 0.;
+    SelectedNoOscNCTagN[i]           = 0.;
+
+    SelectedCCQENeutrinos[i]    = 0.;
+    SelectedCC2p2hNeutrinos[i]  = 0.;
+    SelectedCCnonQENeutrinos[i] = 0.;
+    SelectedNCNeutrinos[i]      = 0.;
+    SelectedCCQETagN[i]         = 0.;
+    SelectedCC2p2hTagN[i]       = 0.;
+    SelectedCCnonQETagN[i]      = 0.;
+    SelectedNCTagN[i]           = 0.;
   }
   for (int i=0; i<DecayeCutPoint; i++) {
     SelectedParentNeutrinos_dtScan[i]      = 0;
@@ -143,9 +171,11 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
   if (prmsel.C1ApplyFCFV(evsel)) {
     SelectedParentNeutrinos[0]++;
     ProtoSelectedParentNeutrinos[0]++;
-    //if (mode==1)             SelectedCCQENeutrinos[0]++;
-    //if (mode>=2 && mode<=10) SelectedCC2p2hNeutrinos[0]++;
-    //if (mode>10 && mode<=30) SelectedCCnonQENeutrinos[0]++;
+    if (mode==1)             SelectedNoOscCCQENeutrinos[0]++;
+    if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[0]++;
+    if (mode>10 && mode<=30) SelectedNoOscCCnonQENeutrinos[0]++;
+    if (mode>=31)            SelectedNoOscNCNeutrinos[0]++;
+
     if (mode==1)             SelectedCCQENeutrinos[0] += OscProb;
     if (mode>=2 && mode<=10) SelectedCC2p2hNeutrinos[0] += OscProb;
     if (mode>10 && mode<=30) SelectedCCnonQENeutrinos[0] += OscProb;
@@ -155,9 +185,11 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
     if (prmsel.C2Apply1R(evsel)) {
       SelectedParentNeutrinos[1]++;
       ProtoSelectedParentNeutrinos[1]++;
-      //if (mode==1)             SelectedCCQENeutrinos[1]++;
-      //if (mode>=2 && mode<=10) SelectedCC2p2hNeutrinos[1]++;
-      //if (mode>10 && mode<=30) SelectedCCnonQENeutrinos[1]++;
+      if (mode==1)             SelectedNoOscCCQENeutrinos[1]++;
+      if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[1]++;
+      if (mode>10 && mode<=30) SelectedNoOscCCnonQENeutrinos[1]++;
+      if (mode>=31)            SelectedNoOscNCNeutrinos[1]++;
+
       if (mode==1)             SelectedCCQENeutrinos[1] += OscProb;
       if (mode>=2 && mode<=10) SelectedCC2p2hNeutrinos[1] += OscProb;
       if (mode>10 && mode<=30) SelectedCCnonQENeutrinos[1] += OscProb;
@@ -167,9 +199,11 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
       if (prmsel.C3Applymuonlike(evsel)) {
         SelectedParentNeutrinos[2]++;
         ProtoSelectedParentNeutrinos[2]++;
-        //if (mode==1)             SelectedCCQENeutrinos[2]++;
-        //if (mode>=2 && mode<=10) SelectedCC2p2hNeutrinos[2]++;
-        //if (mode>10 && mode<=30) SelectedCCnonQENeutrinos[2]++;
+        if (mode==1)             SelectedNoOscCCQENeutrinos[2]++;
+        if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[2]++;
+        if (mode>10 && mode<=30) SelectedNoOscCCnonQENeutrinos[2]++;
+        if (mode>=31)            SelectedNoOscNCNeutrinos[2]++;
+
         if (mode==1)             SelectedCCQENeutrinos[2] += OscProb;
         if (mode>=2 && mode<=10) SelectedCC2p2hNeutrinos[2] += OscProb;
         if (mode>10 && mode<=30) SelectedCCnonQENeutrinos[2] += OscProb;
@@ -179,9 +213,11 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
         if (prmsel.C4ApplyPmu200MeV(evsel)) {
           SelectedParentNeutrinos[3]++;
           ProtoSelectedParentNeutrinos[3]++;
-          //if (mode==1)             SelectedCCQENeutrinos[3]++;
-          //if (mode>=2 && mode<=10) SelectedCC2p2hNeutrinos[3]++;
-          //if (mode>10 && mode<=30) SelectedCCnonQENeutrinos[3]++;
+          if (mode==1)             SelectedNoOscCCQENeutrinos[3]++;
+          if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[3]++;
+          if (mode>10 && mode<=30) SelectedNoOscCCnonQENeutrinos[3]++;
+          if (mode>=31)            SelectedNoOscNCNeutrinos[3]++;
+
           if (mode==1)             SelectedCCQENeutrinos[3] += OscProb;
           if (mode>=2 && mode<=10) SelectedCC2p2hNeutrinos[3] += OscProb;
           if (mode>10 && mode<=30) SelectedCCnonQENeutrinos[3] += OscProb;
@@ -191,9 +227,11 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
 
           if (prmsel.C5Applydecaye(evsel, numu, decayebox, eMode, eOsc, dtCut, N50CutMin, N50CutMax, dtvsn50fill)) {
             SelectedParentNeutrinos[4]++;
-            //if (mode==1)             SelectedCCQENeutrinos[4]++;
-            //if (mode>=2 && mode<=10) SelectedCC2p2hNeutrinos[4]++;
-            //if (mode>10 && mode<=30) SelectedCCnonQENeutrinos[4]++;
+            if (mode==1)             SelectedNoOscCCQENeutrinos[4]++;
+            if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[4]++;
+            if (mode>10 && mode<=30) SelectedNoOscCCnonQENeutrinos[4]++;
+            if (mode>=31)            SelectedNoOscNCNeutrinos[4]++;
+
             if (mode==1)             SelectedCCQENeutrinos[4] += OscProb;
             if (mode>=2 && mode<=10) SelectedCC2p2hNeutrinos[4] += OscProb;
             if (mode>10 && mode<=30) SelectedCCnonQENeutrinos[4] += OscProb;
@@ -202,9 +240,11 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
 
             if (prmsel.C6Applynotpionlike(evsel)) {
               SelectedParentNeutrinos[5]++;
-              //if (mode==1)             SelectedCCQENeutrinos[5]++;
-              //if (mode>=2 && mode<=10) SelectedCC2p2hNeutrinos[5]++;
-              //if (mode>10 && mode<=30) SelectedCCnonQENeutrinos[5]++;
+              if (mode==1)             SelectedNoOscCCQENeutrinos[5]++;
+              if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[5]++;
+              if (mode>10 && mode<=30) SelectedNoOscCCnonQENeutrinos[5]++;
+              if (mode>=31)            SelectedNoOscNCNeutrinos[5]++;
+
               if (mode==1)             SelectedCCQENeutrinos[5] += OscProb;
               if (mode>=2 && mode<=10) SelectedCC2p2hNeutrinos[5] += OscProb;
               if (mode>10 && mode<=30) SelectedCCnonQENeutrinos[5] += OscProb;

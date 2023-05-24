@@ -57,6 +57,7 @@ int main(int argc, char **argv) {
   float dtMax  = 10.;
   float N50Min = 50.;
   float N50Max = 400.;
+  float nlikeThreshold = 0.55;
 
 
   //=========  fiTQun output (TTree: h1)  ============
@@ -349,7 +350,7 @@ int main(int argc, char **argv) {
 
     h1_NTrueN[0] -> Fill(NTrueN);
 
-    int TagN = ntagana.GetTaggedNeutrons(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
+    int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
     GetSelectedTagN(prmsel, evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false, TagN);
 
     //New 1R muon selection
@@ -451,12 +452,12 @@ int main(int argc, char **argv) {
 
       //Check neutrino events with tagged neutrons
       ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, 
-                                     etagmode, numu, neuosc, 15,
+                                     etagmode, numu, neuosc, nlikeThreshold/0.05,
                                      recothetamu, thetamin, thetamax);
 
       //Number of tagged-neutrons
       //CCQE w/ tagged-n
-      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
+      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
       if (intmode==1 && numtaggedneutrons!=0) {
 
         CCQEwTaggedNeutrons++;
@@ -809,7 +810,7 @@ int main(int argc, char **argv) {
     resultfile << " " << std::endl;
 
     for (int i=0; i<SELECTIONCUTS; i++) {
-      resultfile << "[Neutrino] C" << i << ": " << ProtoSelectedParentNeutrinos[i] << " -> " << SelectedParentNeutrinos[i] << std::endl;
+      resultfile << "[Neutrino] C" << i+1 << ": " << ProtoSelectedParentNeutrinos[i] << " -> " << SelectedParentNeutrinos[i] << std::endl;
       h1_1RmuonEvents->fArray[i+1]      = (float)SelectedParentNeutrinos[i]/SelectedParentNeutrinos[0];
       h1_Proto1RmuonEvents->fArray[i+1] = (float)ProtoSelectedParentNeutrinos[i]/ProtoSelectedParentNeutrinos[0];
       h1_SelNuEvents[0]->fArray[i+1]    = SelectedCCQENeutrinos[i];
@@ -820,6 +821,20 @@ int main(int argc, char **argv) {
       h1_SelTagN[1]->fArray[i+1]        = SelectedCC2p2hTagN[i];
       h1_SelTagN[2]->fArray[i+1]        = SelectedCCnonQETagN[i];
       h1_SelTagN[3]->fArray[i+1]        = SelectedNCTagN[i];
+
+      resultfile << "  CCQE    (osc.): " << SelectedCCQENeutrinos[i]    << std::endl;
+      resultfile << "  CC-2p2h (osc.): " << SelectedCC2p2hNeutrinos[i]  << std::endl;
+      resultfile << "  CC-Other(osc.): " << SelectedCCnonQENeutrinos[i] << std::endl;
+      resultfile << "  NC      (osc.): " << SelectedNCNeutrinos[i]      << std::endl;
+      resultfile << "  ------------------------------------------"      << std::endl;
+      resultfile << "  Total   (osc.): " << SelectedCCQENeutrinos[i]+SelectedCC2p2hNeutrinos[i]+SelectedCCnonQENeutrinos[i]+SelectedNCNeutrinos[i] << std::endl;
+      resultfile << " " << std::endl;
+      resultfile << "  CCQE    (No osc.): " << SelectedNoOscCCQENeutrinos[i]    << std::endl;
+      resultfile << "  CC-2p2h (No osc.): " << SelectedNoOscCC2p2hNeutrinos[i]  << std::endl;
+      resultfile << "  CC-Other(No osc.): " << SelectedNoOscCCnonQENeutrinos[i] << std::endl;
+      resultfile << "  NC      (No osc.): " << SelectedNoOscNCNeutrinos[i]      << std::endl;
+      resultfile << "  ------------------------------------------"      << std::endl;
+      resultfile << "  Total   (No osc.): " << SelectedNoOscCCQENeutrinos[i]+SelectedNoOscCC2p2hNeutrinos[i]+SelectedNoOscCCnonQENeutrinos[i]+SelectedNoOscNCNeutrinos[i] << std::endl;
     }
     
     resultfile << "--- Box cut performance ---" << std::endl;

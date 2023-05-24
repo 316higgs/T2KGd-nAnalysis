@@ -72,23 +72,23 @@ COMMENTOUT
 #                   -OSCCH NUMUBAR
 
 
-
+####################################################################
 ##### FHC numu -> numu Gd MC #####
-#<<COMMENTOUT
+<<COMMENTOUT
 #####  new Gd MC  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
-                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.newGdMC.root\
-                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.newGdMC.txt\
-                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.newGdMC.txt\
+                   ${ANALYSISSTAGE}/output/fhc/fhc.numu_x_numu.newGdMC.root\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.neutrino.newGdMC.txt\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.ntag.newGdMC.txt\
                    -MCType Gd\
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMU
-#COMMENTOUT
+COMMENTOUT
 
 <<COMMENTOUT
-#####  new Gd MC  ######
+#####  new Gd MC w/ ToF-subtraction  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/wToF/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
                    $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.newGdMC.wToF.root\
@@ -100,6 +100,7 @@ COMMENTOUT
                    -OSCCH NUMU
 COMMENTOUT
 
+#####  old Gd MC  ######
 <<COMMENTOUT
 ./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
@@ -111,6 +112,23 @@ COMMENTOUT
                    -BEAMMODE FHC\
                    -OSCCH NUMU
 COMMENTOUT
+
+####################################################################
+##### FHC numu -> nue Gd MC #####
+#<<COMMENTOUT
+#####  new Gd MC  ######
+./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_nue.13a.fiTQun0026Gd.\*.root\
+                   ${DISK3}/Ntag/output/fhc/numu_x_nue/fhc.numu_x_nue.13a.ntag0026Gd.\*.root\
+                   ${ANALYSISSTAGE}/output/fhc/fhc.numu_x_nue.newGdMC.root\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_nue.neutrino.newGdMC.txt\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_nue.ntag.newGdMC.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUESIG
+#COMMENTOUT
+
+
 
 <<COMMENTOUT
 ./analysis1Rmu.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\

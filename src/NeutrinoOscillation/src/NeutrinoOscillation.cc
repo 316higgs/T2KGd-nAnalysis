@@ -15,9 +15,9 @@ void NeutrinoOscillation::SetHistoFrame() {
 
     h1_NoOsc[i]              = new TH1F(TString::Format("h1_NoOsc_mode%d", i), "No Oscillation; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
 
-    h1_OscProb[i]            = new TH1F(TString::Format("h1_OscProb_mode%d", i), "Oscillation Probability; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
-    h1_OscProb_wNeutron[i]   = new TH1F(TString::Format("h1_OscProb_wNeutron_mode%d", i), "Oscillation Probability w/ Tagged Neutrons; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
-    h1_OscProb_woNeutron[i]  = new TH1F(TString::Format("h1_OscProb_woNeutron_mode%d", i), "Oscillation Probability w/o Tagged Neutrons; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
+    h1_OscProb[i]            = new TH1F(TString::Format("h1_OscProb_mode%d", i), "", 50, 0, 3);
+    h1_OscProb_wNeutron[i]   = new TH1F(TString::Format("h1_OscProb_wNeutron_mode%d", i), "", 50, 0, 3);
+    h1_OscProb_woNeutron[i]  = new TH1F(TString::Format("h1_OscProb_woNeutron_mode%d", i), "", 50, 0, 3);
 
     h1_OscProbRatio[i]       = new TH1F(TString::Format("h1_OscProbRatio_mode%d", i), "Oscillation Probability; Reconstructed Neurtino Energy[GeV]; Ratio to No Oscillation", 60, 0, 3);
   
@@ -34,14 +34,12 @@ void NeutrinoOscillation::SetHistoFrame() {
   h2_PrmMuEndVtxReso = new TH2F("h2_PrmMuEndVtxReso", "Primary #mu Stopping Vertex Resolution; Truth [cm]; Reco [cm]", 300, 0, 3000, 300, 0, 3000);
   h2_PrmMuEndVtxReso -> SetStats(0);
 
-  //numu
   h1_AllEnutrue     = new TH1F("h1_AllEnutrue",  "Truth Neutrino Energy; Truth Neutrino Energy E^{true}_{#nu}[GeV]; Number of Neutrino Events", 60, 0, 3);
   h1_AllEnureco     = new TH1F("h1_AllEnureco",  "Truth Neutrino Energy; Reconstructed Neutrino Energy E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, 0, 3);
   h1_AllEnureso     = new TH1F("h1_AllEnureso",  "Neutrino Energy Resolution; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 50, -0.8, 0.8);
   h1_EnuresoCCnonQE = new TH1F("h1_EnuresoCCnonQE", "Neutrino Energy Resolution; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
   h2_Reso_x_TrueEnu = new TH2F("h2_Reso_x_TrueEnu", "Resolution vs Truth Neutrino Energy; Truth Neutrino Energy E^{true}_{#nu}[GeV]; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}", 60, 0, 3, 60, -1, 1);
 
-  //numu
   h1_All_NoOsc                = new TH1F("h1_All_NoOsc", "No Oscillation; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
   h1_All_NoOsc_woTruthNeutron = new TH1F("h1_All_NoOsc_woTruthNeutron", "No Oscillation w/o Truth Neutrons; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
   h1_All_NoOsc_woNeutron      = new TH1F("h1_All_NoOsc_woNeutron", "No Oscillation w/o Tagged Neutrons; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
@@ -51,12 +49,12 @@ void NeutrinoOscillation::SetHistoFrame() {
   h1_All_OscProbRatio                = new TH1F("h1_All_OscProbRatio", "Oscillation Probability; Reconstructed Neurtino Energy[GeV]; Ratio to No Oscillation", 60, 0, 3);
   h1_All_OscProbRatio_woTruthNeutron = new TH1F("h1_All_OscProbRatio_woTruthNeutron", "Oscillation Probability w/o Truth Neutrons; Reconstructed Neurtino Energy[GeV]; Ratio to No Oscillation", 60, 0, 3);
   h1_All_OscProbRatio_woNeutron      = new TH1F("h1_All_OscProbRatio_woNeutron", "Oscillation Probability w/o Tagged Neutrons; Reconstructed Neurtino Energy[GeV]; Ratio to No Oscillation", 60, 0, 3);
-  h1_OscProbCCOther                  = new TH1F("h1_OscProbCCOther", "Oscillation Probability; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
-  h1_OscProbCCnonQE                  = new TH1F("h1_OscProbCCnonQE", "Oscillation Probability; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
-  h1_OscProbCCOther_wNeutron         = new TH1F("h1_OscProbCCOther_wNeutron", "Oscillation Probability w/ Tagged Neutrons; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
-  h1_OscProbCCOther_woNeutron        = new TH1F("h1_OscProbCCOther_woNeutron", "Oscillation Probability w/o Tagged Neutrons; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
-  h1_OscProbCCnonQE_wNeutron         = new TH1F("h1_OscProbCCnonQE_wNeutron", "Oscillation Probability w/ Tagged Neutrons; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
-  h1_OscProbCCnonQE_woNeutron        = new TH1F("h1_OscProbCCnonQE_woNeutron", "Oscillation Probability w/o Tagged Neutrons; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
+  h1_OscProbCCOther                  = new TH1F("h1_OscProbCCOther", "", 50, 0, 3);
+  h1_OscProbCCnonQE                  = new TH1F("h1_OscProbCCnonQE", "", 50, 0, 3);
+  h1_OscProbCCOther_wNeutron         = new TH1F("h1_OscProbCCOther_wNeutron", "", 50, 0, 3);
+  h1_OscProbCCOther_woNeutron        = new TH1F("h1_OscProbCCOther_woNeutron", "", 50, 0, 3);
+  h1_OscProbCCnonQE_wNeutron         = new TH1F("h1_OscProbCCnonQE_wNeutron", "", 50, 0, 3);
+  h1_OscProbCCnonQE_woNeutron        = new TH1F("h1_OscProbCCnonQE_woNeutron", "", 50, 0, 3);
 
   h2_TruePrmVtxXY = new TH2F("h2_TruePrmVtxXY", "", 100, -20, 20, 100, -20, 20);
   h2_TruePrmVtxRZ = new TH2F("h2_TruePrmVtxRZ", "", 100, 0, 400, 100, -20, 20);

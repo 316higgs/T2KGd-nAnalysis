@@ -15,7 +15,6 @@ TH1F* h1_Proto1RmuonEvents;
 TH1F* h1_SelNuEvents[4];
 TH1F* h1_SelTagN[4];
 
-
 TH1F* h1_dwall[INTERACTIONTYPE];
 TH1F* h1_Nring[INTERACTIONTYPE];
 TH1F* h1_emulikelihood[INTERACTIONTYPE];

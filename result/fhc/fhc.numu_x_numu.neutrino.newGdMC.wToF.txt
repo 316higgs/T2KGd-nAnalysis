@@ -1,45 +1,45 @@
 [fiTQun OUTPUT] /disk03/usr8/sedi/fiTQun_v4/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.*.root
 [NTag   OUTPUT] /disk03/usr8/sedi/Ntag/output/wToF/fhc.numu_x_numu.13a.ntag0026Gd.*.root
  
-[Neutrino] C0: 42804 -> 42804
-[Neutrino] C1: 29619 -> 29619
-[Neutrino] C2: 28448 -> 28448
-[Neutrino] C3: 28426 -> 28426
-[Neutrino] C4: 18491 -> 26220
-[Neutrino] C5: 18165 -> 25672
+[Neutrino] C0: 43779 -> 43779
+[Neutrino] C1: 29753 -> 29753
+[Neutrino] C2: 28476 -> 28476
+[Neutrino] C3: 28449 -> 28449
+[Neutrino] C4: 18805 -> 26397
+[Neutrino] C5: 18462 -> 25872
 --- Box cut performance ---
  0 < dt[usec] < 10, 50 < N50 < 400
- All truth decay-e                : 25860
- All fiTQun decay-e               : 41217
- fiTQun decya-e in the box        : 25945
- Matched fiTQun decya-e in the box: 24514
+ All truth decay-e                : 25723
+ All fiTQun decay-e               : 40697
+ fiTQun decya-e in the box        : 25769
+ Matched fiTQun decya-e in the box: 24395
 [Decay-e Cut Scan] 
-[Decay-e Cut Scan] dt = 20 us: 26220
-                             : 25672
-[Decay-e Cut Scan] dt = 15 us: 26220
-                             : 25672
-[Decay-e Cut Scan] dt = 10 us: 26220
-                             : 25672
-[Decay-e Cut Scan] dt =  5 us: 26220
-                             : 25672
-[Decay-e Cut Scan] dt =  3 us: 26220
-                             : 25672
+[Decay-e Cut Scan] dt = 20 us: 26397
+                             : 25872
+[Decay-e Cut Scan] dt = 15 us: 26397
+                             : 25872
+[Decay-e Cut Scan] dt = 10 us: 26397
+                             : 25872
+[Decay-e Cut Scan] dt =  5 us: 26397
+                             : 25872
+[Decay-e Cut Scan] dt =  3 us: 26397
+                             : 25872
 [Neutrino] All Parent Neutrino Events          : 100000
-[Neutrino] Generated Neutrino Events(wallv>200): 63576
-[Neutrino] Generated 1Rmu Events (Oscillated)  : 5757.37
+[Neutrino] Generated Neutrino Events(wallv>200): 63458
+[Neutrino] Generated 1Rmu Events (Oscillated)  : 5817.42
  
-[Neutrino] Oscillated CCQE Events     : 2779.25(67.5438 %)
-           w/ tagged neutrons: 841.608(52.8474 %), w/o tagged neutrons:1937.64(76.8232 %)
-[Neutrino] Oscillated CC(2p2h) Events : 477.052(11.5937 %)
-           w/ tagged neutrons: 231.912(14.5625 %), w/o tagged neutrons:245.14(9.71926 %)
-[Neutrino] Oscillated All CCRES Events: 627.565(15.2517 %)
-           w/ tagged neutrons: 375.138(23.5562 %), w/o tagged neutrons:252.427(10.0082 %)
-[Neutrino] Oscillated CC Other Events : 50.8671(1.23622 %)
-           w/ tagged neutrons: 41.8682(2.62904 %), w/o tagged neutrons:8.99887(0.356786 %)
-[Neutrino] Oscillated NC Events       : 180(4.37453 %)
-           w/ tagged neutrons: 102(6.40492 %), w/o tagged neutrons:78(3.09253 %)
+[Neutrino] Oscillated CCQE Events     : 2936.97(70.3562 %)
+           w/ tagged neutrons: 950.999(56.1073 %), w/o tagged neutrons:1985.97(80.0967 %)
+[Neutrino] Oscillated CC(2p2h) Events : 432.145(10.3522 %)
+           w/ tagged neutrons: 228.558(13.4845 %), w/o tagged neutrons:203.587(8.21094 %)
+[Neutrino] Oscillated All CCRES Events: 575.291(13.7813 %)
+           w/ tagged neutrons: 359.991(21.2388 %), w/o tagged neutrons:215.3(8.68336 %)
+[Neutrino] Oscillated CC Other Events : 59.0232(1.41392 %)
+           w/ tagged neutrons: 50.417(2.97451 %), w/o tagged neutrons:8.60626(0.347102 %)
+[Neutrino] Oscillated NC Events       : 171(4.09637 %)
+           w/ tagged neutrons: 105(6.19482 %), w/o tagged neutrons:66(2.66187 %)
 [Neutrino] Oscillated Neutrino Events within [0.25 GeV, 1.5 GeV]
-           Legacy Analysis    : 4114.74(Osc)/23704(No Osc) = 0.173588
-           Only CCQE(1p1h)    : 2779.25(Osc)/18464(No Osc) = 0.150522
-           w/o truth neutrons : 1624.2(Osc)/10255(No Osc) = 0.158381
-           w/o tagged neutrons: 2522.21(Osc)/15185(No Osc) = 0.166099
+           Legacy Analysis    : 4174.44(Osc)/23913(No Osc) = 0.174568
+           Only CCQE(1p1h)    : 2936.97(Osc)/19041(No Osc) = 0.154245
+           w/o truth neutrons : 1722.92(Osc)/10677(No Osc) = 0.161367
+           w/o tagged neutrons: 2479.46(Osc)/15052(No Osc) = 0.164727
