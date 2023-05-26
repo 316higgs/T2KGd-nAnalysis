@@ -109,7 +109,8 @@ int main(int argc, char **argv) {
 
 
   //=========  TTree event variables  ============
-  int NTrueN = 0.;
+  float NTrueN = 0.;
+  //int NTrueN = 0.;
   float vecvx  = 0.;
   float vecvy  = 0.;
   float vecvz  = 0.;
@@ -146,7 +147,7 @@ int main(int argc, char **argv) {
   TBranch *bpar_z = 0;
   tchpar->SetBranchAddress("PID", &PID, &bPID);
   tchpar->SetBranchAddress("ParentPID", &ParentPID, &bParentPID);
-  tchpar->SetBranchAddress("ParentIndex", &ParentIndex, &bParentIndex); //avalable at NTag1.1.2
+  //tchpar->SetBranchAddress("ParentIndex", &ParentIndex, &bParentIndex); //avalable at NTag1.1.2
   tchpar->SetBranchAddress("IntID", &IntID, &bIntID);
   //tchpar->SetBranchAddress("t", &par_t);
   tchpar->SetBranchAddress("t", &par_t, &bpar_t);
@@ -299,7 +300,7 @@ int main(int argc, char **argv) {
     Long64_t tentry = tchntag->LoadTree(ientry);
     bPID        -> GetEntry(tentry);
     bParentPID  -> GetEntry(tentry);
-    bParentIndex -> GetEntry(tentry);  //avalable at NTag1.1.2
+    //bParentIndex -> GetEntry(tentry);  //avalable at NTag1.1.2
     bIntID      -> GetEntry(tentry);
     bpar_t      -> GetEntry(tentry);
     bpar_x      -> GetEntry(tentry);
@@ -338,6 +339,9 @@ int main(int argc, char **argv) {
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., true)) {
       GetSelectedModeEvents(numu);
 
+      int mode = TMath::Abs(numu->var<int>("mode"));
+      float OscProb = numu->getOscWgt();
+
       //truth secondary loop
       /*for (Int_t itruth=0; itruth<nscndprt; itruth++) {
     
@@ -355,6 +359,9 @@ int main(int argc, char **argv) {
       int reco = 0;
       float reco_mucaptime = 0.;
       for (UInt_t jentry=0; jentry<Label->size(); ++jentry) {
+
+        bool etagboxin = false;
+        if (NHits->at(jentry)>50 && FitT->at(jentry)<20) etagboxin = true;
 
         float NNVar = 0.;
         for (int ivar=0; ivar<NNVARIABLES; ivar++) {
@@ -401,30 +408,32 @@ int main(int argc, char **argv) {
           }
 
           //Pre-NN
-#if 0
-          if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
-          if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar);
-          if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar);
-          if (Label->at(jentry)==3) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
+#if 1
+          if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
+          if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
+          if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar, OscProb);
+          if (Label->at(jentry)==3) h1_NNvar_Gd[ivar]       -> Fill(NNVar, OscProb);
 #endif
 
           //Post-NN
-#if 1
-          bool etagboxin = false;
-          if (NHits->at(jentry)>50 && FitT->at(jentry)<20) etagboxin = true;
+#if 0
+          //bool etagboxin = false;
+          //if (NHits->at(jentry)>50 && FitT->at(jentry)<20) etagboxin = true;
 
-          if (Label->at(jentry)==0 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
-          if (Label->at(jentry)==1 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Decaye[ivar]   -> Fill(NNVar);
-          if (Label->at(jentry)==2 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_H[ivar]        -> Fill(NNVar);
-          if (Label->at(jentry)==3 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
+          if (Label->at(jentry)==0 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
+          if (Label->at(jentry)==1 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
+          if (Label->at(jentry)==2 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_H[ivar]        -> Fill(NNVar, OscProb);
+          if (Label->at(jentry)==3 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Gd[ivar]       -> Fill(NNVar, OscProb);
 #endif
         }
+        //h1_AllNHits -> Fill(NHits->at(jentry), OscProb);
+        if (TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_AllNHits -> Fill(NHits->at(jentry), OscProb);
 
         //TMVA output
-        if (Label->at(jentry)==0) h1_NTagOut[0] -> Fill(TagOut->at(jentry));
-        if (Label->at(jentry)==1) h1_NTagOut[1] -> Fill(TagOut->at(jentry));
-        if (Label->at(jentry)==2) h1_NTagOut[2] -> Fill(TagOut->at(jentry));
-        if (Label->at(jentry)==3) h1_NTagOut[3] -> Fill(TagOut->at(jentry));
+        if (Label->at(jentry)==0) h1_NTagOut[0] -> Fill(TagOut->at(jentry), OscProb);
+        if (Label->at(jentry)==1) h1_NTagOut[1] -> Fill(TagOut->at(jentry), OscProb);
+        if (Label->at(jentry)==2) h1_NTagOut[2] -> Fill(TagOut->at(jentry), OscProb);
+        if (Label->at(jentry)==3) h1_NTagOut[3] -> Fill(TagOut->at(jentry), OscProb);
 
 
         //Excess of NHits for numu MC

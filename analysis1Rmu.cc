@@ -121,8 +121,8 @@ int main(int argc, char **argv) {
 
 
   //=========  TTree event variables  ============
-  //float NTrueN = 0.;
-  int NTrueN = 0.;
+  float NTrueN = 0.;
+  //int NTrueN = 0.;
   float vecvx  = 0.;
   float vecvy  = 0.;
   float vecvz  = 0.;
@@ -822,6 +822,7 @@ int main(int argc, char **argv) {
       h1_SelTagN[2]->fArray[i+1]        = SelectedCCnonQETagN[i];
       h1_SelTagN[3]->fArray[i+1]        = SelectedNCTagN[i];
 
+      resultfile << "  ======  # of selected neutrinos  ======" << std::endl;
       resultfile << "  CCQE    (osc.): " << SelectedCCQENeutrinos[i]    << std::endl;
       resultfile << "  CC-2p2h (osc.): " << SelectedCC2p2hNeutrinos[i]  << std::endl;
       resultfile << "  CC-Other(osc.): " << SelectedCCnonQENeutrinos[i] << std::endl;
@@ -835,6 +836,14 @@ int main(int argc, char **argv) {
       resultfile << "  NC      (No osc.): " << SelectedNoOscNCNeutrinos[i]      << std::endl;
       resultfile << "  ------------------------------------------"      << std::endl;
       resultfile << "  Total   (No osc.): " << SelectedNoOscCCQENeutrinos[i]+SelectedNoOscCC2p2hNeutrinos[i]+SelectedNoOscCCnonQENeutrinos[i]+SelectedNoOscNCNeutrinos[i] << std::endl;
+      resultfile << " " << std::endl;
+      resultfile << "  ======  # of selected tagged-n  ======" << std::endl;
+      resultfile << "  CCQE    (osc.): " << SelectedCCQETagN[i]    << std::endl;
+      resultfile << "  CC-2p2h (osc.): " << SelectedCC2p2hTagN[i]  << std::endl;
+      resultfile << "  CC-Other(osc.): " << SelectedCCnonQETagN[i] << std::endl;
+      resultfile << "  NC      (osc.): " << SelectedNCTagN[i]      << std::endl;
+      resultfile << "  ------------------------------------------"      << std::endl;
+      resultfile << "  Total   (osc.): " << SelectedCCQETagN[i]+SelectedCC2p2hTagN[i]+SelectedCCnonQETagN[i]+SelectedNCTagN[i] << std::endl;
     }
     
     resultfile << "--- Box cut performance ---" << std::endl;

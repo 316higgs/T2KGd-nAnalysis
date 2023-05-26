@@ -10,12 +10,12 @@ void Gd1RmuonSelection::SetHistoFrame() {
   }
 
   for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
-    h1_dwall[i]          = new TH1F(TString::Format("h1_dwall_mode%d", i), "h1_dwall; fiTQun Dwall[cm]; Number of Neutrino Events", 30, 0, 600);
-    h1_Nring[i]          = new TH1F(TString::Format("h1_Nring_mode%d", i), "h1_Nring; Number of Rings; Number of Neutrino Events", 5, 1, 6);
-    h1_emulikelihood[i]  = new TH1F(TString::Format("h1_emulikelihood_mode%d", i), "h1_emulikelihood; e-#{mu} Likelihood; Number of Neutrino Events", 50, -1500, 1500);
-    h1_Pmu[i]            = new TH1F(TString::Format("h1_Pmu_mode%d", i), "h1_Pmu; #{mu} Momentum P_{#mu}[MeV]; Number of Neutrino Events", 60, 0, 3000);
-    h1_Decaye[i]         = new TH1F(TString::Format("h1_Decaye_mode%d", i), "h1_Decaye; Number of Decay-e; Number of Neutrino Events", 6, 0, 6);
-    h1_pimulikelihood[i] = new TH1F(TString::Format("h1_pimulikelihood_mode%d", i), "h1_pimulikelihood; #pi^{#pm}-#{mu} Likelihood; Number of Neutrino Events", 40, -300, 100);
+    h1_dwall[i]          = new TH1F(TString::Format("h1_dwall_mode%d", i), "", 30, 0, 600);
+    h1_Nring[i]          = new TH1F(TString::Format("h1_Nring_mode%d", i), "", 5, 1, 6);
+    h1_emulikelihood[i]  = new TH1F(TString::Format("h1_emulikelihood_mode%d", i), "", 50, -1500, 1500);
+    h1_Pmu[i]            = new TH1F(TString::Format("h1_Pmu_mode%d", i), "", 40, 0, 3000);
+    h1_Decaye[i]         = new TH1F(TString::Format("h1_Decaye_mode%d", i), "", 6, 0, 6);
+    h1_pimulikelihood[i] = new TH1F(TString::Format("h1_pimulikelihood_mode%d", i), "", 40, -300, 100);
   }
 }
 
@@ -91,60 +91,65 @@ void Gd1RmuonSelection::SetHistoFormat() {
 
 float Gd1RmuonSelection::GetDWall(CC0PiNumu* numu) {
   int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
 
   float dwall = numu->var<float>("fqdwall");
-  if (mode==1)              h1_dwall[0] -> Fill(dwall); //CCQE
-  if (mode>=2 && mode<=10)  h1_dwall[1] -> Fill(dwall); //CC 2p2h
-  if (mode>=31)             h1_dwall[2] -> Fill(dwall); //NC
-  if (mode>10 && mode<=30)  h1_dwall[3] -> Fill(dwall); //CC other
+  if (mode==1)              h1_dwall[0] -> Fill(dwall, OscProb); //CCQE
+  if (mode>=2 && mode<=10)  h1_dwall[1] -> Fill(dwall, OscProb); //CC 2p2h
+  if (mode>=31)             h1_dwall[2] -> Fill(dwall, OscProb); //NC
+  if (mode>10 && mode<=30)  h1_dwall[3] -> Fill(dwall, OscProb); //CC other
 
   return dwall;
 }
 
 int Gd1RmuonSelection::GetNring(CC0PiNumu* numu) {
   int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
 
   int Nring = numu->var<int>("fqmrnring",0);
-  if (mode==1)              h1_Nring[0] -> Fill(Nring); //CCQE
-  if (mode>=2 && mode<=10)  h1_Nring[1] -> Fill(Nring); //CC 2p2h
-  if (mode>=31)             h1_Nring[2] -> Fill(Nring); //NC
-  if (mode>10 && mode<=30)  h1_Nring[3] -> Fill(Nring); //CC other
+  if (mode==1)              h1_Nring[0] -> Fill(Nring, OscProb); //CCQE
+  if (mode>=2 && mode<=10)  h1_Nring[1] -> Fill(Nring, OscProb); //CC 2p2h
+  if (mode>=31)             h1_Nring[2] -> Fill(Nring, OscProb); //NC
+  if (mode>10 && mode<=30)  h1_Nring[3] -> Fill(Nring, OscProb); //CC other
 
   return Nring;
 }
 
 float Gd1RmuonSelection::GetemuLikelihood(CC0PiNumu* numu) {
   int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
 
   float likelihood = numu->var<float>("pidemu");
-  if (mode==1)              h1_emulikelihood[0] -> Fill(likelihood);
-  if (mode>=2 && mode<=10)  h1_emulikelihood[1] -> Fill(likelihood);
-  if (mode>=31)             h1_emulikelihood[2] -> Fill(likelihood);
-  if (mode>10 && mode<=30)  h1_emulikelihood[3] -> Fill(likelihood);
+  if (mode==1)              h1_emulikelihood[0] -> Fill(likelihood, OscProb);
+  if (mode>=2 && mode<=10)  h1_emulikelihood[1] -> Fill(likelihood, OscProb);
+  if (mode>=31)             h1_emulikelihood[2] -> Fill(likelihood, OscProb);
+  if (mode>10 && mode<=30)  h1_emulikelihood[3] -> Fill(likelihood, OscProb);
 
   return likelihood;
 }
 
 float Gd1RmuonSelection::GetPmu(CC0PiNumu* numu) {
   int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
 
   float Pmu = numu->var<float>("fqmomm");
-  if (mode==1)              h1_Pmu[0] -> Fill(Pmu);
-  if (mode>=2 && mode<=10)  h1_Pmu[1] -> Fill(Pmu);
-  if (mode>=31)             h1_Pmu[2] -> Fill(Pmu);
-  if (mode>10 && mode<=30)  h1_Pmu[3] -> Fill(Pmu);
+  if (mode==1)              h1_Pmu[0] -> Fill(Pmu, OscProb);
+  if (mode>=2 && mode<=10)  h1_Pmu[1] -> Fill(Pmu, OscProb);
+  if (mode>=31)             h1_Pmu[2] -> Fill(Pmu, OscProb);
+  if (mode>10 && mode<=30)  h1_Pmu[3] -> Fill(Pmu, OscProb);
 
   return Pmu;
 }
 
 float Gd1RmuonSelection::GetpimuLikelihood(CC0PiNumu* numu) {
   int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
 
   float likelihood = numu->var<float>("pidcpimu");
-  if (mode==1)              h1_pimulikelihood[0] -> Fill(likelihood);
-  if (mode>=2 && mode<=10)  h1_pimulikelihood[1] -> Fill(likelihood);
-  if (mode>=31)             h1_pimulikelihood[2] -> Fill(likelihood);
-  if (mode>10 && mode<=30)  h1_pimulikelihood[3] -> Fill(likelihood);
+  if (mode==1)              h1_pimulikelihood[0] -> Fill(likelihood, OscProb);
+  if (mode>=2 && mode<=10)  h1_pimulikelihood[1] -> Fill(likelihood, OscProb);
+  if (mode>=31)             h1_pimulikelihood[2] -> Fill(likelihood, OscProb);
+  if (mode>10 && mode<=30)  h1_pimulikelihood[3] -> Fill(likelihood, OscProb);
 
   return likelihood;
 }
@@ -238,6 +243,7 @@ bool Gd1RmuonSelection::Apply1RmuonSelection(EvSelVar_t evsel,
 	                                           float N50CutMax,
                                              bool dtvsn50fill) 
 {
+  float OscProb = numu->getOscWgt();
   bool pass = false;
   if (evsel.pass[0]==true &&
   	  evsel.pass[1]==true &&
@@ -248,10 +254,10 @@ bool Gd1RmuonSelection::Apply1RmuonSelection(EvSelVar_t evsel,
     //decayebox.GetDecayeTagPurity(numu, dtCut, N50CutMin, N50CutMax);
 
     int mode = TMath::Abs(numu->var<int>("mode"));
-    if (mode==1)              h1_Decaye[0] -> Fill(NumDecaye);
-    if (mode>=2 && mode<=10)  h1_Decaye[1] -> Fill(NumDecaye);
-    if (mode>=31)             h1_Decaye[2] -> Fill(NumDecaye);
-    if (mode>10 && mode<=30)  h1_Decaye[3] -> Fill(NumDecaye);
+    if (mode==1)              h1_Decaye[0] -> Fill(NumDecaye, OscProb);
+    if (mode>=2 && mode<=10)  h1_Decaye[1] -> Fill(NumDecaye, OscProb);
+    if (mode>=31)             h1_Decaye[2] -> Fill(NumDecaye, OscProb);
+    if (mode>10 && mode<=30)  h1_Decaye[3] -> Fill(NumDecaye, OscProb);
 
   	if (NumDecaye<=1 && evsel.pass[5]==true) pass = true;
   }

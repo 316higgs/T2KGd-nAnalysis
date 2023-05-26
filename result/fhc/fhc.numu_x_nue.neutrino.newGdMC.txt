@@ -2,6 +2,7 @@
 [NTag   OUTPUT] /disk03/usr8/sedi/Ntag/output/fhc/numu_x_nue/fhc.numu_x_nue.13a.ntag0026Gd.*.root
  
 [Neutrino] C1: 46547 -> 46547
+  ======  # of selected neutrinos  ======
   CCQE    (osc.): 1081.38
   CC-2p2h (osc.): 150.631
   CC-Other(osc.): 488.009
@@ -15,7 +16,16 @@
   NC      (No osc.): 4129
   ------------------------------------------
   Total   (No osc.): 46547
+ 
+  ======  # of selected tagged-n  ======
+  CCQE    (osc.): 356.944
+  CC-2p2h (osc.): 98.442
+  CC-Other(osc.): 276.595
+  NC      (osc.): 7582
+  ------------------------------------------
+  Total   (osc.): 8313.98
 [Neutrino] C2: 32215 -> 32215
+  ======  # of selected neutrinos  ======
   CCQE    (osc.): 977.487
   CC-2p2h (osc.): 143.089
   CC-Other(osc.): 307.308
@@ -29,7 +39,16 @@
   NC      (No osc.): 845
   ------------------------------------------
   Total   (No osc.): 32215
+ 
+  ======  # of selected tagged-n  ======
+  CCQE    (osc.): 320.993
+  CC-2p2h (osc.): 92.7079
+  CC-Other(osc.): 180.187
+  NC      (osc.): 1131
+  ------------------------------------------
+  Total   (osc.): 1724.89
 [Neutrino] C3: 385 -> 385
+  ======  # of selected neutrinos  ======
   CCQE    (osc.): 0.885252
   CC-2p2h (osc.): 0.00621541
   CC-Other(osc.): 0.234579
@@ -43,7 +62,16 @@
   NC      (No osc.): 357
   ------------------------------------------
   Total   (No osc.): 385
+ 
+  ======  # of selected tagged-n  ======
+  CCQE    (osc.): 0.194987
+  CC-2p2h (osc.): 0
+  CC-Other(osc.): 0.0631805
+  NC      (osc.): 473
+  ------------------------------------------
+  Total   (osc.): 473.258
 [Neutrino] C4: 381 -> 381
+  ======  # of selected neutrinos  ======
   CCQE    (osc.): 0.885252
   CC-2p2h (osc.): 0.00621541
   CC-Other(osc.): 0.234579
@@ -57,7 +85,16 @@
   NC      (No osc.): 353
   ------------------------------------------
   Total   (No osc.): 381
+ 
+  ======  # of selected tagged-n  ======
+  CCQE    (osc.): 0.194987
+  CC-2p2h (osc.): 0
+  CC-Other(osc.): 0.0631805
+  NC      (osc.): 471
+  ------------------------------------------
+  Total   (osc.): 471.258
 [Neutrino] C5: 229 -> 372
+  ======  # of selected neutrinos  ======
   CCQE    (osc.): 0.885252
   CC-2p2h (osc.): 0.00621541
   CC-Other(osc.): 0.234579
@@ -71,7 +108,16 @@
   NC      (No osc.): 344
   ------------------------------------------
   Total   (No osc.): 372
+ 
+  ======  # of selected tagged-n  ======
+  CCQE    (osc.): 0.194987
+  CC-2p2h (osc.): 0
+  CC-Other(osc.): 0.0631805
+  NC      (osc.): 436
+  ------------------------------------------
+  Total   (osc.): 436.258
 [Neutrino] C6: 137 -> 208
+  ======  # of selected neutrinos  ======
   CCQE    (osc.): 0.885252
   CC-2p2h (osc.): 0.00621541
   CC-Other(osc.): 0.17875
@@ -85,6 +131,14 @@
   NC      (No osc.): 181
   ------------------------------------------
   Total   (No osc.): 208
+ 
+  ======  # of selected tagged-n  ======
+  CCQE    (osc.): 0.194987
+  CC-2p2h (osc.): 0
+  CC-Other(osc.): 0.00735148
+  NC      (osc.): 205
+  ------------------------------------------
+  Total   (osc.): 205.202
 --- Box cut performance ---
  0 < dt[usec] < 10, 50 < N50 < 400
  All truth decay-e                : 154

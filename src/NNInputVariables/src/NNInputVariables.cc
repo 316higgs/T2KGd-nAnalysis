@@ -78,6 +78,9 @@ void NNInputVariables::SetHistoFrame(int vartype, TString histtitle) {
       h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 50, -0.2, 1.1);
       break;
   }
+
+  //only once
+  if (vartype==0) h1_AllNHits = new TH1F("h1_AllNHits", "", 10, 0, 10000);
 }
 
 void NNInputVariables::SetHistoFormat(int vartype, TString histtitle) {
@@ -153,7 +156,7 @@ void NNInputVariables::SetNNinputHisto() {
   }
 
   for (int i=0; i<4; i++) {
-    h1_NTagOut[i] = new TH1F(TString::Format("h1_NTagOut_type%d", i), "h1_NTagOut; TagOut; Number of Candidates", 100, 0, 1);
+    h1_NTagOut[i] = new TH1F(TString::Format("h1_NTagOut_type%d", i), "", 20, 0, 1);
     h1_NTagOut[i] -> SetLineWidth(2);
   }
   h1_NTagOut[0] -> SetLineColor(kGray+2);
@@ -233,6 +236,8 @@ void NNInputVariables::WritePlots() {
     h1_NNvar_H[i]        -> Write();
     h1_NNvar_Gd[i]       -> Write();
   }
+
+  h1_AllNHits -> Write();
 
   for (int i=0; i<4; i++) h1_NTagOut[i] -> Write();
 

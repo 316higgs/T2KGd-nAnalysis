@@ -26,11 +26,14 @@ void SelectedEvents(bool beammode) {
   //FHC
 #if fhcflag
   //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.root");
 
   TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+  TFile* fin_nuesig  = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.root");
+  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.root");
 
-  TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
+  //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
+  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.2.1/skrate/fhc_sk_rate_tmp.root");
 #endif
 
   //RHC
@@ -40,38 +43,53 @@ void SelectedEvents(bool beammode) {
   TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
 #endif
 
-  //Normalization
+  // Normalization factors
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
+  TH1F* h1_skrate_numu_x_nue        = (TH1F*)fin_skrate->Get("skrate_numu_x_nue");
   TH1F* h1_skrate_numubar_x_numubar = (TH1F*)fin_skrate->Get("skrate_numu_bar_x_numu_bar");
   //Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
   //Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
   Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_numu_x_nue          = h1_skrate_numu_x_nue->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
-  Double_t GenN_numu_x_numu         = 190292;
-  Double_t GenN_numubar_x_numubar   = 190909;
-  std::cout << "ExpN_numu_x_numu = " << ExpN_numu_x_numu << std::endl;
-  std::cout << "GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
-  std::cout << "ExpN_numubar_x_numubar = " << ExpN_numubar_x_numubar << std::endl;
-  std::cout << "GenN_numubar_x_numubar = " << GenN_numubar_x_numubar << std::endl;
-  std::cout << "Normalization factor for numu_x_numu      : " << (ExpN_numu_x_numu)/(GenN_numu_x_numu) << std::endl;
-  std::cout << "Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
+  //Double_t GenN_numu_x_numu         = 190292;
+  //Double_t GenN_numubar_x_numubar   = 190909;
+  Double_t GenN_numu_x_numu         = 63576;
+  Double_t GenN_numu_x_nue          = 63312;
+  Double_t GenN_numubar_x_numubar   = 63458;
+  std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
+  std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
+  std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
+  std::cout << "[numu  -> numu ] Normalization factor for numu_x_numu      : " << (ExpN_numu_x_numu)/(GenN_numu_x_numu) << std::endl;
+  std::cout << "[numu  -> nue  ] ExpN_numu_x_nue = " << h1_skrate_numu_x_nue->Integral() << std::endl;
+  std::cout << "[numu  -> nue  ] GenN_numu_x_nue = " << GenN_numu_x_nue << std::endl;
+  std::cout << "[numu  -> nue  ] Normalization factor for numu_x_nue       : " << (ExpN_numu_x_nue)/(GenN_numu_x_nue) << std::endl;
+  std::cout << "[numub -> numub] ExpN_numubar_x_numubar = " << h1_skrate_numubar_x_numubar->Integral() << std::endl;
+  std::cout << "[numub -> numub] GenN_numubar_x_numubar = " << GenN_numubar_x_numubar << std::endl;
+  std::cout << "[numub -> numub] Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
 
-//Neutrino events
+// Neutrino events
 #if 1
-  TH1F* h1_CCQE_numu     = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode0");
-  TH1F* h1_CC2p2h_numu   = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode1");
-  TH1F* h1_CCOther_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode2");
-  TH1F* h1_NC_numu       = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode3");
+  TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode0");
+  TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode1");
+  TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode2");
+  TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode3");
   h1_CCQE_numu -> SetStats(0);
 
-  TH1F* h1_CCQE_numubar     = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_1RmuonEvents_mode0");
-  TH1F* h1_CC2p2h_numubar   = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_1RmuonEvents_mode1");
-  TH1F* h1_CCOther_numubar  = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_1RmuonEvents_mode2");
-  TH1F* h1_NC_numubar       = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_1RmuonEvents_mode3");
+  TH1F* h1_CCQE_nuesig    = (TH1F*)fin_nuesig->Get("Gd1RmuonSelection/h1_SelNuEvents_mode0");
+  TH1F* h1_CC2p2h_nuesig  = (TH1F*)fin_nuesig->Get("Gd1RmuonSelection/h1_SelNuEvents_mode1");
+  TH1F* h1_CCOther_nuesig = (TH1F*)fin_nuesig->Get("Gd1RmuonSelection/h1_SelNuEvents_mode2");
+  TH1F* h1_NC_nuesig      = (TH1F*)fin_nuesig->Get("Gd1RmuonSelection/h1_SelNuEvents_mode3");
+  h1_CCQE_nuesig -> SetStats(0);
+
+  TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_SelNuEvents_mode0");
+  TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_SelNuEvents_mode1");
+  TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_SelNuEvents_mode2");
+  TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_SelNuEvents_mode3");
   h1_CCQE_numubar -> SetStats(0);
 #endif
 
-//Tagged neutrons
+// Tagged neutrons
 #if 0
   TH1F* h1_CCQE_numu     = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode0");
   TH1F* h1_CC2p2h_numu   = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode1");
@@ -95,6 +113,16 @@ void SelectedEvents(bool beammode) {
   h1_NC_numu       -> SetLineColor(kSpring-9);
   h1_NC_numu       -> SetFillColor(kSpring-9);
 
+  h1_CCQE_nuesig    -> SetLineColor(kViolet-1);
+  h1_CC2p2h_nuesig  -> SetLineColor(kViolet-1);
+  h1_CCOther_nuesig -> SetLineColor(kViolet-1);
+  h1_NC_nuesig      -> SetLineColor(kSpring-9);
+
+  h1_CCQE_nuesig    -> SetFillColor(kViolet-1);
+  h1_CC2p2h_nuesig  -> SetFillColor(kViolet-1);
+  h1_CCOther_nuesig -> SetFillColor(kViolet-1);
+  h1_NC_nuesig      -> SetFillColor(kSpring-9);
+
   h1_CCQE_numubar    -> SetLineColor(kOrange+7);
   h1_CCQE_numubar    -> SetFillColor(kOrange+7);
   h1_CC2p2h_numubar  -> SetLineColor(kOrange+6);
@@ -104,26 +132,38 @@ void SelectedEvents(bool beammode) {
   h1_NC_numubar      -> SetLineColor(kSpring-9);
   h1_NC_numubar      -> SetFillColor(kSpring-9);
 
-#if 0
-  h1_CCQE_numu        -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CCQE_numubar     -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_CC2p2h_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CC2p2h_numubar   -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_CCOther_numu     -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CCOther_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_NC_numu          -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_NC_numubar       -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+
+  /////  Normalizations  //////
+#if 1
+  h1_CCQE_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  h1_CCQE_nuesig     -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+  h1_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  h1_CC2p2h_numu     -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  h1_CC2p2h_nuesig   -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+  h1_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  h1_CCOther_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  h1_CCOther_nuesig  -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+  h1_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  h1_NC_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  h1_NC_nuesig       -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+  h1_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
 #endif
 
+
+  /////  Merged #Selected Neutrinos  //////
   THStack* hs_NuEvt = new THStack("hs_NuEvt", "");
 #if fhcflag
-  //hs_NuEvt -> Add(h1_NC_numubar);
+  hs_NuEvt -> Add(h1_NC_numubar);
+  hs_NuEvt -> Add(h1_NC_nuesig);
   hs_NuEvt -> Add(h1_NC_numu);
-  //hs_NuEvt -> Add(h1_CCOther_numubar);
+  hs_NuEvt -> Add(h1_CCOther_nuesig);
+  hs_NuEvt -> Add(h1_CC2p2h_nuesig);
+  hs_NuEvt -> Add(h1_CCQE_nuesig);
+  hs_NuEvt -> Add(h1_CCOther_numubar);
   hs_NuEvt -> Add(h1_CCOther_numu);
-  //hs_NuEvt -> Add(h1_CC2p2h_numubar);
+  hs_NuEvt -> Add(h1_CC2p2h_numubar);
   hs_NuEvt -> Add(h1_CC2p2h_numu);
-  //hs_NuEvt -> Add(h1_CCQE_numubar);
+  hs_NuEvt -> Add(h1_CCQE_numubar);
   hs_NuEvt -> Add(h1_CCQE_numu);
 #endif
 #if rhcflag
@@ -137,11 +177,17 @@ void SelectedEvents(bool beammode) {
   hs_NuEvt -> Add(h1_CCQE_numubar);
 #endif
 
+
+  /////  Merged Selection Efficiency  //////
   TH1F* h1_SelEff_merge = new TH1F("h1_SelEff_merge", "", 6, 0, 6);
   h1_SelEff_merge -> Add(h1_CCQE_numu);
   h1_SelEff_merge -> Add(h1_CC2p2h_numu);
   h1_SelEff_merge -> Add(h1_CCOther_numu);
   h1_SelEff_merge -> Add(h1_NC_numu);
+  h1_SelEff_merge -> Add(h1_CCQE_nuesig);
+  h1_SelEff_merge -> Add(h1_CC2p2h_nuesig);
+  h1_SelEff_merge -> Add(h1_CCOther_nuesig);
+  h1_SelEff_merge -> Add(h1_NC_nuesig);
   h1_SelEff_merge -> Add(h1_CCQE_numubar);
   h1_SelEff_merge -> Add(h1_CC2p2h_numubar);
   h1_SelEff_merge -> Add(h1_CCOther_numubar);
@@ -151,23 +197,49 @@ void SelectedEvents(bool beammode) {
   SelecEvFCFV += h1_CC2p2h_numu->GetBinContent(1);
   SelecEvFCFV += h1_CCOther_numu->GetBinContent(1);
   SelecEvFCFV += h1_NC_numu->GetBinContent(1);
+  SelecEvFCFV += h1_CCQE_nuesig->GetBinContent(1);
+  SelecEvFCFV += h1_CC2p2h_nuesig->GetBinContent(1);
+  SelecEvFCFV += h1_CCOther_nuesig->GetBinContent(1);
+  SelecEvFCFV += h1_NC_nuesig->GetBinContent(1);
   SelecEvFCFV += h1_CCQE_numubar->GetBinContent(1);
   SelecEvFCFV += h1_CC2p2h_numubar->GetBinContent(1);
   SelecEvFCFV += h1_CCOther_numubar->GetBinContent(1);
   SelecEvFCFV += h1_NC_numubar->GetBinContent(1);
   float SelecEv[6] = {0.};
   for (int i=0; i<6; i++) {
-    std::cout << "Cut[" << i+1 << "] numu CCQE: " << h1_CCQE_numu->GetBinContent(i+1) 
-              << ", numubar CCQE: " << h1_CCQE_numubar->GetBinContent(i+1)
-              << ", numu CC 2p2h: " << h1_CC2p2h_numu->GetBinContent(i+1)
-              << ", numubar CC 2p2h: " << h1_CC2p2h_numubar->GetBinContent(i+1)
-              << ", numu CC other: " << h1_CCOther_numu->GetBinContent(i+1)
-              << ", numubar CC other: " << h1_CCOther_numubar->GetBinContent(i+1)
-              << ", NC: " << h1_NC_numu->GetBinContent(i+1)+h1_NC_numubar->GetBinContent(i+1) << std::endl;
+    std::cout << "######  Cut[" << i+1 << "]  ######" << std::endl;
+    std::cout << "[numu    -> numu   ]  CCQE   : " << h1_CCQE_numu->GetBinContent(i+1) << std::endl;
+    std::cout << "[numu    -> numu   ]  CC2p2h : " << h1_CC2p2h_numu->GetBinContent(i+1) << std::endl;
+    std::cout << "[numu    -> numu   ]  CCOther: " << h1_CCOther_numu->GetBinContent(i+1) << std::endl;
+    std::cout << "[numu    -> numu   ]  NC     : " << h1_NC_numu->GetBinContent(i+1) << std::endl;
+    std::cout << "[numu    -> numu   ]  Total  : " << h1_CCQE_numu->GetBinContent(i+1) +
+                                                      h1_CC2p2h_numu->GetBinContent(i+1) +
+                                                      h1_CCOther_numu->GetBinContent(i+1) +
+                                                      h1_NC_numu->GetBinContent(i+1) << std::endl;
+    std::cout << "[numu    -> nue    ]  CCQE   : " << h1_CCQE_nuesig->GetBinContent(i+1) << std::endl;
+    std::cout << "[numu    -> nue    ]  CC2p2h : " << h1_CC2p2h_nuesig->GetBinContent(i+1) << std::endl;
+    std::cout << "[numu    -> nue    ]  CCOther: " << h1_CCOther_nuesig->GetBinContent(i+1) << std::endl;
+    std::cout << "[numu    -> nue    ]  NC     : " << h1_NC_nuesig->GetBinContent(i+1) << std::endl;
+    std::cout << "[numu    -> nue    ]  Total  : " << h1_CCQE_nuesig->GetBinContent(i+1) +
+                                                      h1_CC2p2h_nuesig->GetBinContent(i+1) +
+                                                      h1_CCOther_nuesig->GetBinContent(i+1) +
+                                                      h1_NC_nuesig->GetBinContent(i+1) << std::endl;
+    std::cout << "[numubar -> numubar]  CCQE   : " << h1_CCQE_numubar->GetBinContent(i+1) << std::endl;
+    std::cout << "[numubar -> numubar]  CC2p2h : " << h1_CC2p2h_numubar->GetBinContent(i+1) << std::endl;
+    std::cout << "[numubar -> numubar]  CCOther: " << h1_CCOther_numubar->GetBinContent(i+1) << std::endl;
+    std::cout << "[numubar -> numubar]  NC     : " << h1_NC_numubar->GetBinContent(i+1) << std::endl;
+    std::cout << "[numubar -> numubar]  Total  : " << h1_CCQE_numubar->GetBinContent(i+1) +
+                                                      h1_CC2p2h_numubar->GetBinContent(i+1) +
+                                                      h1_CCOther_numubar->GetBinContent(i+1) +
+                                                      h1_NC_numubar->GetBinContent(i+1) << std::endl;
     SelecEv[i] += h1_CCQE_numu->GetBinContent(i+1);
     SelecEv[i] += h1_CC2p2h_numu->GetBinContent(i+1);
     SelecEv[i] += h1_CCOther_numu->GetBinContent(i+1);
     SelecEv[i] += h1_NC_numu->GetBinContent(i+1);
+    SelecEv[i] += h1_CCQE_nuesig->GetBinContent(i+1);
+    SelecEv[i] += h1_CC2p2h_nuesig->GetBinContent(i+1);
+    SelecEv[i] += h1_CCOther_nuesig->GetBinContent(i+1);
+    SelecEv[i] += h1_NC_nuesig->GetBinContent(i+1);
     SelecEv[i] += h1_CCQE_numubar->GetBinContent(i+1);
     SelecEv[i] += h1_CC2p2h_numubar->GetBinContent(i+1);
     SelecEv[i] += h1_CCOther_numubar->GetBinContent(i+1);
@@ -191,14 +263,14 @@ void SelectedEvents(bool beammode) {
   h1_SelEff_merge -> GetXaxis()->SetBinLabel(6, "C6.Not #pi^{#pm}-like");
 
 
-#if 1
+#if 0
   // Number of Events
 
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1","c1", 1000,700);
   c1 -> SetGrid();
-  hs_NuEvt -> SetMaximum(20000);
-  //if (beammode) hs_NuEvt -> SetMaximum(130);
+  //hs_NuEvt -> SetMaximum(20000);
+  if (beammode) hs_NuEvt -> SetMaximum(110);
   //if (beammode) hs_NuEvt -> SetMaximum(16);
   //else hs_NuEvt -> SetMaximum(10);
   hs_NuEvt -> Draw();
@@ -208,25 +280,30 @@ void SelectedEvents(bool beammode) {
   hs_NuEvt ->GetYaxis()->SetTitle("Number of #nu Events");
   //hs_NuEvt ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
   hs_NuEvt -> Draw();
-  c1->RedrawAxis();
+  TGaxis* axis = new TGaxis(6, 0, 6, 115, 0, 115, 23, "+L");
+  axis -> SetLabelColor(kWhite);
+  //axis -> Draw();
+  c1 -> RedrawAxis();
+
 
   TLegend* legend1 = new TLegend(0.47, 0.42, 0.89, 0.89);
   legend1 -> SetTextSize(0.04);
-  legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC #nu_{#mu}#rightarrow#nu_{#mu} MC (0.01% Gd)}","");
-  //if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
+  //legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC #nu_{#mu}#rightarrow#nu_{#mu} MC (0.01% Gd)}","");
+  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
   //else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
   legend1 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
-  //legend1 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
+  legend1 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CC2p2h_numu, "#nu_{#mu} CC-2p2h", "F");
-  //legend1 -> AddEntry(h1_CC2p2h_numubar, "#bar{#nu}_{#mu} CC-2p2h", "F");
+  legend1 -> AddEntry(h1_CC2p2h_numubar, "#bar{#nu}_{#mu} CC-2p2h", "F");
   legend1 -> AddEntry(h1_CCOther_numu, "#nu_{#mu} CC-other", "F");
-  //legend1 -> AddEntry(h1_CCOther_numubar, "#bar{#nu}_{#mu} CC-other", "F");
+  legend1 -> AddEntry(h1_CCOther_numubar, "#bar{#nu}_{#mu} CC-other", "F");
+  legend1 -> AddEntry(h1_CCQE_nuesig, "#nu_{e} / #bar#nu_{e} CC", "F");
   legend1 -> AddEntry(h1_NC_numu, "NC", "F");
   legend1->SetFillColor(0);
   legend1->Draw();
 #endif
 
-#if 0
+#if 1
   //Selection efficiency
 
   TCanvas* c2 = new TCanvas("c2","c2",1000,700);

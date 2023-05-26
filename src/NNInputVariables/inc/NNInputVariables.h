@@ -17,6 +17,7 @@ TH1F* h1_NNvar_AccNoise[NNVARIABLES];
 TH1F* h1_NNvar_Decaye[NNVARIABLES];
 TH1F* h1_NNvar_H[NNVARIABLES];
 TH1F* h1_NNvar_Gd[NNVARIABLES];
+TH1F* h1_AllNHits; // for sanity check of #tag-n in NN input variable plots
 
 TH1F* h1_NTagOut[4];
 

@@ -1,3 +1,4 @@
+
 void NNinput() {
 
   TFile* finnumu = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
@@ -48,14 +49,24 @@ void NNinput() {
   c1 -> Divide(4,3);
   for (int i=0; i<12; i++) {
     c1 -> cd(i+1);
-    //gPad->SetLogy();
+    gPad->SetLogy();
 
+#if 1
     if (i==0 || i==1 || i==3 || i==4) {
       h1_NNvar_AccNoise_numu[i] -> Draw();
       h1_NNvar_H_numu[i]        -> Draw("SAME");
       h1_NNvar_Gd_numu[i]       -> Draw("SAME");
       h1_NNvar_Decaye_numu[i]   -> Draw("SAME");
     }
+#endif
+#if 0
+    if (i==0 || i==1 || i==3 || i==4) {
+      h1_NNvar_H_numu[i]        -> Draw("SAME");
+      h1_NNvar_AccNoise_numu[i] -> Draw("SAME");
+      h1_NNvar_Gd_numu[i]       -> Draw("SAME");
+      h1_NNvar_Decaye_numu[i]   -> Draw("SAME");
+    }
+#endif
 
     else {
       h1_NNvar_Decaye_numu[i]   -> Draw();

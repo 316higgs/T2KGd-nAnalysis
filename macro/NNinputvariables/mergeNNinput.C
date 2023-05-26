@@ -1,16 +1,89 @@
 
+#define NA 6.0221409
+#define FV 22.5
+//#define POTSCALE 1.96  //Run1-10 FHC
+//#define POTSCALE 1.63  //Run1-10 RHC
+#define POTSCALE 0.17  //Run11 FHC
+
 TString GetNNVarName(int vartype);
 TString GetNNVarAxisName(int vartype);
 
-void mergeNNinput() {
-  
-  //TFile* finnumu = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
-  TFile* finnumu = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.newGdMC.root");
+void mergeNNinput(bool beammode) {
+
+  int fhcflag = 1;
+  int rhcflag = 0;
+  if (!beammode) {
+    std::cout << "[### Beam mode ###] RHC" << POTSCALE << " x 10^21 POT)" << std::endl;
+    fhcflag = 0;
+    rhcflag = 1;
+  }
+  else std::cout << "[### Beam mode ###] FHC (" << POTSCALE << " x 10^21 POT)" << std::endl;
+
+
+  //FHC
+#if fhcflag
+
+  //Pre
+  TFile* finnumu     = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
+  TFile* finnuesig   = new TFile("../../output/fhc/fhc.numu_x_nue.preNN.newGdMC.root");
+  TFile* finnumubar  = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root");
+
+  //Post
+  //TFile* finnumu     = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.newGdMC.root");
+  //TFile* finnuesig   = new TFile("../../output/fhc/fhc.numu_x_nue.postNN.newGdMC.root");
+  //TFile* finnumubar  = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.newGdMC.root");
+
+  //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
+  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.2.1/skrate/fhc_sk_rate_tmp.root");
+#endif
+
+  //RHC
+#if rhcflag
+  TFile* fin_numu    = new TFile("../../output/rhc/rhc.numu_x_numu.etagON.cut1.root");
+  TFile* fin_numubar = new TFile("../../output/rhc/rhc.numubar_x_numubar.etagON.root");
+  TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
+#endif
+
+  // Normalization factors
+  TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
+  TH1F* h1_skrate_numu_x_nue        = (TH1F*)fin_skrate->Get("skrate_numu_x_nue");
+  TH1F* h1_skrate_numubar_x_numubar = (TH1F*)fin_skrate->Get("skrate_numu_bar_x_numu_bar");
+  //Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
+  //Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
+  Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_numu_x_nue          = h1_skrate_numu_x_nue->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  //Double_t GenN_numu_x_numu         = 190292;
+  //Double_t GenN_numubar_x_numubar   = 190909;
+  Double_t GenN_numu_x_numu         = 63576;
+  Double_t GenN_numu_x_nue          = 63312;
+  Double_t GenN_numubar_x_numubar   = 63458;
+  std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
+  std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
+  std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
+  std::cout << "[numu  -> numu ] Normalization factor for numu_x_numu      : " << (ExpN_numu_x_numu)/(GenN_numu_x_numu) << std::endl;
+  std::cout << "[numu  -> nue  ] ExpN_numu_x_nue = " << h1_skrate_numu_x_nue->Integral() << std::endl;
+  std::cout << "[numu  -> nue  ] GenN_numu_x_nue = " << GenN_numu_x_nue << std::endl;
+  std::cout << "[numu  -> nue  ] Normalization factor for numu_x_nue       : " << (ExpN_numu_x_nue)/(GenN_numu_x_nue) << std::endl;
+  std::cout << "[numub -> numub] ExpN_numubar_x_numubar = " << h1_skrate_numubar_x_numubar->Integral() << std::endl;
+  std::cout << "[numub -> numub] GenN_numubar_x_numubar = " << GenN_numubar_x_numubar << std::endl;
+  std::cout << "[numub -> numub] Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
+
 
   TH1F* h1_NNvar_Gd_numu[12];
   TH1F* h1_NNvar_H_numu[12];
   TH1F* h1_NNvar_AccNoise_numu[12];
   TH1F* h1_NNvar_Decaye_numu[12];
+
+  TH1F* h1_NNvar_Gd_nuesig[12];
+  TH1F* h1_NNvar_H_nuesig[12];
+  TH1F* h1_NNvar_AccNoise_nuesig[12];
+  TH1F* h1_NNvar_Decaye_nuesig[12];
+
+  TH1F* h1_NNvar_Gd_numubar[12];
+  TH1F* h1_NNvar_H_numubar[12];
+  TH1F* h1_NNvar_AccNoise_numubar[12];
+  TH1F* h1_NNvar_Decaye_numubar[12];
 
   THStack* hs_NNvar_numu[12];
 
@@ -20,23 +93,82 @@ void mergeNNinput() {
     h1_NNvar_AccNoise_numu[i] = (TH1F*)finnumu->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
     h1_NNvar_Decaye_numu[i]   = (TH1F*)finnumu->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
 
+    h1_NNvar_Gd_nuesig[i]       = (TH1F*)finnuesig->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
+    h1_NNvar_H_nuesig[i]        = (TH1F*)finnuesig->Get(TString::Format("NNInputVariables/h1_NNvar_H_type%d", i));
+    h1_NNvar_AccNoise_nuesig[i] = (TH1F*)finnuesig->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
+    h1_NNvar_Decaye_nuesig[i]   = (TH1F*)finnuesig->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
+
+    h1_NNvar_Gd_numubar[i]       = (TH1F*)finnumubar->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
+    h1_NNvar_H_numubar[i]        = (TH1F*)finnumubar->Get(TString::Format("NNInputVariables/h1_NNvar_H_type%d", i));
+    h1_NNvar_AccNoise_numubar[i] = (TH1F*)finnumubar->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
+    h1_NNvar_Decaye_numubar[i]   = (TH1F*)finnumubar->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
+
     h1_NNvar_Gd_numu[i]       -> SetFillColor(kTeal-5);
     h1_NNvar_H_numu[i]        -> SetFillColor(kAzure-4);
     h1_NNvar_Decaye_numu[i]   -> SetFillColor(kYellow-3);
     h1_NNvar_AccNoise_numu[i] -> SetFillColor(kGray+2);
 
+    h1_NNvar_Gd_nuesig[i]       -> SetFillColor(kTeal-5);
+    h1_NNvar_H_nuesig[i]        -> SetFillColor(kAzure-4);
+    h1_NNvar_Decaye_nuesig[i]   -> SetFillColor(kYellow-3);
+    h1_NNvar_AccNoise_nuesig[i] -> SetFillColor(kGray+2);
+
+    h1_NNvar_Gd_numubar[i]       -> SetFillColor(kTeal-5);
+    h1_NNvar_H_numubar[i]        -> SetFillColor(kAzure-4);
+    h1_NNvar_Decaye_numubar[i]   -> SetFillColor(kYellow-3);
+    h1_NNvar_AccNoise_numubar[i] -> SetFillColor(kGray+2);
+
+#if 1
+    // Normalization
+    h1_NNvar_Gd_numu[i]       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+    h1_NNvar_H_numu[i]        -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+    h1_NNvar_Decaye_numu[i]   -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+    h1_NNvar_AccNoise_numu[i] -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+
+    h1_NNvar_Gd_nuesig[i]       -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+    h1_NNvar_H_nuesig[i]        -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+    h1_NNvar_Decaye_nuesig[i]   -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+    h1_NNvar_AccNoise_nuesig[i] -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+
+    h1_NNvar_Gd_numubar[i]       -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+    h1_NNvar_H_numubar[i]        -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+    h1_NNvar_Decaye_numubar[i]   -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+    h1_NNvar_AccNoise_numubar[i] -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+#endif
+
     TString hsname = GetNNVarName(i);
     hs_NNvar_numu[i] = new THStack(TString::Format("hs_NNvar_numu_var%d", i), hsname);
     hs_NNvar_numu[i] -> Add(h1_NNvar_AccNoise_numu[i]);
+    hs_NNvar_numu[i] -> Add(h1_NNvar_AccNoise_nuesig[i]);
+    hs_NNvar_numu[i] -> Add(h1_NNvar_AccNoise_numubar[i]);
     hs_NNvar_numu[i] -> Add(h1_NNvar_Decaye_numu[i]);
+    hs_NNvar_numu[i] -> Add(h1_NNvar_Decaye_nuesig[i]);
+    hs_NNvar_numu[i] -> Add(h1_NNvar_Decaye_numubar[i]);
     hs_NNvar_numu[i] -> Add(h1_NNvar_H_numu[i]);
+    hs_NNvar_numu[i] -> Add(h1_NNvar_H_nuesig[i]);
+    hs_NNvar_numu[i] -> Add(h1_NNvar_H_numubar[i]);
     hs_NNvar_numu[i] -> Add(h1_NNvar_Gd_numu[i]);
+    hs_NNvar_numu[i] -> Add(h1_NNvar_Gd_nuesig[i]);
+    hs_NNvar_numu[i] -> Add(h1_NNvar_Gd_numubar[i]);
+
+    //hs_NNvar_nuesig[i] = new THStack(TString::Format("hs_NNvar_nuesig_var%d", i), hsname);
+    //hs_NNvar_nuesig[i] -> Add(h1_NNvar_AccNoise_numu[i]);
+    //hs_NNvar_nuesig[i] -> Add(h1_NNvar_Decaye_numu[i]);
+    //hs_NNvar_nuesig[i] -> Add(h1_NNvar_H_numu[i]);
+    //hs_NNvar_nuesig[i] -> Add(h1_NNvar_Gd_numu[i]);
   }
 
-  TLegend* legend = new TLegend(0.4, 0.4, 0.87, 0.87);
+  
+  // for sanity check of NN input variable plots
+  h1_AllNHits = (TH1F*)finnumu->Get("NNInputVariables/h1_AllNHits");
+  //h1_AllNHits -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  std::cout << "numu_x_numu #tag-n = " << h1_AllNHits->Integral() << std::endl;
+
+#if 1
+  TLegend* legend = new TLegend(0.35, 0.4, 0.89, 0.89);
   legend -> SetTextSize(0.06);
-  //legend -> AddEntry((TObject*)0,"#kern[-0.23]{Pre-NN}","");
-  legend -> AddEntry((TObject*)0,"#kern[-0.23]{Post-NN}","");
+  legend -> AddEntry((TObject*)0,"#kern[-0.23]{Pre-NN (Run11 FHC)}","");
+  //legend -> AddEntry((TObject*)0,"#kern[-0.23]{Post-NN (Run11 FHC)}","");
   legend -> AddEntry(h1_NNvar_Gd_numu[0], "Gd-n signal", "F");
   legend -> AddEntry(h1_NNvar_H_numu[0], "H-n signal", "F");
   legend -> AddEntry(h1_NNvar_Decaye_numu[0], "Decay-e", "F");
@@ -54,8 +186,10 @@ void mergeNNinput() {
     hs_NNvar_numu[i] -> GetXaxis()->SetTitle(varname);
     hs_NNvar_numu[i] -> GetYaxis()->SetTitle("Number of Events");
     hs_NNvar_numu[i] -> Draw();
+    //hs_NNvar_nuesig[i] -> Draw("SAME");
     if (i==11) legend -> Draw();
   }
+#endif
 }
 
 

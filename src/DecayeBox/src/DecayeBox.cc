@@ -55,12 +55,24 @@ void DecayeBox::SetHistoFormat() {
   h1_TaggedDecaye_CCpi -> SetLineWidth(2);
 
   for (int i=0; i<INTERACTIONTYPE; i++) {
-    h1_TrueDecaye[i]     -> SetLineWidth(2);
+    h1_TrueDecaye[i] -> SetLineWidth(2);
+    h1_TrueDecaye[i] -> GetXaxis()->SetBinLabel(1, "0");
+    h1_TrueDecaye[i] -> GetXaxis()->SetBinLabel(2, "1");
+    h1_TrueDecaye[i] -> GetXaxis()->SetBinLabel(3, "2");
+    h1_TrueDecaye[i] -> GetXaxis()->SetBinLabel(4, "3");
+    h1_TrueDecaye[i] -> GetXaxis()->SetBinLabel(5, "4");
+    h1_TrueDecaye[i] -> GetXaxis()->SetBinLabel(6, "5");
     h1_TrueDecaye_vtx[i] -> SetLineWidth(2);
   }
 
   for (int i=0; i<4; i++) {
     h1_TaggedDecaye[i] -> SetLineWidth(2);
+    h1_TaggedDecaye[i] -> GetXaxis()->SetBinLabel(1, "0");
+    h1_TaggedDecaye[i] -> GetXaxis()->SetBinLabel(2, "1");
+    h1_TaggedDecaye[i] -> GetXaxis()->SetBinLabel(3, "2");
+    h1_TaggedDecaye[i] -> GetXaxis()->SetBinLabel(4, "3");
+    h1_TaggedDecaye[i] -> GetXaxis()->SetBinLabel(5, "4");
+    h1_TaggedDecaye[i] -> GetXaxis()->SetBinLabel(6, "5");
   }
 }
 
@@ -631,43 +643,44 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
 
 int DecayeBox::GetTruthDecaye(CC0PiNumu* numu, int NumDcyE) {
   int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
 
   //CCQE(1p1h)
-  if (mode==1) h1_TrueDecaye[0] -> Fill(NumDcyE);
+  if (mode==1) h1_TrueDecaye[0] -> Fill(NumDcyE, OscProb);
   //CC 2p2h
-  if (mode>=2 && mode<=10) h1_TrueDecaye[1] -> Fill(NumDcyE);
+  if (mode>=2 && mode<=10) h1_TrueDecaye[1] -> Fill(NumDcyE, OscProb);
   //NC
-  if (mode>=31) h1_TrueDecaye[2] -> Fill(NumDcyE);
+  if (mode>=31) h1_TrueDecaye[2] -> Fill(NumDcyE, OscProb);
   //CC RES (Delta+)
-  if (mode==13) h1_TrueDecaye[3] -> Fill(NumDcyE);
+  if (mode==13) h1_TrueDecaye[3] -> Fill(NumDcyE, OscProb);
   //CC RES (Delta++)
-  if (mode==11) h1_TrueDecaye[4] -> Fill(NumDcyE);
+  if (mode==11) h1_TrueDecaye[4] -> Fill(NumDcyE, OscProb);
   //CC RES (Delta0)
-  if (mode==12) h1_TrueDecaye[5] -> Fill(NumDcyE);
+  if (mode==12) h1_TrueDecaye[5] -> Fill(NumDcyE, OscProb);
   //CC other
-  if (mode>10 && mode<=30) h1_TrueDecaye[6] -> Fill(NumDcyE);
+  if (mode>10 && mode<=30) h1_TrueDecaye[6] -> Fill(NumDcyE, OscProb);
 
   return NumDcyE;
 }
 
 
+//  #fiTQun sub-events
 int DecayeBox::GetTaggedDecaye(CC0PiNumu* numu) {
   int mode = TMath::Abs(numu->var<int>("mode"));
-  //All interactions
-  //h1_TaggedDecaye -> Fill(numu->var<int>("fqdcye"));
+  float OscProb = numu->getOscWgt();
 
   //CCQE
-  if (mode==1) h1_TaggedDecaye_CCQE -> Fill(numu->var<int>("fqdcye"));
+  if (mode==1) h1_TaggedDecaye_CCQE -> Fill(numu->var<int>("fqdcye"), OscProb);
 
   //CC pion productions
-  if (mode==11 || mode==12 || mode==13 || mode==21) h1_TaggedDecaye_CCpi -> Fill(numu->var<int>("fqdcye"));
+  if (mode==11 || mode==12 || mode==13 || mode==21) h1_TaggedDecaye_CCpi -> Fill(numu->var<int>("fqdcye"), OscProb);
 
   //int NumFQDcyE = numu->var<int>("fqdcye");
   int NumFQDcyE = numu->var<int>("fqnse") - 1;
-  if (mode==1) h1_TaggedDecaye[0] -> Fill(NumFQDcyE);
-  if (mode>=2 && mode<=10) h1_TaggedDecaye[1] -> Fill(NumFQDcyE);
-  if (mode>10 && mode<=30) h1_TaggedDecaye[2] -> Fill(NumFQDcyE);
-  if (mode>=31) h1_TaggedDecaye[3] -> Fill(NumFQDcyE);
+  if (mode==1)             h1_TaggedDecaye[0] -> Fill(NumFQDcyE, OscProb);
+  if (mode>=2 && mode<=10) h1_TaggedDecaye[1] -> Fill(NumFQDcyE, OscProb);
+  if (mode>10 && mode<=30) h1_TaggedDecaye[2] -> Fill(NumFQDcyE, OscProb);
+  if (mode>=31)            h1_TaggedDecaye[3] -> Fill(NumFQDcyE, OscProb);
 
   return numu->var<int>("fqdcye");
 }
