@@ -3,10 +3,15 @@ void NNcomparison() {
   //TFile* fin1 = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.root");
   //TFile* fin2 = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.root");
 
+  // old NTag, old Gd MC
   TFile* fin1 = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.root");
 
+  // new NTag, new Gd MC
   TFile* fin2 = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
   //TFile* fin2 = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
+
+  // old NTag, new Gd MC
+  //TFile* fin2 = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.oldntag.root");
 
   TH1F* h1_NNvar_Gd_1[12];
   TH1F* h1_NNvar_H_1[12];
@@ -82,18 +87,26 @@ void NNcomparison() {
     h1_NNvar_AccNoise_2[i] -> Scale(1./totAccNoise_2);
   }
 
-  TLegend* legend = new TLegend(0.3, 0.71, 0.89, 0.89);
+  TLegend* legend = new TLegend(0.14, 0.90, 0.93, 0.98);
   legend -> SetTextSize(0.06);
   //legend -> AddEntry(h1_NNvar_AccNoise_1[0], "#nu_{#mu}#rightarrow#nu_{#mu} MC", "L");
   //legend -> AddEntry(h1_NNvar_AccNoise_2[0], "#bar{#nu}_{#mu}#rightarrow#bar{#nu}_{#mu} MC", "L");
-  //legend -> AddEntry(h1_NNvar_AccNoise_1[0], "NTag2022Apr, Noise", "L");
-  //legend -> AddEntry(h1_NNvar_AccNoise_2[0], "NTag1.1.2, Noise", "L");
+  ////  Acc noise  ////
+  legend -> AddEntry(h1_NNvar_AccNoise_1[0], "NTag2022Apr, Noise", "L");
+  //legend -> AddEntry(h1_NNvar_AccNoise_2[0], "NTag2022Apr, New Noise", "L");
+  legend -> AddEntry(h1_NNvar_AccNoise_2[0], "NTag1.1.2, New Noise", "L");
+  ////  Gd  ////
   //legend -> AddEntry(h1_NNvar_Gd_1[0], "NTag2022Apr, Gd", "L");
-  //legend -> AddEntry(h1_NNvar_Gd_2[0], "NTag1.1.2, Gd", "L");
+  //legend -> AddEntry(h1_NNvar_Gd_2[0], "NTag2022Apr, New Gd", "L");
+  //legend -> AddEntry(h1_NNvar_Gd_2[0], "NTag1.1.2, New Gd", "L");
+  ////  H  ////
   //legend -> AddEntry(h1_NNvar_H_1[0], "NTag2022Apr, H", "L");
-  //legend -> AddEntry(h1_NNvar_H_2[0], "NTag1.1.2, H", "L");
-  legend -> AddEntry(h1_NNvar_Decaye_1[0], "NTag2022Apr, Dcye", "L");
-  legend -> AddEntry(h1_NNvar_Decaye_2[0], "NTag1.1.2, Dcye", "L");
+  //legend -> AddEntry(h1_NNvar_H_2[0], "NTag2022Apr, New H", "L");
+  //legend -> AddEntry(h1_NNvar_H_2[0], "NTag1.1.2, New H", "L");
+  ////  decay-e  ////
+  //legend -> AddEntry(h1_NNvar_Decaye_1[0], "NTag2022Apr, Dcye", "L");
+  //legend -> AddEntry(h1_NNvar_Decaye_2[0], "NTag2022Apr, New Dcye", "L");
+  //legend -> AddEntry(h1_NNvar_Decaye_2[0], "NTag1.1.2, New Dcye", "L");
   legend -> SetFillColor(0);
   //legend->SetLineColor(0);
   //legend->SetFillColor(0);
@@ -112,10 +125,12 @@ void NNcomparison() {
 
     //h1_NNvar_Gd_1[i] -> Draw();
     //h1_NNvar_Gd_2[i] -> Draw("SAME");
-    h1_NNvar_H_1[i] -> Draw();
-    h1_NNvar_H_2[i] -> Draw("SAME");
-    //h1_NNvar_AccNoise_1[i] -> Draw();
-    //h1_NNvar_AccNoise_2[i] -> Draw("SAME");
+    //h1_NNvar_H_1[i] -> Draw();
+    //h1_NNvar_H_2[i] -> Draw("SAME");
+    //h1_NNvar_Decaye_1[i] -> Draw();
+    //h1_NNvar_Decaye_2[i] -> Draw("SAME");
+    h1_NNvar_AccNoise_1[i] -> Draw();
+    h1_NNvar_AccNoise_2[i] -> Draw("SAME");
     if (i==0) legend -> Draw();
 
     //h1_NNvar_AccNoise_1[i] -> Sumw2();

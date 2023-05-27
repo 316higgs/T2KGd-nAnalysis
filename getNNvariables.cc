@@ -52,48 +52,48 @@ int main(int argc, char **argv) {
   TChain *tchfQ = new TChain("h1");
   int nfQFiles = tchfQ->Add( fiTQunFileName );
   if ( nfQFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree h1 from: " << fiTQunFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "[### getNNvariables ###]  Cannot load TTree h1 from: " << fiTQunFileName << std::endl;
+    std::cout << "[### getNNvariables ###]  -> EXIT " << std::endl;
     exit(-1);
   }
   //=========  Event info (TTree: event)  ============
   TChain *tchev = new TChain("event");
   int nevFiles = tchev->Add( NtagFileName );
   if ( nevFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree event from: " << NtagFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "[### getNNvariables ###]  Cannot load TTree event from: " << NtagFileName << std::endl;
+    std::cout << "[### getNNvariables ###]  -> EXIT " << std::endl;
     exit(-1);
   }
   //=========  Event info (TTree: particle)  ============
   TChain *tchpar = new TChain("particle");
   int nparFiles = tchpar->Add( NtagFileName );
   if ( nparFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree particle from: " << NtagFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "[### getNNvariables ###]  Cannot load TTree particle from: " << NtagFileName << std::endl;
+    std::cout << "[### getNNvariables ###]  -> EXIT " << std::endl;
     exit(-1);
   }
   //=========  Delayed info (TTree: taggable)  ============
   TChain *tchtaggable = new TChain("taggable");
   int ntaggableFiles = tchtaggable->Add( NtagFileName );
   if ( ntaggableFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree taggable from: " << NtagFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "[### getNNvariables ###]  Cannot load TTree taggable from: " << NtagFileName << std::endl;
+    std::cout << "[### getNNvariables ###]  -> EXIT " << std::endl;
     exit(-1);
   }
   //=========  NTag output (TTree: ntag)  ============
   TChain *tchntag = new TChain("ntag");
   int ntagFiles = tchntag->Add( NtagFileName );
   if ( ntagFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree ntag from: " << NtagFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "[### getNNvariables ###]  Cannot load TTree ntag from: " << NtagFileName << std::endl;
+    std::cout << "[### getNNvariables ###]  -> EXIT " << std::endl;
     exit(-1);
   }
   //Load succeed
-  std::cout << "[### analysis1Rmu ###]  Loaded " << nfQFiles       << " files from: " << fiTQunFileName << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Loaded " << nevFiles       << " files from: " << NtagFileName   << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Loaded " << nparFiles      << " files from: " << NtagFileName   << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Loaded " << ntaggableFiles << " files from: " << NtagFileName   << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Loaded " << ntagFiles      << " files from: " << NtagFileName   << std::endl;
+  std::cout << "[### getNNvariables ###]  Loaded " << nfQFiles       << " files from: " << fiTQunFileName << std::endl;
+  std::cout << "[### getNNvariables ###]  Loaded " << nevFiles       << " files from: " << NtagFileName   << std::endl;
+  std::cout << "[### getNNvariables ###]  Loaded " << nparFiles      << " files from: " << NtagFileName   << std::endl;
+  std::cout << "[### getNNvariables ###]  Loaded " << ntaggableFiles << " files from: " << NtagFileName   << std::endl;
+  std::cout << "[### getNNvariables ###]  Loaded " << ntagFiles      << " files from: " << NtagFileName   << std::endl;
 
 
   const int nfQEntries       = tchfQ->GetEntries();       //total entries of TTree h1
@@ -101,16 +101,16 @@ int main(int argc, char **argv) {
   const int nparEntries      = tchpar->GetEntries();       //total entries of TTree particle
   const int ntaggableEntries = tchtaggable->GetEntries(); //total entries of TTree taggable
   const int ntagEntries      = tchntag->GetEntries();     //total entries of TTree ntag
-  std::cout << "[### analysis1Rmu ###]  fiTQun output     : Processing " << nfQEntries       <<" entries..." << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Event info        : Processing " << nevEntries       <<" entries..." << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Particle info     : Processing " << nparEntries      <<" entries..." << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Delayed info      : Processing " << ntaggableEntries <<" entries..." << std::endl;
-  std::cout << "[### analysis1Rmu ###]  NTag output       : Processing " << ntagEntries      <<" entries..." << std::endl;
+  std::cout << "[### getNNvariables ###]  fiTQun output     : Processing " << nfQEntries       <<" entries..." << std::endl;
+  std::cout << "[### getNNvariables ###]  Event info        : Processing " << nevEntries       <<" entries..." << std::endl;
+  std::cout << "[### getNNvariables ###]  Particle info     : Processing " << nparEntries      <<" entries..." << std::endl;
+  std::cout << "[### getNNvariables ###]  Delayed info      : Processing " << ntaggableEntries <<" entries..." << std::endl;
+  std::cout << "[### getNNvariables ###]  NTag output       : Processing " << ntagEntries      <<" entries..." << std::endl;
 
 
   //=========  TTree event variables  ============
-  float NTrueN = 0.;
-  //int NTrueN = 0.;
+  //float NTrueN = 0.;
+  int NTrueN = 0.;
   float vecvx  = 0.;
   float vecvy  = 0.;
   float vecvz  = 0.;
@@ -147,7 +147,7 @@ int main(int argc, char **argv) {
   TBranch *bpar_z = 0;
   tchpar->SetBranchAddress("PID", &PID, &bPID);
   tchpar->SetBranchAddress("ParentPID", &ParentPID, &bParentPID);
-  //tchpar->SetBranchAddress("ParentIndex", &ParentIndex, &bParentIndex); //avalable at NTag1.1.2
+  tchpar->SetBranchAddress("ParentIndex", &ParentIndex, &bParentIndex); //avalable at NTag1.1.2
   tchpar->SetBranchAddress("IntID", &IntID, &bIntID);
   //tchpar->SetBranchAddress("t", &par_t);
   tchpar->SetBranchAddress("t", &par_t, &bpar_t);
@@ -289,7 +289,7 @@ int main(int argc, char **argv) {
   for (int ientry=0; ientry<ntagEntries; ientry++) {
 
   	//Progress meter
-    if(ientry>100 && ientry%100==0) std::cout << "[### analysis1Rmu ###]  Progress: " << 100.*ientry/ntagEntries << "%" << std::endl;
+    if(ientry>100 && ientry%100==0) std::cout << "[### getNNvariables ###]  Progress: " << 100.*ientry/ntagEntries << "%" << std::endl;
 
     tchfQ       -> GetEntry(ientry);
     tchev       -> GetEntry(ientry);
@@ -408,7 +408,7 @@ int main(int argc, char **argv) {
           }
 
           //Pre-NN
-#if 1
+#if 0
           if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
           if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
           if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar, OscProb);
@@ -416,7 +416,7 @@ int main(int argc, char **argv) {
 #endif
 
           //Post-NN
-#if 0
+#if 1
           //bool etagboxin = false;
           //if (NHits->at(jentry)>50 && FitT->at(jentry)<20) etagboxin = true;
 

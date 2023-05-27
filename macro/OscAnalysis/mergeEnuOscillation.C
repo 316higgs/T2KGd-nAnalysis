@@ -30,7 +30,7 @@ void mergeEnuOscillation(bool beammode) {
 
   TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
   TFile* fin_nuesig  = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.root");
+  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.root");
 
   //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.003conc.0532.root");
   //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.003conc.0532.root");
@@ -46,7 +46,7 @@ void mergeEnuOscillation(bool beammode) {
   TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
 #endif
 
-  //Normalization
+  // Normalization factors
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
   TH1F* h1_skrate_numu_x_nue        = (TH1F*)fin_skrate->Get("skrate_numu_x_nue");
   TH1F* h1_skrate_numubar_x_numubar = (TH1F*)fin_skrate->Get("skrate_numu_bar_x_numu_bar");
@@ -59,7 +59,7 @@ void mergeEnuOscillation(bool beammode) {
   //Double_t GenN_numubar_x_numubar   = 190909;
   Double_t GenN_numu_x_numu         = 63576;
   Double_t GenN_numu_x_nue          = 63312;
-  Double_t GenN_numubar_x_numubar   = 190909;
+  Double_t GenN_numubar_x_numubar   = 63458;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
   std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
   std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;

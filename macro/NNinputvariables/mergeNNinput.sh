@@ -10,4 +10,5 @@ BEAMMODE=true
 #BEAMMODE=false
 
 #root -l 'mergeNNinput.C('${BEAMMODE}')'
-root -l 'NTagOut.C('${BEAMMODE}')'
+root -l 'mergeNNinputshape.C('${BEAMMODE}')'
+#root -l 'NTagOut.C('${BEAMMODE}')'

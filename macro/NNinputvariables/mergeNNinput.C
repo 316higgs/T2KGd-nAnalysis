@@ -85,7 +85,7 @@ void mergeNNinput(bool beammode) {
   TH1F* h1_NNvar_AccNoise_numubar[12];
   TH1F* h1_NNvar_Decaye_numubar[12];
 
-  THStack* hs_NNvar_numu[12];
+  THStack* hs_NNvar[12];
 
   for (int i=0; i<12; i++) {
   	h1_NNvar_Gd_numu[i]       = (TH1F*)finnumu->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
@@ -137,25 +137,19 @@ void mergeNNinput(bool beammode) {
 #endif
 
     TString hsname = GetNNVarName(i);
-    hs_NNvar_numu[i] = new THStack(TString::Format("hs_NNvar_numu_var%d", i), hsname);
-    hs_NNvar_numu[i] -> Add(h1_NNvar_AccNoise_numu[i]);
-    hs_NNvar_numu[i] -> Add(h1_NNvar_AccNoise_nuesig[i]);
-    hs_NNvar_numu[i] -> Add(h1_NNvar_AccNoise_numubar[i]);
-    hs_NNvar_numu[i] -> Add(h1_NNvar_Decaye_numu[i]);
-    hs_NNvar_numu[i] -> Add(h1_NNvar_Decaye_nuesig[i]);
-    hs_NNvar_numu[i] -> Add(h1_NNvar_Decaye_numubar[i]);
-    hs_NNvar_numu[i] -> Add(h1_NNvar_H_numu[i]);
-    hs_NNvar_numu[i] -> Add(h1_NNvar_H_nuesig[i]);
-    hs_NNvar_numu[i] -> Add(h1_NNvar_H_numubar[i]);
-    hs_NNvar_numu[i] -> Add(h1_NNvar_Gd_numu[i]);
-    hs_NNvar_numu[i] -> Add(h1_NNvar_Gd_nuesig[i]);
-    hs_NNvar_numu[i] -> Add(h1_NNvar_Gd_numubar[i]);
-
-    //hs_NNvar_nuesig[i] = new THStack(TString::Format("hs_NNvar_nuesig_var%d", i), hsname);
-    //hs_NNvar_nuesig[i] -> Add(h1_NNvar_AccNoise_numu[i]);
-    //hs_NNvar_nuesig[i] -> Add(h1_NNvar_Decaye_numu[i]);
-    //hs_NNvar_nuesig[i] -> Add(h1_NNvar_H_numu[i]);
-    //hs_NNvar_nuesig[i] -> Add(h1_NNvar_Gd_numu[i]);
+    hs_NNvar[i] = new THStack(TString::Format("hs_NNvar_var%d", i), hsname);
+    hs_NNvar[i] -> Add(h1_NNvar_AccNoise_numu[i]);
+    hs_NNvar[i] -> Add(h1_NNvar_AccNoise_nuesig[i]);
+    hs_NNvar[i] -> Add(h1_NNvar_AccNoise_numubar[i]);
+    hs_NNvar[i] -> Add(h1_NNvar_Decaye_numu[i]);
+    hs_NNvar[i] -> Add(h1_NNvar_Decaye_nuesig[i]);
+    hs_NNvar[i] -> Add(h1_NNvar_Decaye_numubar[i]);
+    hs_NNvar[i] -> Add(h1_NNvar_H_numu[i]);
+    hs_NNvar[i] -> Add(h1_NNvar_H_nuesig[i]);
+    hs_NNvar[i] -> Add(h1_NNvar_H_numubar[i]);
+    hs_NNvar[i] -> Add(h1_NNvar_Gd_numu[i]);
+    hs_NNvar[i] -> Add(h1_NNvar_Gd_nuesig[i]);
+    hs_NNvar[i] -> Add(h1_NNvar_Gd_numubar[i]);
   }
 
   
@@ -181,11 +175,11 @@ void mergeNNinput(bool beammode) {
   for (int i=0; i<12; i++) {
     c1 -> cd(i+1);
     //gPad->SetLogy();
-    hs_NNvar_numu[i] -> Draw();
+    hs_NNvar[i] -> Draw();
     TString varname = GetNNVarAxisName(i);
-    hs_NNvar_numu[i] -> GetXaxis()->SetTitle(varname);
-    hs_NNvar_numu[i] -> GetYaxis()->SetTitle("Number of Events");
-    hs_NNvar_numu[i] -> Draw();
+    hs_NNvar[i] -> GetXaxis()->SetTitle(varname);
+    hs_NNvar[i] -> GetYaxis()->SetTitle("Number of Events");
+    hs_NNvar[i] -> Draw();
     //hs_NNvar_nuesig[i] -> Draw("SAME");
     if (i==11) legend -> Draw();
   }

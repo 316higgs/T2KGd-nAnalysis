@@ -88,6 +88,19 @@ COMMENTOUT
 COMMENTOUT
 
 <<COMMENTOUT
+#####  new Gd MC, old NTag  ######
+./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
+                   ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.oldntag0026Gd.\*.root\
+                   ${ANALYSISSTAGE}/output/fhc/fhc.numu_x_numu.newGdMC.oldntag.root\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.neutrino.newGdMC.oldntag.txt\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.ntag.newGdMC.oldntag.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMU
+COMMENTOUT
+
+<<COMMENTOUT
 #####  new Gd MC w/ ToF-subtraction  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/wToF/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
@@ -100,7 +113,7 @@ COMMENTOUT
                    -OSCCH NUMU
 COMMENTOUT
 
-#<<COMMENTOUT
+<<COMMENTOUT
 #####  old Gd MC  ######
 ./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
@@ -111,7 +124,7 @@ COMMENTOUT
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMU
-#COMMENTOUT
+COMMENTOUT
 
 ####################################################################
 ##### FHC numu -> nue Gd MC #####

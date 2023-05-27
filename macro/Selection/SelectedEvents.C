@@ -69,7 +69,7 @@ void SelectedEvents(bool beammode) {
   std::cout << "[numub -> numub] Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
 
 // Neutrino events
-#if 1
+#if 0
   TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode0");
   TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode1");
   TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode2");
@@ -90,12 +90,18 @@ void SelectedEvents(bool beammode) {
 #endif
 
 // Tagged neutrons
-#if 0
+#if 1
   TH1F* h1_CCQE_numu     = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode0");
   TH1F* h1_CC2p2h_numu   = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode1");
   TH1F* h1_CCOther_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode2");
   TH1F* h1_NC_numu       = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode3");
   h1_CCQE_numu -> SetStats(0);
+
+  TH1F* h1_CCQE_nuesig    = (TH1F*)fin_nuesig->Get("Gd1RmuonSelection/h1_SelTagN_mode0");
+  TH1F* h1_CC2p2h_nuesig  = (TH1F*)fin_nuesig->Get("Gd1RmuonSelection/h1_SelTagN_mode1");
+  TH1F* h1_CCOther_nuesig = (TH1F*)fin_nuesig->Get("Gd1RmuonSelection/h1_SelTagN_mode2");
+  TH1F* h1_NC_nuesig      = (TH1F*)fin_nuesig->Get("Gd1RmuonSelection/h1_SelTagN_mode3");
+  h1_CCQE_nuesig -> SetStats(0);
 
   TH1F* h1_CCQE_numubar     = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_SelTagN_mode0");
   TH1F* h1_CC2p2h_numubar   = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_SelTagN_mode1");
@@ -270,15 +276,15 @@ void SelectedEvents(bool beammode) {
   TCanvas* c1 = new TCanvas("c1","c1", 1000,700);
   c1 -> SetGrid();
   //hs_NuEvt -> SetMaximum(20000);
-  if (beammode) hs_NuEvt -> SetMaximum(110);
-  //if (beammode) hs_NuEvt -> SetMaximum(16);
+  //if (beammode) hs_NuEvt -> SetMaximum(110);
+  if (beammode) hs_NuEvt -> SetMaximum(180);
   //else hs_NuEvt -> SetMaximum(10);
   hs_NuEvt -> Draw();
   hs_NuEvt ->GetYaxis()->SetTitleSize(0.038);
   hs_NuEvt ->GetYaxis()->SetTitleOffset(1.3);
   hs_NuEvt ->GetYaxis()->SetLabelSize(0.036);
-  hs_NuEvt ->GetYaxis()->SetTitle("Number of #nu Events");
-  //hs_NuEvt ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
+  //hs_NuEvt ->GetYaxis()->SetTitle("Number of #nu Events");
+  hs_NuEvt ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
   hs_NuEvt -> Draw();
   TGaxis* axis = new TGaxis(6, 0, 6, 115, 0, 115, 23, "+L");
   axis -> SetLabelColor(kWhite);
@@ -324,8 +330,8 @@ void SelectedEvents(bool beammode) {
   TLatex* text2 = new TLatex(0.5, 0.77, "-1R #mu sample");
   text2 -> SetNDC(1);
   text2 -> SetTextSize(0.04);
-  TLatex* text3 = new TLatex(0.5, 0.72, "-Efficiency of #nu events");
-  //TLatex* text3 = new TLatex(0.5, 0.72, "-Efficiency of tagged neutrons");
+  //TLatex* text3 = new TLatex(0.5, 0.72, "-Efficiency of #nu events");
+  TLatex* text3 = new TLatex(0.5, 0.72, "-Efficiency of tagged neutrons");
   text3 -> SetNDC(1);
   text3 -> SetTextSize(0.04);
   text1 -> Draw();
