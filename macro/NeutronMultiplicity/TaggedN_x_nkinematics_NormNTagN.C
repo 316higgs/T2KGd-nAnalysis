@@ -57,8 +57,8 @@ void TaggedN_x_nkinematics_NormNTagN(bool beammode) {
 
   //TString KnmtcName = "nTraveld";
   //TString KnmtcName = "nTraveldL";
-  TString KnmtcName = "nTraveldT";
-  //TString KnmtcName = "nAngle";
+  //TString KnmtcName = "nTraveldT";
+  TString KnmtcName = "nAngle";
   //TString KnmtcName = "MuStp_NCap";
 
   TString Prefix      = "NTagAnalysis/h1_TaggedN_x_";

@@ -170,6 +170,23 @@ COMMENTOUT
                    -OSCCH NUMUBAR
 COMMENTOUT
 
+####################################################################
+##### FHC numubar -> nuebar Gd MC #####
+#<<COMMENTOUT
+#####  new Gd MC  ######
+./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_nuebar.13a.fiTQun0026Gd.\*.root\
+                   ${DISK3}/Ntag/output/fhc/numubar_x_nuebar/fhc.numubar_x_nuebar.13a.ntag0026Gd.\*.root\
+                   ${ANALYSISSTAGE}/output/fhc/fhc.numubar_x_nuebar.newGdMC.root\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_nuebar.neutrino.newGdMC.txt\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_nuebar.ntag.newGdMC.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMUBAR
+#COMMENTOUT
+
+
+
 #./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.etagON.noinpmt.root\
