@@ -1,7 +1,7 @@
-[Truth Info] All Truth Neutrons(Gd+H)      : 34350
+[Truth Info] All Truth Neutrons(Gd+H)      : 0
 [Truth Info] Truth H-n Neutrons            : 16919
 [Truth Info] Truth Gd-n Neutrons           : 17431
-[Truth Info] All Truth CCQE Neutrons(Gd+H) : 21333
+[Truth Info] All Truth CCQE Neutrons(Gd+H) : 0
 [Truth Info] Truth CCQE H-n Neutrons       : 10505
 [Truth Info] Truth CCQE Gd-n Neutrons      : 10828
 ===== [3 us, 535 us] =====
@@ -15,7 +15,7 @@
 [Candidates] Truth Decay e in Candidates in [3 us, 535 us]      : 3945
 [Candidates] Truth Acc. Noise in Candidates in [3 us, 535 us]   : 1879893
 [Candidates] All Candidates in [3 us, 535 us]   : 1931905
-[   Pre    ] Pre-selection Efficiency(Gd+H): 63.1907 %
+[   Pre    ] Pre-selection Efficiency(Gd+H): inf %
 [   Pre    ] Pre-selection Efficiency(H)   : 34.4819 %
 [   Pre    ] Pre-selection Efficiency(Gd)  : 91.0562 %
 [    NN    ] ===== Threshold: 0 =====
@@ -37,7 +37,7 @@
 [    NN    ] NN Efficiency(Gd+H): 99.9862 %
 [    NN    ] NN Efficiency(H)   : 99.9829 %
 [    NN    ] NN Efficiency(Gd)  : 99.9874 %
-[  Overall ] Overall Efficiency(Gd+H): 63.1819 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 34.476 %
 [  Overall ] Overall Efficiency(Gd)  : 91.0447 %
 [  Purity  ] Purity: 1.14126
@@ -60,7 +60,7 @@
 [    NN    ] NN Efficiency(Gd+H): 75.0115 %
 [    NN    ] NN Efficiency(H)   : 25.2485 %
 [    NN    ] NN Efficiency(Gd)  : 93.3027 %
-[  Overall ] Overall Efficiency(Gd+H): 47.4003 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 8.70619 %
 [  Overall ] Overall Efficiency(Gd)  : 84.9578 %
 [  Purity  ] Purity: 53.5874
@@ -83,7 +83,7 @@
 [    NN    ] NN Efficiency(Gd+H): 72.2243 %
 [    NN    ] NN Efficiency(H)   : 19.6949 %
 [    NN    ] NN Efficiency(Gd)  : 91.5323 %
-[  Overall ] Overall Efficiency(Gd+H): 45.639 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 6.79118 %
 [  Overall ] Overall Efficiency(Gd)  : 83.3458 %
 [  Purity  ] Purity: 73.134
@@ -106,7 +106,7 @@
 [    NN    ] NN Efficiency(Gd+H): 70.6441 %
 [    NN    ] NN Efficiency(H)   : 16.8324 %
 [    NN    ] NN Efficiency(Gd)  : 90.4234 %
-[  Overall ] Overall Efficiency(Gd+H): 44.6405 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 5.80413 %
 [  Overall ] Overall Efficiency(Gd)  : 82.3361 %
 [  Purity  ] Purity: 81.7334
@@ -129,7 +129,7 @@
 [    NN    ] NN Efficiency(Gd+H): 69.3679 %
 [    NN    ] NN Efficiency(H)   : 14.9126 %
 [    NN    ] NN Efficiency(Gd)  : 89.3838 %
-[  Overall ] Overall Efficiency(Gd+H): 43.8341 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 5.14215 %
 [  Overall ] Overall Efficiency(Gd)  : 81.3895 %
 [  Purity  ] Purity: 86.4997
@@ -152,7 +152,7 @@
 [    NN    ] NN Efficiency(Gd+H): 68.3866 %
 [    NN    ] NN Efficiency(H)   : 13.3528 %
 [    NN    ] NN Efficiency(Gd)  : 88.6152 %
-[  Overall ] Overall Efficiency(Gd+H): 43.214 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.60429 %
 [  Overall ] Overall Efficiency(Gd)  : 80.6896 %
 [  Purity  ] Purity: 89.4864
@@ -175,7 +175,7 @@
 [    NN    ] NN Efficiency(Gd+H): 67.5481 %
 [    NN    ] NN Efficiency(H)   : 12.2043 %
 [    NN    ] NN Efficiency(Gd)  : 87.8906 %
-[  Overall ] Overall Efficiency(Gd+H): 42.6841 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.20829 %
 [  Overall ] Overall Efficiency(Gd)  : 80.0298 %
 [  Purity  ] Purity: 91.4888
@@ -198,7 +198,7 @@
 [    NN    ] NN Efficiency(Gd+H): 66.788 %
 [    NN    ] NN Efficiency(H)   : 11.2273 %
 [    NN    ] NN Efficiency(Gd)  : 87.2102 %
-[  Overall ] Overall Efficiency(Gd+H): 42.2038 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.87139 %
 [  Overall ] Overall Efficiency(Gd)  : 79.4102 %
 [  Purity  ] Purity: 93.1205
@@ -221,7 +221,7 @@
 [    NN    ] NN Efficiency(Gd+H): 66.1384 %
 [    NN    ] NN Efficiency(H)   : 10.3874 %
 [    NN    ] NN Efficiency(Gd)  : 86.6305 %
-[  Overall ] Overall Efficiency(Gd+H): 41.7933 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.58177 %
 [  Overall ] Overall Efficiency(Gd)  : 78.8824 %
 [  Purity  ] Purity: 94.2304
@@ -244,7 +244,7 @@
 [    NN    ] NN Efficiency(Gd+H): 65.4013 %
 [    NN    ] NN Efficiency(H)   : 9.68461 %
 [    NN    ] NN Efficiency(Gd)  : 85.8808 %
-[  Overall ] Overall Efficiency(Gd+H): 41.3275 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.33944 %
 [  Overall ] Overall Efficiency(Gd)  : 78.1998 %
 [  Purity  ] Purity: 95.1028
@@ -267,7 +267,7 @@
 [    NN    ] NN Efficiency(Gd+H): 64.7655 %
 [    NN    ] NN Efficiency(H)   : 8.87899 %
 [    NN    ] NN Efficiency(Gd)  : 85.3075 %
-[  Overall ] Overall Efficiency(Gd+H): 40.9258 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.06165 %
 [  Overall ] Overall Efficiency(Gd)  : 77.6777 %
 [  Purity  ] Purity: 95.7499
@@ -290,7 +290,7 @@
 [    NN    ] NN Efficiency(Gd+H): 64.185 %
 [    NN    ] NN Efficiency(H)   : 8.27905 %
 [    NN    ] NN Efficiency(Gd)  : 84.7341 %
-[  Overall ] Overall Efficiency(Gd+H): 40.559 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.85478 %
 [  Overall ] Overall Efficiency(Gd)  : 77.1556 %
 [  Purity  ] Purity: 96.282
@@ -313,7 +313,7 @@
 [    NN    ] NN Efficiency(Gd+H): 63.5354 %
 [    NN    ] NN Efficiency(H)   : 7.76483 %
 [    NN    ] NN Efficiency(Gd)  : 84.0348 %
-[  Overall ] Overall Efficiency(Gd+H): 40.1485 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.67746 %
 [  Overall ] Overall Efficiency(Gd)  : 76.5188 %
 [  Purity  ] Purity: 96.8265
@@ -336,7 +336,7 @@
 [    NN    ] NN Efficiency(Gd+H): 62.7522 %
 [    NN    ] NN Efficiency(H)   : 7.09633 %
 [    NN    ] NN Efficiency(Gd)  : 83.2094 %
-[  Overall ] Overall Efficiency(Gd+H): 39.6536 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.44695 %
 [  Overall ] Overall Efficiency(Gd)  : 75.7673 %
 [  Purity  ] Purity: 97.2929
@@ -359,7 +359,7 @@
 [    NN    ] NN Efficiency(Gd+H): 61.9598 %
 [    NN    ] NN Efficiency(H)   : 6.37641 %
 [    NN    ] NN Efficiency(Gd)  : 82.3904 %
-[  Overall ] Overall Efficiency(Gd+H): 39.1528 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.19871 %
 [  Overall ] Overall Efficiency(Gd)  : 75.0215 %
 [  Purity  ] Purity: 97.6476
@@ -382,7 +382,7 @@
 [    NN    ] NN Efficiency(Gd+H): 61.0108 %
 [    NN    ] NN Efficiency(H)   : 5.72506 %
 [    NN    ] NN Efficiency(Gd)  : 81.3319 %
-[  Overall ] Overall Efficiency(Gd+H): 38.5531 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.97411 %
 [  Overall ] Overall Efficiency(Gd)  : 74.0577 %
 [  Purity  ] Purity: 97.8716
@@ -405,7 +405,7 @@
 [    NN    ] NN Efficiency(Gd+H): 60.1078 %
 [    NN    ] NN Efficiency(H)   : 5.09085 %
 [    NN    ] NN Efficiency(Gd)  : 80.3301 %
-[  Overall ] Overall Efficiency(Gd+H): 37.9825 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.75542 %
 [  Overall ] Overall Efficiency(Gd)  : 73.1455 %
 [  Purity  ] Purity: 98.2159
@@ -428,7 +428,7 @@
 [    NN    ] NN Efficiency(Gd+H): 58.7533 %
 [    NN    ] NN Efficiency(H)   : 4.07953 %
 [    NN    ] NN Efficiency(Gd)  : 78.8495 %
-[  Overall ] Overall Efficiency(Gd+H): 37.1266 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.4067 %
 [  Overall ] Overall Efficiency(Gd)  : 71.7974 %
 [  Purity  ] Purity: 98.4864
@@ -451,7 +451,7 @@
 [    NN    ] NN Efficiency(Gd+H): 56.8138 %
 [    NN    ] NN Efficiency(H)   : 3.3939 %
 [    NN    ] NN Efficiency(Gd)  : 76.4491 %
-[  Overall ] Overall Efficiency(Gd+H): 35.901 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.17028 %
 [  Overall ] Overall Efficiency(Gd)  : 69.6116 %
 [  Purity  ] Purity: 98.7113
@@ -474,7 +474,7 @@
 [    NN    ] NN Efficiency(Gd+H): 52.9116 %
 [    NN    ] NN Efficiency(H)   : 2.03977 %
 [    NN    ] NN Efficiency(Gd)  : 71.6104 %
-[  Overall ] Overall Efficiency(Gd+H): 33.4352 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 0.703351 %
 [  Overall ] Overall Efficiency(Gd)  : 65.2057 %
 [  Purity  ] Purity: 99.2225
@@ -497,7 +497,7 @@
 [    NN    ] NN Efficiency(Gd+H): 0 %
 [    NN    ] NN Efficiency(H)   : 0 %
 [    NN    ] NN Efficiency(Gd)  : 0 %
-[  Overall ] Overall Efficiency(Gd+H): 0 %
+[  Overall ] Overall Efficiency(Gd+H): -nan %
 [  Overall ] Overall Efficiency(H)   : 0 %
 [  Overall ] Overall Efficiency(Gd)  : 0 %
 [  Purity  ] Purity: -nan
@@ -513,7 +513,7 @@
 [Candidates] Truth Decay e in Candidates in [3 us, 400 us]      : 3945
 [Candidates] Truth Acc. Noise in Candidates in [3 us, 400 us]   : 1451079
 [Candidates] All Candidates in [3 us, 400 us]   : 1502203
-[   Pre    ] Pre-selection Efficiency(Gd+H): 61.8981 %
+[   Pre    ] Pre-selection Efficiency(Gd+H): inf %
 [   Pre    ] Pre-selection Efficiency(H)   : 33.6958 %
 [   Pre    ] Pre-selection Efficiency(Gd)  : 89.272 %
 [    NN    ] ===== Threshold: 0 =====
@@ -535,7 +535,7 @@
 [    NN    ] NN Efficiency(Gd+H): 99.9859 %
 [    NN    ] NN Efficiency(H)   : 99.9825 %
 [    NN    ] NN Efficiency(Gd)  : 99.9872 %
-[  Overall ] Overall Efficiency(Gd+H): 61.8894 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 33.6899 %
 [  Overall ] Overall Efficiency(Gd)  : 89.2605 %
 [  Purity  ] Purity: 1.44383
@@ -558,7 +558,7 @@
 [    NN    ] NN Efficiency(Gd+H): 75.1482 %
 [    NN    ] NN Efficiency(H)   : 25.2938 %
 [    NN    ] NN Efficiency(Gd)  : 93.413 %
-[  Overall ] Overall Efficiency(Gd+H): 46.5153 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 8.52296 %
 [  Overall ] Overall Efficiency(Gd)  : 83.3917 %
 [  Purity  ] Purity: 59.4375
@@ -581,7 +581,7 @@
 [    NN    ] NN Efficiency(Gd+H): 72.3544 %
 [    NN    ] NN Efficiency(H)   : 19.7334 %
 [    NN    ] NN Efficiency(Gd)  : 91.6329 %
-[  Overall ] Overall Efficiency(Gd+H): 44.786 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 6.64933 %
 [  Overall ] Overall Efficiency(Gd)  : 81.8025 %
 [  Purity  ] Purity: 77.6577
@@ -604,7 +604,7 @@
 [    NN    ] NN Efficiency(Gd+H): 70.7741 %
 [    NN    ] NN Efficiency(H)   : 16.8392 %
 [    NN    ] NN Efficiency(Gd)  : 90.534 %
-[  Overall ] Overall Efficiency(Gd+H): 43.8079 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 5.67409 %
 [  Overall ] Overall Efficiency(Gd)  : 80.8215 %
 [  Purity  ] Purity: 85.0169
@@ -627,7 +627,7 @@
 [    NN    ] NN Efficiency(Gd+H): 69.509 %
 [    NN    ] NN Efficiency(H)   : 14.9097 %
 [    NN    ] NN Efficiency(Gd)  : 89.5122 %
-[  Overall ] Overall Efficiency(Gd+H): 43.0247 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 5.02394 %
 [  Overall ] Overall Efficiency(Gd)  : 79.9094 %
 [  Purity  ] Purity: 89.1268
@@ -650,7 +650,7 @@
 [    NN    ] NN Efficiency(Gd+H): 68.5401 %
 [    NN    ] NN Efficiency(H)   : 13.3836 %
 [    NN    ] NN Efficiency(Gd)  : 88.7475 %
-[  Overall ] Overall Efficiency(Gd+H): 42.425 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.50972 %
 [  Overall ] Overall Efficiency(Gd)  : 79.2267 %
 [  Purity  ] Purity: 91.5677
@@ -673,7 +673,7 @@
 [    NN    ] NN Efficiency(Gd+H): 67.7218 %
 [    NN    ] NN Efficiency(H)   : 12.261 %
 [    NN    ] NN Efficiency(Gd)  : 88.0406 %
-[  Overall ] Overall Efficiency(Gd+H): 41.9185 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.13145 %
 [  Overall ] Overall Efficiency(Gd)  : 78.5956 %
 [  Purity  ] Purity: 93.1793
@@ -696,7 +696,7 @@
 [    NN    ] NN Efficiency(Gd+H): 66.9598 %
 [    NN    ] NN Efficiency(H)   : 11.2612 %
 [    NN    ] NN Efficiency(Gd)  : 87.3658 %
-[  Overall ] Overall Efficiency(Gd+H): 41.4469 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.79455 %
 [  Overall ] Overall Efficiency(Gd)  : 77.9932 %
 [  Purity  ] Purity: 94.485
@@ -719,7 +719,7 @@
 [    NN    ] NN Efficiency(Gd+H): 66.3061 %
 [    NN    ] NN Efficiency(H)   : 10.4368 %
 [    NN    ] NN Efficiency(Gd)  : 86.7746 %
-[  Overall ] Overall Efficiency(Gd+H): 41.0422 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.51676 %
 [  Overall ] Overall Efficiency(Gd)  : 77.4654 %
 [  Purity  ] Purity: 95.3598
@@ -742,7 +742,7 @@
 [    NN    ] NN Efficiency(Gd+H): 65.5771 %
 [    NN    ] NN Efficiency(H)   : 9.75268 %
 [    NN    ] NN Efficiency(Gd)  : 86.0292 %
-[  Overall ] Overall Efficiency(Gd+H): 40.591 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.28625 %
 [  Overall ] Overall Efficiency(Gd)  : 76.7999 %
 [  Purity  ] Purity: 96.0394
@@ -765,7 +765,7 @@
 [    NN    ] NN Efficiency(Gd+H): 64.9422 %
 [    NN    ] NN Efficiency(H)   : 8.92826 %
 [    NN    ] NN Efficiency(Gd)  : 85.4637 %
-[  Overall ] Overall Efficiency(Gd+H): 40.198 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.00845 %
 [  Overall ] Overall Efficiency(Gd)  : 76.2951 %
 [  Purity  ] Purity: 96.5527
@@ -788,7 +788,7 @@
 [    NN    ] NN Efficiency(Gd+H): 64.3589 %
 [    NN    ] NN Efficiency(H)   : 8.31433 %
 [    NN    ] NN Efficiency(Gd)  : 84.8917 %
-[  Overall ] Overall Efficiency(Gd+H): 39.837 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.80158 %
 [  Overall ] Overall Efficiency(Gd)  : 75.7845 %
 [  Purity  ] Purity: 96.9328
@@ -811,7 +811,7 @@
 [    NN    ] NN Efficiency(Gd+H): 63.7005 %
 [    NN    ] NN Efficiency(H)   : 7.78811 %
 [    NN    ] NN Efficiency(Gd)  : 84.1848 %
-[  Overall ] Overall Efficiency(Gd+H): 39.4294 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.62427 %
 [  Overall ] Overall Efficiency(Gd)  : 75.1535 %
 [  Purity  ] Purity: 97.3688
@@ -834,7 +834,7 @@
 [    NN    ] NN Efficiency(Gd+H): 62.9198 %
 [    NN    ] NN Efficiency(H)   : 7.12156 %
 [    NN    ] NN Efficiency(Gd)  : 83.3623 %
-[  Overall ] Overall Efficiency(Gd+H): 38.9461 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.39967 %
 [  Overall ] Overall Efficiency(Gd)  : 74.4191 %
 [  Purity  ] Purity: 97.721
@@ -857,7 +857,7 @@
 [    NN    ] NN Efficiency(Gd+H): 62.1343 %
 [    NN    ] NN Efficiency(H)   : 6.40239 %
 [    NN    ] NN Efficiency(Gd)  : 82.5525 %
-[  Overall ] Overall Efficiency(Gd+H): 38.46 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.15734 %
 [  Overall ] Overall Efficiency(Gd)  : 73.6963 %
 [  Purity  ] Purity: 98.019
@@ -880,7 +880,7 @@
 [    NN    ] NN Efficiency(Gd+H): 61.1749 %
 [    NN    ] NN Efficiency(H)   : 5.75338 %
 [    NN    ] NN Efficiency(Gd)  : 81.4793 %
-[  Overall ] Overall Efficiency(Gd+H): 37.8661 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.93865 %
 [  Overall ] Overall Efficiency(Gd)  : 72.7382 %
 [  Purity  ] Purity: 98.1734
@@ -903,7 +903,7 @@
 [    NN    ] NN Efficiency(Gd+H): 60.2766 %
 [    NN    ] NN Efficiency(H)   : 5.10437 %
 [    NN    ] NN Efficiency(Gd)  : 80.4897 %
-[  Overall ] Overall Efficiency(Gd+H): 37.31 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.71996 %
 [  Overall ] Overall Efficiency(Gd)  : 71.8547 %
 [  Purity  ] Purity: 98.4407
@@ -926,7 +926,7 @@
 [    NN    ] NN Efficiency(Gd+H): 58.922 %
 [    NN    ] NN Efficiency(H)   : 4.10454 %
 [    NN    ] NN Efficiency(Gd)  : 79.0052 %
-[  Overall ] Overall Efficiency(Gd+H): 36.4716 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.38306 %
 [  Overall ] Overall Efficiency(Gd)  : 70.5295 %
 [  Purity  ] Purity: 98.6068
@@ -949,7 +949,7 @@
 [    NN    ] NN Efficiency(Gd+H): 56.9749 %
 [    NN    ] NN Efficiency(H)   : 3.40291 %
 [    NN    ] NN Efficiency(Gd)  : 76.6018 %
-[  Overall ] Overall Efficiency(Gd+H): 35.2664 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.14664 %
 [  Overall ] Overall Efficiency(Gd)  : 68.3839 %
 [  Purity  ] Purity: 98.785
@@ -972,7 +972,7 @@
 [    NN    ] NN Efficiency(Gd+H): 53.0759 %
 [    NN    ] NN Efficiency(H)   : 2.06981 %
 [    NN    ] NN Efficiency(Gd)  : 71.7627 %
-[  Overall ] Overall Efficiency(Gd+H): 32.853 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 0.697441 %
 [  Overall ] Overall Efficiency(Gd)  : 64.064 %
 [  Purity  ] Purity: 99.2437
@@ -995,7 +995,7 @@
 [    NN    ] NN Efficiency(Gd+H): 0 %
 [    NN    ] NN Efficiency(H)   : 0 %
 [    NN    ] NN Efficiency(Gd)  : 0 %
-[  Overall ] Overall Efficiency(Gd+H): 0 %
+[  Overall ] Overall Efficiency(Gd+H): -nan %
 [  Overall ] Overall Efficiency(H)   : 0 %
 [  Overall ] Overall Efficiency(Gd)  : 0 %
 [  Purity  ] Purity: -nan
@@ -1011,7 +1011,7 @@
 [Candidates] Truth Decay e in Candidates in [3 us, 350 us]      : 3945
 [Candidates] Truth Acc. Noise in Candidates in [3 us, 350 us]   : 1261073
 [Candidates] All Candidates in [3 us, 350 us]   : 1311439
-[   Pre    ] Pre-selection Efficiency(Gd+H): 60.7948 %
+[   Pre    ] Pre-selection Efficiency(Gd+H): inf %
 [   Pre    ] Pre-selection Efficiency(H)   : 33.1048 %
 [   Pre    ] Pre-selection Efficiency(Gd)  : 87.6714 %
 [    NN    ] ===== Threshold: 0 =====
@@ -1033,7 +1033,7 @@
 [    NN    ] NN Efficiency(Gd+H): 99.9856 %
 [    NN    ] NN Efficiency(H)   : 99.9821 %
 [    NN    ] NN Efficiency(Gd)  : 99.9869 %
-[  Overall ] Overall Efficiency(Gd+H): 60.786 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 33.0989 %
 [  Overall ] Overall Efficiency(Gd)  : 87.6599 %
 [  Purity  ] Purity: 1.62868
@@ -1056,7 +1056,7 @@
 [    NN    ] NN Efficiency(Gd+H): 75.1377 %
 [    NN    ] NN Efficiency(H)   : 25.2812 %
 [    NN    ] NN Efficiency(Gd)  : 93.4105 %
-[  Overall ] Overall Efficiency(Gd+H): 45.6798 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 8.36929 %
 [  Overall ] Overall Efficiency(Gd)  : 81.8943 %
 [  Purity  ] Purity: 62.303
@@ -1079,7 +1079,7 @@
 [    NN    ] NN Efficiency(Gd+H): 72.3459 %
 [    NN    ] NN Efficiency(H)   : 19.7286 %
 [    NN    ] NN Efficiency(Gd)  : 91.6307 %
-[  Overall ] Overall Efficiency(Gd+H): 43.9825 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 6.53112 %
 [  Overall ] Overall Efficiency(Gd)  : 80.3339 %
 [  Purity  ] Purity: 79.6331
@@ -1102,7 +1102,7 @@
 [    NN    ] NN Efficiency(Gd+H): 70.7609 %
 [    NN    ] NN Efficiency(H)   : 16.8541 %
 [    NN    ] NN Efficiency(Gd)  : 90.5183 %
-[  Overall ] Overall Efficiency(Gd+H): 43.0189 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 5.57953 %
 [  Overall ] Overall Efficiency(Gd)  : 79.3586 %
 [  Purity  ] Purity: 86.4304
@@ -1125,7 +1125,7 @@
 [    NN    ] NN Efficiency(Gd+H): 69.5015 %
 [    NN    ] NN Efficiency(H)   : 14.9438 %
 [    NN    ] NN Efficiency(Gd)  : 89.4974 %
-[  Overall ] Overall Efficiency(Gd+H): 42.2533 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.9471 %
 [  Overall ] Overall Efficiency(Gd)  : 78.4637 %
 [  Purity  ] Purity: 90.1659
@@ -1148,7 +1148,7 @@
 [    NN    ] NN Efficiency(Gd+H): 68.5438 %
 [    NN    ] NN Efficiency(H)   : 13.4262 %
 [    NN    ] NN Efficiency(Gd)  : 88.7449 %
-[  Overall ] Overall Efficiency(Gd+H): 41.671 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.44471 %
 [  Overall ] Overall Efficiency(Gd)  : 77.8039 %
 [  Purity  ] Purity: 92.3782
@@ -1171,7 +1171,7 @@
 [    NN    ] NN Efficiency(Gd+H): 67.7249 %
 [    NN    ] NN Efficiency(H)   : 12.2835 %
 [    NN    ] NN Efficiency(Gd)  : 88.0448 %
-[  Overall ] Overall Efficiency(Gd+H): 41.1732 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.06643 %
 [  Overall ] Overall Efficiency(Gd)  : 77.1901 %
 [  Purity  ] Purity: 93.8051
@@ -1194,7 +1194,7 @@
 [    NN    ] NN Efficiency(Gd+H): 66.9683 %
 [    NN    ] NN Efficiency(H)   : 11.2658 %
 [    NN    ] NN Efficiency(Gd)  : 87.3839 %
-[  Overall ] Overall Efficiency(Gd+H): 40.7132 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.72953 %
 [  Overall ] Overall Efficiency(Gd)  : 76.6106 %
 [  Purity  ] Purity: 95.0133
@@ -1217,7 +1217,7 @@
 [    NN    ] NN Efficiency(Gd+H): 66.3171 %
 [    NN    ] NN Efficiency(H)   : 10.4624 %
 [    NN    ] NN Efficiency(Gd)  : 86.7884 %
-[  Overall ] Overall Efficiency(Gd+H): 40.3173 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.46356 %
 [  Overall ] Overall Efficiency(Gd)  : 76.0886 %
 [  Purity  ] Purity: 95.7613
@@ -1240,7 +1240,7 @@
 [    NN    ] NN Efficiency(Gd+H): 65.5797 %
 [    NN    ] NN Efficiency(H)   : 9.76611 %
 [    NN    ] NN Efficiency(Gd)  : 86.0359 %
-[  Overall ] Overall Efficiency(Gd+H): 39.869 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.23305 %
 [  Overall ] Overall Efficiency(Gd)  : 75.4288 %
 [  Purity  ] Purity: 96.369
@@ -1263,7 +1263,7 @@
 [    NN    ] NN Efficiency(Gd+H): 64.9524 %
 [    NN    ] NN Efficiency(H)   : 8.92698 %
 [    NN    ] NN Efficiency(Gd)  : 85.4862 %
-[  Overall ] Overall Efficiency(Gd+H): 39.4876 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.95526 %
 [  Overall ] Overall Efficiency(Gd)  : 74.9469 %
 [  Purity  ] Purity: 96.8027
@@ -1286,7 +1286,7 @@
 [    NN    ] NN Efficiency(Gd+H): 64.3729 %
 [    NN    ] NN Efficiency(H)   : 8.3378 %
 [    NN    ] NN Efficiency(Gd)  : 84.9104 %
-[  Overall ] Overall Efficiency(Gd+H): 39.1354 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.76021 %
 [  Overall ] Overall Efficiency(Gd)  : 74.4421 %
 [  Purity  ] Purity: 97.1175
@@ -1309,7 +1309,7 @@
 [    NN    ] NN Efficiency(Gd+H): 63.7169 %
 [    NN    ] NN Efficiency(H)   : 7.80218 %
 [    NN    ] NN Efficiency(Gd)  : 84.2102 %
-[  Overall ] Overall Efficiency(Gd+H): 38.7365 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.5829 %
 [  Overall ] Overall Efficiency(Gd)  : 73.8282 %
 [  Purity  ] Purity: 97.5084
@@ -1332,7 +1332,7 @@
 [    NN    ] NN Efficiency(Gd+H): 62.9268 %
 [    NN    ] NN Efficiency(H)   : 7.12373 %
 [    NN    ] NN Efficiency(Gd)  : 83.3791 %
-[  Overall ] Overall Efficiency(Gd+H): 38.2562 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.3583 %
 [  Overall ] Overall Efficiency(Gd)  : 73.0996 %
 [  Purity  ] Purity: 97.8117
@@ -1355,7 +1355,7 @@
 [    NN    ] NN Efficiency(Gd+H): 62.1271 %
 [    NN    ] NN Efficiency(H)   : 6.39172 %
 [    NN    ] NN Efficiency(Gd)  : 82.5546 %
-[  Overall ] Overall Efficiency(Gd+H): 37.77 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.11596 %
 [  Overall ] Overall Efficiency(Gd)  : 72.3768 %
 [  Purity  ] Purity: 98.0872
@@ -1378,7 +1378,7 @@
 [    NN    ] NN Efficiency(Gd+H): 61.1646 %
 [    NN    ] NN Efficiency(H)   : 5.74897 %
 [    NN    ] NN Efficiency(Gd)  : 81.4749 %
-[  Overall ] Overall Efficiency(Gd+H): 37.1849 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.90319 %
 [  Overall ] Overall Efficiency(Gd)  : 71.4302 %
 [  Purity  ] Purity: 98.2387
@@ -1401,7 +1401,7 @@
 [    NN    ] NN Efficiency(Gd+H): 60.2691 %
 [    NN    ] NN Efficiency(H)   : 5.12408 %
 [    NN    ] NN Efficiency(Gd)  : 80.4803 %
-[  Overall ] Overall Efficiency(Gd+H): 36.6405 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.69632 %
 [  Overall ] Overall Efficiency(Gd)  : 70.5582 %
 [  Purity  ] Purity: 98.4897
@@ -1424,7 +1424,7 @@
 [    NN    ] NN Efficiency(Gd+H): 58.9187 %
 [    NN    ] NN Efficiency(H)   : 4.14212 %
 [    NN    ] NN Efficiency(Gd)  : 78.9949 %
-[  Overall ] Overall Efficiency(Gd+H): 35.8195 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.37124 %
 [  Overall ] Overall Efficiency(Gd)  : 69.2559 %
 [  Purity  ] Purity: 98.6372
@@ -1447,7 +1447,7 @@
 [    NN    ] NN Efficiency(Gd+H): 56.9458 %
 [    NN    ] NN Efficiency(H)   : 3.42796 %
 [    NN    ] NN Efficiency(Gd)  : 76.5607 %
-[  Overall ] Overall Efficiency(Gd+H): 34.6201 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.13482 %
 [  Overall ] Overall Efficiency(Gd)  : 67.1218 %
 [  Purity  ] Purity: 98.8118
@@ -1470,7 +1470,7 @@
 [    NN    ] NN Efficiency(Gd+H): 53.0479 %
 [    NN    ] NN Efficiency(H)   : 2.10677 %
 [    NN    ] NN Efficiency(Gd)  : 71.7184 %
-[  Overall ] Overall Efficiency(Gd+H): 32.2504 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 0.697441 %
 [  Overall ] Overall Efficiency(Gd)  : 62.8765 %
 [  Purity  ] Purity: 99.2475
@@ -1493,7 +1493,7 @@
 [    NN    ] NN Efficiency(Gd+H): 0 %
 [    NN    ] NN Efficiency(H)   : 0 %
 [    NN    ] NN Efficiency(Gd)  : 0 %
-[  Overall ] Overall Efficiency(Gd+H): 0 %
+[  Overall ] Overall Efficiency(Gd+H): -nan %
 [  Overall ] Overall Efficiency(H)   : 0 %
 [  Overall ] Overall Efficiency(Gd)  : 0 %
 [  Purity  ] Purity: -nan
@@ -1509,7 +1509,7 @@
 [Candidates] Truth Decay e in Candidates in [3 us, 300 us]      : 3945
 [Candidates] Truth Acc. Noise in Candidates in [3 us, 300 us]   : 1071136
 [Candidates] All Candidates in [3 us, 300 us]   : 1120275
-[   Pre    ] Pre-selection Efficiency(Gd+H): 59.0073 %
+[   Pre    ] Pre-selection Efficiency(Gd+H): inf %
 [   Pre    ] Pre-selection Efficiency(H)   : 32.1768 %
 [   Pre    ] Pre-selection Efficiency(Gd)  : 85.0496 %
 [    NN    ] ===== Threshold: 0 =====
@@ -1531,7 +1531,7 @@
 [    NN    ] NN Efficiency(Gd+H): 99.9852 %
 [    NN    ] NN Efficiency(H)   : 99.9816 %
 [    NN    ] NN Efficiency(Gd)  : 99.9865 %
-[  Overall ] Overall Efficiency(Gd+H): 58.9985 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 32.1709 %
 [  Overall ] Overall Efficiency(Gd)  : 85.0381 %
 [  Purity  ] Purity: 1.85676
@@ -1554,7 +1554,7 @@
 [    NN    ] NN Efficiency(Gd+H): 75.1196 %
 [    NN    ] NN Efficiency(H)   : 25.3123 %
 [    NN    ] NN Efficiency(Gd)  : 93.4098 %
-[  Overall ] Overall Efficiency(Gd+H): 44.3261 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 8.14469 %
 [  Overall ] Overall Efficiency(Gd)  : 79.4447 %
 [  Purity  ] Purity: 65.3448
@@ -1577,7 +1577,7 @@
 [    NN    ] NN Efficiency(Gd+H): 72.3272 %
 [    NN    ] NN Efficiency(H)   : 19.7649 %
 [    NN    ] NN Efficiency(Gd)  : 91.629 %
-[  Overall ] Overall Efficiency(Gd+H): 42.6783 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 6.35971 %
 [  Overall ] Overall Efficiency(Gd)  : 77.9301 %
 [  Purity  ] Purity: 81.6713
@@ -1600,7 +1600,7 @@
 [    NN    ] NN Efficiency(Gd+H): 70.7534 %
 [    NN    ] NN Efficiency(H)   : 16.8442 %
 [    NN    ] NN Efficiency(Gd)  : 90.5498 %
-[  Overall ] Overall Efficiency(Gd+H): 41.7496 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 5.41994 %
 [  Overall ] Overall Efficiency(Gd)  : 77.0122 %
 [  Purity  ] Purity: 87.9654
@@ -1623,7 +1623,7 @@
 [    NN    ] NN Efficiency(Gd+H): 69.4706 %
 [    NN    ] NN Efficiency(H)   : 14.9155 %
 [    NN    ] NN Efficiency(Gd)  : 89.5042 %
-[  Overall ] Overall Efficiency(Gd+H): 40.9927 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.79934 %
 [  Overall ] Overall Efficiency(Gd)  : 76.123 %
 [  Purity  ] Purity: 91.2987
@@ -1646,7 +1646,7 @@
 [    NN    ] NN Efficiency(Gd+H): 68.5283 %
 [    NN    ] NN Efficiency(H)   : 13.4644 %
 [    NN    ] NN Efficiency(Gd)  : 88.7487 %
-[  Overall ] Overall Efficiency(Gd+H): 40.4367 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.33241 %
 [  Overall ] Overall Efficiency(Gd)  : 75.4805 %
 [  Purity  ] Purity: 93.259
@@ -1669,7 +1669,7 @@
 [    NN    ] NN Efficiency(Gd+H): 67.7142 %
 [    NN    ] NN Efficiency(H)   : 12.3071 %
 [    NN    ] NN Efficiency(Gd)  : 88.0607 %
-[  Overall ] Overall Efficiency(Gd+H): 39.9563 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.96005 %
 [  Overall ] Overall Efficiency(Gd)  : 74.8953 %
 [  Purity  ] Purity: 94.4792
@@ -1692,7 +1692,7 @@
 [    NN    ] NN Efficiency(Gd+H): 66.9594 %
 [    NN    ] NN Efficiency(H)   : 11.2785 %
 [    NN    ] NN Efficiency(Gd)  : 87.4064 %
-[  Overall ] Overall Efficiency(Gd+H): 39.5109 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.62906 %
 [  Overall ] Overall Efficiency(Gd)  : 74.3388 %
 [  Purity  ] Purity: 95.5169
@@ -1715,7 +1715,7 @@
 [    NN    ] NN Efficiency(Gd+H): 66.2983 %
 [    NN    ] NN Efficiency(H)   : 10.4519 %
 [    NN    ] NN Efficiency(Gd)  : 86.8061 %
-[  Overall ] Overall Efficiency(Gd+H): 39.1208 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.36308 %
 [  Overall ] Overall Efficiency(Gd)  : 73.8282 %
 [  Purity  ] Purity: 96.1574
@@ -1738,7 +1738,7 @@
 [    NN    ] NN Efficiency(Gd+H): 65.5484 %
 [    NN    ] NN Efficiency(H)   : 9.73549 %
 [    NN    ] NN Efficiency(Gd)  : 86.0438 %
-[  Overall ] Overall Efficiency(Gd+H): 38.6783 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.13257 %
 [  Overall ] Overall Efficiency(Gd)  : 73.18 %
 [  Purity  ] Purity: 96.6958
@@ -1761,7 +1761,7 @@
 [    NN    ] NN Efficiency(Gd+H): 64.9317 %
 [    NN    ] NN Efficiency(H)   : 8.94563 %
 [    NN    ] NN Efficiency(Gd)  : 85.4907 %
-[  Overall ] Overall Efficiency(Gd+H): 38.3144 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.87842 %
 [  Overall ] Overall Efficiency(Gd)  : 72.7095 %
 [  Purity  ] Purity: 97.0718
@@ -1784,7 +1784,7 @@
 [    NN    ] NN Efficiency(Gd+H): 64.3495 %
 [    NN    ] NN Efficiency(H)   : 8.33946 %
 [    NN    ] NN Efficiency(Gd)  : 84.9174 %
-[  Overall ] Overall Efficiency(Gd+H): 37.9709 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.68337 %
 [  Overall ] Overall Efficiency(Gd)  : 72.2219 %
 [  Purity  ] Purity: 97.3286
@@ -1807,7 +1807,7 @@
 [    NN    ] NN Efficiency(Gd+H): 63.7131 %
 [    NN    ] NN Efficiency(H)   : 7.8435 %
 [    NN    ] NN Efficiency(Gd)  : 84.2293 %
-[  Overall ] Overall Efficiency(Gd+H): 37.5953 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.52379 %
 [  Overall ] Overall Efficiency(Gd)  : 71.6367 %
 [  Purity  ] Purity: 97.6632
@@ -1830,7 +1830,7 @@
 [    NN    ] NN Efficiency(Gd+H): 62.9385 %
 [    NN    ] NN Efficiency(H)   : 7.20059 %
 [    NN    ] NN Efficiency(Gd)  : 83.4064 %
-[  Overall ] Overall Efficiency(Gd+H): 37.1383 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.31692 %
 [  Overall ] Overall Efficiency(Gd)  : 70.9368 %
 [  Purity  ] Purity: 97.9499
@@ -1853,7 +1853,7 @@
 [    NN    ] NN Efficiency(Gd+H): 62.1343 %
 [    NN    ] NN Efficiency(H)   : 6.4842 %
 [    NN    ] NN Efficiency(Gd)  : 82.57 %
-[  Overall ] Overall Efficiency(Gd+H): 36.6638 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.08641 %
 [  Overall ] Overall Efficiency(Gd)  : 70.2255 %
 [  Purity  ] Purity: 98.1912
@@ -1876,7 +1876,7 @@
 [    NN    ] NN Efficiency(Gd+H): 61.1574 %
 [    NN    ] NN Efficiency(H)   : 5.82292 %
 [    NN    ] NN Efficiency(Gd)  : 81.4772 %
-[  Overall ] Overall Efficiency(Gd+H): 36.0873 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.87363 %
 [  Overall ] Overall Efficiency(Gd)  : 69.2961 %
 [  Purity  ] Purity: 98.3263
@@ -1899,7 +1899,7 @@
 [    NN    ] NN Efficiency(Gd+H): 60.2496 %
 [    NN    ] NN Efficiency(H)   : 5.18001 %
 [    NN    ] NN Efficiency(Gd)  : 80.4722 %
-[  Overall ] Overall Efficiency(Gd+H): 35.5517 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.66677 %
 [  Overall ] Overall Efficiency(Gd)  : 68.4413 %
 [  Purity  ] Purity: 98.5395
@@ -1922,7 +1922,7 @@
 [    NN    ] NN Efficiency(Gd+H): 58.9028 %
 [    NN    ] NN Efficiency(H)   : 4.1881 %
 [    NN    ] NN Efficiency(Gd)  : 78.9949 %
-[  Overall ] Overall Efficiency(Gd+H): 34.7569 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.3476 %
 [  Overall ] Overall Efficiency(Gd)  : 67.1849 %
 [  Purity  ] Purity: 98.6776
@@ -1945,7 +1945,7 @@
 [    NN    ] NN Efficiency(Gd+H): 56.9096 %
 [    NN    ] NN Efficiency(H)   : 3.45334 %
 [    NN    ] NN Efficiency(Gd)  : 76.5396 %
-[  Overall ] Overall Efficiency(Gd+H): 33.5808 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.11118 %
 [  Overall ] Overall Efficiency(Gd)  : 65.0967 %
 [  Purity  ] Purity: 98.8263
@@ -1968,7 +1968,7 @@
 [    NN    ] NN Efficiency(Gd+H): 52.9923 %
 [    NN    ] NN Efficiency(H)   : 2.11242 %
 [    NN    ] NN Efficiency(Gd)  : 71.6762 %
-[  Overall ] Overall Efficiency(Gd+H): 31.2693 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 0.679709 %
 [  Overall ] Overall Efficiency(Gd)  : 60.9604 %
 [  Purity  ] Purity: 99.2332
@@ -1991,7 +1991,7 @@
 [    NN    ] NN Efficiency(Gd+H): 0 %
 [    NN    ] NN Efficiency(H)   : 0 %
 [    NN    ] NN Efficiency(Gd)  : 0 %
-[  Overall ] Overall Efficiency(Gd+H): 0 %
+[  Overall ] Overall Efficiency(Gd+H): -nan %
 [  Overall ] Overall Efficiency(H)   : 0 %
 [  Overall ] Overall Efficiency(Gd)  : 0 %
 [  Purity  ] Purity: -nan
@@ -2007,7 +2007,7 @@
 [Candidates] Truth Decay e in Candidates in [3 us, 250 us]      : 3945
 [Candidates] Truth Acc. Noise in Candidates in [3 us, 250 us]   : 881045
 [Candidates] All Candidates in [3 us, 250 us]   : 928337
-[   Pre    ] Pre-selection Efficiency(Gd+H): 56.3202 %
+[   Pre    ] Pre-selection Efficiency(Gd+H): inf %
 [   Pre    ] Pre-selection Efficiency(H)   : 30.7879 %
 [   Pre    ] Pre-selection Efficiency(Gd)  : 81.1026 %
 [    NN    ] ===== Threshold: 0 =====
@@ -2029,7 +2029,7 @@
 [    NN    ] NN Efficiency(Gd+H): 99.9845 %
 [    NN    ] NN Efficiency(H)   : 99.9808 %
 [    NN    ] NN Efficiency(Gd)  : 99.9858 %
-[  Overall ] Overall Efficiency(Gd+H): 56.3115 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 30.782 %
 [  Overall ] Overall Efficiency(Gd)  : 81.0912 %
 [  Purity  ] Purity: 2.14814
@@ -2052,7 +2052,7 @@
 [    NN    ] NN Efficiency(Gd+H): 75.0388 %
 [    NN    ] NN Efficiency(H)   : 25.2256 %
 [    NN    ] NN Efficiency(Gd)  : 93.3932 %
-[  Overall ] Overall Efficiency(Gd+H): 42.262 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 7.76642 %
 [  Overall ] Overall Efficiency(Gd)  : 75.7444 %
 [  Purity  ] Purity: 68.5929
@@ -2075,7 +2075,7 @@
 [    NN    ] NN Efficiency(Gd+H): 72.2423 %
 [    NN    ] NN Efficiency(H)   : 19.6583 %
 [    NN    ] NN Efficiency(Gd)  : 91.6177 %
-[  Overall ] Overall Efficiency(Gd+H): 40.687 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 6.05237 %
 [  Overall ] Overall Efficiency(Gd)  : 74.3044 %
 [  Purity  ] Purity: 83.7087
@@ -2098,7 +2098,7 @@
 [    NN    ] NN Efficiency(Gd+H): 70.6916 %
 [    NN    ] NN Efficiency(H)   : 16.8362 %
 [    NN    ] NN Efficiency(Gd)  : 90.5355 %
-[  Overall ] Overall Efficiency(Gd+H): 39.8137 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 5.18352 %
 [  Overall ] Overall Efficiency(Gd)  : 73.4267 %
 [  Purity  ] Purity: 89.4382
@@ -2121,7 +2121,7 @@
 [    NN    ] NN Efficiency(Gd+H): 69.42 %
 [    NN    ] NN Efficiency(H)   : 14.9549 %
 [    NN    ] NN Efficiency(Gd)  : 89.4886 %
-[  Overall ] Overall Efficiency(Gd+H): 39.0975 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.60429 %
 [  Overall ] Overall Efficiency(Gd)  : 72.5776 %
 [  Purity  ] Purity: 92.2897
@@ -2144,7 +2144,7 @@
 [    NN    ] NN Efficiency(Gd+H): 68.4896 %
 [    NN    ] NN Efficiency(H)   : 13.5535 %
 [    NN    ] NN Efficiency(Gd)  : 88.7317 %
-[  Overall ] Overall Efficiency(Gd+H): 38.5735 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.17282 %
 [  Overall ] Overall Efficiency(Gd)  : 71.9637 %
 [  Purity  ] Purity: 93.945
@@ -2167,7 +2167,7 @@
 [    NN    ] NN Efficiency(Gd+H): 67.6626 %
 [    NN    ] NN Efficiency(H)   : 12.3632 %
 [    NN    ] NN Efficiency(Gd)  : 88.0385 %
-[  Overall ] Overall Efficiency(Gd+H): 38.1077 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.80637 %
 [  Overall ] Overall Efficiency(Gd)  : 71.4015 %
 [  Purity  ] Purity: 95.0203
@@ -2190,7 +2190,7 @@
 [    NN    ] NN Efficiency(Gd+H): 66.9079 %
 [    NN    ] NN Efficiency(H)   : 11.3265 %
 [    NN    ] NN Efficiency(Gd)  : 87.3877 %
-[  Overall ] Overall Efficiency(Gd+H): 37.6827 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.4872 %
 [  Overall ] Overall Efficiency(Gd)  : 70.8737 %
 [  Purity  ] Purity: 95.8815
@@ -2213,7 +2213,7 @@
 [    NN    ] NN Efficiency(Gd+H): 66.2463 %
 [    NN    ] NN Efficiency(H)   : 10.5011 %
 [    NN    ] NN Efficiency(Gd)  : 86.7864 %
-[  Overall ] Overall Efficiency(Gd+H): 37.31 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.23305 %
 [  Overall ] Overall Efficiency(Gd)  : 70.3861 %
 [  Purity  ] Purity: 96.4479
@@ -2236,7 +2236,7 @@
 [    NN    ] NN Efficiency(Gd+H): 65.4812 %
 [    NN    ] NN Efficiency(H)   : 9.79075 %
 [    NN    ] NN Efficiency(Gd)  : 86.0013 %
-[  Overall ] Overall Efficiency(Gd+H): 36.8792 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.01436 %
 [  Overall ] Overall Efficiency(Gd)  : 69.7493 %
 [  Purity  ] Purity: 96.902
@@ -2259,7 +2259,7 @@
 [    NN    ] NN Efficiency(Gd+H): 64.8455 %
 [    NN    ] NN Efficiency(H)   : 8.96525 %
 [    NN    ] NN Efficiency(Gd)  : 85.4354 %
-[  Overall ] Overall Efficiency(Gd+H): 36.5211 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.76021 %
 [  Overall ] Overall Efficiency(Gd)  : 69.2903 %
 [  Purity  ] Purity: 97.2254
@@ -2282,7 +2282,7 @@
 [    NN    ] NN Efficiency(Gd+H): 64.2562 %
 [    NN    ] NN Efficiency(H)   : 8.33173 %
 [    NN    ] NN Efficiency(Gd)  : 84.8624 %
-[  Overall ] Overall Efficiency(Gd+H): 36.1892 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.56516 %
 [  Overall ] Overall Efficiency(Gd)  : 68.8257 %
 [  Purity  ] Purity: 97.4675
@@ -2305,7 +2305,7 @@
 [    NN    ] NN Efficiency(Gd+H): 63.6256 %
 [    NN    ] NN Efficiency(H)   : 7.8518 %
 [    NN    ] NN Efficiency(Gd)  : 84.1763 %
-[  Overall ] Overall Efficiency(Gd+H): 35.8341 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.4174 %
 [  Overall ] Overall Efficiency(Gd)  : 68.2692 %
 [  Purity  ] Purity: 97.7448
@@ -2328,7 +2328,7 @@
 [    NN    ] NN Efficiency(Gd+H): 62.8347 %
 [    NN    ] NN Efficiency(H)   : 7.17988 %
 [    NN    ] NN Efficiency(Gd)  : 83.3416 %
-[  Overall ] Overall Efficiency(Gd+H): 35.3886 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.21053 %
 [  Overall ] Overall Efficiency(Gd)  : 67.5922 %
 [  Purity  ] Purity: 98.0086
@@ -2351,7 +2351,7 @@
 [    NN    ] NN Efficiency(Gd+H): 62.018 %
 [    NN    ] NN Efficiency(H)   : 6.45037 %
 [    NN    ] NN Efficiency(Gd)  : 82.4928 %
-[  Overall ] Overall Efficiency(Gd+H): 34.9287 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.98593 %
 [  Overall ] Overall Efficiency(Gd)  : 66.9038 %
 [  Purity  ] Purity: 98.2235
@@ -2374,7 +2374,7 @@
 [    NN    ] NN Efficiency(Gd+H): 61.0462 %
 [    NN    ] NN Efficiency(H)   : 5.77846 %
 [    NN    ] NN Efficiency(Gd)  : 81.4105 %
-[  Overall ] Overall Efficiency(Gd+H): 34.3814 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.77906 %
 [  Overall ] Overall Efficiency(Gd)  : 66.026 %
 [  Purity  ] Purity: 98.3593
@@ -2397,7 +2397,7 @@
 [    NN    ] NN Efficiency(Gd+H): 60.1365 %
 [    NN    ] NN Efficiency(H)   : 5.10655 %
 [    NN    ] NN Efficiency(Gd)  : 80.4131 %
-[  Overall ] Overall Efficiency(Gd+H): 33.869 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.5722 %
 [  Overall ] Overall Efficiency(Gd)  : 65.2171 %
 [  Purity  ] Purity: 98.5515
@@ -2420,7 +2420,7 @@
 [    NN    ] NN Efficiency(Gd+H): 58.7822 %
 [    NN    ] NN Efficiency(H)   : 4.10827 %
 [    NN    ] NN Efficiency(Gd)  : 78.9276 %
-[  Overall ] Overall Efficiency(Gd+H): 33.1063 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.26485 %
 [  Overall ] Overall Efficiency(Gd)  : 64.0124 %
 [  Purity  ] Purity: 98.681
@@ -2443,7 +2443,7 @@
 [    NN    ] NN Efficiency(Gd+H): 56.8076 %
 [    NN    ] NN Efficiency(H)   : 3.39796 %
 [    NN    ] NN Efficiency(Gd)  : 76.4872 %
-[  Overall ] Overall Efficiency(Gd+H): 31.9942 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.04616 %
 [  Overall ] Overall Efficiency(Gd)  : 62.0332 %
 [  Purity  ] Purity: 98.8309
@@ -2466,7 +2466,7 @@
 [    NN    ] NN Efficiency(Gd+H): 52.9102 %
 [    NN    ] NN Efficiency(H)   : 2.03494 %
 [    NN    ] NN Efficiency(Gd)  : 71.6559 %
-[  Overall ] Overall Efficiency(Gd+H): 29.7991 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 0.626515 %
 [  Overall ] Overall Efficiency(Gd)  : 58.1148 %
 [  Purity  ] Purity: 99.2053
@@ -2489,7 +2489,7 @@
 [    NN    ] NN Efficiency(Gd+H): 0 %
 [    NN    ] NN Efficiency(H)   : 0 %
 [    NN    ] NN Efficiency(Gd)  : 0 %
-[  Overall ] Overall Efficiency(Gd+H): 0 %
+[  Overall ] Overall Efficiency(Gd+H): -nan %
 [  Overall ] Overall Efficiency(H)   : 0 %
 [  Overall ] Overall Efficiency(Gd)  : 0 %
 [  Purity  ] Purity: -nan
@@ -2505,7 +2505,7 @@
 [Candidates] Truth Decay e in Candidates in [3 us, 200 us]      : 3945
 [Candidates] Truth Acc. Noise in Candidates in [3 us, 200 us]   : 691320
 [Candidates] All Candidates in [3 us, 200 us]   : 735833
-[   Pre    ] Pre-selection Efficiency(Gd+H): 52.2737 %
+[   Pre    ] Pre-selection Efficiency(Gd+H): inf %
 [   Pre    ] Pre-selection Efficiency(H)   : 28.3646 %
 [   Pre    ] Pre-selection Efficiency(Gd)  : 75.4805 %
 [    NN    ] ===== Threshold: 0 =====
@@ -2527,7 +2527,7 @@
 [    NN    ] NN Efficiency(Gd+H): 99.9833 %
 [    NN    ] NN Efficiency(H)   : 99.9792 %
 [    NN    ] NN Efficiency(Gd)  : 99.9848 %
-[  Overall ] Overall Efficiency(Gd+H): 52.2649 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 28.3587 %
 [  Overall ] Overall Efficiency(Gd)  : 75.469 %
 [  Purity  ] Purity: 2.53094
@@ -2550,7 +2550,7 @@
 [    NN    ] NN Efficiency(Gd+H): 75.1949 %
 [    NN    ] NN Efficiency(H)   : 25.5262 %
 [    NN    ] NN Efficiency(Gd)  : 93.3115 %
-[  Overall ] Overall Efficiency(Gd+H): 39.3071 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 7.24038 %
 [  Overall ] Overall Efficiency(Gd)  : 70.432 %
 [  Purity  ] Purity: 71.9608
@@ -2573,7 +2573,7 @@
 [    NN    ] NN Efficiency(Gd+H): 72.3825 %
 [    NN    ] NN Efficiency(H)   : 19.9208 %
 [    NN    ] NN Efficiency(Gd)  : 91.5178 %
-[  Overall ] Overall Efficiency(Gd+H): 37.837 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 5.65045 %
 [  Overall ] Overall Efficiency(Gd)  : 69.0781 %
 [  Purity  ] Purity: 85.8058
@@ -2596,7 +2596,7 @@
 [    NN    ] NN Efficiency(Gd+H): 70.8621 %
 [    NN    ] NN Efficiency(H)   : 17.1494 %
 [    NN    ] NN Efficiency(Gd)  : 90.4538 %
-[  Overall ] Overall Efficiency(Gd+H): 37.0422 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.86435 %
 [  Overall ] Overall Efficiency(Gd)  : 68.2749 %
 [  Purity  ] Purity: 90.8922
@@ -2619,7 +2619,7 @@
 [    NN    ] NN Efficiency(Gd+H): 69.5979 %
 [    NN    ] NN Efficiency(H)   : 15.2532 %
 [    NN    ] NN Efficiency(Gd)  : 89.4201 %
-[  Overall ] Overall Efficiency(Gd+H): 36.3814 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 4.3265 %
 [  Overall ] Overall Efficiency(Gd)  : 67.4947 %
 [  Purity  ] Purity: 93.3169
@@ -2642,7 +2642,7 @@
 [    NN    ] NN Efficiency(Gd+H): 68.6734 %
 [    NN    ] NN Efficiency(H)   : 13.8154 %
 [    NN    ] NN Efficiency(Gd)  : 88.6828 %
-[  Overall ] Overall Efficiency(Gd+H): 35.8981 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.91867 %
 [  Overall ] Overall Efficiency(Gd)  : 66.9382 %
 [  Purity  ] Purity: 94.6645
@@ -2665,7 +2665,7 @@
 [    NN    ] NN Efficiency(Gd+H): 67.8603 %
 [    NN    ] NN Efficiency(H)   : 12.6485 %
 [    NN    ] NN Efficiency(Gd)  : 87.9988 %
-[  Overall ] Overall Efficiency(Gd+H): 35.4731 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.58768 %
 [  Overall ] Overall Efficiency(Gd)  : 66.4219 %
 [  Purity  ] Purity: 95.5986
@@ -2688,7 +2688,7 @@
 [    NN    ] NN Efficiency(Gd+H): 67.0806 %
 [    NN    ] NN Efficiency(H)   : 11.5857 %
 [    NN    ] NN Efficiency(Gd)  : 87.3223 %
-[  Overall ] Overall Efficiency(Gd+H): 35.0655 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.28625 %
 [  Overall ] Overall Efficiency(Gd)  : 65.9113 %
 [  Purity  ] Purity: 96.3446
@@ -2711,7 +2711,7 @@
 [    NN    ] NN Efficiency(Gd+H): 66.4179 %
 [    NN    ] NN Efficiency(H)   : 10.7731 %
 [    NN    ] NN Efficiency(Gd)  : 86.7143 %
-[  Overall ] Overall Efficiency(Gd+H): 34.7191 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 3.05574 %
 [  Overall ] Overall Efficiency(Gd)  : 65.4524 %
 [  Purity  ] Purity: 96.8255
@@ -2734,7 +2734,7 @@
 [    NN    ] NN Efficiency(Gd+H): 65.6605 %
 [    NN    ] NN Efficiency(H)   : 10.1063 %
 [    NN    ] NN Efficiency(Gd)  : 85.9238 %
-[  Overall ] Overall Efficiency(Gd+H): 34.3231 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.8666 %
 [  Overall ] Overall Efficiency(Gd)  : 64.8557 %
 [  Purity  ] Purity: 97.2131
@@ -2757,7 +2757,7 @@
 [    NN    ] NN Efficiency(Gd+H): 64.9978 %
 [    NN    ] NN Efficiency(H)   : 9.23109 %
 [    NN    ] NN Efficiency(Gd)  : 85.3386 %
-[  Overall ] Overall Efficiency(Gd+H): 33.9767 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.61836 %
 [  Overall ] Overall Efficiency(Gd)  : 64.414 %
 [  Purity  ] Purity: 97.4939
@@ -2780,7 +2780,7 @@
 [    NN    ] NN Efficiency(Gd+H): 64.3963 %
 [    NN    ] NN Efficiency(H)   : 8.54345 %
 [    NN    ] NN Efficiency(Gd)  : 84.7686 %
-[  Overall ] Overall Efficiency(Gd+H): 33.6623 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.42331 %
 [  Overall ] Overall Efficiency(Gd)  : 63.9837 %
 [  Purity  ] Purity: 97.6935
@@ -2803,7 +2803,7 @@
 [    NN    ] NN Efficiency(Gd+H): 63.7503 %
 [    NN    ] NN Efficiency(H)   : 8.04334 %
 [    NN    ] NN Efficiency(Gd)  : 84.0693 %
-[  Overall ] Overall Efficiency(Gd+H): 33.3246 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.28146 %
 [  Overall ] Overall Efficiency(Gd)  : 63.4559 %
 [  Purity  ] Purity: 97.9045
@@ -2826,7 +2826,7 @@
 [    NN    ] NN Efficiency(Gd+H): 62.9539 %
 [    NN    ] NN Efficiency(H)   : 7.39737 %
 [    NN    ] NN Efficiency(Gd)  : 83.2181 %
-[  Overall ] Overall Efficiency(Gd+H): 32.9083 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 2.09823 %
 [  Overall ] Overall Efficiency(Gd)  : 62.8134 %
 [  Purity  ] Purity: 98.1165
@@ -2849,7 +2849,7 @@
 [    NN    ] NN Efficiency(Gd+H): 62.1352 %
 [    NN    ] NN Efficiency(H)   : 6.62638 %
 [    NN    ] NN Efficiency(Gd)  : 82.382 %
-[  Overall ] Overall Efficiency(Gd+H): 32.4804 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.87954 %
 [  Overall ] Overall Efficiency(Gd)  : 62.1823 %
 [  Purity  ] Purity: 98.3082
@@ -2872,7 +2872,7 @@
 [    NN    ] NN Efficiency(Gd+H): 61.1495 %
 [    NN    ] NN Efficiency(H)   : 5.93874 %
 [    NN    ] NN Efficiency(Gd)  : 81.2875 %
-[  Overall ] Overall Efficiency(Gd+H): 31.9651 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.6845 %
 [  Overall ] Overall Efficiency(Gd)  : 61.3562 %
 [  Purity  ] Purity: 98.3959
@@ -2895,7 +2895,7 @@
 [    NN    ] NN Efficiency(Gd+H): 60.2194 %
 [    NN    ] NN Efficiency(H)   : 5.25109 %
 [    NN    ] NN Efficiency(Gd)  : 80.2691 %
-[  Overall ] Overall Efficiency(Gd+H): 31.4789 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.48945 %
 [  Overall ] Overall Efficiency(Gd)  : 60.5875 %
 [  Purity  ] Purity: 98.5509
@@ -2918,7 +2918,7 @@
 [    NN    ] NN Efficiency(Gd+H): 58.8438 %
 [    NN    ] NN Efficiency(H)   : 4.18837 %
 [    NN    ] NN Efficiency(Gd)  : 78.7794 %
-[  Overall ] Overall Efficiency(Gd+H): 30.7598 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 1.18801 %
 [  Overall ] Overall Efficiency(Gd)  : 59.463 %
 [  Purity  ] Purity: 98.6463
@@ -2941,7 +2941,7 @@
 [    NN    ] NN Efficiency(Gd+H): 56.8389 %
 [    NN    ] NN Efficiency(H)   : 3.45905 %
 [    NN    ] NN Efficiency(Gd)  : 76.3092 %
-[  Overall ] Overall Efficiency(Gd+H): 29.7118 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 0.981145 %
 [  Overall ] Overall Efficiency(Gd)  : 57.5985 %
 [  Purity  ] Purity: 98.79
@@ -2964,7 +2964,7 @@
 [    NN    ] NN Efficiency(Gd+H): 52.9572 %
 [    NN    ] NN Efficiency(H)   : 2.08377 %
 [    NN    ] NN Efficiency(Gd)  : 71.5133 %
-[  Overall ] Overall Efficiency(Gd+H): 27.6827 %
+[  Overall ] Overall Efficiency(Gd+H): inf %
 [  Overall ] Overall Efficiency(H)   : 0.591051 %
 [  Overall ] Overall Efficiency(Gd)  : 53.9785 %
 [  Purity  ] Purity: 99.1657
@@ -2987,7 +2987,7 @@
 [    NN    ] NN Efficiency(Gd+H): 0 %
 [    NN    ] NN Efficiency(H)   : 0 %
 [    NN    ] NN Efficiency(Gd)  : 0 %
-[  Overall ] Overall Efficiency(Gd+H): 0 %
+[  Overall ] Overall Efficiency(Gd+H): -nan %
 [  Overall ] Overall Efficiency(H)   : 0 %
 [  Overall ] Overall Efficiency(Gd)  : 0 %
 [  Purity  ] Purity: -nan

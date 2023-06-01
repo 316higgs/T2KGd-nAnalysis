@@ -74,7 +74,7 @@ COMMENTOUT
 
 ####################################################################
 ##### FHC numu -> numu Gd MC #####
-<<COMMENTOUT
+#<<COMMENTOUT
 #####  new Gd MC  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
@@ -85,7 +85,7 @@ COMMENTOUT
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMU
-COMMENTOUT
+#COMMENTOUT
 
 <<COMMENTOUT
 #####  new Gd MC, old NTag  ######
@@ -172,7 +172,7 @@ COMMENTOUT
 
 ####################################################################
 ##### FHC numubar -> nuebar Gd MC #####
-#<<COMMENTOUT
+<<COMMENTOUT
 #####  new Gd MC  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_nuebar.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/fhc/numubar_x_nuebar/fhc.numubar_x_nuebar.13a.ntag0026Gd.\*.root\
@@ -183,7 +183,7 @@ COMMENTOUT
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
-#COMMENTOUT
+COMMENTOUT
 
 
 

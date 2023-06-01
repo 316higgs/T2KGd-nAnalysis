@@ -1,9 +1,23 @@
 #pragma once
 
+// Primary-selection
 #define SELECTIONCUTS 6
 #define INTERACTIONTYPE 7
 #define INTERACTIONTYPE_FOR_MERGE 4
 #define DecayeCutPoint 5
+
+// NTag
+#define CUTSTEP 21
+
+float TMVATH[CUTSTEP];
+float eTMVATH[CUTSTEP];
+
+void InitNTagVariables() {
+  for (int i=0; i<CUTSTEP; i++) {
+    TMVATH[i] = 0.;
+    eTMVATH[i] = 0.;
+  }
+}
 
 
 enum class PDGPID

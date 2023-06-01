@@ -12,7 +12,8 @@
 //#include "DefOscChannels.h"
 
 #include "include/NeutrinoEvents.h"
-#include "include/NTagVariables.h"
+//#include "include/NTagVariables.h"
+#include "include/Const.h"
 #include "include/CLTOption.h"
 #include "include/ResultSummary.h"
 #include "include/VECTChannelChecker.h"

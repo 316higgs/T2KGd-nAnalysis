@@ -76,6 +76,7 @@ TGraphErrors* g_OverallGdEff;
 
 TGraphErrors* g_Purity;
 TGraphErrors* g_FillNoiseRate;
+TGraph* g_ROC;
 
 //Capture vertex resolution
 TH1F* h1_TrueNCapTime;

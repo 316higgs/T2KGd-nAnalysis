@@ -1560,7 +1560,6 @@ void NTagAnalysis::SetEfficiencyGraph(int windowstep) {
   //make 20-point(not 21-point) purity curve
   for (int i=0; i<CUTSTEP-1; i++) {
     FillPurity[i]  = Purity[i];
-
     FillTMVATH[i]  = TMVATH[i];
     FilleTMVATH[i] = eTMVATH[i];
   }
@@ -1573,7 +1572,6 @@ void NTagAnalysis::SetEfficiencyGraph(int windowstep) {
   //make 20-point(not 21-point) noise rate curve
   for (int i=0; i<CUTSTEP-1; i++) {
     FillNoiseRate[i] = NoiseRate[windowstep][i+1];
-
     FillTMVATH[i]  = TMVATH[i+1];
     FilleTMVATH[i] = eTMVATH[i+1];
   }
@@ -1582,6 +1580,25 @@ void NTagAnalysis::SetEfficiencyGraph(int windowstep) {
   g_FillNoiseRate -> SetLineColor(kGray+3);
   g_FillNoiseRate -> SetMarkerStyle(20);
   g_FillNoiseRate -> SetMarkerSize(1.0);
+
+  float ROC_Purity[CUTSTEP-2];
+  float ROC_NoiseRate[CUTSTEP-2];
+  int ipoint = 0;
+  for (int i=0; i<CUTSTEP; i++) {
+    if (i==0 || i==20) continue; // skip: noise rate@thr=0 is >>100%, and purity@thr=1 is -nan
+    else {
+      std::cout << "[### i=" << i << ", Thr=" << TMVATH[i] << " ###] Purity: " << Purity[i]*100. << "%, Noise rate: " << NoiseRate[windowstep][i]*100. << "%" << std::endl;
+      ROC_Purity[ipoint] = Purity[i];
+      ROC_NoiseRate[ipoint] = NoiseRate[windowstep][i];
+      ipoint++;
+    }
+  }
+
+  g_ROC = new TGraph(CUTSTEP-2, ROC_NoiseRate, ROC_Purity);
+  g_ROC -> SetMarkerColor(kAzure+5);
+  g_ROC -> SetLineColor(kAzure+5);
+  g_ROC -> SetMarkerStyle(20);
+  g_ROC -> SetMarkerSize(1.0);
 }
 
 
@@ -2530,5 +2547,6 @@ void NTagAnalysis::WritePlots() {
   g_Purity        -> Write();  //Graph19
   //Noise rate as a funtcion of TagOut at a ceratin time window
   g_FillNoiseRate -> Write();  //Graph20
+  g_ROC           -> Write();  //Graph21
 }
 
