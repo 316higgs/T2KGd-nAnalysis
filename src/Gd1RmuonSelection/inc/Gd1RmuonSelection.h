@@ -15,6 +15,7 @@ TH1F* h1_Proto1RmuonEvents;
 TH1F* h1_SelNuEvents[4];
 TH1F* h1_SelTagN[4];
 
+TH1F* h1_evis[INTERACTIONTYPE];
 TH1F* h1_dwall[INTERACTIONTYPE];
 TH1F* h1_Nring[INTERACTIONTYPE];
 TH1F* h1_emulikelihood[INTERACTIONTYPE];
@@ -27,6 +28,7 @@ class Gd1RmuonSelection {
   	Gd1RmuonSelection(){};
   	virtual ~Gd1RmuonSelection(){};
 
+    float GetEvis(CC0PiNumu* numu);
     float GetDWall(CC0PiNumu* numu);
     int   GetNring(CC0PiNumu* numu);
     float GetemuLikelihood(CC0PiNumu* numu);

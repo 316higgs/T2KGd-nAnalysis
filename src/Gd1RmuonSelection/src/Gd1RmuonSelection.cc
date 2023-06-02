@@ -10,6 +10,7 @@ void Gd1RmuonSelection::SetHistoFrame() {
   }
 
   for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
+    h1_evis[i]           = new TH1F(TString::Format("h1_evis_mode%d", i), "", 100, 0, 1000);
     h1_dwall[i]          = new TH1F(TString::Format("h1_dwall_mode%d", i), "", 30, 0, 600);
     h1_Nring[i]          = new TH1F(TString::Format("h1_Nring_mode%d", i), "", 5, 1, 6);
     h1_emulikelihood[i]  = new TH1F(TString::Format("h1_emulikelihood_mode%d", i), "", 50, -1500, 1500);
@@ -87,6 +88,19 @@ void Gd1RmuonSelection::SetHistoFormat() {
     h1_Decaye[i] -> GetXaxis()->SetBinLabel(5, "4");
     h1_Decaye[i] -> GetXaxis()->SetBinLabel(6, "5");
   }
+}
+
+float Gd1RmuonSelection::GetEvis(CC0PiNumu* numu) {
+  int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
+
+  float evis = numu->var<float>("fqevis");
+  if (mode==1)              h1_evis[0] -> Fill(evis, OscProb); //CCQE
+  if (mode>=2 && mode<=10)  h1_evis[1] -> Fill(evis, OscProb); //CC 2p2h
+  if (mode>=31)             h1_evis[2] -> Fill(evis, OscProb); //NC
+  if (mode>10 && mode<=30)  h1_evis[3] -> Fill(evis, OscProb); //CC other
+
+  return evis;
 }
 
 float Gd1RmuonSelection::GetDWall(CC0PiNumu* numu) {
@@ -314,6 +328,7 @@ void Gd1RmuonSelection::WritePlots() {
   }
 
   for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
+    h1_evis[i]           -> Write();
     h1_dwall[i]          -> Write();
     h1_Nring[i]          -> Write();
     h1_emulikelihood[i]  -> Write();

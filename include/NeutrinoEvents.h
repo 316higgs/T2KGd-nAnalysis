@@ -167,6 +167,7 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
 {
   int mode = TMath::Abs(numu->var<int>("mode"));
   float OscProb = numu->getOscWgt();
+  prmsel.GetEvis(numu);
   prmsel.GetDWall(numu);
   if (prmsel.C1ApplyFCFV(evsel)) {
     SelectedParentNeutrinos[0]++;

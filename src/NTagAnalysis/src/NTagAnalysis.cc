@@ -225,7 +225,7 @@ void NTagAnalysis::SetHistoFormat() {
 
 
 void NTagAnalysis::InitNeutrons() {
-  AllTruthNeutrons     = 0;
+  //AllTruthNeutrons     = 0;
   TruthHNeutrons       = 0;
   TruthGdNeutrons      = 0;
   AllTruthCCQENeutrons = 0;
@@ -242,6 +242,13 @@ void NTagAnalysis::InitNeutrons() {
   PreEffinFV   = 0.;
   PreHEffinFV  = 0.;
   PreGdEffinFV = 0.;
+
+  for (int i=0; i<CUTSTEP; i++) {
+    TagTP[i] = 0;
+    TagFN[i] = 0;
+    TagFP[i] = 0;
+    TagTN[i] = 0;
+  }
 
   for (int i=0; i<WINSTEP; i++) {
     AllTruthNeutronsinSearch[i] = 0;
@@ -502,6 +509,7 @@ void NTagAnalysis::GetTruthNeutrons(float NTrueN,
   int mode = TMath::Abs(numu->var<int>("mode"));
 
   AllTruthNeutrons += NTrueN;
+
   //h1_NTrueN[0] -> Fill(NTrueN);
   if (mode==1) {
     //h1_NTrueN[0] -> Fill(NTrueN);
@@ -1581,6 +1589,7 @@ void NTagAnalysis::SetEfficiencyGraph(int windowstep) {
   g_FillNoiseRate -> SetMarkerStyle(20);
   g_FillNoiseRate -> SetMarkerSize(1.0);
 
+  /*
   float ROC_Purity[CUTSTEP-2];
   float ROC_NoiseRate[CUTSTEP-2];
   int ipoint = 0;
@@ -1593,12 +1602,12 @@ void NTagAnalysis::SetEfficiencyGraph(int windowstep) {
       ipoint++;
     }
   }
-
   g_ROC = new TGraph(CUTSTEP-2, ROC_NoiseRate, ROC_Purity);
   g_ROC -> SetMarkerColor(kAzure+5);
   g_ROC -> SetLineColor(kAzure+5);
   g_ROC -> SetMarkerStyle(20);
   g_ROC -> SetMarkerSize(1.0);
+  */
 }
 
 
@@ -1676,6 +1685,27 @@ bool NTagAnalysis::GetTrueMuNCapVtx(int iscnd, CC0PiNumu* numu, Int_t *ichildidx
   } 
   return MuNCap;
 }
+
+void NTagAnalysis::GetTagBreakdown(int ith, 
+                                   UInt_t ican, 
+                                   float Threshold,
+                                   std::vector<float> *NHits,
+                                   std::vector<float> *FitT,
+                                   std::vector<float> *Label,
+                                   std::vector<float> *TagOut,
+                                   bool etagmode) 
+{
+  bool etagboxin = false;
+  if (etagmode){
+    if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+
+    //if (TagOut->at(ican)>Threshold && etagboxin==false) 
+    if (TagOut->at(ican)>Threshold && etagboxin==false && (Label->at(ican)==2 || Label->at(ican)==3)) TagTP[ith]++;
+    if (TagOut->at(ican)>Threshold && etagboxin==false && (Label->at(ican)==0 || Label->at(ican)==1)) TagFP[ith]++;
+  }
+}
+
+
 
 int NTagAnalysis::LabelTrueMuN(CC0PiNumu* numu, bool PrmMuEnd, Int_t *ichildidx) {
   int TrueMuN = 0;
@@ -2548,5 +2578,6 @@ void NTagAnalysis::WritePlots() {
   //Noise rate as a funtcion of TagOut at a ceratin time window
   g_FillNoiseRate -> Write();  //Graph20
   g_ROC           -> Write();  //Graph21
+  g_FOM           -> Write();  //Graph22
 }
 

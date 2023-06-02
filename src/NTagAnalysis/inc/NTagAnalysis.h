@@ -74,9 +74,11 @@ TGraphErrors* g_OverallEff;
 TGraphErrors* g_OverallHEff;
 TGraphErrors* g_OverallGdEff;
 
+// Indecies for NTag performance
 TGraphErrors* g_Purity;
 TGraphErrors* g_FillNoiseRate;
 TGraph* g_ROC;
+TGraph* g_FOM;
 
 //Capture vertex resolution
 TH1F* h1_TrueNCapTime;
@@ -95,9 +97,20 @@ TH1F* h1_GenBefSINeutrons;  // captured neutrons from nu+FSI
 TH1F* h1_GenBefSInE;
 TH1F* h1_GenSInE;
 
+
+int AllTruthNeutrons = 0;
+int TagCandidates = 0;
+int TagTP[CUTSTEP];  // True positive  (tagged truth neutrons)
+int TagFN[CUTSTEP];  // False negative (missed truth neutrons)
+int TagFP[CUTSTEP];  // False positive (mis-tagged truth noise)
+int TagTN[CUTSTEP];  // True negative  (rejected truth noise)
+
+
 int test1 = 0;
 int test2 = 0;
 
+
+// Neutron multiplicity measurement
 const int binnumber_nu = 6;
 const int binnumber_mu = 5;
 const int binnumber_n  = 7;
@@ -219,7 +232,7 @@ void FlagReset() {
 
 class NTagAnalysis {
   private:
-    int AllTruthNeutrons;
+    
     int TruthHNeutrons;
     int TruthGdNeutrons;
     int AllTruthCCQENeutrons;
@@ -431,6 +444,15 @@ class NTagAnalysis {
   	bool DecayelikeChecker(bool etagmode, float NHits, float FitT);
 
     void Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float theta, float thetamin, float thetamax);
+
+    void GetTagBreakdown(int ith, 
+                         UInt_t ican, 
+                         float Threshold,
+                         std::vector<float> *NHits,
+                         std::vector<float> *FitT,
+                         std::vector<float> *Label,
+                         std::vector<float> *TagOut,
+                         bool etagmode);
 
     //For neutron multiplicity measurement
     float GetTaggedNeutrons(std::vector<float> *TagOut,

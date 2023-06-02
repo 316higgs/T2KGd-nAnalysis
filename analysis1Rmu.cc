@@ -122,8 +122,8 @@ int main(int argc, char **argv) {
 
 
   //=========  TTree event variables  ============
-  float NTrueN = 0.;
-  //int NTrueN = 0.;
+  //float NTrueN = 0.;
+  int NTrueN = 0.;
   float vecvx  = 0.;
   float vecvy  = 0.;
   float vecvz  = 0.;
@@ -738,11 +738,16 @@ int main(int argc, char **argv) {
       for (int ith=0; ith<CUTSTEP; ith++) {
         
         //Threshold
-        if (CUTSTEP==11) TMVATH[ith] = 0.1*ith;
-        if (CUTSTEP==21) TMVATH[ith] = 0.05*ith;
+        //if (CUTSTEP==11) TMVATH[ith] = 0.1*ith;
+        //if (CUTSTEP==21) TMVATH[ith] = 0.05*ith;
 
         //Candidates loop
         for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
+
+          ntagana.GetTagBreakdown(ith, jentry, TMVATH[ith], NHits, FitT, Label, TagOut, etagmode);
+          TagCandidates++;
+
+
           //Truth Gd-n or H-n captures
           if (Label->at(jentry)==2 || Label->at(jentry)==3) {
 
@@ -781,9 +786,64 @@ int main(int argc, char **argv) {
 
   }
 
-  std::cout << "No mu stop CCQE   : " << NoPrmMuEnd_CCQE << std::endl;
-  std::cout << "No mu stop CCnonQE: " << NoPrmMuEnd_CCnonQE << std::endl;
-  std::cout << "No mu stop NC     : " << NoPrmMuEnd_NC << std::endl;
+
+  // Calculation of ROC
+  float TagTPR[CUTSTEP];
+  float TagFPR[CUTSTEP];
+  for (int i=0; i<CUTSTEP; i++) {
+    TagTPR[i] = 0;
+    TagFPR[i] = 0;
+  }
+
+  std::cout << "All Truth neutrons: " << AllTruthNeutrons << std::endl;
+  std::cout << "Candidates        : " << TagCandidates << std::endl;
+  for (int ith=0; ith<CUTSTEP; ith++) {
+    TagFN[ith] = AllTruthNeutrons - TagTP[ith];
+    TagTN[ith] = TagCandidates - (TagFP[ith]+TagTP[ith]+TagFN[ith]);
+    TagTPR[ith] = (float)TagTP[ith]/(TagTP[ith] + TagFN[ith]);
+    TagFPR[ith] = (float)TagFP[ith]/(TagTN[ith] + TagFP[ith]);
+  }
+
+  float YoudenIndex = 0;
+  float OptThreshold_ROC = 0;
+  float slope = TagTPR[1]/TagFPR[1];
+  for (int ith=0; ith<CUTSTEP; ith++) {
+    //float TMVATH = 0.05*ith;
+    //float TagSingularity = 1 - TagFPR[ith];
+    float thisYouden = TagTPR[ith] - slope*TagFPR[ith];
+    if (thisYouden > YoudenIndex) {
+      YoudenIndex = thisYouden;
+      OptThreshold_ROC = TMVATH[ith];
+    }
+    std::cout << "[### i=" << ith << ", Thr=" << TMVATH[ith] << " ###] TP = " << TagTP[ith] << ", FP = " << TagFP[ith] << ", FN = " << TagFN[ith] << ", TN = " << TagTN[ith] << std::endl;
+    std::cout << "              True positive rate = " << TagTPR[ith] 
+              << ", False positive rate = " << TagFPR[ith] << ", YoudenIndex = " << 1+thisYouden << std::endl;
+  }
+  std::cout << "Slope = " << slope << std::endl;
+  std::cout << "Optimized n-like threshold(ROC): " << OptThreshold_ROC << std::endl;
+  g_ROC = new TGraph(CUTSTEP, TagFPR, TagTPR);
+
+  // Calculation of FOM
+  float TagFOM[CUTSTEP];
+  for (int i=0; i<CUTSTEP; i++) TagFOM[i] = 0.;
+
+  float MaxFOM = 0;
+  float OptThreshold_FOM = 0;
+  for (int ith=0; ith<CUTSTEP; ith++) {
+    TagFOM[ith] = TagTP[ith]/std::sqrt( TagTP[ith] + TagFP[ith] );
+    if (TagFOM[ith] > MaxFOM) {
+      MaxFOM = TagFOM[ith];
+      OptThreshold_FOM = TMVATH[ith];
+    }
+    std::cout << "[### i=" << ith << ", Thr=" << TMVATH[ith] << " ###] FOM = " << TagFOM[ith] << std::endl;
+  }
+  std::cout << "Optimized n-like threshold(FOM): " << OptThreshold_FOM << std::endl;
+  g_FOM = new TGraph(CUTSTEP, TMVATH, TagFOM);
+  g_FOM -> RemovePoint(20); // remove infinity @ n-likelihood=1
+
+  //std::cout << "No mu stop CCQE   : " << NoPrmMuEnd_CCQE << std::endl;
+  //std::cout << "No mu stop CCnonQE: " << NoPrmMuEnd_CCnonQE << std::endl;
+  //std::cout << "No mu stop NC     : " << NoPrmMuEnd_NC << std::endl;
 
   
   std::cout << "No nlike: " << test1 << std::endl;

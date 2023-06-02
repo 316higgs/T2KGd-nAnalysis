@@ -2,8 +2,8 @@
 
 make cleananalysis1Rmu
 make 
-make cleanPreScan
-make PreScan.exe
+#make cleanPreScan
+#make PreScan.exe
 
 if [ ! -f ./analysis1Rmu.exe ]; then
   exit 2
@@ -36,10 +36,10 @@ COMMENTOUT
 ########## TWIDTH scan ############
 #<<COMMENTOUT
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
-                   ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
-                   $ANALYSISSTAGE/output/TWIDTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH160.root\
-                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.TWIDTH160.txt\
-                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.TWIDTH160.txt\
+                   ${DISK3}/Ntag/output/TWIDTHscan/TWIDTH_280ns/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
+                   $ANALYSISSTAGE/output/TWIDTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH280.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.TWIDTH280.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.TWIDTH1280.txt\
                    -MCType Gd\
                    -ETAG ON\
                    -BEAMMODE FHC\

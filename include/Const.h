@@ -14,7 +14,8 @@ float eTMVATH[CUTSTEP];
 
 void InitNTagVariables() {
   for (int i=0; i<CUTSTEP; i++) {
-    TMVATH[i] = 0.;
+    if (CUTSTEP==11) TMVATH[i] = 0.1*i;
+    if (CUTSTEP==21) TMVATH[i] = 0.05*i;
     eTMVATH[i] = 0.;
   }
 }
