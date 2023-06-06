@@ -104,9 +104,9 @@ COMMENTOUT
 #####  new Gd MC w/ ToF-subtraction  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/wToF/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
-                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.newGdMC.wToF.root\
-                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.newGdMC.wToF.txt\
-                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.newGdMC.wToF.txt\
+                   ${ANALYSISSTAGE}/output/fhc/fhc.numu_x_numu.newGdMC.wToF.root\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.neutrino.newGdMC.wToF.txt\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.ntag.newGdMC.wToF.txt\
                    -MCType Gd\
                    -ETAG ON\
                    -BEAMMODE FHC\

@@ -16,19 +16,19 @@ void PreScanPurity() {
 #endif
 
 #if 1
-  TFile* fin120 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH10.root");
-  TFile* fin160 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH15.root");
-  TFile* fin200 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH25.root");
-  TFile* fin240 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH35.root");
-  TFile* fin280 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH45.root");
+  TFile* fin_scn1 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH15.root");
+  TFile* fin_scn2 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH20.root");
+  TFile* fin_scn3 = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+  TFile* fin_scn4 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH30.root");
+  TFile* fin_scn5 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH35.root");
 #endif
   
   TGraphErrors* g_Purity[SCANPOINTS];
-  g_Purity[0] = (TGraphErrors*)fin120->Get("NTagAnalysis/Graph;19");
-  g_Purity[1] = (TGraphErrors*)fin160->Get("NTagAnalysis/Graph;19");
-  g_Purity[2] = (TGraphErrors*)fin200->Get("NTagAnalysis/Graph;19");
-  g_Purity[3] = (TGraphErrors*)fin240->Get("NTagAnalysis/Graph;19");
-  g_Purity[4] = (TGraphErrors*)fin280->Get("NTagAnalysis/Graph;19");
+  g_Purity[0] = (TGraphErrors*)fin_scn1->Get("NTagAnalysis/Graph;19");
+  g_Purity[1] = (TGraphErrors*)fin_scn2->Get("NTagAnalysis/Graph;19");
+  g_Purity[2] = (TGraphErrors*)fin_scn3->Get("NTagAnalysis/Graph;19");
+  g_Purity[3] = (TGraphErrors*)fin_scn4->Get("NTagAnalysis/Graph;19");
+  g_Purity[4] = (TGraphErrors*)fin_scn5->Get("NTagAnalysis/Graph;19");
 
   for (int iscan=0; iscan<SCANPOINTS; iscan++) {
     g_Purity[iscan] -> SetLineWidth(2);
@@ -59,11 +59,11 @@ void PreScanPurity() {
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
   TH1F* frame = gPad->DrawFrame(0., 0., 1., 1.);
-  frame -> SetMinimum(0.7);
+  //frame -> SetMinimum(0.7);
   frame -> SetXTitle("n-likelihood");
   frame -> SetYTitle("Tagging Purity");
   frame -> SetTitleOffset(1.1, "Y");
-  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_Purity[iscan]->Draw("SAMEPL");
+  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_Purity[iscan]->Draw("SAMEL");
 
   TLegend* legend1 = new TLegend(0.3, 0.2, 0.89, 0.65);
   legend1 -> SetTextSize(0.04);
@@ -79,7 +79,7 @@ void PreScanPurity() {
   legend1->AddEntry((TObject*)0,"#kern[-0.25]{Pre-selection NHITSTH scan(TWIDTH=200 ns)}","");
   legend1 -> AddEntry(g_Purity[0], "NHITSTH = 10", "PL");
   legend1 -> AddEntry(g_Purity[1], "NHITSTH = 15", "PL");
-  legend1 -> AddEntry(g_Purity[2], "NHITSTH = 25", "PL");
+  legend1 -> AddEntry(g_Purity[2], "NHITSTH = 25 (nominal)", "PL");
   legend1 -> AddEntry(g_Purity[3], "NHITSTH = 35", "PL");
   legend1 -> AddEntry(g_Purity[4], "NHITSTH = 45", "PL");
 #endif

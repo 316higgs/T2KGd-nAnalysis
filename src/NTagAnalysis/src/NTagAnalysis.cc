@@ -1276,6 +1276,9 @@ void NTagAnalysis::SummaryTruthInfoinSearch(float WinMin, TString outputname) {
     ofs << "[   Pre    ] Pre-selection Efficiency(Gd+H): " << PreEff*100 << " %" << std::endl;
     ofs << "[   Pre    ] Pre-selection Efficiency(H)   : " << PreHEff*100 << " %" << std::endl;
     ofs << "[   Pre    ] Pre-selection Efficiency(Gd)  : " << PreGdEff*100 << " %" << std::endl;
+    ofs << "PreEff[i]   = " << PreEff*100 << std::endl;
+    ofs << "PreHEff[i]  = " << PreHEff*100 << std::endl; 
+    ofs << "PreGdEff[i] = " << PreGdEff*100 << std::endl; 
     //ofs << "[   Pre    ] Pre-selection Efficiency(Gd+H) in FV: " << PreEffinFV*100 << " %" << std::endl;
     //ofs << "[   Pre    ] Pre-selection Efficiency(H) in FV   : " << PreHEffinFV*100 << " %" << std::endl;
     //ofs << "[   Pre    ] Pre-selection Efficiency(Gd) in FV  : " << PreGdEffinFV*100 << " %" << std::endl;

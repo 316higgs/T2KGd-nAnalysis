@@ -16,19 +16,19 @@ void PreScanNoiseRate() {
 #endif
 
 #if 1
-  TFile* fin120 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH10.root");
-  TFile* fin160 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH15.root");
-  TFile* fin200 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH25.root");
-  TFile* fin240 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH35.root");
-  TFile* fin280 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH45.root");
+  TFile* fin_scn1 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH15.root");
+  TFile* fin_scn2 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH20.root");
+  TFile* fin_scn3 = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+  TFile* fin_scn4 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH30.root");
+  TFile* fin_scn5 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH35.root");
 #endif
   
   TGraphErrors* g_NoiseRate[SCANPOINTS];
-  g_NoiseRate[0] = (TGraphErrors*)fin120->Get("NTagAnalysis/Graph;20");
-  g_NoiseRate[1] = (TGraphErrors*)fin160->Get("NTagAnalysis/Graph;20");
-  g_NoiseRate[2] = (TGraphErrors*)fin200->Get("NTagAnalysis/Graph;20");
-  g_NoiseRate[3] = (TGraphErrors*)fin240->Get("NTagAnalysis/Graph;20");
-  g_NoiseRate[4] = (TGraphErrors*)fin280->Get("NTagAnalysis/Graph;20");
+  g_NoiseRate[0] = (TGraphErrors*)fin_scn1->Get("NTagAnalysis/Graph;20");
+  g_NoiseRate[1] = (TGraphErrors*)fin_scn2->Get("NTagAnalysis/Graph;20");
+  g_NoiseRate[2] = (TGraphErrors*)fin_scn3->Get("NTagAnalysis/Graph;20");
+  g_NoiseRate[3] = (TGraphErrors*)fin_scn4->Get("NTagAnalysis/Graph;20");
+  g_NoiseRate[4] = (TGraphErrors*)fin_scn5->Get("NTagAnalysis/Graph;20");
 
   for (int iscan=0; iscan<SCANPOINTS; iscan++) {
     g_NoiseRate[iscan] -> SetLineWidth(2);
@@ -63,7 +63,7 @@ void PreScanNoiseRate() {
   frame -> SetXTitle("n-likelihood");
   frame -> SetYTitle("Mis-tagged Noise Rate");
   frame -> SetTitleOffset(1.1, "Y");
-  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NoiseRate[iscan]->Draw("SAMEPL");
+  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NoiseRate[iscan]->Draw("SAMEL");
 
   TLegend* legend1 = new TLegend(0.3, 0.45, 0.89, 0.89);
   legend1 -> SetTextSize(0.04);
@@ -79,7 +79,7 @@ void PreScanNoiseRate() {
   legend1->AddEntry((TObject*)0,"#kern[-0.25]{Pre-selection NHITSTH scan(TWIDTH=200 ns)}","");
   legend1 -> AddEntry(g_NoiseRate[0], "NHITSTH = 10", "PL");
   legend1 -> AddEntry(g_NoiseRate[1], "NHITSTH = 15", "PL");
-  legend1 -> AddEntry(g_NoiseRate[2], "NHITSTH = 25", "PL");
+  legend1 -> AddEntry(g_NoiseRate[2], "NHITSTH = 25 (nominal)", "PL");
   legend1 -> AddEntry(g_NoiseRate[3], "NHITSTH = 35", "PL");
   legend1 -> AddEntry(g_NoiseRate[4], "NHITSTH = 45", "PL");
 #endif

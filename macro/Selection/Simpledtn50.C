@@ -17,6 +17,7 @@ void Simpledtn50() {
   h2_dtn50 -> SetTitleOffset(1.2, "X");
   h2_dtn50 -> SetXTitle("Timing difference from the prompt event dt [#musec]");
   h2_dtn50 -> SetYTitle("#hits in 50 nsec time window N50");
+  h2_dtn50 ->GetXaxis()->SetTitleSize(0.04);
 
   //TF1* f1_upr = new TF1("f1_upr", "400.", 0., 10.);
   TF1* f1_btm = new TF1("f1_btm", "4*x+30.0", 1.5, 20.);

@@ -16,22 +16,29 @@ void Efficiency() {
   TGraphErrors* g_NNEff    = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;13");
   TGraphErrors* g_NNHEff   = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;14");
   TGraphErrors* g_NNGdEff  = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;15");
+  g_NNEff   -> SetLineWidth(2);
+  g_NNHEff  -> SetLineWidth(2);
+  g_NNGdEff -> SetLineWidth(2);
 
   TGraphErrors* g_OverallEff    = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;16");
   TGraphErrors* g_OverallHEff   = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;17");
   TGraphErrors* g_OverallGdEff  = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;18");
+  g_OverallEff   -> SetLineWidth(2);
+  g_OverallHEff  -> SetLineWidth(2);
+  g_OverallGdEff -> SetLineWidth(2);
 
+
+  ///////////  Overall tagging efficiency  /////////////
   gROOT -> SetStyle("Plain");
-
-  TCanvas* c = new TCanvas("c","c",800,800);
+  TCanvas* c = new TCanvas("c","c",900,700);
   c -> SetGrid();
   TH1F* frame = gPad->DrawFrame(0., 0., 1., 1.);
   frame -> SetXTitle("n-likelihood");
   frame -> SetYTitle("Overall Tagging Efficiency");
   frame -> SetTitleOffset(1.2, "Y");
-  g_OverallEff   -> Draw("PL");
-  g_OverallHEff  -> Draw("SAMEPL");
-  g_OverallGdEff -> Draw("SAMEPL");
+  g_OverallEff   -> Draw("L");
+  g_OverallHEff  -> Draw("SAMEL");
+  g_OverallGdEff -> Draw("SAMEL");
 
   TLegend* legend = new TLegend(0.53, 0.9, 0.87, 0.94);
   legend -> SetTextSize(0.04);
@@ -78,16 +85,18 @@ void Efficiency() {
   legend4->SetBorderSize(0);
   legend4->Draw() ;
 
+
 #if 1
-  TCanvas* cNN = new TCanvas("cNN","cNN",800,800);
+  ///////////  NN classification efficiency  /////////////
+  TCanvas* cNN = new TCanvas("cNN","cNN",900,700);
   cNN -> SetGrid();
   TH1F* frameNN = gPad->DrawFrame(0., 0., 1., 1.);
   frameNN -> SetXTitle("n-likelihood");
   frameNN -> SetYTitle("NN Classification Efficiency");
   frameNN -> SetTitleOffset(1.2, "Y");
-  g_NNEff   -> Draw("PL");
-  g_NNHEff  -> Draw("SAMEPL");
-  g_NNGdEff -> Draw("SAMEPL");
+  g_NNEff   -> Draw("L");
+  g_NNHEff  -> Draw("SAMEL");
+  g_NNGdEff -> Draw("SAMEL");
   //legend->Draw() ;
   legend1 -> Draw();
   legend2 -> Draw();

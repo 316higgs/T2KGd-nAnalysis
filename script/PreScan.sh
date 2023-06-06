@@ -33,8 +33,58 @@ FITQUNVER=fiTQun_v4
 COMMENTOUT
 
 
-########## TWIDTH scan ############
+########## NHITSTH scan ############
 #<<COMMENTOUT
+./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
+                   ${DISK3}/Ntag/output/NHITSTHscan/NHITSTH_15/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
+                   $ANALYSISSTAGE/output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH15.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.NHITSTH15.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.NHITSTH15.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMU
+#COMMENTOUT
+
+#<<COMMENTOUT
+./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
+                   ${DISK3}/Ntag/output/NHITSTHscan/NHITSTH_20/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
+                   $ANALYSISSTAGE/output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH20.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.NHITSTH20.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.NHITSTH20.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMU
+#COMMENTOUT
+
+#<<COMMENTOUT
+./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
+                   ${DISK3}/Ntag/output/NHITSTHscan/NHITSTH_30/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
+                   $ANALYSISSTAGE/output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH30.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.NHITSTH30.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.NHITSTH30.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMU
+#COMMENTOUT
+
+#<<COMMENTOUT
+./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
+                   ${DISK3}/Ntag/output/NHITSTHscan/NHITSTH_35/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
+                   $ANALYSISSTAGE/output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH35.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.NHITSTH35.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.NHITSTH35.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMU
+#COMMENTOUT
+
+
+########## TWIDTH scan ############
+<<COMMENTOUT
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/TWIDTHscan/TWIDTH_280ns/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
                    $ANALYSISSTAGE/output/TWIDTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH280.root\
@@ -44,7 +94,7 @@ COMMENTOUT
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMU
-#COMMENTOUT
+COMMENTOUT
 
 <<COMMENTOUT
 ./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\

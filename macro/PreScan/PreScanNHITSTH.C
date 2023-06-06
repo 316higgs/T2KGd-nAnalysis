@@ -7,11 +7,11 @@
 #define SCANPOINTS 5
 
 void PreScanNHITSTH() {
-  TFile* fin120 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH10.root");
-  TFile* fin160 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH15.root");
-  TFile* fin200 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH25.root");
-  TFile* fin240 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH35.root");
-  TFile* fin280 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH45.root");
+  TFile* fin_scn1 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH15.root");
+  TFile* fin_scn2 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH20.root");
+  TFile* fin_scn3 = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+  TFile* fin_scn4 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH30.root");
+  TFile* fin_scn5 = new TFile("../../output/NHITSTHScan/fhc.numu_x_numu.0026Gd.noToF.NHITSTH35.root");
 
   float NHITSTH[SCANPOINTS];
   float eNHITSTH[SCANPOINTS];
@@ -30,34 +30,34 @@ void PreScanNHITSTH() {
 
     switch (i) {
       case 0:
-        NHITSTH[i]   = 10;
-        PreEff[i]   = 68.2667;
-        PreHEff[i]  = 41.541;
-        PreGdEff[i] = 94.3518;
+        NHITSTH[i]   = 15;
+        PreEff[i]   = 74.3276;
+        PreHEff[i]  = 52.5766;
+        PreGdEff[i] = 95.0874;
         break;
       case 1:
-        NHITSTH[i]   = 15;
-        PreEff[i]   = 59.1718;
-        PreHEff[i]  = 32.5068;
-        PreGdEff[i] = 90.6488;
+        NHITSTH[i]   = 20;
+        PreEff[i]   = 71.1277;
+        PreHEff[i]  = 48;
+        PreGdEff[i] = 93.2015;
         break;
       case 2:
         NHITSTH[i]   = 25;
-        PreEff[i]   = 56.375;
-        PreHEff[i]  = 23.0365;
-        PreGdEff[i] = 88.9142;
+        PreEff[i]   = 62.845;
+        PreHEff[i]  = 33.4054;
+        PreGdEff[i] = 90.943;
         break;
       case 3:
-        NHITSTH[i]   = 35;
-        PreEff[i]   = 39.0501;
-        PreHEff[i]  = 2.29831;
-        PreGdEff[i] = 74.9207;
+        NHITSTH[i]   = 30;
+        PreEff[i]   = 51.2157;
+        PreHEff[i]  = 13.9219;
+        PreGdEff[i] = 86.81;
         break;
       case 4:
-        NHITSTH[i]   = 45;
-        PreEff[i]   = 20.8295;
-        PreHEff[i]  = 0.0912206;
-        PreGdEff[i] = 41.0706;
+        NHITSTH[i]   = 35;
+        PreEff[i]   = 41.0089;
+        PreHEff[i]  = 3.5976;
+        PreGdEff[i] = 76.7154;
         break;
     }
 
@@ -90,25 +90,25 @@ void PreScanNHITSTH() {
   ////////////////////////////////////////////////////////////////////////////////
 
   TGraphErrors* g_NHITSTH_x_NNEff[SCANPOINTS];
-  g_NHITSTH_x_NNEff[0] = (TGraphErrors*)fin120->Get("NTagAnalysis/Graph;13");
-  g_NHITSTH_x_NNEff[1] = (TGraphErrors*)fin160->Get("NTagAnalysis/Graph;13");
-  g_NHITSTH_x_NNEff[2] = (TGraphErrors*)fin200->Get("NTagAnalysis/Graph;13");
-  g_NHITSTH_x_NNEff[3] = (TGraphErrors*)fin240->Get("NTagAnalysis/Graph;13");
-  g_NHITSTH_x_NNEff[4] = (TGraphErrors*)fin280->Get("NTagAnalysis/Graph;13");
+  g_NHITSTH_x_NNEff[0] = (TGraphErrors*)fin_scn1->Get("NTagAnalysis/Graph;13");
+  g_NHITSTH_x_NNEff[1] = (TGraphErrors*)fin_scn2->Get("NTagAnalysis/Graph;13");
+  g_NHITSTH_x_NNEff[2] = (TGraphErrors*)fin_scn3->Get("NTagAnalysis/Graph;13");
+  g_NHITSTH_x_NNEff[3] = (TGraphErrors*)fin_scn4->Get("NTagAnalysis/Graph;13");
+  g_NHITSTH_x_NNEff[4] = (TGraphErrors*)fin_scn5->Get("NTagAnalysis/Graph;13");
 
   TGraphErrors* g_NHITSTH_x_NNHEff[SCANPOINTS];
-  g_NHITSTH_x_NNHEff[0] = (TGraphErrors*)fin120->Get("NTagAnalysis/Graph;14");
-  g_NHITSTH_x_NNHEff[1] = (TGraphErrors*)fin160->Get("NTagAnalysis/Graph;14");
-  g_NHITSTH_x_NNHEff[2] = (TGraphErrors*)fin200->Get("NTagAnalysis/Graph;14");
-  g_NHITSTH_x_NNHEff[3] = (TGraphErrors*)fin240->Get("NTagAnalysis/Graph;14");
-  g_NHITSTH_x_NNHEff[4] = (TGraphErrors*)fin280->Get("NTagAnalysis/Graph;14");
+  g_NHITSTH_x_NNHEff[0] = (TGraphErrors*)fin_scn1->Get("NTagAnalysis/Graph;14");
+  g_NHITSTH_x_NNHEff[1] = (TGraphErrors*)fin_scn2->Get("NTagAnalysis/Graph;14");
+  g_NHITSTH_x_NNHEff[2] = (TGraphErrors*)fin_scn3->Get("NTagAnalysis/Graph;14");
+  g_NHITSTH_x_NNHEff[3] = (TGraphErrors*)fin_scn4->Get("NTagAnalysis/Graph;14");
+  g_NHITSTH_x_NNHEff[4] = (TGraphErrors*)fin_scn5->Get("NTagAnalysis/Graph;14");
 
   TGraphErrors* g_NHITSTH_x_NNGdEff[SCANPOINTS];
-  g_NHITSTH_x_NNGdEff[0] = (TGraphErrors*)fin120->Get("NTagAnalysis/Graph;15");
-  g_NHITSTH_x_NNGdEff[1] = (TGraphErrors*)fin160->Get("NTagAnalysis/Graph;15");
-  g_NHITSTH_x_NNGdEff[2] = (TGraphErrors*)fin200->Get("NTagAnalysis/Graph;15");
-  g_NHITSTH_x_NNGdEff[3] = (TGraphErrors*)fin240->Get("NTagAnalysis/Graph;15");
-  g_NHITSTH_x_NNGdEff[4] = (TGraphErrors*)fin280->Get("NTagAnalysis/Graph;15");
+  g_NHITSTH_x_NNGdEff[0] = (TGraphErrors*)fin_scn1->Get("NTagAnalysis/Graph;15");
+  g_NHITSTH_x_NNGdEff[1] = (TGraphErrors*)fin_scn2->Get("NTagAnalysis/Graph;15");
+  g_NHITSTH_x_NNGdEff[2] = (TGraphErrors*)fin_scn3->Get("NTagAnalysis/Graph;15");
+  g_NHITSTH_x_NNGdEff[3] = (TGraphErrors*)fin_scn4->Get("NTagAnalysis/Graph;15");
+  g_NHITSTH_x_NNGdEff[4] = (TGraphErrors*)fin_scn5->Get("NTagAnalysis/Graph;15");
 
   for (int iscan=0; iscan<SCANPOINTS; iscan++) {
     g_NHITSTH_x_NNEff[iscan]   -> SetLineWidth(2);
@@ -161,25 +161,25 @@ void PreScanNHITSTH() {
   ////////////////////////////////////////////////////////////////////////////////
 
   TGraphErrors* g_NHITSTH_x_Eff[SCANPOINTS];
-  g_NHITSTH_x_Eff[0] = (TGraphErrors*)fin120->Get("NTagAnalysis/Graph;16");
-  g_NHITSTH_x_Eff[1] = (TGraphErrors*)fin160->Get("NTagAnalysis/Graph;16");
-  g_NHITSTH_x_Eff[2] = (TGraphErrors*)fin200->Get("NTagAnalysis/Graph;16");
-  g_NHITSTH_x_Eff[3] = (TGraphErrors*)fin240->Get("NTagAnalysis/Graph;16");
-  g_NHITSTH_x_Eff[4] = (TGraphErrors*)fin280->Get("NTagAnalysis/Graph;16");
+  g_NHITSTH_x_Eff[0] = (TGraphErrors*)fin_scn1->Get("NTagAnalysis/Graph;16");
+  g_NHITSTH_x_Eff[1] = (TGraphErrors*)fin_scn2->Get("NTagAnalysis/Graph;16");
+  g_NHITSTH_x_Eff[2] = (TGraphErrors*)fin_scn3->Get("NTagAnalysis/Graph;16");
+  g_NHITSTH_x_Eff[3] = (TGraphErrors*)fin_scn4->Get("NTagAnalysis/Graph;16");
+  g_NHITSTH_x_Eff[4] = (TGraphErrors*)fin_scn5->Get("NTagAnalysis/Graph;16");
 
   TGraphErrors* g_NHITSTH_x_HEff[SCANPOINTS];
-  g_NHITSTH_x_HEff[0] = (TGraphErrors*)fin120->Get("NTagAnalysis/Graph;17");
-  g_NHITSTH_x_HEff[1] = (TGraphErrors*)fin160->Get("NTagAnalysis/Graph;17");
-  g_NHITSTH_x_HEff[2] = (TGraphErrors*)fin200->Get("NTagAnalysis/Graph;17");
-  g_NHITSTH_x_HEff[3] = (TGraphErrors*)fin240->Get("NTagAnalysis/Graph;17");
-  g_NHITSTH_x_HEff[4] = (TGraphErrors*)fin280->Get("NTagAnalysis/Graph;17");
+  g_NHITSTH_x_HEff[0] = (TGraphErrors*)fin_scn1->Get("NTagAnalysis/Graph;17");
+  g_NHITSTH_x_HEff[1] = (TGraphErrors*)fin_scn2->Get("NTagAnalysis/Graph;17");
+  g_NHITSTH_x_HEff[2] = (TGraphErrors*)fin_scn3->Get("NTagAnalysis/Graph;17");
+  g_NHITSTH_x_HEff[3] = (TGraphErrors*)fin_scn4->Get("NTagAnalysis/Graph;17");
+  g_NHITSTH_x_HEff[4] = (TGraphErrors*)fin_scn5->Get("NTagAnalysis/Graph;17");
 
   TGraphErrors* g_NHITSTH_x_GdEff[SCANPOINTS];
-  g_NHITSTH_x_GdEff[0] = (TGraphErrors*)fin120->Get("NTagAnalysis/Graph;18");
-  g_NHITSTH_x_GdEff[1] = (TGraphErrors*)fin160->Get("NTagAnalysis/Graph;18");
-  g_NHITSTH_x_GdEff[2] = (TGraphErrors*)fin200->Get("NTagAnalysis/Graph;18");
-  g_NHITSTH_x_GdEff[3] = (TGraphErrors*)fin240->Get("NTagAnalysis/Graph;18");
-  g_NHITSTH_x_GdEff[4] = (TGraphErrors*)fin280->Get("NTagAnalysis/Graph;18");
+  g_NHITSTH_x_GdEff[0] = (TGraphErrors*)fin_scn1->Get("NTagAnalysis/Graph;18");
+  g_NHITSTH_x_GdEff[1] = (TGraphErrors*)fin_scn2->Get("NTagAnalysis/Graph;18");
+  g_NHITSTH_x_GdEff[2] = (TGraphErrors*)fin_scn3->Get("NTagAnalysis/Graph;18");
+  g_NHITSTH_x_GdEff[3] = (TGraphErrors*)fin_scn4->Get("NTagAnalysis/Graph;18");
+  g_NHITSTH_x_GdEff[4] = (TGraphErrors*)fin_scn5->Get("NTagAnalysis/Graph;18");
 
   for (int iscan=0; iscan<SCANPOINTS; iscan++) {
     g_NHITSTH_x_Eff[iscan]   -> SetLineWidth(2);
@@ -230,10 +230,12 @@ void PreScanNHITSTH() {
   }
 
 
+#if 0
+  ///////////  Pre-selection Efficiency  ////////////
   TCanvas* cPre = new TCanvas("cPre", "cPre", 900, 700);
   cPre -> cd();
   cPre -> SetGrid();
-  TH1F* framePre = gPad->DrawFrame(5., 0., 50., 1.);
+  TH1F* framePre = gPad->DrawFrame(10., 0., 45., 1.);
   framePre -> SetXTitle("n-likelihood");
   framePre -> SetYTitle("Pre-selection Efficiency");
   framePre -> SetTitleOffset(1.1, "Y");
@@ -248,104 +250,188 @@ void PreScanNHITSTH() {
   legend1 -> AddEntry(g_NHITSTH_x_PreHEff, "H(n,#gamma)", "PL");
   legend1 -> AddEntry(g_NHITSTH_x_PreGdEff, "Gd(n,#gamma)", "PL");
   legend1->SetFillColor(0);
-  legend1->Draw();
+  //legend1->Draw();
 
-  TCanvas* cNN = new TCanvas("cNN", "cNN", 900, 700);
-  cNN -> cd();
-  cNN -> SetGrid();
+  TLegend* legend2 = new TLegend(0.42, 0.9, 0.68, 0.95);
+  legend2 -> SetTextSize(0.04);
+  legend2 -> AddEntry(g_NHITSTH_x_PreEff, "Gd+H", "PL");
+  legend2->SetLineColor(0);
+  legend2->SetFillColor(0);
+  legend2->SetFillStyle(0);
+  legend2->SetBorderSize(0);
+  legend2->Draw() ;
+
+  TLegend* legend3 = new TLegend(0.6, 0.9, 0.88, 0.95);
+  legend3 -> SetTextSize(0.04);
+  legend3 -> AddEntry(g_NHITSTH_x_PreHEff, "H", "PL");
+  legend3->SetLineColor(0);
+  legend3->SetFillColor(0);
+  legend3->SetFillStyle(0);
+  legend3->SetBorderSize(0);
+  legend3->Draw() ;
+
+  TLegend* legend4 = new TLegend(0.7, 0.9, 0.98, 0.95);
+  legend4 -> SetTextSize(0.04);
+  legend4 -> AddEntry(g_NHITSTH_x_PreGdEff, "Gd", "PL");
+  legend4->SetLineColor(0);
+  legend4->SetFillColor(0);
+  legend4->SetFillStyle(0);
+  legend4->SetBorderSize(0);
+  legend4->Draw() ;
+#endif
+
+
+#if 0
+  ///////////  NN Classification Efficiency (Gd+H)  ////////////
+  TCanvas* cNN = new TCanvas("cNN", "cNN", 900, 1000);
+  cNN -> Divide(1, 3);
+  cNN -> cd(1) -> SetGrid();
   TH1F* frameNN = gPad->DrawFrame(0., 0., 1., 1.);
   frameNN -> SetXTitle("n-likelihood");
   frameNN -> SetYTitle("NN Classification Efficiency");
-  frameNN -> SetTitleOffset(1.1, "Y");
-  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NHITSTH_x_NNEff[iscan] -> Draw("PL");
+  frameNN ->GetXaxis()->SetLabelSize(0.053);
+  frameNN ->GetYaxis()->SetLabelSize(0.053);
+  frameNN ->GetXaxis()->SetTitleSize(0.053);
+  frameNN ->GetYaxis()->SetTitleSize(0.053);
+  frameNN -> SetTitleOffset(0.7, "Y");
+  frameNN -> SetTitleOffset(0.8, "X");
+  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NHITSTH_x_NNEff[iscan] -> Draw("L");
 
-  TLegend* legendNN = new TLegend(0.12, 0.12, 0.6, 0.5);
-  legendNN -> SetTextSize(0.04);
-  legendNN -> AddEntry((TObject*)0,"#kern[-0.25]{NHITSTH scan(TWIDTH=200 ns)}","");
-  legendNN -> AddEntry(g_NHITSTH_x_NNEff[0], "NHITSTH = 10", "PL");
-  legendNN -> AddEntry(g_NHITSTH_x_NNEff[1], "NHITSTH = 15", "PL");
-  legendNN -> AddEntry(g_NHITSTH_x_NNEff[2], "NHITSTH = 25", "PL");
-  legendNN -> AddEntry(g_NHITSTH_x_NNEff[3], "NHITSTH = 35", "PL");
-  legendNN -> AddEntry(g_NHITSTH_x_NNEff[4], "NHITSTH = 45", "PL");
-  legendNN -> SetFillColor(0);
-  legendNN -> Draw();
-
-  TCanvas* cHNN = new TCanvas("cHNN", "cHNN", 900, 700);
-  cHNN -> cd();
-  cHNN -> SetGrid();
-  TH1F* frameHNN = gPad->DrawFrame(0., 0., 1., 1.);
-  frameHNN -> SetXTitle("n-likelihood");
-  frameHNN -> SetYTitle("NN H(n, #gamma) Classification Efficiency");
-  frameHNN -> SetTitleOffset(1.1, "Y");
-  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NHITSTH_x_NNHEff[iscan] -> Draw("PL");
-  TLegend* legendHNN = new TLegend(0.4, 0.5, 0.89, 0.89);
-  legendHNN -> SetTextSize(0.04);
-  legendHNN -> AddEntry((TObject*)0,"#kern[-0.25]{NHITSTH scan(TWIDTH=200 ns)}","");
-  legendHNN -> AddEntry(g_NHITSTH_x_NNEff[0], "NHITSTH = 10", "PL");
-  legendHNN -> AddEntry(g_NHITSTH_x_NNEff[1], "NHITSTH = 15", "PL");
-  legendHNN -> AddEntry(g_NHITSTH_x_NNEff[2], "NHITSTH = 25", "PL");
-  legendHNN -> AddEntry(g_NHITSTH_x_NNEff[3], "NHITSTH = 35", "PL");
-  legendHNN -> AddEntry(g_NHITSTH_x_NNEff[4], "NHITSTH = 45", "PL");
-  legendHNN -> SetFillColor(0);
-  legendHNN -> Draw();
-
-  TCanvas* cGdNN = new TCanvas("cGdNN", "cGdNN", 900, 700);
-  cGdNN -> cd();
-  cGdNN -> SetGrid();
-  TH1F* frameGdNN = gPad->DrawFrame(0., 0., 1., 1.);
-  frameGdNN -> SetXTitle("n-likelihood");
-  frameGdNN -> SetYTitle("NN Gd(n, #gamma) Classification Efficiency");
-  frameGdNN -> SetTitleOffset(1.1, "Y");
-  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NHITSTH_x_NNGdEff[iscan] -> Draw("PL");
-  TLegend* legendGdNN = new TLegend(0.2, 0.2, 0.68, 0.58);
-  legendGdNN -> SetTextSize(0.04);
-  legendGdNN -> AddEntry((TObject*)0,"#kern[-0.25]{NHITSTH scan(TWIDTH=200 ns)}","");
-  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[0], "NHITSTH = 10", "PL");
-  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[1], "NHITSTH = 15", "PL");
-  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[2], "NHITSTH = 25", "PL");
-  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[3], "NHITSTH = 35", "PL");
-  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[4], "NHITSTH = 45", "PL");
+  TLegend* legendGdNN = new TLegend(0.15, 0.15, 0.49, 0.59);
+  legendGdNN -> SetTextSize(0.055);
+  legendGdNN -> AddEntry((TObject*)0,"#kern[-0.25]{NHITSTH scan (TWIDTH=200 ns)}","");
+  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[0], "NHITSTH = 10", "L");
+  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[1], "NHITSTH = 15", "L");
+  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[2], "NHITSTH = 25(nominal)", "L");
+  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[3], "NHITSTH = 35", "L");
+  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[4], "NHITSTH = 45", "L");
   legendGdNN -> SetFillColor(0);
   legendGdNN -> Draw();
 
+  ///////////  NN Classification Efficiency (H)  ////////////
+  cNN -> cd(2) -> SetGrid();
+  TH1F* frameHNN = gPad->DrawFrame(0., 0., 1., 1.);
+  frameHNN -> SetXTitle("n-likelihood");
+  frameHNN -> SetYTitle("NN H(n, #gamma) Classification Efficiency");
+  frameHNN ->GetXaxis()->SetLabelSize(0.053);
+  frameHNN ->GetYaxis()->SetLabelSize(0.053);
+  frameHNN ->GetXaxis()->SetTitleSize(0.053);
+  frameHNN ->GetYaxis()->SetTitleSize(0.053);
+  frameHNN -> SetTitleOffset(0.7, "Y");
+  frameHNN -> SetTitleOffset(0.8, "X");
+  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NHITSTH_x_NNHEff[iscan] -> Draw("L");
 
-  TCanvas* c = new TCanvas("c", "c", 900, 700);
-  c -> cd();
-  c -> SetGrid();
+  TLegend* legendHNN = new TLegend(0.55, 0.45, 0.89, 0.89);
+  legendHNN -> SetTextSize(0.055);
+  legendHNN -> AddEntry((TObject*)0,"#kern[-0.25]{NHITSTH scan (TWIDTH=200 ns)}","");
+  legendHNN -> AddEntry(g_NHITSTH_x_NNEff[0], "NHITSTH = 10", "L");
+  legendHNN -> AddEntry(g_NHITSTH_x_NNEff[1], "NHITSTH = 15", "L");
+  legendHNN -> AddEntry(g_NHITSTH_x_NNEff[2], "NHITSTH = 25(nominal)", "L");
+  legendHNN -> AddEntry(g_NHITSTH_x_NNEff[3], "NHITSTH = 35", "L");
+  legendHNN -> AddEntry(g_NHITSTH_x_NNEff[4], "NHITSTH = 45", "L");
+  legendHNN -> SetFillColor(0);
+  legendHNN -> Draw();
+  
+  ///////////  NN Classification Efficiency (Gd)  ////////////
+  cNN -> cd(3) -> SetGrid();
+  TH1F* frameGdNN = gPad->DrawFrame(0., 0., 1., 1.);
+  frameGdNN -> SetXTitle("n-likelihood");
+  frameGdNN -> SetYTitle("NN Gd(n, #gamma) Classification Efficiency");
+  frameGdNN ->GetXaxis()->SetLabelSize(0.053);
+  frameGdNN ->GetYaxis()->SetLabelSize(0.053);
+  frameGdNN ->GetXaxis()->SetTitleSize(0.053);
+  frameGdNN ->GetYaxis()->SetTitleSize(0.053);
+  frameGdNN -> SetTitleOffset(0.7, "Y");
+  frameGdNN -> SetTitleOffset(0.8, "X");
+  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NHITSTH_x_NNGdEff[iscan] -> Draw("L");
+
+  TLegend* legendGdNN = new TLegend(0.15, 0.15, 0.49, 0.59);
+  legendGdNN -> SetTextSize(0.055);
+  legendGdNN -> AddEntry((TObject*)0,"#kern[-0.25]{NHITSTH scan (TWIDTH=200 ns)}","");
+  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[0], "NHITSTH = 10", "L");
+  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[1], "NHITSTH = 15", "L");
+  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[2], "NHITSTH = 25(nominal)", "L");
+  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[3], "NHITSTH = 35", "L");
+  legendGdNN -> AddEntry(g_NHITSTH_x_NNEff[4], "NHITSTH = 45", "L");
+  legendGdNN -> SetFillColor(0);
+  legendGdNN -> Draw();
+#endif
+
+
+#if 1
+  ///////////  Overall Tagging Efficiency (Gd+H)  ////////////
+  TCanvas* cNN = new TCanvas("cNN", "cNN", 900, 1000);
+  cNN -> Divide(1, 3);
+  cNN -> cd(1) -> SetGrid();
   TH1F* frame = gPad->DrawFrame(0., 0., 1., 1.);
   frame -> SetXTitle("n-likelihood");
   frame -> SetYTitle("Overall Tagging Efficiency");
-  frame -> SetTitleOffset(1.1, "Y");
-  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NHITSTH_x_Eff[iscan] -> Draw("PL");
-  TLegend* legend = new TLegend(0.45, 0.45, 0.89, 0.89);
-  legend -> SetTextSize(0.04);
-  legend -> AddEntry((TObject*)0,"#kern[-0.25]{NHITSTH scan(TWIDTH=200 ns)}","");
-  legend -> AddEntry(g_NHITSTH_x_NNEff[0], "NHITSTH = 10", "PL");
-  legend -> AddEntry(g_NHITSTH_x_NNEff[1], "NHITSTH = 15", "PL");
-  legend -> AddEntry(g_NHITSTH_x_NNEff[2], "NHITSTH = 25", "PL");
-  legend -> AddEntry(g_NHITSTH_x_NNEff[3], "NHITSTH = 35", "PL");
-  legend -> AddEntry(g_NHITSTH_x_NNEff[4], "NHITSTH = 45", "PL");
-  legend -> SetFillColor(0);
-  legend -> Draw();
+  frame ->GetXaxis()->SetLabelSize(0.053);
+  frame ->GetYaxis()->SetLabelSize(0.053);
+  frame ->GetXaxis()->SetTitleSize(0.053);
+  frame ->GetYaxis()->SetTitleSize(0.053);
+  frame -> SetTitleOffset(0.7, "Y");
+  frame -> SetTitleOffset(0.8, "X");
+  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NHITSTH_x_Eff[iscan] -> Draw("L");
 
-  TCanvas* cH = new TCanvas("cH", "cH", 900, 700);
-  cH -> cd();
-  cH -> SetGrid();
+  TLegend* legendGd = new TLegend(0.55, 0.45, 0.89, 0.89);
+  legendGd -> SetTextSize(0.055);
+  legendGd -> AddEntry((TObject*)0,"#kern[-0.25]{NHITSTH scan (TWIDTH=200 ns)}","");
+  legendGd -> AddEntry(g_NHITSTH_x_NNEff[0], "NHITSTH = 10", "L");
+  legendGd -> AddEntry(g_NHITSTH_x_NNEff[1], "NHITSTH = 15", "L");
+  legendGd -> AddEntry(g_NHITSTH_x_NNEff[2], "NHITSTH = 25(nominal)", "L");
+  legendGd -> AddEntry(g_NHITSTH_x_NNEff[3], "NHITSTH = 35", "L");
+  legendGd -> AddEntry(g_NHITSTH_x_NNEff[4], "NHITSTH = 45", "L");
+  legendGd -> SetFillColor(0);
+  legendGd -> Draw();
+
+  ///////////  Overall Tagging Efficiency (H)  ////////////
+  cNN -> cd(2) -> SetGrid();
   TH1F* frameH = gPad->DrawFrame(0., 0., 1., 1.);
   frameH -> SetXTitle("n-likelihood");
   frameH -> SetYTitle("Overall H(n, #gamma) Tagging Efficiency");
-  frameH -> SetTitleOffset(1.1, "Y");
-  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NHITSTH_x_HEff[iscan] -> Draw("PL");
-  legendHNN -> Draw();
+  frameH ->GetXaxis()->SetLabelSize(0.053);
+  frameH ->GetYaxis()->SetLabelSize(0.053);
+  frameH ->GetXaxis()->SetTitleSize(0.053);
+  frameH ->GetYaxis()->SetTitleSize(0.053);
+  frameH -> SetTitleOffset(0.7, "Y");
+  frameH -> SetTitleOffset(0.8, "X");
+  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NHITSTH_x_HEff[iscan] -> Draw("L");
 
-  TCanvas* cGd = new TCanvas("cGd", "cGd", 900, 700);
-  cGd -> cd();
-  cGd -> SetGrid();
+  TLegend* legendH = new TLegend(0.55, 0.45, 0.89, 0.89);
+  legendH -> SetTextSize(0.055);
+  legendH -> AddEntry((TObject*)0,"#kern[-0.25]{NHITSTH scan (TWIDTH=200 ns)}","");
+  legendH -> AddEntry(g_NHITSTH_x_NNEff[0], "NHITSTH = 10", "L");
+  legendH -> AddEntry(g_NHITSTH_x_NNEff[1], "NHITSTH = 15", "L");
+  legendH -> AddEntry(g_NHITSTH_x_NNEff[2], "NHITSTH = 25(nominal)", "L");
+  legendH -> AddEntry(g_NHITSTH_x_NNEff[3], "NHITSTH = 35", "L");
+  legendH -> AddEntry(g_NHITSTH_x_NNEff[4], "NHITSTH = 45", "L");
+  legendH -> SetFillColor(0);
+  legendH -> Draw();
+  
+  ///////////  Overall Tagging Efficiency (Gd)  ////////////
+  cNN -> cd(3) -> SetGrid();
   TH1F* frameGd = gPad->DrawFrame(0., 0., 1., 1.);
-  frameGd -> SetXTitle("Threshold of Hit Cluster NHITSTH[nsec]");
+  frameGd -> SetXTitle("n-likelihood");
   frameGd -> SetYTitle("Overall Gd(n, #gamma) Tagging Efficiency");
-  frameGd -> SetTitleOffset(1.1, "Y");
-  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NHITSTH_x_GdEff[iscan] -> Draw("PL");
-  legendGdNN -> Draw();
+  frameGd ->GetXaxis()->SetLabelSize(0.053);
+  frameGd ->GetYaxis()->SetLabelSize(0.053);
+  frameGd ->GetXaxis()->SetTitleSize(0.053);
+  frameGd ->GetYaxis()->SetTitleSize(0.053);
+  frameGd -> SetTitleOffset(0.7, "Y");
+  frameGd -> SetTitleOffset(0.8, "X");
+  for (int iscan=0; iscan<SCANPOINTS; iscan++) g_NHITSTH_x_GdEff[iscan] -> Draw("L");
+
+  TLegend* legendGd = new TLegend(0.15, 0.15, 0.49, 0.59);
+  legendGd -> SetTextSize(0.055);
+  legendGd -> AddEntry((TObject*)0,"#kern[-0.25]{NHITSTH scan (TWIDTH=200 ns)}","");
+  legendGd -> AddEntry(g_NHITSTH_x_NNEff[0], "NHITSTH = 10", "L");
+  legendGd -> AddEntry(g_NHITSTH_x_NNEff[1], "NHITSTH = 15", "L");
+  legendGd -> AddEntry(g_NHITSTH_x_NNEff[2], "NHITSTH = 25(nominal)", "L");
+  legendGd -> AddEntry(g_NHITSTH_x_NNEff[3], "NHITSTH = 35", "L");
+  legendGd -> AddEntry(g_NHITSTH_x_NNEff[4], "NHITSTH = 45", "L");
+  legendGd -> SetFillColor(0);
+  legendGd -> Draw();
+#endif
   
 }

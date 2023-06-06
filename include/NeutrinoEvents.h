@@ -437,10 +437,10 @@ void Sequencial1RmuonSelection_Pion(Gd1RmuonSelection prmsel,
 //Count #neutrino events with respect to neutrino interactions
 void GetSelectedModeEvents(CC0PiNumu* numu) {
   int mode = TMath::Abs(numu->var<int>("mode"));
-  if (mode==1) SelectedCCQEevents++;
+  if (mode==1)             SelectedCCQEevents++;
   if (mode>=2 && mode<=10) SelectedCC2p2hevents++;
   if (mode>10 && mode<=30) SelectedCCnonQEevents++;
-  if (mode>=31) SelectedNCevents++;
+  if (mode>=31)            SelectedNCevents++;
 }
 
 void GetProtoSelectedModeEvents(CC0PiNumu* numu) {

@@ -175,3 +175,71 @@
            Only CCQE(1p1h)    : 9083.9(Osc)/61240(No Osc) = 0.148333
            w/o truth neutrons : 5813.45(Osc)/37513(No Osc) = 0.154972
            w/o tagged neutrons: 8035.02(Osc)/50720(No Osc) = 0.158419
+All Truth neutrons: 90013
+Candidates        : 136286535
+[### i=0, Thr=0 ###] TP = 50780, FP = 6426730, FN = 39233, TN = 129769792
+              True positive rate = 0.564141, False positive rate = 0.0471872, YoudenIndex = -68.6461
+[### i=1, Thr=0.05 ###] TP = 42212, FP = 42926, FN = 47801, TN = 136153596
+              True positive rate = 0.468954, False positive rate = 0.000315177, YoudenIndex = 1
+[### i=2, Thr=0.1 ###] TP = 40898, FP = 18135, FN = 49115, TN = 136178387
+              True positive rate = 0.454357, False positive rate = 0.000133153, YoudenIndex = 1.25624
+[### i=3, Thr=0.15 ###] TP = 40112, FP = 11357, FN = 49901, TN = 136185165
+              True positive rate = 0.445625, False positive rate = 8.33869e-05, YoudenIndex = 1.32155
+[### i=4, Thr=0.2 ###] TP = 39518, FP = 8180, FN = 50495, TN = 136188342
+              True positive rate = 0.439025, False positive rate = 6.00603e-05, YoudenIndex = 1.34966
+[### i=5, Thr=0.25 ###] TP = 39034, FP = 6429, FN = 50979, TN = 136190093
+              True positive rate = 0.433648, False positive rate = 4.72038e-05, YoudenIndex = 1.36341
+[### i=6, Thr=0.3 ###] TP = 38599, FP = 5250, FN = 51414, TN = 136191272
+              True positive rate = 0.428816, False positive rate = 3.85472e-05, YoudenIndex = 1.37146
+[### i=7, Thr=0.35 ###] TP = 38182, FP = 4415, FN = 51831, TN = 136192107
+              True positive rate = 0.424183, False positive rate = 3.24164e-05, YoudenIndex = 1.37595
+[### i=8, Thr=0.4 ###] TP = 37839, FP = 3792, FN = 52174, TN = 136192730
+              True positive rate = 0.420373, False positive rate = 2.78421e-05, YoudenIndex = 1.37895
+[### i=9, Thr=0.45 ###] TP = 37461, FP = 3332, FN = 52552, TN = 136193190
+              True positive rate = 0.416173, False positive rate = 2.44646e-05, YoudenIndex = 1.37977
+[### i=10, Thr=0.5 ###] TP = 37105, FP = 2951, FN = 52908, TN = 136193571
+              True positive rate = 0.412218, False positive rate = 2.16672e-05, YoudenIndex = 1.37998
+[### i=11, Thr=0.55 ###] TP = 36761, FP = 2670, FN = 53252, TN = 136193852
+              True positive rate = 0.408397, False positive rate = 1.9604e-05, YoudenIndex = 1.37923
+[### i=12, Thr=0.6 ###] TP = 36393, FP = 2408, FN = 53620, TN = 136194114
+              True positive rate = 0.404308, False positive rate = 1.76803e-05, YoudenIndex = 1.378
+[### i=13, Thr=0.65 ###] TP = 36012, FP = 2218, FN = 54001, TN = 136194304
+              True positive rate = 0.400076, False positive rate = 1.62853e-05, YoudenIndex = 1.37584
+[### i=14, Thr=0.7 ###] TP = 35590, FP = 2029, FN = 54423, TN = 136194493
+              True positive rate = 0.395387, False positive rate = 1.48976e-05, YoudenIndex = 1.37322
+[### i=15, Thr=0.75 ###] TP = 35123, FP = 1819, FN = 54890, TN = 136194703
+              True positive rate = 0.390199, False positive rate = 1.33557e-05, YoudenIndex = 1.37033
+[### i=16, Thr=0.8 ###] TP = 34587, FP = 1662, FN = 55426, TN = 136194860
+              True positive rate = 0.384245, False positive rate = 1.2203e-05, YoudenIndex = 1.36609
+[### i=17, Thr=0.85 ###] TP = 33896, FP = 1501, FN = 56117, TN = 136195021
+              True positive rate = 0.376568, False positive rate = 1.10208e-05, YoudenIndex = 1.36017
+[### i=18, Thr=0.9 ###] TP = 32818, FP = 1312, FN = 57195, TN = 136195210
+              True positive rate = 0.364592, False positive rate = 9.63314e-06, YoudenIndex = 1.35026
+[### i=19, Thr=0.95 ###] TP = 30635, FP = 1040, FN = 59378, TN = 136195482
+              True positive rate = 0.34034, False positive rate = 7.63602e-06, YoudenIndex = 1.32898
+[### i=20, Thr=1 ###] TP = 0, FP = 0, FN = 90013, TN = 136196522
+              True positive rate = 0, False positive rate = 0, YoudenIndex = 1
+Slope = 1487.91
+Optimized n-like threshold(ROC): 0.5
+[### i=0, Thr=0 ###] FOM = 19.9521
+[### i=1, Thr=0.05 ###] FOM = 144.669
+[### i=2, Thr=0.1 ###] FOM = 168.327
+[### i=3, Thr=0.15 ###] FOM = 176.808
+[### i=4, Thr=0.2 ###] FOM = 180.944
+[### i=5, Thr=0.25 ###] FOM = 183.069
+[### i=6, Thr=0.3 ###] FOM = 184.33
+[### i=7, Thr=0.35 ###] FOM = 184.999
+[### i=8, Thr=0.4 ###] FOM = 185.452
+[### i=9, Thr=0.45 ###] FOM = 185.475
+[### i=10, Thr=0.5 ###] FOM = 185.395
+[### i=11, Thr=0.55 ###] FOM = 185.126
+[### i=12, Thr=0.6 ###] FOM = 184.755
+[### i=13, Thr=0.65 ###] FOM = 184.181
+[### i=14, Thr=0.7 ###] FOM = 183.495
+[### i=15, Thr=0.75 ###] FOM = 182.739
+[### i=16, Thr=0.8 ###] FOM = 181.662
+[### i=17, Thr=0.85 ###] FOM = 180.163
+[### i=18, Thr=0.9 ###] FOM = 177.641
+[### i=19, Thr=0.95 ###] FOM = 172.131
+[### i=20, Thr=1 ###] FOM = -nan
+Optimized n-like threshold(FOM): 0.45
