@@ -77,11 +77,11 @@ void PreScanPurity() {
 #endif
 #if 1
   legend1->AddEntry((TObject*)0,"#kern[-0.25]{Pre-selection NHITSTH scan(TWIDTH=200 ns)}","");
-  legend1 -> AddEntry(g_Purity[0], "NHITSTH = 10", "PL");
-  legend1 -> AddEntry(g_Purity[1], "NHITSTH = 15", "PL");
+  legend1 -> AddEntry(g_Purity[0], "NHITSTH = 15", "PL");
+  legend1 -> AddEntry(g_Purity[1], "NHITSTH = 20", "PL");
   legend1 -> AddEntry(g_Purity[2], "NHITSTH = 25 (nominal)", "PL");
-  legend1 -> AddEntry(g_Purity[3], "NHITSTH = 35", "PL");
-  legend1 -> AddEntry(g_Purity[4], "NHITSTH = 45", "PL");
+  legend1 -> AddEntry(g_Purity[3], "NHITSTH = 30", "PL");
+  legend1 -> AddEntry(g_Purity[4], "NHITSTH = 35", "PL");
 #endif
   legend1->SetFillColor(0);
   legend1->Draw();

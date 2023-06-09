@@ -23,7 +23,7 @@
 #include "src/NTagAnalysis/inc/NTagAnalysis.h"
 #include "src/NNInputVariables/inc/NNInputVariables.h"
 
-#define NLIKETHRESHOLD 0.55
+#define NLIKETHRESHOLD 0.45
 
 
 int main(int argc, char **argv) {

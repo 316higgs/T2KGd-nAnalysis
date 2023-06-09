@@ -49,6 +49,10 @@ getNNvariables.exe: getNNvariables.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
+NNcorrelation.exe: NNcorrelation.o
+	$(RM) .$@
+	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
+
 DecayeTag.exe: DecayeTag.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
@@ -104,6 +108,9 @@ cleancreateOAinputs:
 
 cleangetNNvariables:
 	$(RM) getNNvariables.o getNNvariables.exe
+
+cleanNNcorrelation:
+	$(RM) NNcorrelation.o NNcorrelation.exe
 
 cleanDecayeTag:
 	$(RM) DecayeTag.o DecayeTag.exe

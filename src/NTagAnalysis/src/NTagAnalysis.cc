@@ -2582,5 +2582,9 @@ void NTagAnalysis::WritePlots() {
   g_FillNoiseRate -> Write();  //Graph20
   g_ROC           -> Write();  //Graph21
   g_FOM           -> Write();  //Graph22
+  g_FOM_p30       -> Write();  //Graph23
+  g_FOM_m30       -> Write();  //Graph24
+  g_FOM_p40       -> Write();  //Graph25
+  g_FOM_m40       -> Write();  //Graph26
 }
 

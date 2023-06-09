@@ -9,6 +9,7 @@
 //#define POTSCALE 1.96  //Run1-10 FHC
 //#define POTSCALE 1.63  //Run1-10 RHC
 #define POTSCALE 0.17  //Run11 FHC
+#define NTHRESHOLD 0.45
 
 
 void NTagOut(bool beammode) {
@@ -35,7 +36,7 @@ void NTagOut(bool beammode) {
   //TFile* finnumubar  = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.newGdMC.root");
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
-  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.2.1/skrate/fhc_sk_rate_tmp.root");
+  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
 
@@ -50,9 +51,9 @@ void NTagOut(bool beammode) {
   Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   //Double_t GenN_numu_x_numu         = 190292;
   //Double_t GenN_numubar_x_numubar   = 190909;
-  Double_t GenN_numu_x_numu         = 63576;
-  Double_t GenN_numu_x_nue          = 63312;
-  Double_t GenN_numubar_x_numubar   = 63458;
+  Double_t GenN_numu_x_numu         = 63606;
+  Double_t GenN_numu_x_nue          = 63445;
+  Double_t GenN_numubar_x_numubar   = 63361;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
   std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
   std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
@@ -125,7 +126,6 @@ void NTagOut(bool beammode) {
   h1_NTagOut_AccNoise_numu ->GetYaxis()->SetTitleOffset(1.3);
   h1_NTagOut_AccNoise_numu ->GetYaxis()->SetLabelSize(0.036);
 
-  #define NTHRESHOLD 0.55
   float y[2] = {0., 200.};
   float xC[2] = {NTHRESHOLD, NTHRESHOLD};
   TGraph* g_C = new TGraph(2, xC, y);

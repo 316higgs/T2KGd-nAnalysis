@@ -1013,21 +1013,84 @@ int main(int argc, char **argv) {
 
     // Calculation of FOM
     float TagFOM[CUTSTEP];
-    for (int i=0; i<CUTSTEP; i++) TagFOM[i] = 0.;
+    float TagFOM_p30[CUTSTEP];
+    float TagFOM_p40[CUTSTEP];
+    float TagFOM_m30[CUTSTEP];
+    float TagFOM_m40[CUTSTEP];
+    for (int i=0; i<CUTSTEP; i++) {
+      TagFOM[i] = 0.;
+      TagFOM_p30[CUTSTEP] = 0;
+      TagFOM_p40[CUTSTEP] = 0;
+      TagFOM_m30[CUTSTEP] = 0;
+      TagFOM_m40[CUTSTEP] = 0;
+    }
 
     float MaxFOM = 0;
+    float MaxFOM_p30 = 0;
+    float MaxFOM_m30 = 0;
+    float MaxFOM_p40 = 0;
+    float MaxFOM_m40 = 0;
     float OptThreshold_FOM = 0;
+    float OptThreshold_FOM_p30 = 0;
+    float OptThreshold_FOM_m30 = 0;
+    float OptThreshold_FOM_p40 = 0;
+    float OptThreshold_FOM_m40 = 0;
     for (int ith=0; ith<CUTSTEP; ith++) {
       TagFOM[ith] = TagTP[ith]/std::sqrt( TagTP[ith] + TagFP[ith] );
+      float TagTP_p30 = TagTP[ith] + 0.3*TagTP[ith];
+      float TagTP_m30 = TagTP[ith] - 0.3*TagTP[ith];
+      float TagTP_p40 = TagTP[ith] + 0.4*TagTP[ith];
+      float TagTP_m40 = TagTP[ith] - 0.4*TagTP[ith];
+      TagFOM_p40[ith] = TagTP_p40/std::sqrt( TagTP_p40 + TagFP[ith] );
+      TagFOM_p30[ith] = TagTP_p30/std::sqrt( TagTP_p30 + TagFP[ith] );
+      TagFOM_m30[ith] = TagTP_m30/std::sqrt( TagTP_m30 + TagFP[ith] );
+      TagFOM_m40[ith] = TagTP_m40/std::sqrt( TagTP_m40 + TagFP[ith] );
+
+      resultfile << "[### i=" << ith << ", Thr=" << TMVATH[ith] << " ###] FOM = " << TagFOM[ith] << std::endl;
+      resultfile << "   +40%: " << TagTP_p40 << ", FOM = " << TagFOM_p40[ith] << std::endl;
+      resultfile << "   +30%: " << TagTP_p30 << ", FOM = " << TagFOM_p30[ith] << std::endl;
+      resultfile << "   -30%: " << TagTP_m30 << ", FOM = " << TagFOM_m30[ith] << std::endl;
+      resultfile << "   -40%: " << TagTP_m40 << ", FOM = " << TagFOM_m40[ith] << std::endl;
+
+      // finding of the max. FOM
       if (TagFOM[ith] > MaxFOM) {
         MaxFOM = TagFOM[ith];
         OptThreshold_FOM = TMVATH[ith];
       }
-      resultfile << "[### i=" << ith << ", Thr=" << TMVATH[ith] << " ###] FOM = " << TagFOM[ith] << std::endl;
+      if (TagFOM_p40[ith] > MaxFOM_p40) {
+        MaxFOM_p40 = TagFOM_p40[ith];
+        OptThreshold_FOM_p40 = TMVATH[ith];
+      }
+      if (TagFOM_p30[ith] > MaxFOM_p30) {
+        MaxFOM_p30 = TagFOM_p30[ith];
+        OptThreshold_FOM_p30 = TMVATH[ith];
+      }
+      if (TagFOM_m30[ith] > MaxFOM_m30) {
+        MaxFOM_m30 = TagFOM_m30[ith];
+        OptThreshold_FOM_m30 = TMVATH[ith];
+      }
+      if (TagFOM_m40[ith] > MaxFOM_m40) {
+        MaxFOM_m40 = TagFOM_m40[ith];
+        OptThreshold_FOM_m40 = TMVATH[ith];
+      }
+
     }
     resultfile << "Optimized n-like threshold(FOM): " << OptThreshold_FOM << std::endl;
+    resultfile << "                           +40%: " << OptThreshold_FOM_p40 << std::endl;
+    resultfile << "                           +30%: " << OptThreshold_FOM_p30 << std::endl;
+    resultfile << "                           -30%: " << OptThreshold_FOM_m30 << std::endl;
+    resultfile << "                           -40%: " << OptThreshold_FOM_m40 << std::endl;
     g_FOM = new TGraph(CUTSTEP, TMVATH, TagFOM);
     g_FOM -> RemovePoint(20); // remove infinity @ n-likelihood=1
+
+    g_FOM_p30 = new TGraph(CUTSTEP, TMVATH, TagFOM_p30);
+    g_FOM_m30 = new TGraph(CUTSTEP, TMVATH, TagFOM_m30);
+    g_FOM_p40 = new TGraph(CUTSTEP, TMVATH, TagFOM_p40);
+    g_FOM_m40 = new TGraph(CUTSTEP, TMVATH, TagFOM_m40);
+    g_FOM_p30 -> RemovePoint(20); // remove infinity @ n-likelihood=1
+    g_FOM_m30 -> RemovePoint(20); // remove infinity @ n-likelihood=1
+    g_FOM_p40 -> RemovePoint(20); // remove infinity @ n-likelihood=1
+    g_FOM_m40 -> RemovePoint(20); // remove infinity @ n-likelihood=1
 
     ntagana.SummaryTruthInfoinSearch(3., NTagSummary);
   }

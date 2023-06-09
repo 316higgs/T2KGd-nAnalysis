@@ -24,17 +24,17 @@ void mergeNNinputshape(bool beammode) {
 #if fhcflag
 
   //Pre
-  TFile* finnumu     = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
-  TFile* finnuesig   = new TFile("../../output/fhc/fhc.numu_x_nue.preNN.newGdMC.root");
-  TFile* finnumubar  = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root");
+  //TFile* finnumu     = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
+  //TFile* finnuesig   = new TFile("../../output/fhc/fhc.numu_x_nue.preNN.newGdMC.root");
+  //TFile* finnumubar  = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root");
 
   //Post
-  //TFile* finnumu     = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.newGdMC.root");
-  //TFile* finnuesig   = new TFile("../../output/fhc/fhc.numu_x_nue.postNN.newGdMC.root");
-  //TFile* finnumubar  = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.newGdMC.root");
+  TFile* finnumu     = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.newGdMC.root");
+  TFile* finnuesig   = new TFile("../../output/fhc/fhc.numu_x_nue.postNN.newGdMC.root");
+  TFile* finnumubar  = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.newGdMC.root");
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
-  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.2.1/skrate/fhc_sk_rate_tmp.root");
+  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
   //RHC
@@ -55,9 +55,9 @@ void mergeNNinputshape(bool beammode) {
   Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   //Double_t GenN_numu_x_numu         = 190292;
   //Double_t GenN_numubar_x_numubar   = 190909;
-  Double_t GenN_numu_x_numu         = 63576;
-  Double_t GenN_numu_x_nue          = 63312;
-  Double_t GenN_numubar_x_numubar   = 63458;
+  Double_t GenN_numu_x_numu         = 63606;
+  Double_t GenN_numu_x_nue          = 63445;
+  Double_t GenN_numubar_x_numubar   = 63361;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
   std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
   std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
@@ -191,13 +191,13 @@ void mergeNNinputshape(bool beammode) {
   
   // for sanity check of NN input variable plots
   h1_AllNHits = (TH1F*)finnumu->Get("NNInputVariables/h1_AllNHits");
-  //h1_AllNHits -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  h1_AllNHits -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   std::cout << "numu_x_numu #tag-n = " << h1_AllNHits->Integral() << std::endl;
 
   TLegend* legend = new TLegend(0.35, 0.4, 0.89, 0.89);
   legend -> SetTextSize(0.06);
-  legend -> AddEntry((TObject*)0,"#kern[-0.23]{Pre-NN (Run11 FHC)}","");
-  //legend -> AddEntry((TObject*)0,"#kern[-0.23]{Post-NN (Run11 FHC)}","");
+  //legend -> AddEntry((TObject*)0,"#kern[-0.23]{Pre-NN (Run11 FHC)}","");
+  legend -> AddEntry((TObject*)0,"#kern[-0.23]{Post-NN (Run11 FHC)}","");
   legend -> AddEntry(h1_NNvar_Gd[0], "Gd-n signal", "L");
   legend -> AddEntry(h1_NNvar_H[0], "H-n signal", "L");
   legend -> AddEntry(h1_NNvar_Decaye[0], "Decay-e", "L");
@@ -219,7 +219,7 @@ void mergeNNinputshape(bool beammode) {
     h1_NNvar_Decaye[i] -> GetYaxis()->SetTitle("Area Normalized");
     h1_NNvar_AccNoise[i] -> GetXaxis()->SetTitle(varname);
     h1_NNvar_AccNoise[i] -> GetYaxis()->SetTitle("Area Normalized");
-#if 1
+#if 0
     if (i==0 || i==1 || i==3 || i==4) {
       h1_NNvar_AccNoise[i] -> Draw();
       h1_NNvar_H[i]        -> Draw("SAME");
@@ -227,7 +227,7 @@ void mergeNNinputshape(bool beammode) {
       h1_NNvar_Decaye[i]   -> Draw("SAME");
     }
 #endif
-#if 0
+#if 1
     if (i==0 || i==1 || i==3 || i==4) {
       h1_NNvar_H[i]        -> Draw("SAME");
       h1_NNvar_AccNoise[i] -> Draw("SAME");
