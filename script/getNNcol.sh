@@ -95,5 +95,7 @@ done
 OUTPUT="./output/fhc/numu_x_numu.NNcol.${Label}.root"
 root -l './macro/NNinputvariables/CorrelationMatrix.C("'${OUTPUT}'")'
 
+rm -rf ./tmp
+
 
 #COMMENTOUT
