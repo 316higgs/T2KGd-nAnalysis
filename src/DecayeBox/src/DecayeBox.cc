@@ -399,6 +399,8 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
                                   float dtCut,
                                   float N50CutMin,
                                   float N50CutMax) {
+
+  float OscProb = numu->getOscWgt();
   
   //Check the existence of secondary particles
   int nse_true = numu->var<int>("nscndprt");
@@ -429,7 +431,9 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
       vtxscndYlist.push_back(numu->var<float>("vtxscnd", jsub, 1));
       vtxscndZlist.push_back(numu->var<float>("vtxscnd", jsub, 2));
 
-      AllTrueDcye++;
+      //AllTrueDcye++;
+      AllTrueDcye += OscProb;
+
     }
   }
 
@@ -455,10 +459,15 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
     float dt  = numu->var<float>("fq1rt0", jsub, FQ_EHYP) - numu->var<float>("fq1rt0", 0, FQ_MUHYP);
     float N50 = numu->var<int>("fqn50", jsub);
     //if (dt/1000. < dtCut && N50 >= N50CutMin && N50 <= N50CutMax) AllfQdcye++;
-    AllfQdcye++;
+    //AllfQdcye++;
+    AllfQdcye += OscProb;
     //if (dt/1000. < dtCut && N50 >= N50CutMin && N50 <= N50CutMax) BoxfQdcye++;
-    if ( dt/1000. < 1.5 ) BoxfQdcye++;
-    else if ( dt/1000. < 20. && dt/1000. < 0.25*N50-7.5 ) BoxfQdcye++;
+
+    ////  Box cut  ////
+    //if ( dt/1000. < 1.5 ) BoxfQdcye++;
+    //else if ( dt/1000. < 20. && dt/1000. < 0.25*N50-7.5 ) BoxfQdcye++;
+    if ( dt/1000. < 1.5 ) BoxfQdcye += OscProb;
+    else if ( dt/1000. < 20. && dt/1000. < 0.25*N50-7.5 ) BoxfQdcye += OscProb;
   }
 
   //std::vector<int> skip_itr_reco;
@@ -618,7 +627,8 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
       h2_DcyVtxReso_x_dwall -> Fill(vtxresolution, dwall/100.);
 
       //if (min_dt/1000. < dtCut && min_N50 >= N50CutMin && min_N50 <= N50CutMax) MatchedfQdcye++;
-      if (inbox==true) MatchedfQdcye++;
+      //if (inbox==true) MatchedfQdcye++;
+      if (inbox==true) MatchedfQdcye += OscProb;
     }
 
     //Decrement the number of truth particles at last

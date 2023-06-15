@@ -141,17 +141,17 @@ void CLTOptionSummary(TString ETAGKeyword, TString ETAG,
   bool etagoption = false;
   if (ETAGKeyword=="-ETAG") {
     etagoption = true;
-    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] e-tagging: " << ETAG << std::endl;
+    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] e-tagging: " << ETAG << "\e[0m" << std::endl;
   }
   bool mctypeoption = false;
   if (MCTypeKeyword=="-MCType") {
     mctypeoption = true;
-    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] MC type: " << MCType << std::endl;
+    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] MC type: " << MCType << "\e[0m" << std::endl;
   }
 
   if (etagoption==false && mctypeoption==false) {
     std::cout << " " << std::endl;
-    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] No option" << std::endl;
+    std::cout << "\e[38;5;03m\e[1m[### CLT Option Summary ###] No option\e[0m" << std::endl;
   }
   
 }

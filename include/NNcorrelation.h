@@ -6,11 +6,16 @@
 
 #define VARNUM 12
 
+Double_t var[10000000];
+Double_t var1[10000000]; 
+Double_t var2[10000000];
 TH2D* h2_matrix = new TH2D("h2_matrix", "", VARNUM, 0, VARNUM, VARNUM, 0, VARNUM);
 
 
 //Template of Correlation calculation
 Double_t GetCorrelation(int N, Double_t* var1, Double_t* var2) {
+
+  //std::cout << "Number of candidates: " << N << std::endl;
 
   Double_t sum1 = 0.;
   Double_t sum2 = 0.;
@@ -171,6 +176,8 @@ Double_t GetMatrixElementF(int type, TChain* tchntag, const int ntagEntries, con
   int gdsize    = 0;
 
   //Get array size of each type
+  std::cout << " " << std::endl;
+  std::cout << "ntagEntries: " << ntagEntries << std::endl;
   for (Int_t ientry=0; ientry<ntagEntries; ientry++) {
 
     tchntag ->GetEntry(ientry);
@@ -189,9 +196,14 @@ Double_t GetMatrixElementF(int type, TChain* tchntag, const int ntagEntries, con
       if (Label->at(jentry)==3) gdsize++;
     }
   }
+  std::cout << "#noise: " << noisesize << std::endl;
+  std::cout << "#dcy-e: " << dcyesize  << std::endl;
+  std::cout << "#H-n  : " << hsize     << std::endl;
+  std::cout << "#Gd-n : " << gdsize    << std::endl;  
 
 
-  int entries;
+  long int entries;
+  std::cout << "type: " << type << std::endl;
   switch(type) {
     case 0:
       entries = noisesize;
@@ -207,20 +219,30 @@ Double_t GetMatrixElementF(int type, TChain* tchntag, const int ntagEntries, con
       break;
     default:
       entries = arraysize;
+      break;
   }
 
+  std::cout << "Array size: " << entries << std::endl;
+
   //Array for NN input variables
-  Double_t var[entries]; 
+  const long int candidates = entries;
+  //Double_t var[candidates];
+  //std::cout << "candidates: " << candidates << std::endl;
+  std::cout << "ntagEntries: " << ntagEntries << std::endl;
   //std::cout << "Array size: " << entries << std::endl;
-  for (int i=0; i<entries; i++) {
-    var[i] = 0;
+  //for (long int i=0; i<candidates; i++) var[i] = 0;
+  for (long int i=0; i<10000000; i++) {
+    var[i] = 0.;
   }
+  std::cout << "ntagEntries: " << ntagEntries << std::endl;
 
 
   //Array filling
   int element = 0;
   for (Int_t ientry=0; ientry<ntagEntries; ientry++) {
+  //for (long int ientry=0; ientry<candidates; ientry++) {
 
+    //std::cout << "ientry: " << ientry << std::endl;
     tchntag -> GetEntry(ientry);
 
     Long64_t tentry = tchntag->LoadTree(ientry);
@@ -230,6 +252,7 @@ Double_t GetMatrixElementF(int type, TChain* tchntag, const int ntagEntries, con
 
     for (UInt_t jentry=0; jentry<NNvar->size(); jentry++) {
 
+      //std::cout << "Label: " << Label->at(jentry) << ", Type: " << type << std::endl; 
       if (Label->at(jentry)==type) {
         var[element] = NNvar->at(jentry);
         element++;
@@ -239,35 +262,13 @@ Double_t GetMatrixElementF(int type, TChain* tchntag, const int ntagEntries, con
         element++;
       }
 
-      /*if (type==0) {
-        if (CaptureType->at(jentry)==0) {
-          var[element] = NNvar->at(jentry);
-          element++;
-        }
-      }
-      else if (type==1) {
-        if (CaptureType->at(jentry)==1) {
-          var[element] = NNvar->at(jentry);
-          element++;
-        }
-      }
-      else if (type==2) {
-        if (CaptureType->at(jentry)==2) {
-          var[element] = NNvar->at(jentry);
-          element++;
-        }
-      }
-      else if (type!=0 && type!=1 && type!=2) {
-        var[element] = NNvar->at(jentry);
-        element++;
-      }*/
-
     }
   }
 
   //Get correlation factor between var itself
   std::cout << " Correlation factor       : " << GetCorrelation(entries, var, var) << std::endl;
   return GetCorrelation(entries, var, var);
+  //return 0;
 }
 
 
@@ -540,6 +541,7 @@ Double_t GetMatrixElementFF(int type, TChain* tchntag, const int ntagEntries, co
 
     Long64_t tentry = tchntag->LoadTree(ientry);
     bNNvar1       -> GetEntry(tentry);
+    bNNvar2       -> GetEntry(tentry);
     //bCaptureType  -> GetEntry(tentry);
     bLabel        -> GetEntry(tentry);
 
@@ -586,13 +588,14 @@ Double_t GetMatrixElementFF(int type, TChain* tchntag, const int ntagEntries, co
       break;
     default:
       entries = arraysize;
+      break;
   }
 
   //Array for NN input variables
-  Double_t var1[entries]; 
-  Double_t var2[entries];
+  //Double_t var1[entries]; 
+  //Double_t var2[entries];
   //std::cout << "Array size: " << entries << std::endl;
-  for (int i=0; i<entries; i++) {
+  for (int i=0; i<10000000; i++) {
     var1[i] = 0;
     var2[i] = 0;
   }

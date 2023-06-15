@@ -18,9 +18,9 @@ fi
 DISK3=/disk03/usr8/sedi
 
 
-#type=0
+type=0
 #type=1
-type=2
+#type=2
 #type=3
 #type=4
 Label="All"
@@ -70,7 +70,7 @@ do
                           ${ivar}\
                           0\
                           ${filecount}\
-                          ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.0000.root\
+                          ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.0\*.root\
                           -MCType Gd\
                           -ETAG ON\
                           -BEAMMODE FHC\
@@ -81,7 +81,7 @@ do
                           ${ivar}\
                           ${jvar}\
                           ${filecount}\
-                          ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.0000.root\
+                          ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.0\*.root\
                           -MCType Gd\
                           -ETAG ON\
                           -BEAMMODE FHC\

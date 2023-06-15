@@ -4,9 +4,9 @@ GetPreEff()
 {
 	FILE=$1
 	#grep -r '\[   Pre    \]' ${FILE}
-	grep -r 'PreEff' ${FILE}
-	grep -r 'PreHEff' ${FILE}
-    grep -r 'PreGdEff' ${FILE}
+	grep -r 'Pre' ${FILE}
+	#grep -r 'Pre' ${FILE}
+    #grep -r 'PreGdEff' ${FILE}
 }
 
 <<COMMENTOUT

@@ -18,11 +18,10 @@
 
 int main(int argc, char **argv) {
 
-  //int type   = *argv[1]-'0';    //True label
-  float type   = *argv[1]-'0';    //True label
-  int   varid1 = atoi(argv[2]);   //1st variable ID
-  int   varid2 = atoi(argv[3]);   //2nd variable ID
-  int   file   = atoi(argv[4]);   //file counter (label output files)
+  int type   = *argv[1]-'0';    //True label
+  int varid1 = atoi(argv[2]);   //1st variable ID
+  int varid2 = atoi(argv[3]);   //2nd variable ID
+  int file   = atoi(argv[4]);   //file counter (label output files)
   TString NtagFileName   = argv[5];
   TString MCTypeKeyword  = argv[6];
   TString MCType         = argv[7];
@@ -49,10 +48,12 @@ int main(int argc, char **argv) {
     exit(-1);
   }
   const int ntagEntries = tchntag->GetEntries();
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << ntagFiles      << " files from: " << NtagFileName << "\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  NTag output       : Processing " << ntagEntries      <<" entries...\e[0m" << std::endl;
   
   const char* varname1;
   const char* varname2;
-  bool empty = false;
+  //bool empty = false;
 
   //variable ID
   switch(varid1) {
@@ -139,10 +140,13 @@ int main(int argc, char **argv) {
       break;
   }
 
+  CLTOptionSummary(ETAGKeyword, ETAG, MCTypeKeyword, MCType);
+
 
   //Correlation
   Double_t col = 0;
   
+  std::cout << "Type: " << type << std::endl;
   if (varid2==0) {
     std::cout << "\e[38;5;70m\e[1m" << varname1 << " vs " << varname1 << "\e[0m";
     col = GetMatrixElementF(type, tchntag, ntagEntries, varname1);

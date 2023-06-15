@@ -36,10 +36,15 @@ int TaggedDecayeinBox = 0; //for new selection
 int TaggedDecaye      = 0; //for older selection
 
 //Variables for purity & efficiency calculation
-int AllTrueDcye   = 0;
+/*int AllTrueDcye   = 0;
 int AllfQdcye     = 0;
 int BoxfQdcye     = 0;
-int MatchedfQdcye = 0;
+int MatchedfQdcye = 0;*/
+
+float AllTrueDcye   = 0.;
+float AllfQdcye     = 0.;
+float BoxfQdcye     = 0.;
+float MatchedfQdcye = 0.;
 
 int DcyE_CCQE = 0;
 int DcyE_CC2p2h = 0;

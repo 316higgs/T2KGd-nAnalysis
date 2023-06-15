@@ -31,33 +31,33 @@ void PreScanNHITSTH() {
     switch (i) {
       case 0:
         NHITSTH[i]   = 15;
-        PreEff[i]   = 74.3276;
-        PreHEff[i]  = 52.5766;
-        PreGdEff[i] = 95.0874;
+        PreEff[i]   = 74.7672;
+        PreHEff[i]  = 53.9946;
+        PreGdEff[i] = 95.1158;
         break;
       case 1:
         NHITSTH[i]   = 20;
-        PreEff[i]   = 71.1277;
-        PreHEff[i]  = 48;
-        PreGdEff[i] = 93.2015;
+        PreEff[i]   = 71.8403;
+        PreHEff[i]  = 49.8059;
+        PreGdEff[i] = 93.4249;
         break;
       case 2:
         NHITSTH[i]   = 25;
-        PreEff[i]   = 62.845;
-        PreHEff[i]  = 33.4054;
-        PreGdEff[i] = 90.943;
+        PreEff[i]   = 63.9352;
+        PreHEff[i]  = 35.8948;
+        PreGdEff[i] = 91.4037;
         break;
       case 3:
         NHITSTH[i]   = 30;
-        PreEff[i]   = 51.2157;
-        PreHEff[i]  = 13.9219;
-        PreGdEff[i] = 86.81;
+        PreEff[i]   = 51.5914;
+        PreHEff[i]  = 15.1829;
+        PreGdEff[i] = 87.2582;
         break;
       case 4:
         NHITSTH[i]   = 35;
-        PreEff[i]   = 41.0089;
-        PreHEff[i]  = 3.5976;
-        PreGdEff[i] = 76.7154;
+        PreEff[i]   = 41.1455;
+        PreHEff[i]  = 4.02583;
+        PreGdEff[i] = 77.5087;
         break;
     }
 
@@ -230,7 +230,7 @@ void PreScanNHITSTH() {
   }
 
 
-#if 0
+#if 1
   ///////////  Pre-selection Efficiency  ////////////
   TCanvas* cPre = new TCanvas("cPre", "cPre", 900, 700);
   cPre -> cd();
@@ -360,7 +360,7 @@ void PreScanNHITSTH() {
 
 #if 1
   ///////////  Overall Tagging Efficiency (Gd+H)  ////////////
-  TCanvas* c = new TCanvas("cNN", "cNN", 900, 1000);
+  TCanvas* c = new TCanvas("c", "cOverall", 900, 1000);
   c -> Divide(1, 3);
   c -> cd(1) -> SetGrid();
   TH1F* frame = gPad->DrawFrame(0., 0., 1., 1.);
@@ -386,7 +386,7 @@ void PreScanNHITSTH() {
   legend -> Draw();
 
   ///////////  Overall Tagging Efficiency (H)  ////////////
-  cNN -> cd(2) -> SetGrid();
+  c -> cd(2) -> SetGrid();
   TH1F* frameH = gPad->DrawFrame(0., 0., 1., 1.);
   frameH -> SetXTitle("n-likelihood");
   frameH -> SetYTitle("Overall H(n, #gamma) Tagging Efficiency");
@@ -410,7 +410,7 @@ void PreScanNHITSTH() {
   legendH -> Draw();
   
   ///////////  Overall Tagging Efficiency (Gd)  ////////////
-  cNN -> cd(3) -> SetGrid();
+  c -> cd(3) -> SetGrid();
   TH1F* frameGd = gPad->DrawFrame(0., 0., 1., 1.);
   frameGd -> SetXTitle("n-likelihood");
   frameGd -> SetYTitle("Overall Gd(n, #gamma) Tagging Efficiency");

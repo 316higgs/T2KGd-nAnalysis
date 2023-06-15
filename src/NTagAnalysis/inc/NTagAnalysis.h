@@ -102,12 +102,33 @@ TH1F* h1_GenBefSInE;
 TH1F* h1_GenSInE;
 
 
-int AllTruthNeutrons = 0;
-int TagCandidates = 0;
-int TagTP[CUTSTEP];  // True positive  (tagged truth neutrons)
-int TagFN[CUTSTEP];  // False negative (missed truth neutrons)
-int TagFP[CUTSTEP];  // False positive (mis-tagged truth noise)
-int TagTN[CUTSTEP];  // True negative  (rejected truth noise)
+////  #truth neutrons  ////
+float AllTruthNeutrons = 0.;
+float TruthHNeutrons   = 0.;
+float TruthGdNeutrons  = 0.;
+////  #truth neutrons in candidates  //// 
+float TruthNeutroninCandidatesinWin[WINSTEP];
+float TruthHNeutroninCandidatesinWin[WINSTEP];
+float TruthGdNeutroninCandidatesinWin[WINSTEP];
+////  #tagged candidates  ////
+float TaggedTruthNeutronsinWin[WINSTEP][CUTSTEP];
+float TaggedTruthHNeutronsinWin[WINSTEP][CUTSTEP];
+float TaggedTruthGdNeutronsinWin[WINSTEP][CUTSTEP];
+float MisTaggedDecayeinNlike[WINSTEP][CUTSTEP];
+float MisTaggedAccNoiseinNlike[WINSTEP][CUTSTEP];
+float AllNlikeCandidates[WINSTEP][CUTSTEP];
+
+//int TagCandidates = 0;
+//int TagTP[CUTSTEP];  // True positive  (tagged truth neutrons)
+//int TagFN[CUTSTEP];  // False negative (missed truth neutrons)
+//int TagFP[CUTSTEP];  // False positive (mis-tagged truth noise)
+//int TagTN[CUTSTEP];  // True negative  (rejected truth noise)
+
+float TagCandidates = 0;
+float TagTP[CUTSTEP];  // True positive  (tagged truth neutrons)
+float TagFN[CUTSTEP];  // False negative (missed truth neutrons)
+float TagFP[CUTSTEP];  // False positive (mis-tagged truth noise)
+float TagTN[CUTSTEP];  // True negative  (rejected truth noise)
 
 
 int test1 = 0;
@@ -237,8 +258,8 @@ void FlagReset() {
 class NTagAnalysis {
   private:
     
-    int TruthHNeutrons;
-    int TruthGdNeutrons;
+    //int TruthHNeutrons;
+    //int TruthGdNeutrons;
     int AllTruthCCQENeutrons;
     int TruthCCQEHNeutrons;
     int TruthCCQEGdNeutrons;
@@ -246,7 +267,7 @@ class NTagAnalysis {
     int TruthHNeutronsinFV;
     int TruthGdNeutronsinFV;
 
-    //Truth particles in search window [3 us, XXX us]
+    // Truth particles in search window [3 us, XXX us]
     int AllTruthNeutronsinSearch[WINSTEP];
     int TruthHNeutronsinSearch[WINSTEP];
     int TruthGdNeutronsinSearch[WINSTEP];
@@ -255,12 +276,12 @@ class NTagAnalysis {
     int TruthGdNeutronsinSearchFV[WINSTEP];
     int TruthDecayeinSearch[WINSTEP];
 
-    //All candidates in window [3 us, XXX us]
+    // All candidates in window [3 us, XXX us]
     int AllCandidatesinWin[WINSTEP];
-    //Truth breakdown of candidates in window [3 us, XXX us]
-    int TruthNeutroninCandidatesinWin[WINSTEP];
-    int TruthHNeutroninCandidatesinWin[WINSTEP];
-    int TruthGdNeutroninCandidatesinWin[WINSTEP];
+    // Truth breakdown of candidates in window [3 us, XXX us]
+    //int TruthNeutroninCandidatesinWin[WINSTEP];
+    //int TruthHNeutroninCandidatesinWin[WINSTEP];
+    //int TruthGdNeutroninCandidatesinWin[WINSTEP];
     int TruthDecayeinCandidatesinWin[WINSTEP];
     int TruthAccNoiseinCandidatesinWin[WINSTEP];
 
@@ -273,14 +294,14 @@ class NTagAnalysis {
     int TruthDecayeinCandidatesinWinFV[WINSTEP];
     int TruthAccNoiseinCandidatesinWinFV[WINSTEP];
 
-    //n-like candidates
-    //Taggged truth neutrons/Mis-tagged decay-e/Mis-tagged acc. noise
-    int TaggedTruthNeutronsinWin[WINSTEP][CUTSTEP];
-    int TaggedTruthHNeutronsinWin[WINSTEP][CUTSTEP];
-    int TaggedTruthGdNeutronsinWin[WINSTEP][CUTSTEP];
-    int MisTaggedDecayeinNlike[WINSTEP][CUTSTEP];
-    int MisTaggedAccNoiseinNlike[WINSTEP][CUTSTEP];
-    int AllNlikeCandidates[WINSTEP][CUTSTEP];
+    // n-like candidates
+    // Taggged truth neutrons/Mis-tagged decay-e/Mis-tagged acc. noise
+    //int TaggedTruthNeutronsinWin[WINSTEP][CUTSTEP];
+    //int TaggedTruthHNeutronsinWin[WINSTEP][CUTSTEP];
+    //int TaggedTruthGdNeutronsinWin[WINSTEP][CUTSTEP];
+    //int MisTaggedDecayeinNlike[WINSTEP][CUTSTEP];
+    //int MisTaggedAccNoiseinNlike[WINSTEP][CUTSTEP];
+    //int AllNlikeCandidates[WINSTEP][CUTSTEP];
 
     int TaggedTruthNeutronsinWinFV[WINSTEP][CUTSTEP];
     int TaggedTruthHNeutronsinWinFV[WINSTEP][CUTSTEP];
@@ -365,8 +386,8 @@ class NTagAnalysis {
     float NeutrinoEventswNoTruthNeutrons[CUTSTEP];
 
   public:
-  	NTagAnalysis() {};
-  	virtual ~NTagAnalysis() {};
+    NTagAnalysis() {};
+    virtual ~NTagAnalysis() {};
 
     void InitNeutrons();
 
@@ -406,7 +427,8 @@ class NTagAnalysis {
                                   float WinMin);
     void SummaryTruthInfoinSearch(float WinMin, TString outputname);
 
-    void TruthBreakdowninWindow(std::vector<float> *TagClass, 
+    void TruthBreakdowninWindow(CC0PiNumu* numu,
+                                std::vector<float> *TagClass, 
                                 std::vector<float> *t,
                                 std::vector<float> *DWall,
                                 std::vector<float> *TagIndex,
@@ -414,7 +436,8 @@ class NTagAnalysis {
                                 std::vector<float> *FitT,
                                 std::vector<float> *TagDWall);
 
-    void GetNlikeCandidatesinWindow(std::vector<float> *t,
+    void GetNlikeCandidatesinWindow(CC0PiNumu* numu,
+                                    std::vector<float> *t,
                                     std::vector<float> *DWall,
                                     std::vector<float> *TagIndex,
                                     bool etagmode,
@@ -445,11 +468,12 @@ class NTagAnalysis {
 
     void GetResolutionwTrueN(CC0PiNumu* numu, float NTrueN);
 
-  	bool DecayelikeChecker(bool etagmode, float NHits, float FitT);
+    bool DecayelikeChecker(bool etagmode, float NHits, float FitT);
 
     void Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float theta, float thetamin, float thetamax);
 
-    void GetTagBreakdown(int ith, 
+    void GetTagBreakdown(CC0PiNumu* numu,
+                         int ith, 
                          UInt_t ican, 
                          float Threshold,
                          std::vector<float> *NHits,
