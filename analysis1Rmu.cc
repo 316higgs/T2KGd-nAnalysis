@@ -178,17 +178,29 @@ int main(int argc, char **argv) {
   TBranch *bTagDWall = 0;
   std::vector<float> *NHits = 0;
   TBranch *bNHits = 0;
+  std::vector<float> *N50 = 0;
+  TBranch *bN50 = 0;
   std::vector<float> *TagIndex = 0;
   TBranch *bTagIndex = 0;
   std::vector<float> *TagOut = 0;
   TBranch *bTagOut = 0;
+  std::vector<float> *fvx = 0;
+  std::vector<float> *fvy = 0;
+  std::vector<float> *fvz = 0;
+  TBranch *bfvx = 0;
+  TBranch *bfvy = 0;
+  TBranch *bfvz = 0;
   tchntag->SetBranchAddress("Label", &Label, &bLabel);
   tchntag->SetBranchAddress("TagClass", &TagClass, &bTagClass);
   tchntag->SetBranchAddress("FitT", &FitT, &bFitT);
   tchntag->SetBranchAddress("DWall", &TagDWall, &bTagDWall);
   tchntag->SetBranchAddress("NHits", &NHits, &bNHits);
+  tchntag->SetBranchAddress("N50", &N50, &bN50);
   tchntag->SetBranchAddress("TagIndex", &TagIndex, &bTagIndex);
   tchntag->SetBranchAddress("TagOut", &TagOut, &bTagOut);
+  tchntag->SetBranchAddress("fvx", &fvx, &bfvx);
+  tchntag->SetBranchAddress("fvy", &fvy, &bfvy);
+  tchntag->SetBranchAddress("fvz", &fvz, &bfvz);
 
   Float_t pscnd[1000][3];   //Momentum of the secondary particle
   tchfQ -> SetBranchAddress("pscnd", pscnd);
@@ -310,8 +322,12 @@ int main(int argc, char **argv) {
     bFitT       -> GetEntry(tentry);
     bTagDWall   -> GetEntry(tentry);
     bNHits      -> GetEntry(tentry);
+    bN50        -> GetEntry(tentry);
     bTagIndex   -> GetEntry(tentry);
     bTagOut     -> GetEntry(tentry);
+    bfvx        -> GetEntry(tentry);
+    bfvy        -> GetEntry(tentry);
+    bfvz        -> GetEntry(tentry);
 
 
     numu->computeCC0PiVariables();
@@ -353,7 +369,8 @@ int main(int argc, char **argv) {
 
     h1_NTrueN[0] -> Fill(NTrueN);
 
-    int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
+    //int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
+    int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
     GetSelectedTagN(prmsel, evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false, TagN);
 
     //New 1R muon selection
@@ -363,6 +380,7 @@ int main(int argc, char **argv) {
       neuosc.GetTrueEnu(numu);
       neuosc.GetRecoEnu(numu);
       neuosc.GetPrmVtxResolution(numu);
+      ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, N50, Label, TagOut, nlikeThreshold, fvx, fvy, fvz);
       float TruePrmVtx[3] = {0., 0., 0.,};
       neuosc.GetTruePrmVtx(numu, TruePrmVtx);
       ntagana.TrueNCapVtxProfile(Type, tagvx, tagvy, tagvz);
@@ -449,19 +467,25 @@ int main(int argc, char **argv) {
 
       // Check tagged truth neutrons and mis-tagged decay-e and noise with respect to window and threshold.
       //ntagana.GetNlikeCandidatesinWindow(t, DWall, TagIndex, etagmode, NHits, FitT, TagOut, Label, TagDWall);
-      ntagana.GetNlikeCandidatesinWindow(numu, t, DWall, TagIndex, etagmode, NHits, FitT, TagOut, Label, TagDWall);
+      //ntagana.GetNlikeCandidatesinWindow(numu, t, DWall, TagIndex, etagmode, NHits, FitT, TagOut, Label, TagDWall);
+      ntagana.GetNlikeCandidatesinWindow(numu, t, DWall, TagIndex, etagmode, N50, FitT, TagOut, Label, TagDWall);
 
       // Check tagged truth decay-e and mis-tagged neutrons and noise with respect to window and threshold.
-      ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, NHits, FitT, TagOut, Label);
+      //ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, NHits, FitT, TagOut, Label);
+      ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, N50, FitT, TagOut, Label);
 
       // Check neutrino events with tagged neutrons
-      ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, 
+      //ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, 
+      //                               etagmode, numu, neuosc, nlikeThreshold/0.05,
+      //                               recothetamu, thetamin, thetamax);
+      ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, N50, FitT, Label, NTrueN, 
                                      etagmode, numu, neuosc, nlikeThreshold/0.05,
                                      recothetamu, thetamin, thetamax);
 
       //Number of tagged-neutrons
       //CCQE w/ tagged-n
-      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
+      //int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
+      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
       if (intmode==1 && numtaggedneutrons!=0) {
 
         CCQEwTaggedNeutrons++;
@@ -747,7 +771,8 @@ int main(int argc, char **argv) {
         //Candidates loop
         for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
 
-          ntagana.GetTagBreakdown(numu, ith, jentry, TMVATH[ith], NHits, FitT, Label, TagOut, etagmode);
+          //ntagana.GetTagBreakdown(numu, ith, jentry, TMVATH[ith], NHits, FitT, Label, TagOut, etagmode);
+          ntagana.GetTagBreakdown(numu, ith, jentry, TMVATH[ith], N50, FitT, Label, TagOut, etagmode);
           //TagCandidates++;
           TagCandidates += OscProb;
 
@@ -757,7 +782,8 @@ int main(int argc, char **argv) {
 
             if (etagmode) {
               //Focus on neutron-like candidates(e-tagging ON)
-              if (TagOut->at(jentry)>TMVATH[ith] && ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry))==false) {
+              //if (TagOut->at(jentry)>TMVATH[ith] && ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry))==false) {
+              if (TagOut->at(jentry)>TMVATH[ith] && ntagana.DecayelikeChecker(etagmode, N50->at(jentry), FitT->at(jentry))==false) {
                 //Fill corresponded truth distance
                 for (UInt_t kentry=0; kentry<DistFromPV->size(); ++kentry) {
                   if (Type->at(kentry)==2 && DWall->at(kentry)>0.) {

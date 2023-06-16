@@ -676,10 +676,12 @@ void NTagAnalysis::GetTruthDecayeinSearch(UInt_t truthneutrons,
 
 
 
-bool NTagAnalysis::DecayelikeChecker(bool etagmode, float NHits, float FitT) {
+bool NTagAnalysis::DecayelikeChecker(bool etagmode, float N50, float FitT) {
   bool etagboxin = false;
   if (etagmode) {
-    if (NHits>50 && FitT<20) etagboxin = true;
+    //if (NHits>50 && FitT<20) etagboxin = true;
+    if ( FitT < 1.5 ) etagboxin = true;
+    else if ( FitT < 20. && FitT < 0.25*N50-7.5 ) etagboxin = true;
   }
   return etagboxin;
 }
@@ -758,7 +760,7 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(CC0PiNumu* numu,
                                               std::vector<float> *DWall,
                                               std::vector<float> *TagIndex,
                                               bool etagmode,
-                                              std::vector<float> *NHits,
+                                              std::vector<float> *N50,
                                               std::vector<float> *FitT,
                                               std::vector<float> *TagOut,
                                               std::vector<float> *Label,
@@ -797,7 +799,9 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(CC0PiNumu* numu,
           if (etagmode) {
             //bool etagboxin = this->DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican));
             bool etagboxin = false;
-            if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+            //if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+            if ( FitT->at(ican) < 1.5 ) etagboxin = true;
+            else if ( FitT->at(ican) < 20. && FitT->at(ican) < 0.25*(N50->at(ican))-7.5 ) etagboxin = true;
 
             /*if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWin[iwin][ith]++;
             if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==2) TaggedTruthHNeutronsinWin[iwin][ith]++;
@@ -844,7 +848,9 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(CC0PiNumu* numu,
           if (etagmode) {
             bool etagboxin = false;
             if (etagmode) {
-              if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+              //if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+              if ( FitT->at(ican) < 1.5 ) etagboxin = true;
+              else if ( FitT->at(ican) < 20. && FitT->at(ican) < 0.25*(N50->at(ican))-7.5 ) etagboxin = true;
             }
             //if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==0) MisTaggedAccNoiseinNlike[iwin][ith]++;
             if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==0) MisTaggedAccNoiseinNlike[iwin][ith] += OscProb;
@@ -870,7 +876,7 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(CC0PiNumu* numu,
 void NTagAnalysis::GetElikeCandidatesinWindow(std::vector<float> *t,
                                     std::vector<float> *TagIndex,
                                     bool etagmode,
-                                    std::vector<float> *NHits,
+                                    std::vector<float> *N50,
                                     std::vector<float> *FitT,
                                     std::vector<float> *TagOut,
                                     std::vector<float> *Label) 
@@ -904,7 +910,9 @@ void NTagAnalysis::GetElikeCandidatesinWindow(std::vector<float> *t,
           if (etagmode) {
             //bool etagboxin = this->DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican));
             bool etagboxin = false;
-            if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+            //if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+            if ( FitT->at(ican) < 1.5 ) etagboxin = true;
+            else if ( FitT->at(ican) < 20. && FitT->at(ican) < 0.25*(N50->at(ican))-7.5 ) etagboxin = true;
 
             if (TagOut->at(ican)>TMVATH[ith] && etagboxin==true && Label->at(ican)==1) TaggedTruthDecayeinWin[iwin][ith]++;
 
@@ -921,7 +929,9 @@ void NTagAnalysis::GetElikeCandidatesinWindow(std::vector<float> *t,
           if (etagmode) {
             bool etagboxin = false;
             if (etagmode) {
-              if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+              //if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+              if ( FitT->at(ican) < 1.5 ) etagboxin = true;
+              else if ( FitT->at(ican) < 20. && FitT->at(ican) < 0.25*(N50->at(ican))-7.5 ) etagboxin = true;
             }
             if (TagOut->at(ican)>TMVATH[ith] && etagboxin==true && Label->at(ican)==0) MisTaggedAccNoiseinElike[iwin][ith]++;
           }
@@ -1070,7 +1080,7 @@ void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float the
 
 void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
                                           std::vector<float> *TagIndex,
-                                          std::vector<float> *NHits,
+                                          std::vector<float> *N50,
                                           std::vector<float> *FitT,
                                           std::vector<float> *Label,
                                           float NTrueN,
@@ -1098,7 +1108,9 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
       //Check whether this candidate is n-like or e-like(for e-tagging ON)
       bool etagboxin = false;
       if (etagmode){
-        if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+        //if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+        if ( FitT->at(ican) < 1.5 ) etagboxin = true;
+        else if ( FitT->at(ican) < 20. && FitT->at(ican) < 0.25*(N50->at(ican))-7.5 ) etagboxin = true;
 
         if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false) NumTaggedNeutrons++;
         if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && (Label->at(ican)==2 || Label->at(ican)==3)) NumTruthNeutronsinNlike++;
@@ -1639,10 +1651,16 @@ void NTagAnalysis::SetEfficiencyGraph(int windowstep) {
 }
 
 
+//float NTagAnalysis::GetTaggedNeutrons(std::vector<float> *TagOut,
+//                                      float Threshold,
+//                                      std::vector<float> *TagIndex,
+//                                      std::vector<float> *NHits,
+//                                      std::vector<float> *FitT,
+//                                      std::vector<float> *Label,
+//                                      bool etagmode) 
 float NTagAnalysis::GetTaggedNeutrons(std::vector<float> *TagOut,
                                       float Threshold,
-                                      std::vector<float> *TagIndex,
-                                      std::vector<float> *NHits,
+                                      std::vector<float> *N50,
                                       std::vector<float> *FitT,
                                       std::vector<float> *Label,
                                       bool etagmode) 
@@ -1657,7 +1675,10 @@ float NTagAnalysis::GetTaggedNeutrons(std::vector<float> *TagOut,
     //Check whether this candidate is n-like or e-like(for e-tagging ON)
     bool etagboxin = false;
     if (etagmode){
-      if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+      //if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+      if ( FitT->at(ican) < 1.5 ) etagboxin = true;
+      else if ( FitT->at(ican) < 20. && FitT->at(ican) < 0.25*(N50->at(ican))-7.5 ) etagboxin = true;
+
 
       if (TagOut->at(ican)>Threshold && etagboxin==false) NumTaggedNeutrons++;
       if (TagOut->at(ican)>Threshold && etagboxin==false && (Label->at(ican)==2 || Label->at(ican)==3)) NumTruthNeutronsinNlike++;
@@ -1672,10 +1693,16 @@ float NTagAnalysis::GetTaggedNeutrons(std::vector<float> *TagOut,
   return NumTaggedNeutrons;  
 }
 
+//float NTagAnalysis::GetTaggedNoise(std::vector<float> *TagOut,
+//                                   float Threshold,
+//                                   std::vector<float> *TagIndex,
+//                                   std::vector<float> *NHits,
+//                                   std::vector<float> *FitT,
+//                                   std::vector<float> *Label,
+//                                   bool etagmode) 
 float NTagAnalysis::GetTaggedNoise(std::vector<float> *TagOut,
                                    float Threshold,
-                                   std::vector<float> *TagIndex,
-                                   std::vector<float> *NHits,
+                                   std::vector<float> *N50,
                                    std::vector<float> *FitT,
                                    std::vector<float> *Label,
                                    bool etagmode) 
@@ -1685,7 +1712,10 @@ float NTagAnalysis::GetTaggedNoise(std::vector<float> *TagOut,
     //Check whether this candidate is n-like or e-like(for e-tagging ON)
     bool etagboxin = false;
     if (etagmode){
-      if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+      //if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+      if ( FitT->at(ican) < 1.5 ) etagboxin = true;
+      else if ( FitT->at(ican) < 20. && FitT->at(ican) < 0.25*(N50->at(ican))-7.5 ) etagboxin = true;
+
       if (TagOut->at(ican)>Threshold && etagboxin==false && (Label->at(ican)==0 || Label->at(ican)==1)) NumTaggedNoise++;
     }
     else {
@@ -1718,7 +1748,7 @@ void NTagAnalysis::GetTagBreakdown(CC0PiNumu* numu,
                                    int ith, 
                                    UInt_t ican, 
                                    float Threshold,
-                                   std::vector<float> *NHits,
+                                   std::vector<float> *N50,
                                    std::vector<float> *FitT,
                                    std::vector<float> *Label,
                                    std::vector<float> *TagOut,
@@ -1727,7 +1757,9 @@ void NTagAnalysis::GetTagBreakdown(CC0PiNumu* numu,
   float OscProb = numu->getOscWgt();
   bool etagboxin = false;
   if (etagmode){
-    if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+    //if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+    if ( FitT->at(ican) < 1.5 ) etagboxin = true;
+    else if ( FitT->at(ican) < 20. && FitT->at(ican) < 0.25*(N50->at(ican))-7.5 ) etagboxin = true;
 
     //if (TagOut->at(ican)>Threshold && etagboxin==false) 
     //if (TagOut->at(ican)>Threshold && etagboxin==false && (Label->at(ican)==2 || Label->at(ican)==3)) TagTP[ith]++;
@@ -1820,7 +1852,7 @@ int NTagAnalysis::LabelTrueNuN(CC0PiNumu* numu, bool PrmMuEnd, Int_t *iprntidx, 
 
 bool NTagAnalysis::GetRecoNeutronCapVtx(UInt_t ican, 
                                         float Threshold, 
-                                        std::vector<float> *NHits,
+                                        std::vector<float> *N50,
                                         std::vector<float> *FitT, 
                                         std::vector<float> *TagOut,
                                         std::vector<float> *dvx, 
@@ -1833,7 +1865,9 @@ bool NTagAnalysis::GetRecoNeutronCapVtx(UInt_t ican,
 
   bool etagboxin = false;
   if (etagmode){
-    if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+    //if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+    if ( FitT->at(ican) < 1.5 ) etagboxin = true;
+    else if ( FitT->at(ican) < 20. && FitT->at(ican) < 0.25*(N50->at(ican))-7.5 ) etagboxin = true;
 
     if (TagOut->at(ican)>Threshold && etagboxin==false) {
       NCap = true;
@@ -1858,7 +1892,7 @@ bool NTagAnalysis::GetRecoNeutronCapVtx(UInt_t ican,
 
 
 int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscnd, Float_t vtxprnt[][3], 
-                                      bool etagmode, std::vector<float> *FitT, std::vector<float> *NHits, std::vector<float> *Label, std::vector<float> *TagOut, 
+                                      bool etagmode, std::vector<float> *FitT, std::vector<float> *N50, std::vector<float> *Label, std::vector<float> *TagOut, 
                                       float TMVAThreshold, std::vector<float> *dvx, std::vector<float> *dvy, std::vector<float> *dvz) 
 {
 
@@ -1945,7 +1979,9 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
       //if (Label->at(ican)==2) h1_N50[2] -> Fill(NHits->at(ican));
       //if (Label->at(ican)==3) h1_N50[3] -> Fill(NHits->at(ican));
 
-      if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+      //if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
+      if ( FitT->at(ican) < 1.5 ) etagboxin = true;
+      else if ( FitT->at(ican) < 20. && FitT->at(ican) < 0.25*(N50->at(ican))-7.5 ) etagboxin = true;
       if (TagOut->at(ican)>TMVAThreshold && etagboxin==false) {
         RecoNCap++;
         //std::cout << "FitT: " << FitT->at(ican) << std::endl;

@@ -441,7 +441,7 @@ class NTagAnalysis {
                                     std::vector<float> *DWall,
                                     std::vector<float> *TagIndex,
                                     bool etagmode,
-                                    std::vector<float> *NHits,
+                                    std::vector<float> *N50,
                                     std::vector<float> *FitT,
                                     std::vector<float> *TagOut,
                                     std::vector<float> *Label,
@@ -449,14 +449,14 @@ class NTagAnalysis {
     void GetElikeCandidatesinWindow(std::vector<float> *t,
                                     std::vector<float> *TagIndex,
                                     bool etagmode,
-                                    std::vector<float> *NHits,
+                                    std::vector<float> *N50,
                                     std::vector<float> *FitT,
                                     std::vector<float> *TagOut,
                                     std::vector<float> *Label);
 
     void GetNeutrinoEventswNTag(std::vector<float> *TagOut,
                                 std::vector<float> *TagIndex,
-                                std::vector<float> *NHits,
+                                std::vector<float> *N50,
                                 std::vector<float> *FitT,
                                 std::vector<float> *Label,
                                 float NTrueN,
@@ -468,7 +468,7 @@ class NTagAnalysis {
 
     void GetResolutionwTrueN(CC0PiNumu* numu, float NTrueN);
 
-    bool DecayelikeChecker(bool etagmode, float NHits, float FitT);
+    bool DecayelikeChecker(bool etagmode, float N50, float FitT);
 
     void Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float theta, float thetamin, float thetamax);
 
@@ -476,24 +476,36 @@ class NTagAnalysis {
                          int ith, 
                          UInt_t ican, 
                          float Threshold,
-                         std::vector<float> *NHits,
+                         std::vector<float> *N50,
                          std::vector<float> *FitT,
                          std::vector<float> *Label,
                          std::vector<float> *TagOut,
                          bool etagmode);
 
     //For neutron multiplicity measurement
+    //float GetTaggedNeutrons(std::vector<float> *TagOut,
+    //                        float Threshold,
+    //                        std::vector<float> *TagIndex,
+    //                        std::vector<float> *NHits,
+    //                        std::vector<float> *FitT,
+    //                        std::vector<float> *Label,
+    //                        bool etagmode);
     float GetTaggedNeutrons(std::vector<float> *TagOut,
                             float Threshold,
-                            std::vector<float> *TagIndex,
-                            std::vector<float> *NHits,
+                            std::vector<float> *N50,
                             std::vector<float> *FitT,
                             std::vector<float> *Label,
                             bool etagmode);
+    //float GetTaggedNoise(std::vector<float> *TagOut,
+    //                     float Threshold,
+    //                     std::vector<float> *TagIndex,
+    //                     std::vector<float> *NHits,
+    //                     std::vector<float> *FitT,
+    //                     std::vector<float> *Label,
+    //                     bool etagmode);
     float GetTaggedNoise(std::vector<float> *TagOut,
                          float Threshold,
-                         std::vector<float> *TagIndex,
-                         std::vector<float> *NHits,
+                         std::vector<float> *N50,
                          std::vector<float> *FitT,
                          std::vector<float> *Label,
                          bool etagmode);
@@ -516,7 +528,7 @@ class NTagAnalysis {
     int  LabelTrueNuN(CC0PiNumu* numu, bool PrmMuEnd, Int_t *iprntidx, Float_t vtxprnt[][3], std::vector<float> *VtxPrntList, std::vector<float> *VtxScndList);
     bool GetRecoNeutronCapVtx(UInt_t ican, 
                               float Threshold, 
-                              std::vector<float> *NHits,
+                              std::vector<float> *N50,
                               std::vector<float> *FitT, 
                               std::vector<float> *TagOut,
                               std::vector<float> *dvx, 
@@ -525,7 +537,7 @@ class NTagAnalysis {
                               float *NCapVtx,
                               bool etagmode);
     int NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscnd, Float_t vtxprnt[][3], 
-                            bool etagmode, std::vector<float> *FitT, std::vector<float> *NHits, std::vector<float> *Label, std::vector<float> *TagOut, 
+                            bool etagmode, std::vector<float> *FitT, std::vector<float> *N50, std::vector<float> *Label, std::vector<float> *TagOut, 
                             float TMVAThreshold, std::vector<float> *dvx, std::vector<float> *dvy, std::vector<float> *dvz);
 
     void GetTrueNCapTime(std::vector<float> *t, std::vector<int> *Type);

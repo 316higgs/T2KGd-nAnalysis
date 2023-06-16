@@ -394,9 +394,11 @@ int main(int argc, char **argv) {
                                      recothetamu, thetamin, thetamax);
 
       //Number of tagged-neutrons
-      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
+      //int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
+      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, 0.75, N50, FitT, Label, etagmode);
       TotalTaggedN += numtaggedneutrons;
-      int numtaggednoise = ntagana.GetTaggedNoise(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
+      //int numtaggednoise = ntagana.GetTaggedNoise(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
+      int numtaggednoise = ntagana.GetTaggedNoise(TagOut, 0.75, N50, FitT, Label, etagmode);
 
       //Pre-selection
       for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
