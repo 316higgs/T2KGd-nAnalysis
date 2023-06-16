@@ -42,7 +42,7 @@ COMMENTOUT
 ##### FHC numu -> numu Gd MC #####
 <<COMMENTOUT
 ./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
-                     ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.NNoptntag0026Gd.\*.root\
                      $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.preNN.newGdMC.root\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.preNN.newGdMC.txt\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.preNN.newGdMC.txt\
@@ -54,7 +54,7 @@ COMMENTOUT
 
 #<<COMMENTOUT
 ./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
-                     ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.NNoptntag0026Gd.\*.root\
                      $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.postNN.newGdMC.root\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.postNN.newGdMC.txt\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.postNN.newGdMC.txt\
@@ -90,7 +90,7 @@ COMMENTOUT
                      -OSCCH NUMU
 COMMENTOUT
 
-#<<COMMENTOUT
+<<COMMENTOUT
 ./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_nue.13a.fiTQun0026Gd.\*.root\
                      ${DISK3}/Ntag/output/fhc/numu_x_nue/fhc.numu_x_nue.13a.ntag0026Gd.\*.root\
                      $ANALYSISSTAGE/output/fhc/fhc.numu_x_nue.postNN.newGdMC.root\
@@ -100,7 +100,7 @@ COMMENTOUT
                      -ETAG ON\
                      -BEAMMODE FHC\
                      -OSCCH NUMU
-#COMMENTOUT
+COMMENTOUT
 
 
 ##### FHC numubar -> numubar Gd MC #####
@@ -116,7 +116,7 @@ COMMENTOUT
                      -OSCCH NUMU
 COMMENTOUT
 
-#<<COMMENTOUT
+<<COMMENTOUT
 ./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_numubar.13a.fiTQun0026Gd.\*.root\
                      ${DISK3}/Ntag/output/fhc/numubar_x_numubar/fhc.numubar_x_numubar.13a.ntag0026Gd.\*.root\
                      $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.postNN.newGdMC.root\
@@ -126,7 +126,7 @@ COMMENTOUT
                      -ETAG ON\
                      -BEAMMODE FHC\
                      -OSCCH NUMU
-#COMMENTOUT
+COMMENTOUT
 
 
 

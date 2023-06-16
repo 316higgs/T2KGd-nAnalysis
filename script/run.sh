@@ -75,6 +75,19 @@ COMMENTOUT
 ####################################################################
 ##### FHC numu -> numu Gd MC #####
 <<COMMENTOUT
+#####  new Gd MC (NN optimized)  ######
+./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
+                   ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.NNoptntag0026Gd.\*.root\
+                   ${ANALYSISSTAGE}/output/fhc/fhc.numu_x_numu.NNoptnewGdMC.root\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.neutrino.newGdMC.txt\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.NNoptntag.newGdMC.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMU
+COMMENTOUT
+
+<<COMMENTOUT
 #####  new Gd MC  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.\*.root\

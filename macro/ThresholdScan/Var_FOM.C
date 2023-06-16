@@ -7,8 +7,9 @@
 #define VARNUM 5
 
 void Var_FOM() {
-  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
-  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.wToF.root");
+  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.root");
+  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.wToF.root");
 
   TGraphErrors* g_FOM[VARNUM];
   g_FOM[0] = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;25");  // +40%
@@ -46,7 +47,7 @@ void Var_FOM() {
 #endif
 
   ////  w/o ToF-subtraction  ////
-#if 1
+#if 0
   // Optimal threshold
   Double_t OptX_p40 = 0.35;
   Double_t OptX_p30 = 0.35;
@@ -60,6 +61,40 @@ void Var_FOM() {
   Double_t OptY_nom = 115.579;
   Double_t OptY_m30 = 95.565;
   Double_t OptY_m40 = 87.9864;
+#endif
+
+  //// NN optimized  w/o ToF-subtraction  ////
+#if 0
+  // Optimal threshold
+  Double_t OptX_p40 = 0.5;
+  Double_t OptX_p30 = 0.5;
+  Double_t OptX_nom = 0.5;
+  Double_t OptX_m30 = 0.6;
+  Double_t OptX_m40 = 0.7;
+
+  // Maximized FOM
+  Double_t OptY_p40 = 78.2116;
+  Double_t OptY_p30 = 75.2244;
+  Double_t OptY_nom = 65.4602;
+  Double_t OptY_m30 = 54.0596;
+  Double_t OptY_m40 = 49.7772;
+#endif
+
+  //// NN optimized  w/ ToF-subtraction  ////
+#if 1
+  // Optimal threshold
+  Double_t OptX_p40 = 0.15;
+  Double_t OptX_p30 = 0.15;
+  Double_t OptX_nom = 0.2;
+  Double_t OptX_m30 = 0.2;
+  Double_t OptX_m40 = 0.2;
+
+  // Maximized FOM
+  Double_t OptY_p40 = 80.9524;
+  Double_t OptY_p30 = 77.8243;
+  Double_t OptY_nom = 67.6953;
+  Double_t OptY_m30 = 55.9403;
+  Double_t OptY_m40 = 51.4419;
 #endif
 
   TGraph* g_Opt[VARNUM];
@@ -90,13 +125,32 @@ void Var_FOM() {
 #endif
 
   ////  w/o ToF-subtraction  //// 
-#if 1
+#if 0
   OptNoiseRate[0] = 4.61915;  // %
   OptNoiseRate[1] = 4.61915;  // %
   OptNoiseRate[2] = 3.83897;  // %
   OptNoiseRate[3] = 3.16529;  // %
   OptNoiseRate[4] = 2.66498;  // %
 #endif
+
+  //// NN optimized w/o ToF-subtraction  //// 
+#if 0
+  OptNoiseRate[0] = 2.76734;  // %
+  OptNoiseRate[1] = 2.76734;  // %
+  OptNoiseRate[2] = 2.76734;  // %
+  OptNoiseRate[3] = 2.05169;  // %
+  OptNoiseRate[4] = 1.48938;  // %
+#endif
+
+  //// NN optimized w/ ToF-subtraction  //// 
+#if 1
+  OptNoiseRate[0] = 7.71741;  // %
+  OptNoiseRate[1] = 7.71741;  // %
+  OptNoiseRate[2] = 5.11037;  // %
+  OptNoiseRate[3] = 5.11037;  // %
+  OptNoiseRate[4] = 5.11037;  // %
+#endif
+
   TH1F* h1_VarNoiseRate = new TH1F("h1_VarNoiseRate", "", VARNUM, 0, VARNUM);
   for (int ibin=0; ibin<VARNUM; ibin++) {
     h1_VarNoiseRate -> SetBinContent(ibin+1, OptNoiseRate[ibin]/OptNoiseRate[2]);
@@ -122,7 +176,8 @@ void Var_FOM() {
   gROOT -> SetStyle("Plain");
   TCanvas* c = new TCanvas("c","c",1000,700);
   c -> SetGrid();
-  TH1F* frame = gPad->DrawFrame(0., 0., 1., 160.);
+  //TH1F* frame = gPad->DrawFrame(0., 0., 1., 160.);
+  TH1F* frame = gPad->DrawFrame(0., 0., 1., 100.);
   frame -> SetXTitle("n-likethreshold");
   frame -> SetYTitle("Figure of Merit  S/#sqrt{S+B}");
   frame -> SetTitleOffset(1.1, "Y");

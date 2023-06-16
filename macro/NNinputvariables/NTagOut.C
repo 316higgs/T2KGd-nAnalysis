@@ -9,7 +9,7 @@
 //#define POTSCALE 1.96  //Run1-10 FHC
 //#define POTSCALE 1.63  //Run1-10 RHC
 #define POTSCALE 0.17  //Run11 FHC
-#define NTHRESHOLD 0.45
+#define NTHRESHOLD 0.7
 
 
 void NTagOut(bool beammode) {

@@ -23,15 +23,21 @@ void mergeNNinputshape(bool beammode) {
   //FHC
 #if fhcflag
 
-  //Pre
-  //TFile* finnumu     = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
-  //TFile* finnuesig   = new TFile("../../output/fhc/fhc.numu_x_nue.preNN.newGdMC.root");
-  //TFile* finnumubar  = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root");
+#if 0
+  // Pre
+  bool NTagapply = false;
+  TFile* finnumu     = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
+  TFile* finnuesig   = new TFile("../../output/fhc/fhc.numu_x_nue.preNN.newGdMC.root");
+  TFile* finnumubar  = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root");
+#endif
 
-  //Post
+#if 1
+  // Post
+  bool NTagapply = true;
   TFile* finnumu     = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.newGdMC.root");
   TFile* finnuesig   = new TFile("../../output/fhc/fhc.numu_x_nue.postNN.newGdMC.root");
   TFile* finnumubar  = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.newGdMC.root");
+#endif
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
@@ -196,8 +202,8 @@ void mergeNNinputshape(bool beammode) {
 
   TLegend* legend = new TLegend(0.35, 0.4, 0.89, 0.89);
   legend -> SetTextSize(0.06);
-  //legend -> AddEntry((TObject*)0,"#kern[-0.23]{Pre-NN (Run11 FHC)}","");
-  legend -> AddEntry((TObject*)0,"#kern[-0.23]{Post-NN (Run11 FHC)}","");
+  if (!NTagapply) legend -> AddEntry((TObject*)0,"#kern[-0.23]{Pre-NN (Run11 FHC)}","");
+  else legend -> AddEntry((TObject*)0,"#kern[-0.23]{Post-NN (Run11 FHC)}","");
   legend -> AddEntry(h1_NNvar_Gd[0], "Gd-n signal", "L");
   legend -> AddEntry(h1_NNvar_H[0], "H-n signal", "L");
   legend -> AddEntry(h1_NNvar_Decaye[0], "Decay-e", "L");

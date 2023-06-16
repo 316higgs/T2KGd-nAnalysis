@@ -23,7 +23,7 @@
 #include "src/NTagAnalysis/inc/NTagAnalysis.h"
 #include "src/NNInputVariables/inc/NNInputVariables.h"
 
-#define NLIKETHRESHOLD 0.45
+#define NLIKETHRESHOLD 0.7
 
 
 int main(int argc, char **argv) {
@@ -300,7 +300,7 @@ int main(int argc, char **argv) {
     Long64_t tentry = tchntag->LoadTree(ientry);
     bPID        -> GetEntry(tentry);
     bParentPID  -> GetEntry(tentry);
-    //bParentIndex -> GetEntry(tentry);  //avalable at NTag1.1.2
+    bParentIndex -> GetEntry(tentry);  //avalable from NTag1.1.2
     bIntID      -> GetEntry(tentry);
     bpar_t      -> GetEntry(tentry);
     bpar_x      -> GetEntry(tentry);

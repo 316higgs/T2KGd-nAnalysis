@@ -11,7 +11,8 @@ void Efficiency() {
 
   //TFile* fin = new TFile("../../output/TWIDTHScan/fhc.numu_x_numu.0026Gd.noToF.TWIDTH200.NHITSTH25.root");
 
-  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.root");
 
   TGraphErrors* g_NNEff    = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;13");
   TGraphErrors* g_NNHEff   = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;14");
