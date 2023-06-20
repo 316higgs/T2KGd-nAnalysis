@@ -23,7 +23,7 @@ void PreScanNHITSTH() {
   float ePreHEff[SCANPOINTS];
   float ePreGdEff[SCANPOINTS];
   for (int i=0; i<SCANPOINTS; i++) {
-    eNHITSTH[i]   = 0.;
+    eNHITSTH[i]  = 0.;
     ePreEff[i]   = 0.;
     ePreHEff[i]  = 0.;
     ePreGdEff[i] = 0.;
@@ -31,33 +31,33 @@ void PreScanNHITSTH() {
     switch (i) {
       case 0:
         NHITSTH[i]   = 15;
-        PreEff[i]   = 74.7672;
-        PreHEff[i]  = 53.9946;
-        PreGdEff[i] = 95.1158;
+        PreEff[i]   = 74.6117;
+        PreHEff[i]  = 53.0344;
+        PreGdEff[i] = 94.8912;
         break;
       case 1:
         NHITSTH[i]   = 20;
-        PreEff[i]   = 71.8403;
-        PreHEff[i]  = 49.8059;
-        PreGdEff[i] = 93.4249;
+        PreEff[i]   = 71.779;
+        PreHEff[i]  = 49.309;
+        PreGdEff[i] = 92.8979;
         break;
       case 2:
         NHITSTH[i]   = 25;
-        PreEff[i]   = 63.9352;
-        PreHEff[i]  = 35.8948;
-        PreGdEff[i] = 91.4037;
+        PreEff[i]   = 64.2696;
+        PreHEff[i]  = 35.7184;
+        PreGdEff[i] = 91.1042;
         break;
       case 3:
         NHITSTH[i]   = 30;
-        PreEff[i]   = 51.5914;
-        PreHEff[i]  = 15.1829;
-        PreGdEff[i] = 87.2582;
+        PreEff[i]   = 52.6464;
+        PreHEff[i]  = 15.7464;
+        PreGdEff[i] = 87.3284;
         break;
       case 4:
         NHITSTH[i]   = 35;
-        PreEff[i]   = 41.1455;
-        PreHEff[i]  = 4.02583;
-        PreGdEff[i] = 77.5087;
+        PreEff[i]   = 42.0353;
+        PreHEff[i]  = 4.06112;
+        PreGdEff[i] = 77.727;
         break;
     }
 
