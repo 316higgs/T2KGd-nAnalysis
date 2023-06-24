@@ -33,7 +33,7 @@ void SimpleDecaye(bool beammode) {
   TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.root");
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
-  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.2.1/skrate/fhc_sk_rate_tmp.root");
+  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
   //RHC
@@ -56,7 +56,7 @@ void SimpleDecaye(bool beammode) {
   Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   //Double_t GenN_numu_x_numu         = 190292;
   //Double_t GenN_numubar_x_numubar   = 190909;
-  Double_t GenN_numu_x_numu         = 63576;
+  Double_t GenN_numu_x_numu         = 63622;
   Double_t GenN_numu_x_nue          = 63312;
   Double_t GenN_numubar_x_numubar   = 63458;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
@@ -78,14 +78,14 @@ void SimpleDecaye(bool beammode) {
   TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("DecayeBox/h1_TrueDecaye_mode2");
   TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("DecayeBox/h1_TrueDecaye_mode6");
 #endif
-#if 0
+#if 1
   //////////  Reconstructed decay-e (fiTQun sub-events)  /////////
   TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("DecayeBox/h1_TaggedDecaye_mode0");
   TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("DecayeBox/h1_TaggedDecaye_mode1");
   TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get("DecayeBox/h1_TaggedDecaye_mode3");
   TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("DecayeBox/h1_TaggedDecaye_mode2");
 #endif
-#if 1
+#if 0
   //////////  Reconstructed decay-e (floor cut)  /////////
   TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_Decaye_mode0");
   TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_Decaye_mode1");
@@ -101,14 +101,14 @@ void SimpleDecaye(bool beammode) {
   TH1F* h1_NC_nuesig      = (TH1F*)fin_nuesig->Get("DecayeBox/h1_TrueDecaye_mode2");
   TH1F* h1_CCOther_nuesig = (TH1F*)fin_nuesig->Get("DecayeBox/h1_TrueDecaye_mode6");
 #endif
-#if 0
+#if 1
   //////////  Reconstructed decay-e (fiTQun sub-events)  /////////
   TH1F* h1_CCQE_nuesig    = (TH1F*)fin_nuesig->Get("DecayeBox/h1_TaggedDecaye_mode0");
   TH1F* h1_CC2p2h_nuesig  = (TH1F*)fin_nuesig->Get("DecayeBox/h1_TaggedDecaye_mode1");
   TH1F* h1_NC_nuesig      = (TH1F*)fin_nuesig->Get("DecayeBox/h1_TaggedDecaye_mode3");
   TH1F* h1_CCOther_nuesig = (TH1F*)fin_nuesig->Get("DecayeBox/h1_TaggedDecaye_mode2");
 #endif
-#if 1
+#if 0
   //////////  Reconstructed decay-e (floor cut)  /////////
   TH1F* h1_CCQE_nuesig    = (TH1F*)fin_nuesig->Get("Gd1RmuonSelection/h1_Decaye_mode0");
   TH1F* h1_CC2p2h_nuesig  = (TH1F*)fin_nuesig->Get("Gd1RmuonSelection/h1_Decaye_mode1");
@@ -124,14 +124,14 @@ void SimpleDecaye(bool beammode) {
   //TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("DecayeBox/h1_TrueDecaye_mode2");
   //TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get("DecayeBox/h1_TrueDecaye_mode6");
 #endif
-#if 0
+#if 1
   //////////  Reconstructed decay-e (fiTQun sub-events)  /////////
   TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("DecayeBox/h1_TaggedDecaye_mode0");
   TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("DecayeBox/h1_TaggedDecaye_mode1");
   TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get("DecayeBox/h1_TaggedDecaye_mode3");
   TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get("DecayeBox/h1_TaggedDecaye_mode2");
 #endif
-#if 1
+#if 0
   //////////  Reconstructed decay-e (floor cut)  /////////
   TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_Decaye_mode0");
   TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_Decaye_mode1");

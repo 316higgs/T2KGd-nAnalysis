@@ -7,9 +7,9 @@
 #define VARNUM 5
 
 void Var_FOM() {
-  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
   //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.root");
-  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.wToF.root");
+  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.wToF.root");
 
   TGraphErrors* g_FOM[VARNUM];
   g_FOM[0] = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;25");  // +40%
@@ -47,20 +47,20 @@ void Var_FOM() {
 #endif
 
   ////  w/o ToF-subtraction  ////
-#if 0
+#if 1
   // Optimal threshold
-  Double_t OptX_p40 = 0.35;
-  Double_t OptX_p30 = 0.35;
-  Double_t OptX_nom = 0.4;
-  Double_t OptX_m30 = 0.45;
-  Double_t OptX_m40 = 0.5;
+  Double_t OptX_p40 = 0.5;
+  Double_t OptX_p30 = 0.5;
+  Double_t OptX_nom = 0.5;
+  Double_t OptX_m30 = 0.55;
+  Double_t OptX_m40 = 0.65;
 
   // Maximized FOM
-  Double_t OptY_p40 = 138.241;
-  Double_t OptY_p30 = 132.932;
-  Double_t OptY_nom = 115.579;
-  Double_t OptY_m30 = 95.565;
-  Double_t OptY_m40 = 87.9864;
+  Double_t OptY_p40 = 76.8148;
+  Double_t OptY_p30 = 73.8997;
+  Double_t OptY_nom = 64.3746;
+  Double_t OptY_m30 = 53.3041;
+  Double_t OptY_m40 = 49.0762;
 #endif
 
   //// NN optimized  w/o ToF-subtraction  ////
@@ -81,7 +81,7 @@ void Var_FOM() {
 #endif
 
   //// NN optimized  w/ ToF-subtraction  ////
-#if 1
+#if 0
   // Optimal threshold
   Double_t OptX_p40 = 0.15;
   Double_t OptX_p30 = 0.15;
@@ -125,12 +125,12 @@ void Var_FOM() {
 #endif
 
   ////  w/o ToF-subtraction  //// 
-#if 0
-  OptNoiseRate[0] = 4.61915;  // %
-  OptNoiseRate[1] = 4.61915;  // %
-  OptNoiseRate[2] = 3.83897;  // %
-  OptNoiseRate[3] = 3.16529;  // %
-  OptNoiseRate[4] = 2.66498;  // %
+#if 1
+  OptNoiseRate[0] = 4.67173;  // %
+  OptNoiseRate[1] = 4.67173;  // %
+  OptNoiseRate[2] = 4.67173;  // %
+  OptNoiseRate[3] = 3.79808;  // %
+  OptNoiseRate[4] = 2.68462;  // %
 #endif
 
   //// NN optimized w/o ToF-subtraction  //// 
@@ -143,7 +143,7 @@ void Var_FOM() {
 #endif
 
   //// NN optimized w/ ToF-subtraction  //// 
-#if 1
+#if 0
   OptNoiseRate[0] = 7.71741;  // %
   OptNoiseRate[1] = 7.71741;  // %
   OptNoiseRate[2] = 5.11037;  // %

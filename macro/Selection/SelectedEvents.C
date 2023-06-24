@@ -34,7 +34,7 @@ void SelectedEvents(bool beammode) {
   TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.newGdMC.root");
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
-  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.2.1/skrate/fhc_sk_rate_tmp.root");
+  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
   //RHC
@@ -57,7 +57,7 @@ void SelectedEvents(bool beammode) {
   Double_t ExpN_numubar_x_nuebar    = h1_skrate_numubar_x_nuebar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   //Double_t GenN_numu_x_numu         = 190292;
   //Double_t GenN_numubar_x_numubar   = 190909;
-  Double_t GenN_numu_x_numu       = 63576;
+  Double_t GenN_numu_x_numu       = 63622;
   Double_t GenN_numu_x_nue        = 63312;
   Double_t GenN_numubar_x_numubar = 63458;
   Double_t GenN_numubar_x_nuebar  = 63489;
@@ -374,9 +374,11 @@ void SelectedEvents(bool beammode) {
   h1_SelEff_merge -> SetMaximum(1.1);
   h1_SelEff_merge -> Draw();
   h1_SelEff_merge ->GetYaxis()->SetTitleSize(0.038);
-  h1_SelEff_merge ->GetYaxis()->SetTitleOffset(1.3);
-  h1_SelEff_merge ->GetYaxis()->SetLabelSize(0.036);
+  h1_SelEff_merge ->GetYaxis()->SetTitleOffset(0.9);
+  h1_SelEff_merge ->GetYaxis()->SetLabelSize(0.04);
   h1_SelEff_merge ->GetYaxis()->SetTitle("Selection Efficiency");
+  h1_SelEff_merge ->GetYaxis()->SetTitleSize(0.045);
+  h1_SelEff_merge ->GetXaxis()->SetTitleSize(0.06);
   h1_SelEff_merge -> Draw();
   c2->RedrawAxis();
   

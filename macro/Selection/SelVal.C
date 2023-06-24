@@ -129,7 +129,7 @@ void SelVal(bool beammode) {
   TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.root");
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
-  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.2.1/skrate/fhc_sk_rate_tmp.root");
+  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
   //RHC
@@ -150,7 +150,7 @@ void SelVal(bool beammode) {
   ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   //Double_t GenN_numu_x_numu         = 190292;
   //Double_t GenN_numubar_x_numubar   = 190909;
-  GenN_numu_x_numu         = 63576;
+  GenN_numu_x_numu         = 63622;
   GenN_numu_x_nue          = 63312;
   GenN_numubar_x_numubar   = 63458;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;

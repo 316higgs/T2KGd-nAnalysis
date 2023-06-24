@@ -79,7 +79,7 @@ COMMENTOUT
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.NNoptntag0026Gd.\*.root\
                    ${ANALYSISSTAGE}/output/fhc/fhc.numu_x_numu.NNoptnewGdMC.root\
-                   ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.neutrino.newGdMC.txt\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.NNoptneutrino.newGdMC.txt\
                    ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.NNoptntag.newGdMC.txt\
                    -MCType Gd\
                    -ETAG ON\

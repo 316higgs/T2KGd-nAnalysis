@@ -75,7 +75,8 @@ void PreScanROC() {
 
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
-  TH1F* frame = gPad->DrawFrame(0., 0., 1., 1.);
+  //TH1F* frame = gPad->DrawFrame(0., 0., 1., 1.);
+  TH1F* frame = gPad->DrawFrame(0., 0., 0.05, 1.);
   //frame -> SetMaximum(0.1);
   frame -> SetXTitle("Mis-tagged Noise Rate");
   frame -> SetYTitle("Overall Tagging Efficiency");
