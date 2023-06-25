@@ -23,7 +23,7 @@
 #include "src/NTagAnalysis/inc/NTagAnalysis.h"
 #include "src/NNInputVariables/inc/NNInputVariables.h"
 
-#define NLIKETHRESHOLD 0.7
+#define NLIKETHRESHOLD 0.65
 
 
 int main(int argc, char **argv) {
@@ -165,6 +165,8 @@ int main(int argc, char **argv) {
   TBranch *bTagIndex = 0;
   std::vector<float> *NHits = 0;
   TBranch *bNHits = 0;
+  std::vector<float> *N50 = 0;
+  TBranch *bN50 = 0;
   std::vector<float> *N200 = 0;
   TBranch *bN200 = 0;
   std::vector<float> *TRMS = 0;
@@ -194,6 +196,7 @@ int main(int argc, char **argv) {
   tchntag->SetBranchAddress("FitT", &FitT, &bFitT);
   tchntag->SetBranchAddress("TagIndex", &TagIndex, &bTagIndex);
   tchntag->SetBranchAddress("NHits", &NHits, &bNHits);
+  tchntag->SetBranchAddress("N50", &N50, &bN50);
   tchntag->SetBranchAddress("N200", &N200, &bN200);
   tchntag->SetBranchAddress("TRMS", &TRMS, &bTRMS);
   tchntag->SetBranchAddress("DWall", &DWall, &bDWall);
@@ -312,6 +315,7 @@ int main(int argc, char **argv) {
     bTagClass   -> GetEntry(tentry);
     bFitT       -> GetEntry(tentry);
     bNHits             -> GetEntry(tentry);
+    bN50               -> GetEntry(tentry);
     bN200              -> GetEntry(tentry);
     bTRMS              -> GetEntry(tentry);
     bDWall             -> GetEntry(tentry);
@@ -419,6 +423,8 @@ int main(int argc, char **argv) {
 #if 1
           //bool etagboxin = false;
           //if (NHits->at(jentry)>50 && FitT->at(jentry)<20) etagboxin = true;
+          if ( FitT->at(jentry) < 1.5 ) etagboxin = true;
+          else if ( FitT->at(jentry) < 20. && FitT->at(jentry) < 0.25*(N50->at(jentry))-7.5 ) etagboxin = true;
 
           if (Label->at(jentry)==0 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
           if (Label->at(jentry)==1 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);

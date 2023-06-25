@@ -18,11 +18,11 @@ fi
 DISK3=/disk03/usr8/sedi
 
 
-type=0
+#type=0
 #type=1
 #type=2
 #type=3
-#type=4
+type=4
 Label="All"
 if [ $type -eq 0 ]; then
   echo "==========================="
