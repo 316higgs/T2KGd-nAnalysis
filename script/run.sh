@@ -141,7 +141,7 @@ COMMENTOUT
 
 ####################################################################
 ##### FHC numu -> nue Gd MC #####
-#<<COMMENTOUT
+<<COMMENTOUT
 #####  new Gd MC  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_nue.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/fhc/numu_x_nue/fhc.numu_x_nue.13a.NNoptntag0026Gd.\*.root\
@@ -152,23 +152,23 @@ COMMENTOUT
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUESIG
-#COMMENTOUT
+COMMENTOUT
 
 
 ####################################################################
 ##### FHC numubar -> numubar Gd MC #####
-<<COMMENTOUT
+#<<COMMENTOUT
 #####  new Gd MC  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_numubar.13a.fiTQun0026Gd.\*.root\
-                   ${DISK3}/Ntag/output/fhc/numubar_x_numubar/fhc.numubar_x_numubar.13a.ntag0026Gd.\*.root\
-                   ${ANALYSISSTAGE}/output/fhc/fhc.numubar_x_numubar.newGdMC.root\
-                   ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_numubar.neutrino.newGdMC.txt\
-                   ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_numubar.ntag.newGdMC.txt\
+                   ${DISK3}/Ntag/output/fhc/numubar_x_numubar/fhc.numubar_x_numubar.13a.NNoptntag0026Gd.\*.root\
+                   ${ANALYSISSTAGE}/output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.root\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_numubar.NNoptneutrino.newGdMC.txt\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_numubar.NNoptntag.newGdMC.txt\
                    -MCType Gd\
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
-COMMENTOUT
+#COMMENTOUT
 
 <<COMMENTOUT
 #####  old Gd MC  ######
@@ -185,18 +185,18 @@ COMMENTOUT
 
 ####################################################################
 ##### FHC numubar -> nuebar Gd MC #####
-<<COMMENTOUT
+#<<COMMENTOUT
 #####  new Gd MC  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_nuebar.13a.fiTQun0026Gd.\*.root\
-                   ${DISK3}/Ntag/output/fhc/numubar_x_nuebar/fhc.numubar_x_nuebar.13a.ntag0026Gd.\*.root\
-                   ${ANALYSISSTAGE}/output/fhc/fhc.numubar_x_nuebar.newGdMC.root\
-                   ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_nuebar.neutrino.newGdMC.txt\
-                   ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_nuebar.ntag.newGdMC.txt\
+                   ${DISK3}/Ntag/output/fhc/numubar_x_nuebar/fhc.numubar_x_nuebar.13a.NNoptntag0026Gd.\*.root\
+                   ${ANALYSISSTAGE}/output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.root\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_nuebar.NNoptneutrino.newGdMC.txt\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_nuebar.NNoptntag.newGdMC.txt\
                    -MCType Gd\
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
-COMMENTOUT
+#COMMENTOUT
 
 
 
