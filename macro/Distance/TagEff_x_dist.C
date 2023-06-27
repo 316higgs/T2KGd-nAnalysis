@@ -24,22 +24,23 @@ void TagEff_x_dist() {
   TH1D* h1_NNeff_x_dist_n  = (TH1D*)fin_n->Get("h1_NN_eff_scan8");
   TH1D* h1_truedistance_n  = (TH1D*)fin_n->Get("h1_truedistance");
 
-
+  //////  w/o ToF-subtraction  //////
   TH1D* h1_preeff_x_dist_o = (TH1D*)fin_o->Get("DistanceViewer/h1_PreEff_dist");
-  h1_preeff_x_dist_o -> SetXTitle("Truth Neutron Travel DIstance[m]");
+  h1_preeff_x_dist_o -> SetXTitle("Truth Neutron Travel Distance[m]");
   h1_preeff_x_dist_o -> SetYTitle("Pre-selection Efficiency");
   h1_preeff_x_dist_o -> SetTitleOffset(1.3, "Y");
   TH1D* h1_NNeff_x_dist_o  = (TH1D*)fin_o->Get("DistanceViewer/h1_NNEff_dist_thr4");
-  h1_NNeff_x_dist_o -> SetXTitle("Truth Neutron Travel DIstance[m]");
+  h1_NNeff_x_dist_o -> SetXTitle("Truth Neutron Travel Distance[m]");
   h1_NNeff_x_dist_o -> SetYTitle("NN Classification Efficiency");
   TH1D* h1_truedistance_o  = (TH1D*)fin_o->Get("DistanceViewer/h1_truedistance");
   TH1D* h1_eff_x_dist_o    = (TH1D*)fin_o->Get("DistanceViewer/h1_OverallEff_dist_thr4");
-  h1_eff_x_dist_o -> SetXTitle("Truth Neutron Travel DIstance[m]");
+  h1_eff_x_dist_o -> SetXTitle("Truth Neutron Travel Distance[m]");
   h1_eff_x_dist_o -> SetYTitle("Overall Tagging Efficiency");
 
+  //////  w/ ToF-subtraction  //////
   TH1D* h1_preeff_x_dist = (TH1D*)fin->Get("DistanceViewer/h1_PreEff_dist");
-  TH1D* h1_NNeff_x_dist  = (TH1D*)fin->Get("DistanceViewer/h1_NNEff_dist_thr14");
-  TH1D* h1_eff_x_dist    = (TH1D*)fin->Get("DistanceViewer/h1_OverallEff_dist_thr14");
+  TH1D* h1_NNeff_x_dist  = (TH1D*)fin->Get("DistanceViewer/h1_NNEff_dist_thr13");
+  TH1D* h1_eff_x_dist    = (TH1D*)fin->Get("DistanceViewer/h1_OverallEff_dist_thr13");
   TH1D* h1_truedistance  = (TH1D*)fin->Get("DistanceViewer/h1_truedistance");
 
   h1_eff_x_dist_o    -> SetLineColor(kAzure+7);
@@ -101,7 +102,7 @@ void TagEff_x_dist() {
   legend2 -> AddEntry(h1_eff_x_dist_o, "ToF-subtracted", "L");
   legend2 -> AddEntry((TObject*)0,"#kern[-0]{ (n-like threshold: 0.2)}","");
   legend2 -> AddEntry(h1_eff_x_dist, "No ToF-subtraction", "L");
-  legend2 -> AddEntry((TObject*)0,"#kern[-0]{ (n-like threshold: 0.7)}","");
+  legend2 -> AddEntry((TObject*)0,"#kern[-0]{ (n-like threshold: 0.65)}","");
   legend2 -> SetFillColor(0);
   legend2 -> Draw();
 

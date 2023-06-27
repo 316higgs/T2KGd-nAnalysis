@@ -9,5 +9,5 @@
 BEAMMODE=true
 #BEAMMODE=false
 
-#root -l 'SelectedEvents.C('${BEAMMODE}')'
-root -l 'mergeDcyePerform.C('${BEAMMODE}')'
+root -l 'SelectedEvents.C('${BEAMMODE}')'
+#root -l -q 'mergeDcyePerform.C('${BEAMMODE}')'

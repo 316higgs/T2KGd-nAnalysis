@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
   float dtMax  = 10.;
   float N50Min = 50.;
   float N50Max = 400.;
-  float nlikeThreshold = 0.55;
+  float nlikeThreshold = 0.65;
 
 
   //=========  fiTQun output (TTree: h1)  ============

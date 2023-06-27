@@ -9,5 +9,6 @@
 BEAMMODE=true
 #BEAMMODE=false
 
-root -l 'SelVal.C('${BEAMMODE}')'
+#root -l 'SelVal.C('${BEAMMODE}')'
+root -l 'SelectionVar.C('${BEAMMODE}')'
 #root -l 'Evis.C('${BEAMMODE}')'

@@ -30,6 +30,14 @@ TH1F* h1_C1_CCQE_numubar;
 TH1F* h1_C1_CC2p2h_numubar;
 TH1F* h1_C1_CCOther_numubar;
 TH1F* h1_C1_NC_numubar;
+TH1F* h1_C1_CCQE_nuebarsig;
+TH1F* h1_C1_CC2p2h_nuebarsig;
+TH1F* h1_C1_CCOther_nuebarsig;
+TH1F* h1_C1_NC_nuebarsig;
+TH1F* h1_C1_CCQE_nuebkg;
+TH1F* h1_C1_CC2p2h_nuebkg;
+TH1F* h1_C1_CCOther_nuebkg;
+TH1F* h1_C1_NC_nuebkg;
 
 TH1F* h1_C2_CCQE_numu;
 TH1F* h1_C2_CC2p2h_numu;
@@ -43,6 +51,14 @@ TH1F* h1_C2_CCQE_numubar;
 TH1F* h1_C2_CC2p2h_numubar;
 TH1F* h1_C2_CCOther_numubar;
 TH1F* h1_C2_NC_numubar;
+TH1F* h1_C2_CCQE_nuebarsig;
+TH1F* h1_C2_CC2p2h_nuebarsig;
+TH1F* h1_C2_CCOther_nuebarsig;
+TH1F* h1_C2_NC_nuebarsig;
+TH1F* h1_C2_CCQE_nuebkg;
+TH1F* h1_C2_CC2p2h_nuebkg;
+TH1F* h1_C2_CCOther_nuebkg;
+TH1F* h1_C2_NC_nuebkg;
 
 TH1F* h1_C3_CCQE_numu;
 TH1F* h1_C3_CC2p2h_numu;
@@ -56,6 +72,14 @@ TH1F* h1_C3_CCQE_numubar;
 TH1F* h1_C3_CC2p2h_numubar;
 TH1F* h1_C3_CCOther_numubar;
 TH1F* h1_C3_NC_numubar;
+TH1F* h1_C3_CCQE_nuebarsig;
+TH1F* h1_C3_CC2p2h_nuebarsig;
+TH1F* h1_C3_CCOther_nuebarsig;
+TH1F* h1_C3_NC_nuebarsig;
+TH1F* h1_C3_CCQE_nuebkg;
+TH1F* h1_C3_CC2p2h_nuebkg;
+TH1F* h1_C3_CCOther_nuebkg;
+TH1F* h1_C3_NC_nuebkg;
 
 TH1F* h1_C4_CCQE_numu;
 TH1F* h1_C4_CC2p2h_numu;
@@ -69,6 +93,14 @@ TH1F* h1_C4_CCQE_numubar;
 TH1F* h1_C4_CC2p2h_numubar;
 TH1F* h1_C4_CCOther_numubar;
 TH1F* h1_C4_NC_numubar;
+TH1F* h1_C4_CCQE_nuebarsig;
+TH1F* h1_C4_CC2p2h_nuebarsig;
+TH1F* h1_C4_CCOther_nuebarsig;
+TH1F* h1_C4_NC_nuebarsig;
+TH1F* h1_C4_CCQE_nuebkg;
+TH1F* h1_C4_CC2p2h_nuebkg;
+TH1F* h1_C4_CCOther_nuebkg;
+TH1F* h1_C4_NC_nuebkg;
 
 TH1F* h1_C5_CCQE_numu;
 TH1F* h1_C5_CC2p2h_numu;
@@ -82,6 +114,14 @@ TH1F* h1_C5_CCQE_numubar;
 TH1F* h1_C5_CC2p2h_numubar;
 TH1F* h1_C5_CCOther_numubar;
 TH1F* h1_C5_NC_numubar;
+TH1F* h1_C5_CCQE_nuebarsig;
+TH1F* h1_C5_CC2p2h_nuebarsig;
+TH1F* h1_C5_CCOther_nuebarsig;
+TH1F* h1_C5_NC_nuebarsig;
+TH1F* h1_C5_CCQE_nuebkg;
+TH1F* h1_C5_CC2p2h_nuebkg;
+TH1F* h1_C5_CCOther_nuebkg;
+TH1F* h1_C5_NC_nuebkg;
 
 TH1F* h1_C6_CCQE_numu;
 TH1F* h1_C6_CC2p2h_numu;
@@ -95,13 +135,26 @@ TH1F* h1_C6_CCQE_numubar;
 TH1F* h1_C6_CC2p2h_numubar;
 TH1F* h1_C6_CCOther_numubar;
 TH1F* h1_C6_NC_numubar;
+TH1F* h1_C6_CCQE_nuebarsig;
+TH1F* h1_C6_CC2p2h_nuebarsig;
+TH1F* h1_C6_CCOther_nuebarsig;
+TH1F* h1_C6_NC_nuebarsig;
+TH1F* h1_C6_CCQE_nuebkg;
+TH1F* h1_C6_CC2p2h_nuebkg;
+TH1F* h1_C6_CCOther_nuebkg;
+TH1F* h1_C6_NC_nuebkg;
 
 Double_t ExpN_numu_x_numu;
 Double_t ExpN_numu_x_nue;
 Double_t ExpN_numubar_x_numubar;
+Double_t ExpN_numubar_x_nuebar;
+Double_t ExpN_nue_x_nue;
+
 Double_t GenN_numu_x_numu;
 Double_t GenN_numu_x_nue;
 Double_t GenN_numubar_x_numubar;
+Double_t GenN_numubar_x_nuebar;
+Double_t GenN_nue_x_nue;
 
 
 void SetHistoColor();
@@ -121,12 +174,11 @@ void SelVal(bool beammode) {
 
   //FHC
 #if fhcflag
-  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.root");
-  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.root");
-
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
-  TFile* fin_nuesig  = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.NNoptnewGdMC.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.NNoptnewGdMC.root");
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
@@ -143,16 +195,21 @@ void SelVal(bool beammode) {
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
   TH1F* h1_skrate_numu_x_nue        = (TH1F*)fin_skrate->Get("skrate_numu_x_nue");
   TH1F* h1_skrate_numubar_x_numubar = (TH1F*)fin_skrate->Get("skrate_numu_bar_x_numu_bar");
-  //Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
-  //Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
-  ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
-  ExpN_numu_x_nue          = h1_skrate_numu_x_nue->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
-  ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
-  //Double_t GenN_numu_x_numu         = 190292;
-  //Double_t GenN_numubar_x_numubar   = 190909;
-  GenN_numu_x_numu         = 63622;
-  GenN_numu_x_nue          = 63312;
-  GenN_numubar_x_numubar   = 63458;
+  TH1F* h1_skrate_numubar_x_nuebar  = (TH1F*)fin_skrate->Get("skrate_numu_bar_x_nue_bar");
+  TH1F* h1_skrate_nue_x_nue         = (TH1F*)fin_skrate->Get("skrate_nue_x_nue");
+  TH1F* h1_skrate_nuebar_x_nuebar   = (TH1F*)fin_skrate->Get("skrate_nue_bar_x_nue_bar");
+  Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_numu_x_nue          = h1_skrate_numu_x_nue->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_numubar_x_nuebar    = h1_skrate_numubar_x_nuebar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_nue_x_nue           = h1_skrate_nue_x_nue->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_nuebar_x_nuebar     = h1_skrate_nuebar_x_nuebar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t GenN_numu_x_numu       = 63622;
+  Double_t GenN_numu_x_nue        = 63538;
+  Double_t GenN_numubar_x_numubar = 63444;
+  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_nue_x_nue         = 63379;
+  Double_t GenN_nuebar_x_nuebar   = 63463;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
   std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
   std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
@@ -163,6 +220,15 @@ void SelVal(bool beammode) {
   std::cout << "[numub -> numub] ExpN_numubar_x_numubar = " << h1_skrate_numubar_x_numubar->Integral() << std::endl;
   std::cout << "[numub -> numub] GenN_numubar_x_numubar = " << GenN_numubar_x_numubar << std::endl;
   std::cout << "[numub -> numub] Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
+  std::cout << "[numub -> nueb ] ExpN_numubar_x_nuebar = " << h1_skrate_numubar_x_nuebar->Integral() << std::endl;
+  std::cout << "[numub -> nueb ] GenN_numubar_x_nuebar = " << GenN_numubar_x_nuebar << std::endl;
+  std::cout << "[numub -> nueb ] Normalization factor for numubar_x_nuebar: " << (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) << std::endl;
+  std::cout << "[nue   -> nue  ] ExpN_nue_x_nue = " << h1_skrate_nue_x_nue->Integral() << std::endl;
+  std::cout << "[nue   -> nue  ] GenN_nue_x_nue = " << GenN_nue_x_nue << std::endl;
+  std::cout << "[nue   -> nue  ] Normalization factor for nue_x_nue: " << (ExpN_nue_x_nue)/(GenN_nue_x_nue) << std::endl;
+  std::cout << "[nueb  -> nueb ] ExpN_nuebar_x_nuebar = " << h1_skrate_nuebar_x_nuebar->Integral() << std::endl;
+  std::cout << "[nueb  -> nueb ] GenN_nuebar_x_nuebar = " << GenN_nuebar_x_nuebar << std::endl;
+  std::cout << "[nueb  -> nueb ] Normalization factor for nuebar_x_nuebar: " << (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) << std::endl;
 
 
   float y[2] = {0., 200.};
@@ -217,12 +283,32 @@ void SelVal(bool beammode) {
   h1_C1_NC_numubar      = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_dwall_mode2");
   h1_C1_CCQE_numubar -> SetStats(0);
 
+  h1_C1_CCQE_nuebarsig    = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_dwall_mode0");
+  h1_C1_CC2p2h_nuebarsig  = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_dwall_mode1");
+  h1_C1_CCOther_nuebarsig = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_dwall_mode3");
+  h1_C1_NC_nuebarsig      = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_dwall_mode2");
+  h1_C1_CCQE_nuebarsig -> SetStats(0);
+
+  h1_C1_CCQE_nuebkg    = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_dwall_mode0");
+  h1_C1_CC2p2h_nuebkg  = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_dwall_mode1");
+  h1_C1_CCOther_nuebkg = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_dwall_mode3");
+  h1_C1_NC_nuebkg      = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_dwall_mode2");
+  h1_C1_CCQE_nuebkg -> SetStats(0);
+
   THStack* hs_C1 = new THStack("hs_C1", "1. Dwall #geq 2 m; fiTQun Dwall[cm]; ");
   ScaleHisto(1);
 #if fhcflag
+  //hs_C1 -> Add(h1_C1_NC_nuebkg);
+  //hs_C1 -> Add(h1_C1_NC_nuebarsig);
   hs_C1 -> Add(h1_C1_NC_numubar);
   hs_C1 -> Add(h1_C1_NC_nuesig);
   hs_C1 -> Add(h1_C1_NC_numu);
+  //hs_C1 -> Add(h1_C1_CCOther_nuebkg);
+  //hs_C1 -> Add(h1_C1_CC2p2h_nuebkg);
+  //hs_C1 -> Add(h1_C1_CCQE_nuebkg);
+  //hs_C1 -> Add(h1_C1_CCOther_nuebarsig);
+  //hs_C1 -> Add(h1_C1_CC2p2h_nuebarsig);
+  //hs_C1 -> Add(h1_C1_CCQE_nuebarsig);
   hs_C1 -> Add(h1_C1_CCOther_nuesig);
   hs_C1 -> Add(h1_C1_CC2p2h_nuesig);
   hs_C1 -> Add(h1_C1_CCQE_nuesig);
@@ -263,12 +349,32 @@ void SelVal(bool beammode) {
   h1_C2_NC_numubar      = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_Nring_mode2");
   h1_C2_CCQE_numubar -> SetStats(0);
 
+  h1_C2_CCQE_nuebarsig    = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_Nring_mode0");
+  h1_C2_CC2p2h_nuebarsig  = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_Nring_mode1");
+  h1_C2_CCOther_nuebarsig = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_Nring_mode3");
+  h1_C2_NC_nuebarsig      = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_Nring_mode2");
+  h1_C2_CCQE_nuebarsig -> SetStats(0);
+
+  h1_C2_CCQE_nuebkg    = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_Nring_mode0");
+  h1_C2_CC2p2h_nuebkg  = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_Nring_mode1");
+  h1_C2_CCOther_nuebkg = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_Nring_mode3");
+  h1_C2_NC_nuebkg      = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_Nring_mode2");
+  h1_C2_CCQE_nuebkg -> SetStats(0);
+
   THStack* hs_C2 = new THStack("hs_C2", "2. Single ring; Number of Rings; ");
   ScaleHisto(2);
 #if fhcflag
+  hs_C2 -> Add(h1_C2_NC_nuebkg);
+  hs_C2 -> Add(h1_C2_NC_nuebarsig);
   hs_C2 -> Add(h1_C2_NC_numubar);
   hs_C2 -> Add(h1_C2_NC_nuesig);
   hs_C2 -> Add(h1_C2_NC_numu);
+  hs_C2 -> Add(h1_C2_CCOther_nuebkg);
+  hs_C2 -> Add(h1_C2_CC2p2h_nuebkg);
+  hs_C2 -> Add(h1_C2_CCQE_nuebkg);
+  hs_C2 -> Add(h1_C2_CCOther_nuebarsig);
+  hs_C2 -> Add(h1_C2_CC2p2h_nuebarsig);
+  hs_C2 -> Add(h1_C2_CCQE_nuebarsig);
   hs_C2 -> Add(h1_C2_CCOther_nuesig);
   hs_C2 -> Add(h1_C2_CC2p2h_nuesig);
   hs_C2 -> Add(h1_C2_CCQE_nuesig);
@@ -309,13 +415,33 @@ void SelVal(bool beammode) {
   h1_C3_CCOther_numubar = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_emulikelihood_mode3");
   h1_C3_NC_numubar      = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_emulikelihood_mode2");
   h1_C3_CCQE_numubar -> SetStats(0);
+
+  h1_C3_CCQE_nuebarsig    = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_emulikelihood_mode0");
+  h1_C3_CC2p2h_nuebarsig  = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_emulikelihood_mode1");
+  h1_C3_CCOther_nuebarsig = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_emulikelihood_mode3");
+  h1_C3_NC_nuebarsig      = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_emulikelihood_mode2");
+  h1_C3_CCQE_nuebarsig -> SetStats(0);
+
+  h1_C3_CCQE_nuebkg    = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_emulikelihood_mode0");
+  h1_C3_CC2p2h_nuebkg  = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_emulikelihood_mode1");
+  h1_C3_CCOther_nuebkg = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_emulikelihood_mode3");
+  h1_C3_NC_nuebkg      = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_emulikelihood_mode2");
+  h1_C3_CCQE_nuebkg -> SetStats(0);
   
   THStack* hs_C3 = new THStack("hs_C3", "3. #mu-like; e-#mu PID; ");
   ScaleHisto(3);
 #if fhcflag
+  hs_C3 -> Add(h1_C3_NC_nuebkg);
+  hs_C3 -> Add(h1_C3_NC_nuebarsig);
   hs_C3 -> Add(h1_C3_NC_numubar);
   hs_C3 -> Add(h1_C3_NC_nuesig);
   hs_C3 -> Add(h1_C3_NC_numu);
+  hs_C3 -> Add(h1_C3_CCOther_nuebkg);
+  hs_C3 -> Add(h1_C3_CC2p2h_nuebkg);
+  hs_C3 -> Add(h1_C3_CCQE_nuebkg);
+  hs_C3 -> Add(h1_C3_CCOther_nuebarsig);
+  hs_C3 -> Add(h1_C3_CC2p2h_nuebarsig);
+  hs_C3 -> Add(h1_C3_CCQE_nuebarsig);
   hs_C3 -> Add(h1_C3_CCOther_nuesig);
   hs_C3 -> Add(h1_C3_CC2p2h_nuesig);
   hs_C3 -> Add(h1_C3_CCQE_nuesig);
@@ -355,13 +481,33 @@ void SelVal(bool beammode) {
   h1_C4_CCOther_numubar = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_Pmu_mode3");
   h1_C4_NC_numubar      = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_Pmu_mode2");
   h1_C4_CCQE_numubar -> SetStats(0);
+
+  h1_C4_CCQE_nuebarsig    = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_Pmu_mode0");
+  h1_C4_CC2p2h_nuebarsig  = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_Pmu_mode1");
+  h1_C4_CCOther_nuebarsig = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_Pmu_mode3");
+  h1_C4_NC_nuebarsig      = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_Pmu_mode2");
+  h1_C4_CCQE_nuebarsig -> SetStats(0);
+
+  h1_C4_CCQE_nuebkg    = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_Pmu_mode0");
+  h1_C4_CC2p2h_nuebkg  = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_Pmu_mode1");
+  h1_C4_CCOther_nuebkg = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_Pmu_mode3");
+  h1_C4_NC_nuebkg      = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_Pmu_mode2");
+  h1_C4_CCQE_nuebkg -> SetStats(0);
   
   THStack* hs_C4 = new THStack("hs_C4", "4. P_{#mu} #geq 200 MeV; #mu momentum[MeV/c]; ");
   ScaleHisto(4);
 #if fhcflag
+  hs_C4 -> Add(h1_C4_NC_nuebkg);
+  hs_C4 -> Add(h1_C4_NC_nuebarsig);
   hs_C4 -> Add(h1_C4_NC_numubar);
   hs_C4 -> Add(h1_C4_NC_nuesig);
   hs_C4 -> Add(h1_C4_NC_numu);
+  hs_C4 -> Add(h1_C4_CCOther_nuebkg);
+  hs_C4 -> Add(h1_C4_CC2p2h_nuebkg);
+  hs_C4 -> Add(h1_C4_CCQE_nuebkg);
+  hs_C4 -> Add(h1_C4_CCOther_nuebarsig);
+  hs_C4 -> Add(h1_C4_CC2p2h_nuebarsig);
+  hs_C4 -> Add(h1_C4_CCQE_nuebarsig);
   hs_C4 -> Add(h1_C4_CCOther_nuesig);
   hs_C4 -> Add(h1_C4_CC2p2h_nuesig);
   hs_C4 -> Add(h1_C4_CCQE_nuesig);
@@ -401,13 +547,33 @@ void SelVal(bool beammode) {
   h1_C5_CCOther_numubar = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_Decaye_mode3");
   h1_C5_NC_numubar      = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_Decaye_mode2");
   h1_C5_CCQE_numubar -> SetStats(0);
+
+  h1_C5_CCQE_nuebarsig    = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_Decaye_mode0");
+  h1_C5_CC2p2h_nuebarsig  = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_Decaye_mode1");
+  h1_C5_CCOther_nuebarsig = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_Decaye_mode3");
+  h1_C5_NC_nuebarsig      = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_Decaye_mode2");
+  h1_C5_CCQE_nuebarsig -> SetStats(0);
+
+  h1_C5_CCQE_nuebkg    = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_Decaye_mode0");
+  h1_C5_CC2p2h_nuebkg  = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_Decaye_mode1");
+  h1_C5_CCOther_nuebkg = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_Decaye_mode3");
+  h1_C5_NC_nuebkg      = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_Decaye_mode2");
+  h1_C5_CCQE_nuebkg -> SetStats(0);
   
   THStack* hs_C5 = new THStack("hs_C5", "5. Decay-e #leq 1; Number of Decay-e; ");
   ScaleHisto(5);
 #if fhcflag
+  hs_C5 -> Add(h1_C5_NC_nuebkg);
+  hs_C5 -> Add(h1_C5_NC_nuebarsig);
   hs_C5 -> Add(h1_C5_NC_numubar);
   hs_C5 -> Add(h1_C5_NC_nuesig);
   hs_C5 -> Add(h1_C5_NC_numu);
+  hs_C5 -> Add(h1_C5_CCOther_nuebkg);
+  hs_C5 -> Add(h1_C5_CC2p2h_nuebkg);
+  hs_C5 -> Add(h1_C5_CCQE_nuebkg);
+  hs_C5 -> Add(h1_C5_CCOther_nuebarsig);
+  hs_C5 -> Add(h1_C5_CC2p2h_nuebarsig);
+  hs_C5 -> Add(h1_C5_CCQE_nuebarsig);
   hs_C5 -> Add(h1_C5_CCOther_nuesig);
   hs_C5 -> Add(h1_C5_CC2p2h_nuesig);
   hs_C5 -> Add(h1_C5_CCQE_nuesig);
@@ -447,13 +613,33 @@ void SelVal(bool beammode) {
   h1_C6_CCOther_numubar = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_pimulikelihood_mode3");
   h1_C6_NC_numubar      = (TH1F*)fin_numubar->Get("Gd1RmuonSelection/h1_pimulikelihood_mode2");
   h1_C6_CCQE_numubar -> SetStats(0);
+
+  h1_C6_CCQE_nuebarsig    = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_pimulikelihood_mode0");
+  h1_C6_CC2p2h_nuebarsig  = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_pimulikelihood_mode1");
+  h1_C6_CCOther_nuebarsig = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_pimulikelihood_mode3");
+  h1_C6_NC_nuebarsig      = (TH1F*)fin_nuebarsig->Get("Gd1RmuonSelection/h1_pimulikelihood_mode2");
+  h1_C6_CCQE_nuebarsig -> SetStats(0);
+
+  h1_C6_CCQE_nuebkg    = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_pimulikelihood_mode0");
+  h1_C6_CC2p2h_nuebkg  = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_pimulikelihood_mode1");
+  h1_C6_CCOther_nuebkg = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_pimulikelihood_mode3");
+  h1_C6_NC_nuebkg      = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_pimulikelihood_mode2");
+  h1_C6_CCQE_nuebkg -> SetStats(0);
   
   THStack* hs_C6 = new THStack("hs_C6", "6. Not#pi^{#pm}like; #pi^{#pm}-#mu PID; ");
   ScaleHisto(6);
 #if fhcflag
+  hs_C6 -> Add(h1_C6_NC_nuebkg);
+  hs_C6 -> Add(h1_C6_NC_nuebarsig);
   hs_C6 -> Add(h1_C6_NC_numubar);
   hs_C6 -> Add(h1_C6_NC_nuesig);
   hs_C6 -> Add(h1_C6_NC_numu);
+  hs_C6 -> Add(h1_C6_CCOther_nuebkg);
+  hs_C6 -> Add(h1_C6_CC2p2h_nuebkg);
+  hs_C6 -> Add(h1_C6_CCQE_nuebkg);
+  hs_C6 -> Add(h1_C6_CCOther_nuebarsig);
+  hs_C6 -> Add(h1_C6_CC2p2h_nuebarsig);
+  hs_C6 -> Add(h1_C6_CCQE_nuebarsig);
   hs_C6 -> Add(h1_C6_CCOther_nuesig);
   hs_C6 -> Add(h1_C6_CC2p2h_nuesig);
   hs_C6 -> Add(h1_C6_CCQE_nuesig);
@@ -576,6 +762,24 @@ void SetHistColor() {
   h1_C1_NC_numubar      -> SetLineColor(kSpring-9);
   h1_C1_NC_numubar      -> SetFillColor(kSpring-9);
 
+  h1_C1_CCQE_nuebarsig    -> SetLineColor(kOrange+7);
+  h1_C1_CCQE_nuebarsig    -> SetFillColor(kOrange+7);
+  h1_C1_CC2p2h_nuebarsig  -> SetLineColor(kOrange+6);
+  h1_C1_CC2p2h_nuebarsig  -> SetFillColor(kOrange+6);
+  h1_C1_CCOther_nuebarsig -> SetLineColor(kOrange+0);
+  h1_C1_CCOther_nuebarsig -> SetFillColor(kOrange+0);
+  h1_C1_NC_nuebarsig      -> SetLineColor(kSpring-9);
+  h1_C1_NC_nuebarsig      -> SetFillColor(kSpring-9);
+  
+  h1_C1_CCQE_nuebkg    -> SetLineColor(kOrange+7);
+  h1_C1_CCQE_nuebkg    -> SetFillColor(kOrange+7);
+  h1_C1_CC2p2h_nuebkg  -> SetLineColor(kOrange+6);
+  h1_C1_CC2p2h_nuebkg  -> SetFillColor(kOrange+6);
+  h1_C1_CCOther_nuebkg -> SetLineColor(kOrange+0);
+  h1_C1_CCOther_nuebkg -> SetFillColor(kOrange+0);
+  h1_C1_NC_nuebkg      -> SetLineColor(kSpring-9);
+  h1_C1_NC_nuebkg      -> SetFillColor(kSpring-9);
+
   h1_C2_CCQE_numu    -> SetLineColor(kAzure-1);
   h1_C2_CCQE_numu    -> SetFillColor(kAzure-1);
   h1_C2_CC2p2h_numu  -> SetLineColor(kAzure-5);
@@ -602,6 +806,24 @@ void SetHistColor() {
   h1_C2_CCOther_numubar -> SetFillColor(kOrange+0);
   h1_C2_NC_numubar      -> SetLineColor(kSpring-9);
   h1_C2_NC_numubar      -> SetFillColor(kSpring-9);
+
+  h1_C2_CCQE_nuebarsig    -> SetLineColor(kOrange+7);
+  h1_C2_CCQE_nuebarsig    -> SetFillColor(kOrange+7);
+  h1_C2_CC2p2h_nuebarsig  -> SetLineColor(kOrange+6);
+  h1_C2_CC2p2h_nuebarsig  -> SetFillColor(kOrange+6);
+  h1_C2_CCOther_nuebarsig -> SetLineColor(kOrange+0);
+  h1_C2_CCOther_nuebarsig -> SetFillColor(kOrange+0);
+  h1_C2_NC_nuebarsig      -> SetLineColor(kSpring-9);
+  h1_C2_NC_nuebarsig      -> SetFillColor(kSpring-9);
+  
+  h1_C2_CCQE_nuebkg    -> SetLineColor(kOrange+7);
+  h1_C2_CCQE_nuebkg    -> SetFillColor(kOrange+7);
+  h1_C2_CC2p2h_nuebkg  -> SetLineColor(kOrange+6);
+  h1_C2_CC2p2h_nuebkg  -> SetFillColor(kOrange+6);
+  h1_C2_CCOther_nuebkg -> SetLineColor(kOrange+0);
+  h1_C2_CCOther_nuebkg -> SetFillColor(kOrange+0);
+  h1_C2_NC_nuebkg      -> SetLineColor(kSpring-9);
+  h1_C2_NC_nuebkg      -> SetFillColor(kSpring-9);
 
   h1_C3_CCQE_numu    -> SetLineColor(kAzure-1);
   h1_C3_CCQE_numu    -> SetFillColor(kAzure-1);
@@ -630,6 +852,24 @@ void SetHistColor() {
   h1_C3_NC_numubar      -> SetLineColor(kSpring-9);
   h1_C3_NC_numubar      -> SetFillColor(kSpring-9);
 
+  h1_C3_CCQE_nuebarsig    -> SetLineColor(kOrange+7);
+  h1_C3_CCQE_nuebarsig    -> SetFillColor(kOrange+7);
+  h1_C3_CC2p2h_nuebarsig  -> SetLineColor(kOrange+6);
+  h1_C3_CC2p2h_nuebarsig  -> SetFillColor(kOrange+6);
+  h1_C3_CCOther_nuebarsig -> SetLineColor(kOrange+0);
+  h1_C3_CCOther_nuebarsig -> SetFillColor(kOrange+0);
+  h1_C3_NC_nuebarsig      -> SetLineColor(kSpring-9);
+  h1_C3_NC_nuebarsig      -> SetFillColor(kSpring-9);
+  
+  h1_C3_CCQE_nuebkg    -> SetLineColor(kOrange+7);
+  h1_C3_CCQE_nuebkg    -> SetFillColor(kOrange+7);
+  h1_C3_CC2p2h_nuebkg  -> SetLineColor(kOrange+6);
+  h1_C3_CC2p2h_nuebkg  -> SetFillColor(kOrange+6);
+  h1_C3_CCOther_nuebkg -> SetLineColor(kOrange+0);
+  h1_C3_CCOther_nuebkg -> SetFillColor(kOrange+0);
+  h1_C3_NC_nuebkg      -> SetLineColor(kSpring-9);
+  h1_C3_NC_nuebkg      -> SetFillColor(kSpring-9);
+
   h1_C4_CCQE_numu    -> SetLineColor(kAzure-1);
   h1_C4_CCQE_numu    -> SetFillColor(kAzure-1);
   h1_C4_CC2p2h_numu  -> SetLineColor(kAzure-5);
@@ -656,6 +896,24 @@ void SetHistColor() {
   h1_C4_CCOther_numubar -> SetFillColor(kOrange+0);
   h1_C4_NC_numubar      -> SetLineColor(kSpring-9);
   h1_C4_NC_numubar      -> SetFillColor(kSpring-9);
+
+  h1_C4_CCQE_nuebarsig    -> SetLineColor(kOrange+7);
+  h1_C4_CCQE_nuebarsig    -> SetFillColor(kOrange+7);
+  h1_C4_CC2p2h_nuebarsig  -> SetLineColor(kOrange+6);
+  h1_C4_CC2p2h_nuebarsig  -> SetFillColor(kOrange+6);
+  h1_C4_CCOther_nuebarsig -> SetLineColor(kOrange+0);
+  h1_C4_CCOther_nuebarsig -> SetFillColor(kOrange+0);
+  h1_C4_NC_nuebarsig      -> SetLineColor(kSpring-9);
+  h1_C4_NC_nuebarsig      -> SetFillColor(kSpring-9);
+  
+  h1_C4_CCQE_nuebkg    -> SetLineColor(kOrange+7);
+  h1_C4_CCQE_nuebkg    -> SetFillColor(kOrange+7);
+  h1_C4_CC2p2h_nuebkg  -> SetLineColor(kOrange+6);
+  h1_C4_CC2p2h_nuebkg  -> SetFillColor(kOrange+6);
+  h1_C4_CCOther_nuebkg -> SetLineColor(kOrange+0);
+  h1_C4_CCOther_nuebkg -> SetFillColor(kOrange+0);
+  h1_C4_NC_nuebkg      -> SetLineColor(kSpring-9);
+  h1_C4_NC_nuebkg      -> SetFillColor(kSpring-9);
 
   h1_C5_CCQE_numu    -> SetLineColor(kAzure-1);
   h1_C5_CCQE_numu    -> SetFillColor(kAzure-1);
@@ -684,6 +942,24 @@ void SetHistColor() {
   h1_C5_NC_numubar      -> SetLineColor(kSpring-9);
   h1_C5_NC_numubar      -> SetFillColor(kSpring-9);
 
+  h1_C5_CCQE_nuebarsig    -> SetLineColor(kOrange+7);
+  h1_C5_CCQE_nuebarsig    -> SetFillColor(kOrange+7);
+  h1_C5_CC2p2h_nuebarsig  -> SetLineColor(kOrange+6);
+  h1_C5_CC2p2h_nuebarsig  -> SetFillColor(kOrange+6);
+  h1_C5_CCOther_nuebarsig -> SetLineColor(kOrange+0);
+  h1_C5_CCOther_nuebarsig -> SetFillColor(kOrange+0);
+  h1_C5_NC_nuebarsig      -> SetLineColor(kSpring-9);
+  h1_C5_NC_nuebarsig      -> SetFillColor(kSpring-9);
+  
+  h1_C5_CCQE_nuebkg    -> SetLineColor(kOrange+7);
+  h1_C5_CCQE_nuebkg    -> SetFillColor(kOrange+7);
+  h1_C5_CC2p2h_nuebkg  -> SetLineColor(kOrange+6);
+  h1_C5_CC2p2h_nuebkg  -> SetFillColor(kOrange+6);
+  h1_C5_CCOther_nuebkg -> SetLineColor(kOrange+0);
+  h1_C5_CCOther_nuebkg -> SetFillColor(kOrange+0);
+  h1_C5_NC_nuebkg      -> SetLineColor(kSpring-9);
+  h1_C5_NC_nuebkg      -> SetFillColor(kSpring-9);
+
   h1_C6_CCQE_numu    -> SetLineColor(kAzure-1);
   h1_C6_CCQE_numu    -> SetFillColor(kAzure-1);
   h1_C6_CC2p2h_numu  -> SetLineColor(kAzure-5);
@@ -710,6 +986,24 @@ void SetHistColor() {
   h1_C6_CCOther_numubar -> SetFillColor(kOrange+0);
   h1_C6_NC_numubar      -> SetLineColor(kSpring-9);
   h1_C6_NC_numubar      -> SetFillColor(kSpring-9);
+
+  h1_C6_CCQE_nuebarsig    -> SetLineColor(kOrange+7);
+  h1_C6_CCQE_nuebarsig    -> SetFillColor(kOrange+7);
+  h1_C6_CC2p2h_nuebarsig  -> SetLineColor(kOrange+6);
+  h1_C6_CC2p2h_nuebarsig  -> SetFillColor(kOrange+6);
+  h1_C6_CCOther_nuebarsig -> SetLineColor(kOrange+0);
+  h1_C6_CCOther_nuebarsig -> SetFillColor(kOrange+0);
+  h1_C6_NC_nuebarsig      -> SetLineColor(kSpring-9);
+  h1_C6_NC_nuebarsig      -> SetFillColor(kSpring-9);
+  
+  h1_C6_CCQE_nuebkg    -> SetLineColor(kOrange+7);
+  h1_C6_CCQE_nuebkg    -> SetFillColor(kOrange+7);
+  h1_C6_CC2p2h_nuebkg  -> SetLineColor(kOrange+6);
+  h1_C6_CC2p2h_nuebkg  -> SetFillColor(kOrange+6);
+  h1_C6_CCOther_nuebkg -> SetLineColor(kOrange+0);
+  h1_C6_CCOther_nuebkg -> SetFillColor(kOrange+0);
+  h1_C6_NC_nuebkg      -> SetLineColor(kSpring-9);
+  h1_C6_NC_nuebkg      -> SetFillColor(kSpring-9);
 }
 
 void ScaleHisto(int step) {
@@ -727,6 +1021,14 @@ void ScaleHisto(int step) {
       h1_C1_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
       h1_C1_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
       h1_C1_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C1_CCQE_nuebarsig    -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C1_CC2p2h_nuebarsig  -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C1_CCOther_nuebarsig -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C1_NC_nuebarsig      -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C1_CCQE_nuebkg    -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C1_CC2p2h_nuebkg  -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C1_CCOther_nuebkg -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C1_NC_nuebkg      -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
       break;
     case 2:
       h1_C2_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -741,6 +1043,14 @@ void ScaleHisto(int step) {
       h1_C2_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
       h1_C2_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
       h1_C2_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C2_CCQE_nuebarsig    -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C2_CC2p2h_nuebarsig  -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C2_CCOther_nuebarsig -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C2_NC_nuebarsig      -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C2_CCQE_nuebkg    -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C2_CC2p2h_nuebkg  -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C2_CCOther_nuebkg -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C2_NC_nuebkg      -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
       break;
     case 3:
       h1_C3_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -755,6 +1065,14 @@ void ScaleHisto(int step) {
       h1_C3_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
       h1_C3_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
       h1_C3_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C3_CCQE_nuebarsig    -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C3_CC2p2h_nuebarsig  -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C3_CCOther_nuebarsig -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C3_NC_nuebarsig      -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C3_CCQE_nuebkg    -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C3_CC2p2h_nuebkg  -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C3_CCOther_nuebkg -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C3_NC_nuebkg      -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
       break;
     case 4:
       h1_C4_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -769,6 +1087,14 @@ void ScaleHisto(int step) {
       h1_C4_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
       h1_C4_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
       h1_C4_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C4_CCQE_nuebarsig    -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C4_CC2p2h_nuebarsig  -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C4_CCOther_nuebarsig -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C4_NC_nuebarsig      -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C4_CCQE_nuebkg    -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C4_CC2p2h_nuebkg  -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C4_CCOther_nuebkg -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C4_NC_nuebkg      -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
       break;
     case 5:
       h1_C5_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -783,6 +1109,14 @@ void ScaleHisto(int step) {
       h1_C5_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
       h1_C5_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
       h1_C5_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C5_CCQE_nuebarsig    -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C5_CC2p2h_nuebarsig  -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C5_CCOther_nuebarsig -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C5_NC_nuebarsig      -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C5_CCQE_nuebkg    -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C5_CC2p2h_nuebkg  -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C5_CCOther_nuebkg -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C5_NC_nuebkg      -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
       break;
     case 6:
       h1_C6_CCQE_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -797,6 +1131,14 @@ void ScaleHisto(int step) {
       h1_C6_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
       h1_C6_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
       h1_C6_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+      h1_C6_CCQE_nuebarsig    -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C6_CC2p2h_nuebarsig  -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C6_CCOther_nuebarsig -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C6_NC_nuebarsig      -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+      h1_C6_CCQE_nuebkg    -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C6_CC2p2h_nuebkg  -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C6_CCOther_nuebkg -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+      h1_C6_NC_nuebkg      -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
       break;
     default:
       break;

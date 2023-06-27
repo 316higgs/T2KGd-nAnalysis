@@ -7,9 +7,9 @@
 #define VARNUM 5
 
 void Var_FOM() {
-  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
   //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.root");
-  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.wToF.root");
+  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.wToF.root");
 
   TGraphErrors* g_FOM[VARNUM];
   g_FOM[0] = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;25");  // +40%
@@ -47,7 +47,7 @@ void Var_FOM() {
 #endif
 
   ////  w/o ToF-subtraction  ////
-#if 1
+#if 0
   // Optimal threshold
   Double_t OptX_p40 = 0.5;
   Double_t OptX_p30 = 0.5;
@@ -81,20 +81,20 @@ void Var_FOM() {
 #endif
 
   //// NN optimized  w/ ToF-subtraction  ////
-#if 0
+#if 1
   // Optimal threshold
-  Double_t OptX_p40 = 0.15;
-  Double_t OptX_p30 = 0.15;
-  Double_t OptX_nom = 0.2;
+  Double_t OptX_p40 = 0.1;
+  Double_t OptX_p30 = 0.1;
+  Double_t OptX_nom = 0.15;
   Double_t OptX_m30 = 0.2;
   Double_t OptX_m40 = 0.2;
 
   // Maximized FOM
-  Double_t OptY_p40 = 80.9524;
-  Double_t OptY_p30 = 77.8243;
-  Double_t OptY_nom = 67.6953;
-  Double_t OptY_m30 = 55.9403;
-  Double_t OptY_m40 = 51.4419;
+  Double_t OptY_p40 = 82.2261;
+  Double_t OptY_p30 = 79.0048;
+  Double_t OptY_nom = 68.6929;
+  Double_t OptY_m30 = 56.7402;
+  Double_t OptY_m40 = 52.2602;
 #endif
 
   TGraph* g_Opt[VARNUM];
