@@ -157,7 +157,7 @@ COMMENTOUT
 
 ####################################################################
 ##### FHC numubar -> numubar Gd MC #####
-#<<COMMENTOUT
+<<COMMENTOUT
 #####  new Gd MC  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_numubar.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/fhc/numubar_x_numubar/fhc.numubar_x_numubar.13a.NNoptntag0026Gd.\*.root\
@@ -168,7 +168,7 @@ COMMENTOUT
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
-#COMMENTOUT
+COMMENTOUT
 
 <<COMMENTOUT
 #####  old Gd MC  ######
@@ -185,7 +185,7 @@ COMMENTOUT
 
 ####################################################################
 ##### FHC numubar -> nuebar Gd MC #####
-#<<COMMENTOUT
+<<COMMENTOUT
 #####  new Gd MC  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_nuebar.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/fhc/numubar_x_nuebar/fhc.numubar_x_nuebar.13a.NNoptntag0026Gd.\*.root\
@@ -196,10 +196,10 @@ COMMENTOUT
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
-#COMMENTOUT
+COMMENTOUT
 
 
-
+#####  old Gd MC  ######
 #./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.etagON.noinpmt.root\
@@ -209,6 +209,24 @@ COMMENTOUT
 #                   -ETAG ON\
 #                   -BEAMMODE FHC\
 #                   -OSCCH NUMU
+
+####################################################################
+##### FHC nue -> nue Gd MC #####
+#<<COMMENTOUT
+#####  new Gd MC  ######
+./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.nue_x_nue.13a.fiTQun0026Gd.\*.root\
+                   ${DISK3}/Ntag/output/fhc/nue_x_nue/fhc.nue_x_nue.13a.NNoptntag0026Gd.\*.root\
+                   ${ANALYSISSTAGE}/output/fhc/fhc.nue_x_nue.NNoptnewGdMC.root\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.nue_x_nue.NNoptneutrino.newGdMC.txt\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.nue_x_nue.NNoptntag.newGdMC.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUE
+#COMMENTOUT
+
+
+
 
 
 <<COMMENTOUT
