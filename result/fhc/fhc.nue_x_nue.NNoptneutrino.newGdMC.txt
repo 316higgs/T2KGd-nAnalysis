@@ -1,57 +1,57 @@
 [fiTQun OUTPUT] /disk03/usr8/sedi/fiTQun_v4/output/fhc/fhc.nue_x_nue.13a.fiTQun0026Gd.*.root
 [NTag   OUTPUT] /disk03/usr8/sedi/Ntag/output/fhc/nue_x_nue/fhc.nue_x_nue.13a.NNoptntag0026Gd.*.root
  
-[Generated] CCQE   : 27171
-[Generated] CC2p2h : 4732
-[Generated] CCOther: 43490
-[Generated] NC     : 24539
+[Generated] CCQE   : 27193
+[Generated] CC2p2h : 4734
+[Generated] CCOther: 43517
+[Generated] NC     : 24556
  
-[Neutrino] C1: 47315 -> 47315
+[Neutrino] C1: 47350 -> 47350
   ======  # of selected neutrinos  ======
-  CCQE    (osc.): 14741.9
-  CC-2p2h (osc.): 2576.12
-  CC-Other(osc.): 21977.9
-  NC      (osc.): 6511
+  CCQE    (osc.): 14755.1
+  CC-2p2h (osc.): 2577.08
+  CC-Other(osc.): 21993.4
+  NC      (osc.): 6515
   ------------------------------------------
-  Total   (osc.): 45806.9
+  Total   (osc.): 45840.6
  
-  CCQE    (No osc.): 15535
-  CC-2p2h (No osc.): 2702
-  CC-Other(No osc.): 22567
-  NC      (No osc.): 6511
+  CCQE    (No osc.): 15549
+  CC-2p2h (No osc.): 2703
+  CC-Other(No osc.): 22583
+  NC      (No osc.): 6515
   ------------------------------------------
-  Total   (No osc.): 47315
+  Total   (No osc.): 47350
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 11200.8
-  CC-2p2h (osc.): 2644.38
-  CC-Other(osc.): 34226.9
-  NC      (osc.): 12307
+  CCQE    (osc.): 8044.69
+  CC-2p2h (osc.): 2447.13
+  CC-Other(osc.): 38367.8
+  NC      (osc.): 14402
   ------------------------------------------
-  Total   (osc.): 60379
-[Neutrino] C2: 25285 -> 25285
+  Total   (osc.): 63261.6
+[Neutrino] C2: 25304 -> 25304
   ======  # of selected neutrinos  ======
-  CCQE    (osc.): 12868.9
-  CC-2p2h (osc.): 2375.7
-  CC-Other(osc.): 7625.75
+  CCQE    (osc.): 12880.2
+  CC-2p2h (osc.): 2376.67
+  CC-Other(osc.): 7631.59
   NC      (osc.): 1285
   ------------------------------------------
-  Total   (osc.): 24155.4
+  Total   (osc.): 24173.5
  
-  CCQE    (No osc.): 13581
-  CC-2p2h (No osc.): 2494
-  CC-Other(No osc.): 7925
+  CCQE    (No osc.): 13593
+  CC-2p2h (No osc.): 2495
+  CC-Other(No osc.): 7931
   NC      (No osc.): 1285
   ------------------------------------------
-  Total   (No osc.): 25285
+  Total   (No osc.): 25304
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 9225.49
-  CC-2p2h (osc.): 2391.86
-  CC-Other(osc.): 9033.05
-  NC      (osc.): 2076
+  CCQE    (osc.): 6288.29
+  CC-2p2h (osc.): 2208.81
+  CC-Other(osc.): 8810.27
+  NC      (osc.): 2273
   ------------------------------------------
-  Total   (osc.): 22726.4
+  Total   (osc.): 19580.4
 [Neutrino] C3: 609 -> 609
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 10.4524
@@ -69,12 +69,12 @@
   Total   (No osc.): 609
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 3.8034
+  CCQE    (osc.): 1.932
   CC-2p2h (osc.): 0
-  CC-Other(osc.): 3.8266
-  NC      (osc.): 1005
+  CC-Other(osc.): 2.95572
+  NC      (osc.): 1059
   ------------------------------------------
-  Total   (osc.): 1012.63
+  Total   (osc.): 1063.89
 [Neutrino] C4: 599 -> 599
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 10.4524
@@ -92,12 +92,12 @@
   Total   (No osc.): 599
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 3.8034
+  CCQE    (osc.): 1.932
   CC-2p2h (osc.): 0
-  CC-Other(osc.): 3.8266
-  NC      (osc.): 994
+  CC-Other(osc.): 2.95572
+  NC      (osc.): 1054
   ------------------------------------------
-  Total   (osc.): 1001.63
+  Total   (osc.): 1058.89
 [Neutrino] C5: 285 -> 586
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 10.4524
@@ -115,12 +115,12 @@
   Total   (No osc.): 586
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 3.8034
+  CCQE    (osc.): 1.932
   CC-2p2h (osc.): 0
-  CC-Other(osc.): 3.8266
-  NC      (osc.): 968
+  CC-Other(osc.): 2.95572
+  NC      (osc.): 1011
   ------------------------------------------
-  Total   (osc.): 975.63
+  Total   (osc.): 1015.89
 [Neutrino] C6: 142 -> 281
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 9.54335
@@ -138,12 +138,12 @@
   Total   (No osc.): 281
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 3.8034
+  CCQE    (osc.): 1.932
   CC-2p2h (osc.): 0
-  CC-Other(osc.): 3.8266
-  NC      (osc.): 442
+  CC-Other(osc.): 2.95572
+  NC      (osc.): 427
   ------------------------------------------
-  Total   (osc.): 449.63
+  Total   (osc.): 431.888
 --- Box cut performance ---
  0 < dt[usec] < 10, 50 < N50 < 400
  All truth decay-e                : 259.886
@@ -161,139 +161,139 @@
                              : 281
 [Decay-e Cut Scan] dt =  3 us: 586
                              : 281
-[Neutrino] All Parent Neutrino Events          : 99932
-[Neutrino] Generated Neutrino Events(wallv>200): 63379
+[Neutrino] All Parent Neutrino Events          : 100000
+[Neutrino] Generated Neutrino Events(wallv>200): 63423
 [Neutrino] Generated 1Rmu Events (Oscillated)  : 280.3
  
 [Neutrino] Oscillated CCQE Events     : 2.79808(1.03782 %)
-           w/ truth neutrons : 0.913908 (0.40831 %), w/o truth neutrons :1.88417 (4.11535 %)
-           w/ tagged neutrons: 0.913908(0.519648 %), w/o tagged neutrons:1.88417(2.00999 %)
+           w/ truth neutrons : 0 (0 %), w/o truth neutrons :2.79808 (11.3424 %)
+           w/ tagged neutrons: 0(0 %), w/o tagged neutrons:2.79808(3.47046 %)
 [Neutrino] Oscillated CC(2p2h) Events : 0.956205(0.354661 %)
-           w/ truth neutrons : 0.956205 (0.427208 %), w/o truth neutrons :0 (0 %)
-           w/ tagged neutrons: 0(0 %), w/o tagged neutrons:0.956205(1.02006 %)
+           w/ truth neutrons : 0.956205 (0.390381 %), w/o truth neutrons :0 (0 %)
+           w/ tagged neutrons: 0(0 %), w/o tagged neutrons:0.956205(1.18598 %)
 [Neutrino] Oscillated All CCRES Events: 1.8712(0.694037 %)
-           w/ truth neutrons : 0.956649 (0.427406 %), w/o truth neutrons :0.91455 (1.99753 %)
-           w/ tagged neutrons: 0.956649(0.543951 %), w/o tagged neutrons:0.91455(0.975622 %)
+           w/ truth neutrons : 0 (0 %), w/o truth neutrons :1.8712 (7.58514 %)
+           w/ tagged neutrons: 0(0 %), w/o tagged neutrons:1.8712(2.32085 %)
 [Neutrino] Oscillated CC Other Events : 0.985241(0.365431 %)
-           w/ truth neutrons : 0 (0 %), w/o truth neutrons :0.985241 (2.15194 %)
-           w/ tagged neutrons: 0(0 %), w/o tagged neutrons:0.985241(1.05103 %)
+           w/ truth neutrons : 0.985241 (0.402235 %), w/o truth neutrons :0 (0 %)
+           w/ tagged neutrons: 0.985241(0.521332 %), w/o tagged neutrons:0(0 %)
 [Neutrino] Oscillated NC Events       : 263(97.548 %)
-           w/ truth neutrons : 221 (98.7371 %), w/o truth neutrons :42 (91.7352 %)
-           w/ tagged neutrons: 174(98.9364 %), w/o tagged neutrons:89(94.9433 %)
+           w/ truth neutrons : 243 (99.2074 %), w/o truth neutrons :20 (81.0725 %)
+           w/ tagged neutrons: 188(99.4787 %), w/o tagged neutrons:75(93.0227 %)
 [Neutrino] Oscillated Neutrino Events within [0.25 GeV, 1.5 GeV]
            Legacy Analysis    : 269.611(Osc)/270(No Osc) = 0.998558
            Only CCQE(1p1h)    : 2.79808(Osc)/3(No Osc) = 0.932692
-           w/o truth neutrons : 45.784(Osc)/46(No Osc) = 0.995303
-           w/o tagged neutrons: 93.7402(Osc)/94(No Osc) = 0.997236
-All Truth neutrons: 1067.26
-Candidates        : 1.08138e+06
-[### i=0, Thr=0 ###] FOM = 3.38408
-   +40%: 1074.51, FOM = 4.72364
-   +30%: 997.76, FOM = 4.38949
-   -30%: 537.255, FOM = 2.37418
-   -40%: 460.505, FOM = 2.03654
-[### i=1, Thr=0.05 ###] FOM = 17.4274
-   +40%: 738.68, FOM = 21.997
-   +30%: 685.917, FOM = 20.9211
-   -30%: 369.34, FOM = 13.4121
-   -40%: 316.577, FOM = 11.9181
-[### i=2, Thr=0.1 ###] FOM = 19.4073
-   +40%: 693.88, FOM = 23.7936
-   +30%: 644.317, FOM = 22.7674
-   -30%: 346.94, FOM = 15.4614
-   -40%: 297.377, FOM = 13.9574
-[### i=3, Thr=0.15 ###] FOM = 20.1944
-   +40%: 677.08, FOM = 24.4481
-   +30%: 628.717, FOM = 23.4533
-   -30%: 338.54, FOM = 16.3554
-   -40%: 290.177, FOM = 14.8841
-[### i=4, Thr=0.2 ###] FOM = 20.755
-   +40%: 668.68, FOM = 24.9092
-   +30%: 620.917, FOM = 23.9368
-   -30%: 334.34, FOM = 17.0109
-   -40%: 286.577, FOM = 15.5754
-[### i=5, Thr=0.25 ###] FOM = 20.8039
-   +40%: 657.48, FOM = 24.896
-   +30%: 610.517, FOM = 23.9377
-   -30%: 328.74, FOM = 17.1205
-   -40%: 281.777, FOM = 15.7093
-[### i=6, Thr=0.3 ###] FOM = 20.9093
-   +40%: 647.741, FOM = 24.9371
-   +30%: 601.474, FOM = 23.9932
-   -30%: 323.871, FOM = 17.2912
-   -40%: 277.603, FOM = 15.907
-[### i=7, Thr=0.35 ###] FOM = 20.8958
-   +40%: 639.341, FOM = 24.8807
-   +30%: 593.674, FOM = 23.9464
-   -30%: 319.671, FOM = 17.3206
-   -40%: 274.003, FOM = 15.9542
-[### i=8, Thr=0.4 ###] FOM = 20.914
-   +40%: 636.541, FOM = 24.8813
-   +30%: 591.074, FOM = 23.9509
-   -30%: 318.271, FOM = 17.3572
-   -40%: 272.803, FOM = 15.9986
-[### i=9, Thr=0.45 ###] FOM = 20.7686
-   +40%: 626.741, FOM = 24.7028
-   +30%: 581.974, FOM = 23.7802
-   -30%: 313.371, FOM = 17.2419
-   -40%: 268.603, FOM = 15.8951
-[### i=10, Thr=0.5 ###] FOM = 20.7172
-   +40%: 621.141, FOM = 24.6279
-   +30%: 576.774, FOM = 23.7106
-   -30%: 310.571, FOM = 17.2134
-   -40%: 266.203, FOM = 15.8758
-[### i=11, Thr=0.55 ###] FOM = 20.6877
-   +40%: 614.141, FOM = 24.5637
-   +30%: 570.274, FOM = 23.6542
-   -30%: 307.071, FOM = 17.2189
-   -40%: 263.203, FOM = 15.896
-[### i=12, Thr=0.6 ###] FOM = 20.5403
-   +40%: 601.602, FOM = 24.367
-   +30%: 558.631, FOM = 23.4688
-   -30%: 300.801, FOM = 17.1187
-   -40%: 257.829, FOM = 15.8149
-[### i=13, Thr=0.65 ###] FOM = 20.5615
-   +40%: 598.802, FOM = 24.3689
-   +30%: 556.031, FOM = 23.475
-   -30%: 299.401, FOM = 17.1605
-   -40%: 256.629, FOM = 15.8658
-[### i=14, Thr=0.7 ###] FOM = 20.464
-   +40%: 593.202, FOM = 24.2537
-   +30%: 550.831, FOM = 23.364
-   -30%: 296.601, FOM = 17.0788
-   -40%: 254.229, FOM = 15.7901
-[### i=15, Thr=0.75 ###] FOM = 20.3655
-   +40%: 586.202, FOM = 24.1294
-   +30%: 544.331, FOM = 23.2456
-   -30%: 293.101, FOM = 17.0046
-   -40%: 251.229, FOM = 15.7255
-[### i=16, Thr=0.8 ###] FOM = 20.2424
-   +40%: 579.202, FOM = 23.9839
-   +30%: 537.831, FOM = 23.1054
-   -30%: 289.601, FOM = 16.9014
-   -40%: 248.229, FOM = 15.6299
-[### i=17, Thr=0.85 ###] FOM = 20.2168
-   +40%: 573.602, FOM = 23.9291
-   +30%: 532.631, FOM = 23.0572
-   -30%: 286.801, FOM = 16.9058
-   -40%: 245.829, FOM = 15.6472
-[### i=18, Thr=0.9 ###] FOM = 20.0179
-   +40%: 562.402, FOM = 23.694
-   +30%: 522.231, FOM = 22.8305
-   -30%: 281.201, FOM = 16.7393
-   -40%: 241.029, FOM = 15.493
-[### i=19, Thr=0.95 ###] FOM = 19.7159
-   +40%: 544.202, FOM = 23.3281
-   +30%: 505.331, FOM = 22.4796
-   -30%: 272.101, FOM = 16.4955
-   -40%: 233.229, FOM = 15.2719
+           w/o truth neutrons : 24.6693(Osc)/25(No Osc) = 0.986771
+           w/o tagged neutrons: 80.6255(Osc)/81(No Osc) = 0.995376
+All Truth neutrons: 1024.78
+Candidates        : 1.08116e+06
+[### i=0, Thr=0 ###] FOM = 3.29308
+   +40%: 1045.56, FOM = 4.59698
+   +30%: 970.878, FOM = 4.27171
+   -30%: 522.78, FOM = 2.3102
+   -40%: 448.097, FOM = 1.98161
+[### i=1, Thr=0.05 ###] FOM = 17.5397
+   +40%: 733.381, FOM = 22.097
+   +30%: 680.997, FOM = 21.0246
+   -30%: 366.691, FOM = 13.5271
+   -40%: 314.306, FOM = 12.0314
+[### i=2, Thr=0.1 ###] FOM = 19.6319
+   +40%: 695.581, FOM = 24.0108
+   +30%: 645.897, FOM = 22.9866
+   -30%: 347.791, FOM = 15.6886
+   -40%: 298.106, FOM = 14.1834
+[### i=3, Thr=0.15 ###] FOM = 20.258
+   +40%: 674.581, FOM = 24.4942
+   +30%: 626.397, FOM = 23.5034
+   -30%: 337.291, FOM = 16.4349
+   -40%: 289.106, FOM = 14.9693
+[### i=4, Thr=0.2 ###] FOM = 20.7249
+   +40%: 663.381, FOM = 24.8564
+   +30%: 615.997, FOM = 23.8892
+   -30%: 331.691, FOM = 17.0022
+   -40%: 284.306, FOM = 15.5751
+[### i=5, Thr=0.25 ###] FOM = 20.799
+   +40%: 653.581, FOM = 24.8717
+   +30%: 606.897, FOM = 23.9178
+   -30%: 326.791, FOM = 17.1344
+   -40%: 280.106, FOM = 15.7308
+[### i=6, Thr=0.3 ###] FOM = 20.9335
+   +40%: 646.643, FOM = 24.9522
+   +30%: 600.454, FOM = 24.0103
+   -30%: 323.321, FOM = 17.3249
+   -40%: 277.133, FOM = 15.9448
+[### i=7, Thr=0.35 ###] FOM = 20.9686
+   +40%: 641.043, FOM = 24.9526
+   +30%: 595.254, FOM = 24.0184
+   -30%: 320.521, FOM = 17.396
+   -40%: 274.733, FOM = 16.0312
+[### i=8, Thr=0.4 ###] FOM = 20.9397
+   +40%: 635.443, FOM = 24.8973
+   +30%: 590.054, FOM = 23.9691
+   -30%: 317.721, FOM = 17.3933
+   -40%: 272.333, FOM = 16.0393
+[### i=9, Thr=0.45 ###] FOM = 20.8665
+   +40%: 629.843, FOM = 24.8039
+   +30%: 584.854, FOM = 23.8803
+   -30%: 314.921, FOM = 17.339
+   -40%: 269.933, FOM = 15.9925
+[### i=10, Thr=0.5 ###] FOM = 20.8145
+   +40%: 622.843, FOM = 24.7206
+   +30%: 578.354, FOM = 23.8042
+   -30%: 311.421, FOM = 17.3178
+   -40%: 266.933, FOM = 15.984
+[### i=11, Thr=0.55 ###] FOM = 20.715
+   +40%: 613.043, FOM = 24.5808
+   +30%: 569.254, FOM = 23.6735
+   -30%: 306.521, FOM = 17.2574
+   -40%: 262.733, FOM = 15.9396
+[### i=12, Thr=0.6 ###] FOM = 20.6407
+   +40%: 606.043, FOM = 24.4778
+   +30%: 562.754, FOM = 23.5771
+   -30%: 303.021, FOM = 17.211
+   -40%: 259.733, FOM = 15.9046
+[### i=13, Thr=0.65 ###] FOM = 20.6376
+   +40%: 600.443, FOM = 24.4429
+   +30%: 557.554, FOM = 23.5493
+   -30%: 300.221, FOM = 17.241
+   -40%: 257.333, FOM = 15.9489
+[### i=14, Thr=0.7 ###] FOM = 20.5161
+   +40%: 593.443, FOM = 24.2993
+   +30%: 551.054, FOM = 23.4109
+   -30%: 296.721, FOM = 17.1392
+   -40%: 254.333, FOM = 15.8546
+[### i=15, Thr=0.75 ###] FOM = 20.3693
+   +40%: 585.043, FOM = 24.1259
+   +30%: 543.254, FOM = 23.2437
+   -30%: 292.521, FOM = 17.0162
+   -40%: 250.733, FOM = 15.7407
+[### i=16, Thr=0.8 ###] FOM = 20.2215
+   +40%: 576.643, FOM = 23.9512
+   +30%: 535.454, FOM = 23.0753
+   -30%: 288.321, FOM = 16.8924
+   -40%: 247.133, FOM = 15.6259
+[### i=17, Thr=0.85 ###] FOM = 20.097
+   +40%: 566.843, FOM = 23.7875
+   +30%: 526.354, FOM = 22.9206
+   -30%: 283.421, FOM = 16.8055
+   -40%: 242.933, FOM = 15.5543
+[### i=18, Thr=0.9 ###] FOM = 19.8467
+   +40%: 552.843, FOM = 23.4914
+   +30%: 513.354, FOM = 22.6353
+   -30%: 276.421, FOM = 16.5959
+   -40%: 236.933, FOM = 15.3602
+[### i=19, Thr=0.95 ###] FOM = 19.5675
+   +40%: 536.043, FOM = 23.1526
+   +30%: 497.754, FOM = 22.3104
+   -30%: 268.021, FOM = 16.3714
+   -40%: 229.733, FOM = 15.1569
 [### i=20, Thr=1 ###] FOM = -nan
    +40%: 0, FOM = -nan
    +30%: 0, FOM = -nan
    -30%: 0, FOM = -nan
    -40%: 0, FOM = -nan
-Optimized n-like threshold(FOM): 0.4
-                           +40%: 0.3
-                           +30%: 0.3
-                           -30%: 0.4
+Optimized n-like threshold(FOM): 0.35
+                           +40%: 0.35
+                           +30%: 0.35
+                           -30%: 0.35
                            -40%: 0.4
