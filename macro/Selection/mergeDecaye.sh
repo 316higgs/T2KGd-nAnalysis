@@ -9,9 +9,10 @@
 BEAMMODE=true
 #BEAMMODE=false
 
-root -l 'SimpleDecaye.C('${BEAMMODE}')'    ### truth decay-e or #fiTQun sub-events
+#root -l 'SimpleDecaye.C('${BEAMMODE}')'    ### truth decay-e or #fiTQun sub-events
 #root -l 'CompareDecaye.C('${BEAMMODE}')'
 #root -l 'dtn50.C('${BEAMMODE}')'
+root -l -q 'mergeDcyePerform.C('${BEAMMODE}')'
 
 
 #root -l 'CCPiDecaye.C('${BEAMMODE}')'

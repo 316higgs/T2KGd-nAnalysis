@@ -141,7 +141,7 @@ COMMENTOUT
 
 ####################################################################
 ##### FHC numu -> nue Gd MC #####
-<<COMMENTOUT
+#<<COMMENTOUT
 #####  new Gd MC  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_nue.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/fhc/numu_x_nue/fhc.numu_x_nue.13a.NNoptntag0026Gd.\*.root\
@@ -152,7 +152,7 @@ COMMENTOUT
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUESIG
-COMMENTOUT
+#COMMENTOUT
 
 
 ####################################################################
@@ -195,7 +195,7 @@ COMMENTOUT
                    -MCType Gd\
                    -ETAG ON\
                    -BEAMMODE FHC\
-                   -OSCCH NUMUBAR
+                   -OSCCH NUEBARSIG
 COMMENTOUT
 
 
@@ -212,7 +212,7 @@ COMMENTOUT
 
 ####################################################################
 ##### FHC nue -> nue Gd MC #####
-#<<COMMENTOUT
+<<COMMENTOUT
 #####  new Gd MC  ######
 ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.nue_x_nue.13a.fiTQun0026Gd.\*.root\
                    ${DISK3}/Ntag/output/fhc/nue_x_nue/fhc.nue_x_nue.13a.NNoptntag0026Gd.\*.root\
@@ -223,8 +223,22 @@ COMMENTOUT
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUE
-#COMMENTOUT
+COMMENTOUT
 
+####################################################################
+##### FHC nubaer -> nuebar Gd MC #####
+<<COMMENTOUT
+#####  new Gd MC  ######
+./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.nuebar_x_nuebar.13a.fiTQun0026Gd.\*.root\
+                   ${DISK3}/Ntag/output/fhc/nuebar_x_nuebar/fhc.nuebar_x_nuebar.13a.NNoptntag0026Gd.\*.root\
+                   ${ANALYSISSTAGE}/output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.root\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.nuebar_x_nuebar.NNoptneutrino.newGdMC.txt\
+                   ${ANALYSISSTAGE}/result/fhc/fhc.nuebar_x_nuebar.NNoptntag.newGdMC.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUEBAR
+COMMENTOUT
 
 
 

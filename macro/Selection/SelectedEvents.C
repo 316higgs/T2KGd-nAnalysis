@@ -26,15 +26,12 @@ void SelectedEvents(bool beammode) {
 
   //FHC
 #if fhcflag
-  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.root");
-  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.root");
-
-  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.root");
   TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.NNoptnewGdMC.root");
   TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.root");
   TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.root");
   TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.NNoptnewGdMC.root");
-  //TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.root");
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
@@ -64,8 +61,8 @@ void SelectedEvents(bool beammode) {
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
   Double_t GenN_numubar_x_nuebar  = 63463;
-  Double_t GenN_nue_x_nue         = 63379;
-  Double_t GenN_nuebar_x_nuebar   = 63463;
+  Double_t GenN_nue_x_nue         = 63423;
+  Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
   std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
   std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
@@ -118,11 +115,11 @@ void SelectedEvents(bool beammode) {
   TH1F* h1_NC_nuebkg      = (TH1F*)fin_nuebkg->Get("Gd1RmuonSelection/h1_SelNuEvents_mode3");
   h1_CCQE_nuebkg -> SetStats(0);
 
-  //TH1F* h1_CCQE_nuebarbkg    = (TH1F*)fin_nuebarbkg->Get("Gd1RmuonSelection/h1_SelNuEvents_mode0");
-  //TH1F* h1_CC2p2h_nuebarbkg  = (TH1F*)fin_nuebarbkg->Get("Gd1RmuonSelection/h1_SelNuEvents_mode1");
-  //TH1F* h1_CCOther_nuebarbkg = (TH1F*)fin_nuebarbkg->Get("Gd1RmuonSelection/h1_SelNuEvents_mode2");
-  //TH1F* h1_NC_nuebarbkg      = (TH1F*)fin_nuebarbkg->Get("Gd1RmuonSelection/h1_SelNuEvents_mode3");
-  //h1_CCQE_nuebarbkg -> SetStats(0);
+  TH1F* h1_CCQE_nuebarbkg    = (TH1F*)fin_nuebarbkg->Get("Gd1RmuonSelection/h1_SelNuEvents_mode0");
+  TH1F* h1_CC2p2h_nuebarbkg  = (TH1F*)fin_nuebarbkg->Get("Gd1RmuonSelection/h1_SelNuEvents_mode1");
+  TH1F* h1_CCOther_nuebarbkg = (TH1F*)fin_nuebarbkg->Get("Gd1RmuonSelection/h1_SelNuEvents_mode2");
+  TH1F* h1_NC_nuebarbkg      = (TH1F*)fin_nuebarbkg->Get("Gd1RmuonSelection/h1_SelNuEvents_mode3");
+  h1_CCQE_nuebarbkg -> SetStats(0);
 #endif
 
 // Tagged neutrons
@@ -209,14 +206,14 @@ void SelectedEvents(bool beammode) {
   h1_CCOther_nuebkg -> SetFillColor(kViolet-1);
   h1_NC_nuebkg      -> SetFillColor(kSpring-9);
 
-  /*h1_CCQE_nuebarbkg    -> SetLineColor(kViolet-1);
+  h1_CCQE_nuebarbkg    -> SetLineColor(kViolet-1);
   h1_CC2p2h_nuebarbkg  -> SetLineColor(kViolet-1);
   h1_CCOther_nuebarbkg -> SetLineColor(kViolet-1);
   h1_NC_nuebarbkg      -> SetLineColor(kSpring-9);
   h1_CCQE_nuebarbkg    -> SetFillColor(kViolet-1);
   h1_CC2p2h_nuebarbkg  -> SetFillColor(kViolet-1);
   h1_CCOther_nuebarbkg -> SetFillColor(kViolet-1);
-  h1_NC_nuebarbkg      -> SetFillColor(kSpring-9);*/
+  h1_NC_nuebarbkg      -> SetFillColor(kSpring-9);
 
 
   /////  Normalizations  //////
@@ -226,44 +223,44 @@ void SelectedEvents(bool beammode) {
   h1_CCQE_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_CCQE_nuebarsig    -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
   h1_CCQE_nuebkg       -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
-  //h1_CCQE_nuebarbkg    -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
+  h1_CCQE_nuebarbkg    -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
 
   h1_CC2p2h_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CC2p2h_nuesig     -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
   h1_CC2p2h_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_CC2p2h_nuebarsig  -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
   h1_CC2p2h_nuebkg     -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
-  //h1_CC2p2h_nuebarbkg  -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
+  h1_CC2p2h_nuebarbkg  -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
 
   h1_CCOther_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CCOther_nuesig    -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
   h1_CCOther_numubar   -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_CCOther_nuebarsig -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
   h1_CCOther_nuebkg    -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
-  //h1_CCOther_nuebarbkg -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
+  h1_CCOther_nuebarbkg -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
 
   h1_NC_numu           -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_NC_nuesig         -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
   h1_NC_numubar        -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
   h1_NC_nuebarsig      -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
   h1_NC_nuebkg         -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
-  //h1_NC_nuebarbkg      -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
+  h1_NC_nuebarbkg      -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
 #endif
 
 
   /////  Merged #Selected Neutrinos  //////
   THStack* hs_NuEvt = new THStack("hs_NuEvt", "");
 #if fhcflag
-  //hs_NuEvt -> Add(h1_NC_nuebarbkg);
+  hs_NuEvt -> Add(h1_NC_nuebarbkg);
   hs_NuEvt -> Add(h1_NC_nuebkg);
   hs_NuEvt -> Add(h1_NC_nuebarsig);
   hs_NuEvt -> Add(h1_NC_numubar);
   hs_NuEvt -> Add(h1_NC_nuesig);
   hs_NuEvt -> Add(h1_NC_numu);
 
-  //hs_NuEvt -> Add(h1_CCOther_nuebarbkg);
-  //hs_NuEvt -> Add(h1_CC2p2h_nuebarbkg);
-  //hs_NuEvt -> Add(h1_CCQE_nuebarbkg);
+  hs_NuEvt -> Add(h1_CCOther_nuebarbkg);
+  hs_NuEvt -> Add(h1_CC2p2h_nuebarbkg);
+  hs_NuEvt -> Add(h1_CCQE_nuebarbkg);
   hs_NuEvt -> Add(h1_CCOther_nuebkg);
   hs_NuEvt -> Add(h1_CC2p2h_nuebkg);
   hs_NuEvt -> Add(h1_CCQE_nuebkg);
@@ -315,10 +312,10 @@ void SelectedEvents(bool beammode) {
   h1_SelEff_merge -> Add(h1_CC2p2h_nuebkg);
   h1_SelEff_merge -> Add(h1_CCOther_nuebkg);
   h1_SelEff_merge -> Add(h1_NC_nuebkg);
-  //h1_SelEff_merge -> Add(h1_CCQE_nuebarbkg);
-  //h1_SelEff_merge -> Add(h1_CC2p2h_nuebarbkg);
-  //h1_SelEff_merge -> Add(h1_CCOther_nuebarbkg);
-  //h1_SelEff_merge -> Add(h1_NC_nuebarbkg);
+  h1_SelEff_merge -> Add(h1_CCQE_nuebarbkg);
+  h1_SelEff_merge -> Add(h1_CC2p2h_nuebarbkg);
+  h1_SelEff_merge -> Add(h1_CCOther_nuebarbkg);
+  h1_SelEff_merge -> Add(h1_NC_nuebarbkg);
   float SelecEvFCFV = 0.;
   SelecEvFCFV += h1_CCQE_numu->GetBinContent(1);
   SelecEvFCFV += h1_CC2p2h_numu->GetBinContent(1);
@@ -340,10 +337,10 @@ void SelectedEvents(bool beammode) {
   SelecEvFCFV += h1_CC2p2h_nuebkg->GetBinContent(1);
   SelecEvFCFV += h1_CCOther_nuebkg->GetBinContent(1);
   SelecEvFCFV += h1_NC_nuebkg->GetBinContent(1);
-  //SelecEvFCFV += h1_CCQE_nuebarbkg->GetBinContent(1);
-  //SelecEvFCFV += h1_CC2p2h_nuebarbkg->GetBinContent(1);
-  //SelecEvFCFV += h1_CCOther_nuebarbkg->GetBinContent(1);
-  //SelecEvFCFV += h1_NC_nuebarbkg->GetBinContent(1);
+  SelecEvFCFV += h1_CCQE_nuebarbkg->GetBinContent(1);
+  SelecEvFCFV += h1_CC2p2h_nuebarbkg->GetBinContent(1);
+  SelecEvFCFV += h1_CCOther_nuebarbkg->GetBinContent(1);
+  SelecEvFCFV += h1_NC_nuebarbkg->GetBinContent(1);
   float SelecEv[6] = {0.};
   for (int i=0; i<6; i++) {
     std::cout << "######  Cut[" << i+1 << "]  ######" << std::endl;
@@ -387,14 +384,14 @@ void SelectedEvents(bool beammode) {
                                                       h1_CC2p2h_nuebkg->GetBinContent(i+1) +
                                                       h1_CCOther_nuebkg->GetBinContent(i+1) +
                                                       h1_NC_nuebkg->GetBinContent(i+1) << std::endl;
-    //std::cout << "[nuebar  -> nuebar ]  CCQE   : " << h1_CCQE_nuebarbkg->GetBinContent(i+1) << std::endl;
-    //std::cout << "[nuebar  -> nuebar ]  CC2p2h : " << h1_CC2p2h_nuebarbkg->GetBinContent(i+1) << std::endl;
-    //std::cout << "[nuebar  -> nuebar ]  CCOther: " << h1_CCOther_nuebarbkg->GetBinContent(i+1) << std::endl;
-    //std::cout << "[nuebar  -> nuebar ]  NC     : " << h1_NC_nuebarbkg->GetBinContent(i+1) << std::endl;
-    //std::cout << "[nuebar  -> nuebar ]  Total  : " << h1_CCQE_nuebarbkg->GetBinContent(i+1) +
-    //                                                  h1_CC2p2h_nuebarbkg->GetBinContent(i+1) +
-    //                                                  h1_CCOther_nuebarbkg->GetBinContent(i+1) +
-    //                                                  h1_NC_nuebarbkg->GetBinContent(i+1) << std::endl;
+    std::cout << "[nuebar  -> nuebar ]  CCQE   : " << h1_CCQE_nuebarbkg->GetBinContent(i+1) << std::endl;
+    std::cout << "[nuebar  -> nuebar ]  CC2p2h : " << h1_CC2p2h_nuebarbkg->GetBinContent(i+1) << std::endl;
+    std::cout << "[nuebar  -> nuebar ]  CCOther: " << h1_CCOther_nuebarbkg->GetBinContent(i+1) << std::endl;
+    std::cout << "[nuebar  -> nuebar ]  NC     : " << h1_NC_nuebarbkg->GetBinContent(i+1) << std::endl;
+    std::cout << "[nuebar  -> nuebar ]  Total  : " << h1_CCQE_nuebarbkg->GetBinContent(i+1) +
+                                                      h1_CC2p2h_nuebarbkg->GetBinContent(i+1) +
+                                                      h1_CCOther_nuebarbkg->GetBinContent(i+1) +
+                                                      h1_NC_nuebarbkg->GetBinContent(i+1) << std::endl;
     SelecEv[i] += h1_CCQE_numu->GetBinContent(i+1);
     SelecEv[i] += h1_CC2p2h_numu->GetBinContent(i+1);
     SelecEv[i] += h1_CCOther_numu->GetBinContent(i+1);
@@ -415,10 +412,10 @@ void SelectedEvents(bool beammode) {
     SelecEv[i] += h1_CC2p2h_nuebkg->GetBinContent(i+1);
     SelecEv[i] += h1_CCOther_nuebkg->GetBinContent(i+1);
     SelecEv[i] += h1_NC_nuebkg->GetBinContent(i+1);
-    //SelecEv[i] += h1_CCQE_nuebarbkg->GetBinContent(i+1);
-    //SelecEv[i] += h1_CC2p2h_nuebarbkg->GetBinContent(i+1);
-    //SelecEv[i] += h1_CCOther_nuebarbkg->GetBinContent(i+1);
-    //SelecEv[i] += h1_NC_nuebarbkg->GetBinContent(i+1);
+    SelecEv[i] += h1_CCQE_nuebarbkg->GetBinContent(i+1);
+    SelecEv[i] += h1_CC2p2h_nuebarbkg->GetBinContent(i+1);
+    SelecEv[i] += h1_CCOther_nuebarbkg->GetBinContent(i+1);
+    SelecEv[i] += h1_NC_nuebarbkg->GetBinContent(i+1);
     std::cout << "Cut[" << i+1 << "] Total: " << SelecEv[i] << std::endl;
   }
   h1_SelEff_merge -> Scale(1./SelecEvFCFV);
@@ -463,7 +460,6 @@ void SelectedEvents(bool beammode) {
 
   TLegend* legend1 = new TLegend(0.47, 0.42, 0.89, 0.89);
   legend1 -> SetTextSize(0.04);
-  //legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC #nu_{#mu}#rightarrow#nu_{#mu} MC (0.01% Gd)}","");
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
   //else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
   legend1 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
@@ -491,7 +487,7 @@ void SelectedEvents(bool beammode) {
   h1_SelEff_merge ->GetYaxis()->SetLabelSize(0.04);
   h1_SelEff_merge ->GetYaxis()->SetTitle("Selection Efficiency");
   h1_SelEff_merge ->GetYaxis()->SetTitleSize(0.045);
-  h1_SelEff_merge ->GetXaxis()->SetTitleSize(0.06);
+  h1_SelEff_merge ->GetXaxis()->SetLabelSize(0.045);
   h1_SelEff_merge -> Draw();
   c2->RedrawAxis();
   

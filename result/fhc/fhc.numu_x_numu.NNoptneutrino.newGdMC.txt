@@ -23,12 +23,12 @@
   Total   (No osc.): 43814
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 3259.06
-  CC-2p2h (osc.): 775.008
-  CC-Other(osc.): 16798.2
-  NC      (osc.): 8574
+  CCQE    (osc.): 3133.36
+  CC-2p2h (osc.): 749.608
+  CC-Other(osc.): 16389.6
+  NC      (osc.): 8320
   ------------------------------------------
-  Total   (osc.): 29406.3
+  Total   (osc.): 28592.6
 [Neutrino] C2: 29988 -> 29988
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 4156.65
@@ -46,12 +46,12 @@
   Total   (No osc.): 29988
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 2418.59
-  CC-2p2h (osc.): 702.564
-  CC-Other(osc.): 2608.77
-  NC      (osc.): 1251
+  CCQE    (osc.): 2321.45
+  CC-2p2h (osc.): 677.318
+  CC-Other(osc.): 2532.5
+  NC      (osc.): 1212
   ------------------------------------------
-  Total   (osc.): 6980.92
+  Total   (osc.): 6743.27
 [Neutrino] C3: 28729 -> 28729
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 4054.18
@@ -69,12 +69,12 @@
   Total   (No osc.): 28729
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 2382.59
-  CC-2p2h (osc.): 694.8
-  CC-Other(osc.): 2415.88
-  NC      (osc.): 569
+  CCQE    (osc.): 2287.04
+  CC-2p2h (osc.): 669.573
+  CC-Other(osc.): 2346.46
+  NC      (osc.): 554
   ------------------------------------------
-  Total   (osc.): 6062.27
+  Total   (osc.): 5857.08
 [Neutrino] C4: 28704 -> 28704
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 4050.69
@@ -92,12 +92,12 @@
   Total   (No osc.): 28704
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 2379.56
-  CC-2p2h (osc.): 694.303
-  CC-Other(osc.): 2415.42
-  NC      (osc.): 566
+  CCQE    (osc.): 2284.02
+  CC-2p2h (osc.): 669.179
+  CC-Other(osc.): 2346.01
+  NC      (osc.): 551
   ------------------------------------------
-  Total   (osc.): 6055.29
+  Total   (osc.): 5850.21
 [Neutrino] C5: 19071 -> 26640
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 4024.49
@@ -115,12 +115,12 @@
   Total   (No osc.): 26640
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 2341.8
-  CC-2p2h (osc.): 687.799
-  CC-Other(osc.): 1701.07
-  NC      (osc.): 528
+  CCQE    (osc.): 2247.42
+  CC-2p2h (osc.): 662.675
+  CC-Other(osc.): 1649.76
+  NC      (osc.): 514
   ------------------------------------------
-  Total   (osc.): 5258.67
+  Total   (osc.): 5073.86
 [Neutrino] C6: 18730 -> 26129
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 3991.68
@@ -138,12 +138,12 @@
   Total   (No osc.): 26129
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 2315.36
-  CC-2p2h (osc.): 680.752
-  CC-Other(osc.): 1665.6
-  NC      (osc.): 262
+  CCQE    (osc.): 2221.44
+  CC-2p2h (osc.): 655.628
+  CC-Other(osc.): 1617.09
+  NC      (osc.): 256
   ------------------------------------------
-  Total   (osc.): 4923.7
+  Total   (osc.): 4750.16
 --- Box cut performance ---
  0 < dt[usec] < 10, 50 < N50 < 400
  All truth decay-e                : 6507.34
@@ -167,24 +167,24 @@
  
 [Neutrino] Oscillated CCQE Events     : 2976.79(69.591 %)
            w/ truth neutrons : 1440.45 (58.2684 %), w/o truth neutrons :1536.34 (85.0945 %)
-           w/ tagged neutrons: 1027.18(56.5582 %), w/o tagged neutrons:1949.61(79.2073 %)
+           w/ tagged neutrons: 1001.35(56.2709 %), w/o tagged neutrons:1975.45(79.0798 %)
 [Neutrino] Oscillated CC(2p2h) Events : 458.441(10.7174 %)
            w/ truth neutrons : 325.823 (13.18 %), w/o truth neutrons :132.617 (7.34535 %)
-           w/ tagged neutrons: 250.265(13.7799 %), w/o tagged neutrons:208.175(8.45756 %)
+           w/ tagged neutrons: 244.435(13.7361 %), w/o tagged neutrons:214.005(8.56688 %)
 [Neutrino] Oscillated All CCRES Events: 600.062(14.0282 %)
            w/ truth neutrons : 487.244 (19.7097 %), w/o truth neutrons :112.818 (6.24875 %)
-           w/ tagged neutrons: 375.403(20.6702 %), w/o tagged neutrons:224.66(9.12729 %)
+           w/ tagged neutrons: 371.429(20.8725 %), w/o tagged neutrons:228.633(9.15248 %)
 [Neutrino] Oscillated CC Other Events : 45.259(1.05806 %)
            w/ truth neutrons : 41.5814 (1.68203 %), w/o truth neutrons :3.67764 (0.203697 %)
-           w/ tagged neutrons: 39.3011(2.16397 %), w/o tagged neutrons:5.95795(0.242055 %)
+           w/ tagged neutrons: 39.3011(2.20853 %), w/o tagged neutrons:5.95795(0.238505 %)
 [Neutrino] Oscillated NC Events       : 197(4.60544 %)
            w/ truth neutrons : 177 (7.1599 %), w/o truth neutrons :20 (1.10776 %)
-           w/ tagged neutrons: 124(6.82762 %), w/o tagged neutrons:73(2.96579 %)
+           w/ tagged neutrons: 123(6.912 %), w/o tagged neutrons:74(2.96232 %)
 [Neutrino] Oscillated Neutrino Events within [0.25 GeV, 1.5 GeV]
            Legacy Analysis    : 4277.53(Osc)/24050(No Osc) = 0.17786
            Only CCQE(1p1h)    : 2976.79(Osc)/18984(No Osc) = 0.156805
            w/o truth neutrons : 1805.45(Osc)/10892(No Osc) = 0.16576
-           w/o tagged neutrons: 2461.4(Osc)/14604(No Osc) = 0.168543
+           w/o tagged neutrons: 2498.04(Osc)/14796(No Osc) = 0.168832
 All Truth neutrons: 10246.2
 Candidates        : 1.67772e+07
 [### i=0, Thr=0 ###] FOM = 7.32256

@@ -139,7 +139,24 @@ void NTagAnalysis::SetHistoFrame() {
     h1_TaggedN_x_MuStp_NCap[i] = new TH1F(TString::Format("h1_TaggedN_x_MuStp_NCap_mode%d", i), "Tagged_x_MuStp_NCap; Distance b/w #mu Stopping and n Capture vertices [cm]; Number of tagged neutrons", binnumber_n-1, xMuStp_NCapbins);
     h1_TaggedN_x_nAngle[i]     = new TH1F(TString::Format("h1_TaggedN_x_nAngle_mode%d", i), "Tagged_x_nAngle; Cosince of angle b/w n and beam directions; Number of tagged neutrons", binnumber_n3-1, xnAnglebins);
   }
-  
+
+  // Tagged truth neutrons
+  h1_TagTrueN    = new TH1F("h1_TagTrueN", "", 20, 0, 1);
+  h1_TagTrueN_H  = new TH1F("h1_TagTrueN_H", "", 20, 0, 1);
+  h1_TagTrueN_Gd = new TH1F("h1_TagTrueN_Gd", "", 20, 0, 1);
+  // Truth neutron as candidates
+  h1_CanTrueN    = new TH1F("h1_CanTrueN", "", 20, 0, 1);
+  h1_CanTrueN_H  = new TH1F("h1_CanTrueN_H", "", 20, 0, 1);
+  h1_CanTrueN_Gd = new TH1F("h1_CanTrueN_Gd", "", 20, 0, 1);
+  // Truth neutrons
+  h1_TrueN    = new TH1F("h1_TrueN", "", 20, 0, 1);
+  h1_TrueN_H  = new TH1F("h1_TrueN_H", "", 20, 0, 1);
+  h1_TrueN_Gd = new TH1F("h1_TrueN_Gd", "", 20, 0, 1);
+
+  h1_MisTagDcye     = new TH1F("h1_MisTagDcye", "", 20, 0, 1);
+  h1_MisTagAccNoise = new TH1F("h1_MisTagAccNoise", "", 20, 0, 1);
+  h1_NuEvtC6        = new TH1F("h1_NuEvtC6", "", 20, 0, 1);
+
 }
 
 void NTagAnalysis::SetHistoFormat() {
@@ -2624,6 +2641,23 @@ void NTagAnalysis::WritePlots() {
     h1_TrueNmultiplicity[i] -> Write();
     h1_TagNmultiplicity[i]  -> Write();
   }
+
+  h1_TagTrueN    -> Write();
+  h1_TagTrueN_H  -> Write();
+  h1_TagTrueN_Gd -> Write();
+
+  h1_CanTrueN    -> Write();
+  h1_CanTrueN_H  -> Write();
+  h1_CanTrueN_Gd -> Write();
+
+  h1_TrueN    -> Write();
+  h1_TrueN_H  -> Write();
+  h1_TrueN_Gd -> Write();
+
+  h1_MisTagDcye     -> Write();
+  h1_MisTagAccNoise -> Write();
+  h1_NuEvtC6        -> Write();
+
 
   //Noise rate as a function of TagOut for each time window
   for (int i=0; i<WINSTEP; i++) g_NoiseRate[i] -> Write();  //Graph1-6

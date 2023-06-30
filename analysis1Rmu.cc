@@ -376,6 +376,8 @@ int main(int argc, char **argv) {
     //New 1R muon selection
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false)) {
 
+      int intmode = TMath::Abs(numu->var<int>("mode"));
+
       //Neutrino energy distribution
       neuosc.GetTrueEnu(numu);
       neuosc.GetRecoEnu(numu);
@@ -385,6 +387,31 @@ int main(int argc, char **argv) {
       neuosc.GetTruePrmVtx(numu, TruePrmVtx);
       ntagana.TrueNCapVtxProfile(Type, tagvx, tagvy, tagvz);
       ntagana.GetTrueNCapTime(t, Type);
+
+      //Count # of truth decay-e per event
+      int NumDcyE = 0;
+      for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
+        if (std::fabs(numu->var<int>("iprtscnd", iscnd))==static_cast<int>(PDGPID::ELECTRON) && 
+            numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::DECAY)) NumDcyE++;
+      }
+      decayebox.GetTruthDecaye(numu, NumDcyE);
+      /*if (NumDcyE!=0) {
+        GetNeutrinoInteraction(ientry, intmode);
+        std::cout << "------- Primary particles ---------" << std::endl;
+        for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+          std::cout << "Particle[" << iprm << "]=" << numu->var<int>("Ipvc", iprm)
+                                                   << ", Iflvc=" << Iflvc[iprm] 
+                                                   << ", Ichvc=" << numu->var<int>("Ichvc", iprm)
+                                                   << ", Iorgvc=" << Iorgvc[iprm] << std::endl;
+        }
+        std::cout << "------- Secondary particles ---------" << std::endl;
+        for (int jscnd=0; jscnd<numu->var<int>("nscndprt"); jscnd++) {
+          std::cout << "Particle[" << jscnd << "]=" << numu->var<int>("iprtscnd", jscnd)
+                    << ", iprntprt=" << numu->var<int>("iprntprt", jscnd)
+                    << ", iprntidx=" << iprntidx[jscnd]  
+                    << ", lmecscnd=" << numu->var<int>("lmecscnd", jscnd) << std::endl;
+        }
+      }*/
 
       //Muon angle information
       //float truethetamu = neuosc.GetTrueMuDirection(numu, Npvc, Ipvc, Pvc, Iflvc, Ichvc);
@@ -410,7 +437,6 @@ int main(int argc, char **argv) {
       if (MCType=="Water" || MCType=="water") continue;
 
       float OscProb = numu->getOscWgt();
-      int intmode = TMath::Abs(numu->var<int>("mode"));
       float Enu = numu->var<float>("erec");
 
       //decay-e distance @ C1-C6
@@ -1022,23 +1048,6 @@ int main(int argc, char **argv) {
       TagFPR[ith] = (float)TagFP[ith]/(TagTN[ith] + TagFP[ith]);
     }
 
-    /*float YoudenIndex = 0;
-    float OptThreshold_ROC = 0;
-    float slope = TagTPR[1]/TagFPR[1];
-    for (int ith=0; ith<CUTSTEP; ith++) {
-      //float TMVATH = 0.05*ith;
-      //float TagSingularity = 1 - TagFPR[ith];
-      float thisYouden = TagTPR[ith] - slope*TagFPR[ith];
-      if (thisYouden > YoudenIndex) {
-        YoudenIndex = thisYouden;
-        OptThreshold_ROC = TMVATH[ith];
-      }
-      resultfile << "[### i=" << ith << ", Thr=" << TMVATH[ith] << " ###] TP = " << TagTP[ith] << ", FP = " << TagFP[ith] << ", FN = " << TagFN[ith] << ", TN = " << TagTN[ith] << std::endl;
-      resultfile << "              True positive rate = " << TagTPR[ith] 
-                << ", False positive rate = " << TagFPR[ith] << ", YoudenIndex = " << 1+thisYouden << std::endl;
-    }
-    resultfile << "Slope = " << slope << std::endl;
-    resultfile << "Optimized n-like threshold(ROC): " << OptThreshold_ROC << std::endl;*/
     g_ROC = new TGraph(CUTSTEP, TagFPR, TagTPR);
 
     // Calculation of FOM
@@ -1123,6 +1132,23 @@ int main(int argc, char **argv) {
     g_FOM_m40 -> RemovePoint(20); // remove infinity @ n-likelihood=1
 
     ntagana.SummaryTruthInfoinSearch(3., NTagSummary);
+    for (int ithr=0; ithr<CUTSTEP; ithr++) {
+      h1_TagTrueN    -> SetBinContent(ithr+1, TaggedTruthNeutronsinWin[0][ithr]);
+      h1_TagTrueN_H  -> SetBinContent(ithr+1, TaggedTruthHNeutronsinWin[0][ithr]);
+      h1_TagTrueN_Gd -> SetBinContent(ithr+1, TaggedTruthGdNeutronsinWin[0][ithr]);
+
+      h1_CanTrueN    -> SetBinContent(ithr+1, TruthNeutroninCandidatesinWin[0]);
+      h1_CanTrueN_H  -> SetBinContent(ithr+1, TruthHNeutroninCandidatesinWin[0]);
+      h1_CanTrueN_Gd -> SetBinContent(ithr+1, TruthGdNeutroninCandidatesinWin[0]);
+
+      h1_TrueN    -> SetBinContent(ithr+1, AllTruthNeutrons);
+      h1_TrueN_H  -> SetBinContent(ithr+1, TruthHNeutrons);
+      h1_TrueN_Gd -> SetBinContent(ithr+1, TruthGdNeutrons);
+
+      h1_MisTagDcye     -> SetBinContent(ithr+1, MisTaggedDecayeinNlike[0][ithr]);
+      h1_MisTagAccNoise -> SetBinContent(ithr+1, MisTaggedAccNoiseinNlike[0][ithr]);
+      h1_NuEvtC6        -> SetBinContent(ithr+1, SelectedCCQENeutrinos[5]+SelectedCC2p2hNeutrinos[5]+SelectedCCnonQENeutrinos[5]+SelectedNCNeutrinos[5]);
+    }
   }
 
 

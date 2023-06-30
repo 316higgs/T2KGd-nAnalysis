@@ -118,17 +118,25 @@ float MisTaggedDecayeinNlike[WINSTEP][CUTSTEP];
 float MisTaggedAccNoiseinNlike[WINSTEP][CUTSTEP];
 float AllNlikeCandidates[WINSTEP][CUTSTEP];
 
-//int TagCandidates = 0;
-//int TagTP[CUTSTEP];  // True positive  (tagged truth neutrons)
-//int TagFN[CUTSTEP];  // False negative (missed truth neutrons)
-//int TagFP[CUTSTEP];  // False positive (mis-tagged truth noise)
-//int TagTN[CUTSTEP];  // True negative  (rejected truth noise)
-
 float TagCandidates = 0;
 float TagTP[CUTSTEP];  // True positive  (tagged truth neutrons)
 float TagFN[CUTSTEP];  // False negative (missed truth neutrons)
 float TagFP[CUTSTEP];  // False positive (mis-tagged truth noise)
 float TagTN[CUTSTEP];  // True negative  (rejected truth noise)
+
+////  Histogram for sample merge  ////
+TH1F* h1_TagTrueN;     // Tagged truth neutrons
+TH1F* h1_TagTrueN_Gd;
+TH1F* h1_TagTrueN_H;
+TH1F* h1_CanTrueN;     // Truth neutron as candidates
+TH1F* h1_CanTrueN_Gd;
+TH1F* h1_CanTrueN_H;
+TH1F* h1_TrueN;        // Truth neutrons
+TH1F* h1_TrueN_Gd;
+TH1F* h1_TrueN_H;
+TH1F* h1_MisTagDcye;
+TH1F* h1_MisTagAccNoise;
+TH1F* h1_NuEvtC6;
 
 
 int test1 = 0;
@@ -555,9 +563,11 @@ class NTagAnalysis {
 };
 
 
-float GetNoiseRate(int MisTaggedDecaye, int MisTaggedAccNoise, int ParentNeutrinos,
+float GetNoiseRate(float MisTaggedDecaye, float MisTaggedAccNoise, float ParentNeutrinos,
                    int varwindowmax, int windowmin, int noisecut) 
 {
+  //std::cout << "          Correction factor: " << (float)(varwindowmax - WINDOWMIN)/(varwindowmax - NOISECUT) << std::endl;
+  //std::cout << "          ParentNeutrinos  : " << ParentNeutrinos << std::endl;
   float NoiseRate = ( MisTaggedDecaye + MisTaggedAccNoise*((float)(varwindowmax - WINDOWMIN)/(varwindowmax - NOISECUT)) )/ParentNeutrinos;
   return NoiseRate;
 }

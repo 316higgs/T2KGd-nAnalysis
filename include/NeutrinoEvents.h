@@ -452,7 +452,30 @@ void GetProtoSelectedModeEvents(CC0PiNumu* numu) {
 
 
 void GetNeutrinoInteraction(int ientry, int mode) {
-  if (mode==1) {
+  TString IntName = "UNNAMED";
+  if (mode==1) IntName = "CCQE";
+  else if (mode>=2 && mode<=10) IntName = "CC 2p2h";
+  else if (mode==11) IntName = "CC RES(Delta++ -> p, pi+)";
+  else if (mode==12) IntName = "CC RES(Delta+ -> p, pi0)";
+  else if (mode==13) IntName = "CC RES(Delta+ -> n, pi+)";
+  else if (mode==16) IntName = "CC Coherent(Oxygen, make pi+)";
+  else if (mode==17) IntName = "CC RES(Delta -> p,gamma)";
+  else if (mode==21) IntName = "CC DIS(1.3<W<2.0 GeV)";
+  else if (mode==26) IntName = "CC DIS(W>2.0 GeV)";
+  else if (mode==31) IntName = "NC RES(Delta0 -> n,pi0)";
+  else if (mode==32) IntName = "NC RES(Delta+ -> p, pi0)";
+  else if (mode==33) IntName = "NC RES(Delta0 -> p,pi-)";
+  else if (mode==34) IntName = "NC RES(Delta+ -> n, pi0)";
+  else if (mode==36) IntName = "NC Coherent(Oxygen, make pi0)";
+  else if (mode==38) IntName = "NC RES(Delta0 -> n, gamma)";
+  else if (mode==39) IntName = "NC RES(Delta+ -> p, gamma)";
+  else if (mode==41) IntName = "NC DIS(1.3<W<2.0 GeV)";
+  else if (mode==46) IntName = "NC DIS(W>2.0 GeV)";
+  else if (mode==52) IntName = "NCEL(p)";
+  else if (mode==53) IntName = "NCEL(n)";
+  std::cout << "[### " << ientry << " ###] Neutrino interaction: " << IntName << std::endl;
+
+  /*if (mode==1) {
     std::cout << "[### " << ientry << " ###] Neutrino interaction: CCQE" << std::endl;
   }
   else if (mode>=2 && mode<=10) {
@@ -472,7 +495,7 @@ void GetNeutrinoInteraction(int ientry, int mode) {
   }
   else if (mode>=31) {
     std::cout << "[### " << ientry << " ###] Neutrino interaction: NC" << std::endl;
-  }
+  }*/
 }
 
 

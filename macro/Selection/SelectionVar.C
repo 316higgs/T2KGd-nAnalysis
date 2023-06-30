@@ -96,7 +96,7 @@ void SelectionVar(bool beammode) {
   TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.root");
   TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.root");
   TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.NNoptnewGdMC.root");
-  //TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.root");
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
@@ -126,8 +126,8 @@ void SelectionVar(bool beammode) {
   GenN_numu_x_nue        = 63538;
   GenN_numubar_x_numubar = 63444;
   GenN_numubar_x_nuebar  = 63463;
-  GenN_nue_x_nue         = 63379;
-  GenN_nuebar_x_nuebar   = 63463;
+  GenN_nue_x_nue         = 63423;
+  GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
   std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
   std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
@@ -177,10 +177,10 @@ void SelectionVar(bool beammode) {
   TString suffix_NC      = "_mode2";
   for (int istep=0; istep<CUTSTEP; istep++) {
   	TString VarName = SetHistoVarName(istep);
-  	TString CCQEHistoName    = VarPath+VarName+suffix_CCQE;
-    TString CC2p2hHistoName  = VarPath+VarName+suffix_CC2p2h;
-    TString CCOtherHistoName = VarPath+VarName+suffix_CCOther;
-    TString NCHistoName      = VarPath+VarName+suffix_NC;
+  	CCQEHistoName    = VarPath+VarName+suffix_CCQE;
+    CC2p2hHistoName  = VarPath+VarName+suffix_CC2p2h;
+    CCOtherHistoName = VarPath+VarName+suffix_CCOther;
+    NCHistoName      = VarPath+VarName+suffix_NC;
 
     // Get original histograms
     SetHisto(istep, fin_numu, 0);      // numu -> numu
@@ -188,7 +188,7 @@ void SelectionVar(bool beammode) {
     SetHisto(istep, fin_numubar, 2);   // numubar -> numubar
     SetHisto(istep, fin_nuebarsig, 3); // numubar -> nuebar
     SetHisto(istep, fin_nuebkg, 4);    // nue -> nue
-    //SetHisto(fin_nuebarbkg, 5);        // nuebar -> nuebar
+    SetHisto(istep, fin_nuebarbkg, 5); // nuebar -> nuebar
 
     // Color
     SetHistoColor(istep);
@@ -199,7 +199,7 @@ void SelectionVar(bool beammode) {
     ScaleHisto(istep, 2);  // numubar -> numubar
     ScaleHisto(istep, 3);  // numubar -> nuebar
     ScaleHisto(istep, 4);  // nue     -> nue
-    //ScaleHisto(istep, 5);  // nuebar  -> nuebar
+    ScaleHisto(istep, 5);  // nuebar  -> nuebar
 
     // Stack
     SetTHStack(istep);
@@ -375,7 +375,7 @@ void SetTHStack(int istep) {
   }
 
   //////  NC  //////
-  //hs_C[istep] -> Add(h1_NC_nuebarbkg[istep]);
+  hs_C[istep] -> Add(h1_NC_nuebarbkg[istep]);
   hs_C[istep] -> Add(h1_NC_nuebkg[istep]);
   hs_C[istep] -> Add(h1_NC_nuebarsig[istep]);
   hs_C[istep] -> Add(h1_NC_numubar[istep]);
@@ -383,9 +383,9 @@ void SetTHStack(int istep) {
   hs_C[istep] -> Add(h1_NC_numu[istep]);
 
   //////  CC nue/nuebar  //////
-  //hs_C[istep] -> Add(h1_CCOther_nuebarbkg[istep]);
-  //hs_C[istep] -> Add(h1_CC2p2h_nuebarbkg[istep]);
-  //hs_C[istep] -> Add(h1_CCQE_nuebarbkg[istep]);
+  hs_C[istep] -> Add(h1_CCOther_nuebarbkg[istep]);
+  hs_C[istep] -> Add(h1_CC2p2h_nuebarbkg[istep]);
+  hs_C[istep] -> Add(h1_CCQE_nuebarbkg[istep]);
   hs_C[istep] -> Add(h1_CCOther_nuebkg[istep]);
   hs_C[istep] -> Add(h1_CC2p2h_nuebkg[istep]);
   hs_C[istep] -> Add(h1_CCQE_nuebkg[istep]);
@@ -451,14 +451,14 @@ void SetHistoColor(int istep) {
   h1_NC_nuebkg[istep]      -> SetLineColor(kSpring-9);
   h1_NC_nuebkg[istep]      -> SetFillColor(kSpring-9);
 
-  /*h1_CCQE_nuebarbkg[istep]    -> SetLineColor(kOrange+7);
+  h1_CCQE_nuebarbkg[istep]    -> SetLineColor(kOrange+7);
   h1_CCQE_nuebarbkg[istep]    -> SetFillColor(kOrange+7);
   h1_CC2p2h_nuebarbkg[istep]  -> SetLineColor(kOrange+6);
   h1_CC2p2h_nuebarbkg[istep]  -> SetFillColor(kOrange+6);
   h1_CCOther_nuebarbkg[istep] -> SetLineColor(kOrange+0);
   h1_CCOther_nuebarbkg[istep] -> SetFillColor(kOrange+0);
   h1_NC_nuebarbkg[istep]      -> SetLineColor(kSpring-9);
-  h1_NC_nuebarbkg[istep]      -> SetFillColor(kSpring-9);*/
+  h1_NC_nuebarbkg[istep]      -> SetFillColor(kSpring-9);
 }
 
 

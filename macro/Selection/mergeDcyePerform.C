@@ -13,6 +13,7 @@
 
 
 void mergeDcyePerform(bool beammode) {
+
   int fhcflag = 1;
   int rhcflag = 0;
   if (!beammode) {
@@ -45,8 +46,8 @@ void mergeDcyePerform(bool beammode) {
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
   Double_t GenN_numubar_x_nuebar  = 63463;
-  Double_t GenN_nue_x_nue         = 63379;
-  Double_t GenN_nuebar_x_nuebar   = 63463;
+  Double_t GenN_nue_x_nue         = 63423;
+  Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
   std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
   std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
@@ -72,41 +73,47 @@ void mergeDcyePerform(bool beammode) {
   Double_t AllTruedcye_numu      = 6507.34;
   Double_t AllTruedcye_nuesig    = 0.447566;
   Double_t AllTruedcye_numubar   = 13762.2;
-  Double_t AllTruedcye_nuebarsig = 243;
+  Double_t AllTruedcye_nuebarsig = 0;
   Double_t AllTruedcye_nuebkg    = 259.886;
+  Double_t AllTruedcye_nuebarbkg = 333;
 
   //////  fiTQun sub-events in the box (reco. decay-e)  //////
   Double_t BoxfQdcye_numu      = 6146.16;
   Double_t BoxfQdcye_nuesig    = 0.447566;
   Double_t BoxfQdcye_numubar   = 11855.1;
-  Double_t BoxfQdcye_nuebarsig = 245;
+  Double_t BoxfQdcye_nuebarsig = 0;
   Double_t BoxfQdcye_nuebkg    = 256.886;
+  Double_t BoxfQdcye_nuebarbkg = 327;
 
   //////  True-mateched sub-events in the box  //////
   Double_t MatchedfQdcye_numu      = 5848.38;
   Double_t MatchedfQdcye_nuesig    = 0.447566;
   Double_t MatchedfQdcye_numubar   = 11791;
-  Double_t MatchedfQdcye_nuebarsig = 238;
+  Double_t MatchedfQdcye_nuebarsig = 0;
   Double_t MatchedfQdcye_nuebkg    = 249.886;
+  Double_t MatchedfQdcye_nuebarbkg = 324;
 
   
   Double_t mergeAllTruedcye = (ExpN_numu_x_numu)/(GenN_numu_x_numu)*AllTruedcye_numu
                             + (ExpN_numu_x_nue)/(GenN_numu_x_nue)*AllTruedcye_nuesig
                             + (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar)*AllTruedcye_numubar
                             + (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar)*AllTruedcye_nuebarsig
-                            + (ExpN_nue_x_nue)/(GenN_nue_x_nue)*AllTruedcye_nuebkg;
+                            + (ExpN_nue_x_nue)/(GenN_nue_x_nue)*AllTruedcye_nuebkg
+                            + (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar)*AllTruedcye_nuebarbkg;
 
   Double_t mergeBoxfQdcye = (ExpN_numu_x_numu)/(GenN_numu_x_numu)*BoxfQdcye_numu
                           + (ExpN_numu_x_nue)/(GenN_numu_x_nue)*BoxfQdcye_nuesig
                           + (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar)*BoxfQdcye_numubar
                           + (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar)*BoxfQdcye_nuebarsig
-                          + (ExpN_nue_x_nue)/(GenN_nue_x_nue)*BoxfQdcye_nuebkg;
+                          + (ExpN_nue_x_nue)/(GenN_nue_x_nue)*BoxfQdcye_nuebkg
+                          + (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar)*BoxfQdcye_nuebarbkg;
 
   Double_t mergeMatchedfQdcye = (ExpN_numu_x_numu)/(GenN_numu_x_numu)*MatchedfQdcye_numu
                               + (ExpN_numu_x_nue)/(GenN_numu_x_nue)*MatchedfQdcye_nuesig
                               + (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar)*MatchedfQdcye_numubar
                               + (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar)*MatchedfQdcye_nuebarsig
-                              + (ExpN_nue_x_nue)/(GenN_nue_x_nue)*MatchedfQdcye_nuebkg;
+                              + (ExpN_nue_x_nue)/(GenN_nue_x_nue)*MatchedfQdcye_nuebkg
+                              + (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar)*MatchedfQdcye_nuebarbkg;
 
   std::cout << "All True Decay-e                 : " << mergeAllTruedcye << std::endl;
   std::cout << "fiTQun Decay-e in the Box        : " << mergeBoxfQdcye << std::endl;
