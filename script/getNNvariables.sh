@@ -39,31 +39,6 @@ FITQUNVER=fiTQun_v4
                      -OSCCH NUMU
 COMMENTOUT
 
-##### FHC numu -> numu Gd MC #####
-<<COMMENTOUT
-./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
-                     ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.NNoptntag0026Gd.\*.root\
-                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.preNN.newGdMC.root\
-                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.preNN.newGdMC.txt\
-                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.preNN.newGdMC.txt\
-                     -MCType Gd\
-                     -ETAG ON\
-                     -BEAMMODE FHC\
-                     -OSCCH NUMU
-COMMENTOUT
-
-#<<COMMENTOUT
-./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
-                     ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.NNoptntag0026Gd.\*.root\
-                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.postNN.newGdMC.root\
-                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.postNN.newGdMC.txt\
-                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.postNN.newGdMC.txt\
-                     -MCType Gd\
-                     -ETAG ON\
-                     -BEAMMODE FHC\
-                     -OSCCH NUMU
-#COMMENTOUT
-
 <<COMMENTOUT
 ./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
                      ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.oldntag0026Gd.\*.root\
@@ -77,55 +52,157 @@ COMMENTOUT
 COMMENTOUT
 
 
-##### FHC numu -> nue Gd MC #####
+
+##### FHC numu -> numu Gd MC #####
+#<<COMMENTOUT
+./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.NNoptntag0026Gd.\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.preNN.newGdMC.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.preNN.newGdMC.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.preNN.newGdMC.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUMU
+#COMMENTOUT
+
 <<COMMENTOUT
+./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.NNoptntag0026Gd.\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.postNN.newGdMC.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.postNN.newGdMC.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.postNN.newGdMC.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUMU
+COMMENTOUT
+
+##### FHC numu -> nue Gd MC #####
+#<<COMMENTOUT
 ./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_nue.13a.fiTQun0026Gd.\*.root\
-                     ${DISK3}/Ntag/output/fhc/numu_x_nue/fhc.numu_x_nue.13a.ntag0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/numu_x_nue/fhc.numu_x_nue.13a.NNoptntag0026Gd.\*.root\
                      $ANALYSISSTAGE/output/fhc/fhc.numu_x_nue.preNN.newGdMC.root\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_nue.neutrino.preNN.newGdMC.txt\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_nue.ntag.preNN.newGdMC.txt\
                      -MCType Gd\
                      -ETAG ON\
                      -BEAMMODE FHC\
-                     -OSCCH NUMU
-COMMENTOUT
+                     -OSCCH NUESIG
+#COMMENTOUT
 
 <<COMMENTOUT
 ./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_nue.13a.fiTQun0026Gd.\*.root\
-                     ${DISK3}/Ntag/output/fhc/numu_x_nue/fhc.numu_x_nue.13a.ntag0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/numu_x_nue/fhc.numu_x_nue.13a.NNoptntag0026Gd.\*.root\
                      $ANALYSISSTAGE/output/fhc/fhc.numu_x_nue.postNN.newGdMC.root\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_nue.neutrino.postNN.newGdMC.txt\
                      $ANALYSISSTAGE/result/fhc/fhc.numu_x_nue.ntag.postNN.newGdMC.txt\
                      -MCType Gd\
                      -ETAG ON\
                      -BEAMMODE FHC\
-                     -OSCCH NUMU
+                     -OSCCH NUESIG
 COMMENTOUT
 
 
 ##### FHC numubar -> numubar Gd MC #####
-<<COMMENTOUT
+#<<COMMENTOUT
 ./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_numubar.13a.fiTQun0026Gd.\*.root\
-                     ${DISK3}/Ntag/output/fhc/numubar_x_numubar/fhc.numubar_x_numubar.13a.ntag0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/numubar_x_numubar/fhc.numubar_x_numubar.13a.NNoptntag0026Gd.\*.root\
                      $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root\
                      $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.preNN.newGdMC.txt\
                      $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.preNN.newGdMC.txt\
                      -MCType Gd\
                      -ETAG ON\
                      -BEAMMODE FHC\
-                     -OSCCH NUMU
-COMMENTOUT
+                     -OSCCH NUMUBAR
+#COMMENTOUT
 
 <<COMMENTOUT
 ./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_numubar.13a.fiTQun0026Gd.\*.root\
-                     ${DISK3}/Ntag/output/fhc/numubar_x_numubar/fhc.numubar_x_numubar.13a.ntag0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/numubar_x_numubar/fhc.numubar_x_numubar.13a.NNoptntag0026Gd.\*.root\
                      $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.postNN.newGdMC.root\
                      $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.postNN.newGdMC.txt\
                      $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.postNN.newGdMC.txt\
                      -MCType Gd\
                      -ETAG ON\
                      -BEAMMODE FHC\
-                     -OSCCH NUMU
+                     -OSCCH NUMUBAR
+COMMENTOUT
+
+
+##### FHC numubar -> nuebar Gd MC #####
+#<<COMMENTOUT
+./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_nuebar.13a.fiTQun0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/numubar_x_nuebar/fhc.numubar_x_nuebar.13a.NNoptntag0026Gd.\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numubar_x_nuebar.preNN.newGdMC.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numubar_x_nuebar.neutrino.preNN.newGdMC.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numubar_x_nuebar.ntag.preNN.newGdMC.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUEBARSIG
+#COMMENTOUT
+
+<<COMMENTOUT
+./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_nuebar.13a.fiTQun0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/numubar_x_nuebar/fhc.numubar_x_nuebar.13a.NNoptntag0026Gd.\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numubar_x_nuebar.postNN.newGdMC.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numubar_x_nuebar.neutrino.postNN.newGdMC.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numubar_x_nuebar.ntag.postNN.newGdMC.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUEBARSIG
+COMMENTOUT
+
+##### FHC nue -> nue Gd MC #####
+#<<COMMENTOUT
+./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.nue_x_nue.13a.fiTQun0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/nue_x_nue/fhc.nue_x_nue.13a.NNoptntag0026Gd.\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.nue_x_nue.preNN.newGdMC.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.nue_x_nue.neutrino.preNN.newGdMC.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.nue_x_nue.ntag.preNN.newGdMC.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUE
+#COMMENTOUT
+
+<<COMMENTOUT
+./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.nue_x_nue.13a.fiTQun0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/nue_x_nue/fhc.nue_x_nue.13a.NNoptntag0026Gd.\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.nue_x_nue.postNN.newGdMC.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.nue_x_nue.neutrino.postNN.newGdMC.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.nue_x_nue.ntag.postNN.newGdMC.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUE
+COMMENTOUT
+
+##### FHC nuebar -> nuebar Gd MC #####
+#<<COMMENTOUT
+./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.nuebar_x_nuebar.13a.fiTQun0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/nuebar_x_nuebar/fhc.nuebar_x_nuebar.13a.NNoptntag0026Gd.\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.nuebar_x_nuebar.preNN.newGdMC.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.nuebar_x_nuebar.neutrino.preNN.newGdMC.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.nuebar_x_nuebar.ntag.preNN.newGdMC.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUEBAR
+#COMMENTOUT
+
+<<COMMENTOUT
+./getNNvariables.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.nuebar_x_nuebar.13a.fiTQun0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/fhc/nuebar_x_nuebar/fhc.nuebar_x_nuebar.13a.NNoptntag0026Gd.\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.nuebar_x_nuebar.postNN.newGdMC.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.nuebar_x_nuebar.neutrino.postNN.newGdMC.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.nuebar_x_nuebar.ntag.postNN.newGdMC.txt\
+                     -MCType Gd\
+                     -ETAG ON\
+                     -BEAMMODE FHC\
+                     -OSCCH NUEBAR
 COMMENTOUT
 
 

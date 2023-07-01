@@ -13,8 +13,8 @@
 void SimpleDecaye(bool beammode) {
 
   bool truedcye    = 0;
-  bool fitqunsubev = 1;
-  bool floordcye   = 0;
+  bool fitqunsubev = 0;
+  bool floordcye   = 1;
 
   int fhcflag = 1;
   int rhcflag = 0;

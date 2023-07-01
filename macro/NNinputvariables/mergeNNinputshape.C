@@ -23,20 +23,26 @@ void mergeNNinputshape(bool beammode) {
   //FHC
 #if fhcflag
 
-#if 0
+#if 1
   // Pre
   bool NTagapply = false;
-  TFile* finnumu     = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
-  TFile* finnuesig   = new TFile("../../output/fhc/fhc.numu_x_nue.preNN.newGdMC.root");
-  TFile* finnumubar  = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.preNN.newGdMC.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.preNN.newGdMC.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.preNN.newGdMC.root");
 #endif
 
-#if 1
+#if 0
   // Post
   bool NTagapply = true;
-  TFile* finnumu     = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.newGdMC.root");
-  TFile* finnuesig   = new TFile("../../output/fhc/fhc.numu_x_nue.postNN.newGdMC.root");
-  TFile* finnumubar  = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.newGdMC.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.newGdMC.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.postNN.newGdMC.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.newGdMC.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.newGdMC.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.postNN.newGdMC.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.postNN.newGdMC.root");
 #endif
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
@@ -54,16 +60,21 @@ void mergeNNinputshape(bool beammode) {
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
   TH1F* h1_skrate_numu_x_nue        = (TH1F*)fin_skrate->Get("skrate_numu_x_nue");
   TH1F* h1_skrate_numubar_x_numubar = (TH1F*)fin_skrate->Get("skrate_numu_bar_x_numu_bar");
-  //Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
-  //Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
+  TH1F* h1_skrate_numubar_x_nuebar  = (TH1F*)fin_skrate->Get("skrate_numu_bar_x_nue_bar");
+  TH1F* h1_skrate_nue_x_nue         = (TH1F*)fin_skrate->Get("skrate_nue_x_nue");
+  TH1F* h1_skrate_nuebar_x_nuebar   = (TH1F*)fin_skrate->Get("skrate_nue_bar_x_nue_bar");
   Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   Double_t ExpN_numu_x_nue          = h1_skrate_numu_x_nue->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
-  //Double_t GenN_numu_x_numu         = 190292;
-  //Double_t GenN_numubar_x_numubar   = 190909;
-  Double_t GenN_numu_x_numu         = 63606;
-  Double_t GenN_numu_x_nue          = 63445;
-  Double_t GenN_numubar_x_numubar   = 63361;
+  Double_t ExpN_numubar_x_nuebar    = h1_skrate_numubar_x_nuebar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_nue_x_nue           = h1_skrate_nue_x_nue->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_nuebar_x_nuebar     = h1_skrate_nuebar_x_nuebar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t GenN_numu_x_numu       = 63622;
+  Double_t GenN_numu_x_nue        = 63538;
+  Double_t GenN_numubar_x_numubar = 63444;
+  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_nue_x_nue         = 63423;
+  Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
   std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
   std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
@@ -74,6 +85,15 @@ void mergeNNinputshape(bool beammode) {
   std::cout << "[numub -> numub] ExpN_numubar_x_numubar = " << h1_skrate_numubar_x_numubar->Integral() << std::endl;
   std::cout << "[numub -> numub] GenN_numubar_x_numubar = " << GenN_numubar_x_numubar << std::endl;
   std::cout << "[numub -> numub] Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
+  std::cout << "[numub -> nueb ] ExpN_numubar_x_nuebar = " << h1_skrate_numubar_x_nuebar->Integral() << std::endl;
+  std::cout << "[numub -> nueb ] GenN_numubar_x_nuebar = " << GenN_numubar_x_nuebar << std::endl;
+  std::cout << "[numub -> nueb ] Normalization factor for numubar_x_nuebar: " << (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) << std::endl;
+  std::cout << "[nue   -> nue  ] ExpN_nue_x_nue = " << h1_skrate_nue_x_nue->Integral() << std::endl;
+  std::cout << "[nue   -> nue  ] GenN_nue_x_nue = " << GenN_nue_x_nue << std::endl;
+  std::cout << "[nue   -> nue  ] Normalization factor for nue_x_nue: " << (ExpN_nue_x_nue)/(GenN_nue_x_nue) << std::endl;
+  std::cout << "[nueb  -> nueb ] ExpN_nuebar_x_nuebar = " << h1_skrate_nuebar_x_nuebar->Integral() << std::endl;
+  std::cout << "[nueb  -> nueb ] GenN_nuebar_x_nuebar = " << GenN_nuebar_x_nuebar << std::endl;
+  std::cout << "[nueb  -> nueb ] Normalization factor for nuebar_x_nuebar: " << (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) << std::endl;
 
 
   TH1F* h1_NNvar_Gd_numu[12];
@@ -91,29 +111,59 @@ void mergeNNinputshape(bool beammode) {
   TH1F* h1_NNvar_AccNoise_numubar[12];
   TH1F* h1_NNvar_Decaye_numubar[12];
 
+  TH1F* h1_NNvar_Gd_nuebarsig[12];
+  TH1F* h1_NNvar_H_nuebarsig[12];
+  TH1F* h1_NNvar_AccNoise_nuebarsig[12];
+  TH1F* h1_NNvar_Decaye_nuebarsig[12];
+
+  TH1F* h1_NNvar_Gd_nuebkg[12];
+  TH1F* h1_NNvar_H_nuebkg[12];
+  TH1F* h1_NNvar_AccNoise_nuebkg[12];
+  TH1F* h1_NNvar_Decaye_nuebkg[12];
+
+  TH1F* h1_NNvar_Gd_nuebarbkg[12];
+  TH1F* h1_NNvar_H_nuebarbkg[12];
+  TH1F* h1_NNvar_AccNoise_nuebarbkg[12];
+  TH1F* h1_NNvar_Decaye_nuebarbkg[12];
+
   TH1F* h1_NNvar_Gd[12];
   TH1F* h1_NNvar_H[12];
   TH1F* h1_NNvar_Decaye[12];
   TH1F* h1_NNvar_AccNoise[12];
-  float binnum[12] = {60, 40, 50,   50,   50,  50, 50,   50,  50,  50,   50,   50};
-  float xmin[12]   = {0,   0,  0, -150,    0,  20,  5, -200,   0,   0, -0.2, -0.2};
-  float xmax[12]   = {60, 80,  5, 1600, 5000, 100, 35,  200, 100, 100,  1.1,  1.1};
+  float binnum[12] = {50, 40, 50,   50,   50,  40, 40,   40,  40,  40,   40,   40};
+  float xmin[12]   = {0,   0,  0, -150,    0,  20, 10, -150,  20,   0, -0.2, -0.2};
+  float xmax[12]   = {50, 80,  5, 1600, 5000,  80, 30,  150,  90,  60,  0.8,  0.4};
 
   for (int i=0; i<12; i++) {
-  	h1_NNvar_Gd_numu[i]       = (TH1F*)finnumu->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
-    h1_NNvar_H_numu[i]        = (TH1F*)finnumu->Get(TString::Format("NNInputVariables/h1_NNvar_H_type%d", i));
-    h1_NNvar_AccNoise_numu[i] = (TH1F*)finnumu->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
-    h1_NNvar_Decaye_numu[i]   = (TH1F*)finnumu->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
+  	h1_NNvar_Gd_numu[i]       = (TH1F*)fin_numu->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
+    h1_NNvar_H_numu[i]        = (TH1F*)fin_numu->Get(TString::Format("NNInputVariables/h1_NNvar_H_type%d", i));
+    h1_NNvar_AccNoise_numu[i] = (TH1F*)fin_numu->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
+    h1_NNvar_Decaye_numu[i]   = (TH1F*)fin_numu->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
 
-    h1_NNvar_Gd_nuesig[i]       = (TH1F*)finnuesig->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
-    h1_NNvar_H_nuesig[i]        = (TH1F*)finnuesig->Get(TString::Format("NNInputVariables/h1_NNvar_H_type%d", i));
-    h1_NNvar_AccNoise_nuesig[i] = (TH1F*)finnuesig->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
-    h1_NNvar_Decaye_nuesig[i]   = (TH1F*)finnuesig->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
+    h1_NNvar_Gd_nuesig[i]       = (TH1F*)fin_nuesig->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
+    h1_NNvar_H_nuesig[i]        = (TH1F*)fin_nuesig->Get(TString::Format("NNInputVariables/h1_NNvar_H_type%d", i));
+    h1_NNvar_AccNoise_nuesig[i] = (TH1F*)fin_nuesig->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
+    h1_NNvar_Decaye_nuesig[i]   = (TH1F*)fin_nuesig->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
 
-    h1_NNvar_Gd_numubar[i]       = (TH1F*)finnumubar->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
-    h1_NNvar_H_numubar[i]        = (TH1F*)finnumubar->Get(TString::Format("NNInputVariables/h1_NNvar_H_type%d", i));
-    h1_NNvar_AccNoise_numubar[i] = (TH1F*)finnumubar->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
-    h1_NNvar_Decaye_numubar[i]   = (TH1F*)finnumubar->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
+    h1_NNvar_Gd_numubar[i]       = (TH1F*)fin_numubar->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
+    h1_NNvar_H_numubar[i]        = (TH1F*)fin_numubar->Get(TString::Format("NNInputVariables/h1_NNvar_H_type%d", i));
+    h1_NNvar_AccNoise_numubar[i] = (TH1F*)fin_numubar->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
+    h1_NNvar_Decaye_numubar[i]   = (TH1F*)fin_numubar->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
+    
+    h1_NNvar_Gd_nuebarsig[i]       = (TH1F*)fin_nuebarsig->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
+    h1_NNvar_H_nuebarsig[i]        = (TH1F*)fin_nuebarsig->Get(TString::Format("NNInputVariables/h1_NNvar_H_type%d", i));
+    h1_NNvar_AccNoise_nuebarsig[i] = (TH1F*)fin_nuebarsig->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
+    h1_NNvar_Decaye_nuebarsig[i]   = (TH1F*)fin_nuebarsig->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
+
+    h1_NNvar_Gd_nuebkg[i]       = (TH1F*)fin_nuebkg->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
+    h1_NNvar_H_nuebkg[i]        = (TH1F*)fin_nuebkg->Get(TString::Format("NNInputVariables/h1_NNvar_H_type%d", i));
+    h1_NNvar_AccNoise_nuebkg[i] = (TH1F*)fin_nuebkg->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
+    h1_NNvar_Decaye_nuebkg[i]   = (TH1F*)fin_nuebkg->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
+
+    h1_NNvar_Gd_nuebarbkg[i]       = (TH1F*)fin_nuebarbkg->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
+    h1_NNvar_H_nuebarbkg[i]        = (TH1F*)fin_nuebarbkg->Get(TString::Format("NNInputVariables/h1_NNvar_H_type%d", i));
+    h1_NNvar_AccNoise_nuebarbkg[i] = (TH1F*)fin_nuebarbkg->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
+    h1_NNvar_Decaye_nuebarbkg[i]   = (TH1F*)fin_nuebarbkg->Get(TString::Format("NNInputVariables/h1_NNvar_Decaye_type%d", i));
 
     h1_NNvar_Gd_numu[i]       -> SetFillColor(kTeal-5);
     h1_NNvar_H_numu[i]        -> SetFillColor(kAzure-4);
@@ -129,6 +179,21 @@ void mergeNNinputshape(bool beammode) {
     h1_NNvar_H_numubar[i]        -> SetFillColor(kAzure-4);
     h1_NNvar_Decaye_numubar[i]   -> SetFillColor(kYellow-3);
     h1_NNvar_AccNoise_numubar[i] -> SetFillColor(kGray+2);
+
+    h1_NNvar_Gd_nuebarsig[i]       -> SetFillColor(kTeal-5);
+    h1_NNvar_H_nuebarsig[i]        -> SetFillColor(kAzure-4);
+    h1_NNvar_Decaye_nuebarsig[i]   -> SetFillColor(kYellow-3);
+    h1_NNvar_AccNoise_nuebarsig[i] -> SetFillColor(kGray+2);
+
+    h1_NNvar_Gd_nuebkg[i]       -> SetFillColor(kTeal-5);
+    h1_NNvar_H_nuebkg[i]        -> SetFillColor(kAzure-4);
+    h1_NNvar_Decaye_nuebkg[i]   -> SetFillColor(kYellow-3);
+    h1_NNvar_AccNoise_nuebkg[i] -> SetFillColor(kGray+2);
+
+    h1_NNvar_Gd_nuebarbkg[i]       -> SetFillColor(kTeal-5);
+    h1_NNvar_H_nuebarbkg[i]        -> SetFillColor(kAzure-4);
+    h1_NNvar_Decaye_nuebarbkg[i]   -> SetFillColor(kYellow-3);
+    h1_NNvar_AccNoise_nuebarbkg[i] -> SetFillColor(kGray+2);
 
 #if 0
     // Normalization
@@ -158,6 +223,9 @@ void mergeNNinputshape(bool beammode) {
     h1_NNvar_Gd[i] -> Add(h1_NNvar_Gd_numu[i]);
     h1_NNvar_Gd[i] -> Add(h1_NNvar_Gd_nuesig[i]);
     h1_NNvar_Gd[i] -> Add(h1_NNvar_Gd_numubar[i]);
+    h1_NNvar_Gd[i] -> Add(h1_NNvar_Gd_nuebarsig[i]);
+    h1_NNvar_Gd[i] -> Add(h1_NNvar_Gd_nuebkg[i]);
+    h1_NNvar_Gd[i] -> Add(h1_NNvar_Gd_nuebarbkg[i]);
     h1_NNvar_Gd[i] -> SetLineColor(kTeal-5);
     h1_NNvar_Gd[i] -> SetLineWidth(2);
     h1_NNvar_Gd[i] -> SetStats(0);
@@ -165,6 +233,9 @@ void mergeNNinputshape(bool beammode) {
     h1_NNvar_H[i] -> Add(h1_NNvar_H_numu[i]);
     h1_NNvar_H[i] -> Add(h1_NNvar_H_nuesig[i]);
     h1_NNvar_H[i] -> Add(h1_NNvar_H_numubar[i]);
+    h1_NNvar_H[i] -> Add(h1_NNvar_Gd_nuebarsig[i]);
+    h1_NNvar_H[i] -> Add(h1_NNvar_Gd_nuebkg[i]);
+    h1_NNvar_H[i] -> Add(h1_NNvar_Gd_nuebarbkg[i]);
     h1_NNvar_H[i] -> SetLineColor(kAzure-4);
     h1_NNvar_H[i] -> SetLineWidth(2);
     h1_NNvar_H[i] -> SetStats(0);
@@ -172,6 +243,9 @@ void mergeNNinputshape(bool beammode) {
     h1_NNvar_Decaye[i] -> Add(h1_NNvar_Decaye_numu[i]);
     h1_NNvar_Decaye[i] -> Add(h1_NNvar_Decaye_nuesig[i]);
     h1_NNvar_Decaye[i] -> Add(h1_NNvar_Decaye_numubar[i]);
+    h1_NNvar_Decaye[i] -> Add(h1_NNvar_Gd_nuebarsig[i]);
+    h1_NNvar_Decaye[i] -> Add(h1_NNvar_Gd_nuebkg[i]);
+    h1_NNvar_Decaye[i] -> Add(h1_NNvar_Gd_nuebarbkg[i]);
     h1_NNvar_Decaye[i] -> SetLineColor(kYellow-3);
     h1_NNvar_Decaye[i] -> SetLineWidth(2);
     h1_NNvar_Decaye[i] -> SetStats(0);
@@ -179,6 +253,9 @@ void mergeNNinputshape(bool beammode) {
     h1_NNvar_AccNoise[i] -> Add(h1_NNvar_AccNoise_numu[i]);
     h1_NNvar_AccNoise[i] -> Add(h1_NNvar_AccNoise_nuesig[i]);
     h1_NNvar_AccNoise[i] -> Add(h1_NNvar_AccNoise_numubar[i]);
+    h1_NNvar_AccNoise[i] -> Add(h1_NNvar_Gd_nuebarsig[i]);
+    h1_NNvar_AccNoise[i] -> Add(h1_NNvar_Gd_nuebkg[i]);
+    h1_NNvar_AccNoise[i] -> Add(h1_NNvar_Gd_nuebarbkg[i]);
     h1_NNvar_AccNoise[i] -> SetLineColor(kGray+2);
     h1_NNvar_AccNoise[i] -> SetLineWidth(2);
     h1_NNvar_AccNoise[i] -> SetStats(0);
@@ -196,14 +273,14 @@ void mergeNNinputshape(bool beammode) {
 
   
   // for sanity check of NN input variable plots
-  h1_AllNHits = (TH1F*)finnumu->Get("NNInputVariables/h1_AllNHits");
+  h1_AllNHits = (TH1F*)fin_numu->Get("NNInputVariables/h1_AllNHits");
   h1_AllNHits -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   std::cout << "numu_x_numu #tag-n = " << h1_AllNHits->Integral() << std::endl;
 
-  TLegend* legend = new TLegend(0.35, 0.4, 0.89, 0.89);
+  TLegend* legend = new TLegend(0.45, 0.4, 0.89, 0.89);
   legend -> SetTextSize(0.06);
-  if (!NTagapply) legend -> AddEntry((TObject*)0,"#kern[-0.23]{Pre-NN (Run11 FHC)}","");
-  else legend -> AddEntry((TObject*)0,"#kern[-0.23]{Post-NN (Run11 FHC)}","");
+  if (!NTagapply) legend -> AddEntry((TObject*)0,"#kern[-0.23]{Pre-NN (Run11)}","");
+  else legend -> AddEntry((TObject*)0,"#kern[-0.23]{Post-NN (Run11)}","");
   legend -> AddEntry(h1_NNvar_Gd[0], "Gd-n signal", "L");
   legend -> AddEntry(h1_NNvar_H[0], "H-n signal", "L");
   legend -> AddEntry(h1_NNvar_Decaye[0], "Decay-e", "L");
@@ -214,39 +291,66 @@ void mergeNNinputshape(bool beammode) {
   TCanvas* c1 = new TCanvas("c1", "c1", 1200, 1000);
   c1 -> Divide(4,3);
   for (int i=0; i<12; i++) {
-    c1 -> cd(i+1);
+    c1 -> cd(i+1) -> SetGrid();
     //gPad->SetLogy();
     TString varname = GetNNVarAxisName(i);
-    h1_NNvar_Gd[i] -> GetXaxis()->SetTitle(varname);
-    h1_NNvar_Gd[i] -> GetYaxis()->SetTitle("Area Normalized");
-    h1_NNvar_H[i] -> GetXaxis()->SetTitle(varname);
-    h1_NNvar_H[i] -> GetYaxis()->SetTitle("Area Normalized");
-    h1_NNvar_Decaye[i] -> GetXaxis()->SetTitle(varname);
-    h1_NNvar_Decaye[i] -> GetYaxis()->SetTitle("Area Normalized");
+    h1_NNvar_Gd[i]       -> GetXaxis()->SetTitle(varname);
+    h1_NNvar_Gd[i]       -> GetYaxis()->SetTitle("Area Normalized");
+    h1_NNvar_H[i]        -> GetXaxis()->SetTitle(varname);
+    h1_NNvar_H[i]        -> GetYaxis()->SetTitle("Area Normalized");
+    h1_NNvar_Decaye[i]   -> GetXaxis()->SetTitle(varname);
+    h1_NNvar_Decaye[i]   -> GetYaxis()->SetTitle("Area Normalized");
     h1_NNvar_AccNoise[i] -> GetXaxis()->SetTitle(varname);
     h1_NNvar_AccNoise[i] -> GetYaxis()->SetTitle("Area Normalized");
-#if 0
+    h1_NNvar_AccNoise[i] -> SetTitleOffset(1.5, "Y");
+    h1_NNvar_Gd[i]       -> SetTitleOffset(1.5, "Y");
+    h1_NNvar_H[i]        -> SetTitleOffset(1.5, "Y");
+    h1_NNvar_Decaye[i]   -> SetTitleOffset(1.5, "Y");
+
+    h1_NNvar_AccNoise[i] -> GetXaxis()->SetTitleSize(0.05);
+    h1_NNvar_Gd[i]       -> GetXaxis()->SetTitleSize(0.05);
+    h1_NNvar_H[i]        -> GetXaxis()->SetTitleSize(0.05);
+    h1_NNvar_Decaye[i]   -> GetXaxis()->SetTitleSize(0.05);
+
+    ((TGaxis*)h1_NNvar_AccNoise[i] ->GetYaxis())->SetMaxDigits(3);
+    ((TGaxis*)h1_NNvar_Gd[i]       ->GetYaxis())->SetMaxDigits(3);
+    ((TGaxis*)h1_NNvar_H[i]        ->GetYaxis())->SetMaxDigits(3);
+    ((TGaxis*)h1_NNvar_Decaye[i]   ->GetYaxis())->SetMaxDigits(3);
+
+#if !NTagapply
     if (i==0 || i==1 || i==3 || i==4) {
       h1_NNvar_AccNoise[i] -> Draw();
       h1_NNvar_H[i]        -> Draw("SAME");
       h1_NNvar_Gd[i]       -> Draw("SAME");
       h1_NNvar_Decaye[i]   -> Draw("SAME");
     }
-#endif
-#if 1
-    if (i==0 || i==1 || i==3 || i==4) {
-      h1_NNvar_H[i]        -> Draw("SAME");
+    else if (i==5 || i>=7) {
+      h1_NNvar_Gd[i]       -> Draw();
       h1_NNvar_AccNoise[i] -> Draw("SAME");
-      h1_NNvar_Gd[i]       -> Draw("SAME");
+      h1_NNvar_H[i]        -> Draw("SAME");
       h1_NNvar_Decaye[i]   -> Draw("SAME");
     }
-#endif
     else {
       h1_NNvar_Decaye[i]   -> Draw();
       h1_NNvar_Gd[i]       -> Draw("SAME");
       h1_NNvar_H[i]        -> Draw("SAME");
       h1_NNvar_AccNoise[i] -> Draw("SAME");
     }
+#endif
+#if NTagapply
+    if (i==0 || i==1 || i==3 || i==4) {
+      h1_NNvar_H[i]        -> Draw("SAME");
+      h1_NNvar_AccNoise[i] -> Draw("SAME");
+      h1_NNvar_Gd[i]       -> Draw("SAME");
+      h1_NNvar_Decaye[i]   -> Draw("SAME");
+    }
+    else {
+      h1_NNvar_Decaye[i]   -> Draw();
+      h1_NNvar_Gd[i]       -> Draw("SAME");
+      h1_NNvar_H[i]        -> Draw("SAME");
+      h1_NNvar_AccNoise[i] -> Draw("SAME");
+    }
+#endif
     if (i==11) legend -> Draw();
   }
 

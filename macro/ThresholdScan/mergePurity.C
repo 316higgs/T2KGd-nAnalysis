@@ -12,7 +12,7 @@
 
 #define CUTSTEP 21
 
-void mergeNoiseRate(bool beammode) {
+void mergePurity(bool beammode) {
   
   int fhcflag = 1;
   int rhcflag = 0;
@@ -78,27 +78,27 @@ void mergeNoiseRate(bool beammode) {
 
   TH1F* h1_MisTagDcye_numu     = (TH1F*)fin_numu->Get("NTagAnalysis/h1_MisTagDcye");
   TH1F* h1_MisTagAccNoise_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_MisTagAccNoise");
-  TH1F* h1_NuEvtC6_numu        = (TH1F*)fin_numu->Get("NTagAnalysis/h1_NuEvtC6");
+  TH1F* h1_TagTrueN_numu       = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagTrueN");
 
   TH1F* h1_MisTagDcye_nuesig     = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_MisTagDcye");
   TH1F* h1_MisTagAccNoise_nuesig = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_MisTagAccNoise");
-  TH1F* h1_NuEvtC6_nuesig        = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_NuEvtC6");
+  TH1F* h1_TagTrueN_nuesig       = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_TagTrueN");
 
   TH1F* h1_MisTagDcye_numubar     = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_MisTagDcye");
   TH1F* h1_MisTagAccNoise_numubar = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_MisTagAccNoise");
-  TH1F* h1_NuEvtC6_numubar        = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_NuEvtC6");
+  TH1F* h1_TagTrueN_numubar       = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TagTrueN");
 
   TH1F* h1_MisTagDcye_nuebarsig     = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_MisTagDcye");
   TH1F* h1_MisTagAccNoise_nuebarsig = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_MisTagAccNoise");
-  TH1F* h1_NuEvtC6_nuebarsig        = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_NuEvtC6");
+  TH1F* h1_TagTrueN_nuebarsig       = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_TagTrueN");
 
   TH1F* h1_MisTagDcye_nuebkg     = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_MisTagDcye");
   TH1F* h1_MisTagAccNoise_nuebkg = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_MisTagAccNoise");
-  TH1F* h1_NuEvtC6_nuebkg        = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_NuEvtC6");
+  TH1F* h1_TagTrueN_nuebkg       = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_TagTrueN");
 
   TH1F* h1_MisTagDcye_nuebarbkg     = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_MisTagDcye");
   TH1F* h1_MisTagAccNoise_nuebarbkg = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_MisTagAccNoise");
-  TH1F* h1_NuEvtC6_nuebarbkg        = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_NuEvtC6");
+  TH1F* h1_TagTrueN_nuebarbkg       = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_TagTrueN");
 
 
   /////  Normalizations  //////
@@ -117,38 +117,48 @@ void mergeNoiseRate(bool beammode) {
   h1_MisTagAccNoise_nuebkg     -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
   h1_MisTagAccNoise_nuebarbkg  -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
 
-  h1_NuEvtC6_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_NuEvtC6_nuesig    -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
-  h1_NuEvtC6_numubar   -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_NuEvtC6_nuebarsig -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
-  h1_NuEvtC6_nuebkg    -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
-  h1_NuEvtC6_nuebarbkg -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
+  h1_TagTrueN_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  h1_TagTrueN_nuesig    -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+  h1_TagTrueN_numubar   -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  h1_TagTrueN_nuebarsig -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+  h1_TagTrueN_nuebkg    -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+  h1_TagTrueN_nuebarbkg -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
 #endif
 
   
   /////  Seletced 1Rmu events  /////
-  TH1F* h1_NuEvtC6_merge = new TH1F("h1_NuEvtC6_merge", "", 20, 0, 1);
-  h1_NuEvtC6_merge    -> Add(h1_NuEvtC6_numu);
-  h1_NuEvtC6_merge    -> Add(h1_NuEvtC6_nuesig);
-  h1_NuEvtC6_merge    -> Add(h1_NuEvtC6_numubar);
-  h1_NuEvtC6_merge    -> Add(h1_NuEvtC6_nuebarsig);
-  h1_NuEvtC6_merge    -> Add(h1_NuEvtC6_nuebkg);
-  h1_NuEvtC6_merge    -> Add(h1_NuEvtC6_nuebarbkg);
+  TH1F* h1_Purity_merge = new TH1F("h1_TagTrueN_merge", "", 20, 0, 1);
+  h1_Purity_merge -> Add(h1_TagTrueN_numu);
+  h1_Purity_merge -> Add(h1_TagTrueN_nuesig);
+  h1_Purity_merge -> Add(h1_TagTrueN_numubar);
+  h1_Purity_merge -> Add(h1_TagTrueN_nuebarsig);
+  h1_Purity_merge -> Add(h1_TagTrueN_nuebkg);
+  h1_Purity_merge -> Add(h1_TagTrueN_nuebarbkg);
+  h1_Purity_merge -> SetLineColor(kPink-5);
+  h1_Purity_merge -> SetFillColor(kPink-2);
+  h1_Purity_merge -> SetFillStyle(3004);
+  h1_Purity_merge -> SetLineWidth(2);
+  h1_Purity_merge -> SetStats(0);
 
-  TH1F* h1_NoiseRate_merge = new TH1F("h1_NoiseRate_merge", "", 20, 0, 1);
-  h1_NoiseRate_merge -> SetLineColor(kViolet+2);
-  h1_NoiseRate_merge -> SetFillColor(kViolet+6);
-  h1_NoiseRate_merge -> SetFillStyle(3004);
-  h1_NoiseRate_merge -> SetLineWidth(2);
-  h1_NoiseRate_merge -> SetStats(0);
+  TH1F* h1_Nlike_merge = new TH1F("h1_Nlike_merge", "", 20, 0, 1);
 
 
-  float correctionfactor = (535. - 3.)/(535. - 18.);
-  std::cout << "1Rmu events: " << h1_NuEvtC6_merge->GetBinContent(1) << std::endl;
-  std::cout << "Correction factor: " << correctionfactor << std::endl;
   for (int ith=0; ith<CUTSTEP; ith++) {
     float TMVATH = 0.05*ith;
     std::cout << "[### " << TMVATH << " ###] " << std::endl;
+    std::cout << "  [numu    ->  numu  ]Decay-e: " << h1_TagTrueN_numu->GetBinContent(ith+1) << std::endl;
+    std::cout << "  [numu    ->  nue   ]Decay-e: " << h1_TagTrueN_nuesig->GetBinContent(ith+1) << std::endl;
+    std::cout << "  [numubar -> numubar]Decay-e: " << h1_TagTrueN_numubar->GetBinContent(ith+1) << std::endl;
+    std::cout << "  [numubar -> nuebar ]Decay-e: " << h1_TagTrueN_nuebarsig->GetBinContent(ith+1) << std::endl;
+    std::cout << "  [nue     -> nue    ]Decay-e: " << h1_TagTrueN_nuebkg->GetBinContent(ith+1) << std::endl;
+    std::cout << "  [nuebar  -> nuebar ]Decay-e: " << h1_TagTrueN_nuebarbkg->GetBinContent(ith+1) << std::endl;
+    float TagTrueN_merge = h1_TagTrueN_numu->GetBinContent(ith+1) +
+                           h1_TagTrueN_nuesig->GetBinContent(ith+1) +
+                           h1_TagTrueN_numubar->GetBinContent(ith+1) +
+                           h1_TagTrueN_nuebarsig->GetBinContent(ith+1) +
+                           h1_TagTrueN_nuebkg->GetBinContent(ith+1) +
+                           h1_TagTrueN_nuebarbkg->GetBinContent(ith+1);
+    std::cout << "  Total neutrons: " << TagTrueN_merge << std::endl;
     std::cout << "  [numu    ->  numu  ]Decay-e: " << h1_MisTagDcye_numu->GetBinContent(ith+1) << std::endl;
     std::cout << "  [numu    ->  nue   ]Decay-e: " << h1_MisTagDcye_nuesig->GetBinContent(ith+1) << std::endl;
     std::cout << "  [numubar -> numubar]Decay-e: " << h1_MisTagDcye_numubar->GetBinContent(ith+1) << std::endl;
@@ -176,12 +186,13 @@ void mergeNoiseRate(bool beammode) {
                                  h1_MisTagAccNoise_nuebkg->GetBinContent(ith+1) +
                                  h1_MisTagAccNoise_nuebarbkg->GetBinContent(ith+1);
     std::cout << "  Total Acc.Noise: " << MisTagAccNoise_merge << std::endl;
-    std::cout << "  Total Mis-tagged noise: " << MisTagDcye_merge + MisTagAccNoise_merge*correctionfactor << std::endl;
-    float NoiseRate_merge = ( MisTagDcye_merge + MisTagAccNoise_merge*correctionfactor )/(h1_NuEvtC6_merge->GetBinContent(1));
-    std::cout << "  Noise Rate: " << NoiseRate_merge*100. << " %" << std::endl;
+    float Nlike_merge = TagTrueN_merge + MisTagDcye_merge + MisTagAccNoise_merge;
+    std::cout << "  Total n-like: " << Nlike_merge << std::endl;
+    std::cout << "  Purity: " << (h1_Purity_merge->GetBinContent(ith+1)/Nlike_merge)*100. << " %" << std::endl;
 
-    h1_NoiseRate_merge -> SetBinContent(ith+1, NoiseRate_merge);
+    h1_Nlike_merge -> SetBinContent(ith+1, Nlike_merge);
   }
+  h1_Purity_merge -> Divide(h1_Nlike_merge);
 
 
 #if 0
@@ -234,19 +245,19 @@ void mergeNoiseRate(bool beammode) {
 #if 1
   TCanvas* c = new TCanvas("c", "c", 700, 700);
   c -> SetGrid();
-  h1_NoiseRate_merge -> Draw();
-  h1_NoiseRate_merge -> SetMinimum(0.);
-  h1_NoiseRate_merge -> SetMaximum(1.);
-  h1_NoiseRate_merge ->GetYaxis()->SetTitleSize(0.038);
-  h1_NoiseRate_merge ->GetYaxis()->SetTitleOffset(1.2);
-  //h1_NoiseRate_merge ->GetYaxis()->SetLabelSize(0.04);
-  h1_NoiseRate_merge ->GetYaxis()->SetTitle("Mis-tagged Noise Rate");
-  h1_NoiseRate_merge ->GetYaxis()->SetTitleSize(0.04);
-  h1_NoiseRate_merge ->GetXaxis()->SetTitleSize(0.04);
-  h1_NoiseRate_merge ->GetXaxis()->SetTitle("n-likelihood");
-  h1_NoiseRate_merge -> Draw("histo");
-  //h1_NoiseRate_merge -> Draw("SAME");
-  //h1_NoiseRate_merge -> Draw("SAME");
+  h1_Purity_merge -> Draw();
+  h1_Purity_merge -> SetMinimum(0.);
+  h1_Purity_merge -> SetMaximum(1.);
+  h1_Purity_merge ->GetYaxis()->SetTitleSize(0.038);
+  h1_Purity_merge ->GetYaxis()->SetTitleOffset(1.2);
+  //h1_Purity_merge ->GetYaxis()->SetLabelSize(0.04);
+  h1_Purity_merge ->GetYaxis()->SetTitle("Purity");
+  h1_Purity_merge ->GetYaxis()->SetTitleSize(0.04);
+  h1_Purity_merge ->GetXaxis()->SetTitleSize(0.04);
+  h1_Purity_merge ->GetXaxis()->SetTitle("n-likelihood");
+  h1_Purity_merge -> Draw("histo");
+  //h1_Purity_merge -> Draw("SAME");
+  //h1_Purity_merge -> Draw("SAME");
 
   float xMinPos = 1; // x-minimum where you want to set
   float xMaxPos = 1; // x-maximum where you want to set
@@ -261,13 +272,13 @@ void mergeNoiseRate(bool beammode) {
   //axis -> SetLabelSize(0.035);
   axis -> Draw();
 
-  TLatex* text1 = new TLatex(0.35, 0.77, "T2K FHC Run11 (0.01% Gd)");
+  TLatex* text1 = new TLatex(0.35, 0.35, "T2K FHC Run11 (0.01% Gd)");
   text1 -> SetNDC(1);
   text1 -> SetTextSize(0.045);
-  TLatex* text2 = new TLatex(0.38, 0.72, "-1R #mu sample");
+  TLatex* text2 = new TLatex(0.38, 0.3, "-1R #mu sample");
   text2 -> SetNDC(1);
   text2 -> SetTextSize(0.04);
-  TLatex* text3 = new TLatex(0.38, 0.67, "-Gd(n,#gamma)+p(n,#gamma)");
+  TLatex* text3 = new TLatex(0.38, 0.25, "-Gd(n,#gamma)+p(n,#gamma)");
   text3 -> SetNDC(1);
   text3 -> SetTextSize(0.04);
   text1 -> Draw();

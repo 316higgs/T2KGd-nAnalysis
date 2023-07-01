@@ -9,5 +9,5 @@
 BEAMMODE=true
 #BEAMMODE=false
 
-#root -l 'SelectedEvents.C('${BEAMMODE}')'
-root -l 'SelectionVar.C('${BEAMMODE}')'
+root -l 'SelectedEvents.C('${BEAMMODE}')'
+#root -l 'SelectionVar.C('${BEAMMODE}')'

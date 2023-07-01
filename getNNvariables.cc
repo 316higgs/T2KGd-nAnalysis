@@ -412,7 +412,7 @@ int main(int argc, char **argv) {
           }
 
           //Pre-NN
-#if 0
+#if 1
           if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
           if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
           if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar, OscProb);
@@ -420,7 +420,7 @@ int main(int argc, char **argv) {
 #endif
 
           //Post-NN
-#if 1
+#if 0
           //bool etagboxin = false;
           //if (NHits->at(jentry)>50 && FitT->at(jentry)<20) etagboxin = true;
           if ( FitT->at(jentry) < 1.5 ) etagboxin = true;
