@@ -11,3 +11,4 @@ BEAMMODE=true
 
 root -l 'SimpleNeutron.C('${BEAMMODE}')'
 #root -l 'GenNeutron.C('${BEAMMODE}')'
+#root -l 'CaptureTime.C('${BEAMMODE}')'

@@ -29,6 +29,13 @@
   NC      (osc.): 14017
   ------------------------------------------
   Total   (osc.): 73700
+ 
+  CCQE    (No osc.): 16003
+  CC-2p2h (No osc.): 4637
+  CC-Other(No osc.): 39970
+  NC      (No osc.): 14017
+  ------------------------------------------
+  Total   (No osc.): 74627
 [Neutrino] C2: 24333 -> 24333
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 13343.4
@@ -52,6 +59,13 @@
   NC      (osc.): 2181
   ------------------------------------------
   Total   (osc.): 33776.1
+ 
+  CCQE    (No osc.): 13952
+  CC-2p2h (No osc.): 4158
+  CC-Other(No osc.): 14137
+  NC      (No osc.): 2181
+  ------------------------------------------
+  Total   (No osc.): 34428
 [Neutrino] C3: 692 -> 692
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 6.8388
@@ -75,6 +89,13 @@
   NC      (osc.): 1067
   ------------------------------------------
   Total   (osc.): 1076.8
+ 
+  CCQE    (No osc.): 6
+  CC-2p2h (No osc.): 4
+  CC-Other(No osc.): 0
+  NC      (No osc.): 1067
+  ------------------------------------------
+  Total   (No osc.): 1077
 [Neutrino] C4: 688 -> 688
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 6.8388
@@ -98,6 +119,13 @@
   NC      (osc.): 1064
   ------------------------------------------
   Total   (osc.): 1073.8
+ 
+  CCQE    (No osc.): 6
+  CC-2p2h (No osc.): 4
+  CC-Other(No osc.): 0
+  NC      (No osc.): 1064
+  ------------------------------------------
+  Total   (No osc.): 1074
 [Neutrino] C5: 342 -> 669
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 6.8388
@@ -121,6 +149,13 @@
   NC      (osc.): 1002
   ------------------------------------------
   Total   (osc.): 1011.8
+ 
+  CCQE    (No osc.): 6
+  CC-2p2h (No osc.): 4
+  CC-Other(No osc.): 0
+  NC      (No osc.): 1002
+  ------------------------------------------
+  Total   (No osc.): 1012
 [Neutrino] C6: 153 -> 289
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 6.8388
@@ -144,6 +179,13 @@
   NC      (osc.): 404
   ------------------------------------------
   Total   (osc.): 413.803
+ 
+  CCQE    (No osc.): 6
+  CC-2p2h (No osc.): 4
+  CC-Other(No osc.): 0
+  NC      (No osc.): 404
+  ------------------------------------------
+  Total   (No osc.): 414
 --- Box cut performance ---
  0 < dt[usec] < 10, 50 < N50 < 400
  All truth decay-e                : 333

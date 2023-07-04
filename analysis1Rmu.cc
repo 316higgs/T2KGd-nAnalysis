@@ -386,7 +386,7 @@ int main(int argc, char **argv) {
       float TruePrmVtx[3] = {0., 0., 0.,};
       neuosc.GetTruePrmVtx(numu, TruePrmVtx);
       ntagana.TrueNCapVtxProfile(Type, tagvx, tagvy, tagvz);
-      ntagana.GetTrueNCapTime(t, Type);
+      ntagana.GetTrueNCapTime(t, Type, E);
 
       //Count # of truth decay-e per event
       int NumDcyE = 0;
@@ -912,8 +912,15 @@ int main(int argc, char **argv) {
       resultfile << "  NC      (osc.): " << SelectedNCTagN[i]      << std::endl;
       resultfile << "  ------------------------------------------"      << std::endl;
       resultfile << "  Total   (osc.): " << SelectedCCQETagN[i]+SelectedCC2p2hTagN[i]+SelectedCCnonQETagN[i]+SelectedNCTagN[i] << std::endl;
+      resultfile << " " << std::endl;
+      resultfile << "  CCQE    (No osc.): " << SelectedNoOscCCQETagN[i]    << std::endl;
+      resultfile << "  CC-2p2h (No osc.): " << SelectedNoOscCC2p2hTagN[i]  << std::endl;
+      resultfile << "  CC-Other(No osc.): " << SelectedNoOscCCnonQETagN[i] << std::endl;
+      resultfile << "  NC      (No osc.): " << SelectedNoOscNCTagN[i]      << std::endl;
+      resultfile << "  ------------------------------------------"      << std::endl;
+      resultfile << "  Total   (No osc.): " << SelectedNoOscCCQETagN[i]+SelectedNoOscCC2p2hTagN[i]+SelectedNoOscCCnonQETagN[i]+SelectedNoOscNCTagN[i] << std::endl;
     }
-    
+ 
     resultfile << "--- Box cut performance ---" << std::endl;
     resultfile << " 0 < dt[usec] < " << dtMax << ", " << N50Min << " < N50 < " << N50Max << std::endl;
     resultfile << " All truth decay-e                : " << AllTrueDcye   << std::endl;

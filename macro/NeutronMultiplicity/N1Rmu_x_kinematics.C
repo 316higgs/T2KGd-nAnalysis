@@ -23,9 +23,18 @@ void N1Rmu_x_kinematics(bool beammode) {
 
   //FHC
 #if fhcflag
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronMultiplicity.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronMultiplicity.root");
-  TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
+  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronMultiplicity.root");
+  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronMultiplicity.root");
+  //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
+
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.Nmult.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.NNoptnewGdMC.Nmult.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.Nmult.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.Nmult.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.NNoptnewGdMC.Nmult.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.Nmult.root");
+
+  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
   //RHC
@@ -35,21 +44,44 @@ void N1Rmu_x_kinematics(bool beammode) {
   TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
 #endif
 
-  //Normalization
+  // Normalization factors
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
+  TH1F* h1_skrate_numu_x_nue        = (TH1F*)fin_skrate->Get("skrate_numu_x_nue");
   TH1F* h1_skrate_numubar_x_numubar = (TH1F*)fin_skrate->Get("skrate_numu_bar_x_numu_bar");
-  //Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
-  //Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
+  TH1F* h1_skrate_numubar_x_nuebar  = (TH1F*)fin_skrate->Get("skrate_numu_bar_x_nue_bar");
+  TH1F* h1_skrate_nue_x_nue         = (TH1F*)fin_skrate->Get("skrate_nue_x_nue");
+  TH1F* h1_skrate_nuebar_x_nuebar   = (TH1F*)fin_skrate->Get("skrate_nue_bar_x_nue_bar");
   Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_numu_x_nue          = h1_skrate_numu_x_nue->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
-  Double_t GenN_numu_x_numu         = 190292;
-  Double_t GenN_numubar_x_numubar   = 190909;
-  std::cout << "ExpN_numu_x_numu = " << ExpN_numu_x_numu << std::endl;
-  std::cout << "GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
-  std::cout << "ExpN_numubar_x_numubar = " << ExpN_numubar_x_numubar << std::endl;
-  std::cout << "GenN_numubar_x_numubar = " << GenN_numubar_x_numubar << std::endl;
-  std::cout << "Normalization factor for numu_x_numu      : " << (ExpN_numu_x_numu)/(GenN_numu_x_numu) << std::endl;
-  std::cout << "Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
+  Double_t ExpN_numubar_x_nuebar    = h1_skrate_numubar_x_nuebar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_nue_x_nue           = h1_skrate_nue_x_nue->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t ExpN_nuebar_x_nuebar     = h1_skrate_nuebar_x_nuebar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+  Double_t GenN_numu_x_numu       = 63622;
+  Double_t GenN_numu_x_nue        = 63538;
+  Double_t GenN_numubar_x_numubar = 63444;
+  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_nue_x_nue         = 63423;
+  Double_t GenN_nuebar_x_nuebar   = 63652;
+  std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
+  std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
+  std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
+  std::cout << "[numu  -> numu ] Normalization factor for numu_x_numu      : " << (ExpN_numu_x_numu)/(GenN_numu_x_numu) << std::endl;
+  std::cout << "[numu  -> nue  ] ExpN_numu_x_nue = " << h1_skrate_numu_x_nue->Integral() << std::endl;
+  std::cout << "[numu  -> nue  ] GenN_numu_x_nue = " << GenN_numu_x_nue << std::endl;
+  std::cout << "[numu  -> nue  ] Normalization factor for numu_x_nue       : " << (ExpN_numu_x_nue)/(GenN_numu_x_nue) << std::endl;
+  std::cout << "[numub -> numub] ExpN_numubar_x_numubar = " << h1_skrate_numubar_x_numubar->Integral() << std::endl;
+  std::cout << "[numub -> numub] GenN_numubar_x_numubar = " << GenN_numubar_x_numubar << std::endl;
+  std::cout << "[numub -> numub] Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
+  std::cout << "[numub -> nueb ] ExpN_numubar_x_nuebar = " << h1_skrate_numubar_x_nuebar->Integral() << std::endl;
+  std::cout << "[numub -> nueb ] GenN_numubar_x_nuebar = " << GenN_numubar_x_nuebar << std::endl;
+  std::cout << "[numub -> nueb ] Normalization factor for numubar_x_nuebar: " << (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) << std::endl;
+  std::cout << "[nue   -> nue  ] ExpN_nue_x_nue = " << h1_skrate_nue_x_nue->Integral() << std::endl;
+  std::cout << "[nue   -> nue  ] GenN_nue_x_nue = " << GenN_nue_x_nue << std::endl;
+  std::cout << "[nue   -> nue  ] Normalization factor for nue_x_nue: " << (ExpN_nue_x_nue)/(GenN_nue_x_nue) << std::endl;
+  std::cout << "[nueb  -> nueb ] ExpN_nuebar_x_nuebar = " << h1_skrate_nuebar_x_nuebar->Integral() << std::endl;
+  std::cout << "[nueb  -> nueb ] GenN_nuebar_x_nuebar = " << GenN_nuebar_x_nuebar << std::endl;
+  std::cout << "[nueb  -> nueb ] Normalization factor for nuebar_x_nuebar: " << (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) << std::endl;
 
 
   //TString KnmtcName = "Enu";
@@ -74,46 +106,145 @@ void N1Rmu_x_kinematics(bool beammode) {
   TH1F* h1_NC_numu      = (TH1F*)fin_numu->Get(FileNCName);
   h1_CCQE_numu -> SetStats(0);
 
+  TH1F* h1_CCQE_nuesig    = (TH1F*)fin_nuesig->Get(FileCCQEName);
+  TH1F* h1_CC2p2h_nuesig  = (TH1F*)fin_nuesig->Get(FileCC2p2hName);
+  TH1F* h1_CCOther_nuesig = (TH1F*)fin_nuesig->Get(FileCCOtherName);
+  TH1F* h1_NC_nuesig      = (TH1F*)fin_nuesig->Get(FileNCName);
+  h1_CCQE_nuesig -> SetStats(0);
+
   TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get(FileCCQEName);
   TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get(FileCC2p2hName);
   TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get(FileCCOtherName);
   TH1F* h1_NC_numubar      = (TH1F*)fin_numubar->Get(FileNCName);
   h1_CCQE_numubar -> SetStats(0);
 
+  TH1F* h1_CCQE_nuebarsig    = (TH1F*)fin_nuebarsig->Get(FileCCQEName);
+  TH1F* h1_CC2p2h_nuebarsig  = (TH1F*)fin_nuebarsig->Get(FileCC2p2hName);
+  TH1F* h1_CCOther_nuebarsig = (TH1F*)fin_nuebarsig->Get(FileCCOtherName);
+  TH1F* h1_NC_nuebarsig      = (TH1F*)fin_nuebarsig->Get(FileNCName);
+  h1_CCQE_nuebarsig -> SetStats(0);
+
+  TH1F* h1_CCQE_nuebkg    = (TH1F*)fin_nuebkg->Get(FileCCQEName);
+  TH1F* h1_CC2p2h_nuebkg  = (TH1F*)fin_nuebkg->Get(FileCC2p2hName);
+  TH1F* h1_CCOther_nuebkg = (TH1F*)fin_nuebkg->Get(FileCCOtherName);
+  TH1F* h1_NC_nuebkg      = (TH1F*)fin_nuebkg->Get(FileNCName);
+  h1_CCQE_nuebkg -> SetStats(0);
+
+  TH1F* h1_CCQE_nuebarbkg    = (TH1F*)fin_nuebarbkg->Get(FileCCQEName);
+  TH1F* h1_CC2p2h_nuebarbkg  = (TH1F*)fin_nuebarbkg->Get(FileCC2p2hName);
+  TH1F* h1_CCOther_nuebarbkg = (TH1F*)fin_nuebarbkg->Get(FileCCOtherName);
+  TH1F* h1_NC_nuebarbkg      = (TH1F*)fin_nuebarbkg->Get(FileNCName);
+  h1_CCQE_nuebarbkg -> SetStats(0);
+
   h1_CCQE_numu    -> SetLineColor(kAzure-1);
   h1_CC2p2h_numu  -> SetLineColor(kAzure-5);
   h1_CCOther_numu -> SetLineColor(kCyan-8);
   h1_NC_numu      -> SetLineColor(kSpring-9);
-
   h1_CCQE_numu    -> SetFillColor(kAzure-1);
   h1_CC2p2h_numu  -> SetFillColor(kAzure-5);
   h1_CCOther_numu -> SetFillColor(kCyan-8);
   h1_NC_numu      -> SetFillColor(kSpring-9);
 
+  h1_CCQE_nuesig    -> SetLineColor(kViolet-1);
+  h1_CC2p2h_nuesig  -> SetLineColor(kViolet-1);
+  h1_CCOther_nuesig -> SetLineColor(kViolet-1);
+  h1_NC_nuesig      -> SetLineColor(kSpring-9);
+  h1_CCQE_nuesig    -> SetFillColor(kViolet-1);
+  h1_CC2p2h_nuesig  -> SetFillColor(kViolet-1);
+  h1_CCOther_nuesig -> SetFillColor(kViolet-1);
+  h1_NC_nuesig      -> SetFillColor(kSpring-9);
+
   h1_CCQE_numubar    -> SetLineColor(kOrange+7);
   h1_CC2p2h_numubar  -> SetLineColor(kOrange+6);
   h1_CCOther_numubar -> SetLineColor(kOrange+0);
   h1_NC_numubar      -> SetLineColor(kSpring-9);
-
   h1_CCQE_numubar    -> SetFillColor(kOrange+7);
   h1_CC2p2h_numubar  -> SetFillColor(kOrange+6);
   h1_CCOther_numubar -> SetFillColor(kOrange+0);
   h1_NC_numubar      -> SetFillColor(kSpring-9);
 
-  h1_CCQE_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_CC2p2h_numu     -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_CCOther_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_NC_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  h1_CCQE_nuebarsig    -> SetLineColor(kViolet-1);
+  h1_CC2p2h_nuebarsig  -> SetLineColor(kViolet-1);
+  h1_CCOther_nuebarsig -> SetLineColor(kViolet-1);
+  h1_NC_nuebarsig      -> SetLineColor(kSpring-9);
+  h1_CCQE_nuebarsig    -> SetFillColor(kViolet-1);
+  h1_CC2p2h_nuebarsig  -> SetFillColor(kViolet-1);
+  h1_CCOther_nuebarsig -> SetFillColor(kViolet-1);
+  h1_NC_nuebarsig      -> SetFillColor(kSpring-9);
+
+  h1_CCQE_nuebkg    -> SetLineColor(kViolet-1);
+  h1_CC2p2h_nuebkg  -> SetLineColor(kViolet-1);
+  h1_CCOther_nuebkg -> SetLineColor(kViolet-1);
+  h1_NC_nuebkg      -> SetLineColor(kSpring-9);
+  h1_CCQE_nuebkg    -> SetFillColor(kViolet-1);
+  h1_CC2p2h_nuebkg  -> SetFillColor(kViolet-1);
+  h1_CCOther_nuebkg -> SetFillColor(kViolet-1);
+  h1_NC_nuebkg      -> SetFillColor(kSpring-9);
+
+  h1_CCQE_nuebarbkg    -> SetLineColor(kViolet-1);
+  h1_CC2p2h_nuebarbkg  -> SetLineColor(kViolet-1);
+  h1_CCOther_nuebarbkg -> SetLineColor(kViolet-1);
+  h1_NC_nuebarbkg      -> SetLineColor(kSpring-9);
+  h1_CCQE_nuebarbkg    -> SetFillColor(kViolet-1);
+  h1_CC2p2h_nuebarbkg  -> SetFillColor(kViolet-1);
+  h1_CCOther_nuebarbkg -> SetFillColor(kViolet-1);
+  h1_NC_nuebarbkg      -> SetFillColor(kSpring-9);
+
+
+  /////  Normalizations  //////
+#if 1
+  h1_CCQE_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  h1_CCQE_nuesig       -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+  h1_CCQE_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  h1_CCQE_nuebarsig    -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+  h1_CCQE_nuebkg       -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+  h1_CCQE_nuebarbkg    -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
+
+  h1_CC2p2h_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  h1_CC2p2h_nuesig     -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+  h1_CC2p2h_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  h1_CC2p2h_nuebarsig  -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+  h1_CC2p2h_nuebkg     -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+  h1_CC2p2h_nuebarbkg  -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
+
+  h1_CCOther_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  h1_CCOther_nuesig    -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+  h1_CCOther_numubar   -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  h1_CCOther_nuebarsig -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+  h1_CCOther_nuebkg    -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+  h1_CCOther_nuebarbkg -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
+
+  h1_NC_numu           -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  h1_NC_nuesig         -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+  h1_NC_numubar        -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  h1_NC_nuebarsig      -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+  h1_NC_nuebkg         -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+  h1_NC_nuebarbkg      -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
+#endif
 
 
   THStack* hs_merge = new THStack("hs_merge", "");
 #if fhcflag
+  hs_merge -> Add(h1_NC_nuebarbkg);
+  hs_merge -> Add(h1_NC_nuebkg);
+  hs_merge -> Add(h1_NC_nuebarsig);
   hs_merge -> Add(h1_NC_numubar);
+  hs_merge -> Add(h1_NC_nuesig);
   hs_merge -> Add(h1_NC_numu);
+
+  hs_merge -> Add(h1_CCOther_nuebarbkg);
+  hs_merge -> Add(h1_CC2p2h_nuebarbkg);
+  hs_merge -> Add(h1_CCQE_nuebarbkg);
+  hs_merge -> Add(h1_CCOther_nuebkg);
+  hs_merge -> Add(h1_CC2p2h_nuebkg);
+  hs_merge -> Add(h1_CCQE_nuebkg);
+  hs_merge -> Add(h1_CCOther_nuebarsig);
+  hs_merge -> Add(h1_CC2p2h_nuebarsig);
+  hs_merge -> Add(h1_CCQE_nuebarsig);
+  hs_merge -> Add(h1_CCOther_nuesig);
+  hs_merge -> Add(h1_CC2p2h_nuesig);
+  hs_merge -> Add(h1_CCQE_nuesig);
+
   hs_merge -> Add(h1_CCOther_numubar);
   hs_merge -> Add(h1_CCOther_numu);
   hs_merge -> Add(h1_CC2p2h_numubar);
@@ -136,18 +267,19 @@ void N1Rmu_x_kinematics(bool beammode) {
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
-  //hs_merge -> SetMaximum(10);
-  //hs_merge -> SetMaximum(14);
-  hs_merge -> SetMaximum(20);
+  if (KnmtcName=="Enu") hs_merge -> SetMaximum(10);
+  if (KnmtcName=="MuMom" || KnmtcName=="MuPt") hs_merge -> SetMaximum(14);
+  if (KnmtcName=="Q2") hs_merge -> SetMaximum(15);
+  if (KnmtcName=="MuAngle") hs_merge -> SetMaximum(20);
   hs_merge -> Draw();
   hs_merge ->GetYaxis()->SetTitleSize(0.038);
   hs_merge ->GetYaxis()->SetTitleOffset(1.1);
   hs_merge ->GetYaxis()->SetLabelSize(0.036);
-  //hs_merge->GetXaxis()->SetTitle("Reconstructed Neutrino Energy [GeV]");
-  //hs_merge->GetXaxis()->SetTitle("Reconstructed #mu Momentum [GeV]");
-  //hs_merge->GetXaxis()->SetTitle("Reconstructed #mu Transverse Momentum [GeV]");
-  //hs_merge->GetXaxis()->SetTitle("Reconstructed Q^{2}(CCQE Assumption) [GeV^{2}]");
-  hs_merge->GetXaxis()->SetTitle("Cosine of Angle b/w #mu and Beam Directions");
+  if (KnmtcName=="Enu")     hs_merge->GetXaxis()->SetTitle("Reconstructed Neutrino Energy [GeV]");
+  if (KnmtcName=="MuMom")   hs_merge->GetXaxis()->SetTitle("Reconstructed #mu Momentum [GeV]");
+  if (KnmtcName=="MuPt")    hs_merge->GetXaxis()->SetTitle("Reconstructed #mu Transverse Momentum [GeV]");
+  if (KnmtcName=="Q2")      hs_merge->GetXaxis()->SetTitle("Reconstructed Q^{2}(CCQE Assumption) [GeV^{2}]");
+  if (KnmtcName=="MuAngle") hs_merge->GetXaxis()->SetTitle("Cosine of Angle b/w #mu and Beam Directions");
   hs_merge->GetYaxis()->SetTitle("Number of Neutrino Events");
   hs_merge -> Draw();
   c1->RedrawAxis();
@@ -156,7 +288,7 @@ void N1Rmu_x_kinematics(bool beammode) {
   TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);
   legend1 -> SetTextSize(0.04);
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");
-  else legend1->AddEntry((TObject*)0,"#kern[-0.25]{RHC 1R #mu sample (0.01% Gd)}","");
+  //else legend1->AddEntry((TObject*)0,"#kern[-0.25]{RHC 1R #mu sample (0.01% Gd)}","");
   legend1 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CC2p2h_numu, "#nu_{#mu} CC-2p2h", "F");
@@ -164,6 +296,7 @@ void N1Rmu_x_kinematics(bool beammode) {
   legend1 -> AddEntry(h1_CCOther_numu, "#nu_{#mu} CC-other", "F");
   legend1 -> AddEntry(h1_CCOther_numubar, "#bar{#nu}_{#mu} CC-other", "F");
   //legend1 -> AddEntry(h1_CCOther_numubar, "#nu_{#mu}+#bar{#nu}_{#mu} CC non-QE", "F");
+  legend1 -> AddEntry(h1_CCQE_nuesig, "#nu_{e} / #bar#nu_{e} CC", "F");
   legend1 -> AddEntry(h1_NC_numu, "NC", "F");
   legend1->SetFillColor(0);
   legend1->Draw() ;

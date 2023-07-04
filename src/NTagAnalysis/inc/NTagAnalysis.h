@@ -161,38 +161,38 @@ double xnTraveldTbins[binnumber_n]  = {0., 100, 200, 300, 400, 500, 600};
 double xMuStp_NCapbins[binnumber_n] = {0., 100., 200., 400., 600., 1000., 1500.};
 double xnAnglebins[binnumber_n3]    = {-1., -0.6, -0.2, 0.2, 0.6, 1.};
 
-int N1Rmu_x_Enu[binnumber_nu]     = {0};
-int N1Rmu_x_MuMom[binnumber_mu]   = {0};
-int N1Rmu_x_MuPt[binnumber_mu]    = {0};
-int N1Rmu_x_Q2[binnumber_mu]      = {0};
-int N1Rmu_x_MuAngle[binnumber_mu] = {0};
+float N1Rmu_x_Enu[binnumber_nu]     = {0};
+float N1Rmu_x_MuMom[binnumber_mu]   = {0};
+float N1Rmu_x_MuPt[binnumber_mu]    = {0};
+float N1Rmu_x_Q2[binnumber_mu]      = {0};
+float N1Rmu_x_MuAngle[binnumber_mu] = {0};
 TH1F* h1_N1Rmu_x_Enu[4];    //CCQE, CC 2p2h, CC other, NC
 TH1F* h1_N1Rmu_x_MuMom[4];
 TH1F* h1_N1Rmu_x_MuPt[4];
 TH1F* h1_N1Rmu_x_Q2[4];
 TH1F* h1_N1Rmu_x_MuAngle[4];
 
-int TrueN_x_nTraveld[binnumber_n]   = {0};  //n-related kinematics: neutron flight distance
-int TrueN_x_nTraveldL[binnumber_n2] = {0};  //n-related kinematics: longitudinal neutron flight distance
-int TrueN_x_nTraveldT[binnumber_n]  = {0};  //n-related kinematics: transverse neutron flight distance
-int TrueN_x_MuStp_NCap[binnumber_n] = {0};  //n-related kinematics: distance b/w muon stopping and neutron capture vertices
-int TrueN_x_nAngle[binnumber_n3]    = {0};  //n-related kinematics: cosince of angle b/w neutron motion and beam directions
+float TrueN_x_nTraveld[binnumber_n]   = {0};  //n-related kinematics: neutron flight distance
+float TrueN_x_nTraveldL[binnumber_n2] = {0};  //n-related kinematics: longitudinal neutron flight distance
+float TrueN_x_nTraveldT[binnumber_n]  = {0};  //n-related kinematics: transverse neutron flight distance
+float TrueN_x_MuStp_NCap[binnumber_n] = {0};  //n-related kinematics: distance b/w muon stopping and neutron capture vertices
+float TrueN_x_nAngle[binnumber_n3]    = {0};  //n-related kinematics: cosince of angle b/w neutron motion and beam directions
 TH1F* h1_TrueN_x_nTraveld[4];  //CCQE, CC 2p2h, CC other, NC
 TH1F* h1_TrueN_x_nTraveldL[4];
 TH1F* h1_TrueN_x_nTraveldT[4];
 TH1F* h1_TrueN_x_MuStp_NCap[4];
 TH1F* h1_TrueN_x_nAngle[4];
 
-int TaggedN_x_Enu[binnumber_nu]       = {0};  //prompt-related kinematics: neutrino energy
-int TaggedN_x_MuMom[binnumber_mu]     = {0};  //prompt-related kinematics: muon momentum
-int TaggedN_x_MuPt[binnumber_mu]      = {0};  //prompt-related kinematics: muon transverse momentum
-int TaggedN_x_Q2[binnumber_mu]        = {0};  //prompt-related kinematics: Q2 (CCQE assumption)
-int TaggedN_x_MuAngle[binnumber_mu]   = {0};  //prompt-related kinematics: cosine of angle b/w muon motion and beam directions
-int TaggedN_x_nTraveld[binnumber_n]   = {0};  //n-related kinematics: neutron flight distance
-int TaggedN_x_nTraveldL[binnumber_n2] = {0};  //n-related kinematics: longitudinal neutron flight distance
-int TaggedN_x_nTraveldT[binnumber_n]  = {0};  //n-related kinematics: transverse neutron flight distance
-int TaggedN_x_MuStp_NCap[binnumber_n] = {0};  //n-related kinematics: distance b/w muon stopping and neutron capture vertices
-int TaggedN_x_nAngle[binnumber_n3]    = {0};  //n-related kinematics: cosince of angle b/w neutron motion and beam directions
+float TaggedN_x_Enu[binnumber_nu]       = {0};  //prompt-related kinematics: neutrino energy
+float TaggedN_x_MuMom[binnumber_mu]     = {0};  //prompt-related kinematics: muon momentum
+float TaggedN_x_MuPt[binnumber_mu]      = {0};  //prompt-related kinematics: muon transverse momentum
+float TaggedN_x_Q2[binnumber_mu]        = {0};  //prompt-related kinematics: Q2 (CCQE assumption)
+float TaggedN_x_MuAngle[binnumber_mu]   = {0};  //prompt-related kinematics: cosine of angle b/w muon motion and beam directions
+float TaggedN_x_nTraveld[binnumber_n]   = {0};  //n-related kinematics: neutron flight distance
+float TaggedN_x_nTraveldL[binnumber_n2] = {0};  //n-related kinematics: longitudinal neutron flight distance
+float TaggedN_x_nTraveldT[binnumber_n]  = {0};  //n-related kinematics: transverse neutron flight distance
+float TaggedN_x_MuStp_NCap[binnumber_n] = {0};  //n-related kinematics: distance b/w muon stopping and neutron capture vertices
+float TaggedN_x_nAngle[binnumber_n3]    = {0};  //n-related kinematics: cosince of angle b/w neutron motion and beam directions
 TH1F* h1_TaggedN_x_Enu[5];  //CCQE, CC 2p2h, CC other, NC, noise
 TH1F* h1_TaggedN_x_MuMom[5];
 TH1F* h1_TaggedN_x_MuPt[5];
@@ -204,11 +204,11 @@ TH1F* h1_TaggedN_x_nTraveldT[5];
 TH1F* h1_TaggedN_x_MuStp_NCap[5];
 TH1F* h1_TaggedN_x_nAngle[5];
 
-int TrueN_x_Enu[binnumber_nu]     = {0};
-int TrueN_x_MuMom[binnumber_nu]   = {0};
-int TrueN_x_MuPt[binnumber_nu]    = {0};
-int TrueN_x_Q2[binnumber_nu]      = {0};
-int TrueN_x_MuAngle[binnumber_nu] = {0};
+float TrueN_x_Enu[binnumber_nu]     = {0};
+float TrueN_x_MuMom[binnumber_nu]   = {0};
+float TrueN_x_MuPt[binnumber_nu]    = {0};
+float TrueN_x_Q2[binnumber_nu]      = {0};
+float TrueN_x_MuAngle[binnumber_nu] = {0};
 TH1F* h1_TrueN_x_Enu[4];
 TH1F* h1_TrueN_x_MuMom[4];
 TH1F* h1_TrueN_x_MuPt[4];
@@ -548,13 +548,13 @@ class NTagAnalysis {
                             bool etagmode, std::vector<float> *FitT, std::vector<float> *N50, std::vector<float> *Label, std::vector<float> *TagOut, 
                             float TMVAThreshold, std::vector<float> *dvx, std::vector<float> *dvy, std::vector<float> *dvz);
 
-    void GetTrueNCapTime(std::vector<float> *t, std::vector<int> *Type);
+    void GetTrueNCapTime(std::vector<float> *t, std::vector<int> *Type, std::vector<float> *E);
     
-    void N1Rmu_x_kinematics(CC0PiNumu* numu, float knmtcs, double* xbins, int* N1Rmu_x_knmtcs, TH1F** h1, int bintype);
-    void TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int TaggedNoise, float knmtcs, double* xbins, int* TaggedN_x_knmtcs, TH1F** h1, int bintype);
-    void TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, std::vector<float> *t, float WinMin, float knmtcs, double* xbins, int* TrueN_x_knmtcs, TH1F** h1, int bintype);
-    void TrueN_x_Neutronkinematics(CC0PiNumu* numu, float knmtcs, double* xbins, int* TaggedN_x_knmtcs, TH1F** h1, int bintype);
-    void TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<float> *Label, UInt_t ican, float knmtcs, double* xbins, int* TaggedN_x_knmtcs, TH1F** h1, int bintype);
+    void N1Rmu_x_kinematics(CC0PiNumu* numu, float knmtcs, double* xbins, float* N1Rmu_x_knmtcs, TH1F** h1, int bintype);
+    void TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int TaggedNoise, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype);
+    void TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, std::vector<float> *t, float WinMin, float knmtcs, double* xbins, float* TrueN_x_knmtcs, TH1F** h1, int bintype);
+    void TrueN_x_Neutronkinematics(CC0PiNumu* numu, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype);
+    void TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<float> *Label, UInt_t ican, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype);
 
     void SetHistoFrame();
     void SetHistoFormat();

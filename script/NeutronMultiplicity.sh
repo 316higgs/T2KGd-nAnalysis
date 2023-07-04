@@ -13,6 +13,9 @@ NTAGDIR=/disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining
 NTAGDIR3=/disk03/usr8/sedi/Ntag/output/w.mccomb/sk6/NNtraining
 ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis
 
+DISK3=/disk03/usr8/sedi
+FITQUNVER=fiTQun_v4
+
 ######
 # 1st index: fiTQun input
 # 2nd index: NTag input
@@ -24,7 +27,7 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 # 8th index: decay-e-tagging ON/OFF
 
 ##### FHC numu -> numu Gd MC #####
-#<<COMMENTOUT
+<<COMMENTOUT
 ./NeutronMultiplicity.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.NeutronMultiplicity.root\
@@ -34,8 +37,36 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMU
+COMMENTOUT
+<<COMMENTOUT
+./NeutronMultiplicity.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
+                          ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.NNoptntag0026Gd.\*.root\
+                          ${ANALYSISSTAGE}/output/fhc/fhc.numu_x_numu.NNoptnewGdMC.Nmult.root\
+                          ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.NNoptneutrino.newGdMC.Nmult.txt\
+                          ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_numu.NNoptntag.newGdMC.Nmult.txt\
+                          -MCType Gd\
+                          -ETAG ON\
+                          -BEAMMODE FHC\
+                          -OSCCH NUMU
+COMMENTOUT
+
+####################################################################
+##### FHC numu -> nue Gd MC #####
+#<<COMMENTOUT
+#####  new Gd MC  ######
+./NeutronMultiplicity.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_nue.13a.fiTQun0026Gd.\*.root\
+                          ${DISK3}/Ntag/output/fhc/numu_x_nue/fhc.numu_x_nue.13a.NNoptntag0026Gd.\*.root\
+                          ${ANALYSISSTAGE}/output/fhc/fhc.numu_x_nue.NNoptnewGdMC.Nmult.root\
+                          ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_nue.NNoptneutrino.newGdMC.Nmult.txt\
+                          ${ANALYSISSTAGE}/result/fhc/fhc.numu_x_nue.NNoptntag.newGdMC.Nmult.txt\
+                          -MCType Gd\
+                          -ETAG ON\
+                          -BEAMMODE FHC\
+                          -OSCCH NUESIG
 #COMMENTOUT
 
+####################################################################
+##### FHC numubar -> numubar Gd MC #####
 #<<COMMENTOUT
 ./NeutronMultiplicity.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
@@ -47,3 +78,64 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
 #COMMENTOUT
+<<COMMENTOUT
+./NeutronMultiplicity.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_numubar.13a.fiTQun0026Gd.\*.root\
+                          ${DISK3}/Ntag/output/fhc/numubar_x_numubar/fhc.numubar_x_numubar.13a.NNoptntag0026Gd.\*.root\
+                          ${ANALYSISSTAGE}/output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.Nmult.root\
+                          ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_numubar.NNoptneutrino.newGdMC.Nmult.txt\
+                          ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_numubar.NNoptntag.newGdMC.Nmult.txt\
+                          -MCType Gd\
+                          -ETAG ON\
+                          -BEAMMODE FHC\
+                          -OSCCH NUMUBAR
+COMMENTOUT
+
+####################################################################
+##### FHC numubar -> nuebar Gd MC #####
+#<<COMMENTOUT
+#####  new Gd MC  ######
+./NeutronMultiplicity.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_nuebar.13a.fiTQun0026Gd.\*.root\
+                          ${DISK3}/Ntag/output/fhc/numubar_x_nuebar/fhc.numubar_x_nuebar.13a.NNoptntag0026Gd.\*.root\
+                          ${ANALYSISSTAGE}/output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.Nmult.root\
+                          ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_nuebar.NNoptneutrino.newGdMC.Nmult.txt\
+                          ${ANALYSISSTAGE}/result/fhc/fhc.numubar_x_nuebar.NNoptntag.newGdMC.Nmult.txt\
+                          -MCType Gd\
+                          -ETAG ON\
+                          -BEAMMODE FHC\
+                          -OSCCH NUEBARSIG
+#COMMENTOUT
+
+####################################################################
+##### FHC nue -> nue Gd MC #####
+#<<COMMENTOUT
+#####  new Gd MC  ######
+./NeutronMultiplicity.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.nue_x_nue.13a.fiTQun0026Gd.\*.root\
+                          ${DISK3}/Ntag/output/fhc/nue_x_nue/fhc.nue_x_nue.13a.NNoptntag0026Gd.\*.root\
+                          ${ANALYSISSTAGE}/output/fhc/fhc.nue_x_nue.NNoptnewGdMC.Nmult.root\
+                          ${ANALYSISSTAGE}/result/fhc/fhc.nue_x_nue.NNoptneutrino.newGdMC.Nmult.txt\
+                          ${ANALYSISSTAGE}/result/fhc/fhc.nue_x_nue.NNoptntag.newGdMC.Nmult.txt\
+                          -MCType Gd\
+                          -ETAG ON\
+                          -BEAMMODE FHC\
+                          -OSCCH NUE
+#COMMENTOUT
+
+####################################################################
+##### FHC nubaer -> nuebar Gd MC #####
+#<<COMMENTOUT
+#####  new Gd MC  ######
+./NeutronMultiplicity.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.nuebar_x_nuebar.13a.fiTQun0026Gd.\*.root\
+                          ${DISK3}/Ntag/output/fhc/nuebar_x_nuebar/fhc.nuebar_x_nuebar.13a.NNoptntag0026Gd.\*.root\
+                          ${ANALYSISSTAGE}/output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.Nmult.root\
+                          ${ANALYSISSTAGE}/result/fhc/fhc.nuebar_x_nuebar.NNoptneutrino.newGdMC.Nmult.txt\
+                          ${ANALYSISSTAGE}/result/fhc/fhc.nuebar_x_nuebar.NNoptntag.newGdMC.Nmult.txt\
+                          -MCType Gd\
+                          -ETAG ON\
+                          -BEAMMODE FHC\
+                          -OSCCH NUEBAR
+#COMMENTOUT
+
+
+
+
+

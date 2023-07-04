@@ -55,6 +55,11 @@ int main(int argc, char **argv) {
   //float thetamin = 0.8;
   float thetamax = 1.;
 
+  float dtMax  = 10.;
+  float N50Min = 50.;
+  float N50Max = 400.;
+  float nlikeThreshold = 0.65;
+
 
   //=========  fiTQun output (TTree: h1)  ============
   TChain *tchfQ = new TChain("h1");
@@ -117,7 +122,8 @@ int main(int argc, char **argv) {
 
 
   //=========  TTree event variables  ============
-  float NTrueN = 0.;
+  //float NTrueN = 0.;   // for old NTag
+  int NTrueN = 0.;      // for Ntag v1.1.3
   float vecvx  = 0.;
   float vecvy  = 0.;
   float vecvz  = 0.;
@@ -172,26 +178,38 @@ int main(int argc, char **argv) {
   TBranch *bTagDWall = 0;
   std::vector<float> *NHits = 0;
   TBranch *bNHits = 0;
+  std::vector<float> *N50 = 0;
+  TBranch *bN50 = 0;
   std::vector<float> *TagIndex = 0;
   TBranch *bTagIndex = 0;
   std::vector<float> *TagOut = 0;
   TBranch *bTagOut = 0;
-  std::vector<float> *dvx = 0;
-  TBranch *bdvx = 0;
-  std::vector<float> *dvy = 0;
-  TBranch *bdvy = 0;
-  std::vector<float> *dvz = 0;
-  TBranch *bdvz = 0;
+  //std::vector<float> *dvx = 0;
+  //TBranch *bdvx = 0;
+  //std::vector<float> *dvy = 0;
+  //TBranch *bdvy = 0;
+  //std::vector<float> *dvz = 0;
+  //TBranch *bdvz = 0;
+  std::vector<float> *fvx = 0;
+  std::vector<float> *fvy = 0;
+  std::vector<float> *fvz = 0;
+  TBranch *bfvx = 0;
+  TBranch *bfvy = 0;
+  TBranch *bfvz = 0;
   tchntag->SetBranchAddress("Label", &Label, &bLabel);
   tchntag->SetBranchAddress("TagClass", &TagClass, &bTagClass);
   tchntag->SetBranchAddress("FitT", &FitT, &bFitT);
   tchntag->SetBranchAddress("DWall", &TagDWall, &bTagDWall);
   tchntag->SetBranchAddress("NHits", &NHits, &bNHits);
+  tchntag->SetBranchAddress("N50", &N50, &bN50);
   tchntag->SetBranchAddress("TagIndex", &TagIndex, &bTagIndex);
   tchntag->SetBranchAddress("TagOut", &TagOut, &bTagOut);
-  tchntag->SetBranchAddress("dvx", &dvx, &bdvx);
-  tchntag->SetBranchAddress("dvy", &dvy, &bdvy);
-  tchntag->SetBranchAddress("dvz", &dvz, &bdvz);
+  //tchntag->SetBranchAddress("dvx", &dvx, &bdvx);
+  //tchntag->SetBranchAddress("dvy", &dvy, &bdvy);
+  //tchntag->SetBranchAddress("dvz", &dvz, &bdvz);
+  tchntag->SetBranchAddress("fvx", &fvx, &bfvx);
+  tchntag->SetBranchAddress("fvy", &fvy, &bfvy);
+  tchntag->SetBranchAddress("fvz", &fvz, &bfvz);
 
   Float_t pscnd[1000][3];   //Momentum of the secondary particle
   tchfQ -> SetBranchAddress("pscnd", pscnd);
@@ -302,17 +320,21 @@ int main(int argc, char **argv) {
     bFitT       -> GetEntry(tentry);
     bTagDWall   -> GetEntry(tentry);
     bNHits      -> GetEntry(tentry);
+    bN50        -> GetEntry(tentry);
     bTagIndex   -> GetEntry(tentry);
     bTagOut     -> GetEntry(tentry);
-    bdvx        -> GetEntry(tentry);
-    bdvy        -> GetEntry(tentry);
-    bdvz        -> GetEntry(tentry);
+    //bdvx        -> GetEntry(tentry);
+    //bdvy        -> GetEntry(tentry);
+    //bdvz        -> GetEntry(tentry);
+    bfvx        -> GetEntry(tentry);
+    bfvy        -> GetEntry(tentry);
+    bfvz        -> GetEntry(tentry);
 
 
     numu->computeCC0PiVariables();
     numu->applyfQ1RCC0PiNumuCut();
     const EvSelVar_t evsel = numu->getEvSelVar();
-    Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
+    Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false);
 
     if (numu->var<float>("wallv")>200) GeneratedEvents++;
 
@@ -321,9 +343,11 @@ int main(int argc, char **argv) {
 
     //if (prmsel.C1ApplyFCFV(evsel)) neuosc.GetTrueEnu(numu);
 
+    GetSelectedModeEvents(numu);
+
     //New 1R muon selection
-    if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false)) {
-      GetSelectedModeEvents(numu);
+    if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false)) {
+      //GetSelectedModeEvents(numu);
 
       //Neutrino energy distribution
       neuosc.GetTrueEnu(numu);
@@ -380,25 +404,31 @@ int main(int argc, char **argv) {
 
 
       //Check truth breakdown(H-n/Gd-n/Decay-e/Acc.Noise) of candidates in the time window
-      ntagana.TruthBreakdowninWindow(TagClass, t, DWall, TagIndex, Label, FitT, TagDWall);
+      //ntagana.TruthBreakdowninWindow(TagClass, t, DWall, TagIndex, Label, FitT, TagDWall);
+      ntagana.TruthBreakdowninWindow(numu, TagClass, t, DWall, TagIndex, Label, FitT, TagDWall);
 
       //Check tagged truth neutrons and mis-tagged decay-e and noise with respect to window and threshold.
-      ntagana.GetNlikeCandidatesinWindow(t, DWall, TagIndex, etagmode, NHits, FitT, TagOut, Label, TagDWall);
+      //ntagana.GetNlikeCandidatesinWindow(t, DWall, TagIndex, etagmode, NHits, FitT, TagOut, Label, TagDWall);
+      ntagana.GetNlikeCandidatesinWindow(numu, t, DWall, TagIndex, etagmode, N50, FitT, TagOut, Label, TagDWall);
 
       //Check tagged truth decay-e and mis-tagged neutrons and noise with respect to window and threshold.
-      ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, NHits, FitT, TagOut, Label);
+      //ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, NHits, FitT, TagOut, Label);
+      ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, N50, FitT, TagOut, Label);
 
       //Check neutrino events with tagged neutrons
-      ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, 
-                                     etagmode, numu, neuosc, 15,
+      //ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, 
+      //                               etagmode, numu, neuosc, 15,
+      //                               recothetamu, thetamin, thetamax);
+      ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, N50, FitT, Label, NTrueN, 
+                                     etagmode, numu, neuosc, nlikeThreshold/0.05,
                                      recothetamu, thetamin, thetamax);
 
       //Number of tagged-neutrons
-      //int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
-      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, 0.75, N50, FitT, Label, etagmode);
+      //int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
+      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
       TotalTaggedN += numtaggedneutrons;
-      //int numtaggednoise = ntagana.GetTaggedNoise(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
-      int numtaggednoise = ntagana.GetTaggedNoise(TagOut, 0.75, N50, FitT, Label, etagmode);
+      //int numtaggednoise = ntagana.GetTaggedNoise(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
+      int numtaggednoise = ntagana.GetTaggedNoise(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
 
       //Pre-selection
       for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
@@ -419,8 +449,8 @@ int main(int argc, char **argv) {
       for (int ith=0; ith<CUTSTEP; ith++) {
         
         //Threshold
-        if (CUTSTEP==11) TMVATH[ith] = 0.1*ith;
-        if (CUTSTEP==21) TMVATH[ith] = 0.05*ith;
+        //if (CUTSTEP==11) TMVATH[ith] = 0.1*ith;
+        //if (CUTSTEP==21) TMVATH[ith] = 0.05*ith;
 
         //Candidates loop
         for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
@@ -429,7 +459,8 @@ int main(int argc, char **argv) {
 
             if (etagmode) {
               //Focus on neutron-like candidates(e-tagging ON)
-              if (TagOut->at(jentry)>TMVATH[ith] && ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry))==false) {
+              //if (TagOut->at(jentry)>TMVATH[ith] && ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry))==false) {
+              if (TagOut->at(jentry)>TMVATH[ith] && ntagana.DecayelikeChecker(etagmode, N50->at(jentry), FitT->at(jentry))==false) {
                 //Fill corresponded truth distance
                 for (UInt_t kentry=0; kentry<DistFromPV->size(); ++kentry) {
                   if (Type->at(kentry)==2 && DWall->at(kentry)>0.) {
@@ -458,16 +489,26 @@ int main(int argc, char **argv) {
 
       } //threshold scan
 
-      if (intmode==1)                 h1_TrueNmultiplicity[0]->Fill(NTrueN);
-      if (intmode>=2 && intmode<=10)  h1_TrueNmultiplicity[1]->Fill(NTrueN);
-      if (intmode>10 && intmode<=30)  h1_TrueNmultiplicity[2]->Fill(NTrueN);
-      if (intmode>=31)                h1_TrueNmultiplicity[3]->Fill(NTrueN);
+      //if (intmode==1)                 h1_TrueNmultiplicity[0]->Fill(NTrueN);
+      //if (intmode>=2 && intmode<=10)  h1_TrueNmultiplicity[1]->Fill(NTrueN);
+      //if (intmode>10 && intmode<=30)  h1_TrueNmultiplicity[2]->Fill(NTrueN);
+      //if (intmode>=31)                h1_TrueNmultiplicity[3]->Fill(NTrueN);
+      //if (intmode==1)                 h1_TrueNmultiplicity[0]->Fill(NTrueN, OscProb);
+      //if (intmode>=2 && intmode<=10)  h1_TrueNmultiplicity[1]->Fill(NTrueN, OscProb);
+      //if (intmode>10 && intmode<=30)  h1_TrueNmultiplicity[2]->Fill(NTrueN, OscProb);
+      //if (intmode>=31)                h1_TrueNmultiplicity[3]->Fill(NTrueN, OscProb);
 
-      if (intmode==1)                 h1_TagNmultiplicity[0]->Fill(numtaggedneutrons);
-      if (intmode>=2 && intmode<=10)  h1_TagNmultiplicity[1]->Fill(numtaggedneutrons);
-      if (intmode>10 && intmode<=30)  h1_TagNmultiplicity[2]->Fill(numtaggedneutrons);
-      if (intmode>=31)                h1_TagNmultiplicity[3]->Fill(numtaggedneutrons);
+      //if (intmode==1)                 h1_TagNmultiplicity[0]->Fill(numtaggedneutrons);
+      //if (intmode>=2 && intmode<=10)  h1_TagNmultiplicity[1]->Fill(numtaggedneutrons);
+      //if (intmode>10 && intmode<=30)  h1_TagNmultiplicity[2]->Fill(numtaggedneutrons);
+      //if (intmode>=31)                h1_TagNmultiplicity[3]->Fill(numtaggedneutrons);
+      if (intmode==1)                 h1_TagNmultiplicity[0]->Fill(numtaggedneutrons, OscProb);
+      if (intmode>=2 && intmode<=10)  h1_TagNmultiplicity[1]->Fill(numtaggedneutrons, OscProb);
+      if (intmode>10 && intmode<=30)  h1_TagNmultiplicity[2]->Fill(numtaggedneutrons, OscProb);
+      if (intmode>=31)                h1_TagNmultiplicity[3]->Fill(numtaggedneutrons, OscProb);
 
+
+      /////////  Calculation of kinematics  ////////////
       float Pmu = numu->var<float>("fq1rmom", PrmEvent, FQ_MUHYP);
       float Pt  = neuosc.GetMuonPt(numu);
       float Qsquare = neuosc.GetQsquare(numu);
@@ -488,6 +529,7 @@ int main(int argc, char **argv) {
       ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Pt/1000., xMuPtbins, TrueN_x_MuPt, h1_TrueN_x_MuPt, 1);
       ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Qsquare/1000000., xQ2bins, TrueN_x_Q2, h1_TrueN_x_Q2, 1);
       ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, recothetamu, xMuAnglebins, TrueN_x_MuAngle, h1_TrueN_x_MuAngle, 1);
+
 
       ///////////  Truth  //////////////
       float TruePrmVtx[3] = {0., 0., 0.};
@@ -539,8 +581,8 @@ int main(int argc, char **argv) {
 
       for (UInt_t ican=0; ican<TagOut->size(); ican++) {
         if (etagmode){
-          if (TagOut->at(ican)>0.75 && ntagana.DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican))==false) {
-            float NCapVtx[3]   = {dvx->at(ican), dvy->at(ican), dvz->at(ican)};  //Neutron capture vertex
+          if (TagOut->at(ican)>nlikeThreshold && ntagana.DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican))==false) {
+            float NCapVtx[3]   = {fvx->at(ican), fvy->at(ican), fvz->at(ican)};  //Neutron capture vertex
             float nTraveld     = ndistance.TakeDistance(RecoPrmVtx, NCapVtx);  //Neutron flight distance
             float d_MuStp_NCap = ndistance.TakeDistance(RecoMuStpVtx, NCapVtx);  //Distance b/w muon stopping and neutron capture vertices
             float nTraveldv[3] = {0., 0., 0.};  //Neutron flight distance vector
@@ -670,55 +712,96 @@ int main(int argc, char **argv) {
 
     resultfile << " " << std::endl;
     resultfile << "===== #1Rmu as a function of Enu =====" << std::endl;
+    float totalev = 0.;
     for (int ibin=0; ibin<binnumber_nu; ibin++) {
       if (ibin<binnumber_nu-1) resultfile << "#1Rmu @ Enu [" << xEnubins[ibin] << ", " << xEnubins[ibin+1] << "): " << N1Rmu_x_Enu[ibin] << std::endl;
       else resultfile << "#1Rmu @ Enu > " << xEnubins[ibin] << ": " << N1Rmu_x_Enu[ibin] << std::endl;
+      totalev += N1Rmu_x_Enu[ibin];
     }
+    resultfile << "Total: " << totalev << std::endl;
+
+    totalev = 0.;
     resultfile << "===== #1Rmu as a function of Pmu =====" << std::endl;
     for (int ibin=0; ibin<binnumber_mu; ibin++) {
       if (ibin<binnumber_mu-1) resultfile << "#1Rmu @ Pmu [" << xMuMombins[ibin] << ", " << xMuMombins[ibin+1] << "): " << N1Rmu_x_MuMom[ibin] << std::endl;
       else resultfile << "#1Rmu @ Pmu > " << xMuMombins[ibin] << ": " << N1Rmu_x_MuMom[ibin] << std::endl;
+      totalev += N1Rmu_x_MuMom[ibin];
     }
+    resultfile << "Total: " << totalev << std::endl;
+
+    totalev = 0.;
     resultfile << "===== #1Rmu as a function of Pt =====" << std::endl;
     for (int ibin=0; ibin<binnumber_mu; ibin++) {
-      if (ibin<binnumber_mu-1) resultfile << "#1Rmu @ Pt [" << xMuMombins[ibin] << ", " << xMuMombins[ibin+1] << "): " << N1Rmu_x_MuPt[ibin] << std::endl;
-      else resultfile << "#1Rmu @ Pt > " << xMuMombins[ibin] << ": " << N1Rmu_x_MuPt[ibin] << std::endl;
+      if (ibin<binnumber_mu-1) resultfile << "#1Rmu @ Pt [" << xMuPtbins[ibin] << ", " << xMuPtbins[ibin+1] << "): " << N1Rmu_x_MuPt[ibin] << std::endl;
+      else resultfile << "#1Rmu @ Pt > " << xMuPtbins[ibin] << ": " << N1Rmu_x_MuPt[ibin] << std::endl;
+      totalev += N1Rmu_x_MuPt[ibin];
     }
+    resultfile << "Total: " << totalev << std::endl;
+
+    totalev = 0.;
     resultfile << "===== #1Rmu as a function of Q2 =====" << std::endl;
     for (int ibin=0; ibin<binnumber_mu; ibin++) {
       if (ibin<binnumber_mu-1) resultfile << "#1Rmu @ Q2 [" << xQ2bins[ibin] << ", " << xQ2bins[ibin+1] << "): " << N1Rmu_x_Q2[ibin] << std::endl;
       else resultfile << "#1Rmu @ Q2 > " << xQ2bins[ibin] << ": " << N1Rmu_x_Q2[ibin] << std::endl;
+      totalev += N1Rmu_x_Q2[ibin];
     }
+    resultfile << "Total: " << totalev << std::endl;
+
+    totalev = 0.;
     resultfile << "===== #1Rmu as a function of costheta =====" << std::endl;
     for (int ibin=0; ibin<binnumber_mu; ibin++) {
       if (ibin<binnumber_mu-1) resultfile << "#1Rmu @ costheta [" << xMuAnglebins[ibin] << ", " << xMuAnglebins[ibin+1] << "): " << N1Rmu_x_MuAngle[ibin] << std::endl;
+      totalev += N1Rmu_x_MuAngle[ibin];
     }
+    resultfile << "Total: " << totalev << std::endl;
+
+    totalev = 0.;
     resultfile << " " << std::endl;
     resultfile << "Total #tagged neutrons: " << TotalTaggedN << std::endl;
     resultfile << "===== #tagged-n as a function of Enu =====" << std::endl;
     for (int ibin=0; ibin<binnumber_nu; ibin++) {
       if (ibin<binnumber_nu-1) resultfile << "#tagged-n @ Enu [" << xEnubins[ibin] << ", " << xEnubins[ibin+1] << "): " << TaggedN_x_Enu[ibin] << std::endl;
       else resultfile << "#tagged-n @ Enu > " << xEnubins[ibin] << ": " << TaggedN_x_Enu[ibin] << std::endl;
+      totalev += TaggedN_x_Enu[ibin];
     }
+    resultfile << "Total: " << totalev << std::endl;
+
+    totalev = 0.;
     resultfile << "===== #tagged neutrons as a function of Pmu =====" << std::endl;
     for (int ibin=0; ibin<binnumber_mu; ibin++) {
       if (ibin<binnumber_mu-1) resultfile << "#tagged-n @ Pmu [" << xMuMombins[ibin] << ", " << xMuMombins[ibin+1] << "): " << TaggedN_x_MuMom[ibin] << std::endl;
       else resultfile << "#tagged-n @ Pmu > " << xMuMombins[ibin] << ": " << TaggedN_x_MuMom[ibin] << std::endl;
+      totalev += TaggedN_x_MuMom[ibin];
     }
+    resultfile << "Total: " << totalev << std::endl;
+
+    totalev = 0.;
     resultfile << "===== #tagged neutrons as a function of Pt =====" << std::endl;
     for (int ibin=0; ibin<binnumber_mu; ibin++) {
-      if (ibin<binnumber_mu-1) resultfile << "#tagged-n @ Pt [" << xMuMombins[ibin] << ", " << xMuMombins[ibin+1] << "): " << TaggedN_x_MuPt[ibin] << std::endl;
-      else resultfile << "#tagged-n @ Pt > " << xMuMombins[ibin] << ": " << TaggedN_x_MuPt[ibin] << std::endl;
+      if (ibin<binnumber_mu-1) resultfile << "#tagged-n @ Pt [" << xMuPtbins[ibin] << ", " << xMuPtbins[ibin+1] << "): " << TaggedN_x_MuPt[ibin] << std::endl;
+      else resultfile << "#tagged-n @ Pt > " << xMuPtbins[ibin] << ": " << TaggedN_x_MuPt[ibin] << std::endl;
+      totalev += TaggedN_x_MuPt[ibin];
     }
+    resultfile << "Total: " << totalev << std::endl;
+
+    totalev = 0.;
     resultfile << "===== #tagged neutrons as a function of Q2 =====" << std::endl;
     for (int ibin=0; ibin<binnumber_mu; ibin++) {
       if (ibin<binnumber_mu-1) resultfile << "#tagged-n @ Q2 [" << xQ2bins[ibin] << ", " << xQ2bins[ibin+1] << "): " << TaggedN_x_Q2[ibin] << std::endl;
       else resultfile << "#tagged-n @ Q2 > " << xQ2bins[ibin] << ": " << TaggedN_x_Q2[ibin] << std::endl;
+      totalev += TaggedN_x_Q2[ibin];
     }
-    resultfile << "===== #1Rmu as a function of costheta =====" << std::endl;
+    resultfile << "Total: " << totalev << std::endl;
+
+    totalev = 0.;
+    resultfile << "===== #tagged neutrons as a function of costheta =====" << std::endl;
     for (int ibin=0; ibin<binnumber_mu; ibin++) {
       if (ibin<binnumber_mu-1) resultfile << "#tagged-n @ costheta [" << xMuAnglebins[ibin] << ", " << xMuAnglebins[ibin+1] << "): " << TaggedN_x_MuAngle[ibin] << std::endl;
+      totalev += TaggedN_x_MuAngle[ibin];
     }
+    resultfile << "Total: " << totalev << std::endl;
+
+    totalev = 0.;
     resultfile << " " << std::endl;
     resultfile << "Total #truth neutrons: " << TotalTrueN << std::endl;
     resultfile << "===== #truth neutrons as a function of Enu =====" << std::endl;
@@ -742,6 +825,14 @@ int main(int argc, char **argv) {
     ntagana.SummaryTruthInfoinSearch(WinMin, NTagSummary);
   }
 
+  double x[1] = {0.};
+  double y[1] = {0.};
+  g_ROC = new TGraph(1, x, y);
+  g_FOM = new TGraph(1, x, y);
+  g_FOM_p30 = new TGraph(1, x, y);
+  g_FOM_m30 = new TGraph(1, x, y);
+  g_FOM_p40 = new TGraph(1, x, y);
+  g_FOM_m40 = new TGraph(1, x, y);
 
   TFile* fout = new TFile(OutputRootName, "RECREATE");
   std::cout << "Output: " << OutputRootName << std::endl;

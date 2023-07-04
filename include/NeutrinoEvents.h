@@ -529,31 +529,66 @@ void GetSelectedTagN(Gd1RmuonSelection prmsel,
   int mode = TMath::Abs(numu->var<int>("mode"));
   float OscProb = numu->getOscWgt();
   if (prmsel.C1ApplyFCFV(evsel)) {
+    if (mode==1)             SelectedNoOscCCQETagN[0] += TagN;
+    if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[0] += TagN;
+    if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[0] += TagN;
+    if (mode>=31)            SelectedNoOscNCTagN[0] += TagN;
+
     if (mode==1)             SelectedCCQETagN[0] += TagN*OscProb;
     if (mode>=2 && mode<=10) SelectedCC2p2hTagN[0] += TagN*OscProb;
     if (mode>10 && mode<=30) SelectedCCnonQETagN[0] += TagN*OscProb;
     if (mode>=31)            SelectedNCTagN[0] += TagN;
+
     if (prmsel.C2Apply1R(evsel)) {
+      if (mode==1)             SelectedNoOscCCQETagN[1] += TagN;
+      if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[1] += TagN;
+      if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[1] += TagN;
+      if (mode>=31)            SelectedNoOscNCTagN[1] += TagN;
+
       if (mode==1)             SelectedCCQETagN[1] += TagN*OscProb;
       if (mode>=2 && mode<=10) SelectedCC2p2hTagN[1] += TagN*OscProb;
       if (mode>10 && mode<=30) SelectedCCnonQETagN[1] += TagN*OscProb;
       if (mode>=31)            SelectedNCTagN[1] += TagN;
+
       if (prmsel.C3Applymuonlike(evsel)) {
+        if (mode==1)             SelectedNoOscCCQETagN[2] += TagN;
+        if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[2] += TagN;
+        if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[2] += TagN;
+        if (mode>=31)            SelectedNoOscNCTagN[2] += TagN;
+
         if (mode==1)             SelectedCCQETagN[2] += TagN*OscProb;
         if (mode>=2 && mode<=10) SelectedCC2p2hTagN[2] += TagN*OscProb;
         if (mode>10 && mode<=30) SelectedCCnonQETagN[2] += TagN*OscProb;
         if (mode>=31)            SelectedNCTagN[2] += TagN;
+
         if (prmsel.C4ApplyPmu200MeV(evsel)) {
+          if (mode==1)             SelectedNoOscCCQETagN[3] += TagN;
+          if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[3] += TagN;
+          if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[3] += TagN;
+          if (mode>=31)            SelectedNoOscNCTagN[3] += TagN;
+
           if (mode==1)             SelectedCCQETagN[3] += TagN*OscProb;
           if (mode>=2 && mode<=10) SelectedCC2p2hTagN[3] += TagN*OscProb;
           if (mode>10 && mode<=30) SelectedCCnonQETagN[3] += TagN*OscProb;
           if (mode>=31)            SelectedNCTagN[3] += TagN;
+
           if (prmsel.C5Applydecaye(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false)) {
+            if (mode==1)             SelectedNoOscCCQETagN[4] += TagN;
+            if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[4] += TagN;
+            if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[4] += TagN;
+            if (mode>=31)            SelectedNoOscNCTagN[4] += TagN;
+
             if (mode==1)             SelectedCCQETagN[4] += TagN*OscProb;
             if (mode>=2 && mode<=10) SelectedCC2p2hTagN[4] += TagN*OscProb;
             if (mode>10 && mode<=30) SelectedCCnonQETagN[4] += TagN*OscProb;
             if (mode>=31)            SelectedNCTagN[4] += TagN;
+
             if (prmsel.C6Applynotpionlike(evsel)) {
+              if (mode==1)             SelectedNoOscCCQETagN[5] += TagN;
+              if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[5] += TagN;
+              if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[5] += TagN;
+              if (mode>=31)            SelectedNoOscNCTagN[5] += TagN;
+
               if (mode==1)             SelectedCCQETagN[5] += TagN*OscProb;
               if (mode>=2 && mode<=10) SelectedCC2p2hTagN[5] += TagN*OscProb;
               if (mode>10 && mode<=30) SelectedCCnonQETagN[5] += TagN*OscProb;
