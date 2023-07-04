@@ -215,6 +215,8 @@ TH1F* h1_TrueN_x_MuPt[4];
 TH1F* h1_TrueN_x_Q2[4];
 TH1F* h1_TrueN_x_MuAngle[4];
 
+float nueev = 0.;
+
 int varwindowmax = 9999;
 
 void SetWindowMax(int i) {

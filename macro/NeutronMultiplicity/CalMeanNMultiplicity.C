@@ -1,13 +1,6 @@
 
 
 void CalMeanNMultiplicity() {
-  
-  #if 0
-  float rNoise  = 0.021;
-  float NTagEff = 0.1989;
-  float N1Rmu   = 202.12;
-  float NtagN   = 60.20;
-  #endif
 
   #if 1
   float rNoise  = 0.0192;
@@ -31,8 +24,9 @@ void CalMeanNMultiplicity() {
   float FctrNtagN   = 1./( NTagEff*N1Rmu );
   float Delta_N1Rmu = std::sqrt( N1Rmu );
   float Delta_NtagN = std::sqrt( NtagN );
-  float Delta_MeanN = std::sqrt( FctrN1Rmu*FctrN1Rmu * Delta_N1Rmu*Delta_N1Rmu 
-                               + FctrNtagN*FctrNtagN * Delta_NtagN*Delta_NtagN );
+  //float Delta_MeanN = std::sqrt( FctrN1Rmu*FctrN1Rmu * Delta_N1Rmu*Delta_N1Rmu 
+  //                             + FctrNtagN*FctrNtagN * Delta_NtagN*Delta_NtagN );
+  float Delta_MeanN = std::sqrt( FctrNtagN*FctrNtagN * Delta_NtagN*Delta_NtagN );
 
   std::cout << "Mean neutron multiplicity: " << MeanN << "+/-" << Delta_MeanN << std::endl;
   std::cout << "(Error: " << Delta_MeanN/MeanN*100. << " %)" << std::endl;

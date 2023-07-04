@@ -216,6 +216,37 @@ void SelectedEvents(bool beammode) {
   h1_NC_nuebarbkg      -> SetFillColor(kSpring-9);
 
 
+#if 1
+  for (int i=0; i<6; i++) {
+    std::cout << "[### Bin" << i << " ###] [numu    -> numu   ] : " <<  h1_CCQE_numu->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_numu->GetBinContent(i+1) +
+                                                                        h1_CCOther_numu->GetBinContent(i+1) +
+                                                                        h1_NC_numu->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numu    -> nue    ] : " <<  h1_CCQE_nuesig->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_nuesig->GetBinContent(i+1) +
+                                                                        h1_CCOther_nuesig->GetBinContent(i+1) +
+                                                                        h1_NC_nuesig->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numubar -> numubar] : " <<  h1_CCQE_numubar->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_numubar->GetBinContent(i+1) +
+                                                                        h1_CCOther_numubar->GetBinContent(i+1) +
+                                                                        h1_NC_numubar->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numubar -> nuebar ] : " <<  h1_CCQE_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_CCOther_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_NC_nuebarsig->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [nue     -> nue    ] : " <<  h1_CCQE_nuebkg->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_nuebkg->GetBinContent(i+1) +
+                                                                        h1_CCOther_nuebkg->GetBinContent(i+1) +
+                                                                        h1_NC_nuebkg->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [nuebar  -> nuebar ] : " <<  h1_CCQE_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_CCOther_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_NC_nuebarbkg->GetBinContent(i+1) << std::endl;
+  }
+#endif
+  std::cout << " " << std::endl;
+
+
   /////  Normalizations  //////
 #if 1
   h1_CCQE_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );

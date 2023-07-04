@@ -605,13 +605,15 @@ int main(int argc, char **argv) {
 
   }
 
-  std::cout << "No mu stop CCQE   : " << NoPrmMuEnd_CCQE << std::endl;
-  std::cout << "No mu stop CCnonQE: " << NoPrmMuEnd_CCnonQE << std::endl;
-  std::cout << "No mu stop NC     : " << NoPrmMuEnd_NC << std::endl;
+  std::cout << "Neutrino events: " << nueev/5. << std::endl;
+  std::cout << "Total   (osc.): " << SelectedCCQENeutrinos[5]+SelectedCC2p2hNeutrinos[5]+SelectedCCnonQENeutrinos[5]+SelectedNCNeutrinos[5] << std::endl;
+  //std::cout << "No mu stop CCQE   : " << NoPrmMuEnd_CCQE << std::endl;
+  //std::cout << "No mu stop CCnonQE: " << NoPrmMuEnd_CCnonQE << std::endl;
+  //std::cout << "No mu stop NC     : " << NoPrmMuEnd_NC << std::endl;
 
   
-  std::cout << "No nlike: " << test1 << std::endl;
-  std::cout << "More than one nlike: " << test2 << std::endl;
+  //std::cout << "No nlike: " << test1 << std::endl;
+  //std::cout << "More than one nlike: " << test2 << std::endl;
 
   std::fstream resultfile;
   resultfile.open(ResultSummary, std::ios_base::out);

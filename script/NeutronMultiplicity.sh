@@ -38,7 +38,7 @@ FITQUNVER=fiTQun_v4
                    -BEAMMODE FHC\
                    -OSCCH NUMU
 COMMENTOUT
-<<COMMENTOUT
+#<<COMMENTOUT
 ./NeutronMultiplicity.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
                           ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.NNoptntag0026Gd.\*.root\
                           ${ANALYSISSTAGE}/output/fhc/fhc.numu_x_numu.NNoptnewGdMC.Nmult.root\
@@ -48,7 +48,7 @@ COMMENTOUT
                           -ETAG ON\
                           -BEAMMODE FHC\
                           -OSCCH NUMU
-COMMENTOUT
+#COMMENTOUT
 
 ####################################################################
 ##### FHC numu -> nue Gd MC #####
@@ -67,7 +67,7 @@ COMMENTOUT
 
 ####################################################################
 ##### FHC numubar -> numubar Gd MC #####
-#<<COMMENTOUT
+<<COMMENTOUT
 ./NeutronMultiplicity.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                    $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.NeutronMultiplicity.root\
@@ -77,8 +77,8 @@ COMMENTOUT
                    -ETAG ON\
                    -BEAMMODE FHC\
                    -OSCCH NUMUBAR
-#COMMENTOUT
-<<COMMENTOUT
+COMMENTOUT
+#<<COMMENTOUT
 ./NeutronMultiplicity.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_numubar.13a.fiTQun0026Gd.\*.root\
                           ${DISK3}/Ntag/output/fhc/numubar_x_numubar/fhc.numubar_x_numubar.13a.NNoptntag0026Gd.\*.root\
                           ${ANALYSISSTAGE}/output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.Nmult.root\
@@ -88,7 +88,7 @@ COMMENTOUT
                           -ETAG ON\
                           -BEAMMODE FHC\
                           -OSCCH NUMUBAR
-COMMENTOUT
+#COMMENTOUT
 
 ####################################################################
 ##### FHC numubar -> nuebar Gd MC #####

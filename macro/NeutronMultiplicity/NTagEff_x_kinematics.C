@@ -98,16 +98,16 @@ void NTagEff_x_kinematics(bool beammode) {
 
   //TString KnmtcName = "Enu";
   //TString KnmtcName = "MuMom";
-  //TString KnmtcName = "MuPt";
+  TString KnmtcName = "MuPt";
   //TString KnmtcName = "Q2";
-  TString KnmtcName = "MuAngle";
+  //TString KnmtcName = "MuAngle";
 
   const int binnumber = SetHistoBinNumber(KnmtcName);
   //double xbins[binnumber] = {0, 0.5, 1., 1.5, 2.5, 5.};
   //double xbins[binnumber] = {0, 0.5, 1.0, 2.0, 6.0};
-  //double xbins[binnumber] = {0, 0.25, 0.5, 0.75, 1.5};
+  double xbins[binnumber] = {0, 0.25, 0.5, 0.75, 1.5};
   //double xbins[binnumber] = {0, 0.25, 0.5, 0.75, 3.};
-  double xbins[binnumber] = {-1, -0.5, 0., 0.5, 1.};
+  //double xbins[binnumber] = {-1, -0.5, 0., 0.5, 1.};
 
   TString Prefix      = "NTagAnalysis/h1_TaggedN_x_";
   TString CCQEName    = "_mode0";
@@ -229,16 +229,73 @@ void NTagEff_x_kinematics(bool beammode) {
   h1_TagN_NC_nuebarbkg      -> SetFillColor(kSpring-9);
   h1_TagN_Noise_nuebarbkg   -> SetFillColor(kYellow+2);
 
-  /*h1_TagN_CCQE_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_TagN_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_TagN_CC2p2h_numu     -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_TagN_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_TagN_CCOther_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_TagN_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_TagN_NC_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_TagN_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_TagN_Noise_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_TagN_Noise_numubar   -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );*/
+#if 1
+  std::cout << "Tagged neutrons" << std::endl;
+  for (int i=0; i<binnumber; i++) {
+    std::cout << "[### Bin" << i << " ###] [numu    -> numu   ] : " <<  h1_TagN_CCQE_numu->GetBinContent(i+1) +
+                                                                        h1_TagN_CC2p2h_numu->GetBinContent(i+1) +
+                                                                        h1_TagN_CCOther_numu->GetBinContent(i+1) +
+                                                                        h1_TagN_NC_numu->GetBinContent(i+1) +
+                                                                        h1_TagN_Noise_numu->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numu    -> nue    ] : " <<  h1_TagN_CCQE_nuesig->GetBinContent(i+1) +
+                                                                        h1_TagN_CC2p2h_nuesig->GetBinContent(i+1) +
+                                                                        h1_TagN_CCOther_nuesig->GetBinContent(i+1) +
+                                                                        h1_TagN_NC_nuesig->GetBinContent(i+1) +
+                                                                        h1_TagN_Noise_nuesig->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numubar -> numubar] : " <<  h1_TagN_CCQE_numubar->GetBinContent(i+1) +
+                                                                        h1_TagN_CC2p2h_numubar->GetBinContent(i+1) +
+                                                                        h1_TagN_CCOther_numubar->GetBinContent(i+1) +
+                                                                        h1_TagN_NC_numubar->GetBinContent(i+1) +
+                                                                        h1_TagN_Noise_numubar->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numubar -> nuebar ] : " <<  h1_TagN_CCQE_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_TagN_CC2p2h_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_TagN_CCOther_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_TagN_NC_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_TagN_Noise_nuebarsig->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [nue     -> nue    ] : " <<  h1_TagN_CCQE_nuebkg->GetBinContent(i+1) +
+                                                                        h1_TagN_CC2p2h_nuebkg->GetBinContent(i+1) +
+                                                                        h1_TagN_CCOther_nuebkg->GetBinContent(i+1) +
+                                                                        h1_TagN_NC_nuebkg->GetBinContent(i+1) +
+                                                                        h1_TagN_Noise_nuebkg->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [nuebar  -> nuebar ] : " <<  h1_TagN_CCQE_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_TagN_CC2p2h_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_TagN_CCOther_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_TagN_NC_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_TagN_Noise_nuebarbkg->GetBinContent(i+1) << std::endl;
+  }
+#endif
+  std::cout << " " << std::endl;
+
+#if 1
+  std::cout << "Tagged true neutrons" << std::endl;
+  for (int i=0; i<binnumber; i++) {
+    std::cout << "[### Bin" << i << " ###] [numu    -> numu   ] : " <<  h1_TagN_CCQE_numu->GetBinContent(i+1) +
+                                                                        h1_TagN_CC2p2h_numu->GetBinContent(i+1) +
+                                                                        h1_TagN_CCOther_numu->GetBinContent(i+1) +
+                                                                        h1_TagN_NC_numu->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numu    -> nue    ] : " <<  h1_TagN_CCQE_nuesig->GetBinContent(i+1) +
+                                                                        h1_TagN_CC2p2h_nuesig->GetBinContent(i+1) +
+                                                                        h1_TagN_CCOther_nuesig->GetBinContent(i+1) +
+                                                                        h1_TagN_NC_nuesig->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numubar -> numubar] : " <<  h1_TagN_CCQE_numubar->GetBinContent(i+1) +
+                                                                        h1_TagN_CC2p2h_numubar->GetBinContent(i+1) +
+                                                                        h1_TagN_CCOther_numubar->GetBinContent(i+1) +
+                                                                        h1_TagN_NC_numubar->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numubar -> nuebar ] : " <<  h1_TagN_CCQE_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_TagN_CC2p2h_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_TagN_CCOther_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_TagN_NC_nuebarsig->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [nue     -> nue    ] : " <<  h1_TagN_CCQE_nuebkg->GetBinContent(i+1) +
+                                                                        h1_TagN_CC2p2h_nuebkg->GetBinContent(i+1) +
+                                                                        h1_TagN_CCOther_nuebkg->GetBinContent(i+1) +
+                                                                        h1_TagN_NC_nuebkg->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [nuebar  -> nuebar ] : " <<  h1_TagN_CCQE_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_TagN_CC2p2h_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_TagN_CCOther_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_TagN_NC_nuebarbkg->GetBinContent(i+1) << std::endl;
+  }
+#endif
+  std::cout << " " << std::endl;
 
   /////  Normalizations  //////
 #if 1
@@ -279,17 +336,6 @@ void NTagEff_x_kinematics(bool beammode) {
 #endif
 
   TH1F* h1_TagN_merge = new TH1F("h1_TagN_merge", "", binnumber-1, xbins);
-  /*h1_TagN_merge -> Add(h1_TagN_CCQE_numu, 1.);
-  h1_TagN_merge -> Add(h1_TagN_CCQE_numubar, 1.);
-  h1_TagN_merge -> Add(h1_TagN_CC2p2h_numu, 1.);
-  h1_TagN_merge -> Add(h1_TagN_CC2p2h_numubar, 1.);
-  h1_TagN_merge -> Add(h1_TagN_CCOther_numu, 1.);
-  h1_TagN_merge -> Add(h1_TagN_CCOther_numubar, 1.);
-  h1_TagN_merge -> Add(h1_TagN_NC_numu, 1.);
-  h1_TagN_merge -> Add(h1_TagN_NC_numubar, 1.);*/
-  //h1_TagN_merge -> Add(h1_TagN_Noise_numu, 1.);
-  //h1_TagN_merge -> Add(h1_TagN_Noise_numubar, 1.);
-
   //h1_TagN_merge -> Add(h1_TagN_Noise_nuebarbkg);
   //h1_TagN_merge -> Add(h1_TagN_Noise_nuebkg);
   //h1_TagN_merge -> Add(h1_TagN_Noise_nuebarsig);
@@ -428,14 +474,36 @@ void NTagEff_x_kinematics(bool beammode) {
   h1_TrueN_CCOther_nuebarbkg -> SetFillColor(kViolet-1);
   h1_TrueN_NC_nuebarbkg      -> SetFillColor(kSpring-9);
 
-  /*h1_TrueN_CCQE_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_TrueN_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_TrueN_CC2p2h_numu     -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_TrueN_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_TrueN_CCOther_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_TrueN_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_TrueN_NC_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_TrueN_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );*/
+#if 1
+  std::cout << "True neutron" << std::endl;
+  for (int i=0; i<binnumber; i++) {
+    std::cout << "[### Bin" << i << " ###] [numu    -> numu   ] : " <<  h1_TrueN_CCQE_numu->GetBinContent(i+1) +
+                                                                        h1_TrueN_CC2p2h_numu->GetBinContent(i+1) +
+                                                                        h1_TrueN_CCOther_numu->GetBinContent(i+1) +
+                                                                        h1_TrueN_NC_numu->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numu    -> nue    ] : " <<  h1_TrueN_CCQE_nuesig->GetBinContent(i+1) +
+                                                                        h1_TrueN_CC2p2h_nuesig->GetBinContent(i+1) +
+                                                                        h1_TrueN_CCOther_nuesig->GetBinContent(i+1) +
+                                                                        h1_TrueN_NC_nuesig->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numubar -> numubar] : " <<  h1_TrueN_CCQE_numubar->GetBinContent(i+1) +
+                                                                        h1_TrueN_CC2p2h_numubar->GetBinContent(i+1) +
+                                                                        h1_TrueN_CCOther_numubar->GetBinContent(i+1) +
+                                                                        h1_TrueN_NC_numubar->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numubar -> nuebar ] : " <<  h1_TrueN_CCQE_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_TrueN_CC2p2h_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_TrueN_CCOther_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_TrueN_NC_nuebarsig->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [nue     -> nue    ] : " <<  h1_TrueN_CCQE_nuebkg->GetBinContent(i+1) +
+                                                                        h1_TrueN_CC2p2h_nuebkg->GetBinContent(i+1) +
+                                                                        h1_TrueN_CCOther_nuebkg->GetBinContent(i+1) +
+                                                                        h1_TrueN_NC_nuebkg->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [nuebar  -> nuebar ] : " <<  h1_TrueN_CCQE_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_TrueN_CC2p2h_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_TrueN_CCOther_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_TrueN_NC_nuebarbkg->GetBinContent(i+1) << std::endl;
+  }
+#endif
+
 
   /////  Normalizations  //////
 #if 1
@@ -469,15 +537,6 @@ void NTagEff_x_kinematics(bool beammode) {
 #endif
 
   TH1F* h1_TrueN_merge = new TH1F("h1_TrueN_merge", "", binnumber-1, xbins);
-  /*h1_TrueN_merge -> Add(h1_TrueN_CCQE_numu, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_CCQE_numubar, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_CC2p2h_numu, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_CC2p2h_numubar, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_CCOther_numu, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_CCOther_numubar, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_NC_numu, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_NC_numubar, 1.);*/
-
   h1_TrueN_merge -> Add(h1_TrueN_NC_nuebarbkg);
   h1_TrueN_merge -> Add(h1_TrueN_NC_nuebkg);
   h1_TrueN_merge -> Add(h1_TrueN_NC_nuebarsig);
@@ -536,6 +595,12 @@ void NTagEff_x_kinematics(bool beammode) {
   text1 -> SetTextSize(0.05);
   text1 -> Draw();
 #endif
+
+
+  std::cout << "NTag efficiency" << std::endl;
+  for (int i=0; i<binnumber; i++) {
+    std::cout << "[### Bin" << i << " ###] " <<  h1_TagN_merge->GetBinContent(i+1) << std::endl;
+  }
 
 }
 

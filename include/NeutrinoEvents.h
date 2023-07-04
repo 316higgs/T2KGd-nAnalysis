@@ -145,7 +145,6 @@ float OscOnlyCCQE = 0.;
 float OscwoTrueN  = 0.;
 float OscwoTagN   = 0.;
 
-
 //1R muon selection + w/o truth neutrons
 int SelectedNeutrinoswoTruthNeutrons = 0;
 int ProtoSelectedNeutrinoswoTruthNeutrons = 0;
