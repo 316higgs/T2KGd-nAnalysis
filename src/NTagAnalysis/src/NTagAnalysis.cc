@@ -529,7 +529,8 @@ void NTagAnalysis::GetTruthNeutrons(float NTrueN,
   int mode = TMath::Abs(numu->var<int>("mode"));
 
   //AllTruthNeutrons += NTrueN;
-  AllTruthNeutrons += NTrueN * OscProb;
+  if (mode<31) AllTruthNeutrons += NTrueN * OscProb;
+  else AllTruthNeutrons += NTrueN;
 
   //h1_NTrueN[0] -> Fill(NTrueN);
   if (mode==1) {
@@ -554,7 +555,8 @@ void NTagAnalysis::GetTruthNeutrons(float NTrueN,
       //Truth H-n neutrons
       if (E->at(jentry) < 6.) {
         //TruthHNeutrons++;
-        TruthHNeutrons += OscProb;
+        if (mode<31) TruthHNeutrons += OscProb;
+        else TruthHNeutrons++;
         NumTruthHNeutrons++;
 
         if (mode==1) {
@@ -567,7 +569,8 @@ void NTagAnalysis::GetTruthNeutrons(float NTrueN,
       //Truth Gd-n neutrons
       if (E->at(jentry) > 6.) {
         //TruthGdNeutrons++;
-        TruthGdNeutrons += OscProb;
+        if (mode<31) TruthGdNeutrons += OscProb;
+        else TruthGdNeutrons++;
         NumTruthGdNeutrons++;
 
         if (mode==1) {
@@ -715,6 +718,7 @@ void NTagAnalysis::TruthBreakdowninWindow(CC0PiNumu* numu,
                                           std::vector<float> *TagDWall) 
 {
   float OscProb = numu->getOscWgt();
+  int mode = TMath::Abs(numu->var<int>("mode"));
 
   for (int iwin=0; iwin<WINSTEP; iwin++) {
     SetWindowMax(iwin);
@@ -725,14 +729,14 @@ void NTagAnalysis::TruthBreakdowninWindow(CC0PiNumu* numu,
       //if (Label->at(ican)==2 || Label->at(ican)==3) h1_hitsearch[2] -> Fill(FitT->at(ican));
       
       bool inwindow = false;  //Flag that indicates this candidate is in the time window, or not.
-      bool inFV     = false;  //Flag that indicates this candidate is in FV, or not.
+      //bool inFV     = false;  //Flag that indicates this candidate is in FV, or not.
       //Find corresponded truth info that matches with ican candidate
       for (UInt_t jentry=0; jentry<t->size(); ++jentry) {
         if (TagIndex->at(ican)!=-1 && jentry==(UInt_t)TagIndex->at(ican)) {
           //Check this candidate is in the time window, or not through true time info
           //if not, skip this ican
           if (t->at(jentry) < varwindowmax) inwindow = true;
-          if (DWall->at(jentry) > 0.) inFV = true;
+          //if (DWall->at(jentry) > 0.) inFV = true;
         }
       }
 
@@ -744,11 +748,20 @@ void NTagAnalysis::TruthBreakdowninWindow(CC0PiNumu* numu,
         if (Label->at(ican)==3) TruthGdNeutroninCandidatesinWin[iwin]++;
         if (Label->at(ican)==1) TruthDecayeinCandidatesinWin[iwin]++;*/
 
-        if (Label->at(ican)==2 || Label->at(ican)==3) TruthNeutroninCandidatesinWin[iwin]   += OscProb;
-        if (Label->at(ican)==2)                       TruthHNeutroninCandidatesinWin[iwin]  += OscProb;
-        if (Label->at(ican)==3)                       TruthGdNeutroninCandidatesinWin[iwin] += OscProb;
-        if (Label->at(ican)==1)                       TruthDecayeinCandidatesinWin[iwin]    += OscProb;
-
+        if (mode<31) {
+          if (Label->at(ican)==2 || Label->at(ican)==3) TruthNeutroninCandidatesinWin[iwin]   += OscProb;
+          if (Label->at(ican)==2)                       TruthHNeutroninCandidatesinWin[iwin]  += OscProb;
+          if (Label->at(ican)==3)                       TruthGdNeutroninCandidatesinWin[iwin] += OscProb;
+          if (Label->at(ican)==1)                       TruthDecayeinCandidatesinWin[iwin]    += OscProb;
+        }
+        else {
+          if (Label->at(ican)==2 || Label->at(ican)==3) TruthNeutroninCandidatesinWin[iwin]   ++;
+          if (Label->at(ican)==2)                       TruthHNeutroninCandidatesinWin[iwin]  ++;
+          if (Label->at(ican)==3)                       TruthGdNeutroninCandidatesinWin[iwin] ++;
+          if (Label->at(ican)==1)                       TruthDecayeinCandidatesinWin[iwin]    ++;
+        }
+        
+        /*
         if (inFV==true) {
           AllCandidatesinWinFV[iwin]++;
           if (Label->at(ican)==2 || Label->at(ican)==3) TruthNeutroninCandidatesinWinFV[iwin]++;
@@ -756,6 +769,7 @@ void NTagAnalysis::TruthBreakdowninWindow(CC0PiNumu* numu,
           if (Label->at(ican)==3) TruthGdNeutroninCandidatesinWinFV[iwin]++;
           if (Label->at(ican)==1) TruthDecayeinCandidatesinWinFV[iwin]++;
         }
+        */
       }
 
       //If this candidate is in the time window, count correponded truth noise
@@ -786,6 +800,7 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(CC0PiNumu* numu,
                                               std::vector<float> *TagDWall) 
 {
   float OscProb = numu->getOscWgt();
+  int mode = TMath::Abs(numu->var<int>("mode"));
 
   for (int iwin=0; iwin<WINSTEP; iwin++) {
     SetWindowMax(iwin);
@@ -827,10 +842,18 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(CC0PiNumu* numu,
             if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==3) TaggedTruthGdNeutronsinWin[iwin][ith]++;
             if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==1) MisTaggedDecayeinNlike[iwin][ith]++;*/
 
-            if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWin[iwin][ith]   += OscProb;
-            if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==2)                         TaggedTruthHNeutronsinWin[iwin][ith]  += OscProb;
-            if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==3)                         TaggedTruthGdNeutronsinWin[iwin][ith] += OscProb;
-            if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==1)                         MisTaggedDecayeinNlike[iwin][ith]     += OscProb;
+            if (mode<31) {
+              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWin[iwin][ith]   += OscProb;
+              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==2)                         TaggedTruthHNeutronsinWin[iwin][ith]  += OscProb;
+              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==3)                         TaggedTruthGdNeutronsinWin[iwin][ith] += OscProb;
+              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==1)                         MisTaggedDecayeinNlike[iwin][ith]     += OscProb;
+            }
+            else {
+              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWin[iwin][ith]   ++;
+              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==2)                         TaggedTruthHNeutronsinWin[iwin][ith]  ++;
+              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==3)                         TaggedTruthGdNeutronsinWin[iwin][ith] ++;
+              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==1)                         MisTaggedDecayeinNlike[iwin][ith]     ++;
+            }
 
             //if (inFV) {
             //  if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWinFV[iwin][ith]++;
@@ -845,10 +868,18 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(CC0PiNumu* numu,
             if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==3) TaggedTruthGdNeutronsinWin[iwin][ith]++;
             if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==1) MisTaggedDecayeinNlike[iwin][ith]++;*/
 
-            if (TagOut->at(ican)>TMVATH[ith] && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWin[iwin][ith]   += OscProb;
-            if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==2)                         TaggedTruthHNeutronsinWin[iwin][ith]  += OscProb;
-            if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==3)                         TaggedTruthGdNeutronsinWin[iwin][ith] += OscProb;
-            if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==1)                         MisTaggedDecayeinNlike[iwin][ith]     += OscProb;
+            if (mode<31) {
+              if (TagOut->at(ican)>TMVATH[ith] && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWin[iwin][ith]   += OscProb;
+              if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==2)                         TaggedTruthHNeutronsinWin[iwin][ith]  += OscProb;
+              if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==3)                         TaggedTruthGdNeutronsinWin[iwin][ith] += OscProb;
+              if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==1)                         MisTaggedDecayeinNlike[iwin][ith]     += OscProb;
+            }
+            else {
+              if (TagOut->at(ican)>TMVATH[ith] && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWin[iwin][ith]   ++;
+              if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==2)                         TaggedTruthHNeutronsinWin[iwin][ith]  ++;
+              if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==3)                         TaggedTruthGdNeutronsinWin[iwin][ith] ++;
+              if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==1)                         MisTaggedDecayeinNlike[iwin][ith]     ++;
+            }
 
             //if (inFV) {
             //  if (TagOut->at(ican)>TMVATH[ith] && (Label->at(ican)==2 || Label->at(ican)==3)) TaggedTruthNeutronsinWinFV[iwin][ith]++;
@@ -872,14 +903,24 @@ void NTagAnalysis::GetNlikeCandidatesinWindow(CC0PiNumu* numu,
               else if ( FitT->at(ican) < 20. && FitT->at(ican) < 0.25*(N50->at(ican))-7.5 ) etagboxin = true;
             }
             //if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==0) MisTaggedAccNoiseinNlike[iwin][ith]++;
-            if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==0) MisTaggedAccNoiseinNlike[iwin][ith] += OscProb;
+            if (mode<31) {
+              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==0) MisTaggedAccNoiseinNlike[iwin][ith] += OscProb;
+            }
+            else {
+              if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==0) MisTaggedAccNoiseinNlike[iwin][ith] ++;
+            }
             //if (TagDWall->at(ican) > 0.) {
             //  if (TagOut->at(ican)>TMVATH[ith] && etagboxin==false && Label->at(ican)==0) MisTaggedAccNoiseinNlikeFV[iwin][ith]++;
             //}
           }
           else {
             //if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==0) MisTaggedAccNoiseinNlike[iwin][ith]++;
-            if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==0) MisTaggedAccNoiseinNlike[iwin][ith] += OscProb;
+            if (mode<31) {
+              if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==0) MisTaggedAccNoiseinNlike[iwin][ith] += OscProb;
+            }
+            else {
+              if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==0) MisTaggedAccNoiseinNlike[iwin][ith] ++;
+            }
             //if (TagDWall->at(ican) > 0.) {
             //  if (TagOut->at(ican)>TMVATH[ith] && Label->at(ican)==0) MisTaggedAccNoiseinNlikeFV[iwin][ith]++;
             //}
@@ -2342,12 +2383,14 @@ void NTagAnalysis::TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int Tagged
   }
 }
 
-void NTagAnalysis::TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, std::vector<float> *t, float WinMin, float knmtcs, double* xbins, float* TrueN_x_knmtcs, TH1F** h1, int bintype) {
-  if (Type->size()==0) return;
-  int TrueN = 0;
-  for (UInt_t itrue=0; itrue<Type->size(); itrue++) {
+//void NTagAnalysis::TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, std::vector<float> *t, float WinMin, float knmtcs, double* xbins, float* TrueN_x_knmtcs, TH1F** h1, int bintype) {
+void NTagAnalysis::TrueN_x_kinematics(CC0PiNumu* numu, int NTrueN, float knmtcs, double* xbins, float* TrueN_x_knmtcs, TH1F** h1, int bintype) {
+  if (NTrueN==0) return;
+  //if (Type->size()==0) return;
+  //int TrueN = 0;
+  /*for (UInt_t itrue=0; itrue<Type->size(); itrue++) {
     if (Type->at(itrue)==2 && t->at(itrue)>WinMin) TrueN++;
-  }
+  }*/
 
   int mode = TMath::Abs(numu->var<int>("mode"));
   float OscProb = numu->getOscWgt();
@@ -2355,7 +2398,8 @@ void NTagAnalysis::TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, s
     case 0:
       for (int ibin=0; ibin<binnumber_nu-1; ibin++) {
         if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
-          for (int itruen=0; itruen<TrueN; itruen++) {
+          //for (int itruen=0; itruen<TrueN; itruen++) {
+          for (int itruen=0; itruen<NTrueN; itruen++) {
             //TrueN_x_knmtcs[ibin]++;
             if (mode<31) TrueN_x_knmtcs[ibin] += OscProb;
             else TrueN_x_knmtcs[ibin]++;
@@ -2368,7 +2412,8 @@ void NTagAnalysis::TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, s
         }
       }
       if (knmtcs>=xbins[binnumber_nu-1]) {
-        for (int itruen=0; itruen<TrueN; itruen++) {
+        //for (int itruen=0; itruen<TrueN; itruen++) {
+        for (int itruen=0; itruen<NTrueN; itruen++) {
           //TrueN_x_knmtcs[binnumber_nu-1]++;
           if (mode<31) TrueN_x_knmtcs[binnumber_nu-1] += OscProb;
           else TrueN_x_knmtcs[binnumber_nu-1]++;
@@ -2383,7 +2428,8 @@ void NTagAnalysis::TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, s
     case 1:
       for (int ibin=0; ibin<binnumber_mu-1; ibin++) {
         if (knmtcs>=xbins[ibin] && knmtcs<xbins[ibin+1]) {
-          for (int itruen=0; itruen<TrueN; itruen++) {
+          //for (int itruen=0; itruen<TrueN; itruen++) {
+          for (int itruen=0; itruen<NTrueN; itruen++) {
             //TrueN_x_knmtcs[ibin]++;
             if (mode<31) TrueN_x_knmtcs[ibin] += OscProb;
             else TrueN_x_knmtcs[ibin]++;
@@ -2396,7 +2442,8 @@ void NTagAnalysis::TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, s
         }
       }
       if (knmtcs>=xbins[binnumber_mu-1]) {
-        for (int itruen=0; itruen<TrueN; itruen++) {
+        //for (int itruen=0; itruen<TrueN; itruen++) {
+        for (int itruen=0; itruen<NTrueN; itruen++) {
           //TrueN_x_knmtcs[binnumber_mu-1]++;
           if (mode<31) TrueN_x_knmtcs[binnumber_mu-1] += OscProb;
           else TrueN_x_knmtcs[binnumber_mu-1]++;

@@ -117,12 +117,20 @@ Total: 16811.4
  
 Total #truth neutrons: 64270
 ===== #truth neutrons as a function of Enu =====
-#truth n @ Enu [0, 0.5): 1905.21
-#truth n @ Enu [0.5, 1): 5386.03
-#truth n @ Enu [1, 1.5): 8577.24
-#truth n @ Enu [1.5, 2.5): 12449
-#truth n @ Enu [2.5, 5): 8113.55
-#truth n @ Enu > 5: 840.769
+#truth n @ Enu [0, 0.5): 1931.03
+#truth n @ Enu [0.5, 1): 5479.15
+#truth n @ Enu [1, 1.5): 8731.09
+#truth n @ Enu [1.5, 2.5): 12647
+#truth n @ Enu [2.5, 5): 8267.99
+#truth n @ Enu > 5: 853.434
+Total: 37909.7
+===== #truth neutrons as a function of Pt =====
+#truth n @ Pt [0, 0.25): 7784.34
+#truth n @ Pt [0.25, 0.5): 15544.7
+#truth n @ Pt [0.5, 0.75): 10836.9
+#truth n @ Pt [0.75, 1.5): 3726.06
+#truth n @ Pt > 1.5: 17.7
+Total: 37909.7
  
 ===== #truth neutrons as a function of dn =====
 #truth n @ dn [0, 100): 22727.7

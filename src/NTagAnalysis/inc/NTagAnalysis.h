@@ -554,7 +554,8 @@ class NTagAnalysis {
     
     void N1Rmu_x_kinematics(CC0PiNumu* numu, float knmtcs, double* xbins, float* N1Rmu_x_knmtcs, TH1F** h1, int bintype);
     void TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int TaggedNoise, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype);
-    void TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, std::vector<float> *t, float WinMin, float knmtcs, double* xbins, float* TrueN_x_knmtcs, TH1F** h1, int bintype);
+    //void TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, std::vector<float> *t, float WinMin, float knmtcs, double* xbins, float* TrueN_x_knmtcs, TH1F** h1, int bintype);
+    void TrueN_x_kinematics(CC0PiNumu* numu, int NTrueN, float knmtcs, double* xbins, float* TrueN_x_knmtcs, TH1F** h1, int bintype);
     void TrueN_x_Neutronkinematics(CC0PiNumu* numu, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype);
     void TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<float> *Label, UInt_t ican, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype);
 

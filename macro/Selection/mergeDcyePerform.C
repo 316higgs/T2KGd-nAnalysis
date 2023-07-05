@@ -71,25 +71,25 @@ void mergeDcyePerform(bool beammode) {
 
   //////  All true decay-e  //////
   Double_t AllTruedcye_numu      = 6507.34;
-  Double_t AllTruedcye_nuesig    = 0.447566;
+  Double_t AllTruedcye_nuesig    = 189.448;
   Double_t AllTruedcye_numubar   = 13762.2;
-  Double_t AllTruedcye_nuebarsig = 0;
+  Double_t AllTruedcye_nuebarsig = 243;
   Double_t AllTruedcye_nuebkg    = 259.886;
   Double_t AllTruedcye_nuebarbkg = 333;
 
   //////  fiTQun sub-events in the box (reco. decay-e)  //////
   Double_t BoxfQdcye_numu      = 6146.16;
-  Double_t BoxfQdcye_nuesig    = 0.447566;
+  Double_t BoxfQdcye_nuesig    = 186.448;
   Double_t BoxfQdcye_numubar   = 11855.1;
-  Double_t BoxfQdcye_nuebarsig = 0;
+  Double_t BoxfQdcye_nuebarsig = 247;
   Double_t BoxfQdcye_nuebkg    = 256.886;
   Double_t BoxfQdcye_nuebarbkg = 327;
 
   //////  True-mateched sub-events in the box  //////
   Double_t MatchedfQdcye_numu      = 5848.38;
-  Double_t MatchedfQdcye_nuesig    = 0.447566;
+  Double_t MatchedfQdcye_nuesig    = 183.448;
   Double_t MatchedfQdcye_numubar   = 11791;
-  Double_t MatchedfQdcye_nuebarsig = 0;
+  Double_t MatchedfQdcye_nuebarsig = 241;
   Double_t MatchedfQdcye_nuebkg    = 249.886;
   Double_t MatchedfQdcye_nuebarbkg = 324;
 

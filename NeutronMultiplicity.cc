@@ -524,11 +524,17 @@ int main(int argc, char **argv) {
       ntagana.TaggedN_x_kinematics(numu, numtaggedneutrons, numtaggednoise, Qsquare/1000000., xQ2bins, TaggedN_x_Q2, h1_TaggedN_x_Q2, 1);
       ntagana.TaggedN_x_kinematics(numu, numtaggedneutrons, numtaggednoise, recothetamu, xMuAnglebins, TaggedN_x_MuAngle, h1_TaggedN_x_MuAngle, 1);
 
-      ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Enu/1000., xEnubins, TrueN_x_Enu, h1_TrueN_x_Enu, 0);
-      ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Pmu/1000., xMuMombins, TrueN_x_MuMom, h1_TrueN_x_MuMom, 1);
-      ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Pt/1000., xMuPtbins, TrueN_x_MuPt, h1_TrueN_x_MuPt, 1);
-      ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Qsquare/1000000., xQ2bins, TrueN_x_Q2, h1_TrueN_x_Q2, 1);
-      ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, recothetamu, xMuAnglebins, TrueN_x_MuAngle, h1_TrueN_x_MuAngle, 1);
+      //ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Enu/1000., xEnubins, TrueN_x_Enu, h1_TrueN_x_Enu, 0);
+      //ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Pmu/1000., xMuMombins, TrueN_x_MuMom, h1_TrueN_x_MuMom, 1);
+      //ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Pt/1000., xMuPtbins, TrueN_x_MuPt, h1_TrueN_x_MuPt, 1);
+      //ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Qsquare/1000000., xQ2bins, TrueN_x_Q2, h1_TrueN_x_Q2, 1);
+      //ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, recothetamu, xMuAnglebins, TrueN_x_MuAngle, h1_TrueN_x_MuAngle, 1);
+
+      ntagana.TrueN_x_kinematics(numu, NTrueN, Enu/1000., xEnubins, TrueN_x_Enu, h1_TrueN_x_Enu, 0);
+      ntagana.TrueN_x_kinematics(numu, NTrueN, Pmu/1000., xMuMombins, TrueN_x_MuMom, h1_TrueN_x_MuMom, 1);
+      ntagana.TrueN_x_kinematics(numu, NTrueN, Pt/1000., xMuPtbins, TrueN_x_MuPt, h1_TrueN_x_MuPt, 1);
+      ntagana.TrueN_x_kinematics(numu, NTrueN, Qsquare/1000000., xQ2bins, TrueN_x_Q2, h1_TrueN_x_Q2, 1);
+      ntagana.TrueN_x_kinematics(numu, NTrueN, recothetamu, xMuAnglebins, TrueN_x_MuAngle, h1_TrueN_x_MuAngle, 1);
 
 
       ///////////  Truth  //////////////
@@ -810,7 +816,18 @@ int main(int argc, char **argv) {
     for (int ibin=0; ibin<binnumber_nu; ibin++) {
       if (ibin<binnumber_nu-1) resultfile << "#truth n @ Enu [" << xEnubins[ibin] << ", " << xEnubins[ibin+1] << "): " << TrueN_x_Enu[ibin] << std::endl;
       else resultfile << "#truth n @ Enu > " << xEnubins[ibin] << ": " << TrueN_x_Enu[ibin] << std::endl;
+      totalev += TrueN_x_Enu[ibin];
     }
+    resultfile << "Total: " << totalev << std::endl;
+
+    totalev = 0.;
+    resultfile << "===== #truth neutrons as a function of Pt =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_mu; ibin++) {
+      if (ibin<binnumber_mu-1) resultfile << "#truth n @ Pt [" << xMuPtbins[ibin] << ", " << xMuPtbins[ibin+1] << "): " << TrueN_x_MuPt[ibin] << std::endl;
+      else resultfile << "#truth n @ Pt > " << xMuPtbins[ibin] << ": " << TrueN_x_MuPt[ibin] << std::endl;
+      totalev += TrueN_x_MuPt[ibin];
+    }
+    resultfile << "Total: " << totalev << std::endl;
     resultfile << " " << std::endl;
     resultfile << "===== #truth neutrons as a function of dn =====" << std::endl;
     for (int ibin=0; ibin<binnumber_n; ibin++) {

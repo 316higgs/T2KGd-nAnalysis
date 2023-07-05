@@ -188,10 +188,10 @@
   Total   (No osc.): 258
 --- Box cut performance ---
  0 < dt[usec] < 10, 50 < N50 < 400
- All truth decay-e                : 0.447566
- All fiTQun decay-e               : 0.64199
- fiTQun decya-e in the box        : 0.447566
- Matched fiTQun decya-e in the box: 0.447566
+ All truth decay-e                : 189.448
+ All fiTQun decay-e               : 608.642
+ fiTQun decya-e in the box        : 186.448
+ Matched fiTQun decya-e in the box: 183.448
 [Decay-e Cut Scan] 
 [Decay-e Cut Scan] dt = 20 us: 410
                              : 221
@@ -227,7 +227,7 @@
            Only CCQE(1p1h)    : 0.392045(Osc)/12(No Osc) = 0.0326704
            w/o truth neutrons : 17.9333(Osc)/37(No Osc) = 0.484685
            w/o tagged neutrons: 65.0002(Osc)/86(No Osc) = 0.755816
-All Truth neutrons: 0.686777
+All Truth neutrons: 554.687
 Candidates        : 5076.91
 [### i=0, Thr=0 ###] FOM = 0.0252235
    +40%: 0.548904, FOM = 0.0353014
