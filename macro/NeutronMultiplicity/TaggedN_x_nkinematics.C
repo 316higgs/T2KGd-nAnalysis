@@ -83,11 +83,12 @@ void TaggedN_x_nkinematics(bool beammode) {
   std::cout << "[nueb  -> nueb ] Normalization factor for nuebar_x_nuebar: " << (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) << std::endl;
 
 
-  //TString KnmtcName = "nTraveld";
+  TString KnmtcName = "nTraveld";
   //TString KnmtcName = "nTraveldL";
-  TString KnmtcName = "nTraveldT";
+  //TString KnmtcName = "nTraveldT";
   //TString KnmtcName = "nAngle";
   //TString KnmtcName = "MuStp_NCap";
+  const int binnumber = SetHistoBinNumber(KnmtcName);
 
   TString Prefix      = "NTagAnalysis/h1_TaggedN_x_";
   TString CCQEName    = "_mode0";
@@ -208,6 +209,42 @@ void TaggedN_x_nkinematics(bool beammode) {
   h1_CCOther_nuebarbkg -> SetFillColor(kViolet-1);
   h1_NC_nuebarbkg      -> SetFillColor(kSpring-9);
   h1_Noise_nuebarbkg   -> SetFillColor(kYellow+2);
+
+#if 1
+  std::cout << "Tagged neutrons" << std::endl;
+  for (int i=0; i<binnumber; i++) {
+    std::cout << "[### Bin" << i << " ###] [numu    -> numu   ] : " <<  h1_CCQE_numu->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_numu->GetBinContent(i+1) +
+                                                                        h1_CCOther_numu->GetBinContent(i+1) +
+                                                                        h1_NC_numu->GetBinContent(i+1) +
+                                                                        h1_Noise_numu->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numu    -> nue    ] : " <<  h1_CCQE_nuesig->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_nuesig->GetBinContent(i+1) +
+                                                                        h1_CCOther_nuesig->GetBinContent(i+1) +
+                                                                        h1_NC_nuesig->GetBinContent(i+1) +
+                                                                        h1_Noise_nuesig->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numubar -> numubar] : " <<  h1_CCQE_numubar->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_numubar->GetBinContent(i+1) +
+                                                                        h1_CCOther_numubar->GetBinContent(i+1) +
+                                                                        h1_NC_numubar->GetBinContent(i+1) +
+                                                                        h1_Noise_numubar->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numubar -> nuebar ] : " <<  h1_CCQE_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_CCOther_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_NC_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_Noise_nuebarsig->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [nue     -> nue    ] : " <<  h1_CCQE_nuebkg->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_nuebkg->GetBinContent(i+1) +
+                                                                        h1_CCOther_nuebkg->GetBinContent(i+1) +
+                                                                        h1_NC_nuebkg->GetBinContent(i+1) +
+                                                                        h1_Noise_nuebkg->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [nuebar  -> nuebar ] : " <<  h1_CCQE_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_CCOther_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_NC_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_Noise_nuebarbkg->GetBinContent(i+1) << std::endl;
+  }
+#endif
 
 
   /////  Normalizations  //////
@@ -351,3 +388,12 @@ void TaggedN_x_nkinematics(bool beammode) {
 #endif
 
 }
+
+int SetHistoBinNumber(TString KnmtcName) {
+  int binnumber = 0;
+  if (KnmtcName=="nTraveld" || KnmtcName=="nTraveldT" || KnmtcName=="MuStp_NCap") binnumber = 7;
+  else if (KnmtcName=="nTraveldL") binnumber = 13;
+  else binnumber = 6;
+  return binnumber;
+}
+

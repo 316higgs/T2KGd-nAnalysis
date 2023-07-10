@@ -571,7 +571,7 @@ void GetSelectedTagN(Gd1RmuonSelection prmsel,
           if (mode>10 && mode<=30) SelectedCCnonQETagN[3] += TagN*OscProb;
           if (mode>=31)            SelectedNCTagN[3] += TagN;
 
-          if (prmsel.C5Applydecaye(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false)) {
+          if (prmsel.C5Applydecaye(evsel, numu, decayebox, eMode, eOsc, dtCut, N50CutMin, N50CutMax, false)) {
             if (mode==1)             SelectedNoOscCCQETagN[4] += TagN;
             if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[4] += TagN;
             if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[4] += TagN;

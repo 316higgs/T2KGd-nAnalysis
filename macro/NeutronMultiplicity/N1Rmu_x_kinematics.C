@@ -86,9 +86,9 @@ void N1Rmu_x_kinematics(bool beammode) {
 
   //TString KnmtcName = "Enu";
   //TString KnmtcName = "MuMom";
-  TString KnmtcName = "MuPt";
+  //TString KnmtcName = "MuPt";
   //TString KnmtcName = "Q2";
-  //TString KnmtcName = "MuAngle";
+  TString KnmtcName = "MuAngle";
   const int binnumber = SetHistoBinNumber(KnmtcName);
 
   TString Prefix      = "NTagAnalysis/h1_N1Rmu_x_";
@@ -192,7 +192,7 @@ void N1Rmu_x_kinematics(bool beammode) {
   h1_NC_nuebarbkg      -> SetFillColor(kSpring-9);
 
 #if 1
-  std::cout << "Tagged true neutrons" << std::endl;
+  std::cout << "Number of 1Rmu events" << std::endl;
   for (int i=0; i<binnumber; i++) {
     std::cout << "[### Bin" << i << " ###] [numu    -> numu   ] : " <<  h1_CCQE_numu->GetBinContent(i+1) +
                                                                         h1_CC2p2h_numu->GetBinContent(i+1) +
@@ -301,7 +301,7 @@ void N1Rmu_x_kinematics(bool beammode) {
   if (KnmtcName=="Enu") hs_merge -> SetMaximum(10);
   if (KnmtcName=="MuMom" || KnmtcName=="MuPt") hs_merge -> SetMaximum(14);
   if (KnmtcName=="Q2") hs_merge -> SetMaximum(15);
-  if (KnmtcName=="MuAngle") hs_merge -> SetMaximum(20);
+  if (KnmtcName=="MuAngle") hs_merge -> SetMaximum(25);
   hs_merge -> Draw();
   hs_merge ->GetYaxis()->SetTitleSize(0.038);
   hs_merge ->GetYaxis()->SetTitleOffset(1.1);

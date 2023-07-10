@@ -27,20 +27,20 @@ Generated NC events     : 26122
 [Neutrino] Generated 1Rmu Events (Oscillated)  : 6007.23
  
 [Neutrino] Oscillated CCQE Events     : 2976.79(69.591 %)
-           w/ tagged neutrons: 1001.35(56.2709 %), w/o tagged neutrons:1975.45(79.0798 %)
+           w/ tagged neutrons: 988.47(56.027 %), w/o tagged neutrons:1988.33(79.1128 %)
 [Neutrino] Oscillated CC(2p2h) Events : 458.441(10.7174 %)
-           w/ tagged neutrons: 244.435(13.7361 %), w/o tagged neutrons:214.005(8.56688 %)
+           w/ tagged neutrons: 243.729(13.8147 %), w/o tagged neutrons:214.71(8.54302 %)
 [Neutrino] Oscillated All CCRES Events: 600.062(14.0282 %)
-           w/ tagged neutrons: 371.429(20.8725 %), w/o tagged neutrons:228.633(9.15248 %)
+           w/ tagged neutrons: 369.774(20.959 %), w/o tagged neutrons:230.288(9.16282 %)
 [Neutrino] Oscillated CC Other Events : 45.259(1.05806 %)
-           w/ tagged neutrons: 39.3011(2.20853 %), w/o tagged neutrons:5.95795(0.238505 %)
+           w/ tagged neutrons: 39.3011(2.22761 %), w/o tagged neutrons:5.95795(0.237059 %)
 [Neutrino] Oscillated NC Events       : 197(4.60544 %)
-           w/ tagged neutrons: 123(6.912 %), w/o tagged neutrons:74(2.96232 %)
+           w/ tagged neutrons: 123(6.9717 %), w/o tagged neutrons:74(2.94436 %)
 [Neutrino] Oscillated Neutrino Events within [0.25 GeV, 1.5 GeV]
            Legacy Analysis    : 4277.53(Osc)/24050(No Osc) = 0.17786
            Only CCQE(1p1h)    : 2976.79(Osc)/18984(No Osc) = 0.156805
            w/o truth neutrons : 1805.45(Osc)/10892(No Osc) = 0.16576
-           w/o tagged neutrons: 2498.04(Osc)/14796(No Osc) = 0.168832
+           w/o tagged neutrons: 2513.28(Osc)/14881(No Osc) = 0.168892
  
 ===== #1Rmu as a function of Enu =====
 #1Rmu @ Enu [0, 0.5): 1473.94
@@ -78,42 +78,41 @@ Total: 6007.21
 #1Rmu @ costheta [0.5, 1): 4584.32
 Total: 6007.21
  
-Total #tagged neutrons: 16201
 ===== #tagged-n as a function of Enu =====
-#tagged-n @ Enu [0, 0.5): 793.947
-#tagged-n @ Enu [0.5, 1): 1361.68
-#tagged-n @ Enu [1, 1.5): 790.433
-#tagged-n @ Enu [1.5, 2.5): 786.88
-#tagged-n @ Enu [2.5, 5): 933.031
+#tagged-n @ Enu [0, 0.5): 775.868
+#tagged-n @ Enu [0.5, 1): 1343.84
+#tagged-n @ Enu [1, 1.5): 777.823
+#tagged-n @ Enu [1.5, 2.5): 781.017
+#tagged-n @ Enu [2.5, 5): 923.885
 #tagged-n @ Enu > 5: 84.1903
-Total: 4750.16
+Total: 4686.63
 ===== #tagged neutrons as a function of Pmu =====
-#tagged-n @ Pmu [0, 0.5): 1471.78
-#tagged-n @ Pmu [0.5, 1): 1248.67
-#tagged-n @ Pmu [1, 2): 941.146
-#tagged-n @ Pmu [2, 6): 1078.75
+#tagged-n @ Pmu [0, 0.5): 1445.62
+#tagged-n @ Pmu [0.5, 1): 1231.94
+#tagged-n @ Pmu [1, 2): 930.49
+#tagged-n @ Pmu [2, 6): 1068.76
 #tagged-n @ Pmu > 6: 9.81556
-Total: 4750.16
+Total: 4686.63
 ===== #tagged neutrons as a function of Pt =====
-#tagged-n @ Pt [0, 0.25): 1061.79
-#tagged-n @ Pt [0.25, 0.5): 1988.96
-#tagged-n @ Pt [0.5, 0.75): 1125.82
-#tagged-n @ Pt [0.75, 1.5): 568.735
+#tagged-n @ Pt [0, 0.25): 1038.55
+#tagged-n @ Pt [0.25, 0.5): 1962.85
+#tagged-n @ Pt [0.5, 0.75): 1115.12
+#tagged-n @ Pt [0.75, 1.5): 565.252
 #tagged-n @ Pt > 1.5: 4.8535
-Total: 4750.16
+Total: 4686.62
 ===== #tagged neutrons as a function of Q2 =====
-#tagged-n @ Q2 [0, 0.25): 2102.25
-#tagged-n @ Q2 [0.25, 0.5): 1205.44
-#tagged-n @ Q2 [0.5, 0.75): 603.627
-#tagged-n @ Q2 [0.75, 3): 811.611
+#tagged-n @ Q2 [0, 0.25): 2066.78
+#tagged-n @ Q2 [0.25, 0.5): 1188.89
+#tagged-n @ Q2 [0.5, 0.75): 600.015
+#tagged-n @ Q2 [0.75, 3): 803.709
 #tagged-n @ Q2 > 3: 27.237
-Total: 4750.17
+Total: 4686.63
 ===== #tagged neutrons as a function of costheta =====
-#tagged-n @ costheta [-1, -0.5): 134.129
-#tagged-n @ costheta [-0.5, 0): 273.172
-#tagged-n @ costheta [0, 0.5): 654.734
-#tagged-n @ costheta [0.5, 1): 3688.11
-Total: 4750.14
+#tagged-n @ costheta [-1, -0.5): 131.148
+#tagged-n @ costheta [-0.5, 0): 269.524
+#tagged-n @ costheta [0, 0.5): 645.276
+#tagged-n @ costheta [0.5, 1): 3640.66
+Total: 4686.61
  
 Total #truth neutrons: 34414
 ===== #truth neutrons as a function of Enu =====
@@ -140,12 +139,14 @@ Total: 10246.2
 #truth n @ dn [600, 1000): 223.376
 #truth n @ dn [1000, 1500): 134.913
 #truth n @ dn > 1500: 130.576
+Total: 10246.2
  
 ===== #tagged neutrons as a function of dn =====
-#truth n @ dn [0, 100): 1476.18
-#truth n @ dn [100, 200): 1547.23
-#truth n @ dn [200, 400): 998.503
-#truth n @ dn [400, 600): 268.863
-#truth n @ dn [600, 1000): 177.273
-#truth n @ dn [1000, 1500): 100.42
-#truth n @ dn > 1500: 195.605
+#truth n @ dn [0, 100): 1464.76
+#truth n @ dn [100, 200): 1528.6
+#truth n @ dn [200, 400): 978.541
+#truth n @ dn [400, 600): 257.908
+#truth n @ dn [600, 1000): 170.113
+#truth n @ dn [1000, 1500): 95.8525
+#truth n @ dn > 1500: 190.851
+Total: 4686.62

@@ -27,17 +27,6 @@ FITQUNVER=fiTQun_v4
 # 8th index: decay-e-tagging ON/OFF
 
 ##### FHC numu -> numu Gd MC #####
-<<COMMENTOUT
-./NeutronMultiplicity.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.NeutronMultiplicity.root\
-                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.test.txt\
-                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.test.txt\
-                   -MCType Gd\
-                   -ETAG ON\
-                   -BEAMMODE FHC\
-                   -OSCCH NUMU
-COMMENTOUT
 #<<COMMENTOUT
 ./NeutronMultiplicity.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numu_x_numu.13a.fiTQun0026Gd.\*.root\
                           ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.NNoptntag0026Gd.\*.root\
@@ -67,17 +56,6 @@ COMMENTOUT
 
 ####################################################################
 ##### FHC numubar -> numubar Gd MC #####
-<<COMMENTOUT
-./NeutronMultiplicity.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.NeutronMultiplicity.root\
-                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.etagON.txt\
-                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.etagON.txt\
-                   -MCType Gd\
-                   -ETAG ON\
-                   -BEAMMODE FHC\
-                   -OSCCH NUMUBAR
-COMMENTOUT
 #<<COMMENTOUT
 ./NeutronMultiplicity.exe ${DISK3}/${FITQUNVER}/output/fhc/fhc.numubar_x_numubar.13a.fiTQun0026Gd.\*.root\
                           ${DISK3}/Ntag/output/fhc/numubar_x_numubar/fhc.numubar_x_numubar.13a.NNoptntag0026Gd.\*.root\

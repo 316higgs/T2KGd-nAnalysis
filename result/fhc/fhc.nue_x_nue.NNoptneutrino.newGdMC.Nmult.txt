@@ -78,7 +78,6 @@ Total: 280.3
 #1Rmu @ costheta [0.5, 1): 195.778
 Total: 280.3
  
-Total #tagged neutrons: 432
 ===== #tagged-n as a function of Enu =====
 #tagged-n @ Enu [0, 0.5): 277
 #tagged-n @ Enu [0.5, 1): 117
@@ -140,12 +139,14 @@ Total: 1024.78
 #truth n @ dn [600, 1000): 14
 #truth n @ dn [1000, 1500): 0
 #truth n @ dn > 1500: 0
+Total: 1024.78
  
 ===== #tagged neutrons as a function of dn =====
-#truth n @ dn [0, 100): 107.94
+#truth n @ dn [0, 100): 106.94
 #truth n @ dn [100, 200): 165.97
 #truth n @ dn [200, 400): 89.9774
 #truth n @ dn [400, 600): 42
 #truth n @ dn [600, 1000): 15
 #truth n @ dn [1000, 1500): 10
 #truth n @ dn > 1500: 2
+Total: 431.888

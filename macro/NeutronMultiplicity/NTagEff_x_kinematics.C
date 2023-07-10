@@ -96,16 +96,16 @@ void NTagEff_x_kinematics(bool beammode) {
   std::cout << "[nueb  -> nueb ] Normalization factor for nuebar_x_nuebar: " << (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) << std::endl;
 
 
-  //TString KnmtcName = "Enu";
+  TString KnmtcName = "Enu";
   //TString KnmtcName = "MuMom";
-  TString KnmtcName = "MuPt";
+  //TString KnmtcName = "MuPt";
   //TString KnmtcName = "Q2";
   //TString KnmtcName = "MuAngle";
 
   const int binnumber = SetHistoBinNumber(KnmtcName);
-  //double xbins[binnumber] = {0, 0.5, 1., 1.5, 2.5, 5.};
+  double xbins[binnumber] = {0, 0.5, 1., 1.5, 2.5, 5.};
   //double xbins[binnumber] = {0, 0.5, 1.0, 2.0, 6.0};
-  double xbins[binnumber] = {0, 0.25, 0.5, 0.75, 1.5};
+  //double xbins[binnumber] = {0, 0.25, 0.5, 0.75, 1.5};
   //double xbins[binnumber] = {0, 0.25, 0.5, 0.75, 3.};
   //double xbins[binnumber] = {-1, -0.5, 0., 0.5, 1.};
 

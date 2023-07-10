@@ -515,7 +515,7 @@ void SelectedEvents(bool beammode) {
   h1_SelEff_merge ->GetYaxis()->SetTitleSize(0.038);
   h1_SelEff_merge ->GetYaxis()->SetTitleOffset(0.9);
   h1_SelEff_merge ->GetYaxis()->SetLabelSize(0.04);
-  h1_SelEff_merge ->GetYaxis()->SetTitle("Selection Efficiency");
+  h1_SelEff_merge ->GetYaxis()->SetTitle("Remaining rate from FCFV cut");
   h1_SelEff_merge ->GetYaxis()->SetTitleSize(0.045);
   h1_SelEff_merge ->GetXaxis()->SetLabelSize(0.045);
   h1_SelEff_merge -> Draw();
@@ -527,8 +527,8 @@ void SelectedEvents(bool beammode) {
   TLatex* text2 = new TLatex(0.5, 0.77, "-1R #mu sample");
   text2 -> SetNDC(1);
   text2 -> SetTextSize(0.04);
-  //TLatex* text3 = new TLatex(0.5, 0.72, "-Efficiency of #nu events");
-  TLatex* text3 = new TLatex(0.5, 0.72, "-Efficiency of tagged neutrons");
+  TLatex* text3 = new TLatex(0.5, 0.72, "-#nu events");
+  //TLatex* text3 = new TLatex(0.5, 0.72, "-#tagged neutrons");
   text3 -> SetNDC(1);
   text3 -> SetTextSize(0.04);
   text1 -> Draw();

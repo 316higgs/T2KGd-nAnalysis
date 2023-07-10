@@ -184,12 +184,6 @@ int main(int argc, char **argv) {
   TBranch *bTagIndex = 0;
   std::vector<float> *TagOut = 0;
   TBranch *bTagOut = 0;
-  //std::vector<float> *dvx = 0;
-  //TBranch *bdvx = 0;
-  //std::vector<float> *dvy = 0;
-  //TBranch *bdvy = 0;
-  //std::vector<float> *dvz = 0;
-  //TBranch *bdvz = 0;
   std::vector<float> *fvx = 0;
   std::vector<float> *fvy = 0;
   std::vector<float> *fvz = 0;
@@ -274,8 +268,9 @@ int main(int argc, char **argv) {
   int NoPrmMuEnd_NC = 0;
   const int DCYENUM = 1;
 
-  int TotalTrueN   = 0;
-  int TotalTaggedN = 0;
+  int   TotalTrueN   = 0;
+  float TotalTaggedN = 0.;
+  float TotalTaggedNoise = 0.;
 
   float WinMin = 3.;
 
@@ -323,9 +318,6 @@ int main(int argc, char **argv) {
     bN50        -> GetEntry(tentry);
     bTagIndex   -> GetEntry(tentry);
     bTagOut     -> GetEntry(tentry);
-    //bdvx        -> GetEntry(tentry);
-    //bdvy        -> GetEntry(tentry);
-    //bdvz        -> GetEntry(tentry);
     bfvx        -> GetEntry(tentry);
     bfvy        -> GetEntry(tentry);
     bfvz        -> GetEntry(tentry);
@@ -426,9 +418,11 @@ int main(int argc, char **argv) {
       //Number of tagged-neutrons
       //int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
       int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
-      TotalTaggedN += numtaggedneutrons;
+      if (intmode<31) TotalTaggedN += numtaggedneutrons*OscProb;
+      else TotalTaggedN += numtaggedneutrons;
       //int numtaggednoise = ntagana.GetTaggedNoise(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
       int numtaggednoise = ntagana.GetTaggedNoise(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
+      TotalTaggedNoise += numtaggednoise*OscProb;
 
       //Pre-selection
       for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
@@ -505,7 +499,7 @@ int main(int argc, char **argv) {
       if (intmode==1)                 h1_TagNmultiplicity[0]->Fill(numtaggedneutrons, OscProb);
       if (intmode>=2 && intmode<=10)  h1_TagNmultiplicity[1]->Fill(numtaggedneutrons, OscProb);
       if (intmode>10 && intmode<=30)  h1_TagNmultiplicity[2]->Fill(numtaggedneutrons, OscProb);
-      if (intmode>=31)                h1_TagNmultiplicity[3]->Fill(numtaggedneutrons, OscProb);
+      if (intmode>=31)                h1_TagNmultiplicity[3]->Fill(numtaggedneutrons);
 
 
       /////////  Calculation of kinematics  ////////////
@@ -587,7 +581,9 @@ int main(int argc, char **argv) {
 
       for (UInt_t ican=0; ican<TagOut->size(); ican++) {
         if (etagmode){
-          if (TagOut->at(ican)>nlikeThreshold && ntagana.DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican))==false) {
+          if (TagOut->at(ican)>nlikeThreshold && 
+              ntagana.DecayelikeChecker(etagmode, N50->at(ican), FitT->at(ican))==false &&
+              (Label->at(ican)==0 || Label->at(ican)==1 || Label->at(ican)==2 || Label->at(ican)==3)) {
             float NCapVtx[3]   = {fvx->at(ican), fvy->at(ican), fvz->at(ican)};  //Neutron capture vertex
             float nTraveld     = ndistance.TakeDistance(RecoPrmVtx, NCapVtx);  //Neutron flight distance
             float d_MuStp_NCap = ndistance.TakeDistance(RecoMuStpVtx, NCapVtx);  //Distance b/w muon stopping and neutron capture vertices
@@ -613,6 +609,17 @@ int main(int argc, char **argv) {
 
   std::cout << "Neutrino events: " << nueev/5. << std::endl;
   std::cout << "Total   (osc.): " << SelectedCCQENeutrinos[5]+SelectedCC2p2hNeutrinos[5]+SelectedCCnonQENeutrinos[5]+SelectedNCNeutrinos[5] << std::endl;
+  std::cout << "Total #tagged neutrons: " << TotalTaggedN << std::endl;
+
+  std::cout << "  True neutron (CCQE)   : " << NTrueN_CCQE_osc << std::endl;
+  std::cout << "  True neutron (CC2p2h) : " << NTrueN_CC2p2h_osc << std::endl;
+  std::cout << "  True neutron (CCOther): " << NTrueN_CCOther_osc << std::endl;
+  std::cout << "  True neutron (NC)     : " << NTrueN_NC_osc << std::endl;
+  std::cout << "  True neutron (no osc. CCQE)   : " << NTrueN_CCQE << std::endl;
+  std::cout << "  True neutron (no osc. CC2p2h) : " << NTrueN_CC2p2h << std::endl;
+  std::cout << "  True neutron (no osc. CCOther): " << NTrueN_CCOther << std::endl;
+  std::cout << "  True neutron (no osc. NC)     : " << NTrueN_NC << std::endl;
+  std::cout << "Total #tagged noise: " << TotalTaggedNoise << std::endl;
   //std::cout << "No mu stop CCQE   : " << NoPrmMuEnd_CCQE << std::endl;
   //std::cout << "No mu stop CCnonQE: " << NoPrmMuEnd_CCnonQE << std::endl;
   //std::cout << "No mu stop NC     : " << NoPrmMuEnd_NC << std::endl;
@@ -765,7 +772,6 @@ int main(int argc, char **argv) {
 
     totalev = 0.;
     resultfile << " " << std::endl;
-    resultfile << "Total #tagged neutrons: " << TotalTaggedN << std::endl;
     resultfile << "===== #tagged-n as a function of Enu =====" << std::endl;
     for (int ibin=0; ibin<binnumber_nu; ibin++) {
       if (ibin<binnumber_nu-1) resultfile << "#tagged-n @ Enu [" << xEnubins[ibin] << ", " << xEnubins[ibin+1] << "): " << TaggedN_x_Enu[ibin] << std::endl;
@@ -829,17 +835,25 @@ int main(int argc, char **argv) {
     }
     resultfile << "Total: " << totalev << std::endl;
     resultfile << " " << std::endl;
+
+    totalev = 0.;
     resultfile << "===== #truth neutrons as a function of dn =====" << std::endl;
     for (int ibin=0; ibin<binnumber_n; ibin++) {
       if (ibin<binnumber_n-1) resultfile << "#truth n @ dn [" << xnTraveldbins[ibin] << ", " << xnTraveldbins[ibin+1] << "): " << TrueN_x_nTraveld[ibin] << std::endl;
       else resultfile << "#truth n @ dn > " << xnTraveldbins[ibin] << ": " << TrueN_x_nTraveld[ibin] << std::endl;
+      totalev += TrueN_x_nTraveld[ibin];
     }
+    resultfile << "Total: " << totalev << std::endl;
     resultfile << " " << std::endl;
+
+    totalev = 0.;
     resultfile << "===== #tagged neutrons as a function of dn =====" << std::endl;
     for (int ibin=0; ibin<binnumber_n; ibin++) {
       if (ibin<binnumber_n-1) resultfile << "#truth n @ dn [" << xnTraveldbins[ibin] << ", " << xnTraveldbins[ibin+1] << "): " << TaggedN_x_nTraveld[ibin] << std::endl;
       else resultfile << "#truth n @ dn > " << xnTraveldbins[ibin] << ": " << TaggedN_x_nTraveld[ibin] << std::endl;
+      totalev += TaggedN_x_nTraveld[ibin];
     }
+    resultfile << "Total: " << totalev << std::endl;
 
     ntagana.SummaryTruthInfoinSearch(WinMin, NTagSummary);
   }

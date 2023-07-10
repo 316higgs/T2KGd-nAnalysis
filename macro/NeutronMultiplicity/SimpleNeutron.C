@@ -54,6 +54,10 @@ void SimpleNeutron(bool beammode) {
 #endif
 
 
+  bool TruthNeutron = true;
+  //bool TruthNeutron = false;
+
+
   // Normalization factors
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
   TH1F* h1_skrate_numu_x_nue        = (TH1F*)fin_skrate->Get("skrate_numu_x_nue");
@@ -95,7 +99,7 @@ void SimpleNeutron(bool beammode) {
 
 
   /////////////  Truth neutrons  ////////////////
-#if 0
+#if TruthNeutron
   TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueNmultiplicity_mode0");
   TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueNmultiplicity_mode1");
   TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueNmultiplicity_mode2");
@@ -128,7 +132,7 @@ void SimpleNeutron(bool beammode) {
 #endif
 
   /////////////  Reco neutrons  ////////////////
-#if 1
+#if !TruthNeutron
   TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagNmultiplicity_mode0");
   TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagNmultiplicity_mode1");
   TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagNmultiplicity_mode2");
@@ -217,6 +221,61 @@ void SimpleNeutron(bool beammode) {
   h1_CCOther_nuebarbkg -> SetFillColor(kViolet-1);
   h1_NC_nuebarbkg      -> SetFillColor(kSpring-9);
 
+#if 0
+  float TaggedN_numu      = 0.;
+  float CCQE_numu = 0.;
+  float CC2p2h_numu = 0.;
+  float CCOther_numu = 0.;
+  float NC_numu = 0.;
+  float TaggedN_nuesig    = 0.;
+  float TaggedN_numubar   = 0.;
+  float TaggedN_nuebarsig = 0.;
+  float TaggedN_nuebkg    = 0.;
+  float TaggedN_nuebarbkg = 0.;
+  for (int ibin=0; ibin<50; ibin++) {
+  //for (int ibin=0; ibin<20; ibin++) {
+    CCQE_numu    += ibin*h1_CCQE_numu->GetBinContent(ibin+1);
+    CC2p2h_numu  += ibin*h1_CC2p2h_numu->GetBinContent(ibin+1);
+    CCOther_numu += ibin*h1_CCOther_numu->GetBinContent(ibin+1);
+    NC_numu      += ibin*h1_NC_numu->GetBinContent(ibin+1);
+
+    TaggedN_numu      += ibin*( h1_CCQE_numu->GetBinContent(ibin+1) + 
+                                h1_CC2p2h_numu->GetBinContent(ibin+1) +
+                                h1_CCOther_numu->GetBinContent(ibin+1) +
+                                h1_NC_numu->GetBinContent(ibin+1) );
+    TaggedN_nuesig    += ibin*( h1_CCQE_nuesig->GetBinContent(ibin+1) + 
+                                h1_CC2p2h_nuesig->GetBinContent(ibin+1) +
+                                h1_CCOther_nuesig->GetBinContent(ibin+1) +
+                                h1_NC_nuesig->GetBinContent(ibin+1) );
+    TaggedN_numubar   += ibin*( h1_CCQE_numubar->GetBinContent(ibin+1) + 
+                                h1_CC2p2h_numubar->GetBinContent(ibin+1) +
+                                h1_CCOther_numubar->GetBinContent(ibin+1) +
+                                h1_NC_numubar->GetBinContent(ibin+1) );
+    TaggedN_nuebarsig += ibin*( h1_CCQE_nuebarsig->GetBinContent(ibin+1) + 
+                                h1_CC2p2h_nuebarsig->GetBinContent(ibin+1) +
+                                h1_CCOther_nuebarsig->GetBinContent(ibin+1) +
+                                h1_NC_nuebarsig->GetBinContent(ibin+1) );
+    TaggedN_nuebkg    += ibin*( h1_CCQE_nuebkg->GetBinContent(ibin+1) + 
+                                h1_CC2p2h_nuebkg->GetBinContent(ibin+1) +
+                                h1_CCOther_nuebkg->GetBinContent(ibin+1) +
+                                h1_NC_nuebkg->GetBinContent(ibin+1) );
+    TaggedN_nuebarbkg += ibin*( h1_CCQE_nuebarbkg->GetBinContent(ibin+1) + 
+                                h1_CC2p2h_nuebarbkg->GetBinContent(ibin+1) +
+                                h1_CCOther_nuebarbkg->GetBinContent(ibin+1) +
+                                h1_NC_nuebarbkg->GetBinContent(ibin+1) );
+  }
+  std::cout << "CCQE   : " << CCQE_numu << std::endl;
+  std::cout << "CC2p2h : " << CC2p2h_numu << std::endl;
+  std::cout << "CCOther: " << CCOther_numu << std::endl;
+  std::cout << "NC     : " << NC_numu << std::endl;
+  std::cout << "[numu    -> numu   ]: " << TaggedN_numu << std::endl;
+  std::cout << "[numu    -> nue    ]: " << TaggedN_nuesig << std::endl;
+  std::cout << "[numubar -> numubar]: " << TaggedN_numubar << std::endl;
+  std::cout << "[numubar -> nuebar ]: " << TaggedN_nuebarsig << std::endl;
+  std::cout << "[nue     -> nue    ]: " << TaggedN_nuebkg << std::endl;
+  std::cout << "[nuebar  -> nuebar ]: " << TaggedN_nuebarbkg << std::endl;
+#endif
+
 
   /////  Normalizations  //////
 #if 1
@@ -300,8 +359,8 @@ void SimpleNeutron(bool beammode) {
   hs_Neutron ->GetYaxis()->SetTitleSize(0.038);
   hs_Neutron ->GetYaxis()->SetTitleOffset(1.3);
   hs_Neutron ->GetYaxis()->SetLabelSize(0.036);
-  //hs_Neutron ->GetXaxis()->SetTitle("Truth Neutron Multiplicity");
-  hs_Neutron ->GetXaxis()->SetTitle("Tagged Neutron Multiplicity");
+  if (TruthNeutron) hs_Neutron ->GetXaxis()->SetTitle("Truth Neutron Multiplicity");
+  else hs_Neutron ->GetXaxis()->SetTitle("Tagged Neutron Multiplicity");
   hs_Neutron ->GetYaxis()->SetTitle("Number of #nu Events");
   hs_Neutron -> Draw();
   c1->RedrawAxis();

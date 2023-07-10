@@ -9,7 +9,8 @@
 #define FV 22.5
 //#define POTSCALE 1.96  //Run1-10 FHC
 //#define POTSCALE 1.63  //Run1-10 RHC
-#define POTSCALE 0.17
+//#define POTSCALE 0.17
+#define POTSCALE 1
 
 void CaptureTime(bool beammode) {
 
@@ -198,7 +199,7 @@ void CaptureTime(bool beammode) {
 
 
   /////  Normalizations  //////
-#if 1
+#if 0
   h1_TrueCapTime_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_TrueCapTime_nuesig    -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
   h1_TrueCapTime_numubar   -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
@@ -354,7 +355,8 @@ void CaptureTime(bool beammode) {
 
   TLegend* legend1 = new TLegend(0.45, 0.55, 0.89, 0.89);
   legend1 -> SetTextSize(0.05);
-  legend1 -> AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (T2K Run11)}","");
+  //legend1 -> AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (T2K Run11)}","");
+  legend1 -> AddEntry((TObject*)0,"#kern[-0.35]{FHC 1R #mu sample}","");
   legend1 -> AddEntry(h1_TrueCapTime, "0.01% Gd MC", "F");
   legend1 -> AddEntry(f1_CapTime, "A*(1-e^{-B*t})*exp(-x/C)+D", "L");
   legend1 -> AddEntry((TObject*)0,TString::Format("#kern[-0.25]{Capture time = %.1f #pm %.1f #musec}", CapTime, CapTimeErr),"");
@@ -392,7 +394,8 @@ void CaptureTime(bool beammode) {
 
   TLegend* legend1 = new TLegend(0.45, 0.4, 0.89, 0.89);
   legend1 -> SetTextSize(0.05);
-  legend1 -> AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (T2K Run11)}","");
+  //legend1 -> AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (T2K Run11)}","");
+  legend1 -> AddEntry((TObject*)0,"#kern[-0.35]{FHC 1R #mu sample}","");
   legend1 -> AddEntry(h1_RecoCapTime_AccNoise_numu, "Acc. noise", "F");
   legend1 -> AddEntry(h1_RecoCapTime_dcye_numu, "Decay-e", "F");
   legend1 -> AddEntry(h1_RecoCapTime_H_numu, "H-n signal", "F");

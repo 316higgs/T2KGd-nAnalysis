@@ -10,7 +10,7 @@
 #define POTSCALE 0.17  //Run11 FHC
 //#define POTSCALE 1.63  //Run1-10 RHC
 
-#define rNoise 0.0337133
+#define rNoise 0.0349004
 
 enum class KnmtcType
 {
@@ -99,8 +99,8 @@ void AveTaggedN_x_kinematics(bool beammode) {
   TString KnmtcName = "MuPt";
   //TString KnmtcName = "Q2";
   //TString KnmtcName = "MuAngle";
-
   const int binnumber = SetHistoBinNumber(KnmtcName);
+
   //double xbins[binnumber] = {0, 0.5, 1., 1.5, 2.5, 5.};
   //double xbins[binnumber] = {0, 0.5, 1.0, 2.0, 6.0};
   double xbins[binnumber] = {0, 0.25, 0.5, 0.75, 1.5};
@@ -316,16 +316,7 @@ void AveTaggedN_x_kinematics(bool beammode) {
   //for (int ibin=0; ibin<binnumber-1; ibin++) std::cout << "Bin[" << ibin << "]: " << TaggedN_x_kinematics[ibin] << std::endl;
 
   TH1F* h1_TagN_merge = new TH1F("h1_NTagEff_merge", "", binnumber-1, xbins);
-  /*h1_NTagEff_merge -> Add(h1_TagN_CCQE_numu, 1.);
-  h1_NTagEff_merge -> Add(h1_TagN_CCQE_numubar, 1.);
-  h1_NTagEff_merge -> Add(h1_TagN_CC2p2h_numu, 1.);
-  h1_NTagEff_merge -> Add(h1_TagN_CC2p2h_numubar, 1.);
-  h1_NTagEff_merge -> Add(h1_TagN_CCOther_numu, 1.);
-  h1_NTagEff_merge -> Add(h1_TagN_CCOther_numubar, 1.);
-  h1_NTagEff_merge -> Add(h1_TagN_NC_numu, 1.);
-  h1_NTagEff_merge -> Add(h1_TagN_NC_numubar, 1.);*/
-  //h1_NTagEff_merge -> Add(h1_TagN_Noise_numu, 1.);
-  //h1_NTagEff_merge -> Add(h1_TagN_Noise_numubar, 1.);
+
   h1_NTagEff_merge -> Add(h1_TagN_NC_nuebarbkg);
   h1_NTagEff_merge -> Add(h1_TagN_NC_nuebkg);
   h1_NTagEff_merge -> Add(h1_TagN_NC_nuebarsig);
@@ -488,14 +479,6 @@ void AveTaggedN_x_kinematics(bool beammode) {
 #endif
 
   TH1F* h1_TrueN_merge = new TH1F("h1_TrueN_merge", "", binnumber-1, xbins);
-  /*h1_TrueN_merge -> Add(h1_TrueN_CCQE_numu, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_CCQE_numubar, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_CC2p2h_numu, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_CC2p2h_numubar, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_CCOther_numu, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_CCOther_numubar, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_NC_numu, 1.);
-  h1_TrueN_merge -> Add(h1_TrueN_NC_numubar, 1.);*/
   h1_TrueN_merge -> Add(h1_TrueN_NC_nuebarbkg);
   h1_TrueN_merge -> Add(h1_TrueN_NC_nuebkg);
   h1_TrueN_merge -> Add(h1_TrueN_NC_nuebarsig);
@@ -661,14 +644,7 @@ void AveTaggedN_x_kinematics(bool beammode) {
 #endif
 
   TH1F* h1_N1Rmu_merge = new TH1F("h1_N1Rmu_merge", "", binnumber-1, xbins);
-  /*h1_N1Rmu_merge -> Add(h1_N1Rmu_CCQE_numu, 1.);
-  h1_N1Rmu_merge -> Add(h1_N1Rmu_CCQE_numubar, 1.);
-  h1_N1Rmu_merge -> Add(h1_N1Rmu_CC2p2h_numu, 1.);
-  h1_N1Rmu_merge -> Add(h1_N1Rmu_CC2p2h_numubar, 1.);
-  h1_N1Rmu_merge -> Add(h1_N1Rmu_CCOther_numu, 1.);
-  h1_N1Rmu_merge -> Add(h1_N1Rmu_CCOther_numubar, 1.);
-  h1_N1Rmu_merge -> Add(h1_N1Rmu_NC_numu, 1.);
-  h1_N1Rmu_merge -> Add(h1_N1Rmu_NC_numubar, 1.);*/
+
   h1_N1Rmu_merge -> Add(h1_NC_nuebarbkg);
   h1_N1Rmu_merge -> Add(h1_NC_nuebkg);
   h1_N1Rmu_merge -> Add(h1_NC_nuebarsig);
@@ -711,10 +687,10 @@ void AveTaggedN_x_kinematics(bool beammode) {
   TH1F* h1_AveTaggedN_x_kinematics = new TH1F("h1_AveTaggedN_x_kinematics", "", binnumber-1, xbins);
   h1_AveTaggedN_x_kinematics -> SetLineColor(kViolet-7);
   h1_AveTaggedN_x_kinematics -> SetLineWidth(2);
-  h1_AveTaggedN_x_kinematics -> SetFillColor(kViolet-9);
-  h1_AveTaggedN_x_kinematics -> SetFillStyle(3004);
+  //h1_AveTaggedN_x_kinematics -> SetFillColor(kViolet-9);
+  //h1_AveTaggedN_x_kinematics -> SetFillStyle(3004);
   h1_AveTaggedN_x_kinematics -> SetStats(0);
-  float AveTaggedN_x_kinematics[binnumber];
+  double AveTaggedN_x_kinematics[binnumber];
   for (int ibin=0; ibin<binnumber-1; ibin++) {
     //AveTaggedN_x_kinematics[ibin] = ( TaggedN_x_kinematics[ibin] - rNoise*N1Rmu_x_kinematics[ibin] )/N1Rmu_x_kinematics[ibin];
     //AveTaggedN_x_kinematics[ibin] /= NTagEff_x_kinematics[ibin];
@@ -723,6 +699,36 @@ void AveTaggedN_x_kinematics(bool beammode) {
   }
   h1_AveTaggedN_x_kinematics -> Sumw2();
   h1_AveTaggedN_x_kinematics -> Divide(h1_Denominator);
+
+
+#if 1
+  TGraphErrors* g_errbnd[binnumber];
+  double x0[1] = {(0.+0.25)/2.};
+  double x1[1] = {(0.25+0.5)/2.};
+  double x2[1] = {(0.5+0.75)/2.};
+  double x3[1] = {(0.75+1.5)/2.};
+  double x4[1] = {(1.5+2.0)/2.};
+  double e_x0[1] = {0.};
+  double e_x1[1] = {0.};
+  double e_x2[1] = {0.};
+  double e_x3[1] = {0.};
+  double e_x4[1] = {0.};
+  double AveTaggedN0[1] = {1.37};
+  double AveTaggedN1[1] = {1.68};
+  double AveTaggedN2[1] = {2.38};
+  double AveTaggedN3[1] = {3.99};
+  double AveTaggedN4[1] = {3.76};
+  double e_AveTaggedN0[2] = {0.614, 0.614};
+  double e_AveTaggedN1[2] = {0.583};
+  double e_AveTaggedN2[2] = {1.08};
+  double e_AveTaggedN3[2] = {2.56};
+  double e_AveTaggedN4[2] = {26.4};
+  g_errbnd[0] = new TGraphErrors(1, x0, AveTaggedN0, e_x0, e_AveTaggedN0);
+  g_errbnd[1] = new TGraphErrors(1, x1, AveTaggedN1, e_x1, e_AveTaggedN1);
+  g_errbnd[2] = new TGraphErrors(1, x2, AveTaggedN2, e_x2, e_AveTaggedN2);
+  g_errbnd[3] = new TGraphErrors(1, x3, AveTaggedN3, e_x3, e_AveTaggedN3);
+  g_errbnd[4] = new TGraphErrors(1, x4, AveTaggedN4, e_x4, e_AveTaggedN4);
+#endif
 
 
 #if 1
@@ -741,9 +747,20 @@ void AveTaggedN_x_kinematics(bool beammode) {
   if (KnmtcName=="Q2")      h1_AveTaggedN_x_kinematics->GetXaxis()->SetTitle("Reconstructed Q^{2}(CCQE Assumption) [GeV^{2}]");
   if (KnmtcName=="MuAngle") h1_AveTaggedN_x_kinematics->GetXaxis()->SetTitle("Cosine of Angle b/w #mu and Beam Directions");
   h1_AveTaggedN_x_kinematics->GetYaxis()->SetTitle("Mean Neutron Multiplicity");
-  //h1_AveTaggedN_x_kinematics -> Draw("histo");
-  h1_AveTaggedN_x_kinematics -> Draw("E1");
-  h1_AveTaggedN_x_kinematics -> Draw("hist same");
+  h1_AveTaggedN_x_kinematics -> Draw("histo");
+  //h1_AveTaggedN_x_kinematics -> Draw("E1");
+  //h1_AveTaggedN_x_kinematics -> Draw("");
+  //h1_AveTaggedN_x_kinematics -> Draw("hist same");
+#if 1
+  for (int i=0; i<binnumber; i++) {
+    g_errbnd[i] -> SetFillStyle(3244);
+    g_errbnd[i] -> SetFillColor(kViolet+1);
+    g_errbnd[i] -> SetLineColor(kViolet-7);
+    g_errbnd[i] -> SetLineWidth(2);
+    //g_errbnd[i] -> Draw("3 SAME");
+    g_errbnd[i] -> Draw("E1 SAME");
+  }
+#endif
   c1->RedrawAxis();
   
   TLatex* text1 = new TLatex(0.12, 0.82, "T2K FHC Run11 (0.01% Gd)");
@@ -751,13 +768,13 @@ void AveTaggedN_x_kinematics(bool beammode) {
   text1 -> SetTextSize(0.05);
   TLatex* text2 = new TLatex(0.14, 0.77, "-1R #mu sample");
   text2 -> SetNDC(1);
-  text2 -> SetTextSize(0.03);
-  TLatex* text3 = new TLatex(0.14, 0.72, "-Subtracted acc. bkg. & decay-e");
+  text2 -> SetTextSize(0.04);
+  TLatex* text3 = new TLatex(0.14, 0.72, "-Acc. bkg. & decay-e subtracted");
   text3 -> SetNDC(1);
-  text3 -> SetTextSize(0.03);
-  TLatex* text4 = new TLatex(0.14, 0.67, "-Corrected tagging efficiency");
+  text3 -> SetTextSize(0.04);
+  TLatex* text4 = new TLatex(0.14, 0.67, "-Tagging efficiency corrected");
   text4 -> SetNDC(1);
-  text4 -> SetTextSize(0.03);
+  text4 -> SetTextSize(0.04);
   text1 -> Draw();
   text2 -> Draw();
   text3 -> Draw();
