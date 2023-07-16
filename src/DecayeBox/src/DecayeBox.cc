@@ -9,7 +9,7 @@ void DecayeBox::SetHistoFrame() {
   //h1_TaggedDecaye = new TH1F("h1_TaggedDecaye", "h1_TaggedDecaye; Number of Tagged Decay-e; Number of Neutrino Events", 6, 0, 6);
   h1_TaggedDecaye_CCQE = new TH1F("h1_TaggedDecaye_CCQE", "h1_TaggedDecaye@CCQE; Number of Tagged Decay-e; Number of Neutrino Events", 6, 0, 6);
   h1_TaggedDecaye_CCpi = new TH1F("h1_TaggedDecaye_CCpi", "h1_TaggedDecaye@CCPi; Number of Tagged Decay-e; Number of Neutrino Events", 6, 0, 6);
-  h1_mintimediff       = new TH1F("h1_mintimediff", "h1_mintimediff; dt-tscnd[#musec]; Number of Events", 100, -0.006, 0.006);
+  h1_mintimediff       = new TH1F("h1_mintimediff", "h1_mintimediff; dt-tscnd[#musec]; Number of Events", 2000, -0.006, 0.006);
   h1_DcyVtxReso        = new TH1F("h1_DcyVtxReso", "h1_DcyVtxReso; Decay-e Vertex Resolution[cm]; Number of Events", 2000, 0, 200);
   h1_pscnd             = new TH1F("h1_pscnd", "h1_pscnd; pscnd[MeV]; Number of Events", 80, 0, 80);
 
@@ -364,7 +364,7 @@ int DecayeBox::GetDecayeInBox(CC0PiNumu* numu,
     //float dt  = numu->var<float>("fq1rt0", 1, jsub) - numu->var<float>("fq1rt0", 2, 0);  //wrong
     float dt  = numu->var<float>("fq1rt0", jsub, FQ_EHYP) - numu->var<float>("fq1rt0", 0, FQ_MUHYP); //new
     float N50 = numu->var<int>("fqn50", jsub);
-    //std::cout << " Matched fiTQun decya-e in the box: " << MatchedfQdcye << std::endl;
+    //std::cout << " Matched fiTQun decya-e in the box: " << MatchedBoxfQdcye << std::endl;
     if (histofill==true) h2_dtn50 -> Fill(dt/1000., N50);
     TaggedDecaye++;
 
@@ -635,12 +635,15 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
       h2_DcyVtxReso_x_pscnd -> Fill(vtxresolution, min_pscnd);
       h2_DcyVtxReso_x_dwall -> Fill(vtxresolution, dwall/100.);
 
-      //if (min_dt/1000. < dtCut && min_N50 >= N50CutMin && min_N50 <= N50CutMax) MatchedfQdcye++;
-      //if (inbox==true) MatchedfQdcye++;
+      //if (min_dt/1000. < dtCut && min_N50 >= N50CutMin && min_N50 <= N50CutMax) MatchedBoxfQdcye++;
+      //if (inbox==true) MatchedBoxfQdcye++;
       if (inbox==true) {
-        if (mode<31) MatchedfQdcye += OscProb;
-        else MatchedfQdcye++;
+        if (mode<31) MatchedBoxfQdcye += OscProb;
+        else MatchedBoxfQdcye++;
       }
+
+      if (mode<31) MatchedfQdcye += OscProb;
+      else MatchedfQdcye++;
     }
 
     //Decrement the number of truth particles at last

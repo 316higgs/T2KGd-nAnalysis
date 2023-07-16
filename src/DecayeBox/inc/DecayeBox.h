@@ -45,6 +45,7 @@ float AllTrueDcye   = 0.;
 float AllfQdcye     = 0.;
 float BoxfQdcye     = 0.;
 float MatchedfQdcye = 0.;
+float MatchedBoxfQdcye = 0.;
 
 int DcyE_CCQE = 0;
 int DcyE_CC2p2h = 0;

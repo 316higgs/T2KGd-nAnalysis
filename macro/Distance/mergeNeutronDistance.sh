@@ -9,6 +9,7 @@
 BEAMMODE=true
 #BEAMMODE=false
 
+#root -l 'TrueDistance.C('${BEAMMODE}')'
 #root -l 'NeutronDistance_prm_x_n.C('${BEAMMODE}')'
 #root -l 'NeutronDistance_mu_x_n.C('${BEAMMODE}')'
 root -l 'NeutronSrcLabelDistance.C('${BEAMMODE}')'

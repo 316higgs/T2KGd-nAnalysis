@@ -8,23 +8,22 @@ void DistanceViewer::SetHistoFrame() {
   h1_truedistance_CCQE    = new TH1F("h1_truedistance_CCQE", "", 10, 0, 5);
   h1_truedistance_CC2p2h  = new TH1F("h1_truedistance_CC2p2h", "", 10, 0, 5);
   h1_truedistance_CCOther = new TH1F("h1_truedistance_CCOther", "", 10, 0, 5);
-  h1_truedistance_CCnonQE = new TH1F("h1_truedistance_CCnonQE", "", 10, 0, 5);
   h1_truedistance_NC      = new TH1F("h1_truedistance_NC", "", 10, 0, 5);
 
-  h1_truedistance_nu_n      = new TH1F("h1_truedistance_nu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
-  h1_truedistance_mu_n      = new TH1F("h1_truedistance_mu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
-  h1_truedistance_prm_nu_n  = new TH1F("h1_truedistance_prm_nu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
-  h1_truedistance_prm_mu_n  = new TH1F("h1_truedistance_prm_mu_n", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
-  h1_truedistance_nu_BefSIn = new TH1F("h1_truedistance_nu_BefSIn", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
-  h1_truedistance_nu_SIn    = new TH1F("h1_truedistance_nu_SIn", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 50, 0, DistanceMax);
+  h1_truedistance_nu_n     = new TH1F("h1_truedistance_nu_n", "", 50, 0, DistanceMax);
+  h1_truedistance_mu_n     = new TH1F("h1_truedistance_mu_n", "", 50, 0, DistanceMax);
+  h1_truedistance_prm_nu_n = new TH1F("h1_truedistance_prm_nu_n", "", 50, 0, DistanceMax);
+  h1_truedistance_prm_mu_n = new TH1F("h1_truedistance_prm_mu_n", "", 50, 0, DistanceMax);
+  h1_truedistance_BefSIn   = new TH1F("h1_truedistance_BefSIn", "", 50, 0, DistanceMax);
+  h1_truedistance_SIn      = new TH1F("h1_truedistance_SIn", "", 50, 0, DistanceMax);
   //h1_TruePrmMuEnd_x_TagNCap = new TH1F("h1_TruePrmMuEnd_x_TagNCap", "Neutron-related distance; Distance[m]; Number of Events", 50, 0, DistanceMax);
 
-  h1_truedistance_mudecay = new TH1F("h1_truedistance_mudecay", "Truth distance of #mu decay; Distance[m]; Number of Events", 100, 0, DistanceMax);
-  h1_truedistance_pidecay = new TH1F("h1_truedistance_pidecay", "Truth distance of #pi^{+} decay; Distance[m]; Number of Events", 100, 0, DistanceMax);
-  for (int i=0; i<6; i++) {
-    h1_TruePrmMuEnd_x_TagNCap[i] = new TH1F(TString::Format("h1_TruePrmMuEnd_x_TagNCap_mode%d", i), "Neutron-related distance; Distance[m]; Number of Events", 50, 0, DistanceMax);
-    h1_RecoPrmMuEnd_x_TagNCap[i] = new TH1F(TString::Format("h1_RecoPrmMuEnd_x_TagNCap_mode%d", i), "Neutron-related distance; Distance[m]; Number of Events", 50, 0, 5);
-    h1_Erec[i] = new TH1F(TString::Format("h1_Erec_mode%d", i), "Reco. #nu Energy; Reconstructed #nu Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
+  h1_truedistance_mudecay = new TH1F("h1_truedistance_mudecay", "", 100, 0, DistanceMax);
+  h1_truedistance_pidecay = new TH1F("h1_truedistance_pidecay", "", 100, 0, DistanceMax);
+  for (int i=0; i<4; i++) {
+    h1_TruePrmMuEnd_x_TagNCap[i] = new TH1F(TString::Format("h1_TruePrmMuEnd_x_TagNCap_mode%d", i), "", 50, 0, DistanceMax);
+    h1_RecoPrmMuEnd_x_TagNCap[i] = new TH1F(TString::Format("h1_RecoPrmMuEnd_x_TagNCap_mode%d", i), "", 50, 0, 5);
+    h1_Erec[i] = new TH1F(TString::Format("h1_Erec_mode%d", i), "", 60, 0, 3);
   }
   h1_TruePrmMuEnd_x_TagNCap_MuN   = new TH1F("h1_TruePrmMuEnd_x_TagNCap_MuN", "Neutron-related distance; Distance[m]; Number of Events", 50, 0, DistanceMax);
   h1_TruePrmMuEnd_x_TagNCap_NuN   = new TH1F("h1_TruePrmMuEnd_x_TagNCap_NuN", "Neutron-related distance; Distance[m]; Number of Events", 50, 0, DistanceMax);
@@ -79,48 +78,6 @@ void DistanceViewer::SetHistoFrame() {
 }
 
 void DistanceViewer::SetHistoFormat() {
-  h1_truedistance -> SetLineWidth(2);
-  h1_truedistance -> SetLineColor(kAzure-4);
-  h1_truedistance -> SetTitleOffset(1.4, "Y");
-  h1_truedistance -> SetTitleSize(0.035, "Y");
-  h1_truedistance -> SetLabelSize(0.033, "Y");
-
-  h1_truedistance_CCQE -> SetLineWidth(2);
-  h1_truedistance_CCQE -> SetLineColor(kAzure-1);
-  h1_truedistance_CCQE -> SetFillColor(kAzure-1);
-  h1_truedistance_CCQE -> SetTitleOffset(1.4, "Y");
-  h1_truedistance_CCQE -> SetTitleSize(0.035, "Y");
-  h1_truedistance_CCQE -> SetLabelSize(0.033, "Y");
-
-  h1_truedistance_CC2p2h -> SetLineWidth(2);
-  h1_truedistance_CC2p2h -> SetLineColor(kAzure-5);
-  h1_truedistance_CC2p2h -> SetFillColor(kAzure-5);
-  h1_truedistance_CC2p2h -> SetTitleOffset(1.4, "Y");
-  h1_truedistance_CC2p2h -> SetTitleSize(0.035, "Y");
-  h1_truedistance_CC2p2h -> SetLabelSize(0.033, "Y");
-
-  h1_truedistance_CCOther -> SetLineWidth(2);
-  h1_truedistance_CCOther -> SetLineColor(kCyan-6);
-  h1_truedistance_CCOther -> SetFillColor(kCyan-6);
-  h1_truedistance_CCOther -> SetTitleOffset(1.4, "Y");
-  h1_truedistance_CCOther -> SetTitleSize(0.035, "Y");
-  h1_truedistance_CCOther -> SetLabelSize(0.033, "Y");
-
-  h1_truedistance_CCnonQE -> SetLineWidth(2);
-  h1_truedistance_CCnonQE -> SetLineColor(kCyan-8);
-  h1_truedistance_CCnonQE -> SetFillColor(kCyan-8);
-  h1_truedistance_CCnonQE -> SetTitleOffset(1.4, "Y");
-  h1_truedistance_CCnonQE -> SetTitleSize(0.035, "Y");
-  h1_truedistance_CCnonQE -> SetLabelSize(0.033, "Y");
-
-  h1_truedistance_NC -> SetLineWidth(2);
-  h1_truedistance_NC -> SetLineColor(kTeal+9);
-  h1_truedistance_NC -> SetFillColor(kTeal+9);
-  h1_truedistance_NC -> SetTitleOffset(1.4, "Y");
-  h1_truedistance_NC -> SetTitleSize(0.035, "Y");
-  h1_truedistance_NC -> SetLabelSize(0.033, "Y");
-
-
   h1_truedistance_nu_n -> SetLineWidth(2);
   h1_truedistance_nu_n -> SetLineColor(kRed-8);
   h1_truedistance_nu_n -> SetTitleOffset(1.4, "Y");
@@ -184,28 +141,28 @@ float DistanceViewer::GetTruthDistance(CC0PiNumu *numu,
     	                                 float primaryvtxz) 
 {
   int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
+
   float d_x = std::fabs(capturevtxx - primaryvtxx);
   float d_y = std::fabs(capturevtxy - primaryvtxy);
   float d_z = std::fabs(capturevtxz - primaryvtxz);
   float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
-  h1_truedistance -> Fill(d/100.);
+  if (mode<31) h1_truedistance -> Fill(d/100., OscProb);
+  else h1_truedistance -> Fill(d/100.);
 
-  if (mode==1)             h1_truedistance_CCQE    -> Fill(d/100.);
-  //if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30))
-  if (mode>=2 && mode<=30) h1_truedistance_CCnonQE -> Fill(d/100.);
-  if (mode>=2 && mode<=10) h1_truedistance_CC2p2h  -> Fill(d/100.);
-  if (mode>10 && mode<=30) h1_truedistance_CCOther -> Fill(d/100.);
+  if (mode==1)             h1_truedistance_CCQE    -> Fill(d/100., OscProb);
+  //if (mode>=2 && mode<=30) h1_truedistance_CCnonQE -> Fill(d/100.);
+  if (mode>=2 && mode<=10) h1_truedistance_CC2p2h  -> Fill(d/100., OscProb);
+  if (mode>10 && mode<=30) h1_truedistance_CCOther -> Fill(d/100., OscProb);
   if (mode>=31)            h1_truedistance_NC      -> Fill(d/100.);
-  //if (mode==13)        h1_truedistance_CCRESdeltap  -> Fill(d/100.);
-  //if (mode==11)        h1_truedistance_CCRESdeltapp -> Fill(d/100.);
-  //if (mode==12)        h1_truedistance_CCRESdelta0  -> Fill(d/100.);
   return d;
 }
 
 
 
 //Pre-selection efficiency as a function of the distance
-void DistanceViewer::GetPreEffDistance(int tagindex,
+void DistanceViewer::GetPreEffDistance(CC0PiNumu *numu,
+                                       int tagindex,
                                        UInt_t matchtrue,
                                        float capturevtxx,
                                        float capturevtxy,
@@ -214,20 +171,27 @@ void DistanceViewer::GetPreEffDistance(int tagindex,
                                        float primaryvtxy,
                                        float primaryvtxz) 
 {
+  int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
+
   //Find matchtrue match with tagindex
   if (tagindex!=-1 && matchtrue==(UInt_t)tagindex) {
     float d_x = std::fabs(capturevtxx - primaryvtxx);
     float d_y = std::fabs(capturevtxy - primaryvtxy);
     float d_z = std::fabs(capturevtxz - primaryvtxz);
     float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
-    h1_Candidatetruedistance -> Fill(d/100.);
+    
+    if (mode<31) h1_Candidatetruedistance -> Fill(d/100., OscProb);
+    else h1_Candidatetruedistance -> Fill(d/100.);
 
-    h1_PreEff_dist -> Fill(d/100.);
+    if (mode<31) h1_PreEff_dist -> Fill(d/100., OscProb);
+    else h1_PreEff_dist -> Fill(d/100.);
   }
 }
 
 //NN and overall tagging efficiencies as a function of the distance
-void DistanceViewer::GetOverallEffDistance(int ith,
+void DistanceViewer::GetOverallEffDistance(CC0PiNumu *numu,
+                                           int ith,
                                            int tagindex,
                                            UInt_t matchtrue,
                                            float capturevtxx,
@@ -237,6 +201,8 @@ void DistanceViewer::GetOverallEffDistance(int ith,
                                            float primaryvtxy,
                                            float primaryvtxz)
 {
+  int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
 
   //Find kentry match with jentry
   if (tagindex!=-1 && matchtrue==(UInt_t)tagindex) {
@@ -245,10 +211,14 @@ void DistanceViewer::GetOverallEffDistance(int ith,
     float d_z = std::fabs(capturevtxz - primaryvtxz);
     float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
 
-    h1_Tagtruedistance[ith] -> Fill(d/100.);
+    if (mode<31) h1_Tagtruedistance[ith] -> Fill(d/100., OscProb);
+    else h1_Tagtruedistance[ith] -> Fill(d/100.);
 
-    h1_OverallEff_dist[ith] -> Fill(d/100.);
-    h1_NNEff_dist[ith]      -> Fill(d/100.);
+    if (mode<31) h1_OverallEff_dist[ith] -> Fill(d/100., OscProb);
+    else h1_OverallEff_dist[ith] -> Fill(d/100.);
+
+    if (mode<31) h1_NNEff_dist[ith] -> Fill(d/100., OscProb);
+    else h1_NNEff_dist[ith] -> Fill(d/100.);
   }
 
 }
@@ -264,7 +234,6 @@ void DistanceViewer::WritePlots() {
   h1_truedistance_CCQE    -> Write();
   h1_truedistance_CC2p2h  -> Write();
   h1_truedistance_CCOther -> Write();
-  h1_truedistance_CCnonQE -> Write();
   h1_truedistance_NC      -> Write();
 
   h1_truedistance_mudecay   -> Write();
@@ -273,10 +242,10 @@ void DistanceViewer::WritePlots() {
   h1_truedistance_mu_n      -> Write();
   h1_truedistance_prm_nu_n  -> Write();
   h1_truedistance_prm_mu_n  -> Write();
-  h1_truedistance_nu_BefSIn -> Write();
-  h1_truedistance_nu_SIn    -> Write();
+  h1_truedistance_BefSIn    -> Write();
+  h1_truedistance_SIn       -> Write();
 
-  for (int i=0; i<6; i++) {
+  for (int i=0; i<4; i++) {
     h1_TruePrmMuEnd_x_TagNCap[i] -> Write();
     h1_RecoPrmMuEnd_x_TagNCap[i] -> Write();
     h1_Erec[i] -> Write();

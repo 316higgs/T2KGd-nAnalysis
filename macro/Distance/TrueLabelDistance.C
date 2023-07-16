@@ -8,6 +8,7 @@
 #define FV 22.5
 #define POTSCALE 1.96  //Run1-10 FHC
 //#define POTSCALE 1.63  //Run1-10 RHC
+//#define POTSCALE 0.17  //Run1-10 FHC
 
 void TrueLabelDistance(bool beammode) {
 

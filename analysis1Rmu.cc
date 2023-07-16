@@ -280,6 +280,11 @@ int main(int argc, char **argv) {
   int NoPrmMuEnd_NC = 0;
   const int DCYENUM = 1;
 
+  int BefSIn = 0;
+  int SIn = 0;
+  int MuN = 0;
+  int TrueN = 0;
+
 
   //Process
   if (MCTypeKeyword=="-MCType") {
@@ -477,10 +482,7 @@ int main(int argc, char **argv) {
 
       //Truth distance distribution
       for (UInt_t jentry=0; jentry<DistFromPV->size(); ++jentry) {
-        if (Type->at(jentry)==2 && DWall->at(jentry)>0.) {
-          ndistance.GetTruthDistance(numu, tagvx->at(jentry), tagvy->at(jentry), tagvz->at(jentry),
-                                     vecvx, vecvy, vecvz);
-        }
+        if (Type->at(jentry)==2) ndistance.GetTruthDistance(numu, tagvx->at(jentry), tagvy->at(jentry), tagvz->at(jentry), vecvx, vecvy, vecvz);
       }
 
       ntagana.GetTruthNeutronsinSearch(t->size(), Type, t, 3., E, DWall);
@@ -778,7 +780,7 @@ int main(int argc, char **argv) {
           //Fill corresponded truth distance
           for (UInt_t kentry=0; kentry<DistFromPV->size(); ++kentry) {
             if (Type->at(kentry)==2 && DWall->at(kentry)>0.) {
-              ndistance.GetPreEffDistance(TagIndex->at(jentry), kentry,
+              ndistance.GetPreEffDistance(numu, TagIndex->at(jentry), kentry,
                                           tagvx->at(kentry), tagvy->at(kentry), tagvz->at(kentry),
                                           vecvx, vecvy, vecvz);
             }
@@ -813,7 +815,7 @@ int main(int argc, char **argv) {
                 //Fill corresponded truth distance
                 for (UInt_t kentry=0; kentry<DistFromPV->size(); ++kentry) {
                   if (Type->at(kentry)==2 && DWall->at(kentry)>0.) {
-                    ndistance.GetOverallEffDistance(ith, TagIndex->at(jentry), kentry,
+                    ndistance.GetOverallEffDistance(numu, ith, TagIndex->at(jentry), kentry,
                                                   tagvx->at(kentry), tagvy->at(kentry), tagvz->at(kentry),
                                                   vecvx, vecvy, vecvz);
                   }
@@ -826,7 +828,7 @@ int main(int argc, char **argv) {
                 //Fill corresponded truth distance
                 for (UInt_t kentry=0; kentry<DistFromPV->size(); ++kentry) {
                   if (Type->at(kentry)==2 && DWall->at(kentry)>0.) {
-                    ndistance.GetOverallEffDistance(ith, TagIndex->at(jentry), kentry,
+                    ndistance.GetOverallEffDistance(numu, ith, TagIndex->at(jentry), kentry,
                                                   tagvx->at(kentry), tagvy->at(kentry), tagvz->at(kentry),
                                                   vecvx, vecvy, vecvz);
                   }
@@ -838,6 +840,58 @@ int main(int argc, char **argv) {
 
       } //threshold scan
 
+
+      int TrueMuN = 0;
+      float MuNCapVtx[3]   = {0., 0., 0.};  //neutron(from primary interaction) capture vertex
+
+      ///////////  True distance with respect to each neutron source  /////////////
+      GetNeutrinoInteraction(ientry, intmode);
+      ///  Before FSI, detector simulation
+      std::cout << "[    NEWORK    ]" << std::endl;
+      for (int iprm=0; iprm<numu->var<int>("numnu"); iprm++) {
+        std::cout << "[### " << ientry 
+                  << " ###] Primary[" << iprm+1 << "] " << numu->var<int>("ipnu", iprm) 
+                  << " P = " << numu->var<float>("pnu", iprm)*1000. << " MeV" << std::endl;
+      }
+      std::cout << "----------------------" << std::endl;
+      std::cout << "[    VCWORK    ]" << std::endl;
+      for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+        std::cout << "[### " << ientry 
+                  << " ###] Primary[" << iprm+1 << "] " << numu->var<int>("Ipvc", iprm) 
+                  << " Iorgvc = [" << Iorgvc[iprm] 
+                  << "] Ichvc = [" << numu->var<int>("Ichvc", iprm)
+                  << "] P = [" << Pvc[iprm][0] << ", " << Pvc[iprm][1] << ", " << Pvc[iprm][2] << "] MeV" << std::endl;
+      }
+      std::cout << "----------------------" << std::endl;
+      std::cout << "[    CONVVECT    ]" << std::endl;
+      for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
+        /*std::cout << "[### " << ientry 
+                  << " ###] Secondary[" << iscnd+1 << "] " << numu->var<int>("iprtscnd", iscnd) 
+                  << " lmecscnd = " << numu->var<int>("lmecscnd", iscnd)
+                  << " iprntprt = [" << numu->var<int>("iprntprt", iscnd) 
+                  << "] iprntidx = [" << iprntidx[iscnd]
+                  << "] ichildidx = [" << ichildidx[iscnd]
+                  << "] vtxscnd = [" << numu->var<float>("vtxscnd", iscnd, 0) << ", " << numu->var<float>("vtxscnd", iscnd, 1) << ", " << numu->var<float>("vtxscnd", iscnd, 2)
+                  << "] cm, vtxprnt = [" << vtxprnt[iscnd][0] << ", " << vtxprnt[iscnd][1] << ", " << vtxprnt[iscnd][2]
+                  << "] cm, pprntinit = [" << pprntinit[iscnd][0] << ", " << pprntinit[iscnd][1] << ", " << pprntinit[iscnd][2]
+                  << "] MeV, P = [" << pscnd[iscnd][0] << ", " << pscnd[iscnd][1] << ", " << pscnd[iscnd][2] << "] MeV" << std::endl;*/
+        if (ntagana.GetTrueMuNCapVtx(iscnd, numu, ichildidx, MuNCapVtx)) TrueMuN++;
+      }
+      int TrueBefSI = ntagana.GetTrueNBefSI(numu, iprntidx, vtxprnt);
+      //int TrueAftSI = ntagana.GetTrueNAftSI(numu, iprntidx, vtxprnt);
+      int TrueAftSI = ntagana.GetTrueNAftSI(numu, iprntidx, vtxprnt, pprntinit);
+      std::cout << "#Neutron up to FSI: " << TrueBefSI << std::endl;
+      std::cout << "#Neutron from SI  : " << TrueAftSI << std::endl;
+      std::cout << "#Neutron from mu  : " << TrueMuN << std::endl;
+      std::cout << "NTrueN: " << NTrueN << std::endl;
+      if (NTrueN-(TrueBefSI+TrueAftSI+TrueMuN)!=0) std::cout << "\e[38;5;09m\e[1m BUG? \e[0m" << std::endl;
+      std::cout << " " << std::endl;
+      BefSIn += TrueBefSI;
+      SIn    += TrueAftSI;
+      MuN    += TrueMuN;
+      TrueN  += NTrueN;
+      
+
     } //New 1R muon selection
 
   }
@@ -847,8 +901,8 @@ int main(int argc, char **argv) {
   //std::cout << "No mu stop NC     : " << NoPrmMuEnd_NC << std::endl;
 
   
-  std::cout << "No nlike: " << test1 << std::endl;
-  std::cout << "More than one nlike: " << test2 << std::endl;
+  //std::cout << "No nlike: " << test1 << std::endl;
+  //std::cout << "More than one nlike: " << test2 << std::endl;
   /*std::cout << "CCQE w/ tagged neutrons: " << CCQEwTaggedNeutrons << std::endl;
   std::cout << "All Primary Neutrons: " << AllPrimaryNeutrons << std::endl;
   std::cout << "All SI Neutrons: " << AllSINeutrons << std::endl;
@@ -857,9 +911,10 @@ int main(int argc, char **argv) {
   std::cout << "CCQE w/ tagged neutrons(nonzero truth secondary neutrons): " << CCQEwTaggedNeutrons_scnd << std::endl;
   */
 
-  //std::cout << "Number of entire dt vs N50: " << TaggedDecaye << std::endl;
-  //std::cout << "Number of Tagged Decay-e in the Box: " << TaggedDecayeinBox << std::endl;
-  //std::cout << "Number of Tagged Truth Decay-e: " << TaggedTrueDecaye << std::endl;
+  std::cout << "#Neutron up to FSI: " << BefSIn << std::endl;
+  std::cout << "#Neutron from SI  : " << SIn << std::endl;
+  std::cout << "#Neutron from mu  : " << MuN << std::endl;
+  std::cout << "#Neutron          : " << TrueN << std::endl;
 
   std::fstream resultfile;
   resultfile.open(ResultSummary, std::ios_base::out);
@@ -926,7 +981,8 @@ int main(int argc, char **argv) {
     resultfile << " All truth decay-e                : " << AllTrueDcye   << std::endl;
     resultfile << " All fiTQun decay-e               : " << AllfQdcye     << std::endl;
     resultfile << " fiTQun decya-e in the box        : " << BoxfQdcye     << std::endl;
-    resultfile << " Matched fiTQun decya-e in the box: " << MatchedfQdcye << std::endl;
+    resultfile << " Matched fiTQun decya-e (legacy)  : " << MatchedfQdcye << std::endl;
+    resultfile << " Matched fiTQun decya-e in the box: " << MatchedBoxfQdcye << std::endl;
 
     resultfile << "[Decay-e Cut Scan] " << std::endl;
     resultfile << "[Decay-e Cut Scan] dt = 20 us: " << SelectedParentNeutrinos_dtScan[0]      << std::endl;

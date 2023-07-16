@@ -457,10 +457,12 @@ void GetNeutrinoInteraction(int ientry, int mode) {
   else if (mode==11) IntName = "CC RES(Delta++ -> p, pi+)";
   else if (mode==12) IntName = "CC RES(Delta+ -> p, pi0)";
   else if (mode==13) IntName = "CC RES(Delta+ -> n, pi+)";
+  else if (mode==14) IntName = "CC RES";
   else if (mode==16) IntName = "CC Coherent(Oxygen, make pi+)";
   else if (mode==17) IntName = "CC RES(Delta -> p,gamma)";
   else if (mode==21) IntName = "CC DIS(1.3<W<2.0 GeV)";
   else if (mode==26) IntName = "CC DIS(W>2.0 GeV)";
+  else if (mode==30) IntName = "NC RES";
   else if (mode==31) IntName = "NC RES(Delta0 -> n,pi0)";
   else if (mode==32) IntName = "NC RES(Delta+ -> p, pi0)";
   else if (mode==33) IntName = "NC RES(Delta0 -> p,pi-)";
@@ -468,10 +470,14 @@ void GetNeutrinoInteraction(int ientry, int mode) {
   else if (mode==36) IntName = "NC Coherent(Oxygen, make pi0)";
   else if (mode==38) IntName = "NC RES(Delta0 -> n, gamma)";
   else if (mode==39) IntName = "NC RES(Delta+ -> p, gamma)";
+  else if (mode==40) IntName = "NC gamma (Delta w/ gamma)";
   else if (mode==41) IntName = "NC DIS(1.3<W<2.0 GeV)";
   else if (mode==46) IntName = "NC DIS(W>2.0 GeV)";
-  else if (mode==52) IntName = "NCEL(p)";
-  else if (mode==53) IntName = "NCEL(n)";
+  else if (mode==51) IntName = "NCEL(p)";
+  else if (mode==52) IntName = "NCEL(n)";
+  else if (mode==53) IntName = "NCEL";
+  else if (mode==58) IntName = "CC TOTAL";
+  else if (mode==59) IntName = "NC TOTAL";
   std::cout << "[### " << ientry << " ###] Neutrino interaction: " << IntName << std::endl;
 
   /*if (mode==1) {

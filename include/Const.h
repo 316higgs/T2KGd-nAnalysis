@@ -34,7 +34,8 @@ enum class PDGPID
   NEUTRON = 2112,
   PIPLUS = 211,
   PI0 = 111,
-  KPLUS=321
+  KPLUS=321,
+  DEUTRON=100045
 };
 
 enum class GEANTPID 

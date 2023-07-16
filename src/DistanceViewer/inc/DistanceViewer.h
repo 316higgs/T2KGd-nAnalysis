@@ -22,8 +22,8 @@ TH1F* h1_truedistance_nu_n;      //mu stopping - neutron capture vtx
 TH1F* h1_truedistance_mu_n;      //mu stopping - neutron capture vtx
 TH1F* h1_truedistance_prm_nu_n;  //primary - neutron capture vtx
 TH1F* h1_truedistance_prm_mu_n;  //primary - neutron capture vtx
-TH1F* h1_truedistance_nu_BefSIn; 
-TH1F* h1_truedistance_nu_SIn;
+TH1F* h1_truedistance_BefSIn; 
+TH1F* h1_truedistance_SIn;
 TH1F* h1_TruePrmMuEnd_x_TagNCap[4];
 TH1F* h1_TruePrmMuEnd_x_TagNCap_MuN;
 TH1F* h1_TruePrmMuEnd_x_TagNCap_NuN;
@@ -82,7 +82,8 @@ class DistanceViewer {
     	                     float primaryvtxz);
 
 
-    void GetPreEffDistance(int tagindex,
+    void GetPreEffDistance(CC0PiNumu *numu,
+                           int tagindex,
                            UInt_t matchtrue,
                            float capturevtxx,
                            float capturevtxy,
@@ -91,7 +92,8 @@ class DistanceViewer {
                            float primaryvtxy,
                            float primaryvtxz);
 
-    void GetOverallEffDistance(int ith,
+    void GetOverallEffDistance(CC0PiNumu *numu,
+                               int ith,
                                int tagindex,
                                UInt_t matchtrue,
                                float capturevtxx,
