@@ -24,6 +24,8 @@ TH1F* h1_truedistance_prm_nu_n;  //primary - neutron capture vtx
 TH1F* h1_truedistance_prm_mu_n;  //primary - neutron capture vtx
 TH1F* h1_truedistance_BefSIn; 
 TH1F* h1_truedistance_SIn;
+TH1F* h1_truedistance_MuCapn;
+
 TH1F* h1_TruePrmMuEnd_x_TagNCap[4];
 TH1F* h1_TruePrmMuEnd_x_TagNCap_MuN;
 TH1F* h1_TruePrmMuEnd_x_TagNCap_NuN;

@@ -14,8 +14,9 @@ void DistanceViewer::SetHistoFrame() {
   h1_truedistance_mu_n     = new TH1F("h1_truedistance_mu_n", "", 50, 0, DistanceMax);
   h1_truedistance_prm_nu_n = new TH1F("h1_truedistance_prm_nu_n", "", 50, 0, DistanceMax);
   h1_truedistance_prm_mu_n = new TH1F("h1_truedistance_prm_mu_n", "", 50, 0, DistanceMax);
-  h1_truedistance_BefSIn   = new TH1F("h1_truedistance_BefSIn", "", 50, 0, DistanceMax);
-  h1_truedistance_SIn      = new TH1F("h1_truedistance_SIn", "", 50, 0, DistanceMax);
+  h1_truedistance_BefSIn   = new TH1F("h1_truedistance_BefSIn", "", 10, 0, 5);
+  h1_truedistance_SIn      = new TH1F("h1_truedistance_SIn", "", 10, 0, 5);
+  h1_truedistance_MuCapn   = new TH1F("h1_truedistance_MuCapn", "", 10, 0, 5);
   //h1_TruePrmMuEnd_x_TagNCap = new TH1F("h1_TruePrmMuEnd_x_TagNCap", "Neutron-related distance; Distance[m]; Number of Events", 50, 0, DistanceMax);
 
   h1_truedistance_mudecay = new TH1F("h1_truedistance_mudecay", "", 100, 0, DistanceMax);
@@ -244,6 +245,7 @@ void DistanceViewer::WritePlots() {
   h1_truedistance_prm_mu_n  -> Write();
   h1_truedistance_BefSIn    -> Write();
   h1_truedistance_SIn       -> Write();
+  h1_truedistance_MuCapn    -> Write();
 
   for (int i=0; i<4; i++) {
     h1_TruePrmMuEnd_x_TagNCap[i] -> Write();

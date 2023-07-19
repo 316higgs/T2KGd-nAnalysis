@@ -9,10 +9,13 @@
 BEAMMODE=true
 #BEAMMODE=false
 
-#root -l 'TrueDistance.C('${BEAMMODE}')'
+#root -l 'TrueDistance.C('${BEAMMODE}')'        ### neutron travel distance (neutrino interaction type)
+#root -l 'TrueDistance_nsrc.C('${BEAMMODE}')'    ### neutron travel distance (neutron sources)
+root -l 'TrueMom_nsrc.C('${BEAMMODE}')'    ### neutron momentum (neutron sources)
+
 #root -l 'NeutronDistance_prm_x_n.C('${BEAMMODE}')'
 #root -l 'NeutronDistance_mu_x_n.C('${BEAMMODE}')'
-root -l 'NeutronSrcLabelDistance.C('${BEAMMODE}')'
+#root -l 'NeutronSrcLabelDistance.C('${BEAMMODE}')'
 
 #root -l 'TagSubDistance.C('${BEAMMODE}')'
 #root -l 'TrueLabelDistance.C('${BEAMMODE}')'

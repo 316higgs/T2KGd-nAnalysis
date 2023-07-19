@@ -91,15 +91,17 @@ TH1F* h1_RecoNCapTime[4];
 TH1F* h1_mintimediff_NCap;
 TH1F* h1_NCapVtxReso;
 
-TH1F* h1_GenPrmNeutrons;
+//TH1F* h1_GenPrmNeutrons;
 //TH1F* h1_GenAftFSINeutrons;
-TH1F* h1_GenAftSINeutrons;  // = h1_GenBefSINeutrons + h1_GenAtSINeutrons
-TH1F* h1_GenBefSINeutrons;  // captured neutrons from nu+FSI
+TH1F* h1_GenBefFSINeutrons; // captured neutrons from primary neutrino interaction
+TH1F* h1_GenBefSINeutrons;  // captured neutrons from primary nu+FSI
+TH1F* h1_GenAftSINeutrons;  // captured neutrons from SI
+TH1F* h1_GenMuCapNeutrons;  // captured neutrons from mu- capture
 //TH1F* h1_GenAtSINeutrons;   // captured neutrons from SI
 //int AllBefSINeutrons = 0;
 //int CapBefSINeutrons = 0;
-TH1F* h1_GenBefSInE;
-TH1F* h1_GenSInE;
+TH1F* h1_GenBefSIMom;
+TH1F* h1_GenSIMom;
 
 
 ////  #truth neutrons  ////
@@ -409,9 +411,12 @@ class NTagAnalysis {
 
     float GetGenBefSIMom(CC0PiNumu *numu, Int_t *Iorgvc, Int_t *Iflvc);
 
-    int GetTrueNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
-    //int GetTrueNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
-    int GetTrueNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]);
+    int GetTrueGenNBefFSI(CC0PiNumu *numu);
+    int GetTrueGenNBefSI(CC0PiNumu *numu);
+    //int GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
+    //int GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
+    int GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]);
+    int GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]);
 
     //Get the number of truth neutrons based on NTag variables
     void GetTruthNeutrons(float NTrueN,

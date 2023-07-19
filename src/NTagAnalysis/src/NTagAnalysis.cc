@@ -74,33 +74,16 @@ void NTagAnalysis::SetHistoFrame() {
   h1_mintimediff_NCap = new TH1F("h1_mintimediff_NCap", "h1_mintimediff_NCap; tscnd-FitT[#musec]; Number of Events", 200, -0.2, 0.2);
   h1_NCapVtxReso      = new TH1F("h1_NCapVtxReso", "h1_NCapVtxReso; Neutron Capture Vertex Resolution [cm]; Number of Events", 3000, 0, 300);
 
-  h1_GenPrmNeutrons    = new TH1F("h1_GenPrmNeutrons", "h1_GenPrmNeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
-  //h1_GenAftFSINeutrons = new TH1F("h1_GenAftFSINeutrons", "h1_GenAftFSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
-  h1_GenAftSINeutrons  = new TH1F("h1_GenAftSINeutrons", "h1_GenAftSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
-  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(1, "0");
-  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(2, "1");
-  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(3, "2");
-  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(4, "3");
-  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(5, "4");
-  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(6, "5");
-  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(7, "6");
-  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(8, "7");
-  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(9, "8");
-  h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(10, "9");
-  //h1_GenAtSINeutrons   = new TH1F("h1_GenAtSINeutrons", "h1_GenAtSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
-  h1_GenBefSINeutrons  = new TH1F("h1_GenBefSINeutrons", "h1_GenBefSINeutrons; Number of generated neutrons; Number of Events", 10, 0, 10);
-  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(1, "0");
-  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(2, "1");
-  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(3, "2");
-  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(4, "3");
-  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(5, "4");
-  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(6, "5");
-  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(7, "6");
-  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(8, "7");
-  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(9, "8");
-  h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(10, "9");
-  h1_GenBefSInE        = new TH1F("h1_GenBefSInE", "h1_GenBefSInE; Truth Neutron Energy[MeV]; Number of Events", 50, 0, 200);
-  h1_GenSInE           = new TH1F("h1_GenSInE", "h1_GenSInE; Truth Neutron Energy[MeV]; Number of Events", 50, 0, 200);
+  h1_GenBefFSINeutrons  = new TH1F("h1_GenBefFSINeutrons", "", 10, 0, 10);
+  for(int i=0; i<10; i++) h1_GenBefFSINeutrons ->GetXaxis()->SetBinLabel(i+1, TString::Format("%d", i));
+  h1_GenBefSINeutrons  = new TH1F("h1_GenBefSINeutrons", "", 10, 0, 10);
+  for(int i=0; i<10; i++) h1_GenBefSINeutrons ->GetXaxis()->SetBinLabel(i+1, TString::Format("%d", i));
+  h1_GenAftSINeutrons  = new TH1F("h1_GenAftSINeutrons", "", 10, 0, 10);
+  for(int i=0; i<10; i++) h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(i+1, TString::Format("%d", i));
+  h1_GenMuCapNeutrons  = new TH1F("h1_GenMuCapNeutrons", "", 10, 0, 10);
+  for(int i=0; i<10; i++) h1_GenMuCapNeutrons ->GetXaxis()->SetBinLabel(i+1, TString::Format("%d", i));
+  h1_GenBefSIMom        = new TH1F("h1_GenBefSIMom", "", 20, 0, 200);
+  h1_GenSIMom           = new TH1F("h1_GenSIMom", "", 20, 0, 200);
 
   for (int i=0; i<4; i++) {
     h1_N1Rmu_x_Enu[i]     = new TH1F(TString::Format("h1_N1Rmu_x_Enu_mode%d", i), "N1Rmu_x_Enu; Reco Neutrino Energy [GeV]; Number of #nu Events", binnumber_nu-1, xEnubins);
@@ -155,7 +138,7 @@ void NTagAnalysis::SetHistoFrame() {
 }
 
 void NTagAnalysis::SetHistoFormat() {
-  for (int i=0; i<TRUETYPE; i++) {
+  /*for (int i=0; i<TRUETYPE; i++) {
     h1_NTrueN[i] -> SetLineWidth(2);
     h1_NTrueN[i] -> SetTitleOffset(1.4, "Y");
     h1_NTrueN[i] -> SetTitleSize(0.035, "Y");
@@ -231,7 +214,7 @@ void NTagAnalysis::SetHistoFormat() {
     h1_Enureso_CCRES_delta0_trueN[i]  -> SetFillColor(kGray+1);
     h1_Enureso_CCOther_trueN[i]       -> SetFillColor(kCyan-6);
     h1_Enureso_NC_trueN[i]            -> SetFillColor(kTeal+9);
-  }
+  }*/
 }
 
 
@@ -401,7 +384,44 @@ float NTagAnalysis::GetGenBefSIMom(CC0PiNumu *numu, Int_t *Iorgvc, Int_t *Iflvc)
   return NeutronMom;
 }
 
-int NTagAnalysis::GetTrueNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]) {
+int NTagAnalysis::GetTrueGenNBefFSI(CC0PiNumu *numu) {
+  int TrueNBefFSI = 0;
+  int mode = TMath::Abs(numu->var<int>("mode"));
+
+  for (int iprm=0; iprm<numu->var<int>("numnu"); iprm++) {
+    if (numu->var<int>("ipnu", iprm)==static_cast<int>(PDGPID::NEUTRON)) {
+      // Count final state neutrons
+      if (mode>=2 && mode<=10) {
+        if (iprm>=3) TrueNBefFSI++;
+      }
+      else {
+        if (iprm>=2) TrueNBefFSI++;
+      }
+    } 
+  }
+  return TrueNBefFSI;
+}
+
+int NTagAnalysis::GetTrueGenNBefSI(CC0PiNumu *numu) {
+  int TrueNBefSI = 0;
+  int mode = TMath::Abs(numu->var<int>("mode"));
+
+  for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+    if (numu->var<int>("Ipvc", iprm)==static_cast<int>(PDGPID::NEUTRON)) {
+      // Count final state neutrons
+      if (mode>=2 && mode<=10) {
+        if (iprm>=3) TrueNBefSI++;
+      }
+      else {
+        if (iprm>=2) TrueNBefSI++;
+      }
+    }
+  }
+  return TrueNBefSI;
+}
+
+//int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]) {
+int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]) {
   int TrueNBefSI = 0;
 
   float OscProb = numu->getOscWgt();
@@ -423,14 +443,6 @@ int NTagAnalysis::GetTrueNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprn
         iprntidx[iscnd]<0) 
     {
 
-      /*std::cout << "Secondary[" << iscnd+1 << "] " << numu->var<int>("iprtscnd", iscnd) 
-                  << " lmecscnd = " << numu->var<int>("lmecscnd", iscnd)
-                  << " iprntprt = [" << numu->var<int>("iprntprt", iscnd)
-                  << "] iprntidx = [" << iprntidx[iscnd] 
-                  << "] vtxscnd = [" << numu->var<float>("vtxscnd", iscnd, 0) << ", " << numu->var<float>("vtxscnd", iscnd, 1) << ", " << numu->var<float>("vtxscnd", iscnd, 2)
-                  << "] cm, vtxprnt = [" << vtxprnt[iscnd][0] << ", " << vtxprnt[iscnd][1] << ", " << vtxprnt[iscnd][2]
-                  << "] cm" << std::endl;*/
-
       //Find gamma from different neutrons
       float d_vtxprnt = std::sqrt( vtxprnt[iscnd][0]*vtxprnt[iscnd][0] +
                                    vtxprnt[iscnd][1]*vtxprnt[iscnd][1] +
@@ -441,6 +453,9 @@ int NTagAnalysis::GetTrueNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprn
       float d_vtxscnd = std::sqrt( vtxscndX*vtxscndX +
                                    vtxscndY*vtxscndY +
                                    vtxscndZ*vtxscndZ );
+      float pNinit = std::sqrt( pprntinit[iscnd][0]*pprntinit[iscnd][0] +
+                                pprntinit[iscnd][1]*pprntinit[iscnd][1] +
+                                pprntinit[iscnd][2]*pprntinit[iscnd][2] );
 
       // First gamma
       if (VtxScndList.size()==0) {
@@ -454,21 +469,15 @@ int NTagAnalysis::GetTrueNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprn
           float d_Prm_x_NuNCap = GetSimpleDistance(PrmVtx, NuNCapVtx);
           if (mode<31) h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
           else h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100.);
+
+          if (mode<31) h1_GenBefSIMom -> Fill(pNinit, OscProb);
+          else h1_GenBefSIMom -> Fill(pNinit);
         //}
       }
       // Next gamma
       else {
         // check if this gamma comes from new neutron
         bool NewNeutron = false;
-        /*for (UInt_t in=0; in<VtxPrntList.size(); in++) {
-          if (VtxPrntList.at(in)!=d_vtxprnt) NewNeutron = true;
-          else {
-            for (UInt_t jn=0; jn<VtxScndList.size(); jn++) {
-              if (VtxScndList.at(jn)!=d_vtxscnd) NewNeutron = true;
-              else NewNeutron = false;
-            }
-          }
-        }*/
         bool VtxPrnt = false;
         bool VtxScnd = false;
         auto itrprnt = std::find(VtxPrntList.begin(), VtxPrntList.end(), d_vtxprnt);
@@ -496,6 +505,9 @@ int NTagAnalysis::GetTrueNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprn
             float d_Prm_x_NuNCap = GetSimpleDistance(PrmVtx, NuNCapVtx);
             if (mode<31) h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
             else h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100.);
+
+            if (mode<31) h1_GenBefSIMom -> Fill(pNinit, OscProb);
+            else h1_GenBefSIMom -> Fill(pNinit);
           //}
         }
       }
@@ -505,8 +517,8 @@ int NTagAnalysis::GetTrueNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprn
   return TrueNBefSI;
 }
 
-//int NTagAnalysis::GetTrueNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]) {
-int NTagAnalysis::GetTrueNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]) {
+//int NTagAnalysis::GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]) {
+int NTagAnalysis::GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]) {
   int TrueNAftSI = 0;
 
   float OscProb = numu->getOscWgt();
@@ -522,15 +534,6 @@ int NTagAnalysis::GetTrueNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprn
   std::vector<float> VtxScndList;
   std::vector<float> AbsPPrntList;
   for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
-
-    std::cout << "Secondary[" << iscnd+1 << "] " << numu->var<int>("iprtscnd", iscnd) 
-                  << " lmecscnd = " << numu->var<int>("lmecscnd", iscnd)
-                  << " iprntprt = [" << numu->var<int>("iprntprt", iscnd)
-                  << "] iprntidx = [" << iprntidx[iscnd] 
-                  << "] vtxscnd = [" << numu->var<float>("vtxscnd", iscnd, 0) << ", " << numu->var<float>("vtxscnd", iscnd, 1) << ", " << numu->var<float>("vtxscnd", iscnd, 2)
-                  << "] cm, vtxprnt = [" << vtxprnt[iscnd][0] << ", " << vtxprnt[iscnd][1] << ", " << vtxprnt[iscnd][2]
-                  << "] cm, pprntinit = [" << pprntinit[iscnd][0] << ", " << pprntinit[iscnd][1] << ", " << pprntinit[iscnd][2]
-                  << "] MeV" << std::endl;
 
     if (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) && 
         numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
@@ -548,16 +551,15 @@ int NTagAnalysis::GetTrueNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprn
       float d_vtxscnd = std::sqrt( vtxscndX*vtxscndX +
                                    vtxscndY*vtxscndY +
                                    vtxscndZ*vtxscndZ );
-      float abs_pprnt = std::sqrt( pprntinit[iscnd][0]*pprntinit[iscnd][0] +
-                                   pprntinit[iscnd][1]*pprntinit[iscnd][1] +
-                                   pprntinit[iscnd][2]*pprntinit[iscnd][2] );
+      float pNinit = std::sqrt( pprntinit[iscnd][0]*pprntinit[iscnd][0] +
+                                pprntinit[iscnd][1]*pprntinit[iscnd][1] +
+                                pprntinit[iscnd][2]*pprntinit[iscnd][2] );
 
       //First gamma
       if (VtxScndList.size()==0) {
-        std::cout << "  New neutron" << std::endl;
+        //std::cout << "  New neutron" << std::endl;
         VtxPrntList.push_back(d_vtxprnt);
         VtxScndList.push_back(d_vtxscnd);
-        AbsPPrntList.push_back(abs_pprnt);
         //if (iprntidx[ iprntidx[iscnd]-1 ]==0) TrueNAftSI++;
         if (iprntidx[iscnd]>=0) {
           TrueNAftSI++;
@@ -567,21 +569,13 @@ int NTagAnalysis::GetTrueNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprn
           float d_Prm_x_NuNCap = GetSimpleDistance(PrmVtx, NuNCapVtx);
           if (mode<31) h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
           else h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100.);
+
+          if (mode<31) h1_GenSIMom -> Fill(pNinit, OscProb);
+          else h1_GenSIMom -> Fill(pNinit);
         }
       }
       else {
         bool NewNeutron = false;
-        //bool Deutron = false;
-        //if (numu->var<int>("iprtscnd", iscnd+1)==static_cast<int>(PDGPID::DEUTRON)) Deutron = true; 
-        /*for (UInt_t in=0; in<VtxPrntList.size(); in++) {
-          if (VtxPrntList.at(in)!=d_vtxprnt) NewNeutron = true;
-          else {
-            for (UInt_t jn=0; jn<VtxScndList.size(); jn++) {
-              if (VtxScndList.at(jn)!=d_vtxscnd) NewNeutron = true;
-              else NewNeutron = false;
-            }
-          }
-        }*/
         bool VtxPrnt = false;
         bool VtxScnd = false;
         auto itrprnt = std::find(VtxPrntList.begin(), VtxPrntList.end(), d_vtxprnt);
@@ -598,11 +592,9 @@ int NTagAnalysis::GetTrueNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprn
         if (VtxPrnt || (!VtxPrnt&&VtxScnd)) NewNeutron = true;
   
         if (NewNeutron) {
-          std::cout << "  New neutron" << std::endl;
-        //if (!Deutron && NewNeutron) {
+          //std::cout << "  New neutron" << std::endl;
           VtxScndList.push_back(d_vtxscnd);
           VtxPrntList.push_back(d_vtxprnt);
-          AbsPPrntList.push_back(abs_pprnt);
           //if (iprntidx[ iprntidx[iscnd]-1 ]==0) TrueNAftSI++;
           if (iprntidx[iscnd]>=0) {
             TrueNAftSI++;
@@ -612,22 +604,11 @@ int NTagAnalysis::GetTrueNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprn
             float d_Prm_x_NuNCap = GetSimpleDistance(PrmVtx, NuNCapVtx);
             if (mode<31) h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
             else h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100.);
+
+            if (mode<31) h1_GenSIMom -> Fill(pNinit, OscProb);
+            else h1_GenSIMom -> Fill(pNinit);
           }
         }
-        /*if (Deutron) {
-          VtxScndList.push_back(d_vtxscnd);
-          VtxPrntList.push_back(d_vtxprnt);
-          //if (iprntidx[ iprntidx[iscnd]-1 ]==0) TrueNAftSI++;
-          if (iprntidx[iscnd]>=0) {
-            TrueNAftSI++;
-            NuNCapVtx[0] = vtxscndX;
-            NuNCapVtx[1] = vtxscndY;
-            NuNCapVtx[2] = vtxscndZ;
-            float d_Prm_x_NuNCap = GetSimpleDistance(PrmVtx, NuNCapVtx);
-            if (mode<31) h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
-            else h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100.);
-          }
-        }*/
       }
 
     }
@@ -1916,7 +1897,6 @@ float NTagAnalysis::GetTaggedNoise(std::vector<float> *TagOut,
 
 bool NTagAnalysis::GetTrueMuNCapVtx(int iscnd, CC0PiNumu* numu, Int_t *ichildidx, float *MuNCapVtx) {
   bool MuNCap = false;
-
   if (std::fabs(numu->var<int>("iprtscnd", iscnd))==static_cast<int>(PDGPID::NEUTRON) &&
       numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::DECAY)) 
   {
@@ -2864,9 +2844,11 @@ void NTagAnalysis::cdNTagAnalysis(TFile* fout) {
 
 void NTagAnalysis::WritePlots() {
 
-  h1_GenPrmNeutrons    -> Write();
-  h1_GenAftSINeutrons  -> Write();
+  //h1_GenPrmNeutrons    -> Write();
+  h1_GenBefFSINeutrons -> Write();
   h1_GenBefSINeutrons  -> Write();
+  h1_GenAftSINeutrons  -> Write();
+  h1_GenMuCapNeutrons  -> Write();
 
   h1_TrueNCapTime -> Write();
   for (int i=0; i<4; i++) {
@@ -2876,8 +2858,8 @@ void NTagAnalysis::WritePlots() {
   h1_mintimediff_NCap -> Write();
   h1_NCapVtxReso -> Write();
 
-  h1_GenBefSInE -> Write();
-  h1_GenSInE    -> Write();
+  h1_GenBefSIMom -> Write();
+  h1_GenSIMom    -> Write();
 
   h2_TrueNCapVtxXY -> Write();
   h2_TrueNCapVtxRZ -> Write();

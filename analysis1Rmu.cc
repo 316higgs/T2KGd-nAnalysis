@@ -17,6 +17,7 @@
 #include "include/CLTOption.h"
 #include "include/ResultSummary.h"
 #include "include/VECTChannelChecker.h"
+#include "include/CommonTool.h"
 
 #include "src/DecayeBox/inc/DecayeBox.h"
 #include "src/Gd1RmuonSelection/inc/Gd1RmuonSelection.h"
@@ -280,10 +281,11 @@ int main(int argc, char **argv) {
   int NoPrmMuEnd_NC = 0;
   const int DCYENUM = 1;
 
-  int BefSIn = 0;
-  int SIn = 0;
-  int MuN = 0;
-  int TrueN = 0;
+  float BefFSIn = 0;
+  float BefSIn = 0;
+  float SIn = 0;
+  float MuN = 0;
+  float TrueN = 0;
 
 
   //Process
@@ -841,12 +843,14 @@ int main(int argc, char **argv) {
       } //threshold scan
 
 
+      float PrmVtx[3] = {0., 0., 0.};  //Primary vertex
+      PrmVtx[0] = numu->var<float>("posv", 0);
+      PrmVtx[1] = numu->var<float>("posv", 1);
+      PrmVtx[2] = numu->var<float>("posv", 2);
       int TrueMuN = 0;
       float MuNCapVtx[3]   = {0., 0., 0.};  //neutron(from primary interaction) capture vertex
-
       ///////////  True distance with respect to each neutron source  /////////////
-      GetNeutrinoInteraction(ientry, intmode);
-      ///  Before FSI, detector simulation
+      /*GetNeutrinoInteraction(ientry, intmode);
       std::cout << "[    NEWORK    ]" << std::endl;
       for (int iprm=0; iprm<numu->var<int>("numnu"); iprm++) {
         std::cout << "[### " << ientry 
@@ -863,7 +867,7 @@ int main(int argc, char **argv) {
                   << "] P = [" << Pvc[iprm][0] << ", " << Pvc[iprm][1] << ", " << Pvc[iprm][2] << "] MeV" << std::endl;
       }
       std::cout << "----------------------" << std::endl;
-      std::cout << "[    CONVVECT    ]" << std::endl;
+      std::cout << "[    CONVVECT    ]" << std::endl;*/
       for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
         /*std::cout << "[### " << ientry 
                   << " ###] Secondary[" << iscnd+1 << "] " << numu->var<int>("iprtscnd", iscnd) 
@@ -873,24 +877,56 @@ int main(int argc, char **argv) {
                   << "] ichildidx = [" << ichildidx[iscnd]
                   << "] vtxscnd = [" << numu->var<float>("vtxscnd", iscnd, 0) << ", " << numu->var<float>("vtxscnd", iscnd, 1) << ", " << numu->var<float>("vtxscnd", iscnd, 2)
                   << "] cm, vtxprnt = [" << vtxprnt[iscnd][0] << ", " << vtxprnt[iscnd][1] << ", " << vtxprnt[iscnd][2]
-                  << "] cm, pprntinit = [" << pprntinit[iscnd][0] << ", " << pprntinit[iscnd][1] << ", " << pprntinit[iscnd][2]
-                  << "] MeV, P = [" << pscnd[iscnd][0] << ", " << pscnd[iscnd][1] << ", " << pscnd[iscnd][2] << "] MeV" << std::endl;*/
-        if (ntagana.GetTrueMuNCapVtx(iscnd, numu, ichildidx, MuNCapVtx)) TrueMuN++;
+                  << "] cm, P = [" << pscnd[iscnd][0] << ", " << pscnd[iscnd][1] << ", " << pscnd[iscnd][2] << "] MeV" << std::endl;*/
+        if (ntagana.GetTrueMuNCapVtx(iscnd, numu, ichildidx, MuNCapVtx)) {
+          TrueMuN++;
+          float d_Prm_x_MuNCap = GetSimpleDistance(PrmVtx, MuNCapVtx);
+          if (intmode<31) h1_truedistance_MuCapn -> Fill(d_Prm_x_MuNCap/100., OscProb);
+          else h1_truedistance_MuCapn -> Fill(d_Prm_x_MuNCap/100.);
+        }
       }
-      int TrueBefSI = ntagana.GetTrueNBefSI(numu, iprntidx, vtxprnt);
-      //int TrueAftSI = ntagana.GetTrueNAftSI(numu, iprntidx, vtxprnt);
-      int TrueAftSI = ntagana.GetTrueNAftSI(numu, iprntidx, vtxprnt, pprntinit);
-      std::cout << "#Neutron up to FSI: " << TrueBefSI << std::endl;
-      std::cout << "#Neutron from SI  : " << TrueAftSI << std::endl;
-      std::cout << "#Neutron from mu  : " << TrueMuN << std::endl;
-      std::cout << "NTrueN: " << NTrueN << std::endl;
-      if (NTrueN-(TrueBefSI+TrueAftSI+TrueMuN)!=0) std::cout << "\e[38;5;09m\e[1m BUG? \e[0m" << std::endl;
-      std::cout << " " << std::endl;
-      BefSIn += TrueBefSI;
-      SIn    += TrueAftSI;
-      MuN    += TrueMuN;
-      TrueN  += NTrueN;
+      int TrueBefFSI = ntagana.GetTrueGenNBefFSI(numu);
+      int TrueBefSI  = ntagana.GetTrueGenNBefSI(numu);
+      //int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt);
+      //int TrueAftSI    = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt);
+      int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprntinit);
+      int TrueAftSI    = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt, pprntinit);
+      /*std::cout << "# generated neutrons before FSI: " << TrueBefFSI << std::endl;
+      std::cout << "# generated neutrons up to FSI : " << TrueBefSI << std::endl;
+      std::cout << "# captured neutrons up to FSI  : " << TrueCapBefSI << std::endl;
+      std::cout << "# captured neutrons from SI    : " << TrueAftSI << std::endl;
+      std::cout << "# captured neutrons from mu    : " << TrueMuN << std::endl;
+      std::cout << "NTrueN: " << NTrueN << std::endl;*/
+      //if (NTrueN-(TrueBefSI+TrueAftSI+TrueMuN)!=0) std::cout << "\e[38;5;09m\e[1m BUG? \e[0m" << std::endl;
+      //if (TrueMuN!=0) std::cout << "\e[38;5;09m\e[1m BUG? \e[0m" << std::endl;
+      //std::cout << " " << std::endl;
+      if (intmode<31) {
+        BefFSIn += TrueBefFSI*OscProb;
+        BefSIn  += TrueCapBefSI*OscProb;
+        SIn     += TrueAftSI*OscProb;
+        MuN     += TrueMuN*OscProb;
+        TrueN   += NTrueN*OscProb;
+      }
+      else {
+        BefFSIn += TrueBefFSI;
+        BefSIn  += TrueCapBefSI;
+        SIn     += TrueAftSI;
+        MuN     += TrueMuN;
+        TrueN   += NTrueN;
+      }
+      /*BefFSIn += TrueBefFSI;
+      BefSIn  += TrueCapBefSI;
+      SIn     += TrueAftSI;
+      MuN     += TrueMuN;
+      TrueN   += NTrueN;*/
       
+      if (intmode==1) {
+        //if (TrueBefFSI==1) std::cout << "\e[38;5;09m\e[1m BUG? \e[0m" << std::endl;
+        h1_GenBefFSINeutrons -> Fill(TrueBefFSI);
+        h1_GenBefSINeutrons  -> Fill(TrueBefSI);
+        h1_GenAftSINeutrons  -> Fill(TrueCapBefSI+TrueAftSI);
+        h1_GenMuCapNeutrons  -> Fill(TrueMuN);
+      }
 
     } //New 1R muon selection
 
@@ -910,11 +946,6 @@ int main(int argc, char **argv) {
   std::cout << "CCQE w/ tagged neutrons(nonzero truth primary neutrons): " << CCQEwTaggedNeutrons_prm << std::endl;
   std::cout << "CCQE w/ tagged neutrons(nonzero truth secondary neutrons): " << CCQEwTaggedNeutrons_scnd << std::endl;
   */
-
-  std::cout << "#Neutron up to FSI: " << BefSIn << std::endl;
-  std::cout << "#Neutron from SI  : " << SIn << std::endl;
-  std::cout << "#Neutron from mu  : " << MuN << std::endl;
-  std::cout << "#Neutron          : " << TrueN << std::endl;
 
   std::fstream resultfile;
   resultfile.open(ResultSummary, std::ios_base::out);
@@ -999,6 +1030,13 @@ int main(int argc, char **argv) {
     resultfile << "[Neutrino] All Parent Neutrino Events          : " << AllParentNeutrinos << std::endl;
     resultfile << "[Neutrino] Generated Neutrino Events(wallv>200): " << GeneratedEvents    << std::endl;
     resultfile << "[Neutrino] Generated 1Rmu Events (Oscillated)  : " << OscillatedAll      << std::endl;
+    resultfile << " " << std::endl;
+
+    resultfile << "[Neutron] # generated neutrons before FSI: " << BefFSIn << std::endl;
+    resultfile << "[Neutron] # captured neutrons up to FSI  : " << BefSIn << std::endl;
+    resultfile << "[Neutron] # captured neutrons from SI    : " << SIn << std::endl;
+    resultfile << "[Neutron] # captured neutrons from mu    : " << MuN << std::endl;
+    resultfile << "[Neutron] # all true neutrons            : " << TrueN << std::endl;
     resultfile << " " << std::endl;
 
     float TotalEventsNoNeutronAnalysis = OscillatedCCQE 
