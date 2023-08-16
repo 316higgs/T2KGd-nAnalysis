@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
   float dtMax  = 10.;
   float N50Min = 50.;
   float N50Max = 400.;
-  float nlikeThreshold = 0.65;
+  float nlikeThreshold = 0.7;
 
 
   //=========  fiTQun output (TTree: h1)  ============
@@ -213,6 +213,7 @@ int main(int argc, char **argv) {
   
   //=========  TTree h1 variables  ============
   //===== It should be called after numu? ======
+  Int_t   nmue;
   Float_t Pvc[100][3];      //Momentum of primary particles
   //Int_t   Npvc;             //Number of primary particles
   Int_t   Ipvc[100];        //PID of primary particles
@@ -231,6 +232,7 @@ int main(int argc, char **argv) {
   Int_t   itrkscnd[1000];
   Float_t pprntinit[1000][3]; //Initial momentum of the parent particle at birth
   //tchfQ -> SetBranchAddress("Npvc", &Npvc);  //off if you use numu->Npvc
+  tchfQ -> SetBranchAddress("nmue", &nmue);
   tchfQ -> SetBranchAddress("Pvc", Pvc);
   //tchfQ -> SetBranchAddress("Ipvc", Ipvc);
   //tchfQ -> SetBranchAddress("Ichvc", Ichvc);
@@ -350,7 +352,8 @@ int main(int argc, char **argv) {
         prmsel.C4ApplyPmu200MeV(evsel)) 
     {
 
-      decayebox.GetDecayeTagPurity(numu, tscnd, pscnd, dtMax, N50Min, N50Max);
+      //decayebox.GetDecayeTagPurity(numu, tscnd, pscnd, dtMax, N50Min, N50Max);
+      decayebox.DecayeMatching(numu, nmue, tscnd);
 
       //Reconstructed neutrino energy
       float Enu = numu->var<float>("erec");
@@ -376,8 +379,8 @@ int main(int argc, char **argv) {
 
     h1_NTrueN[0] -> Fill(NTrueN);
 
-    //int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
-    int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
+    //int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
+    int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
     GetSelectedTagN(prmsel, evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false, TagN);
 
     //New 1R muon selection
@@ -389,7 +392,7 @@ int main(int argc, char **argv) {
       neuosc.GetTrueEnu(numu);
       neuosc.GetRecoEnu(numu);
       neuosc.GetPrmVtxResolution(numu);
-      ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, N50, Label, TagOut, nlikeThreshold, fvx, fvy, fvz);
+
       float TruePrmVtx[3] = {0., 0., 0.,};
       neuosc.GetTruePrmVtx(numu, TruePrmVtx);
       ntagana.TrueNCapVtxProfile(Type, tagvx, tagvy, tagvz);
@@ -443,6 +446,7 @@ int main(int argc, char **argv) {
 
       if (MCType=="Water" || MCType=="water") continue;
 
+
       float OscProb = numu->getOscWgt();
       float Enu = numu->var<float>("erec");
 
@@ -492,30 +496,29 @@ int main(int argc, char **argv) {
 
 
       // Check truth breakdown(H-n/Gd-n/Decay-e/Acc.Noise) of candidates in the time window
-      //ntagana.TruthBreakdowninWindow(TagClass, t, DWall, TagIndex, Label, FitT, TagDWall);
       ntagana.TruthBreakdowninWindow(numu, TagClass, t, DWall, TagIndex, Label, FitT, TagDWall);
 
       // Check tagged truth neutrons and mis-tagged decay-e and noise with respect to window and threshold.
-      //ntagana.GetNlikeCandidatesinWindow(t, DWall, TagIndex, etagmode, NHits, FitT, TagOut, Label, TagDWall);
-      //ntagana.GetNlikeCandidatesinWindow(numu, t, DWall, TagIndex, etagmode, NHits, FitT, TagOut, Label, TagDWall);
-      ntagana.GetNlikeCandidatesinWindow(numu, t, DWall, TagIndex, etagmode, N50, FitT, TagOut, Label, TagDWall);
+      ntagana.GetNlikeCandidatesinWindow(numu, t, DWall, TagIndex, etagmode, NHits, FitT, TagOut, Label, TagDWall);
+      //ntagana.GetNlikeCandidatesinWindow(numu, t, DWall, TagIndex, etagmode, N50, FitT, TagOut, Label, TagDWall);
 
       // Check tagged truth decay-e and mis-tagged neutrons and noise with respect to window and threshold.
-      //ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, NHits, FitT, TagOut, Label);
-      ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, N50, FitT, TagOut, Label);
+      ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, NHits, FitT, TagOut, Label);
+      //ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, N50, FitT, TagOut, Label);
 
       // Check neutrino events with tagged neutrons
-      //ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, 
-      //                               etagmode, numu, neuosc, nlikeThreshold/0.05,
-      //                               recothetamu, thetamin, thetamax);
-      ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, N50, FitT, Label, NTrueN, 
+      ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, 
                                      etagmode, numu, neuosc, nlikeThreshold/0.05,
                                      recothetamu, thetamin, thetamax);
+      //ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, N50, FitT, Label, NTrueN, 
+      //                               etagmode, numu, neuosc, nlikeThreshold/0.05,
+      //                               recothetamu, thetamin, thetamax);
 
       //Number of tagged-neutrons
       //CCQE w/ tagged-n
-      //int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
-      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
+      //int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
+      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
+      ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, NHits, Label, TagOut, nlikeThreshold, fvx, fvy, fvz);
       if (intmode==1 && numtaggedneutrons!=0) {
 
         CCQEwTaggedNeutrons++;
@@ -534,244 +537,6 @@ int main(int argc, char **argv) {
 
         //float GenSINeutrons = ntagana.GetGenSINeutrons(numu, iprntidx, vtxprnt);
         //h1_GenSINeutrons -> Fill(GenSINeutrons);
-
-#if 0
-        //Primary particles
-        bool prmneutron = false;
-        int  PrimaryNeutrons = 0;
-        //GetNeutrinoInteraction(ientry, intmode);
-        //std::cout << "------  VCWORK primary info  ------" << std::endl;
-        for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
-          //std::cout << "[### " << ientry << " ###] Particle[" << iprm << "]=" << Ipvc[iprm]
-          //                               << ", Iflvc=" << Iflvc[iprm] 
-          //                               << ", Ichvc=" << Ichvc[iprm]
-          //                               << ", Iorgvc=" <<Iorgvc[iprm] << std::endl;
-          
-          if (Ipvc[iprm]==static_cast<int>(PDGPID::NEUTRON) && 
-              Ichvc[iprm]==1) 
-          {
-            prmneutron = true;
-            float PrmNeutronMom_x = Pvc[iprm][0];
-            float PrmNeutronMom_y = Pvc[iprm][1];
-            float PrmNeutronMom_z = Pvc[iprm][2];
-            float PrmNeutronMom   = PrmNeutronMom_x*PrmNeutronMom_x +
-                                    PrmNeutronMom_y*PrmNeutronMom_y +
-                                    PrmNeutronMom_z*PrmNeutronMom_z;
-            float PrmNeutronE = std::sqrt( PrmNeutronMom + NMASS*NMASS );
-            //std::cout << "- PrmNeutronE: " << PrmNeutronE << std::endl;
-            h1_PrmNeutron  -> Fill(Ipvc[ Iorgvc[iprm]-1 ]);
-            if (Ipvc[ Iorgvc[iprm]-1 ]==static_cast<int>(PDGPID::PI0))     h1_PrmNeutronE[0] -> Fill(PrmNeutronE);
-            if (Ipvc[ Iorgvc[iprm]-1 ]==static_cast<int>(PDGPID::PIPLUS))  h1_PrmNeutronE[1] -> Fill(PrmNeutronE);
-            if (Ipvc[ Iorgvc[iprm]-1 ]==static_cast<int>(PDGPID::NEUTRON)) h1_PrmNeutronE[2] -> Fill(PrmNeutronE);
-            if (Ipvc[ Iorgvc[iprm]-1 ]==static_cast<int>(PDGPID::PROTON))  h1_PrmNeutronE[3] -> Fill(PrmNeutronE);
-            PrimaryNeutrons++;
-          }
-        }
-        
-
-        //Secondary particles
-        bool FSINeutron    = false;
-        bool SIneutron     = false;
-        bool scndneutron   = false;
-        int  FSINeutrons   = 0;
-        int  SINeutrons    = 0;
-        int  OtherNeutrons = 0;
-        std::vector<float> VtxPrntList;
-        std::vector<float> VtxScndList;
-        std::vector<float> VtxPrntList_FSI;
-        std::vector<float> VtxScndList_FSI;
-        //std::cout << "------  CONVVECT secondary info  ------" << std::endl;
-        for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
-          //std::cout << "[### " << ientry << " ###] Particle[" << iscnd << "]=" << iprtscnd[iscnd]
-          //                               << ", iprntprt=" << iprntprt[iscnd]
-          //                               << ", iprntidx=" << iprntidx[iscnd] 
-          //                               << ", ichildidx=" << ichildidx[iscnd] 
-          //                               << ", lmecscnd=" << lmecscnd[iscnd] 
-          //                               << ", vtxscnd=[" << vtxscnd[iscnd][0] << ", " << vtxscnd[iscnd][1] << ", " << vtxscnd[iscnd][2] << "]" 
-          //                               << ", vtxprnt=[" << vtxprnt[iscnd][0] << ", " << vtxprnt[iscnd][1] << ", " << vtxprnt[iscnd][2] << "]" << std::endl;
-          
-          //Find secondary neutrons(SI)
-          if (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) &&
-              numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
-              iprntidx[iscnd]==0 &&
-              numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) 
-          {
-            SIneutron = true;
-            float d_vtxprnt = std::sqrt( vtxprnt[iscnd][0]*vtxprnt[iscnd][0] +
-                                         vtxprnt[iscnd][1]*vtxprnt[iscnd][1] +
-                                         vtxprnt[iscnd][2]*vtxprnt[iscnd][2] );
-            float d_vtxscnd = std::sqrt( vtxscnd[iscnd][0]*vtxscnd[iscnd][0] +
-                                         vtxscnd[iscnd][1]*vtxscnd[iscnd][1] +
-                                         vtxscnd[iscnd][2]*vtxscnd[iscnd][2] );
-
-            float ScndNeutronMom_x = pprntinit[iscnd][0];
-            float ScndNeutronMom_y = pprntinit[iscnd][1];
-            float ScndNeutronMom_z = pprntinit[iscnd][2];
-            float ScndNeutronMom   = ScndNeutronMom_x*ScndNeutronMom_x +
-                                     ScndNeutronMom_y*ScndNeutronMom_y +
-                                     ScndNeutronMom_z*ScndNeutronMom_z;
-            float ScndNeutronE = std::sqrt( ScndNeutronMom + NMASS*NMASS );
-
-            //First neutron
-            if (VtxScndList.size()==0) {
-              VtxScndList.push_back(d_vtxscnd);
-              VtxPrntList.push_back(d_vtxprnt);
-              //std::cout << "- ScndNeutronE(SI): " << ScndNeutronE << std::endl;
-              h1_ScndNeutron -> Fill(999); //handmade ID for SI
-              h1_ScndNeutronE[1] -> Fill(ScndNeutronE);
-              h1_OverallN -> Fill(ScndNeutronE);
-              h1_SINFrac  -> Fill(ScndNeutronE);
-              SINeutrons++;
-            }
-            else {
-              bool NewNeutron = false;
-              for (UInt_t in=0; in<VtxPrntList.size(); in++) {
-                if (VtxPrntList.at(in)!=d_vtxprnt) {
-                  NewNeutron = true;
-                }
-                else {
-                  for (UInt_t jn=0; jn<VtxScndList.size(); jn++) {
-                    if (VtxScndList.at(jn)!=d_vtxscnd) NewNeutron = true;
-                    else NewNeutron = false;
-                  }
-                }
-              }
-              //If this is a new neutron
-              if (NewNeutron) {
-                VtxScndList.push_back(d_vtxscnd);
-                VtxPrntList.push_back(d_vtxprnt);
-                //std::cout << "- ScndNeutronE(SI): " << ScndNeutronE << std::endl;
-                h1_ScndNeutron -> Fill(999); //handmade ID for SI
-                h1_ScndNeutronE[1] -> Fill(ScndNeutronE);
-                h1_OverallN -> Fill(ScndNeutronE);
-                h1_SINFrac  -> Fill(ScndNeutronE);
-                SINeutrons++;
-              }
-            }
-          }
-
-
-          //Find secondary neutrons(Primary or FSI)
-          if (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) &&
-              numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
-              iprntidx[iscnd]==-5 &&
-              numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) 
-          {
-            FSINeutron = true;
-            float d_vtxprnt = std::sqrt( vtxprnt[iscnd][0]*vtxprnt[iscnd][0] +
-                                         vtxprnt[iscnd][1]*vtxprnt[iscnd][1] +
-                                         vtxprnt[iscnd][2]*vtxprnt[iscnd][2] );
-            float d_vtxscnd = std::sqrt( vtxscnd[iscnd][0]*vtxscnd[iscnd][0] +
-                                         vtxscnd[iscnd][1]*vtxscnd[iscnd][1] +
-                                         vtxscnd[iscnd][2]*vtxscnd[iscnd][2] );
-
-            float ScndNeutronMom_x = pprntinit[iscnd][0];
-            float ScndNeutronMom_y = pprntinit[iscnd][1];
-            float ScndNeutronMom_z = pprntinit[iscnd][2];
-            float ScndNeutronMom   = ScndNeutronMom_x*ScndNeutronMom_x +
-                                     ScndNeutronMom_y*ScndNeutronMom_y +
-                                     ScndNeutronMom_z*ScndNeutronMom_z;
-            float ScndNeutronE = std::sqrt( ScndNeutronMom + NMASS*NMASS );
-
-            //First neutron
-            if (VtxScndList_FSI.size()==0) {
-              VtxScndList_FSI.push_back(d_vtxscnd);
-              VtxPrntList_FSI.push_back(d_vtxprnt);
-              //std::cout << "- ScndNeutronE(FSI): " << ScndNeutronE << std::endl;
-              h1_ScndNeutron -> Fill(1999); //handmade ID for FSI
-              h1_ScndNeutronE[0] -> Fill(ScndNeutronE);
-              h1_OverallN -> Fill(ScndNeutronE);
-              h1_PrmNFrac -> Fill(ScndNeutronE);
-              FSINeutrons++;
-            }
-            else {
-              bool NewNeutron = false;
-              for (UInt_t in=0; in<VtxPrntList_FSI.size(); in++) {
-                if (VtxPrntList_FSI.at(in)!=d_vtxprnt) NewNeutron = true;
-                else {
-                  for (UInt_t jn=0; jn<VtxScndList_FSI.size(); jn++) {
-                    if (VtxScndList_FSI.at(jn)!=d_vtxscnd) NewNeutron = true;
-                    else NewNeutron = false;
-                  }
-                }
-              }
-              //If this is a new neutron
-              if (NewNeutron) {
-                VtxScndList_FSI.push_back(d_vtxscnd);
-                VtxPrntList_FSI.push_back(d_vtxprnt);
-                //std::cout << "- ScndNeutronE(FSI): " << ScndNeutronE << std::endl;
-                h1_ScndNeutron -> Fill(1999); //handmade ID for FSI
-                h1_ScndNeutronE[0] -> Fill(ScndNeutronE);
-                h1_OverallN -> Fill(ScndNeutronE);
-                h1_PrmNFrac -> Fill(ScndNeutronE);
-                FSINeutrons++;
-              }
-            }
-          }
-
-          //Find secondary visible neutrons(hadronic decay, mu decay)
-          if (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
-              numu->var<int>("lmecscnd", ichildidx[iscnd]-1)==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) {
-            //scndneutron = true;
-            float ScndNeutronMom_x = pscnd[iscnd][0];
-            float ScndNeutronMom_y = pscnd[iscnd][1];
-            float ScndNeutronMom_z = pscnd[iscnd][2];
-            float ScndNeutronMom   = ScndNeutronMom_x*ScndNeutronMom_x +
-                                     ScndNeutronMom_y*ScndNeutronMom_y +
-                                     ScndNeutronMom_z*ScndNeutronMom_z;
-            float ScndNeutronE = std::sqrt( ScndNeutronMom + NMASS*NMASS );
-            h1_ScndNeutron  -> Fill(numu->var<int>("iprtscnd", iscnd));
-
-            //mu capture
-            if (numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::MUON)) {
-              scndneutron = true;
-              OtherNeutrons++;
-              h1_OverallN   -> Fill(ScndNeutronE);
-              h1_OtherNFrac -> Fill(ScndNeutronE);
-              h1_ScndNeutronE[2] -> Fill(ScndNeutronE);
-              //std::cout << "- ScndNeutronE(mu): " << ScndNeutronE << std::endl;
-            }
-
-            //SI
-            if (numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::PIPLUS) ||
-                numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) ||
-                numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::PROTON)) 
-            {
-              SIneutron = true;
-              h1_OverallN -> Fill(ScndNeutronE);
-              h1_SINFrac  -> Fill(ScndNeutronE);
-              h1_ScndNeutronE[1] -> Fill(ScndNeutronE);
-              SINeutrons++;
-              //std::cout << "- ScndNeutronE(SI): " << ScndNeutronE << std::endl;
-            } 
-              
-          }
-        }
-        VtxScndList.clear();
-        VtxPrntList.clear();
-        VtxScndList_FSI.clear();
-        VtxPrntList_FSI.clear();
-        //std::cout << "[### " << ientry << " ###] Primary neutrons: " << PrimaryNeutrons 
-        //                               << ", FSI neutrons: " << FSINeutrons
-        //                               << ", SI neutrons: " << SINeutrons
-        //                               << ", Other neutrons: " << OtherNeutrons << std::endl;
-        //std::cout << " " << std::endl;
-
-        //Fraction of each neutron contributions
-        //(focus on CCQE events w/ tagged-n & nonzero truth neutrons)
-        /*if (PrimaryNeutrons+SINeutrons+OtherNeutrons!=0) {
-          h1_PrmNeutronFraction   -> Fill( );
-          h1_SINeutronFraction    -> Fill( );
-          h1_OtherNeutronFraction -> Fill( );
-          h2_Prm_x_SINeutronFraction -> Fill( );
-        }*/
-        AllPrimaryNeutrons += PrimaryNeutrons;
-        AllSINeutrons      += SINeutrons;
-        AllOtherNeutrons   += OtherNeutrons;
-
-        if (prmneutron)  CCQEwTaggedNeutrons_prm++;
-        if (SIneutron || scndneutron || FSINeutron) CCQEwTaggedNeutrons_scnd++;
-#endif
       }
 
 
@@ -801,8 +566,8 @@ int main(int argc, char **argv) {
         //Candidates loop
         for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
 
-          //ntagana.GetTagBreakdown(numu, ith, jentry, TMVATH[ith], NHits, FitT, Label, TagOut, etagmode);
-          ntagana.GetTagBreakdown(numu, ith, jentry, TMVATH[ith], N50, FitT, Label, TagOut, etagmode);
+          ntagana.GetTagBreakdown(numu, ith, jentry, TMVATH[ith], NHits, FitT, Label, TagOut, etagmode);
+          //ntagana.GetTagBreakdown(numu, ith, jentry, TMVATH[ith], N50, FitT, Label, TagOut, etagmode);
           //TagCandidates++;
           TagCandidates += OscProb;
 
@@ -812,8 +577,8 @@ int main(int argc, char **argv) {
 
             if (etagmode) {
               //Focus on neutron-like candidates(e-tagging ON)
-              //if (TagOut->at(jentry)>TMVATH[ith] && ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry))==false) {
-              if (TagOut->at(jentry)>TMVATH[ith] && ntagana.DecayelikeChecker(etagmode, N50->at(jentry), FitT->at(jentry))==false) {
+              if (TagOut->at(jentry)>TMVATH[ith] && ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry))==false) {
+              //if (TagOut->at(jentry)>TMVATH[ith] && ntagana.DecayelikeChecker(etagmode, N50->at(jentry), FitT->at(jentry))==false) {
                 //Fill corresponded truth distance
                 for (UInt_t kentry=0; kentry<DistFromPV->size(); ++kentry) {
                   if (Type->at(kentry)==2 && DWall->at(kentry)>0.) {
@@ -926,7 +691,7 @@ int main(int argc, char **argv) {
         h1_GenBefSINeutrons  -> Fill(TrueBefSI);
         h1_GenAftSINeutrons  -> Fill(TrueCapBefSI+TrueAftSI);
         h1_GenMuCapNeutrons  -> Fill(TrueMuN);
-      }
+      }    
 
     } //New 1R muon selection
 
@@ -1014,8 +779,13 @@ int main(int argc, char **argv) {
     resultfile << " fiTQun decya-e in the box        : " << BoxfQdcye     << std::endl;
     resultfile << " Matched fiTQun decya-e (legacy)  : " << MatchedfQdcye << std::endl;
     resultfile << " Matched fiTQun decya-e in the box: " << MatchedBoxfQdcye << std::endl;
+    resultfile << " Q1 : " << SelectedMatchTrueDcye << std::endl;
+    resultfile << " Q2 : " << SelectedfQdcye << std::endl;
+    resultfile << " Q3 : " << RejectedMatchedTrueDcye << std::endl;
+    resultfile << " efficiency Q1/(Q1+Q3): " << SelectedMatchTrueDcye /( SelectedMatchTrueDcye + RejectedMatchedTrueDcye )*100.  << " %" << std::endl;
+    resultfile << " purity     Q1/(Q1+Q2): " << SelectedMatchTrueDcye /( SelectedMatchTrueDcye + SelectedfQdcye)*100. << " %" << std::endl;
 
-    resultfile << "[Decay-e Cut Scan] " << std::endl;
+    /*resultfile << "[Decay-e Cut Scan] " << std::endl;
     resultfile << "[Decay-e Cut Scan] dt = 20 us: " << SelectedParentNeutrinos_dtScan[0]      << std::endl;
     resultfile << "                             : " << FinalSelectedParentNeutrinos_dtScan[0] << std::endl;
     resultfile << "[Decay-e Cut Scan] dt = 15 us: " << SelectedParentNeutrinos_dtScan[1]      << std::endl;
@@ -1025,7 +795,7 @@ int main(int argc, char **argv) {
     resultfile << "[Decay-e Cut Scan] dt =  5 us: " << SelectedParentNeutrinos_dtScan[3]      << std::endl;
     resultfile << "                             : " << FinalSelectedParentNeutrinos_dtScan[3] << std::endl;
     resultfile << "[Decay-e Cut Scan] dt =  3 us: " << SelectedParentNeutrinos_dtScan[4]      << std::endl;
-    resultfile << "                             : " << FinalSelectedParentNeutrinos_dtScan[4] << std::endl;
+    resultfile << "                             : " << FinalSelectedParentNeutrinos_dtScan[4] << std::endl;*/
 
     resultfile << "[Neutrino] All Parent Neutrino Events          : " << AllParentNeutrinos << std::endl;
     resultfile << "[Neutrino] Generated Neutrino Events(wallv>200): " << GeneratedEvents    << std::endl;
@@ -1250,6 +1020,7 @@ int main(int argc, char **argv) {
       h1_MisTagAccNoise -> SetBinContent(ithr+1, MisTaggedAccNoiseinNlike[0][ithr]);
       h1_NuEvtC6        -> SetBinContent(ithr+1, SelectedCCQENeutrinos[5]+SelectedCC2p2hNeutrinos[5]+SelectedCCnonQENeutrinos[5]+SelectedNCNeutrinos[5]);
     }
+
   }
 
 

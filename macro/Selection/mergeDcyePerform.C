@@ -70,56 +70,56 @@ void mergeDcyePerform(bool beammode) {
 
 
   //////  All true decay-e  //////
-  Double_t AllTruedcye_numu      = 6507.34;
-  Double_t AllTruedcye_nuesig    = 189.448;
-  Double_t AllTruedcye_numubar   = 13762.2;
-  Double_t AllTruedcye_nuebarsig = 243;
-  Double_t AllTruedcye_nuebkg    = 259.886;
-  Double_t AllTruedcye_nuebarbkg = 333;
+  Double_t Q1_numu      = 6088.48;
+  Double_t Q1_nuesig    = 183.448;
+  Double_t Q1_numubar   = 11771.3;
+  Double_t Q1_nuebarsig = 241;
+  Double_t Q1_nuebkg    = 249.886;
+  Double_t Q1_nuebarbkg = 323;
 
   //////  fiTQun sub-events in the box (reco. decay-e)  //////
-  Double_t BoxfQdcye_numu      = 6146.16;
-  Double_t BoxfQdcye_nuesig    = 186.448;
-  Double_t BoxfQdcye_numubar   = 11855.1;
-  Double_t BoxfQdcye_nuebarsig = 247;
-  Double_t BoxfQdcye_nuebkg    = 256.886;
-  Double_t BoxfQdcye_nuebarbkg = 327;
+  Double_t Q2_numu      = 59.6321;
+  Double_t Q2_nuesig    = 3;
+  Double_t Q2_numubar   = 83.7877;
+  Double_t Q2_nuebarsig = 6;
+  Double_t Q2_nuebkg    = 7;
+  Double_t Q2_nuebarbkg = 4;
 
   //////  True-mateched sub-events in the box  //////
-  Double_t MatchedfQdcye_numu      = 5848.38;
-  Double_t MatchedfQdcye_nuesig    = 183.448;
-  Double_t MatchedfQdcye_numubar   = 11791;
-  Double_t MatchedfQdcye_nuebarsig = 241;
-  Double_t MatchedfQdcye_nuebkg    = 249.886;
-  Double_t MatchedfQdcye_nuebarbkg = 324;
+  Double_t Q3_numu      = 162.892;
+  Double_t Q3_nuesig    = 0;
+  Double_t Q3_numubar   = 57.5076;
+  Double_t Q3_nuebarsig = 0;
+  Double_t Q3_nuebkg    = 1;
+  Double_t Q3_nuebarbkg = 0;
 
   
-  Double_t mergeAllTruedcye = (ExpN_numu_x_numu)/(GenN_numu_x_numu)*AllTruedcye_numu
-                            + (ExpN_numu_x_nue)/(GenN_numu_x_nue)*AllTruedcye_nuesig
-                            + (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar)*AllTruedcye_numubar
-                            + (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar)*AllTruedcye_nuebarsig
-                            + (ExpN_nue_x_nue)/(GenN_nue_x_nue)*AllTruedcye_nuebkg
-                            + (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar)*AllTruedcye_nuebarbkg;
+  Double_t mergeQ1 = (ExpN_numu_x_numu)/(GenN_numu_x_numu)*Q1_numu
+                            + (ExpN_numu_x_nue)/(GenN_numu_x_nue)*Q1_nuesig
+                            + (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar)*Q1_numubar
+                            + (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar)*Q1_nuebarsig
+                            + (ExpN_nue_x_nue)/(GenN_nue_x_nue)*Q1_nuebkg
+                            + (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar)*Q1_nuebarbkg;
 
-  Double_t mergeBoxfQdcye = (ExpN_numu_x_numu)/(GenN_numu_x_numu)*BoxfQdcye_numu
-                          + (ExpN_numu_x_nue)/(GenN_numu_x_nue)*BoxfQdcye_nuesig
-                          + (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar)*BoxfQdcye_numubar
-                          + (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar)*BoxfQdcye_nuebarsig
-                          + (ExpN_nue_x_nue)/(GenN_nue_x_nue)*BoxfQdcye_nuebkg
-                          + (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar)*BoxfQdcye_nuebarbkg;
+  Double_t mergeQ2 = (ExpN_numu_x_numu)/(GenN_numu_x_numu)*Q2_numu
+                          + (ExpN_numu_x_nue)/(GenN_numu_x_nue)*Q2_nuesig
+                          + (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar)*Q2_numubar
+                          + (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar)*Q2_nuebarsig
+                          + (ExpN_nue_x_nue)/(GenN_nue_x_nue)*Q2_nuebkg
+                          + (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar)*Q2_nuebarbkg;
 
-  Double_t mergeMatchedfQdcye = (ExpN_numu_x_numu)/(GenN_numu_x_numu)*MatchedfQdcye_numu
-                              + (ExpN_numu_x_nue)/(GenN_numu_x_nue)*MatchedfQdcye_nuesig
-                              + (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar)*MatchedfQdcye_numubar
-                              + (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar)*MatchedfQdcye_nuebarsig
-                              + (ExpN_nue_x_nue)/(GenN_nue_x_nue)*MatchedfQdcye_nuebkg
-                              + (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar)*MatchedfQdcye_nuebarbkg;
+  Double_t mergeQ3 = (ExpN_numu_x_numu)/(GenN_numu_x_numu)*Q3_numu
+                              + (ExpN_numu_x_nue)/(GenN_numu_x_nue)*Q3_nuesig
+                              + (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar)*Q3_numubar
+                              + (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar)*Q3_nuebarsig
+                              + (ExpN_nue_x_nue)/(GenN_nue_x_nue)*Q3_nuebkg
+                              + (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar)*Q3_nuebarbkg;
 
-  std::cout << "All True Decay-e                 : " << mergeAllTruedcye << std::endl;
-  std::cout << "fiTQun Decay-e in the Box        : " << mergeBoxfQdcye << std::endl;
-  std::cout << "Matched fiTQun Decay-e in the Box: " << mergeMatchedfQdcye << std::endl;
-  std::cout << "Purity    : " << (mergeMatchedfQdcye/mergeBoxfQdcye)*100. << " %" << std::endl;
-  std::cout << "Efficiency: " << (mergeMatchedfQdcye/mergeAllTruedcye)*100. << " %" << std::endl;
+  std::cout << "Q1: " << mergeQ1 << std::endl;
+  std::cout << "Q2: " << mergeQ2 << std::endl;
+  std::cout << "Q3: " << mergeQ3 << std::endl;
+  std::cout << "Purity    : " << (mergeQ1/(mergeQ1+mergeQ2))*100. << " %" << std::endl;
+  std::cout << "Efficiency: " << (mergeQ1/(mergeQ1+mergeQ3))*100. << " %" << std::endl;
 
 }
 

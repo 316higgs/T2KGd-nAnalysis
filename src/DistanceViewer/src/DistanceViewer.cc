@@ -2,8 +2,9 @@
 #include "TGaxis.h"
 
 void DistanceViewer::SetHistoFrame() {
-  h1_truedistance = new TH1F("h1_truedistance", "Truth Distance From PV; Truth distance[m]; Entries", 10, 0, 5);
-  ((TGaxis*)h1_truedistance->GetYaxis())->SetMaxDigits(4);
+  h1_truedistance = new TH1F("h1_truedistance", "", 10, 0, 5);
+  h1_truendistance = new TH1F("h1_truendistance", "", 100, 0, 5);
+  h1_truendistance_m30 = new TH1F("h1_truendistance_m30", "", 100, 0, 5);
 
   h1_truedistance_CCQE    = new TH1F("h1_truedistance_CCQE", "", 10, 0, 5);
   h1_truedistance_CC2p2h  = new TH1F("h1_truedistance_CC2p2h", "", 10, 0, 5);
@@ -65,13 +66,10 @@ void DistanceViewer::SetHistoFrame() {
   h2_RecoPmu_x_RecoRange = new TH2F("h2_RecoPmu_x_RecoRange", "h2_RecoPmu_x_RecoRange; Reconstructed #mu momentum[MeV]; Reconstructed range[m]", 1000, 0, 1000, 200, 0, 5);
   h2_RecoPmu_x_RecoRange -> SetStats(0);
 
-  h1_Candidatetruedistance = new TH1F("h1_Candidatetruedistance", "Truth Distance From PV; Truth distance[m]; Entries", 10, 0, 5);
-  ((TGaxis*)h1_Candidatetruedistance->GetYaxis())->SetMaxDigits(4);
-
+  h1_Candidatetruedistance = new TH1F("h1_Candidatetruedistance", "", 10, 0, 5);
   for (int i=0; i<CUTSTEP; i++) {
-    h1_Tagtruedistance[i] = new TH1F(TString::Format("h1_Tagtruedistance_thr%d", i), "Truth Distance of Tagged Truth Neutrons; Truth distance[m]; Entries", 10, 0, 5);
-    ((TGaxis*)h1_Tagtruedistance[i]->GetYaxis())->SetMaxDigits(4);
-
+    h1_Tagtruedistance[i] = new TH1F(TString::Format("h1_Tagtruedistance_thr%d", i), "", 10, 0, 5);
+    
     h1_NNEff_dist[i]      = new TH1F(TString::Format("h1_NNEff_dist_thr%d", i), "", 10, 0, 5);
     h1_OverallEff_dist[i] = new TH1F(TString::Format("h1_OverallEff_dist_thr%d", i), "", 10, 0, 5);
   }
@@ -148,8 +146,22 @@ float DistanceViewer::GetTruthDistance(CC0PiNumu *numu,
   float d_y = std::fabs(capturevtxy - primaryvtxy);
   float d_z = std::fabs(capturevtxz - primaryvtxz);
   float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
-  if (mode<31) h1_truedistance -> Fill(d/100., OscProb);
-  else h1_truedistance -> Fill(d/100.);
+
+  float x = d/100.;
+  float nom = 499 * std::exp(-x/(0.92*1.0)) + 9.6;
+  float m30 = 499 * std::exp(-x/(0.92*0.7)) + 9.6;
+  float wgt_m30 = m30/nom;
+
+  if (mode<31) {
+    h1_truedistance  -> Fill(d/100., OscProb);
+    h1_truendistance -> Fill(d/100., OscProb);
+    h1_truendistance_m30 -> Fill(d/100., OscProb*wgt_m30);
+  }
+  else {
+    h1_truedistance  -> Fill(d/100.);
+    h1_truendistance -> Fill(d/100.);
+    h1_truendistance_m30 -> Fill(d/100., wgt_m30);
+  }  
 
   if (mode==1)             h1_truedistance_CCQE    -> Fill(d/100., OscProb);
   //if (mode>=2 && mode<=30) h1_truedistance_CCnonQE -> Fill(d/100.);
@@ -231,7 +243,10 @@ void DistanceViewer::cdDistanceViewer(TFile* fout) {
 }
 
 void DistanceViewer::WritePlots() {
-  h1_truedistance         -> Write();
+  h1_truedistance          -> Write();
+  h1_Candidatetruedistance -> Write();
+  h1_truendistance        -> Write();
+  h1_truendistance_m30    -> Write();
   h1_truedistance_CCQE    -> Write();
   h1_truedistance_CC2p2h  -> Write();
   h1_truedistance_CCOther -> Write();

@@ -47,10 +47,15 @@ float BoxfQdcye     = 0.;
 float MatchedfQdcye = 0.;
 float MatchedBoxfQdcye = 0.;
 
+float RejectedMatchedTrueDcye = 0.;
+float SelectedfQdcye = 0.;
+float SelectedMatchTrueDcye = 0.;
+
 int DcyE_CCQE = 0;
 int DcyE_CC2p2h = 0;
 int DcyE_CCnonQE = 0;
 int DcyE_NC = 0;
+
 
 class DecayeBox {
   public:
@@ -80,6 +85,11 @@ class DecayeBox {
   		                     float dtCut,
 	                         float N50CutMin,
 	                         float N50CutMax);
+
+    std::vector<int> GetSelectedfQSubEvt(CC0PiNumu* numu);
+    std::vector<bool> GetMatchedTrueDecaye(CC0PiNumu* numu, int nmue, Float_t *tscnd);
+    void DecayeMatching(CC0PiNumu* numu, int nmue, Float_t *tscnd);
+
 
     int GetTruthDecaye(CC0PiNumu* numu, int NumDcyE);
   	int GetTaggedDecaye(CC0PiNumu* numu);

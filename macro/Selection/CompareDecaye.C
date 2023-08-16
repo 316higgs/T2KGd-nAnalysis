@@ -25,323 +25,261 @@ void CompareDecaye(bool beammode) {
   //FHC
 #if fhcflag
   //Gd MC
-  //TFile* fin_numu_gd    = new TFile("../../output/fhc/fhc.numu_x_numu.VertexSelection_mu_x_dcye.fqdcye.root");
-  //TFile* fin_numubar_gd = new TFile("../../output/fhc/fhc.numubar_x_numubar.VertexSelection_mu_x_dcye.fqdcye.root");
-  TFile* fin_numu_gd    = new TFile("../../output/fhc/fhc.numu_x_numu.root");
-  TFile* fin_numubar_gd = new TFile("../../output/fhc/fhc.numubar_x_numubar.root");
+  TFile* fin_numu_gd      = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.root");
+  TFile* fin_nuesig_gd    = new TFile("../../output/fhc/fhc.numu_x_nue.NNoptnewGdMC.root");
+  TFile* fin_numubar_gd   = new TFile("../../output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.root");
+  TFile* fin_nuebarsig_gd = new TFile("../../output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.root");
+  TFile* fin_nuebkg_gd    = new TFile("../../output/fhc/fhc.nue_x_nue.NNoptnewGdMC.root");
+  TFile* fin_nuebarbkg_gd = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.root");
 
   //Pure water MC
-  TFile* fin_numu_pw    = new TFile("../../output/fhc/numu_x_numu.water.root");
-  TFile* fin_numubar_pw = new TFile("../../output/fhc/fhc.numubar_x_numubar.water.root");
+  TFile* fin_numu_pw      = new TFile("../../output/fhc/fhc.numu_x_numu.water.root");
+  TFile* fin_nuesig_pw    = new TFile("../../output/fhc/fhc.numu_x_nue.water.root");
+  TFile* fin_numubar_pw   = new TFile("../../output/fhc/fhc.numubar_x_numubar.water.root");
+  TFile* fin_nuebarsig_pw = new TFile("../../output/fhc/fhc.numubar_x_nuebar.water.root");
+  TFile* fin_nuebkg_pw    = new TFile("../../output/fhc/fhc.nue_x_nue.water.root");
+  TFile* fin_nuebarbkg_pw = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.water.root");
 
-  TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
+  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
-  //RHC
-#if rhcflag
-  TFile* fin_numu_gd    = new TFile("../../output/rhc/rhc.numu_x_numu.VertexSelection_mu_x_dcye.beforecut.root");
-  TFile* fin_numubar_gd = new TFile("../../output/rhc/rhc.numubar_x_numubar.VertexSelection_mu_x_dcye.beofrecut.root");
-  TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
-#endif
 
   TH1F* h1_numu_gd[4];
+  TH1F* h1_nuesig_gd[4];
   TH1F* h1_numubar_gd[4];
+  TH1F* h1_nuebarsig_gd[4];
+  TH1F* h1_nuebkg_gd[4];
+  TH1F* h1_nuebarbkg_gd[4];
+
   TH1F* h1_numu_boxgd[4];
+  TH1F* h1_nuesig_boxgd[4];
   TH1F* h1_numubar_boxgd[4];
+  TH1F* h1_nuebarsig_boxgd[4];
+  TH1F* h1_nuebkg_boxgd[4];
+  TH1F* h1_nuebarbkg_boxgd[4];
 
   TH1F* h1_numu_pw[4];
+  TH1F* h1_nuesig_pw[4];
   TH1F* h1_numubar_pw[4];
+  TH1F* h1_nuebarsig_pw[4];
+  TH1F* h1_nuebkg_pw[4];
+  TH1F* h1_nuebarbkg_pw[4];
 
+
+  for (int i=0; i<4; i++) {
+    h1_numu_boxgd[i]      = (TH1F*)fin_numu_gd->Get(TString::Format("Gd1RmuonSelection/h1_Decaye_mode%d", i));  //Floor cut
+    h1_numu_gd[i]         = (TH1F*)fin_numu_gd->Get(TString::Format("DecayeBox/h1_TaggedDecaye_mode%d", i));    //Legacy
+    h1_nuesig_boxgd[i]    = (TH1F*)fin_nuesig_gd->Get(TString::Format("Gd1RmuonSelection/h1_Decaye_mode%d", i));  //Floor cut
+    h1_nuesig_gd[i]       = (TH1F*)fin_nuesig_gd->Get(TString::Format("DecayeBox/h1_TaggedDecaye_mode%d", i));    //Legacy
+    h1_numubar_boxgd[i]   = (TH1F*)fin_numubar_gd->Get(TString::Format("Gd1RmuonSelection/h1_Decaye_mode%d", i));  //Floor cut
+    h1_numubar_gd[i]      = (TH1F*)fin_numubar_gd->Get(TString::Format("DecayeBox/h1_TaggedDecaye_mode%d", i));    //Legacy
+    h1_nuebarsig_boxgd[i] = (TH1F*)fin_nuebarsig_gd->Get(TString::Format("Gd1RmuonSelection/h1_Decaye_mode%d", i));  //Floor cut
+    h1_nuebarsig_gd[i]    = (TH1F*)fin_nuebarsig_gd->Get(TString::Format("DecayeBox/h1_TaggedDecaye_mode%d", i));    //Legacy
+    h1_nuebkg_boxgd[i]    = (TH1F*)fin_nuebkg_gd->Get(TString::Format("Gd1RmuonSelection/h1_Decaye_mode%d", i));  //Floor cut
+    h1_nuebkg_gd[i]       = (TH1F*)fin_nuebkg_gd->Get(TString::Format("DecayeBox/h1_TaggedDecaye_mode%d", i));    //Legacy
+    h1_nuebarbkg_boxgd[i] = (TH1F*)fin_nuebarbkg_gd->Get(TString::Format("Gd1RmuonSelection/h1_Decaye_mode%d", i));  //Floor cut
+    h1_nuebarbkg_gd[i]    = (TH1F*)fin_nuebarbkg_gd->Get(TString::Format("DecayeBox/h1_TaggedDecaye_mode%d", i));    //Legacy
+
+    h1_numu_pw[i]      = (TH1F*)fin_numu_pw->Get(TString::Format("DecayeBox/h1_TaggedDecaye_mode%d", i));  //Legacy
+    h1_nuesig_pw[i]    = (TH1F*)fin_nuesig_pw->Get(TString::Format("DecayeBox/h1_TaggedDecaye_mode%d", i));  //Legacy
+    h1_numubar_pw[i]   = (TH1F*)fin_numubar_pw->Get(TString::Format("DecayeBox/h1_TaggedDecaye_mode%d", i));  //Legacy
+    h1_nuebarsig_pw[i] = (TH1F*)fin_nuebarsig_pw->Get(TString::Format("DecayeBox/h1_TaggedDecaye_mode%d", i));  //Legacy
+    h1_nuebkg_pw[i]    = (TH1F*)fin_nuebkg_pw->Get(TString::Format("DecayeBox/h1_TaggedDecaye_mode%d", i));  //Legacy
+    h1_nuebarbkg_pw[i] = (TH1F*)fin_nuebarbkg_pw->Get(TString::Format("DecayeBox/h1_TaggedDecaye_mode%d", i));  //Legacy
+  }
+
+
+  ////  merged histograms  ////
   TH1F* h1_DcyE_gd[4];
   TH1F* h1_DcyE_boxgd[4];
 
   TH1F* h1_DcyE_pw[4];
 
-  //Normalization
-  TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
-  TH1F* h1_skrate_numubar_x_numubar = (TH1F*)fin_skrate->Get("skrate_numu_bar_x_numu_bar");
-  //Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
-  //Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
-  Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
-  Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
-  Double_t GenN_numu_x_numu         = 190292;
-  Double_t GenN_numubar_x_numubar   = 190909;
-  std::cout << "ExpN_numu_x_numu = " << ExpN_numu_x_numu << std::endl;
-  std::cout << "GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
-  std::cout << "ExpN_numubar_x_numubar = " << ExpN_numubar_x_numubar << std::endl;
-  std::cout << "GenN_numubar_x_numubar = " << GenN_numubar_x_numubar << std::endl;
-  std::cout << "Normalization factor for numu_x_numu      : " << (ExpN_numu_x_numu)/(GenN_numu_x_numu) << std::endl;
-  std::cout << "Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
-
-
-  TH1F* h1_numu_boxgd[0] = (TH1F*)fin_numu_gd->Get("Gd1RmuonSelection/h1_Decaye_mode0");  //Legacy
-  TH1F* h1_numu_boxgd[1] = (TH1F*)fin_numu_gd->Get("Gd1RmuonSelection/h1_Decaye_mode1");
-  TH1F* h1_numu_boxgd[3] = (TH1F*)fin_numu_gd->Get("Gd1RmuonSelection/h1_Decaye_mode2");
-  TH1F* h1_numu_boxgd[2] = (TH1F*)fin_numu_gd->Get("Gd1RmuonSelection/h1_Decaye_mode3");
-  TH1F* h1_numu_gd[0] = (TH1F*)fin_numu_gd->Get("DecayeBox/h1_TaggedDecaye_mode0");  // box cut
-  TH1F* h1_numu_gd[1] = (TH1F*)fin_numu_gd->Get("DecayeBox/h1_TaggedDecaye_mode1");
-  TH1F* h1_numu_gd[3] = (TH1F*)fin_numu_gd->Get("DecayeBox/h1_TaggedDecaye_mode3");
-  TH1F* h1_numu_gd[2] = (TH1F*)fin_numu_gd->Get("DecayeBox/h1_TaggedDecaye_mode2");
-  TH1F* h1_numu_pw[0] = (TH1F*)fin_numu_pw->Get("DecayeBox/h1_TaggedDecaye_mode0");  //Legacy
-  TH1F* h1_numu_pw[1] = (TH1F*)fin_numu_pw->Get("DecayeBox/h1_TaggedDecaye_mode1");
-  TH1F* h1_numu_pw[3] = (TH1F*)fin_numu_pw->Get("DecayeBox/h1_TaggedDecaye_mode3");
-  TH1F* h1_numu_pw[2] = (TH1F*)fin_numu_pw->Get("DecayeBox/h1_TaggedDecaye_mode2");
-  //TH1F* h1_numu_pw[0] = (TH1F*)fin_numu_pw->Get("Gd1RmuonSelection/h1_Decaye_mode0");  // box cut
-  //TH1F* h1_numu_pw[1] = (TH1F*)fin_numu_pw->Get("Gd1RmuonSelection/h1_Decaye_mode1");
-  //TH1F* h1_numu_pw[3] = (TH1F*)fin_numu_pw->Get("Gd1RmuonSelection/h1_Decaye_mode3");
-  //TH1F* h1_numu_pw[2] = (TH1F*)fin_numu_pw->Get("Gd1RmuonSelection/h1_Decaye_mode2");
-  h1_numu_gd[0] -> SetStats(0);
-  h1_numu_boxgd[0] -> SetStats(0);
-
-  TH1F* h1_numubar_boxgd[0] = (TH1F*)fin_numubar_gd->Get("Gd1RmuonSelection/h1_Decaye_mode0");
-  TH1F* h1_numubar_boxgd[1] = (TH1F*)fin_numubar_gd->Get("Gd1RmuonSelection/h1_Decaye_mode1");
-  TH1F* h1_numubar_boxgd[3] = (TH1F*)fin_numubar_gd->Get("Gd1RmuonSelection/h1_Decaye_mode2");
-  TH1F* h1_numubar_boxgd[2] = (TH1F*)fin_numubar_gd->Get("Gd1RmuonSelection/h1_Decaye_mode3");
-  TH1F* h1_numubar_gd[0] = (TH1F*)fin_numubar_gd->Get("DecayeBox/h1_TaggedDecaye_mode0");
-  TH1F* h1_numubar_gd[1] = (TH1F*)fin_numubar_gd->Get("DecayeBox/h1_TaggedDecaye_mode1");
-  TH1F* h1_numubar_gd[3] = (TH1F*)fin_numubar_gd->Get("DecayeBox/h1_TaggedDecaye_mode3");
-  TH1F* h1_numubar_gd[2] = (TH1F*)fin_numubar_gd->Get("DecayeBox/h1_TaggedDecaye_mode2");
-  TH1F* h1_numubar_pw[0] = (TH1F*)fin_numubar_pw->Get("DecayeBox/h1_TaggedDecaye_mode0");  //Legacy
-  TH1F* h1_numubar_pw[1] = (TH1F*)fin_numubar_pw->Get("DecayeBox/h1_TaggedDecaye_mode1");
-  TH1F* h1_numubar_pw[3] = (TH1F*)fin_numubar_pw->Get("DecayeBox/h1_TaggedDecaye_mode3");
-  TH1F* h1_numubar_pw[2] = (TH1F*)fin_numubar_pw->Get("DecayeBox/h1_TaggedDecaye_mode2");
-  //TH1F* h1_numubar_pw[0] = (TH1F*)fin_numubar_pw->Get("Gd1RmuonSelection/h1_Decaye_mode0");  // box cut
-  //TH1F* h1_numubar_pw[1] = (TH1F*)fin_numubar_pw->Get("Gd1RmuonSelection/h1_Decaye_mode1");
-  //TH1F* h1_numubar_pw[3] = (TH1F*)fin_numubar_pw->Get("Gd1RmuonSelection/h1_Decaye_mode3");
-  //TH1F* h1_numubar_pw[2] = (TH1F*)fin_numubar_pw->Get("Gd1RmuonSelection/h1_Decaye_mode2");
-  h1_numubar_gd[0] -> SetStats(0);
-  h1_numubar_boxgd[0] -> SetStats(0);
-
-  //Legacy decay-e
-  h1_numu_gd[0] -> SetLineColor(kAzure-1);
-  h1_numu_gd[1] -> SetLineColor(kAzure-5);
-  h1_numu_gd[2] -> SetLineColor(kCyan-6);
-  h1_numu_gd[3] -> SetLineColor(kSpring-9);
-
-  h1_numu_gd[0] -> SetFillColor(kAzure-1);
-  h1_numu_gd[1] -> SetFillColor(kAzure-5);
-  h1_numu_gd[2] -> SetFillColor(kCyan-6);
-  h1_numu_gd[3] -> SetFillColor(kSpring-9);
-
-  h1_numubar_gd[0] -> SetLineColor(kOrange+7);
-  h1_numubar_gd[1] -> SetLineColor(kOrange+0);
-  h1_numubar_gd[2] -> SetLineColor(kOrange+0);
-  h1_numubar_gd[3] -> SetLineColor(kSpring-9);
-
-  h1_numubar_gd[0] -> SetFillColor(kOrange+7);
-  h1_numubar_gd[1] -> SetFillColor(kOrange+0);
-  h1_numubar_gd[2] -> SetFillColor(kOrange+0);
-  h1_numubar_gd[3] -> SetFillColor(kSpring-9);
-  //Box cut decay-e
-  h1_numu_boxgd[0] -> SetLineColor(kAzure-1);
-  h1_numu_boxgd[1] -> SetLineColor(kAzure-5);
-  h1_numu_boxgd[2] -> SetLineColor(kCyan-6);
-  h1_numu_boxgd[3] -> SetLineColor(kSpring-9);
-
-  h1_numu_boxgd[0] -> SetFillColor(kAzure-1);
-  h1_numu_boxgd[1] -> SetFillColor(kAzure-5);
-  h1_numu_boxgd[2] -> SetFillColor(kCyan-6);
-  h1_numu_boxgd[3] -> SetFillColor(kSpring-9);
-
-  h1_numubar_boxgd[0] -> SetLineColor(kOrange+7);
-  h1_numubar_boxgd[1] -> SetLineColor(kOrange+0);
-  h1_numubar_boxgd[2] -> SetLineColor(kOrange+0);
-  h1_numubar_boxgd[3] -> SetLineColor(kSpring-9);
-
-  h1_numubar_boxgd[0] -> SetFillColor(kOrange+7);
-  h1_numubar_boxgd[1] -> SetFillColor(kOrange+0);
-  h1_numubar_boxgd[2] -> SetFillColor(kOrange+0);
-  h1_numubar_boxgd[3] -> SetFillColor(kSpring-9);
-
-  //Legacy decay-e
-  /*h1_numu_gd[0]    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_numubar_gd[0] -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_numu_gd[1]    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_numubar_gd[1] -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_numu_gd[2]    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_numubar_gd[2] -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_numu_gd[3]    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_numubar_gd[3] -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  //Box cut decay-e
-  h1_numu_boxgd[0]    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_numubar_boxgd[0] -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_numu_boxgd[1]    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_numubar_boxgd[1] -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_numu_boxgd[2]    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_numubar_boxgd[2] -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_numu_boxgd[3]    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_numubar_boxgd[3] -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );*/
-
-  for (int i=0; i<4; i++) {
-    h1_numu_gd[i]       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-    h1_numubar_gd[i]    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-    h1_numu_boxgd[i]    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-    h1_numubar_boxgd[i] -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-    h1_numu_pw[i]       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-    h1_numubar_pw[i]    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  }
-
-#if 0
-  //Legacy decay-e
-  THStack* hs_mergeDcyE_gd = new THStack("hs_mergeDcyE_gd", "Number of Decay-e; Number of Decay-e; Number of Events");
-#if fhcflag
-  hs_mergeDcyE_gd -> Add(h1_numubar_gd[3]);
-  hs_mergeDcyE_gd -> Add(h1_numu_gd[3]);
-  hs_mergeDcyE_gd -> Add(h1_numubar_gd[2]);
-  hs_mergeDcyE_gd -> Add(h1_numu_gd[2]);
-  hs_mergeDcyE_gd -> Add(h1_numubar_gd[1]);
-  hs_mergeDcyE_gd -> Add(h1_numu_gd[1]);
-  hs_mergeDcyE_gd -> Add(h1_numubar_gd[0]);
-  hs_mergeDcyE_gd -> Add(h1_numu_gd[0]);
-#endif
-#if rhcflag
-  hs_mergeDcyE_gd -> Add(h1_numu_gd[3]);
-  hs_mergeDcyE_gd -> Add(h1_numubar_gd[3]);
-  hs_mergeDcyE_gd -> Add(h1_numu_gd[2]);
-  hs_mergeDcyE_gd -> Add(h1_numubar_gd[2]);
-  hs_mergeDcyE_gd -> Add(h1_numu_gd[1]);
-  hs_mergeDcyE_gd -> Add(h1_numubar_gd[1]);
-  hs_mergeDcyE_gd -> Add(h1_numu_gd[0]);
-  hs_mergeDcyE_gd -> Add(h1_numubar_gd[0]);
-#endif
-  //Box cut decay-e
-  THStack* hs_mergeDcyE_boxgd = new THStack("hs_mergeDcyE_boxgd", "Number of Decay-e; Number of Decay-e; Number of Events");
-#if fhcflag
-  hs_mergeDcyE_boxgd -> Add(h1_numubar_boxgd[3]);
-  hs_mergeDcyE_boxgd -> Add(h1_numu_boxgd[3]);
-  hs_mergeDcyE_boxgd -> Add(h1_numubar_boxgd[2]);
-  hs_mergeDcyE_boxgd -> Add(h1_numu_boxgd[2]);
-  hs_mergeDcyE_boxgd -> Add(h1_numubar_boxgd[1]);
-  hs_mergeDcyE_boxgd -> Add(h1_numu_boxgd[1]);
-  hs_mergeDcyE_boxgd -> Add(h1_numubar_boxgd[0]);
-  hs_mergeDcyE_boxgd -> Add(h1_numu_boxgd[0]);
-#endif
-#if rhcflag
-  hs_mergeDcyE_boxgd -> Add(h1_numu_boxgd[3]);
-  hs_mergeDcyE_boxgd -> Add(h1_numubar_boxgd[3]);
-  hs_mergeDcyE_boxgd -> Add(h1_numu_boxgd[2]);
-  hs_mergeDcyE_boxgd -> Add(h1_numubar_boxgd[2]);
-  hs_mergeDcyE_boxgd -> Add(h1_numu_boxgd[1]);
-  hs_mergeDcyE_boxgd -> Add(h1_numubar_boxgd[1]);
-  hs_mergeDcyE_boxgd -> Add(h1_numu_boxgd[0]);
-  hs_mergeDcyE_boxgd -> Add(h1_numubar_boxgd[0]);
-#endif
-#endif
-
-
   for (int i=0; i<4; i++) {
     h1_DcyE_gd[i] = new TH1F(TString::Format("h1_DcyE_gd_mode%d", i), "", 6, 0, 6);
     h1_DcyE_gd[i] -> Add(h1_numu_gd[i], 1.);
+    h1_DcyE_gd[i] -> Add(h1_nuesig_gd[i], 1.);
     h1_DcyE_gd[i] -> Add(h1_numubar_gd[i], 1.);
+    h1_DcyE_gd[i] -> Add(h1_nuebarsig_gd[i], 1.);
+    h1_DcyE_gd[i] -> Add(h1_nuebkg_gd[i], 1.);
+    h1_DcyE_gd[i] -> Add(h1_nuebarbkg_gd[i], 1.);
+
     h1_DcyE_gd[i] -> SetLineColor(kOrange+0);
     h1_DcyE_gd[i] -> SetLineStyle(7);
-    h1_DcyE_gd[i] -> SetLineWidth(2);
-    Double_t tot_DcyE_gd = h1_DcyE_gd[i]->Integral();
-    h1_DcyE_gd[i] -> Scale(1./tot_DcyE_gd);
+    h1_DcyE_gd[i] -> SetLineWidth(3);
     h1_DcyE_gd[i] -> SetStats(0);
 
     h1_DcyE_boxgd[i] = new TH1F(TString::Format("h1_DcyE_boxgd_mode%d", i), "", 6, 0, 6);
     h1_DcyE_boxgd[i] -> Add(h1_numu_boxgd[i], 1.);
+    h1_DcyE_boxgd[i] -> Add(h1_nuesig_boxgd[i], 1.);
     h1_DcyE_boxgd[i] -> Add(h1_numubar_boxgd[i], 1.);
+    h1_DcyE_boxgd[i] -> Add(h1_nuebarsig_boxgd[i], 1.);
+    h1_DcyE_boxgd[i] -> Add(h1_nuebkg_boxgd[i], 1.);
+    h1_DcyE_boxgd[i] -> Add(h1_nuebarbkg_boxgd[i], 1.);
+
     h1_DcyE_boxgd[i] -> SetLineColor(kOrange+0);
-    h1_DcyE_boxgd[i] -> SetLineWidth(2);
-    Double_t tot_DcyE_boxgd = h1_DcyE_boxgd[i]->Integral();
-    h1_DcyE_boxgd[i] -> Scale(1./tot_DcyE_boxgd);
+    h1_DcyE_boxgd[i] -> SetLineWidth(3);
 
     h1_DcyE_pw[i] = new TH1F(TString::Format("h1_DcyE_pw_mode%d", i), "", 6, 0, 6);
     h1_DcyE_pw[i] -> Add(h1_numu_pw[i], 1.);
+    h1_DcyE_pw[i] -> Add(h1_nuesig_pw[i], 1.);
     h1_DcyE_pw[i] -> Add(h1_numubar_pw[i], 1.);
+    h1_DcyE_pw[i] -> Add(h1_nuebarsig_pw[i], 1.);
+    h1_DcyE_pw[i] -> Add(h1_nuebkg_pw[i], 1.);
+    h1_DcyE_pw[i] -> Add(h1_nuebarbkg_pw[i], 1.);
+
     h1_DcyE_pw[i] -> SetLineColor(kAzure+1);
-    h1_DcyE_pw[i] -> SetLineWidth(2);
-    Double_t tot_DcyE_pw = h1_DcyE_pw[i]->Integral();
-    h1_DcyE_pw[i] -> Scale(1./tot_DcyE_pw);
+    h1_DcyE_pw[i] -> SetLineWidth(3);
     h1_DcyE_pw[i] -> SetStats(0);
     h1_DcyE_pw[i] -> SetXTitle("Number of Reconstructed Decay-e");
     h1_DcyE_pw[i] -> SetYTitle("Area Normalized");
+    h1_DcyE_pw[i] ->GetYaxis()->SetTitleSize(0.045);
+    h1_DcyE_pw[i] ->GetXaxis()->SetTitleSize(0.045);
+    h1_DcyE_pw[i] ->GetYaxis()->SetTitleOffset(1.2);
+    h1_DcyE_pw[i] ->GetYaxis()->SetLabelSize(0.036);
+    h1_DcyE_pw[i] ->GetXaxis()->SetLabelSize(0.045);
 
-    h1_DcyE_gd[i] -> GetXaxis()->SetBinLabel(1, "0");
-    h1_DcyE_gd[i] -> GetXaxis()->SetBinLabel(2, "1");
-    h1_DcyE_gd[i] -> GetXaxis()->SetBinLabel(3, "2");
-    h1_DcyE_gd[i] -> GetXaxis()->SetBinLabel(4, "3");
-    h1_DcyE_gd[i] -> GetXaxis()->SetBinLabel(5, "4");
-    h1_DcyE_gd[i] -> GetXaxis()->SetBinLabel(6, "5");
-
-    h1_DcyE_boxgd[i] -> GetXaxis()->SetBinLabel(1, "0");
-    h1_DcyE_boxgd[i] -> GetXaxis()->SetBinLabel(2, "1");
-    h1_DcyE_boxgd[i] -> GetXaxis()->SetBinLabel(3, "2");
-    h1_DcyE_boxgd[i] -> GetXaxis()->SetBinLabel(4, "3");
-    h1_DcyE_boxgd[i] -> GetXaxis()->SetBinLabel(5, "4");
-    h1_DcyE_boxgd[i] -> GetXaxis()->SetBinLabel(6, "5");
-
-    h1_DcyE_pw[i] -> GetXaxis()->SetBinLabel(1, "0");
-    h1_DcyE_pw[i] -> GetXaxis()->SetBinLabel(2, "1");
-    h1_DcyE_pw[i] -> GetXaxis()->SetBinLabel(3, "2");
-    h1_DcyE_pw[i] -> GetXaxis()->SetBinLabel(4, "3");
-    h1_DcyE_pw[i] -> GetXaxis()->SetBinLabel(5, "4");
-    h1_DcyE_pw[i] -> GetXaxis()->SetBinLabel(6, "5");
+    for (int j=0; j<6; j++) {
+      h1_DcyE_gd[i]    -> GetXaxis()->SetBinLabel(j+1, TString::Format("%d", j));
+      h1_DcyE_boxgd[i] -> GetXaxis()->SetBinLabel(j+1, TString::Format("%d", j));
+      h1_DcyE_pw[i]    -> GetXaxis()->SetBinLabel(j+1, TString::Format("%d", j));
+    }
+    
   }
 
 
+  TH1F* h1_DcyE_All_gd = new TH1F("h1_DcyE_All_gd", "", 6, 0, 6);
+  h1_DcyE_All_gd -> Add(h1_DcyE_gd[0]);
+  h1_DcyE_All_gd -> Add(h1_DcyE_gd[1]);
+  h1_DcyE_All_gd -> Add(h1_DcyE_gd[2]);
+  h1_DcyE_All_gd -> Add(h1_DcyE_gd[3]);
+  h1_DcyE_All_gd -> SetLineColor(kOrange+0);
+  h1_DcyE_All_gd -> SetLineStyle(7);
+  h1_DcyE_All_gd -> SetLineWidth(3);
+  Double_t tot_DcyE_All_gd = h1_DcyE_All_gd->Integral();
+  h1_DcyE_All_gd -> Scale(1./tot_DcyE_All_gd);
 
-#if 0
-  gROOT -> SetStyle("Plain");
-  TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
-  c1 -> SetGrid();
-  hs_mergeDcyE_gd -> Draw();
-  hs_mergeDcyE_gd ->GetYaxis()->SetTitleSize(0.038);
-  hs_mergeDcyE_gd ->GetYaxis()->SetTitleOffset(1.3);
-  hs_mergeDcyE_gd ->GetYaxis()->SetLabelSize(0.036);
-  hs_mergeDcyE_gd -> Draw();
-  c1->RedrawAxis();
+  TH1F* h1_DcyE_All_boxgd = new TH1F("h1_DcyE_All_boxgd", "", 6, 0, 6);
+  h1_DcyE_All_boxgd -> Add(h1_DcyE_boxgd[0]);
+  h1_DcyE_All_boxgd -> Add(h1_DcyE_boxgd[1]);
+  h1_DcyE_All_boxgd -> Add(h1_DcyE_boxgd[2]);
+  h1_DcyE_All_boxgd -> Add(h1_DcyE_boxgd[3]);
+  h1_DcyE_All_boxgd -> SetLineColor(kOrange+0);
+  h1_DcyE_All_boxgd -> SetLineWidth(3);
+  Double_t tot_DcyE_All_boxgd = h1_DcyE_All_boxgd->Integral();
+  h1_DcyE_All_boxgd -> Scale(1./tot_DcyE_All_boxgd);
+
+  TH1F* h1_DcyE_All_pw = new TH1F("h1_DcyE_All_pw", "", 6, 0, 6);
+  h1_DcyE_All_pw -> Add(h1_DcyE_pw[0]);
+  h1_DcyE_All_pw -> Add(h1_DcyE_pw[1]);
+  h1_DcyE_All_pw -> Add(h1_DcyE_pw[2]);
+  h1_DcyE_All_pw -> Add(h1_DcyE_pw[3]);
+  h1_DcyE_All_pw -> SetLineColor(kAzure+1);
+  h1_DcyE_All_pw -> SetLineWidth(3);
+  Double_t tot_DcyE_All_pw = h1_DcyE_All_pw->Integral();
+  h1_DcyE_All_pw -> Scale(1./tot_DcyE_All_pw);
+  h1_DcyE_All_pw -> SetStats(0);
+  h1_DcyE_All_pw ->GetXaxis()->SetTitle("Number of Reconstructed Decay-e");
+  h1_DcyE_All_pw ->GetYaxis()->SetTitle("Area Normalized");
+  h1_DcyE_All_pw ->GetYaxis()->SetTitleSize(0.045);
+  h1_DcyE_All_pw ->GetXaxis()->SetTitleSize(0.045);
+  h1_DcyE_All_pw ->GetYaxis()->SetTitleOffset(1.2);
+  h1_DcyE_All_pw ->GetYaxis()->SetLabelSize(0.036);
+  h1_DcyE_All_pw ->GetXaxis()->SetLabelSize(0.045);
+  for (int j=0; j<6; j++) h1_DcyE_All_pw -> GetXaxis()->SetBinLabel(j+1, TString::Format("%d", j));
   
-  TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
-  legend1 -> SetTextSize(0.04);
-  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");
-  else legend1->AddEntry((TObject*)0,"#kern[-0.25]{RHC 1R #mu sample (0.01% Gd)}","");
-  legend1->AddEntry((TObject*)0,"#kern[-0.5]{C1-C4 applied}","");
-  legend1 -> AddEntry(h1_numu_gd[0], "#nu_{#mu} CCQE(1p1h)", "F");
-  legend1 -> AddEntry(h1_numubar_gd[0], "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
-  legend1 -> AddEntry(h1_numu_gd[1], "#nu_{#mu} CC-2p2h", "F");
-  legend1 -> AddEntry(h1_numubar_gd[1], "#bar{#nu}_{#mu} CC-2p2h", "F");
-  legend1 -> AddEntry(h1_numu_gd[2], "#nu_{#mu} CC-other", "F");
-  legend1 -> AddEntry(h1_numubar_gd[2], "#bar{#nu}_{#mu} CC-other", "F");
-  //legend1 -> AddEntry(h1_CCOther_numubar, "#nu_{#mu}+#bar{#nu}_{#mu} CC non-QE", "F");
-  legend1 -> AddEntry(h1_numu_gd[3], "NC", "F");
-  legend1->SetFillColor(0);
-  //legend1->Draw();
-#endif
+
+
+  TH1F* h1_DcyE_QElike_gd = new TH1F("h1_DcyE_QElike_gd", "", 6, 0, 6);
+  h1_DcyE_QElike_gd -> Add(h1_DcyE_gd[0]);
+  h1_DcyE_QElike_gd -> Add(h1_DcyE_gd[1]);
+  h1_DcyE_QElike_gd -> SetLineColor(kOrange+0);
+  h1_DcyE_QElike_gd -> SetLineStyle(7);
+  h1_DcyE_QElike_gd -> SetLineWidth(3);
+  Double_t tot_DcyE_QElike_gd = h1_DcyE_QElike_gd->Integral();
+  h1_DcyE_QElike_gd -> Scale(1./tot_DcyE_QElike_gd);
+
+  TH1F* h1_DcyE_QElike_boxgd = new TH1F("h1_DcyE_QElike_boxgd", "", 6, 0, 6);
+  h1_DcyE_QElike_boxgd -> Add(h1_DcyE_boxgd[0]);
+  h1_DcyE_QElike_boxgd -> Add(h1_DcyE_boxgd[1]);
+  h1_DcyE_QElike_boxgd -> SetLineColor(kOrange+0);
+  h1_DcyE_QElike_boxgd -> SetLineWidth(3);
+  Double_t tot_DcyE_QElike_boxgd = h1_DcyE_QElike_boxgd->Integral();
+  h1_DcyE_QElike_boxgd -> Scale(1./tot_DcyE_QElike_boxgd);
+
+  TH1F* h1_DcyE_QElike_pw = new TH1F("h1_DcyE_QElike_pw", "", 6, 0, 6);
+  h1_DcyE_QElike_pw -> Add(h1_DcyE_pw[0]);
+  h1_DcyE_QElike_pw -> Add(h1_DcyE_pw[1]);
+  h1_DcyE_QElike_pw -> SetLineColor(kAzure+1);
+  h1_DcyE_QElike_pw -> SetLineWidth(3);
+  Double_t tot_DcyE_QElike_pw = h1_DcyE_QElike_pw->Integral();
+  h1_DcyE_QElike_pw -> Scale(1./tot_DcyE_QElike_pw);
+  h1_DcyE_QElike_pw -> SetStats(0);
+  h1_DcyE_QElike_pw ->GetXaxis()->SetTitle("Number of Reconstructed Decay-e");
+  h1_DcyE_QElike_pw ->GetYaxis()->SetTitle("Area Normalized");
+  h1_DcyE_QElike_pw ->GetYaxis()->SetTitleSize(0.045);
+  h1_DcyE_QElike_pw ->GetXaxis()->SetTitleSize(0.045);
+  h1_DcyE_QElike_pw ->GetYaxis()->SetTitleOffset(1.2);
+  h1_DcyE_QElike_pw ->GetYaxis()->SetLabelSize(0.036);
+  h1_DcyE_QElike_pw ->GetXaxis()->SetLabelSize(0.045);
+  for (int j=0; j<6; j++) h1_DcyE_QElike_pw -> GetXaxis()->SetBinLabel(j+1, TString::Format("%d", j));
+
+  for (int i=2; i<4; i++) {
+    Double_t tot_DcyE_gd = h1_DcyE_gd[i]->Integral();
+    h1_DcyE_gd[i] -> Scale(1./tot_DcyE_gd);
+
+    Double_t tot_DcyE_boxgd = h1_DcyE_boxgd[i]->Integral();
+    h1_DcyE_boxgd[i] -> Scale(1./tot_DcyE_boxgd);
+
+    Double_t tot_DcyE_pw = h1_DcyE_pw[i]->Integral();
+    h1_DcyE_pw[i] -> Scale(1./tot_DcyE_pw);
+  }
+  
 
 #if 1
   gROOT -> SetStyle("Plain");
-  TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
+  TCanvas* c1 = new TCanvas("c1", "c1", 1400, 1200);
   c1 -> Divide(2, 2);
   for (int i=0; i<4; i++) {
     c1 -> cd(i+1) -> SetGrid();
 
-    h1_DcyE_gd[i] ->GetXaxis()->SetTitle("Number of Reconstructed Decay-e");
+    /*h1_DcyE_gd[i] ->GetXaxis()->SetTitle("Number of Reconstructed Decay-e");
     h1_DcyE_gd[i] ->GetYaxis()->SetTitle("Area Normalized");
-    h1_DcyE_gd[i] ->GetYaxis()->SetTitleSize(0.038);
-    h1_DcyE_gd[i] ->GetYaxis()->SetTitleOffset(1.3);
+    h1_DcyE_gd[i] ->GetYaxis()->SetTitleSize(0.05);
+    h1_DcyE_gd[i] ->GetXaxis()->SetTitleSize(0.055);
+    h1_DcyE_gd[i] ->GetYaxis()->SetTitleOffset(1.4);
     h1_DcyE_gd[i] ->GetYaxis()->SetLabelSize(0.036);
-    h1_DcyE_pw[i]    -> Draw();
-    h1_DcyE_gd[i]    -> Draw("SAME");
-    h1_DcyE_boxgd[i] -> Draw("SAME");
+    h1_DcyE_gd[i] ->GetXaxis()->SetLabelSize(0.05);*/
 
-    TLegend* legend1 = new TLegend(0.4, 0.55, 0.89, 0.89);
-    legend1 -> SetTextSize(0.04);
-    if (i==0) legend1->AddEntry((TObject*)0,"#kern[-1.2]{CCQE}","");
-    if (i==1) legend1->AddEntry((TObject*)0,"#kern[-0.8]{CC 2p2h}","");
-    if (i==2) legend1->AddEntry((TObject*)0,"#kern[-0.8]{CC other}","");
-    if (i==3) legend1->AddEntry((TObject*)0,"#kern[-1.7]{NC}","");
-    legend1->AddEntry((TObject*)0,"#kern[-0.5]{C1-C4 applied}","");
+    if (i>1) {
+      h1_DcyE_pw[i]    -> Draw();
+      h1_DcyE_gd[i]    -> Draw("SAME");
+      h1_DcyE_boxgd[i] -> Draw("SAME");
+    }
+    else if (i==0) {
+      h1_DcyE_All_pw    -> Draw();
+      h1_DcyE_All_gd    -> Draw("SAME");
+      h1_DcyE_All_boxgd -> Draw("SAME");
+    }
+    else if (i==1) {
+      h1_DcyE_QElike_pw    -> Draw();
+      h1_DcyE_QElike_gd    -> Draw("SAME");
+      h1_DcyE_QElike_boxgd -> Draw("SAME");
+    }
+
+    TLegend* legend1 = new TLegend(0.45, 0.5, 0.89, 0.89);
+    legend1 -> SetTextSize(0.045);
+    if (i==0) legend1->AddEntry((TObject*)0,"#kern[-0.4]{All interactions}","");
+    if (i==1) legend1->AddEntry((TObject*)0,"#kern[-0.4]{CC 1p1h+2p2h}","");
+    if (i==2) legend1->AddEntry((TObject*)0,"#kern[-0.7]{CC other}","");
+    if (i==3) legend1->AddEntry((TObject*)0,"#kern[-2.0]{NC}","");
+    legend1->AddEntry((TObject*)0,"#kern[-0.4]{C1-C4 applied}","");
     legend1 -> AddEntry(h1_DcyE_pw[i], "Pure water", "L");
-    legend1 -> AddEntry(h1_DcyE_gd[i], "Gd: decay-e by #sub-event", "L");
-    legend1 -> AddEntry(h1_DcyE_boxgd[i], "Gd: decay-e by box cut", "L");
+    legend1 -> AddEntry(h1_DcyE_gd[i], "Gd: #sub-event", "L");
+    legend1 -> AddEntry(h1_DcyE_boxgd[i], "Gd: floor cut", "L");
     legend1->SetFillColor(0);
     legend1->Draw() ;
   }
-  
-  
 #endif
 
 }

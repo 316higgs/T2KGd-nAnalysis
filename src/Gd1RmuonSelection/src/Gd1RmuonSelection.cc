@@ -270,8 +270,8 @@ bool Gd1RmuonSelection::Apply1RmuonSelection(EvSelVar_t evsel,
     int mode = TMath::Abs(numu->var<int>("mode"));
     if (mode==1)              h1_Decaye[0] -> Fill(NumDecaye, OscProb);
     if (mode>=2 && mode<=10)  h1_Decaye[1] -> Fill(NumDecaye, OscProb);
-    if (mode>=31)             h1_Decaye[2] -> Fill(NumDecaye, OscProb);
-    if (mode>10 && mode<=30)  h1_Decaye[3] -> Fill(NumDecaye, OscProb);
+    if (mode>10 && mode<=30)  h1_Decaye[2] -> Fill(NumDecaye, OscProb);
+    if (mode>=31)             h1_Decaye[3] -> Fill(NumDecaye);
 
   	if (NumDecaye<=1 && evsel.pass[5]==true) pass = true;
   }

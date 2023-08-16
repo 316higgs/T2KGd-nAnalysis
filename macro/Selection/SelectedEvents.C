@@ -4,6 +4,7 @@
 #include "TROOT.h"
 #include "TText.h"
 #include "TLatex.h"
+#include <iomanip>
 
 #define NA 6.0221409
 #define FV 22.5
@@ -84,7 +85,7 @@ void SelectedEvents(bool beammode) {
   std::cout << "[nueb  -> nueb ] Normalization factor for nuebar_x_nuebar: " << (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) << std::endl;
 
 // Neutrino events
-#if 1
+#if 0
   TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode0");
   TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode1");
   TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode2");
@@ -123,7 +124,7 @@ void SelectedEvents(bool beammode) {
 #endif
 
 // Tagged neutrons
-#if 0
+#if 1
   TH1F* h1_CCQE_numu     = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode0");
   TH1F* h1_CC2p2h_numu   = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode1");
   TH1F* h1_CCOther_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode2");
@@ -423,6 +424,33 @@ void SelectedEvents(bool beammode) {
                                                       h1_CC2p2h_nuebarbkg->GetBinContent(i+1) +
                                                       h1_CCOther_nuebarbkg->GetBinContent(i+1) +
                                                       h1_NC_nuebarbkg->GetBinContent(i+1) << std::endl;
+    std::cout << "------------------------------------------------" << std::endl;
+    std::cout << "& " << h1_CCQE_numu->GetBinContent(i+1)
+              << "& " << h1_CCQE_numubar->GetBinContent(i+1)
+              << "& " << h1_CC2p2h_numu->GetBinContent(i+1)
+              << "& " << h1_CC2p2h_numubar->GetBinContent(i+1)
+              << "& " << h1_CCOther_numu->GetBinContent(i+1)
+              << "& " << h1_CCOther_numubar->GetBinContent(i+1)
+              << "& " << h1_CCQE_nuesig->GetBinContent(i+1) +
+                         h1_CC2p2h_nuesig->GetBinContent(i+1) +
+                         h1_CCOther_nuesig->GetBinContent(i+1) +
+                         h1_CCQE_nuebarsig->GetBinContent(i+1) +
+                         h1_CC2p2h_nuebarsig->GetBinContent(i+1) +
+                         h1_CCOther_nuebarsig->GetBinContent(i+1) +
+                         h1_CCQE_nuebkg->GetBinContent(i+1) +
+                         h1_CC2p2h_nuebkg->GetBinContent(i+1) +
+                         h1_CCOther_nuebkg->GetBinContent(i+1) +
+                         h1_CCQE_nuebarbkg->GetBinContent(i+1) +
+                         h1_CC2p2h_nuebarbkg->GetBinContent(i+1) +
+                         h1_CCOther_nuebarbkg->GetBinContent(i+1)
+              << "& " << h1_NC_numu->GetBinContent(i+1) +
+                         h1_NC_nuesig->GetBinContent(i+1) +
+                         h1_NC_numubar->GetBinContent(i+1) +
+                         h1_NC_nuebarsig->GetBinContent(i+1) +
+                         h1_NC_nuebkg->GetBinContent(i+1) +
+                         h1_NC_nuebarbkg->GetBinContent(i+1) << std::endl;
+
+
     SelecEv[i] += h1_CCQE_numu->GetBinContent(i+1);
     SelecEv[i] += h1_CC2p2h_numu->GetBinContent(i+1);
     SelecEv[i] += h1_CCOther_numu->GetBinContent(i+1);
@@ -479,8 +507,8 @@ void SelectedEvents(bool beammode) {
   hs_NuEvt ->GetYaxis()->SetTitleSize(0.038);
   hs_NuEvt ->GetYaxis()->SetTitleOffset(1.3);
   hs_NuEvt ->GetYaxis()->SetLabelSize(0.036);
-  //hs_NuEvt ->GetYaxis()->SetTitle("Number of #nu Events");
-  hs_NuEvt ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
+  hs_NuEvt ->GetYaxis()->SetTitle("Number of #nu Events");
+  //hs_NuEvt ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
   hs_NuEvt -> Draw();
   TGaxis* axis = new TGaxis(6, 0, 6, 115, 0, 115, 23, "+L");
   axis -> SetLabelColor(kWhite);

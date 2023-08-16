@@ -11,6 +11,8 @@ float DistanceMax = 5.;
 
 //Truth distance distribution
 TH1F* h1_truedistance;
+TH1F* h1_truendistance;
+TH1F* h1_truendistance_m30;
 TH1F* h1_truedistance_CCQE;
 TH1F* h1_truedistance_CC2p2h;
 TH1F* h1_truedistance_CCOther;

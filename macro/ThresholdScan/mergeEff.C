@@ -11,6 +11,7 @@
 #define POTSCALE 0.17
 
 #define CUTSTEP 21
+#define nThreshold 0.7
 
 void mergeEff(bool beammode) {
   
@@ -26,12 +27,44 @@ void mergeEff(bool beammode) {
 
   //FHC
 #if fhcflag
+  
+#if 0  
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.root");
   TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.NNoptnewGdMC.root");
   TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.root");
   TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.root");
   TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.NNoptnewGdMC.root");
-  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.root");*/
+#endif
+
+#if 1
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.bonsaikeras.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.bonsaikeras.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.bonsaikeras.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.newGdMC.bonsaikeras.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.bonsaikeras.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.bonsaikeras.root");
+#endif
+
+#if 0
+  ////  -30%  ////
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.systSIm30.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.systSIm30.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.systSIm30.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.systSIm30.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.systSIm30.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.systSIm30.root");
+#endif
+
+#if 0
+  ////  +30%  ////
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.systSIp30.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.systSIp30.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.systSIp30.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.systSIp30.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.systSIp30.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.systSIp30.root");
+#endif
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
@@ -120,6 +153,20 @@ void mergeEff(bool beammode) {
   TH1F* h1_TrueN_H_nuebarbkg     = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_TrueN_H");
   TH1F* h1_TrueN_Gd_nuebarbkg    = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_TrueN_Gd");
 
+  for (int ith=0; ith<CUTSTEP; ith++) {
+    float TMVATH = 0.05*ith;
+    if (ith==14) {
+      std::cout << " " << std::endl;
+      std::cout << "[### n-likelihood=" << TMVATH << " ###] numu    -> numu    true neutrons: " << h1_TrueN_numu -> GetBinContent(ith+1)      << ", tagged true neutrons: " << h1_TagTrueN_numu -> GetBinContent(ith+1) << std::endl;
+      std::cout << "[### n-likelihood=" << TMVATH << " ###] numu    -> nue     true neutrons: " << h1_TrueN_nuesig -> GetBinContent(ith+1)    << ", tagged true neutrons: " << h1_TagTrueN_nuesig -> GetBinContent(ith+1) << std::endl;
+      std::cout << "[### n-likelihood=" << TMVATH << " ###] numubar -> numubar true neutrons: " << h1_TrueN_numubar -> GetBinContent(ith+1)   << ", tagged true neutrons: " << h1_TagTrueN_numubar -> GetBinContent(ith+1) << std::endl;
+      std::cout << "[### n-likelihood=" << TMVATH << " ###] numubar -> nuebar  true neutrons: " << h1_TrueN_nuebarsig -> GetBinContent(ith+1) << ", tagged true neutrons: " << h1_TagTrueN_nuebarsig -> GetBinContent(ith+1) << std::endl;
+      std::cout << "[### n-likelihood=" << TMVATH << " ###] nue     -> nue     true neutrons: " << h1_TrueN_nuebkg -> GetBinContent(ith+1)    << ", tagged true neutrons: " << h1_TagTrueN_nuebkg -> GetBinContent(ith+1) << std::endl;
+      std::cout << "[### n-likelihood=" << TMVATH << " ###] nuebar  -> nuebar  true neutrons: " << h1_TrueN_nuebarbkg -> GetBinContent(ith+1) << ", tagged true neutrons: " << h1_TagTrueN_nuebarbkg -> GetBinContent(ith+1) << std::endl;
+      std::cout << " " << std::endl;
+    }  
+  }
+
 
   /////  Normalizations  //////
 #if 1
@@ -200,6 +247,7 @@ void mergeEff(bool beammode) {
   }
 
 
+#if 0
   TCanvas* c = new TCanvas("c", "c", 700, 700);
   c -> SetGrid();
   h1_TagEff_merge -> Draw();
@@ -242,5 +290,6 @@ void mergeEff(bool beammode) {
   text1 -> Draw();
   text2 -> Draw();
   text3 -> Draw();
+#endif
 
 }

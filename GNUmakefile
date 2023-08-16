@@ -17,6 +17,10 @@ analysis1Rmu.exe: analysis1Rmu.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
+systSI.exe: systSI.o
+	$(RM) .$@
+	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
+
 analysis1Re.exe: analysis1Re.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
@@ -87,6 +91,9 @@ NeutronMultiplicity.exe: NeutronMultiplicity.o
 
 cleananalysis1Rmu:
 	$(RM) analysis1Rmu.o analysis1Rmu.exe
+
+cleansystSI:
+	$(RM) systSI.o systSI.exe
 
 cleanPreScan:
 	$(RM) PreScan.o PreScan.exe

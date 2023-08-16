@@ -169,8 +169,11 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
   prmsel.GetEvis(numu);
   prmsel.GetDWall(numu);
   if (prmsel.C1ApplyFCFV(evsel)) {
-    SelectedParentNeutrinos[0]++;
-    ProtoSelectedParentNeutrinos[0]++;
+    if (mode<31) SelectedParentNeutrinos[0]+=OscProb;
+    else SelectedParentNeutrinos[0]++;
+    if (mode<31) ProtoSelectedParentNeutrinos[0]+=OscProb;
+    else ProtoSelectedParentNeutrinos[0]++;
+
     if (mode==1)             SelectedNoOscCCQENeutrinos[0]++;
     if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[0]++;
     if (mode>10 && mode<=30) SelectedNoOscCCnonQENeutrinos[0]++;
@@ -183,8 +186,11 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
     prmsel.GetNring(numu);
 
     if (prmsel.C2Apply1R(evsel)) {
-      SelectedParentNeutrinos[1]++;
-      ProtoSelectedParentNeutrinos[1]++;
+      if (mode<31) SelectedParentNeutrinos[1]+=OscProb;
+      else SelectedParentNeutrinos[1]++;
+      if (mode<31) ProtoSelectedParentNeutrinos[1]+=OscProb;
+      else ProtoSelectedParentNeutrinos[1]++;
+
       if (mode==1)             SelectedNoOscCCQENeutrinos[1]++;
       if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[1]++;
       if (mode>10 && mode<=30) SelectedNoOscCCnonQENeutrinos[1]++;
@@ -197,8 +203,11 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
       prmsel.GetemuLikelihood(numu);
 
       if (prmsel.C3Applymuonlike(evsel)) {
-        SelectedParentNeutrinos[2]++;
-        ProtoSelectedParentNeutrinos[2]++;
+        if (mode<31) SelectedParentNeutrinos[2]+=OscProb;
+        else SelectedParentNeutrinos[2]++;
+        if (mode<31) ProtoSelectedParentNeutrinos[2]+=OscProb;
+        else ProtoSelectedParentNeutrinos[2]++;
+
         if (mode==1)             SelectedNoOscCCQENeutrinos[2]++;
         if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[2]++;
         if (mode>10 && mode<=30) SelectedNoOscCCnonQENeutrinos[2]++;
@@ -211,8 +220,11 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
         prmsel.GetPmu(numu);
 
         if (prmsel.C4ApplyPmu200MeV(evsel)) {
-          SelectedParentNeutrinos[3]++;
-          ProtoSelectedParentNeutrinos[3]++;
+          if (mode<31) SelectedParentNeutrinos[3]+=OscProb;
+          else SelectedParentNeutrinos[3]++;
+          if (mode<31) ProtoSelectedParentNeutrinos[3]+=OscProb;
+          else ProtoSelectedParentNeutrinos[3]++;
+
           if (mode==1)             SelectedNoOscCCQENeutrinos[3]++;
           if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[3]++;
           if (mode>10 && mode<=30) SelectedNoOscCCnonQENeutrinos[3]++;
@@ -226,7 +238,9 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
           //decayebox.GetDecayeTagPurity(numu, dtCut, N50CutMin, N50CutMax);
 
           if (prmsel.C5Applydecaye(evsel, numu, decayebox, eMode, eOsc, dtCut, N50CutMin, N50CutMax, dtvsn50fill)) {
-            SelectedParentNeutrinos[4]++;
+            if (mode<31) SelectedParentNeutrinos[4]+=OscProb;
+            else SelectedParentNeutrinos[4]++;
+
             if (mode==1)             SelectedNoOscCCQENeutrinos[4]++;
             if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[4]++;
             if (mode>10 && mode<=30) SelectedNoOscCCnonQENeutrinos[4]++;
@@ -239,7 +253,9 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
             prmsel.GetpimuLikelihood(numu);
 
             if (prmsel.C6Applynotpionlike(evsel)) {
-              SelectedParentNeutrinos[5]++;
+              if (mode<31) SelectedParentNeutrinos[5]+=OscProb;
+              else SelectedParentNeutrinos[5]++;
+
               if (mode==1)             SelectedNoOscCCQENeutrinos[5]++;
               if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[5]++;
               if (mode>10 && mode<=30) SelectedNoOscCCnonQENeutrinos[5]++;
@@ -253,10 +269,12 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
           }
 
           if (prmsel.C5ApplyProtodecaye(evsel)) {
-            ProtoSelectedParentNeutrinos[4]++;
+            if (mode<31) ProtoSelectedParentNeutrinos[4]+=OscProb;
+            else ProtoSelectedParentNeutrinos[4]++;
 
             if (prmsel.C6Applynotpionlike(evsel)) {
-              ProtoSelectedParentNeutrinos[5]++;
+              if (mode<31) ProtoSelectedParentNeutrinos[5]+=OscProb;
+              else ProtoSelectedParentNeutrinos[5]++;
             }
           }
         }

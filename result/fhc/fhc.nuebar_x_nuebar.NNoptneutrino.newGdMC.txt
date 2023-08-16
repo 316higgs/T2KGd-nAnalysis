@@ -23,19 +23,19 @@
   Total   (No osc.): 43711
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 15628.1
-  CC-2p2h (osc.): 4528.98
-  CC-Other(osc.): 39526
-  NC      (osc.): 14017
+  CCQE    (osc.): 15635.8
+  CC-2p2h (osc.): 4529.97
+  CC-Other(osc.): 39539.9
+  NC      (osc.): 14021
   ------------------------------------------
-  Total   (osc.): 73700
+  Total   (osc.): 73726.6
  
-  CCQE    (No osc.): 16003
-  CC-2p2h (No osc.): 4637
-  CC-Other(No osc.): 39970
-  NC      (No osc.): 14017
+  CCQE    (No osc.): 16011
+  CC-2p2h (No osc.): 4638
+  CC-Other(No osc.): 39984
+  NC      (No osc.): 14021
   ------------------------------------------
-  Total   (No osc.): 74627
+  Total   (No osc.): 74654
 [Neutrino] C2: 24333 -> 24333
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 13343.4
@@ -53,19 +53,19 @@
   Total   (No osc.): 24333
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 13616
-  CC-2p2h (osc.): 4058.94
-  CC-Other(osc.): 13920.2
-  NC      (osc.): 2181
+  CCQE    (osc.): 13622.8
+  CC-2p2h (osc.): 4059.93
+  CC-Other(osc.): 13924.2
+  NC      (osc.): 2182
   ------------------------------------------
-  Total   (osc.): 33776.1
+  Total   (osc.): 33788.9
  
-  CCQE    (No osc.): 13952
-  CC-2p2h (No osc.): 4158
-  CC-Other(No osc.): 14137
-  NC      (No osc.): 2181
+  CCQE    (No osc.): 13959
+  CC-2p2h (No osc.): 4159
+  CC-Other(No osc.): 14141
+  NC      (No osc.): 2182
   ------------------------------------------
-  Total   (No osc.): 34428
+  Total   (No osc.): 34441
 [Neutrino] C3: 692 -> 692
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 6.8388
@@ -188,22 +188,16 @@
   Total   (No osc.): 414
 --- Box cut performance ---
  0 < dt[usec] < 10, 50 < N50 < 400
- All truth decay-e                : 333
- All fiTQun decay-e               : 1260.89
- fiTQun decya-e in the box        : 327
- Matched fiTQun decya-e (legacy)  : 328
- Matched fiTQun decya-e in the box: 324
-[Decay-e Cut Scan] 
-[Decay-e Cut Scan] dt = 20 us: 669
-                             : 289
-[Decay-e Cut Scan] dt = 15 us: 669
-                             : 289
-[Decay-e Cut Scan] dt = 10 us: 669
-                             : 289
-[Decay-e Cut Scan] dt =  5 us: 669
-                             : 289
-[Decay-e Cut Scan] dt =  3 us: 669
-                             : 289
+ All truth decay-e                : 0
+ All fiTQun decay-e               : 0
+ fiTQun decya-e in the box        : 0
+ Matched fiTQun decya-e (legacy)  : 0
+ Matched fiTQun decya-e in the box: 0
+ Q1 : 323
+ Q2 : 4
+ Q3 : 0
+ efficiency Q1/(Q1+Q3): 100 %
+ purity     Q1/(Q1+Q2): 98.7768 %
 [Neutrino] All Parent Neutrino Events          : 100000
 [Neutrino] Generated Neutrino Events(wallv>200): 63652
 [Neutrino] Generated 1Rmu Events (Oscillated)  : 288.804

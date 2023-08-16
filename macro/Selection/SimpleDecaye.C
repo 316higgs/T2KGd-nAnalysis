@@ -12,9 +12,11 @@
 
 void SimpleDecaye(bool beammode) {
 
+  // Which type of decay-e?
   bool truedcye    = 0;
   bool fitqunsubev = 0;
   bool floordcye   = 1;
+  
 
   int fhcflag = 1;
   int rhcflag = 0;

@@ -666,8 +666,100 @@ int DecayeBox::GetDecayeTagPurity(CC0PiNumu* numu,
 }
 
 
+// Get reco particle list accepted by the floor cut
+std::vector<int> DecayeBox::GetSelectedfQSubEvt(CC0PiNumu* numu) {
+  std::vector<int> SelectedfQSubEvt;
+  SelectedfQSubEvt.clear();
+  std::vector<float> dtlist(numu->var<int>("fqnse")-1);
+  for (int ireco=1; ireco<numu->var<int>("fqnse"); ireco++) {
+    dtlist[ireco-1] = (numu->var<float>("fq1rt0", ireco, FQ_EHYP) - numu->var<float>("fq1rt0", 0, FQ_MUHYP))/1000.; 
+    float N50 = numu->var<int>("fqn50", ireco);
+    if ( dtlist[ireco-1] < 1.5 ) SelectedfQSubEvt.push_back(ireco);
+    else if ( dtlist[ireco-1] < 20. && dtlist[ireco-1] < 0.25*N50-7.5 ) SelectedfQSubEvt.push_back(ireco);
+  }
+  return SelectedfQSubEvt;
+}
+
+// Get reco particle list with timing matching result between truth and reco particles (true of false)
+std::vector<bool> DecayeBox::GetMatchedTrueDecaye(CC0PiNumu* numu, Int_t nmue, Float_t *tscnd) {
+  // initialization
+  std::vector<bool> DcyeMatching;
+  DcyeMatching.assign(TMath::Max( numu->var<int>("fqnse"), 1 ), false);
+  
+  // prompt
+  if (nmue==0 && numu->var<int>("nscndprt")>0) {
+    if ( std::fabs(numu->var<int>("iprntprt", 0))==static_cast<int>(PDGPID::MUON) &&
+         std::fabs(numu->var<int>("lmecscnd", 0))==static_cast<int>(GEANTINT::DECAY) ) {
+      DcyeMatching[0] = true;
+    }
+  }
+
+  std::vector<float> tdiff;
+  std::vector<int> used_TrueDcye;
+  for (int ireco=1; ireco<numu->var<int>("fqnse"); ireco++) {
+    
+    if (numu->var<int>("nscndprt")==0) break;
+    
+    // time difference for matching
+    for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
+      tdiff.push_back( std::fabs( tscnd[iscnd] - (numu->var<float>("fq1rt0", ireco, FQ_EHYP) - numu->var<float>("fq1rt0", 0, FQ_MUHYP) ) ) );  // ns
+    }
+    
+    // get truth secondary particle with the minimum time diff from ireco. 
+    int min_idx = std::distance( tdiff.begin(), std::min_element(tdiff.begin(), tdiff.end()) );
+    
+    if (tdiff[min_idx] < 50.) {
+      // check if this truth particle is already matched with other reco particle
+      if ( std::find( used_TrueDcye.begin(), used_TrueDcye.end(), min_idx ) != used_TrueDcye.end() ) continue;
+      used_TrueDcye.push_back(min_idx);
+
+      // found
+      if ( std::fabs(numu->var<int>("iprntprt", min_idx))==static_cast<int>(PDGPID::MUON) &&
+           std::fabs(numu->var<int>("lmecscnd", min_idx))==static_cast<int>(GEANTINT::DECAY) ) {
+        DcyeMatching[ireco] = true;
+      }
+    }
+    tdiff.clear();
+  }
+  return DcyeMatching;
+}
+
+
+void DecayeBox::DecayeMatching(CC0PiNumu* numu, Int_t nmue, Float_t *tscnd) {
+
+  std::vector<int> SelectedfQSubEvt = this->GetSelectedfQSubEvt(numu);
+  std::vector<bool> DcyeMatching = this->GetMatchedTrueDecaye(numu, nmue, tscnd);
+
+  int   mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
+  for (int ireco=1; ireco<numu->var<int>("fqnse"); ireco++) {
+    //double dt = (numu->var<float>("fq1rt0", ireco, FQ_EHYP) - numu->var<float>("fq1rt0", 0, FQ_MUHYP))/1000.;  // us
+
+    // reject ireco
+    if ( std::find( SelectedfQSubEvt.begin(), SelectedfQSubEvt.end(), ireco ) == SelectedfQSubEvt.end() ) {
+      if ( DcyeMatching[ireco] ) {
+        if (mode<31) RejectedMatchedTrueDcye += OscProb;
+        else RejectedMatchedTrueDcye ++;
+      }
+    }
+    // accept ireco
+    else {
+      if ( DcyeMatching[ireco] ) {
+        if (mode<31) SelectedMatchTrueDcye += OscProb;
+        else SelectedMatchTrueDcye ++;
+      }
+      else {
+        if (mode<31) SelectedfQdcye += OscProb;
+        else SelectedfQdcye ++;
+      }
+    }
+  }
+
+}
+
+
 int DecayeBox::GetTruthDecaye(CC0PiNumu* numu, int NumDcyE) {
-  int mode = TMath::Abs(numu->var<int>("mode"));
+  int   mode = TMath::Abs(numu->var<int>("mode"));
   float OscProb = numu->getOscWgt();
 
   //CCQE(1p1h)
@@ -675,7 +767,7 @@ int DecayeBox::GetTruthDecaye(CC0PiNumu* numu, int NumDcyE) {
   //CC 2p2h
   if (mode>=2 && mode<=10) h1_TrueDecaye[1] -> Fill(NumDcyE, OscProb);
   //NC
-  if (mode>=31) h1_TrueDecaye[2] -> Fill(NumDcyE, OscProb);
+  if (mode>=31) h1_TrueDecaye[2] -> Fill(NumDcyE);
   //CC RES (Delta+)
   if (mode==13) h1_TrueDecaye[3] -> Fill(NumDcyE, OscProb);
   //CC RES (Delta++)
@@ -705,7 +797,7 @@ int DecayeBox::GetTaggedDecaye(CC0PiNumu* numu) {
   if (mode==1)             h1_TaggedDecaye[0] -> Fill(NumFQDcyE, OscProb);
   if (mode>=2 && mode<=10) h1_TaggedDecaye[1] -> Fill(NumFQDcyE, OscProb);
   if (mode>10 && mode<=30) h1_TaggedDecaye[2] -> Fill(NumFQDcyE, OscProb);
-  if (mode>=31)            h1_TaggedDecaye[3] -> Fill(NumFQDcyE, OscProb);
+  if (mode>=31)            h1_TaggedDecaye[3] -> Fill(NumFQDcyE);
 
   return numu->var<int>("fqdcye");
 }
