@@ -29,12 +29,12 @@ void CaptureTime(bool beammode) {
 
   //FHC
 #if fhcflag
-  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.root");
-  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.NNoptnewGdMC.root");
-  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.root");
-  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.root");
-  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.NNoptnewGdMC.root");
-  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.bonsaikeras_ToF.root");
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
@@ -56,7 +56,7 @@ void CaptureTime(bool beammode) {
   Double_t GenN_numu_x_numu       = 63622;
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
-  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_numubar_x_nuebar  = 63460;
   Double_t GenN_nue_x_nue         = 63423;
   Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
@@ -341,7 +341,7 @@ void CaptureTime(bool beammode) {
 
   gStyle->SetOptFit(1111);
   /////////// True Capture Time //////////
-#if 0
+#if 1
   TCanvas* c1 = new TCanvas("c1", "c1", 1000, 600);
   c1 -> SetGrid();
   h1_TrueCapTime -> Fit(f1_CapTime, "rLL");
@@ -366,7 +366,7 @@ void CaptureTime(bool beammode) {
 
 
   /////////// Reco Capture Time //////////
-#if 1
+#if 0
   h1_RecoCapTime -> Fit(f1_CapTime, "rLL");
 
   //Double_t tot_Reco_H  = h1_RecoCapTime_H_numu->Integral();

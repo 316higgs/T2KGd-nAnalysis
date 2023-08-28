@@ -10,7 +10,7 @@
 #define POTSCALE 0.17  //Run11 FHC
 //#define POTSCALE 1.63  //Run1-10 RHC
 
-#define rNoise 0.0349004
+#define rNoise 0.0135
 
 enum class KnmtcType
 {
@@ -23,6 +23,8 @@ enum class KnmtcType
 
 int SetHistoBinNumber(TString KnmtcName);
 void GetHistoBinContent(const int binnumber, float start, float* N_x_kinematics, TH1F* h1);
+float CalStatErr(float N1Rmu, float NTagN, float NTagEff);
+
 
 void AveTaggedN_x_kinematics(bool beammode) {
 
@@ -37,12 +39,12 @@ void AveTaggedN_x_kinematics(bool beammode) {
 
   //FHC
 #if fhcflag
-  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.NNoptnewGdMC.Nmult.root");
-  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.Nmult.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.Nmult.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.Nmult.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.Nmult.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.newGdMC.Nmult.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.Nmult.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.Nmult.root");
 
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
@@ -70,7 +72,7 @@ void AveTaggedN_x_kinematics(bool beammode) {
   Double_t GenN_numu_x_numu       = 63622;
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
-  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_numubar_x_nuebar  = 63460;
   Double_t GenN_nue_x_nue         = 63423;
   Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
@@ -113,6 +115,10 @@ void AveTaggedN_x_kinematics(bool beammode) {
   float N1Rmu_x_kinematics[binnumber];
   float TaggedN_x_kinematics[binnumber];
   float NTagEff_x_kinematics[binnumber];
+  double Gen_N1Rmu_x_kinematics[binnumber];
+  double Gen_TaggedN_x_kinematics[binnumber];
+  double Gen_TrueN_x_kinematics[binnumber];
+  double Gen_NTagEff_x_kinematics[binnumber];
 
 
   TString Prefix      = "NTagAnalysis/h1_TaggedN_x_";
@@ -235,6 +241,23 @@ void AveTaggedN_x_kinematics(bool beammode) {
   h1_TagN_NC_nuebarbkg      -> SetFillColor(kSpring-9);
   h1_TagN_Noise_nuebarbkg   -> SetFillColor(kYellow+2);
 
+  for (int ibin=0; ibin<binnumber; ibin++) {
+    Gen_TaggedN_x_kinematics[ibin] = h1_TagN_CCQE_numu->GetBinContent(ibin+1) + h1_TagN_CC2p2h_numu->GetBinContent(ibin+1) + h1_TagN_CCOther_numu->GetBinContent(ibin+1) + h1_TagN_NC_numu->GetBinContent(ibin+1) + h1_TagN_Noise_numu->GetBinContent(ibin+1)
+                                   + h1_TagN_CCQE_nuesig->GetBinContent(ibin+1) + h1_TagN_CC2p2h_nuesig->GetBinContent(ibin+1) + h1_TagN_CCOther_nuesig->GetBinContent(ibin+1) + h1_TagN_NC_nuesig->GetBinContent(ibin+1) + h1_TagN_Noise_nuesig->GetBinContent(ibin+1)
+                                   + h1_TagN_CCQE_numubar->GetBinContent(ibin+1) + h1_TagN_CC2p2h_numubar->GetBinContent(ibin+1) + h1_TagN_CCOther_numubar->GetBinContent(ibin+1) + h1_TagN_NC_numubar->GetBinContent(ibin+1) + h1_TagN_Noise_numubar->GetBinContent(ibin+1)
+                                   + h1_TagN_CCQE_nuebarsig->GetBinContent(ibin+1) + h1_TagN_CC2p2h_nuebarsig->GetBinContent(ibin+1) + h1_TagN_CCOther_nuebarsig->GetBinContent(ibin+1) + h1_TagN_NC_nuebarsig->GetBinContent(ibin+1) + h1_TagN_Noise_nuebarsig->GetBinContent(ibin+1)
+                                   + h1_TagN_CCQE_nuebkg->GetBinContent(ibin+1) + h1_TagN_CC2p2h_nuebkg->GetBinContent(ibin+1) + h1_TagN_CCOther_nuebkg->GetBinContent(ibin+1) + h1_TagN_NC_nuebkg->GetBinContent(ibin+1) + h1_TagN_Noise_nuebkg->GetBinContent(ibin+1)
+                                   + h1_TagN_CCQE_nuebarbkg->GetBinContent(ibin+1) + h1_TagN_CC2p2h_nuebarbkg->GetBinContent(ibin+1) + h1_TagN_CCOther_nuebarbkg->GetBinContent(ibin+1) + h1_TagN_NC_nuebarbkg->GetBinContent(ibin+1) + h1_TagN_Noise_nuebarbkg->GetBinContent(ibin+1);
+    Gen_NTagEff_x_kinematics[ibin] = h1_TagN_CCQE_numu->GetBinContent(ibin+1) + h1_TagN_CC2p2h_numu->GetBinContent(ibin+1) + h1_TagN_CCOther_numu->GetBinContent(ibin+1) + h1_TagN_NC_numu->GetBinContent(ibin+1) 
+                                   + h1_TagN_CCQE_nuesig->GetBinContent(ibin+1) + h1_TagN_CC2p2h_nuesig->GetBinContent(ibin+1) + h1_TagN_CCOther_nuesig->GetBinContent(ibin+1) + h1_TagN_NC_nuesig->GetBinContent(ibin+1)
+                                   + h1_TagN_CCQE_numubar->GetBinContent(ibin+1) + h1_TagN_CC2p2h_numubar->GetBinContent(ibin+1) + h1_TagN_CCOther_numubar->GetBinContent(ibin+1) + h1_TagN_NC_numubar->GetBinContent(ibin+1)
+                                   + h1_TagN_CCQE_nuebarsig->GetBinContent(ibin+1) + h1_TagN_CC2p2h_nuebarsig->GetBinContent(ibin+1) + h1_TagN_CCOther_nuebarsig->GetBinContent(ibin+1) + h1_TagN_NC_nuebarsig->GetBinContent(ibin+1)
+                                   + h1_TagN_CCQE_nuebkg->GetBinContent(ibin+1) + h1_TagN_CC2p2h_nuebkg->GetBinContent(ibin+1) + h1_TagN_CCOther_nuebkg->GetBinContent(ibin+1) + h1_TagN_NC_nuebkg->GetBinContent(ibin+1)
+                                   + h1_TagN_CCQE_nuebarbkg->GetBinContent(ibin+1) + h1_TagN_CC2p2h_nuebarbkg->GetBinContent(ibin+1) + h1_TagN_CCOther_nuebarbkg->GetBinContent(ibin+1) + h1_TagN_NC_nuebarbkg->GetBinContent(ibin+1);
+    std::cout << "[ " << ibin << "] Tagged neutrons     : " << Gen_TaggedN_x_kinematics[ibin] << std::endl;
+    std::cout << "[ " << ibin << "] Tagged true neutrons: " << Gen_NTagEff_x_kinematics[ibin] << std::endl;
+  }
+
   /////  Normalizations  //////
 #if 1
   h1_TagN_CCQE_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -315,7 +338,7 @@ void AveTaggedN_x_kinematics(bool beammode) {
   GetHistoBinContent(binnumber, start, TaggedN_x_kinematics, h1_TagN_merge);
   //for (int ibin=0; ibin<binnumber-1; ibin++) std::cout << "Bin[" << ibin << "]: " << TaggedN_x_kinematics[ibin] << std::endl;
 
-  TH1F* h1_TagN_merge = new TH1F("h1_NTagEff_merge", "", binnumber-1, xbins);
+  TH1F* h1_NTagEff_merge = new TH1F("h1_NTagEff_merge", "", binnumber-1, xbins);
 
   h1_NTagEff_merge -> Add(h1_TagN_NC_nuebarbkg);
   h1_NTagEff_merge -> Add(h1_TagN_NC_nuebkg);
@@ -447,6 +470,18 @@ void AveTaggedN_x_kinematics(bool beammode) {
   h1_TrueN_CCOther_nuebarbkg -> SetFillColor(kViolet-1);
   h1_TrueN_NC_nuebarbkg      -> SetFillColor(kSpring-9);
 
+  for (int ibin=0; ibin<binnumber; ibin++) {
+    Gen_TrueN_x_kinematics[ibin] = h1_TrueN_CCQE_numu->GetBinContent(ibin+1) + h1_TrueN_CC2p2h_numu->GetBinContent(ibin+1) + h1_TrueN_CCOther_numu->GetBinContent(ibin+1) + h1_TrueN_NC_numu->GetBinContent(ibin+1)
+                                 + h1_TrueN_CCQE_nuesig->GetBinContent(ibin+1) + h1_TrueN_CC2p2h_nuesig->GetBinContent(ibin+1) + h1_TrueN_CCOther_nuesig->GetBinContent(ibin+1) + h1_TrueN_NC_nuesig->GetBinContent(ibin+1)
+                                 + h1_TrueN_CCQE_numubar->GetBinContent(ibin+1) + h1_TrueN_CC2p2h_numubar->GetBinContent(ibin+1) + h1_TrueN_CCOther_numubar->GetBinContent(ibin+1) + h1_TrueN_NC_numubar->GetBinContent(ibin+1)
+                                 + h1_TrueN_CCQE_nuebarsig->GetBinContent(ibin+1) + h1_TrueN_CC2p2h_nuebarsig->GetBinContent(ibin+1) + h1_TrueN_CCOther_nuebarsig->GetBinContent(ibin+1) + h1_TrueN_NC_nuebarsig->GetBinContent(ibin+1)
+                                 + h1_TrueN_CCQE_nuebkg->GetBinContent(ibin+1) + h1_TrueN_CC2p2h_nuebkg->GetBinContent(ibin+1) + h1_TrueN_CCOther_nuebkg->GetBinContent(ibin+1) + h1_TrueN_NC_nuebkg->GetBinContent(ibin+1)
+                                 + h1_TrueN_CCQE_nuebarbkg->GetBinContent(ibin+1) + h1_TrueN_CC2p2h_nuebarbkg->GetBinContent(ibin+1) + h1_TrueN_CCOther_nuebarbkg->GetBinContent(ibin+1) + h1_TrueN_NC_nuebarbkg->GetBinContent(ibin+1);
+    Gen_NTagEff_x_kinematics[ibin] /= Gen_TrueN_x_kinematics[ibin];
+    std::cout << "[ " << ibin << "] True neutrons     : " << Gen_TrueN_x_kinematics[ibin] << std::endl;
+    std::cout << "[ " << ibin << "] Tagging efficiency: " << Gen_NTagEff_x_kinematics[ibin] << std::endl;
+  }
+
   /////  Normalizations  //////
 #if 1
   h1_TrueN_CCQE_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -514,6 +549,7 @@ void AveTaggedN_x_kinematics(bool beammode) {
   GetHistoBinContent(binnumber, start, NTagEff_x_kinematics, h1_NTagEff_merge);
   //for (int ibin=0; ibin<binnumber-1; ibin++) std::cout << "Bin[" << ibin << "]: " << NTagEff_x_kinematics[ibin] << std::endl;
   
+
   /////////////////////////////////////////////////////////////////////////////
 
   Prefix      = "NTagAnalysis/h1_N1Rmu_x_";
@@ -612,6 +648,17 @@ void AveTaggedN_x_kinematics(bool beammode) {
   h1_CCOther_nuebarbkg -> SetFillColor(kViolet-1);
   h1_NC_nuebarbkg      -> SetFillColor(kSpring-9);
 
+  for (int ibin=0; ibin<binnumber; ibin++) {
+    Gen_N1Rmu_x_kinematics[ibin] = h1_CCQE_numu->GetBinContent(ibin+1) + h1_CC2p2h_numu->GetBinContent(ibin+1) + h1_CCOther_numu->GetBinContent(ibin+1) + h1_NC_numu->GetBinContent(ibin+1)
+                                 + h1_CCQE_nuesig->GetBinContent(ibin+1) + h1_CC2p2h_nuesig->GetBinContent(ibin+1) + h1_CCOther_nuesig->GetBinContent(ibin+1) + h1_NC_nuesig->GetBinContent(ibin+1)
+                                 + h1_CCQE_numubar->GetBinContent(ibin+1) + h1_CC2p2h_numubar->GetBinContent(ibin+1) + h1_CCOther_numubar->GetBinContent(ibin+1) + h1_NC_numubar->GetBinContent(ibin+1)
+                                 + h1_CCQE_nuebarsig->GetBinContent(ibin+1) + h1_CC2p2h_nuebarsig->GetBinContent(ibin+1) + h1_CCOther_nuebarsig->GetBinContent(ibin+1) + h1_NC_nuebarsig->GetBinContent(ibin+1)
+                                 + h1_CCQE_nuebkg->GetBinContent(ibin+1) + h1_CC2p2h_nuebkg->GetBinContent(ibin+1) + h1_CCOther_nuebkg->GetBinContent(ibin+1) + h1_NC_nuebkg->GetBinContent(ibin+1)
+                                 + h1_CCQE_nuebarbkg->GetBinContent(ibin+1) + h1_CC2p2h_nuebarbkg->GetBinContent(ibin+1) + h1_CCOther_nuebarbkg->GetBinContent(ibin+1) + h1_NC_nuebarbkg->GetBinContent(ibin+1);
+    std::cout << "[ " << ibin << "] 1Rmu: " << Gen_N1Rmu_x_kinematics[ibin] << std::endl;
+  }
+
+
   /////  Normalizations  //////
 #if 1
   h1_CCQE_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
@@ -643,8 +690,8 @@ void AveTaggedN_x_kinematics(bool beammode) {
   h1_NC_nuebarbkg      -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
 #endif
 
-  TH1F* h1_N1Rmu_merge = new TH1F("h1_N1Rmu_merge", "", binnumber-1, xbins);
 
+  TH1F* h1_N1Rmu_merge = new TH1F("h1_N1Rmu_merge", "", binnumber-1, xbins);
   h1_N1Rmu_merge -> Add(h1_NC_nuebarbkg);
   h1_N1Rmu_merge -> Add(h1_NC_nuebkg);
   h1_N1Rmu_merge -> Add(h1_NC_nuebarsig);
@@ -687,8 +734,8 @@ void AveTaggedN_x_kinematics(bool beammode) {
   TH1F* h1_AveTaggedN_x_kinematics = new TH1F("h1_AveTaggedN_x_kinematics", "", binnumber-1, xbins);
   h1_AveTaggedN_x_kinematics -> SetLineColor(kViolet-7);
   h1_AveTaggedN_x_kinematics -> SetLineWidth(2);
-  //h1_AveTaggedN_x_kinematics -> SetFillColor(kViolet-9);
-  //h1_AveTaggedN_x_kinematics -> SetFillStyle(3004);
+  h1_AveTaggedN_x_kinematics -> SetFillColor(kViolet-9);
+  h1_AveTaggedN_x_kinematics -> SetFillStyle(3004);
   h1_AveTaggedN_x_kinematics -> SetStats(0);
   double AveTaggedN_x_kinematics[binnumber];
   for (int ibin=0; ibin<binnumber-1; ibin++) {
@@ -700,8 +747,36 @@ void AveTaggedN_x_kinematics(bool beammode) {
   h1_AveTaggedN_x_kinematics -> Sumw2();
   h1_AveTaggedN_x_kinematics -> Divide(h1_Denominator);
 
+  double kinematics[binnumber]  = {0.};
+  double dkinematics[binnumber] = {0.};
+  double nMult[binnumber]       = {0.};
+  double dnMult[binnumber]      = {0.};
+  std::cout << "Mean neutron multiplicity" << std::endl;
+  for (int i=0; i<binnumber; i++) {
+    
+    std::cout << "[ " << xbins[i] << ", " << xbins[i+1] << " ]" << std::endl;
+    if (i!=binnumber-1) kinematics[i] = xbins[i] + (xbins[i+1] - xbins[i])/2.;
+    else kinematics[i] = 2.0;
 
-#if 1
+    std::cout << "kinematics: " << kinematics[i] << std::endl;
+
+    nMult[i]  = h1_AveTaggedN_x_kinematics->GetBinContent(i+1);
+    dnMult[i] = CalStatErr(Gen_N1Rmu_x_kinematics[i], Gen_TaggedN_x_kinematics[i], Gen_NTagEff_x_kinematics[i]);
+
+    std::cout << "[### Bin" << i << " ###] " << std::endl;
+    std::cout << "    #neutrino events    : " << N1Rmu_x_kinematics[i] << std::endl;
+    std::cout << "    #tagged neutrons    : " << TaggedN_x_kinematics[i] << std::endl;
+    std::cout << "    Tagging efficiency  : " << NTagEff_x_kinematics[i] << std::endl;
+    std::cout << "    Neutron multiplicity: " << h1_AveTaggedN_x_kinematics->GetBinContent(i+1) 
+              << " (p/m " << dnMult[i] << " )" << std::endl;
+  }
+  TGraphErrors* g_MCerr = new TGraphErrors(binnumber, kinematics, nMult, dkinematics, dnMult);
+  g_MCerr -> SetLineWidth(3);
+  g_MCerr -> SetMarkerColor(kViolet-7);
+  g_MCerr -> SetLineColor(kViolet-7);
+
+
+#if 0
   TGraphErrors* g_errbnd[binnumber];
   double x0[1] = {(0.+0.25)/2.};
   double x1[1] = {(0.25+0.5)/2.};
@@ -731,6 +806,8 @@ void AveTaggedN_x_kinematics(bool beammode) {
 #endif
 
 
+
+
 #if 1
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
@@ -751,7 +828,7 @@ void AveTaggedN_x_kinematics(bool beammode) {
   //h1_AveTaggedN_x_kinematics -> Draw("E1");
   //h1_AveTaggedN_x_kinematics -> Draw("");
   //h1_AveTaggedN_x_kinematics -> Draw("hist same");
-#if 1
+#if 0
   for (int i=0; i<binnumber; i++) {
     g_errbnd[i] -> SetFillStyle(3244);
     g_errbnd[i] -> SetFillColor(kViolet+1);
@@ -761,6 +838,7 @@ void AveTaggedN_x_kinematics(bool beammode) {
     g_errbnd[i] -> Draw("E1 SAME");
   }
 #endif
+  g_MCerr -> Draw("SAMEP");
   c1->RedrawAxis();
   
   TLatex* text1 = new TLatex(0.12, 0.82, "T2K FHC Run11 (0.01% Gd)");
@@ -784,6 +862,7 @@ void AveTaggedN_x_kinematics(bool beammode) {
 }
 
 
+
 int SetHistoBinNumber(TString KnmtcName) {
   int binnumber = 0;
   if (KnmtcName=="Enu") binnumber = 6;
@@ -791,14 +870,21 @@ int SetHistoBinNumber(TString KnmtcName) {
   return binnumber;
 }
 
+
 void GetHistoBinContent(const int binnumber, float start, float* N_x_kinematics, TH1F* h1) {
   int thisbin = h1->FindBin(start);
-  for (int ibin=0; ibin<binnumber-1; ibin++) {
+  //for (int ibin=0; ibin<binnumber-1; ibin++) {
+  for (int ibin=0; ibin<binnumber; ibin++) {
     N_x_kinematics[ibin] = h1->GetBinContent(thisbin);
-    //std::cout << "Bin[" << ibin << "]=" << thisbin << ": " << N_x_kinematics[ibin] << std::endl;
+    std::cout << "Bin[" << ibin << "]=" << thisbin << ": " << N_x_kinematics[ibin] << std::endl;
     thisbin++;
   }
 }
 
+
+float CalStatErr(float N1Rmu, float NTagN, float NTagEff) {
+  float dnMult = std::sqrt( NTagN ) / (NTagEff * N1Rmu) ; 
+  return dnMult;
+}
 
 

@@ -2402,7 +2402,7 @@ void NTagAnalysis::N1Rmu_x_kinematics(CC0PiNumu* numu, float knmtcs, double* xbi
 }
 
 void NTagAnalysis::TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int TaggedNoise, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype) {
-  int mode = TMath::Abs(numu->var<int>("mode"));
+  int   mode    = TMath::Abs(numu->var<int>("mode"));
   float OscProb = numu->getOscWgt();
   switch (bintype) {
     case 0:

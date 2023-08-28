@@ -23,26 +23,17 @@ void N1Rmu_x_kinematics(bool beammode) {
 
   //FHC
 #if fhcflag
-  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronMultiplicity.root");
-  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronMultiplicity.root");
-  //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
-
-  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.NNoptnewGdMC.Nmult.root");
-  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.Nmult.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.Nmult.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.Nmult.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.Nmult.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.newGdMC.Nmult.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.Nmult.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.Nmult.root");
 
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
-  //RHC
-#if rhcflag
-  TFile* fin_numu    = new TFile("../../output/rhc/rhc.numu_x_numu.VertexSelection_mu_x_dcye.beforecut.root");
-  TFile* fin_numubar = new TFile("../../output/rhc/rhc.numubar_x_numubar.VertexSelection_mu_x_dcye.beofrecut.root");
-  TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
-#endif
+
 
   // Normalization factors
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
@@ -60,7 +51,7 @@ void N1Rmu_x_kinematics(bool beammode) {
   Double_t GenN_numu_x_numu       = 63622;
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
-  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_numubar_x_nuebar  = 63460;
   Double_t GenN_nue_x_nue         = 63423;
   Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
@@ -86,9 +77,9 @@ void N1Rmu_x_kinematics(bool beammode) {
 
   //TString KnmtcName = "Enu";
   //TString KnmtcName = "MuMom";
-  //TString KnmtcName = "MuPt";
+  TString KnmtcName = "MuPt";
   //TString KnmtcName = "Q2";
-  TString KnmtcName = "MuAngle";
+  //TString KnmtcName = "MuAngle";
   const int binnumber = SetHistoBinNumber(KnmtcName);
 
   TString Prefix      = "NTagAnalysis/h1_N1Rmu_x_";
@@ -191,39 +182,9 @@ void N1Rmu_x_kinematics(bool beammode) {
   h1_CCOther_nuebarbkg -> SetFillColor(kViolet-1);
   h1_NC_nuebarbkg      -> SetFillColor(kSpring-9);
 
-#if 1
-  std::cout << "Number of 1Rmu events" << std::endl;
-  for (int i=0; i<binnumber; i++) {
-    std::cout << "[### Bin" << i << " ###] [numu    -> numu   ] : " <<  h1_CCQE_numu->GetBinContent(i+1) +
-                                                                        h1_CC2p2h_numu->GetBinContent(i+1) +
-                                                                        h1_CCOther_numu->GetBinContent(i+1) +
-                                                                        h1_NC_numu->GetBinContent(i+1) << std::endl;
-    std::cout << "[### Bin" << i << " ###] [numu    -> nue    ] : " <<  h1_CCQE_nuesig->GetBinContent(i+1) +
-                                                                        h1_CC2p2h_nuesig->GetBinContent(i+1) +
-                                                                        h1_CCOther_nuesig->GetBinContent(i+1) +
-                                                                        h1_NC_nuesig->GetBinContent(i+1) << std::endl;
-    std::cout << "[### Bin" << i << " ###] [numubar -> numubar] : " <<  h1_CCQE_numubar->GetBinContent(i+1) +
-                                                                        h1_CC2p2h_numubar->GetBinContent(i+1) +
-                                                                        h1_CCOther_numubar->GetBinContent(i+1) +
-                                                                        h1_NC_numubar->GetBinContent(i+1) << std::endl;
-    std::cout << "[### Bin" << i << " ###] [numubar -> nuebar ] : " <<  h1_CCQE_nuebarsig->GetBinContent(i+1) +
-                                                                        h1_CC2p2h_nuebarsig->GetBinContent(i+1) +
-                                                                        h1_CCOther_nuebarsig->GetBinContent(i+1) +
-                                                                        h1_NC_nuebarsig->GetBinContent(i+1) << std::endl;
-    std::cout << "[### Bin" << i << " ###] [nue     -> nue    ] : " <<  h1_CCQE_nuebkg->GetBinContent(i+1) +
-                                                                        h1_CC2p2h_nuebkg->GetBinContent(i+1) +
-                                                                        h1_CCOther_nuebkg->GetBinContent(i+1) +
-                                                                        h1_NC_nuebkg->GetBinContent(i+1) << std::endl;
-    std::cout << "[### Bin" << i << " ###] [nuebar  -> nuebar ] : " <<  h1_CCQE_nuebarbkg->GetBinContent(i+1) +
-                                                                        h1_CC2p2h_nuebarbkg->GetBinContent(i+1) +
-                                                                        h1_CCOther_nuebarbkg->GetBinContent(i+1) +
-                                                                        h1_NC_nuebarbkg->GetBinContent(i+1) << std::endl;
-  }
-#endif
-
 
   /////  Normalizations  //////
-#if 1
+#if 0
   h1_CCQE_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CCQE_nuesig       -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
   h1_CCQE_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
@@ -251,6 +212,46 @@ void N1Rmu_x_kinematics(bool beammode) {
   h1_NC_nuebarsig      -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
   h1_NC_nuebkg         -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
   h1_NC_nuebarbkg      -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
+#endif
+
+#if 1
+  float N1Rmu = 0.;
+  for (int i=0; i<binnumber; i++) {
+    std::cout << "[### Bin" << i << " ###] [numu    -> numu   ] : " <<  h1_CCQE_numu->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_numu->GetBinContent(i+1) +
+                                                                        h1_CCOther_numu->GetBinContent(i+1) +
+                                                                        h1_NC_numu->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numu    -> nue    ] : " <<  h1_CCQE_nuesig->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_nuesig->GetBinContent(i+1) +
+                                                                        h1_CCOther_nuesig->GetBinContent(i+1) +
+                                                                        h1_NC_nuesig->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numubar -> numubar] : " <<  h1_CCQE_numubar->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_numubar->GetBinContent(i+1) +
+                                                                        h1_CCOther_numubar->GetBinContent(i+1) +
+                                                                        h1_NC_numubar->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [numubar -> nuebar ] : " <<  h1_CCQE_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_CCOther_nuebarsig->GetBinContent(i+1) +
+                                                                        h1_NC_nuebarsig->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [nue     -> nue    ] : " <<  h1_CCQE_nuebkg->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_nuebkg->GetBinContent(i+1) +
+                                                                        h1_CCOther_nuebkg->GetBinContent(i+1) +
+                                                                        h1_NC_nuebkg->GetBinContent(i+1) << std::endl;
+    std::cout << "[### Bin" << i << " ###] [nuebar  -> nuebar ] : " <<  h1_CCQE_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_CC2p2h_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_CCOther_nuebarbkg->GetBinContent(i+1) +
+                                                                        h1_NC_nuebarbkg->GetBinContent(i+1) << std::endl;
+    //std::cout << "Number of 1Rmu events: " << N1Rmu << std::endl;
+    float ThisN1Rmu = h1_CCQE_numu->GetBinContent(i+1) + h1_CC2p2h_numu->GetBinContent(i+1) + h1_CCOther_numu->GetBinContent(i+1) + h1_NC_numu->GetBinContent(i+1)
+                    + h1_CCQE_nuesig->GetBinContent(i+1) + h1_CC2p2h_nuesig->GetBinContent(i+1) + h1_CCOther_nuesig->GetBinContent(i+1) + h1_NC_nuesig->GetBinContent(i+1)
+                    + h1_CCQE_numubar->GetBinContent(i+1) + h1_CC2p2h_numubar->GetBinContent(i+1) + h1_CCOther_numubar->GetBinContent(i+1) + h1_NC_numubar->GetBinContent(i+1)
+                    + h1_CCQE_nuebarsig->GetBinContent(i+1) + h1_CC2p2h_nuebarsig->GetBinContent(i+1) + h1_CCOther_nuebarsig->GetBinContent(i+1) + h1_NC_nuebarsig->GetBinContent(i+1)
+                    + h1_CCQE_nuebkg->GetBinContent(i+1) + h1_CC2p2h_nuebkg->GetBinContent(i+1) + h1_CCOther_nuebkg->GetBinContent(i+1) + h1_NC_nuebkg->GetBinContent(i+1)
+                    + h1_CCQE_nuebarbkg->GetBinContent(i+1) + h1_CC2p2h_nuebarbkg->GetBinContent(i+1) + h1_CCOther_nuebarbkg->GetBinContent(i+1) + h1_NC_nuebarbkg->GetBinContent(i+1);
+    //float ThisN1Rmu = h1_CCQE_numu->GetBinContent(i+1) + h1_CC2p2h_numu->GetBinContent(i+1) + h1_CCOther_numu->GetBinContent(i+1) + h1_NC_numu->GetBinContent(i+1);
+    N1Rmu += ThisN1Rmu;
+    std::cout << "Number of 1Rmu events: " << ThisN1Rmu << " (total: " << N1Rmu << ")" << std::endl;
+  }
 #endif
 
 
@@ -294,13 +295,13 @@ void N1Rmu_x_kinematics(bool beammode) {
   hs_merge -> Add(h1_CCQE_numubar);
 #endif
 
-#if 1
+#if 0
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
   if (KnmtcName=="Enu") hs_merge -> SetMaximum(10);
   if (KnmtcName=="MuMom" || KnmtcName=="MuPt") hs_merge -> SetMaximum(14);
-  if (KnmtcName=="Q2") hs_merge -> SetMaximum(15);
+  if (KnmtcName=="Q2") hs_merge -> SetMaximum(17);
   if (KnmtcName=="MuAngle") hs_merge -> SetMaximum(25);
   hs_merge -> Draw();
   hs_merge ->GetYaxis()->SetTitleSize(0.038);
@@ -315,8 +316,13 @@ void N1Rmu_x_kinematics(bool beammode) {
   hs_merge -> Draw();
   c1->RedrawAxis();
   
-  //TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
-  TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);
+  float xmin = 0.45;
+  float xmax = 0.89;
+  if (KnmtcName=="MuAngle") {
+    xmin = 0.15;
+    xmax = 0.59;
+  }
+  TLegend* legend1 = new TLegend(xmin, 0.45, xmax, 0.89);
   legend1 -> SetTextSize(0.04);
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");
   //else legend1->AddEntry((TObject*)0,"#kern[-0.25]{RHC 1R #mu sample (0.01% Gd)}","");

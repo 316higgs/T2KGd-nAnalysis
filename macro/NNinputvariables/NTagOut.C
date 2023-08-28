@@ -62,7 +62,7 @@ void NTagOut(bool beammode) {
   Double_t GenN_numu_x_numu       = 63622;
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
-  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_numubar_x_nuebar  = 63460;
   Double_t GenN_nue_x_nue         = 63423;
   Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
@@ -205,6 +205,7 @@ void NTagOut(bool beammode) {
   c1 -> SetLogy();
 
 #if 1
+  hs_NTagOut -> SetMaximum(1000);
   hs_NTagOut -> Draw();
   hs_NTagOut ->GetYaxis()->SetTitleSize(0.038);
   hs_NTagOut ->GetYaxis()->SetTitleOffset(1.3);
@@ -212,7 +213,8 @@ void NTagOut(bool beammode) {
   hs_NTagOut -> GetXaxis()->SetTitle("n-likelihood");
   hs_NTagOut -> GetYaxis()->SetTitle("Number of Candidates in Pre-selection");
   hs_NTagOut -> Draw();
-  g_C        -> Draw("SAME");
+  //g_C        -> Draw("SAME");
+
   c1 -> RedrawAxis();
 #endif
 
@@ -223,8 +225,8 @@ void NTagOut(bool beammode) {
   h1_NTagOut_Decaye_numu -> Draw("SAME");
 #endif
 
-  TLegend* legend1 = new TLegend(0.55, 0.55, 0.89, 0.89);
-  legend1 -> SetTextSize(0.03);
+  TLegend* legend1 = new TLegend(0.4, 0.55, 0.89, 0.89);
+  legend1 -> SetTextSize(0.045);
   //legend1->AddEntry((TObject*)0,"#kern[-0.3]{ FHC 1R#mu sample (#nu_{#mu}#rightarrow#nu_{#mu}) }","");
   //legend1->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");

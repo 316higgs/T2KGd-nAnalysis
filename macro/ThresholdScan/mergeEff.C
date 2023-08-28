@@ -37,7 +37,18 @@ void mergeEff(bool beammode) {
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.root");*/
 #endif
 
-#if 1
+#if 0
+  ////  prompt_keras  ////
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.promptkeras.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.promptkeras.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.promptkeras.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.newGdMC.promptkeras.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.promptkeras.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.promptkeras.root");
+#endif
+
+#if 0
+  ////  bonsai_keras  ////
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.bonsaikeras.root");
   TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.bonsaikeras.root");
   TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.bonsaikeras.root");
@@ -47,6 +58,16 @@ void mergeEff(bool beammode) {
 #endif
 
 #if 0
+  ////  bonsai_keras w/ ToF  ////
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.bonsaikeras_ToF.root");
+#endif
+
+#if 1
   ////  -30%  ////
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.systSIm30.root");
   TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.systSIm30.root");
@@ -87,7 +108,7 @@ void mergeEff(bool beammode) {
   Double_t GenN_numu_x_numu       = 63622;
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
-  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_numubar_x_nuebar  = 63460;
   Double_t GenN_nue_x_nue         = 63423;
   Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
@@ -114,6 +135,9 @@ void mergeEff(bool beammode) {
   TH1F* h1_TagTrueN_numu    = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagTrueN");
   TH1F* h1_TagTrueN_H_numu  = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagTrueN_H");
   TH1F* h1_TagTrueN_Gd_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TagTrueN_Gd");
+  TH1F* h1_CanTrueN_numu    = (TH1F*)fin_numu->Get("NTagAnalysis/h1_CanTrueN");
+  TH1F* h1_CanTrueN_H_numu  = (TH1F*)fin_numu->Get("NTagAnalysis/h1_CanTrueN_H");
+  TH1F* h1_CanTrueN_Gd_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_CanTrueN_Gd");
   TH1F* h1_TrueN_numu       = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueN");
   TH1F* h1_TrueN_H_numu     = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueN_H");
   TH1F* h1_TrueN_Gd_numu    = (TH1F*)fin_numu->Get("NTagAnalysis/h1_TrueN_Gd");
@@ -121,6 +145,9 @@ void mergeEff(bool beammode) {
   TH1F* h1_TagTrueN_nuesig    = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_TagTrueN");
   TH1F* h1_TagTrueN_H_nuesig  = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_TagTrueN_H");
   TH1F* h1_TagTrueN_Gd_nuesig = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_TagTrueN_Gd");
+  TH1F* h1_CanTrueN_nuesig    = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_CanTrueN");
+  TH1F* h1_CanTrueN_H_nuesig  = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_CanTrueN_H");
+  TH1F* h1_CanTrueN_Gd_nuesig = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_CanTrueN_Gd");
   TH1F* h1_TrueN_nuesig       = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_TrueN");
   TH1F* h1_TrueN_H_nuesig     = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_TrueN_H");
   TH1F* h1_TrueN_Gd_nuesig    = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_TrueN_Gd");
@@ -128,6 +155,9 @@ void mergeEff(bool beammode) {
   TH1F* h1_TagTrueN_numubar    = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TagTrueN");
   TH1F* h1_TagTrueN_H_numubar  = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TagTrueN_H");
   TH1F* h1_TagTrueN_Gd_numubar = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TagTrueN_Gd");
+  TH1F* h1_CanTrueN_numubar    = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_CanTrueN");
+  TH1F* h1_CanTrueN_H_numubar  = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_CanTrueN_H");
+  TH1F* h1_CanTrueN_Gd_numubar = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_CanTrueN_Gd");
   TH1F* h1_TrueN_numubar       = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TrueN");
   TH1F* h1_TrueN_H_numubar     = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TrueN_H");
   TH1F* h1_TrueN_Gd_numubar    = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_TrueN_Gd");
@@ -135,6 +165,9 @@ void mergeEff(bool beammode) {
   TH1F* h1_TagTrueN_nuebarsig    = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_TagTrueN");
   TH1F* h1_TagTrueN_H_nuebarsig  = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_TagTrueN_H");
   TH1F* h1_TagTrueN_Gd_nuebarsig = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_TagTrueN_Gd");
+  TH1F* h1_CanTrueN_nuebarsig    = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_CanTrueN");
+  TH1F* h1_CanTrueN_H_nuebarsig  = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_CanTrueN_H");
+  TH1F* h1_CanTrueN_Gd_nuebarsig = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_CanTrueN_Gd");
   TH1F* h1_TrueN_nuebarsig       = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_TrueN");
   TH1F* h1_TrueN_H_nuebarsig     = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_TrueN_H");
   TH1F* h1_TrueN_Gd_nuebarsig    = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_TrueN_Gd");
@@ -142,6 +175,9 @@ void mergeEff(bool beammode) {
   TH1F* h1_TagTrueN_nuebkg    = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_TagTrueN");
   TH1F* h1_TagTrueN_H_nuebkg  = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_TagTrueN_H");
   TH1F* h1_TagTrueN_Gd_nuebkg = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_TagTrueN_Gd");
+  TH1F* h1_CanTrueN_nuebkg    = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_CanTrueN");
+  TH1F* h1_CanTrueN_H_nuebkg  = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_CanTrueN_H");
+  TH1F* h1_CanTrueN_Gd_nuebkg = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_CanTrueN_Gd");
   TH1F* h1_TrueN_nuebkg       = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_TrueN");
   TH1F* h1_TrueN_H_nuebkg     = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_TrueN_H");
   TH1F* h1_TrueN_Gd_nuebkg    = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_TrueN_Gd");
@@ -149,6 +185,9 @@ void mergeEff(bool beammode) {
   TH1F* h1_TagTrueN_nuebarbkg    = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_TagTrueN");
   TH1F* h1_TagTrueN_H_nuebarbkg  = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_TagTrueN_H");
   TH1F* h1_TagTrueN_Gd_nuebarbkg = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_TagTrueN_Gd");
+  TH1F* h1_CanTrueN_nuebarbkg    = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_CanTrueN");
+  TH1F* h1_CanTrueN_H_nuebarbkg  = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_CanTrueN_H");
+  TH1F* h1_CanTrueN_Gd_nuebarbkg = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_CanTrueN_Gd");
   TH1F* h1_TrueN_nuebarbkg       = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_TrueN");
   TH1F* h1_TrueN_H_nuebarbkg     = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_TrueN_H");
   TH1F* h1_TrueN_Gd_nuebarbkg    = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_TrueN_Gd");
@@ -177,6 +216,13 @@ void mergeEff(bool beammode) {
   h1_TagTrueN_nuebkg       -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
   h1_TagTrueN_nuebarbkg    -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
 
+  h1_CanTrueN_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
+  h1_CanTrueN_nuesig       -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
+  h1_CanTrueN_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
+  h1_CanTrueN_nuebarsig    -> Scale( (ExpN_numubar_x_nuebar)/(GenN_numubar_x_nuebar) );
+  h1_CanTrueN_nuebkg       -> Scale( (ExpN_nue_x_nue)/(GenN_nue_x_nue) );
+  h1_CanTrueN_nuebarbkg    -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
+
   h1_TrueN_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_TrueN_nuesig     -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
   h1_TrueN_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
@@ -186,6 +232,14 @@ void mergeEff(bool beammode) {
 #endif
 
   
+  TH1F* h1_PreEff_merge    = new TH1F("h1_PreEff_merge", "", 20, 0, 1);
+  TH1F* h1_PreEff_H_merge  = new TH1F("h1_PreEff_H_merge", "", 20, 0, 1);
+  TH1F* h1_PreEff_Gd_merge = new TH1F("h1_PreEff_Gd_merge", "", 20, 0, 1);
+
+  TH1F* h1_NNEff_merge    = new TH1F("h1_NNEff_merge", "", 20, 0, 1);
+  TH1F* h1_NNEff_H_merge  = new TH1F("h1_NNEff_H_merge", "", 20, 0, 1);
+  TH1F* h1_NNEff_Gd_merge = new TH1F("h1_NNEff_Gd_merge", "", 20, 0, 1);
+
   TH1F* h1_TagEff_merge    = new TH1F("h1_TagEff_merge", "", 20, 0, 1);
   TH1F* h1_TagEff_H_merge  = new TH1F("h1_TagEff_H_merge", "", 20, 0, 1);
   TH1F* h1_TagEff_Gd_merge = new TH1F("h1_TagEff_Gd_merge", "", 20, 0, 1);
@@ -193,6 +247,22 @@ void mergeEff(bool beammode) {
   TH1F* h1_TrueN_merge    = new TH1F("h1_TrueN_merge", "", 20, 0, 1);
   TH1F* h1_TrueN_H_merge  = new TH1F("h1_TrueN_H_merge", "", 20, 0, 1);
   TH1F* h1_TrueN_Gd_merge = new TH1F("h1_TrueN_Gd_merge", "", 20, 0, 1);
+
+  TH1F* h1_CanTrueN_merge    = new TH1F("h1_CanTrueN_merge", "", 20, 0, 1);
+  TH1F* h1_CanTrueN_H_merge  = new TH1F("h1_CanTrueN_H_merge", "", 20, 0, 1);
+  TH1F* h1_CanTrueN_Gd_merge = new TH1F("h1_CanTrueN_Gd_merge", "", 20, 0, 1);
+
+  h1_PreEff_merge    -> SetLineColor(kPink-5);
+  h1_PreEff_merge    -> SetFillColor(kPink-2);
+  h1_PreEff_merge    -> SetFillStyle(3004);
+  h1_PreEff_merge    -> SetLineWidth(2);
+  h1_PreEff_merge    -> SetStats(0);
+
+  h1_NNEff_merge    -> SetLineColor(kPink-5);
+  h1_NNEff_merge    -> SetFillColor(kPink-2);
+  h1_NNEff_merge    -> SetFillStyle(3004);
+  h1_NNEff_merge    -> SetLineWidth(2);
+  h1_NNEff_merge    -> SetStats(0);
 
   h1_TagEff_merge    -> SetLineColor(kPink-5);
   h1_TagEff_merge    -> SetFillColor(kPink-2);
@@ -209,30 +279,54 @@ void mergeEff(bool beammode) {
   h1_TagEff_Gd_merge    -> SetStats(0);
 
 
+  /////  Truth candidates  /////
+  h1_PreEff_merge    -> Add(h1_CanTrueN_numu);
+  //h1_PreEff_merge    -> Add(h1_CanTrueN_nuesig);
+  h1_PreEff_merge    -> Add(h1_CanTrueN_numubar);
+  //h1_PreEff_merge    -> Add(h1_CanTrueN_nuebarsig);
+  //h1_PreEff_merge    -> Add(h1_CanTrueN_nuebkg);
+  //h1_PreEff_merge    -> Add(h1_CanTrueN_nuebarbkg);
+
+  h1_CanTrueN_merge  -> Add(h1_CanTrueN_numu);
+  //h1_CanTrueN_merge  -> Add(h1_CanTrueN_nuesig);
+  h1_CanTrueN_merge  -> Add(h1_CanTrueN_numubar);
+  //h1_CanTrueN_merge  -> Add(h1_CanTrueN_nuebarsig);
+  //h1_CanTrueN_merge  -> Add(h1_CanTrueN_nuebkg);
+  //h1_CanTrueN_merge  -> Add(h1_CanTrueN_nuebarbkg);
+
+
   /////  Tagged truth neutrons  /////
+  h1_NNEff_merge    -> Add(h1_TagTrueN_numu);
+  //h1_NNEff_merge    -> Add(h1_TagTrueN_nuesig);
+  h1_NNEff_merge    -> Add(h1_TagTrueN_numubar);
+  //h1_NNEff_merge    -> Add(h1_TagTrueN_nuebarsig);
+  //h1_NNEff_merge    -> Add(h1_TagTrueN_nuebkg);
+  //h1_NNEff_merge    -> Add(h1_TagTrueN_nuebarbkg);
+
   h1_TagEff_merge    -> Add(h1_TagTrueN_numu);
-  h1_TagEff_merge    -> Add(h1_TagTrueN_nuesig);
+  //h1_TagEff_merge    -> Add(h1_TagTrueN_nuesig);
   h1_TagEff_merge    -> Add(h1_TagTrueN_numubar);
-  h1_TagEff_merge    -> Add(h1_TagTrueN_nuebarsig);
-  h1_TagEff_merge    -> Add(h1_TagTrueN_nuebkg);
-  h1_TagEff_merge    -> Add(h1_TagTrueN_nuebarbkg);
+  //h1_TagEff_merge    -> Add(h1_TagTrueN_nuebarsig);
+  //h1_TagEff_merge    -> Add(h1_TagTrueN_nuebkg);
+  //h1_TagEff_merge    -> Add(h1_TagTrueN_nuebarbkg);
+  std::cout << "Tagged true neutrons: " << h1_TagEff_merge->GetBinContent(15) << std::endl; 
 
-  h1_TagEff_H_merge  -> Add(h1_TagTrueN_H_numu);
-
-  h1_TagEff_Gd_merge -> Add(h1_TagTrueN_Gd_numu);
 
   /////  Truth neutrons  /////
   h1_TrueN_merge    -> Add(h1_TrueN_numu);
-  h1_TrueN_merge    -> Add(h1_TrueN_nuesig);
+  //h1_TrueN_merge    -> Add(h1_TrueN_nuesig);
   h1_TrueN_merge    -> Add(h1_TrueN_numubar);
-  h1_TrueN_merge    -> Add(h1_TrueN_nuebarsig);
-  h1_TrueN_merge    -> Add(h1_TrueN_nuebkg);
-  h1_TrueN_merge    -> Add(h1_TrueN_nuebarbkg);
+  //h1_TrueN_merge    -> Add(h1_TrueN_nuebarsig);
+  //h1_TrueN_merge    -> Add(h1_TrueN_nuebkg);
+  //h1_TrueN_merge    -> Add(h1_TrueN_nuebarbkg);
+  std::cout << "True neutrons: " << h1_TrueN_merge->GetBinContent(15) << std::endl; 
 
-  h1_TrueN_H_merge  -> Add(h1_TrueN_H_numu);
 
-  h1_TrueN_Gd_merge -> Add(h1_TrueN_Gd_numu);
+  h1_PreEff_merge -> Sumw2();
+  h1_PreEff_merge -> Divide(h1_TrueN_merge);
 
+  h1_NNEff_merge -> Sumw2();
+  h1_NNEff_merge -> Divide(h1_CanTrueN_merge);
 
   h1_TagEff_merge -> Sumw2();
   h1_TagEff_merge -> Divide(h1_TrueN_merge);
@@ -243,7 +337,10 @@ void mergeEff(bool beammode) {
 
   for (int ith=0; ith<CUTSTEP; ith++) {
     float TMVATH = 0.05*ith;
-    std::cout << "[### n-likelihood=" << TMVATH << " ###] Overall Eff.: " << h1_TagEff_merge -> GetBinContent(ith+1)*100. << " %" << std::endl;
+    std::cout << "[### n-likelihood=" << TMVATH 
+              << " ###] Pre-selection eff.: " << h1_PreEff_merge->GetBinContent(ith+1)*100. 
+              << " %, NN eff." << h1_NNEff_merge->GetBinContent(ith+1)*100. 
+              << " %, Overall Eff.: " << h1_TagEff_merge->GetBinContent(ith+1)*100. << " %" << std::endl;
   }
 
 

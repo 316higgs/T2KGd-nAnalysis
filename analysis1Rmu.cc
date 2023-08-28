@@ -124,7 +124,7 @@ int main(int argc, char **argv) {
 
   //=========  TTree event variables  ============
   //float NTrueN = 0.;   // for old NTag
-  int NTrueN = 0.;      // for Ntag v1.1.3
+  int   NTrueN = 0.;      // for Ntag v1.1.3
   float vecvx  = 0.;
   float vecvy  = 0.;
   float vecvz  = 0.;
@@ -730,8 +730,11 @@ int main(int argc, char **argv) {
 
     for (int i=0; i<SELECTIONCUTS; i++) {
       resultfile << "[Neutrino] C" << i+1 << ": " << ProtoSelectedParentNeutrinos[i] << " -> " << SelectedParentNeutrinos[i] << std::endl;
-      h1_1RmuonEvents->fArray[i+1]      = (float)SelectedParentNeutrinos[i]/SelectedParentNeutrinos[0];
-      h1_Proto1RmuonEvents->fArray[i+1] = (float)ProtoSelectedParentNeutrinos[i]/ProtoSelectedParentNeutrinos[0];
+      //h1_1RmuonEvents      -> SetBinContent(i+1, (float)SelectedParentNeutrinos[i]/SelectedParentNeutrinos[0]);
+      //h1_Proto1RmuonEvents -> SetBinContent(i+1, (float)ProtoSelectedParentNeutrinos[i]/ProtoSelectedParentNeutrinos[0]);
+      h1_1RmuonEvents      -> SetBinContent(i+1, SelectedParentNeutrinos[i]);
+      h1_Proto1RmuonEvents -> SetBinContent(i+1, ProtoSelectedParentNeutrinos[i]);
+
       h1_SelNuEvents[0]->fArray[i+1]    = SelectedCCQENeutrinos[i];
       h1_SelNuEvents[1]->fArray[i+1]    = SelectedCC2p2hNeutrinos[i];
       h1_SelNuEvents[2]->fArray[i+1]    = SelectedCCnonQENeutrinos[i];

@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
   float dtMax  = 10.;
   float N50Min = 50.;
   float N50Max = 400.;
-  float nlikeThreshold = 0.65;
+  float nlikeThreshold = 0.7;
 
 
   //=========  fiTQun output (TTree: h1)  ============
@@ -123,7 +123,7 @@ int main(int argc, char **argv) {
 
   //=========  TTree event variables  ============
   //float NTrueN = 0.;   // for old NTag
-  int NTrueN = 0.;      // for Ntag v1.1.3
+  int   NTrueN = 0.;      // for Ntag v1.1.3
   float vecvx  = 0.;
   float vecvy  = 0.;
   float vecvz  = 0.;
@@ -376,8 +376,10 @@ int main(int argc, char **argv) {
       //Truth neutrons
       h1_NTrueN[0] -> Fill(NTrueN);
       TotalTrueN += NTrueN;
-      int TrueBefSI = ntagana.GetTrueNBefSI(numu, iprntidx, vtxprnt);
-      int TrueAftSI = ntagana.GetTrueNAftSI(numu, iprntidx, vtxprnt);
+      //int TrueBefSI = ntagana.GetTrueNBefSI(numu, iprntidx, vtxprnt);
+      //int TrueAftSI = ntagana.GetTrueNAftSI(numu, iprntidx, vtxprnt);
+      int TrueBefSI  = ntagana.GetTrueGenNBefSI(numu);
+      int TrueAftSI  = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt, pprntinit);
       if (intmode==1) {
         h1_GenBefSINeutrons -> Fill(TrueBefSI);
         h1_GenAftSINeutrons -> Fill(TrueAftSI);
@@ -417,13 +419,14 @@ int main(int argc, char **argv) {
 
       //Number of tagged-neutrons
       //int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
-      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
+      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
       if (intmode<31) TotalTaggedN += numtaggedneutrons*OscProb;
       else TotalTaggedN += numtaggedneutrons;
       //int numtaggednoise = ntagana.GetTaggedNoise(TagOut, nlikeThreshold, TagIndex, NHits, FitT, Label, etagmode);
-      int numtaggednoise = ntagana.GetTaggedNoise(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
+      int numtaggednoise = ntagana.GetTaggedNoise(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
       TotalTaggedNoise += numtaggednoise*OscProb;
 
+      /*
       //Pre-selection
       for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
         //Truth Gd-n or H-n captures
@@ -482,6 +485,7 @@ int main(int argc, char **argv) {
         } //candidates loop
 
       } //threshold scan
+      */
 
       //if (intmode==1)                 h1_TrueNmultiplicity[0]->Fill(NTrueN);
       //if (intmode>=2 && intmode<=10)  h1_TrueNmultiplicity[1]->Fill(NTrueN);

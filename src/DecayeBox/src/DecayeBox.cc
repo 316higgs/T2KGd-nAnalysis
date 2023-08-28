@@ -354,6 +354,7 @@ int DecayeBox::GetDecayeInBox(CC0PiNumu* numu,
 	                            float N50CutMax,
                               bool histofill) 
 {
+  float OscProb = numu->getOscWgt();
   int Decaye = 0;
   const int nse = numu->var<int>("fqnse");
   //int mode = TMath::Abs(numu->var<int>("mode"));
@@ -365,7 +366,7 @@ int DecayeBox::GetDecayeInBox(CC0PiNumu* numu,
     float dt  = numu->var<float>("fq1rt0", jsub, FQ_EHYP) - numu->var<float>("fq1rt0", 0, FQ_MUHYP); //new
     float N50 = numu->var<int>("fqn50", jsub);
     //std::cout << " Matched fiTQun decya-e in the box: " << MatchedBoxfQdcye << std::endl;
-    if (histofill==true) h2_dtn50 -> Fill(dt/1000., N50);
+    if (histofill==true) h2_dtn50 -> Fill(dt/1000., N50, OscProb);
     TaggedDecaye++;
 
     //if (dt/1000. > 15. && dt/1000. < 20.) fillthem = true;

@@ -27,12 +27,12 @@ void SelectedEvents(bool beammode) {
 
   //FHC
 #if fhcflag
-  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.root");
-  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.NNoptnewGdMC.root");
-  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.root");
-  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.root");
-  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.NNoptnewGdMC.root");
-  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.bonsaikeras_ToF.root");
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
@@ -61,7 +61,7 @@ void SelectedEvents(bool beammode) {
   Double_t GenN_numu_x_numu       = 63622;
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
-  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_numubar_x_nuebar  = 63460;
   Double_t GenN_nue_x_nue         = 63423;
   Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
@@ -249,7 +249,7 @@ void SelectedEvents(bool beammode) {
 
 
   /////  Normalizations  //////
-#if 1
+#if 0
   h1_CCQE_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CCQE_nuesig       -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
   h1_CCQE_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
@@ -494,9 +494,8 @@ void SelectedEvents(bool beammode) {
   h1_SelEff_merge -> GetXaxis()->SetBinLabel(6, "C6.Not #pi^{#pm}-like");
 
 
-#if 1
+#if 0
   // Number of Events
-
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1","c1", 1000,700);
   c1 -> SetGrid();
@@ -507,8 +506,8 @@ void SelectedEvents(bool beammode) {
   hs_NuEvt ->GetYaxis()->SetTitleSize(0.038);
   hs_NuEvt ->GetYaxis()->SetTitleOffset(1.3);
   hs_NuEvt ->GetYaxis()->SetLabelSize(0.036);
-  hs_NuEvt ->GetYaxis()->SetTitle("Number of #nu Events");
-  //hs_NuEvt ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
+  //hs_NuEvt ->GetYaxis()->SetTitle("Number of #nu Events");
+  hs_NuEvt ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
   hs_NuEvt -> Draw();
   TGaxis* axis = new TGaxis(6, 0, 6, 115, 0, 115, 23, "+L");
   axis -> SetLabelColor(kWhite);
@@ -532,7 +531,7 @@ void SelectedEvents(bool beammode) {
   legend1->Draw();
 #endif
 
-#if 1
+#if 0
   //Selection efficiency
 
   TCanvas* c2 = new TCanvas("c2","c2",1000,700);
@@ -555,8 +554,8 @@ void SelectedEvents(bool beammode) {
   TLatex* text2 = new TLatex(0.5, 0.77, "-1R #mu sample");
   text2 -> SetNDC(1);
   text2 -> SetTextSize(0.04);
-  TLatex* text3 = new TLatex(0.5, 0.72, "-#nu events");
-  //TLatex* text3 = new TLatex(0.5, 0.72, "-#tagged neutrons");
+  //TLatex* text3 = new TLatex(0.5, 0.72, "-#nu events");
+  TLatex* text3 = new TLatex(0.5, 0.72, "-#tagged neutrons");
   text3 -> SetNDC(1);
   text3 -> SetTextSize(0.04);
   text1 -> Draw();

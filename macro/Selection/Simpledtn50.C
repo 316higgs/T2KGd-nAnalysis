@@ -7,17 +7,19 @@
 
 void Simpledtn50() {
 
-  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
+  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.bonsaikeras_ToF.root");
 
   TH2D* h2_dtn50 = (TH2D*)fin->Get("DecayeBox/h2_dtn50");
   h2_dtn50 -> SetStats(0);
   //h2_dtn50 -> GetYaxis()->SetLabelSize(0.045);
-  h2_dtn50 -> SetTitleOffset(1.3, "Y");
+  h2_dtn50 -> SetTitleOffset(1.1, "Y");
   //h2_dtn50 -> GetXaxis()->SetLabelSize(0.045);
   h2_dtn50 -> SetTitleOffset(1.2, "X");
   h2_dtn50 -> SetXTitle("Timing difference from the prompt event dt [#musec]");
   h2_dtn50 -> SetYTitle("#hits in 50 nsec time window N50");
-  h2_dtn50 ->GetXaxis()->SetTitleSize(0.04);
+  h2_dtn50 -> GetXaxis()->SetTitleSize(0.04);
+  h2_dtn50 -> GetYaxis()->SetTitleSize(0.04);
+  ((TGaxis*)h2_dtn50->GetYaxis())->SetMaxDigits(3);
 
   //TF1* f1_upr = new TF1("f1_upr", "400.", 0., 10.);
   TF1* f1_btm = new TF1("f1_btm", "4*x+30.0", 1.5, 20.);

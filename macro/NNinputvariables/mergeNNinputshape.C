@@ -23,7 +23,7 @@ void mergeNNinputshape(bool beammode) {
   //FHC
 #if fhcflag
 
-#if 1
+#if 0
   // Pre
   bool NTagapply = false;
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
@@ -34,7 +34,7 @@ void mergeNNinputshape(bool beammode) {
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.preNN.newGdMC.root");
 #endif
 
-#if 0
+#if 1
   // Post
   bool NTagapply = true;
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.newGdMC.root");
@@ -72,7 +72,7 @@ void mergeNNinputshape(bool beammode) {
   Double_t GenN_numu_x_numu       = 63622;
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
-  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_numubar_x_nuebar  = 63460;
   Double_t GenN_nue_x_nue         = 63423;
   Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
@@ -338,7 +338,7 @@ void mergeNNinputshape(bool beammode) {
     }
 #endif
 #if NTagapply
-    if (i==0 || i==1 || i==3 || i==4) {
+    /*if (i==0 || i==1 || i==3 || i==4) {
       h1_NNvar_H[i]        -> Draw("SAME");
       h1_NNvar_AccNoise[i] -> Draw("SAME");
       h1_NNvar_Gd[i]       -> Draw("SAME");
@@ -349,7 +349,12 @@ void mergeNNinputshape(bool beammode) {
       h1_NNvar_Gd[i]       -> Draw("SAME");
       h1_NNvar_H[i]        -> Draw("SAME");
       h1_NNvar_AccNoise[i] -> Draw("SAME");
-    }
+    }*/
+
+    h1_NNvar_Decaye[i]   -> Draw();
+    h1_NNvar_Gd[i]       -> Draw("SAME");
+    h1_NNvar_H[i]        -> Draw("SAME");
+    h1_NNvar_AccNoise[i] -> Draw("SAME");
 #endif
     if (i==11) legend -> Draw();
   }

@@ -10,6 +10,8 @@
 //#define POTSCALE 1.63  //Run1-10 RHC
 #define POTSCALE 0.17  //Run1-10 FHC
 
+#define NDCYE 2
+
 
 void CompareDecaye(bool beammode) {
 
@@ -234,6 +236,14 @@ void CompareDecaye(bool beammode) {
     Double_t tot_DcyE_pw = h1_DcyE_pw[i]->Integral();
     h1_DcyE_pw[i] -> Scale(1./tot_DcyE_pw);
   }
+
+
+  float y[2] = {0., 200.};
+  float xC[2] = {NDCYE, NDCYE};
+  TGraph* g_Cut = new TGraph(2, xC, y);
+  g_Cut -> SetLineWidth(3);
+  g_Cut -> SetLineColor(kViolet-8);
+  g_Cut -> SetLineStyle(7);
   
 
 #if 1
@@ -255,16 +265,19 @@ void CompareDecaye(bool beammode) {
       h1_DcyE_pw[i]    -> Draw();
       h1_DcyE_gd[i]    -> Draw("SAME");
       h1_DcyE_boxgd[i] -> Draw("SAME");
+      g_Cut            -> Draw("SAME");
     }
     else if (i==0) {
       h1_DcyE_All_pw    -> Draw();
       h1_DcyE_All_gd    -> Draw("SAME");
       h1_DcyE_All_boxgd -> Draw("SAME");
+      g_Cut             -> Draw("SAME");
     }
     else if (i==1) {
       h1_DcyE_QElike_pw    -> Draw();
       h1_DcyE_QElike_gd    -> Draw("SAME");
       h1_DcyE_QElike_boxgd -> Draw("SAME");
+      g_Cut                -> Draw("SAME");
     }
 
     TLegend* legend1 = new TLegend(0.45, 0.5, 0.89, 0.89);

@@ -1,191 +1,191 @@
-[fiTQun OUTPUT] /disk03/usr8/sedi/fiTQun_v4/output/fhc/fhc.numu_x_nue.13a.fiTQun0026Gd.0*.root
-[NTag   OUTPUT] /disk03/usr8/sedi/Ntag/output/bonsai_keras_no_prompt_vertex/fhc/numu_x_nue/fhc.numu_x_nue.13a.ntag0026Gd.*.root
+[fiTQun OUTPUT] /home/rakutsu/disk2/t2k/regene_mc/files/fcfq_fqmr_root/fhc/numu_x_nue/neut.fhc.numu_x_nue.01*.0*.t2kfcFQ.root
+[NTag   OUTPUT] /disk03/usr8/sedi/Ntag/output/bonsai_keras_prompt_vertex/fhc/numu_x_nue/fhc.numu_x_nue.13a.ntag0026Gd.*.root
  
-[Generated] CCQE   : 39103
-[Generated] CC2p2h : 5826
-[Generated] CCOther: 30608
-[Generated] NC     : 24463
+[Generated] CCQE   : 58737
+[Generated] CC2p2h : 9096
+[Generated] CCOther: 49694
+[Generated] NC     : 13117
  
-[Neutrino] C1: 4111 -> 4111
+[Neutrino] C1: 12784.6 -> 12784.6
   ======  # of selected neutrinos  ======
-  CCQE    (osc.): 1180.78
-  CC-2p2h (osc.): 168.234
-  CC-Other(osc.): 540.897
-  NC      (osc.): 4111
+  CCQE    (osc.): 2145.27
+  CC-2p2h (osc.): 313.278
+  CC-Other(osc.): 1171.88
+  NC      (osc.): 9154
   ------------------------------------------
-  Total   (osc.): 6000.91
+  Total   (osc.): 12784.4
  
-  CCQE    (No osc.): 23029
-  CC-2p2h (No osc.): 3371
-  CC-Other(No osc.): 16132
-  NC      (No osc.): 4111
+  CCQE    (No osc.): 41911
+  CC-2p2h (No osc.): 6393
+  CC-Other(No osc.): 34950
+  NC      (No osc.): 9154
   ------------------------------------------
-  Total   (No osc.): 46643
+  Total   (No osc.): 92408
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 402.487
-  CC-2p2h (osc.): 109.737
-  CC-Other(osc.): 323.446
-  NC      (osc.): 7523
+  CCQE    (osc.): 1746.88
+  CC-2p2h (osc.): 260.98
+  CC-Other(osc.): 950.002
+  NC      (osc.): 7570
   ------------------------------------------
-  Total   (osc.): 8358.67
+  Total   (osc.): 10527.9
  
-  CCQE    (No osc.): 8557
-  CC-2p2h (No osc.): 2352
-  CC-Other(No osc.): 20523
-  NC      (No osc.): 7523
+  CCQE    (No osc.): 34125
+  CC-2p2h (No osc.): 5294
+  CC-Other(No osc.): 28236
+  NC      (No osc.): 7570
   ------------------------------------------
-  Total   (No osc.): 38955
-[Neutrino] C2: 843 -> 843
+  Total   (No osc.): 75225
+[Neutrino] C2: 4736.88 -> 4736.88
   ======  # of selected neutrinos  ======
-  CCQE    (osc.): 1064.57
-  CC-2p2h (osc.): 160.297
-  CC-Other(osc.): 339.979
-  NC      (osc.): 843
+  CCQE    (osc.): 2036.96
+  CC-2p2h (osc.): 297.641
+  CC-Other(osc.): 669.299
+  NC      (osc.): 1733
   ------------------------------------------
-  Total   (osc.): 2407.84
+  Total   (osc.): 4736.9
  
-  CCQE    (No osc.): 20586
-  CC-2p2h (No osc.): 3188
-  CC-Other(No osc.): 7694
-  NC      (No osc.): 843
+  CCQE    (No osc.): 39313
+  CC-2p2h (No osc.): 6040
+  CC-Other(No osc.): 14983
+  NC      (No osc.): 1733
   ------------------------------------------
-  Total   (No osc.): 32311
+  Total   (No osc.): 62069
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 359.189
-  CC-2p2h (osc.): 104.287
-  CC-Other(osc.): 208.884
-  NC      (osc.): 1064
+  CCQE    (osc.): 1663.83
+  CC-2p2h (osc.): 246.469
+  CC-Other(osc.): 544.887
+  NC      (osc.): 1496
   ------------------------------------------
-  Total   (osc.): 1736.36
+  Total   (osc.): 3951.18
  
-  CCQE    (No osc.): 7290
-  CC-2p2h (No osc.): 2211
-  CC-Other(No osc.): 6029
-  NC      (No osc.): 1064
+  CCQE    (No osc.): 32085
+  CC-2p2h (No osc.): 4976
+  CC-Other(No osc.): 12126
+  NC      (No osc.): 1496
   ------------------------------------------
-  Total   (No osc.): 16594
-[Neutrino] C3: 387 -> 387
+  Total   (No osc.): 50683
+[Neutrino] C3: 804.558 -> 804.558
   ======  # of selected neutrinos  ======
-  CCQE    (osc.): 0.688793
-  CC-2p2h (osc.): 0.130516
-  CC-Other(osc.): 0.747409
-  NC      (osc.): 387
+  CCQE    (osc.): 0.927023
+  CC-2p2h (osc.): 0.346175
+  CC-Other(osc.): 1.28492
+  NC      (osc.): 802
   ------------------------------------------
-  Total   (osc.): 388.567
+  Total   (osc.): 804.558
  
-  CCQE    (No osc.): 17
-  CC-2p2h (No osc.): 3
-  CC-Other(No osc.): 12
-  NC      (No osc.): 387
+  CCQE    (No osc.): 18
+  CC-2p2h (No osc.): 7
+  CC-Other(No osc.): 22
+  NC      (No osc.): 802
   ------------------------------------------
-  Total   (No osc.): 419
+  Total   (No osc.): 849
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 0.111726
-  CC-2p2h (osc.): 0
-  CC-Other(osc.): 0.0609369
-  NC      (osc.): 484
+  CCQE    (osc.): 0.602347
+  CC-2p2h (osc.): 0.203269
+  CC-Other(osc.): 1.58937
+  NC      (osc.): 668
   ------------------------------------------
-  Total   (osc.): 484.173
+  Total   (osc.): 670.395
  
-  CCQE    (No osc.): 2
-  CC-2p2h (No osc.): 0
-  CC-Other(No osc.): 1
-  NC      (No osc.): 484
+  CCQE    (No osc.): 13
+  CC-2p2h (No osc.): 4
+  CC-Other(No osc.): 26
+  NC      (No osc.): 668
   ------------------------------------------
-  Total   (No osc.): 487
-[Neutrino] C4: 383 -> 383
+  Total   (No osc.): 711
+[Neutrino] C4: 796.558 -> 796.558
   ======  # of selected neutrinos  ======
-  CCQE    (osc.): 0.688793
-  CC-2p2h (osc.): 0.130516
-  CC-Other(osc.): 0.747409
-  NC      (osc.): 383
+  CCQE    (osc.): 0.927023
+  CC-2p2h (osc.): 0.346175
+  CC-Other(osc.): 1.28492
+  NC      (osc.): 794
   ------------------------------------------
-  Total   (osc.): 384.567
+  Total   (osc.): 796.558
  
-  CCQE    (No osc.): 17
-  CC-2p2h (No osc.): 3
-  CC-Other(No osc.): 12
-  NC      (No osc.): 383
+  CCQE    (No osc.): 18
+  CC-2p2h (No osc.): 7
+  CC-Other(No osc.): 22
+  NC      (No osc.): 794
   ------------------------------------------
-  Total   (No osc.): 415
+  Total   (No osc.): 841
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 0.111726
-  CC-2p2h (osc.): 0
-  CC-Other(osc.): 0.0609369
-  NC      (osc.): 479
+  CCQE    (osc.): 0.602347
+  CC-2p2h (osc.): 0.203269
+  CC-Other(osc.): 1.58937
+  NC      (osc.): 662
   ------------------------------------------
-  Total   (osc.): 479.173
+  Total   (osc.): 664.395
  
-  CCQE    (No osc.): 2
-  CC-2p2h (No osc.): 0
-  CC-Other(No osc.): 1
-  NC      (No osc.): 479
+  CCQE    (No osc.): 13
+  CC-2p2h (No osc.): 4
+  CC-Other(No osc.): 26
+  NC      (No osc.): 662
   ------------------------------------------
-  Total   (No osc.): 482
-[Neutrino] C5: 214 -> 378
+  Total   (No osc.): 705
+[Neutrino] C5: 771.558 -> 780.558
   ======  # of selected neutrinos  ======
-  CCQE    (osc.): 0.688793
-  CC-2p2h (osc.): 0.130516
-  CC-Other(osc.): 0.747409
-  NC      (osc.): 378
+  CCQE    (osc.): 0.927023
+  CC-2p2h (osc.): 0.346175
+  CC-Other(osc.): 1.28492
+  NC      (osc.): 778
   ------------------------------------------
-  Total   (osc.): 379.567
+  Total   (osc.): 780.558
  
-  CCQE    (No osc.): 17
-  CC-2p2h (No osc.): 3
-  CC-Other(No osc.): 12
-  NC      (No osc.): 378
+  CCQE    (No osc.): 18
+  CC-2p2h (No osc.): 7
+  CC-Other(No osc.): 22
+  NC      (No osc.): 778
+  ------------------------------------------
+  Total   (No osc.): 825
+ 
+  ======  # of selected tagged-n  ======
+  CCQE    (osc.): 0.602347
+  CC-2p2h (osc.): 0.203269
+  CC-Other(osc.): 1.58937
+  NC      (osc.): 642
+  ------------------------------------------
+  Total   (osc.): 644.395
+ 
+  CCQE    (No osc.): 13
+  CC-2p2h (No osc.): 4
+  CC-Other(No osc.): 26
+  NC      (No osc.): 642
+  ------------------------------------------
+  Total   (No osc.): 685
+[Neutrino] C6: 365.262 -> 370.262
+  ======  # of selected neutrinos  ======
+  CCQE    (osc.): 0.806327
+  CC-2p2h (osc.): 0.346175
+  CC-Other(osc.): 1.10947
+  NC      (osc.): 368
+  ------------------------------------------
+  Total   (osc.): 370.262
+ 
+  CCQE    (No osc.): 16
+  CC-2p2h (No osc.): 7
+  CC-Other(No osc.): 19
+  NC      (No osc.): 368
   ------------------------------------------
   Total   (No osc.): 410
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 0.111726
-  CC-2p2h (osc.): 0
-  CC-Other(osc.): 0.0609369
-  NC      (osc.): 464
+  CCQE    (osc.): 0.540727
+  CC-2p2h (osc.): 0.203269
+  CC-Other(osc.): 1.41392
+  NC      (osc.): 344
   ------------------------------------------
-  Total   (osc.): 464.173
+  Total   (osc.): 346.158
  
-  CCQE    (No osc.): 2
-  CC-2p2h (No osc.): 0
-  CC-Other(No osc.): 1
-  NC      (No osc.): 464
+  CCQE    (No osc.): 12
+  CC-2p2h (No osc.): 4
+  CC-Other(No osc.): 23
+  NC      (No osc.): 344
   ------------------------------------------
-  Total   (No osc.): 467
-[Neutrino] C6: 104 -> 193
-  ======  # of selected neutrinos  ======
-  CCQE    (osc.): 0.626969
-  CC-2p2h (osc.): 0.130516
-  CC-Other(osc.): 0.562868
-  NC      (osc.): 193
-  ------------------------------------------
-  Total   (osc.): 194.32
- 
-  CCQE    (No osc.): 16
-  CC-2p2h (No osc.): 3
-  CC-Other(No osc.): 9
-  NC      (No osc.): 193
-  ------------------------------------------
-  Total   (No osc.): 221
- 
-  ======  # of selected tagged-n  ======
-  CCQE    (osc.): 0.111726
-  CC-2p2h (osc.): 0
-  CC-Other(osc.): 0.0609369
-  NC      (osc.): 234
-  ------------------------------------------
-  Total   (osc.): 234.173
- 
-  CCQE    (No osc.): 2
-  CC-2p2h (No osc.): 0
-  CC-Other(No osc.): 1
-  NC      (No osc.): 234
-  ------------------------------------------
-  Total   (No osc.): 237
+  Total   (No osc.): 383
 --- Box cut performance ---
  0 < dt[usec] < 10, 50 < N50 < 400
  All truth decay-e                : 0
@@ -193,14 +193,14 @@
  fiTQun decya-e in the box        : 0
  Matched fiTQun decya-e (legacy)  : 0
  Matched fiTQun decya-e in the box: 0
- Q1 : 183.448
- Q2 : 3
+ Q1 : 333.898
+ Q2 : 0
  Q3 : 0
  efficiency Q1/(Q1+Q3): 100 %
- purity     Q1/(Q1+Q2): 98.391 %
-[Neutrino] All Parent Neutrino Events          : 100000
-[Neutrino] Generated Neutrino Events(wallv>200): 63538
-[Neutrino] Generated 1Rmu Events (Oscillated)  : 194.32
+ purity     Q1/(Q1+Q2): 100 %
+[Neutrino] All Parent Neutrino Events          : 130644
+[Neutrino] Generated Neutrino Events(wallv>200): 100190
+[Neutrino] Generated 1Rmu Events (Oscillated)  : 370.262
  
 [Neutron] # generated neutrons before FSI: 0
 [Neutron] # captured neutrons up to FSI  : 0
@@ -208,25 +208,25 @@
 [Neutron] # captured neutrons from mu    : 0
 [Neutron] # all true neutrons            : 0
  
-[Neutrino] Oscillated CCQE Events     : 0.392045(0.203042 %)
-           w/ truth neutrons : 0.00322611 (0.00184189 %), w/o truth neutrons :0.388819 (2.16813 %)
+[Neutrino] Oscillated CCQE Events     : 0.612933(0.166118 %)
+           w/ truth neutrons : 0.525132 (0.198507 %), w/o truth neutrons :0.0878014 (0.0840739 %)
            w/ tagged neutrons: 0(-nan %), w/o tagged neutrons:0(-nan %)
-[Neutrino] Oscillated CC(2p2h) Events : 0.130516(0.067595 %)
-           w/ truth neutrons : 0.0904638 (0.0516487 %), w/o truth neutrons :0.0400523 (0.22334 %)
+[Neutrino] Oscillated CC(2p2h) Events : 0.251998(0.0682969 %)
+           w/ truth neutrons : 0.124063 (0.0468976 %), w/o truth neutrons :0.127935 (0.122503 %)
            w/ tagged neutrons: 0(-nan %), w/o tagged neutrons:0(-nan %)
-[Neutrino] Oscillated All CCRES Events: 0.562868(0.291512 %)
-           w/ truth neutrons : 0.0584036 (0.0333445 %), w/o truth neutrons :0.504464 (2.813 %)
+[Neutrino] Oscillated All CCRES Events: 1.00164(0.271467 %)
+           w/ truth neutrons : 0.816825 (0.308771 %), w/o truth neutrons :0.184818 (0.176971 %)
            w/ tagged neutrons: 0(-nan %), w/o tagged neutrons:0(-nan %)
-[Neutrino] Oscillated CC Other Events : 0(0 %)
-           w/ truth neutrons : 0 (0 %), w/o truth neutrons :0 (0 %)
+[Neutrino] Oscillated CC Other Events : 0.107825(0.0292229 %)
+           w/ truth neutrons : 0.0746861 (0.0282324 %), w/o truth neutrons :0.033139 (0.0317321 %)
            w/ tagged neutrons: 0(-nan %), w/o tagged neutrons:0(-nan %)
-[Neutrino] Oscillated NC Events       : 192(99.4379 %)
-           w/ truth neutrons : 175 (99.9132 %), w/o truth neutrons :17 (94.7955 %)
+[Neutrino] Oscillated NC Events       : 367(99.4649 %)
+           w/ truth neutrons : 263 (99.4176 %), w/o truth neutrons :104 (99.5847 %)
            w/ tagged neutrons: 0(-nan %), w/o tagged neutrons:0(-nan %)
 [Neutrino] Oscillated Neutrino Events within [0.25 GeV, 1.5 GeV]
-           Legacy Analysis    : 193.085(Osc)/216(No Osc) = 0.893914
-           Only CCQE(1p1h)    : 0.392045(Osc)/12(No Osc) = 0.0326704
-           w/o truth neutrons : 17.9333(Osc)/37(No Osc) = 0.484685
+           Legacy Analysis    : 368.974(Osc)/404(No Osc) = 0.913303
+           Only CCQE(1p1h)    : 0.612933(Osc)/13(No Osc) = 0.0471487
+           w/o truth neutrons : 104.434(Osc)/113(No Osc) = 0.924192
            w/o tagged neutrons: 0(Osc)/0(No Osc) = -nan
 All Truth neutrons: 0
 Candidates        : 0

@@ -70,27 +70,27 @@ void mergeDcyePerform(bool beammode) {
 
 
   //////  All true decay-e  //////
-  Double_t Q1_numu      = 6088.48;
-  Double_t Q1_nuesig    = 183.448;
-  Double_t Q1_numubar   = 11771.3;
-  Double_t Q1_nuebarsig = 241;
-  Double_t Q1_nuebkg    = 249.886;
-  Double_t Q1_nuebarbkg = 323;
+  Double_t Q1_numu      = 6064.44;
+  Double_t Q1_nuesig    = 169.264;
+  Double_t Q1_numubar   = 11758.4;
+  Double_t Q1_nuebarsig = 226;
+  Double_t Q1_nuebkg    = 256.837;
+  Double_t Q1_nuebarbkg = 307.995;
 
   //////  fiTQun sub-events in the box (reco. decay-e)  //////
-  Double_t Q2_numu      = 59.6321;
-  Double_t Q2_nuesig    = 3;
-  Double_t Q2_numubar   = 83.7877;
-  Double_t Q2_nuebarsig = 6;
-  Double_t Q2_nuebkg    = 7;
-  Double_t Q2_nuebarbkg = 4;
+  Double_t Q2_numu      = 51.0095;
+  Double_t Q2_nuesig    = 7;
+  Double_t Q2_numubar   = 93.0647;
+  Double_t Q2_nuebarsig = 8.03172;
+  Double_t Q2_nuebkg    = 8;
+  Double_t Q2_nuebarbkg = 11;
 
   //////  True-mateched sub-events in the box  //////
-  Double_t Q3_numu      = 162.892;
-  Double_t Q3_nuesig    = 0;
-  Double_t Q3_numubar   = 57.5076;
-  Double_t Q3_nuebarsig = 0;
-  Double_t Q3_nuebkg    = 1;
+  Double_t Q3_numu      = 154.753;
+  Double_t Q3_nuesig    = 1;
+  Double_t Q3_numubar   = 70.8242;
+  Double_t Q3_nuebarsig = 1;
+  Double_t Q3_nuebkg    = 0;
   Double_t Q3_nuebarbkg = 0;
 
   

@@ -23,7 +23,7 @@
 #include "src/NTagAnalysis/inc/NTagAnalysis.h"
 #include "src/NNInputVariables/inc/NNInputVariables.h"
 
-#define NLIKETHRESHOLD 0.65
+#define NLIKETHRESHOLD 0.7
 
 
 int main(int argc, char **argv) {
@@ -366,6 +366,7 @@ int main(int argc, char **argv) {
 
         bool etagboxin = false;
         if (NHits->at(jentry)>50 && FitT->at(jentry)<20) etagboxin = true;
+        //etagboxin = ntagana->DecayelikeChecker(etagmode, N50->at(ican), FitT->at(ican));
 
         float NNVar = 0.;
         for (int ivar=0; ivar<NNVARIABLES; ivar++) {
@@ -412,7 +413,7 @@ int main(int argc, char **argv) {
           }
 
           //Pre-NN
-#if 1
+#if 0
           if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
           if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
           if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar, OscProb);
@@ -420,11 +421,11 @@ int main(int argc, char **argv) {
 #endif
 
           //Post-NN
-#if 0
+#if 1
           //bool etagboxin = false;
           //if (NHits->at(jentry)>50 && FitT->at(jentry)<20) etagboxin = true;
-          if ( FitT->at(jentry) < 1.5 ) etagboxin = true;
-          else if ( FitT->at(jentry) < 20. && FitT->at(jentry) < 0.25*(N50->at(jentry))-7.5 ) etagboxin = true;
+          //if ( FitT->at(jentry) < 1.5 ) etagboxin = true;
+          //else if ( FitT->at(jentry) < 20. && FitT->at(jentry) < 0.25*(N50->at(jentry))-7.5 ) etagboxin = true;
 
           if (Label->at(jentry)==0 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
           if (Label->at(jentry)==1 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
