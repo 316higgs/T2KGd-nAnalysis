@@ -67,7 +67,7 @@ void mergeEff(bool beammode) {
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.bonsaikeras_ToF.root");
 #endif
 
-#if 1
+#if 0
   ////  -30%  ////
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.systSIm30.root");
   TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.systSIm30.root");
@@ -77,7 +77,7 @@ void mergeEff(bool beammode) {
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.systSIm30.root");
 #endif
 
-#if 0
+#if 1
   ////  +30%  ////
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.systSIp30.root");
   TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.systSIp30.root");
@@ -281,44 +281,44 @@ void mergeEff(bool beammode) {
 
   /////  Truth candidates  /////
   h1_PreEff_merge    -> Add(h1_CanTrueN_numu);
-  //h1_PreEff_merge    -> Add(h1_CanTrueN_nuesig);
+  h1_PreEff_merge    -> Add(h1_CanTrueN_nuesig);
   h1_PreEff_merge    -> Add(h1_CanTrueN_numubar);
-  //h1_PreEff_merge    -> Add(h1_CanTrueN_nuebarsig);
-  //h1_PreEff_merge    -> Add(h1_CanTrueN_nuebkg);
-  //h1_PreEff_merge    -> Add(h1_CanTrueN_nuebarbkg);
+  h1_PreEff_merge    -> Add(h1_CanTrueN_nuebarsig);
+  h1_PreEff_merge    -> Add(h1_CanTrueN_nuebkg);
+  h1_PreEff_merge    -> Add(h1_CanTrueN_nuebarbkg);
 
   h1_CanTrueN_merge  -> Add(h1_CanTrueN_numu);
-  //h1_CanTrueN_merge  -> Add(h1_CanTrueN_nuesig);
+  h1_CanTrueN_merge  -> Add(h1_CanTrueN_nuesig);
   h1_CanTrueN_merge  -> Add(h1_CanTrueN_numubar);
-  //h1_CanTrueN_merge  -> Add(h1_CanTrueN_nuebarsig);
-  //h1_CanTrueN_merge  -> Add(h1_CanTrueN_nuebkg);
-  //h1_CanTrueN_merge  -> Add(h1_CanTrueN_nuebarbkg);
+  h1_CanTrueN_merge  -> Add(h1_CanTrueN_nuebarsig);
+  h1_CanTrueN_merge  -> Add(h1_CanTrueN_nuebkg);
+  h1_CanTrueN_merge  -> Add(h1_CanTrueN_nuebarbkg);
 
 
   /////  Tagged truth neutrons  /////
   h1_NNEff_merge    -> Add(h1_TagTrueN_numu);
-  //h1_NNEff_merge    -> Add(h1_TagTrueN_nuesig);
+  h1_NNEff_merge    -> Add(h1_TagTrueN_nuesig);
   h1_NNEff_merge    -> Add(h1_TagTrueN_numubar);
-  //h1_NNEff_merge    -> Add(h1_TagTrueN_nuebarsig);
-  //h1_NNEff_merge    -> Add(h1_TagTrueN_nuebkg);
-  //h1_NNEff_merge    -> Add(h1_TagTrueN_nuebarbkg);
+  h1_NNEff_merge    -> Add(h1_TagTrueN_nuebarsig);
+  h1_NNEff_merge    -> Add(h1_TagTrueN_nuebkg);
+  h1_NNEff_merge    -> Add(h1_TagTrueN_nuebarbkg);
 
   h1_TagEff_merge    -> Add(h1_TagTrueN_numu);
-  //h1_TagEff_merge    -> Add(h1_TagTrueN_nuesig);
+  h1_TagEff_merge    -> Add(h1_TagTrueN_nuesig);
   h1_TagEff_merge    -> Add(h1_TagTrueN_numubar);
-  //h1_TagEff_merge    -> Add(h1_TagTrueN_nuebarsig);
-  //h1_TagEff_merge    -> Add(h1_TagTrueN_nuebkg);
-  //h1_TagEff_merge    -> Add(h1_TagTrueN_nuebarbkg);
+  h1_TagEff_merge    -> Add(h1_TagTrueN_nuebarsig);
+  h1_TagEff_merge    -> Add(h1_TagTrueN_nuebkg);
+  h1_TagEff_merge    -> Add(h1_TagTrueN_nuebarbkg);
   std::cout << "Tagged true neutrons: " << h1_TagEff_merge->GetBinContent(15) << std::endl; 
 
 
   /////  Truth neutrons  /////
   h1_TrueN_merge    -> Add(h1_TrueN_numu);
-  //h1_TrueN_merge    -> Add(h1_TrueN_nuesig);
+  h1_TrueN_merge    -> Add(h1_TrueN_nuesig);
   h1_TrueN_merge    -> Add(h1_TrueN_numubar);
-  //h1_TrueN_merge    -> Add(h1_TrueN_nuebarsig);
-  //h1_TrueN_merge    -> Add(h1_TrueN_nuebkg);
-  //h1_TrueN_merge    -> Add(h1_TrueN_nuebarbkg);
+  h1_TrueN_merge    -> Add(h1_TrueN_nuebarsig);
+  h1_TrueN_merge    -> Add(h1_TrueN_nuebkg);
+  h1_TrueN_merge    -> Add(h1_TrueN_nuebarbkg);
   std::cout << "True neutrons: " << h1_TrueN_merge->GetBinContent(15) << std::endl; 
 
 

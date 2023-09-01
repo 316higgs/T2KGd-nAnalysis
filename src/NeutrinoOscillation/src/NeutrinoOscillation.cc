@@ -24,15 +24,21 @@ void NeutrinoOscillation::SetHistoFrame() {
     h1_Truecosthetamu[i] = new TH1F(TString::Format("h1_Truecosthetamu_mode%d", i), "Scattering angle; #mu Scattering Angle cos#theta_{#mu}; Number of Neutrino Events", 50, -1, 1);
   }
 
-  for (int i=0; i<4; i++) {
-    h1_PrmVtxReso[i] = new TH1F(TString::Format("h1_PrmVtxReso_mode%d", i), "Primary Vertex Resolution; Reco. - Truth [cm]; Number of Neutrino Events", 2000, 0, 200);
-  }
-  h2_Enu_x_PrmVtxReso = new TH2F("h2_Enu_x_PrmVtxReso", "Primary Vertex Resolution; E_{#nu}[GeV]; d_{Reco. vs True}[cm]", 60, 0, 3, 2000, 0, 200);
-  h2_Enu_x_PrmVtxReso -> SetStats(0);
+  for (int i=0; i<4; i++) h1_PrmVtxReso[i] = new TH1F(TString::Format("h1_PrmVtxReso_mode%d", i), "", 200, 0, 200);
+  h1_PrmVtxReso_G4     = new TH1F("h1_PrmVtxReso_G4", "", 180, 0, 150);
+  h1_PrmVtxReso_DETSIM = new TH1F("h1_PrmVtxReso_DETSIM", "", 180, 0, 150);
+  h2_PrmVtxReso        = new TH2F("h2_PrmVtxReso", "", 250, 0, 25, 250, 0, 25);
+  h1_PrmVtxResoX       = new TH1F("h1_PrmVtxResoX", "", 400, -200, 200);
+  h1_PrmVtxResoY       = new TH1F("h1_PrmVtxResoY", "", 400, -200, 200);
+  h1_PrmVtxResoZ       = new TH1F("h1_PrmVtxResoZ", "", 400, -200, 200);
+  h2_True_x_Reco       = new TH2F("h2_True_x_Reco", "", 250, 0, 25, 250, 0, 25);
+  h2_TrueR_x_RecoR     = new TH2F("h2_TrueR_x_RecoR", "", 250, 0, 250, 250, 0, 250);
+  h2_TrueZ_x_RecoZ     = new TH2F("h2_TrueZ_x_RecoZ", "", 400, -20, 20, 400, -20, 20);
+  h2_Enu_x_PrmVtxReso  = new TH2F("h2_Enu_x_PrmVtxReso", "", 150, 0, 3, 200, 0, 100);
+
   h1_PrmMuMomReso = new TH1F("h1_PrmMuMomReso", "Primary #mu Momentum Resolution; (P^{true}_{#mu}-P^{reco}_{#mu})/P^{true}_{#mu}; Number of Events", 2000, -0.2, 0.2);
   h1_PrmMuEndVtxReso = new TH1F("h1_PrmMuEndVtxReso", "Primary #mu Stopping Vertex Resolution; Reco. - Truth [cm]; Number of Neutrino Events", 2000, 0, 200);
   h2_PrmMuEndVtxReso = new TH2F("h2_PrmMuEndVtxReso", "Primary #mu Stopping Vertex Resolution; Truth [cm]; Reco [cm]", 300, 0, 3000, 300, 0, 3000);
-  h2_PrmMuEndVtxReso -> SetStats(0);
 
   h1_AllEnutrue     = new TH1F("h1_AllEnutrue",  "Truth Neutrino Energy; Truth Neutrino Energy E^{true}_{#nu}[GeV]; Number of Neutrino Events", 60, 0, 3);
   h1_AllEnureco     = new TH1F("h1_AllEnureco",  "Truth Neutrino Energy; Reconstructed Neutrino Energy E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, 0, 3);
@@ -907,6 +913,16 @@ void NeutrinoOscillation::WritePlots() {
     h1_Truecosthetamu[i] -> Write();
   }
   for (int i=0; i<4; i++) h1_PrmVtxReso[i] -> Write();
+  h1_PrmVtxReso_G4 -> Write();
+  h1_PrmVtxReso_DETSIM -> Write();
+  h2_PrmVtxReso  -> Write();
+  h1_PrmVtxResoX -> Write();
+  h1_PrmVtxResoY -> Write();
+  h1_PrmVtxResoZ -> Write();
+  h2_True_x_Reco -> Write();
+  h2_TrueR_x_RecoR -> Write();
+  h2_TrueZ_x_RecoZ -> Write();
+
   h2_Enu_x_PrmVtxReso -> Write();
   h1_PrmMuMomReso -> Write();
   h1_PrmMuEndVtxReso -> Write();

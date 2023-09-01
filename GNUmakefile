@@ -21,6 +21,10 @@ systSI.exe: systSI.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
+skg4analysis.exe: skg4analysis.o
+	$(RM) .$@
+	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
+
 analysis1Re.exe: analysis1Re.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
@@ -94,6 +98,10 @@ cleananalysis1Rmu:
 
 cleansystSI:
 	$(RM) systSI.o systSI.exe
+
+cleanskg4analysis:
+	$(RM) skg4analysis.o skg4analysis.exe
+
 
 cleanPreScan:
 	$(RM) PreScan.o PreScan.exe

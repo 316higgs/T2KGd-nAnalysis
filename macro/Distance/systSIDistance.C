@@ -185,19 +185,43 @@ void systSIDistance(bool beammode) {
                       + h1_TagnD_m30_nuebarbkg->GetBinContent(ibin+1);*/
 
     float NTrueN_nom  = h1_TrueD_numu->GetBinContent(ibin+1)
-                      + h1_TrueD_numubar->GetBinContent(ibin+1);
+                      + h1_TrueD_nuesig->GetBinContent(ibin+1)
+                      + h1_TrueD_numubar->GetBinContent(ibin+1)
+                      + h1_TrueD_nuebarsig->GetBinContent(ibin+1)
+                      + h1_TrueD_nuebkg->GetBinContent(ibin+1)
+                      + h1_TrueD_nuebarbkg->GetBinContent(ibin+1);
     float NTagEff_nom = h1_TagnD_numu->GetBinContent(ibin+1)
-                      + h1_TagnD_numubar->GetBinContent(ibin+1);
+                      + h1_TagnD_nuesig->GetBinContent(ibin+1)
+                      + h1_TagnD_numubar->GetBinContent(ibin+1)
+                      + h1_TagnD_nuebarsig->GetBinContent(ibin+1)
+                      + h1_TagnD_nuebkg->GetBinContent(ibin+1)
+                      + h1_TagnD_nuebarbkg->GetBinContent(ibin+1);
 
     float NTrueN_m30  = h1_TrueD_m30_numu->GetBinContent(ibin+1)
-                      + h1_TrueD_m30_numubar->GetBinContent(ibin+1);
+                      + h1_TrueD_m30_nuesig->GetBinContent(ibin+1)
+                      + h1_TrueD_m30_numubar->GetBinContent(ibin+1)
+                      + h1_TrueD_m30_nuebarsig->GetBinContent(ibin+1)
+                      + h1_TrueD_m30_nuebkg->GetBinContent(ibin+1)
+                      + h1_TrueD_m30_nuebarbkg->GetBinContent(ibin+1);
     float NTagEff_m30 = h1_TagnD_m30_numu->GetBinContent(ibin+1)
-                      + h1_TagnD_m30_numubar->GetBinContent(ibin+1);
+                      + h1_TagnD_m30_nuesig->GetBinContent(ibin+1)
+                      + h1_TagnD_m30_numubar->GetBinContent(ibin+1)
+                      + h1_TagnD_m30_nuebarsig->GetBinContent(ibin+1)
+                      + h1_TagnD_m30_nuebkg->GetBinContent(ibin+1)
+                      + h1_TagnD_m30_nuebarbkg->GetBinContent(ibin+1);
 
     float NTrueN_p30  = h1_TrueD_p30_numu->GetBinContent(ibin+1)
-                      + h1_TrueD_p30_numubar->GetBinContent(ibin+1);
+                      + h1_TrueD_p30_nuesig->GetBinContent(ibin+1)
+                      + h1_TrueD_p30_numubar->GetBinContent(ibin+1)
+                      + h1_TrueD_p30_nuebarsig->GetBinContent(ibin+1)
+                      + h1_TrueD_p30_nuebkg->GetBinContent(ibin+1)
+                      + h1_TrueD_p30_nuebarbkg->GetBinContent(ibin+1);
     float NTagEff_p30 = h1_TagnD_p30_numu->GetBinContent(ibin+1)
-                      + h1_TagnD_p30_numubar->GetBinContent(ibin+1);
+                      + h1_TagnD_p30_nuesig->GetBinContent(ibin+1)
+                      + h1_TagnD_p30_numubar->GetBinContent(ibin+1)
+                      + h1_TagnD_p30_nuebarsig->GetBinContent(ibin+1)
+                      + h1_TagnD_p30_nuebkg->GetBinContent(ibin+1)
+                      + h1_TagnD_p30_nuebarbkg->GetBinContent(ibin+1);
 
     NTagEff_nom /= NTrueN_nom;
     NTagEff_m30 /= NTrueN_m30;
@@ -261,11 +285,11 @@ void systSIDistance(bool beammode) {
   ////  true neutrons  ////
   TH1F* h1_TrueD_merge = new TH1F("h1_TrueD_merge", "", 10, 0, 5);
   h1_TrueD_merge -> Add(h1_TrueD_numu);
-  //h1_TrueD_merge -> Add(h1_TrueD_nuesig);
+  h1_TrueD_merge -> Add(h1_TrueD_nuesig);
   h1_TrueD_merge -> Add(h1_TrueD_numubar);
-  //h1_TrueD_merge -> Add(h1_TrueD_nuebarsig);
-  //h1_TrueD_merge -> Add(h1_TrueD_nuebkg);
-  //h1_TrueD_merge -> Add(h1_TrueD_nuebarbkg);
+  h1_TrueD_merge -> Add(h1_TrueD_nuebarsig);
+  h1_TrueD_merge -> Add(h1_TrueD_nuebkg);
+  h1_TrueD_merge -> Add(h1_TrueD_nuebarbkg);
 
   h1_TrueD_merge -> SetStats(0);
   h1_TrueD_merge -> SetLineWidth(3);
@@ -276,11 +300,11 @@ void systSIDistance(bool beammode) {
 
   TH1F* h1_TrueD_m30_merge = new TH1F("h1_TrueD_m30_merge", "", 10, 0, 5);
   h1_TrueD_m30_merge -> Add(h1_TrueD_m30_numu);
-  //h1_TrueD_m30_merge -> Add(h1_TrueD_m30_nuesig);
+  h1_TrueD_m30_merge -> Add(h1_TrueD_m30_nuesig);
   h1_TrueD_m30_merge -> Add(h1_TrueD_m30_numubar);
-  //h1_TrueD_m30_merge -> Add(h1_TrueD_m30_nuebarsig);
-  //h1_TrueD_m30_merge -> Add(h1_TrueD_m30_nuebkg);
-  //h1_TrueD_m30_merge -> Add(h1_TrueD_m30_nuebarbkg);
+  h1_TrueD_m30_merge -> Add(h1_TrueD_m30_nuebarsig);
+  h1_TrueD_m30_merge -> Add(h1_TrueD_m30_nuebkg);
+  h1_TrueD_m30_merge -> Add(h1_TrueD_m30_nuebarbkg);
 
   h1_TrueD_m30_merge -> SetLineWidth(3);
   h1_TrueD_m30_merge -> SetLineColor(kAzure-5);
@@ -288,11 +312,11 @@ void systSIDistance(bool beammode) {
 
   TH1F* h1_TrueD_p30_merge = new TH1F("h1_TrueD_p30_merge", "", 10, 0, 5);
   h1_TrueD_p30_merge -> Add(h1_TrueD_p30_numu);
-  //h1_TrueD_p30_merge -> Add(h1_TrueD_p30_nuesig);
+  h1_TrueD_p30_merge -> Add(h1_TrueD_p30_nuesig);
   h1_TrueD_p30_merge -> Add(h1_TrueD_p30_numubar);
-  //h1_TrueD_p30_merge -> Add(h1_TrueD_p30_nuebarsig);
-  //h1_TrueD_p30_merge -> Add(h1_TrueD_p30_nuebkg);
-  //h1_TrueD_p30_merge -> Add(h1_TrueD_p30_nuebarbkg);
+  h1_TrueD_p30_merge -> Add(h1_TrueD_p30_nuebarsig);
+  h1_TrueD_p30_merge -> Add(h1_TrueD_p30_nuebkg);
+  h1_TrueD_p30_merge -> Add(h1_TrueD_p30_nuebarbkg);
 
   h1_TrueD_p30_merge -> SetLineWidth(3);
   h1_TrueD_p30_merge -> SetLineColor(kRed-3);
@@ -301,11 +325,11 @@ void systSIDistance(bool beammode) {
   ////  tagged true neutrons  ////
   TH1F* h1_TagnD_merge = new TH1F("h1_TagnD_merge", "", 10, 0, 5);
   h1_TagnD_merge -> Add(h1_TagnD_numu);
-  //h1_TagnD_merge -> Add(h1_TagnD_nuesig);
+  h1_TagnD_merge -> Add(h1_TagnD_nuesig);
   h1_TagnD_merge -> Add(h1_TagnD_numubar);
-  //h1_TagnD_merge -> Add(h1_TagnD_nuebarsig);
-  //h1_TagnD_merge -> Add(h1_TagnD_nuebkg);
-  //h1_TagnD_merge -> Add(h1_TagnD_nuebarbkg);
+  h1_TagnD_merge -> Add(h1_TagnD_nuebarsig);
+  h1_TagnD_merge -> Add(h1_TagnD_nuebkg);
+  h1_TagnD_merge -> Add(h1_TagnD_nuebarbkg);
 
   h1_TagnD_merge -> SetStats(0);
   h1_TagnD_merge -> SetLineWidth(3);
@@ -316,22 +340,22 @@ void systSIDistance(bool beammode) {
 
   TH1F* h1_TagnD_m30_merge = new TH1F("h1_TagnD_m30_merge", "", 10, 0, 5);
   h1_TagnD_m30_merge -> Add(h1_TagnD_m30_numu);
-  //h1_TagnD_m30_merge -> Add(h1_TagnD_m30_nuesig);
+  h1_TagnD_m30_merge -> Add(h1_TagnD_m30_nuesig);
   h1_TagnD_m30_merge -> Add(h1_TagnD_m30_numubar);
-  //h1_TagnD_m30_merge -> Add(h1_TagnD_m30_nuebarsig);
-  //h1_TagnD_m30_merge -> Add(h1_TagnD_m30_nuebkg);
-  //h1_TagnD_m30_merge -> Add(h1_TagnD_m30_nuebarbkg);
+  h1_TagnD_m30_merge -> Add(h1_TagnD_m30_nuebarsig);
+  h1_TagnD_m30_merge -> Add(h1_TagnD_m30_nuebkg);
+  h1_TagnD_m30_merge -> Add(h1_TagnD_m30_nuebarbkg);
   h1_TagnD_m30_merge -> SetLineWidth(3);
   h1_TagnD_m30_merge -> SetLineColor(kAzure-5);
 
 
   TH1F* h1_TagnD_p30_merge = new TH1F("h1_TagnD_p30_merge", "", 10, 0, 5);
   h1_TagnD_p30_merge -> Add(h1_TagnD_p30_numu);
-  //h1_TagnD_p30_merge -> Add(h1_TagnD_p30_nuesig);
+  h1_TagnD_p30_merge -> Add(h1_TagnD_p30_nuesig);
   h1_TagnD_p30_merge -> Add(h1_TagnD_p30_numubar);
-  //h1_TagnD_p30_merge -> Add(h1_TagnD_p30_nuebarsig);
-  //h1_TagnD_p30_merge -> Add(h1_TagnD_p30_nuebkg);
-  //h1_TagnD_p30_merge -> Add(h1_TagnD_p30_nuebarbkg);
+  h1_TagnD_p30_merge -> Add(h1_TagnD_p30_nuebarsig);
+  h1_TagnD_p30_merge -> Add(h1_TagnD_p30_nuebkg);
+  h1_TagnD_p30_merge -> Add(h1_TagnD_p30_nuebarbkg);
   h1_TagnD_p30_merge -> SetLineWidth(3);
   h1_TagnD_p30_merge -> SetLineColor(kRed-3);
 
@@ -339,11 +363,11 @@ void systSIDistance(bool beammode) {
   ////  tagging efficiency  ////
   TH1F* h1_TagEff_merge = new TH1F("h1_TagEff_merge", "", 10, 0, 5);
   h1_TagEff_merge -> Add(h1_TagnD_numu);
-  //h1_TagEff_merge -> Add(h1_TagnD_nuesig);
+  h1_TagEff_merge -> Add(h1_TagnD_nuesig);
   h1_TagEff_merge -> Add(h1_TagnD_numubar);
-  //h1_TagEff_merge -> Add(h1_TagnD_nuebarsig);
-  //h1_TagEff_merge -> Add(h1_TagnD_nuebkg);
-  //h1_TagEff_merge -> Add(h1_TagnD_nuebarbkg);
+  h1_TagEff_merge -> Add(h1_TagnD_nuebarsig);
+  h1_TagEff_merge -> Add(h1_TagnD_nuebkg);
+  h1_TagEff_merge -> Add(h1_TagnD_nuebarbkg);
   h1_TagEff_merge -> Sumw2();
   h1_TagEff_merge -> Divide(h1_TrueD_merge);
 
@@ -368,11 +392,11 @@ void systSIDistance(bool beammode) {
 
   TH1F* h1_TagEff_m30_merge = new TH1F("h1_TagEff_m30_merge", "", 10, 0, 5);
   h1_TagEff_m30_merge -> Add(h1_TagnD_m30_numu);
-  //h1_TagEff_m30_merge -> Add(h1_TagnD_m30_nuesig);
+  h1_TagEff_m30_merge -> Add(h1_TagnD_m30_nuesig);
   h1_TagEff_m30_merge -> Add(h1_TagnD_m30_numubar);
-  //h1_TagEff_m30_merge -> Add(h1_TagnD_m30_nuebarsig);
-  //h1_TagEff_m30_merge -> Add(h1_TagnD_m30_nuebkg);
-  //h1_TagEff_m30_merge -> Add(h1_TagnD_m30_nuebarbkg);
+  h1_TagEff_m30_merge -> Add(h1_TagnD_m30_nuebarsig);
+  h1_TagEff_m30_merge -> Add(h1_TagnD_m30_nuebkg);
+  h1_TagEff_m30_merge -> Add(h1_TagnD_m30_nuebarbkg);
   h1_TagEff_m30_merge -> Sumw2();
   h1_TagEff_m30_merge -> Divide(h1_TrueD_m30_merge);
   h1_TagEff_m30_merge -> SetLineWidth(3);
@@ -393,11 +417,11 @@ void systSIDistance(bool beammode) {
 
   TH1F* h1_TagEff_p30_merge = new TH1F("h1_TagEff_p30_merge", "", 10, 0, 5);
   h1_TagEff_p30_merge -> Add(h1_TagnD_p30_numu);
-  //h1_TagEff_p30_merge -> Add(h1_TagnD_p30_nuesig);
+  h1_TagEff_p30_merge -> Add(h1_TagnD_p30_nuesig);
   h1_TagEff_p30_merge -> Add(h1_TagnD_p30_numubar);
-  //h1_TagEff_p30_merge -> Add(h1_TagnD_p30_nuebarsig);
-  //h1_TagEff_p30_merge -> Add(h1_TagnD_p30_nuebkg);
-  //h1_TagEff_p30_merge -> Add(h1_TagnD_p30_nuebarbkg);
+  h1_TagEff_p30_merge -> Add(h1_TagnD_p30_nuebarsig);
+  h1_TagEff_p30_merge -> Add(h1_TagnD_p30_nuebkg);
+  h1_TagEff_p30_merge -> Add(h1_TagnD_p30_nuebarbkg);
   h1_TagEff_p30_merge -> Sumw2();
   h1_TagEff_p30_merge -> Divide(h1_TrueD_p30_merge);
   h1_TagEff_p30_merge -> SetLineWidth(3);
@@ -420,7 +444,6 @@ void systSIDistance(bool beammode) {
   TLegend* legend1 = new TLegend(0.47, 0.65, 0.89, 0.89);
   legend1 -> SetTextSize(0.04);
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
-  //else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
   legend1 -> AddEntry(h1_TrueD_merge, "Nominal MC", "F");
   legend1 -> AddEntry(h1_TrueD_p30_merge, "+30% Bertini's tot xsec", "L");
   legend1 -> AddEntry(h1_TrueD_m30_merge, "-30% Bertini's tot xsec", "L");
@@ -484,11 +507,7 @@ void systSIDistance(bool beammode) {
   float yMaxPos = 1;       // y-maximum where you want to set
   float SetPos  = 1;
   TGaxis* axis = new TGaxis(xMinPos,yMinPos,xMaxPos,yMaxPos, 0, SetPos, 510, "+L");
-  //axis -> SetTitle("Purity");
-  //axis -> SetTitleSize(0.035);
-  //axis -> SetTitleColor(kPink-5);
   axis -> SetLabelColor(kWhite);
-  //axis -> SetLabelSize(0.035);
   axis -> Draw();
 
   legend1 -> Draw();

@@ -767,8 +767,8 @@ void AveTaggedN_x_kinematics(bool beammode) {
     std::cout << "    #neutrino events    : " << N1Rmu_x_kinematics[i] << std::endl;
     std::cout << "    #tagged neutrons    : " << TaggedN_x_kinematics[i] << std::endl;
     std::cout << "    Tagging efficiency  : " << NTagEff_x_kinematics[i] << std::endl;
-    std::cout << "    Neutron multiplicity: " << h1_AveTaggedN_x_kinematics->GetBinContent(i+1) 
-              << " (p/m " << dnMult[i] << " )" << std::endl;
+    std::cout << "    Neutron multiplicity: " << h1_AveTaggedN_x_kinematics->GetBinContent(i+1)  
+              << " p/m " << dnMult[i] << " ( flactional error: " << (dnMult[i]/nMult[i])*100. << " % )" << std::endl;
   }
   TGraphErrors* g_MCerr = new TGraphErrors(binnumber, kinematics, nMult, dkinematics, dnMult);
   g_MCerr -> SetLineWidth(3);
@@ -777,38 +777,6 @@ void AveTaggedN_x_kinematics(bool beammode) {
 
 
 #if 0
-  TGraphErrors* g_errbnd[binnumber];
-  double x0[1] = {(0.+0.25)/2.};
-  double x1[1] = {(0.25+0.5)/2.};
-  double x2[1] = {(0.5+0.75)/2.};
-  double x3[1] = {(0.75+1.5)/2.};
-  double x4[1] = {(1.5+2.0)/2.};
-  double e_x0[1] = {0.};
-  double e_x1[1] = {0.};
-  double e_x2[1] = {0.};
-  double e_x3[1] = {0.};
-  double e_x4[1] = {0.};
-  double AveTaggedN0[1] = {1.37};
-  double AveTaggedN1[1] = {1.68};
-  double AveTaggedN2[1] = {2.38};
-  double AveTaggedN3[1] = {3.99};
-  double AveTaggedN4[1] = {3.76};
-  double e_AveTaggedN0[2] = {0.614, 0.614};
-  double e_AveTaggedN1[2] = {0.583};
-  double e_AveTaggedN2[2] = {1.08};
-  double e_AveTaggedN3[2] = {2.56};
-  double e_AveTaggedN4[2] = {26.4};
-  g_errbnd[0] = new TGraphErrors(1, x0, AveTaggedN0, e_x0, e_AveTaggedN0);
-  g_errbnd[1] = new TGraphErrors(1, x1, AveTaggedN1, e_x1, e_AveTaggedN1);
-  g_errbnd[2] = new TGraphErrors(1, x2, AveTaggedN2, e_x2, e_AveTaggedN2);
-  g_errbnd[3] = new TGraphErrors(1, x3, AveTaggedN3, e_x3, e_AveTaggedN3);
-  g_errbnd[4] = new TGraphErrors(1, x4, AveTaggedN4, e_x4, e_AveTaggedN4);
-#endif
-
-
-
-
-#if 1
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
@@ -828,16 +796,6 @@ void AveTaggedN_x_kinematics(bool beammode) {
   //h1_AveTaggedN_x_kinematics -> Draw("E1");
   //h1_AveTaggedN_x_kinematics -> Draw("");
   //h1_AveTaggedN_x_kinematics -> Draw("hist same");
-#if 0
-  for (int i=0; i<binnumber; i++) {
-    g_errbnd[i] -> SetFillStyle(3244);
-    g_errbnd[i] -> SetFillColor(kViolet+1);
-    g_errbnd[i] -> SetLineColor(kViolet-7);
-    g_errbnd[i] -> SetLineWidth(2);
-    //g_errbnd[i] -> Draw("3 SAME");
-    g_errbnd[i] -> Draw("E1 SAME");
-  }
-#endif
   g_MCerr -> Draw("SAMEP");
   c1->RedrawAxis();
   

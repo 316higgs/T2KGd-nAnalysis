@@ -1,9 +1,9 @@
 #!/bin/bash
 
-make cleananalysis1Rmu
-make 
+make cleanskg4analysis
+make skg4analysis.exe
 
-if [ ! -f ./analysis1Rmu.exe ]; then
+if [ ! -f ./skg4analysis.exe ]; then
   exit 2
 fi
 
@@ -73,9 +73,7 @@ EXECUTE()
     NTAGMODE=${NNSTYLE}
   fi
 
-  #RUNNAME="water"
-  #RUNNAME="NNoptnewGdMC"
-  #RUNNAME="newGdMC.bonsaikeras"
+
   RUNNAME="skg4MC.bonsaikeras_ToF"
 
   ESC=$(printf '\033')
@@ -86,9 +84,8 @@ EXECUTE()
   printf "${ESC}[31m%s${ESC}[m\n" "[### Analysis Option ###] NTAGMODE     : ${NTAGMODE}"
   printf "${ESC}[31m%s${ESC}[m\n" "[### Analysis Option ###] RUNNAME      : ${RUNNAME}"
 
-
 #<<COMMENTOUT
-  ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
+  ./skg4analysis.exe ${DISK3}/${FITQUNVER}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
                      ${DISK3}/Ntag/output/skg4/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.ntag0026Gd.\*.root\
                      ${ANALYSISSTAGE}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${RUNNAME}.root\
                      ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.neutrino.${RUNNAME}.txt\
@@ -98,6 +95,18 @@ EXECUTE()
                      -BEAMMODE ${BEAMMODE_ARG}\
                      -OSCCH ${OSCCH_ARG}
 #COMMENTOUT
+
+<<COMMENTOUT
+  ./skg4analysis.exe ${DISK3}/${FITQUNVER}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
+                     ${DISK3}/Ntag/output/${NTAGMODE}/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.ntag0026Gd.\*.root\
+                     ${ANALYSISSTAGE}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${RUNNAME}.root\
+                     ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.neutrino.${RUNNAME}.txt\
+                     ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.ntag.${RUNNAME}.txt\
+                     -MCType ${MC_ARG}\
+                     -ETAG ON\
+                     -BEAMMODE ${BEAMMODE_ARG}\
+                     -OSCCH ${OSCCH_ARG}
+COMMENTOUT
   echo " " 
 }
 

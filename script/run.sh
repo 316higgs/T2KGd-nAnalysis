@@ -58,8 +58,8 @@ EXECUTE()
   fi
 
   ###  NTag setting  ###
-  PRESELMODE="no_prompt_vertex"
-  #PRESELMODE="prompt_vertex"
+  #PRESELMODE="no_prompt_vertex"
+  PRESELMODE="prompt_vertex"
 
   #NNMODEL="tmva"
   NNMODEL="keras"
@@ -76,8 +76,8 @@ EXECUTE()
   #RUNNAME="water"
   #RUNNAME="NNoptnewGdMC"
   #RUNNAME="newGdMC.promptkeras"
-  RUNNAME="newGdMC.bonsaikeras"
-  #RUNNAME="newGdMC.bonsaikeras_ToF"
+  #RUNNAME="newGdMC.bonsaikeras"
+  RUNNAME="newGdMC.bonsaikeras_ToF"
 
   ESC=$(printf '\033')
   printf "${ESC}[31m%s${ESC}[m\n" "[### Analysis Option ###] OUTBEAMMODE  : ${OUTBEAMMODE}"
@@ -150,11 +150,11 @@ COMMENTOUT
 
 ###  Gd MC  ###
 EXECUTE 0 1  ###  numu -> numu
-EXECUTE 1 1  ###  numu -> nue
-EXECUTE 2 1  ###  numubar -> numubar
-EXECUTE 3 1  ###  numubar -> nuebar
-EXECUTE 4 1  ###  nue -> nue
-EXECUTE 5 1  ###  nuebar -> nuebar
+#EXECUTE 1 1  ###  numu -> nue
+#EXECUTE 2 1  ###  numubar -> numubar
+#EXECUTE 3 1  ###  numubar -> nuebar
+#EXECUTE 4 1  ###  nue -> nue
+#EXECUTE 5 1  ###  nuebar -> nuebar
 
 
 

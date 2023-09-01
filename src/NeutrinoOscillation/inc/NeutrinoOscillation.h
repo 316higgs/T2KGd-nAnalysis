@@ -17,6 +17,15 @@ TH1F* h1_AllEnureco;
 TH1F* h1_AllEnureso;
 
 TH1F* h1_PrmVtxReso[4];
+TH1F* h1_PrmVtxReso_DETSIM;
+TH1F* h1_PrmVtxReso_G4;
+TH1F* h1_PrmVtxResoX;
+TH1F* h1_PrmVtxResoY;
+TH1F* h1_PrmVtxResoZ;
+TH2F* h2_PrmVtxReso;
+TH2F* h2_True_x_Reco;
+TH2F* h2_TrueR_x_RecoR;
+TH2F* h2_TrueZ_x_RecoZ;
 TH2F* h2_Enu_x_PrmVtxReso;
 TH1F* h1_PrmMuMomReso;
 TH1F* h1_PrmMuEndVtxReso;
