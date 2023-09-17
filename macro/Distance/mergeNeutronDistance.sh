@@ -23,7 +23,7 @@ BEAMMODE=true
 #root -l 'NeutronEnergy.C('${BEAMMODE}')'
 
 
-#root -l 'mergeTagEff_x_dist.C('${BEAMMODE}')'
+root -l 'mergeTagEff_x_dist.C('${BEAMMODE}')'
 
 
-root -l 'systSIDistance.C('${BEAMMODE}')'
+#root -l 'systSIDistance.C('${BEAMMODE}')'

@@ -65,7 +65,7 @@ void PrmVtxResolution(bool beammode) {
   TH1F* h1_PrmVtxResoY = (TH1F*)fin_numu_skg4->Get("NeutrinoOscillation/h1_PrmVtxResoY");
   TH1F* h1_PrmVtxResoZ = (TH1F*)fin_numu_skg4->Get("NeutrinoOscillation/h1_PrmVtxResoZ");
 
-  TH2F* h2_PrmVtxReso  = (TH2F*)fin_numu_skg4->Get("NeutrinoOscillation/h2_PrmVtxReso");
+  /*TH2F* h2_PrmVtxReso  = (TH2F*)fin_numu_skg4->Get("NeutrinoOscillation/h2_PrmVtxReso");
   h2_PrmVtxReso -> SetStats(0);
   h2_PrmVtxReso -> SetYTitle("SKDETSIM-based MC d_{Reco} [m]");
   h2_PrmVtxReso -> SetTitleOffset(1.1, "Y");
@@ -78,7 +78,7 @@ void PrmVtxResolution(bool beammode) {
   h2_True_x_Reco -> SetYTitle("SKDETSIM-based fiTQun vertex d_{Reco} [m]");
   h2_True_x_Reco -> SetTitleOffset(1.1, "Y");
   h2_True_x_Reco -> SetXTitle("True Primary Vertex d_{True} [m]");
-  h2_True_x_Reco -> SetTitleOffset(1.2, "X");
+  h2_True_x_Reco -> SetTitleOffset(1.2, "X");*/
 
 
   h1_PrmVtxResoX -> SetLineColor(kViolet-7);
@@ -124,6 +124,13 @@ void PrmVtxResolution(bool beammode) {
   h1_PrmVtxReso_skg4 -> SetLineColor(kAzure-9);
   h1_PrmVtxReso_skg4 -> SetLineWidth(3);
   h1_PrmVtxReso_skg4 -> SetStats(0);
+
+  TH1F* h1_PrmVtxResoDiff = (TH1F*)fin_numu_skg4->Get("NeutrinoOscillation/h1_PrmVtxResoDiff");
+  h1_PrmVtxResoDiff -> SetLineColor(kViolet-7);
+  h1_PrmVtxResoDiff -> SetLineWidth(3);
+  h1_PrmVtxResoDiff -> SetStats(0);
+  h1_PrmVtxResoDiff -> SetYTitle("Neutrino Events");
+  h1_PrmVtxResoDiff -> SetXTitle("d_{True - Reco}^{SKG4} - d_{True - Reco}^{SKDETSIM} [cm]");
 
 
   /////  68 percentile line  //////
@@ -197,7 +204,7 @@ void PrmVtxResolution(bool beammode) {
   legend1->SetFillColor(0);
 
 
-#if 1
+#if 0
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
   h1_PrmVtxReso_detsim -> SetTitleOffset(1.2, "Y");
@@ -210,6 +217,37 @@ void PrmVtxResolution(bool beammode) {
   g_onesigma_DETSIM    -> Draw("SAME");
   c1 -> RedrawAxis();
   legend1->Draw();
+#endif
+
+  TF1* f1_sigma = new TF1("f1_sigma", "[0] * exp( -(x - [1])*(x - [1]) / (2*[2]*[2]) )", -15, 15);
+  f1_sigma -> SetParameter(0, 1000);
+  f1_sigma -> SetParameter(1, 10);
+  f1_sigma -> SetParameter(2, 20);
+  f1_sigma -> SetLineColor(kAzure-8);
+  f1_sigma -> SetLineWidth(3);
+  f1_sigma -> SetNpx(10000);
+
+#if 1
+  TCanvas* c2 = new TCanvas("c2", "c2", 900, 700);
+  c2 -> SetGrid();
+  h1_PrmVtxResoDiff -> SetTitleOffset(1.2, "Y");
+  h1_PrmVtxResoDiff -> SetTitleOffset(1.1, "X");
+  h1_PrmVtxResoDiff -> GetXaxis()->SetTitleSize(0.04);
+  h1_PrmVtxResoDiff -> GetYaxis()->SetTitleSize(0.04);
+  h1_PrmVtxResoDiff -> Draw("SAME");
+  h1_PrmVtxResoDiff -> Fit(f1_sigma, "r");
+  f1_sigma -> Draw("SAME");
+  c2 -> RedrawAxis();
+
+  float RMS   = h1_PrmVtxResoDiff->GetRMS();
+  float Sigma = f1_sigma->GetParameter(2);
+  TLegend* legend2 = new TLegend(0.55, 0.65, 0.89, 0.89);
+  legend2 -> SetTextSize(0.04);
+  legend2 -> AddEntry(h1_PrmVtxResoDiff, TString::Format("#kern[-0.]{RMS = %.1f cm}", RMS), "L");
+  legend2 -> AddEntry(f1_sigma, TString::Format("#kern[-0.]{#sigma = %.1f cm}", Sigma), "L");
+  legend2 -> AddEntry()
+  legend2->SetFillColor(0);
+  legend2 -> Draw();
 #endif
 
 

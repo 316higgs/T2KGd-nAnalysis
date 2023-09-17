@@ -26,33 +26,15 @@ void TaggedN_x_nkinematics_NormNTagN(bool beammode) {
 
   //FHC
 #if fhcflag
-  TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronMultiplicity.root");
-  TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronMultiplicity.root");
-  TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
-#endif
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.Nmult.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.Nmult.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.Nmult.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.newGdMC.Nmult.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.Nmult.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.Nmult.root");
 
-  //RHC
-#if rhcflag
-  TFile* fin_numu    = new TFile("../../output/rhc/rhc.numu_x_numu.VertexSelection_mu_x_dcye.beforecut.root");
-  TFile* fin_numubar = new TFile("../../output/rhc/rhc.numubar_x_numubar.VertexSelection_mu_x_dcye.beofrecut.root");
-  TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
+  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
-
-  //Normalization
-  TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
-  TH1F* h1_skrate_numubar_x_numubar = (TH1F*)fin_skrate->Get("skrate_numu_bar_x_numu_bar");
-  //Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
-  //Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) );
-  Double_t ExpN_numu_x_numu         = h1_skrate_numu_x_numu->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
-  Double_t ExpN_numubar_x_numubar   = h1_skrate_numubar_x_numubar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
-  Double_t GenN_numu_x_numu         = 190292;
-  Double_t GenN_numubar_x_numubar   = 190909;
-  std::cout << "ExpN_numu_x_numu = " << ExpN_numu_x_numu << std::endl;
-  std::cout << "GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
-  std::cout << "ExpN_numubar_x_numubar = " << ExpN_numubar_x_numubar << std::endl;
-  std::cout << "GenN_numubar_x_numubar = " << GenN_numubar_x_numubar << std::endl;
-  std::cout << "Normalization factor for numu_x_numu      : " << (ExpN_numu_x_numu)/(GenN_numu_x_numu) << std::endl;
-  std::cout << "Normalization factor for numubar_x_numubar: " << (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) << std::endl;
 
 
   //TString KnmtcName = "nTraveld";
@@ -60,6 +42,9 @@ void TaggedN_x_nkinematics_NormNTagN(bool beammode) {
   //TString KnmtcName = "nTraveldT";
   TString KnmtcName = "nAngle";
   //TString KnmtcName = "MuStp_NCap";
+  const int binnumber = SetHistoBinNumber(KnmtcName);
+  double    xbins[binnumber] = {-1., -0.6, -0.2, 0.2, 0.6, 1.};
+
 
   TString Prefix      = "NTagAnalysis/h1_TaggedN_x_";
   TString CCQEName    = "_mode0";
@@ -80,6 +65,13 @@ void TaggedN_x_nkinematics_NormNTagN(bool beammode) {
   TH1F* h1_Noise_numu   = (TH1F*)fin_numu->Get(FileNoiseName);
   h1_CCQE_numu -> SetStats(0);
 
+  TH1F* h1_CCQE_nuesig    = (TH1F*)fin_nuesig->Get(FileCCQEName);
+  TH1F* h1_CC2p2h_nuesig  = (TH1F*)fin_nuesig->Get(FileCC2p2hName);
+  TH1F* h1_CCOther_nuesig = (TH1F*)fin_nuesig->Get(FileCCOtherName);
+  TH1F* h1_NC_nuesig      = (TH1F*)fin_nuesig->Get(FileNCName);
+  TH1F* h1_Noise_nuesig   = (TH1F*)fin_nuesig->Get(FileNoiseName);
+  h1_CCQE_nuesig -> SetStats(0);
+
   TH1F* h1_CCQE_numubar    = (TH1F*)fin_numubar->Get(FileCCQEName);
   TH1F* h1_CC2p2h_numubar  = (TH1F*)fin_numubar->Get(FileCC2p2hName);
   TH1F* h1_CCOther_numubar = (TH1F*)fin_numubar->Get(FileCCOtherName);
@@ -87,49 +79,73 @@ void TaggedN_x_nkinematics_NormNTagN(bool beammode) {
   TH1F* h1_Noise_numubar   = (TH1F*)fin_numubar->Get(FileNoiseName);
   h1_CCQE_numubar -> SetStats(0);
 
-  h1_CCQE_numu    -> SetLineColor(kAzure-1);
-  h1_CC2p2h_numu  -> SetLineColor(kAzure-5);
-  h1_CCOther_numu -> SetLineColor(kCyan-8);
-  h1_NC_numu      -> SetLineColor(kSpring-9);
-  h1_Noise_numu   -> SetLineColor(kYellow+2);
+  TH1F* h1_CCQE_nuebarsig    = (TH1F*)fin_nuebarsig->Get(FileCCQEName);
+  TH1F* h1_CC2p2h_nuebarsig  = (TH1F*)fin_nuebarsig->Get(FileCC2p2hName);
+  TH1F* h1_CCOther_nuebarsig = (TH1F*)fin_nuebarsig->Get(FileCCOtherName);
+  TH1F* h1_NC_nuebarsig      = (TH1F*)fin_nuebarsig->Get(FileNCName);
+  TH1F* h1_Noise_nuebarsig   = (TH1F*)fin_nuebarsig->Get(FileNoiseName);
+  h1_CCQE_nuebarsig -> SetStats(0);
 
-  h1_CCQE_numu    -> SetFillColor(kAzure-1);
-  h1_CC2p2h_numu  -> SetFillColor(kAzure-5);
-  h1_CCOther_numu -> SetFillColor(kCyan-8);
-  h1_NC_numu      -> SetFillColor(kSpring-9);
-  h1_Noise_numu   -> SetFillColor(kYellow+2);
+  TH1F* h1_CCQE_nuebkg    = (TH1F*)fin_nuebkg->Get(FileCCQEName);
+  TH1F* h1_CC2p2h_nuebkg  = (TH1F*)fin_nuebkg->Get(FileCC2p2hName);
+  TH1F* h1_CCOther_nuebkg = (TH1F*)fin_nuebkg->Get(FileCCOtherName);
+  TH1F* h1_NC_nuebkg      = (TH1F*)fin_nuebkg->Get(FileNCName);
+  TH1F* h1_Noise_nuebkg   = (TH1F*)fin_nuebkg->Get(FileNoiseName);
+  h1_CCQE_nuebkg -> SetStats(0);
 
-  h1_CCQE_numubar    -> SetLineColor(kOrange+7);
-  h1_CC2p2h_numubar  -> SetLineColor(kOrange+6);
-  h1_CCOther_numubar -> SetLineColor(kOrange+0);
-  h1_NC_numubar      -> SetLineColor(kSpring-9);
-  h1_Noise_numubar   -> SetLineColor(kYellow+2);
+  TH1F* h1_CCQE_nuebarbkg    = (TH1F*)fin_nuebarbkg->Get(FileCCQEName);
+  TH1F* h1_CC2p2h_nuebarbkg  = (TH1F*)fin_nuebarbkg->Get(FileCC2p2hName);
+  TH1F* h1_CCOther_nuebarbkg = (TH1F*)fin_nuebarbkg->Get(FileCCOtherName);
+  TH1F* h1_NC_nuebarbkg      = (TH1F*)fin_nuebarbkg->Get(FileNCName);
+  TH1F* h1_Noise_nuebarbkg   = (TH1F*)fin_nuebarbkg->Get(FileNoiseName);
+  h1_CCQE_nuebarbkg -> SetStats(0);
 
-  h1_CCQE_numubar    -> SetFillColor(kOrange+7);
-  h1_CC2p2h_numubar  -> SetFillColor(kOrange+6);
-  h1_CCOther_numubar -> SetFillColor(kOrange+0);
-  h1_NC_numubar      -> SetFillColor(kSpring-9);
-  h1_Noise_numubar   -> SetFillColor(kYellow+2);
+
+  TH1F* h1_merge = new TH1F("h1_merge", "", binnumber-1, xbins);
+  //h1_merge -> Add(h1_Noise_nuebarbkg);
+  //h1_merge -> Add(h1_Noise_nuebkg);
+  //h1_merge -> Add(h1_Noise_nuebarsig);
+  //h1_merge -> Add(h1_Noise_numubar);
+  //h1_merge -> Add(h1_Noise_nuesig);
+  h1_merge -> Add(h1_Noise_numu);
+
+  //h1_merge -> Add(h1_NC_nuebarbkg);
+  //h1_merge -> Add(h1_NC_nuebkg);
+  //h1_merge -> Add(h1_NC_nuebarsig);
+  //h1_merge -> Add(h1_NC_numubar);
+  //h1_merge -> Add(h1_NC_nuesig);
+  h1_merge -> Add(h1_NC_numu);
+
+  //h1_merge -> Add(h1_CCOther_nuebarbkg);
+  //h1_merge -> Add(h1_CC2p2h_nuebarbkg);
+  //h1_merge -> Add(h1_CCQE_nuebarbkg);
+  //h1_merge -> Add(h1_CCOther_nuebkg);
+  //h1_merge -> Add(h1_CC2p2h_nuebkg);
+  //h1_merge -> Add(h1_CCQE_nuebkg);
+  //h1_merge -> Add(h1_CCOther_nuebarsig);
+  //h1_merge -> Add(h1_CC2p2h_nuebarsig);
+  //h1_merge -> Add(h1_CCQE_nuebarsig);
+  //h1_merge -> Add(h1_CCOther_nuesig);
+  //h1_merge -> Add(h1_CC2p2h_nuesig);
+  //h1_merge -> Add(h1_CCQE_nuesig);
+
+  //h1_merge -> Add(h1_CCOther_numubar);
+  h1_merge -> Add(h1_CCOther_numu);
+  //h1_merge -> Add(h1_CC2p2h_numubar);
+  h1_merge -> Add(h1_CC2p2h_numu);
+  //h1_merge -> Add(h1_CCQE_numubar);
+  h1_merge -> Add(h1_CCQE_numu);
+
+
+  float TotalTaggedN = 0.;
+  for (int i=0; i<binnumber; i++) {
+    std::cout << "[### Bin" << i << " ###] Tagged neutrons: " << h1_merge->GetBinContent(i+1) << std::endl;
+    TotalTaggedN += h1_merge->GetBinContent(i+1);
+  }
+  std::cout << "Total number of tagged neutrons: " << TotalTaggedN << std::endl;
+
 
 #if 0
-  h1_CCQE_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_CC2p2h_numu     -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_CCOther_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_NC_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_Noise_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_Noise_numubar   -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-
-  h1_CCQE_numu -> Add(h1_CC2p2h_numu, 1.);
-  h1_CCQE_numubar -> Add(h1_CC2p2h_numubar, 1.);
-  h1_NC_numu -> Add(h1_NC_numubar, 1.);
-  h1_Noise_numu -> Add(h1_Noise_numubar, 1.);
-#endif
-
-#if 1
   h1_CCQE_numu -> Add(h1_CC2p2h_numu, 1.);
   h1_CCQE_numubar -> Add(h1_CC2p2h_numubar, 1.);
   h1_NC_numu -> Add(h1_NC_numubar, 1.);
@@ -158,8 +174,8 @@ void TaggedN_x_nkinematics_NormNTagN(bool beammode) {
 #endif
 
 
-
-  THStack* hs_merge = new THStack("hs_merge", "");
+  /*
+  THStack* hs_merge = new THStack("hs_merge", "", );
 #if fhcflag
   hs_merge -> Add(h1_Noise_numu);
   hs_merge -> Add(h1_NC_numu);
@@ -176,8 +192,9 @@ void TaggedN_x_nkinematics_NormNTagN(bool beammode) {
   hs_merge -> Add(h1_CCQE_numu);
   hs_merge -> Add(h1_CCQE_numubar);
 #endif
+  */
 
-#if 1
+#if 0
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
@@ -215,4 +232,13 @@ void TaggedN_x_nkinematics_NormNTagN(bool beammode) {
   legend1 -> Draw() ;
 #endif
 
+}
+
+
+int SetHistoBinNumber(TString KnmtcName) {
+  int binnumber = 0;
+  if (KnmtcName=="nTraveld" || KnmtcName=="nTraveldT" || KnmtcName=="MuStp_NCap") binnumber = 7;
+  else if (KnmtcName=="nTraveldL") binnumber = 13;
+  else binnumber = 6;
+  return binnumber;
 }

@@ -75,6 +75,7 @@ void AveTaggedN_x_kinematics(bool beammode) {
   Double_t GenN_numubar_x_nuebar  = 63460;
   Double_t GenN_nue_x_nue         = 63423;
   Double_t GenN_nuebar_x_nuebar   = 63652;
+  std::cout << "Alpha(TN)   : " << NA*FV*1.e-6 << std::endl;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
   std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
   std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;

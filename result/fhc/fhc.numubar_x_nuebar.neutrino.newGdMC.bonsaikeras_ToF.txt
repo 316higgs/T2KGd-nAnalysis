@@ -23,19 +23,19 @@
   Total   (No osc.): 44209
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 303.803
+  CCQE    (osc.): 303.68
   CC-2p2h (osc.): 81.1019
-  CC-Other(osc.): 267.188
-  NC      (osc.): 9751
+  CC-Other(osc.): 267.153
+  NC      (osc.): 9747
   ------------------------------------------
-  Total   (osc.): 10403.1
+  Total   (osc.): 10398.9
  
-  CCQE    (No osc.): 18461
+  CCQE    (No osc.): 18457
   CC-2p2h (No osc.): 5087
-  CC-Other(No osc.): 30808
-  NC      (No osc.): 9751
+  CC-Other(No osc.): 30804
+  NC      (No osc.): 9747
   ------------------------------------------
-  Total   (No osc.): 64107
+  Total   (No osc.): 64095
 [Neutrino] C2: 1669.76 -> 1669.76
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 325.15
@@ -53,19 +53,19 @@
   Total   (No osc.): 28420
  
   ======  # of selected tagged-n  ======
-  CCQE    (osc.): 271.652
+  CCQE    (osc.): 271.529
   CC-2p2h (osc.): 75.3178
-  CC-Other(osc.): 151.788
+  CC-Other(osc.): 151.751
   NC      (osc.): 1682
   ------------------------------------------
-  Total   (osc.): 2180.76
+  Total   (osc.): 2180.6
  
-  CCQE    (No osc.): 16248
+  CCQE    (No osc.): 16244
   CC-2p2h (No osc.): 4656
-  CC-Other(No osc.): 12638
+  CC-Other(No osc.): 12634
   NC      (No osc.): 1682
   ------------------------------------------
-  Total   (No osc.): 35224
+  Total   (No osc.): 35216
 [Neutrino] C3: 587.298 -> 587.298
   ======  # of selected neutrinos  ======
   CCQE    (osc.): 0.209124
@@ -203,9 +203,20 @@
 [Neutrino] Generated 1Rmu Events (Oscillated)  : 251.295
  
 [Neutron] # generated neutrons before FSI: 127.263
-[Neutron] # captured neutrons up to FSI  : 37.0434
+[Neutron] # generated neutrons before SI : 249.331
+[Neutron]   (primary interaction): 106.263
+[Neutron]   (nucleon FSI)        : 58
+[Neutron]   (pion FSI)           : 45.0574
+[Neutron]   (de-excitation)      : 40.0108
+[Neutron] # captured neutrons before FSI  : 37.0434
+[Neutron]   (primary interaction): 4.03061
+[Neutron]   (nucleon FSI)        : 2
+[Neutron]   (pion FSI)           : 0.0128276
+[Neutron]   (de-excitation)      : 31
 [Neutron] # captured neutrons from SI    : 693.601
 [Neutron] # captured neutrons from mu    : 0
+[Neutron] -------------------------------------------
+[Neutron] Total                          : 730.644
 [Neutron] # all true neutrons            : 730.644
  
 [Neutrino] Oscillated CCQE Events     : 0.16657(0.0662949 %)

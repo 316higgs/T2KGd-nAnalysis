@@ -26,22 +26,16 @@ void TaggedN_x_nkinematics(bool beammode) {
 
   //FHC
 #if fhcflag
-  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.NNoptnewGdMC.Nmult.root");
-  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.Nmult.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.Nmult.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.Nmult.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.Nmult.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.newGdMC.Nmult.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.Nmult.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.Nmult.root");
 
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
-  //RHC
-#if rhcflag
-  TFile* fin_numu    = new TFile("../../output/rhc/rhc.numu_x_numu.VertexSelection_mu_x_dcye.beforecut.root");
-  TFile* fin_numubar = new TFile("../../output/rhc/rhc.numubar_x_numubar.VertexSelection_mu_x_dcye.beofrecut.root");
-  TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
-#endif
 
   // Normalization factors
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
@@ -59,7 +53,7 @@ void TaggedN_x_nkinematics(bool beammode) {
   Double_t GenN_numu_x_numu       = 63622;
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
-  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_numubar_x_nuebar  = 63460;
   Double_t GenN_nue_x_nue         = 63423;
   Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
@@ -83,10 +77,10 @@ void TaggedN_x_nkinematics(bool beammode) {
   std::cout << "[nueb  -> nueb ] Normalization factor for nuebar_x_nuebar: " << (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) << std::endl;
 
 
-  TString KnmtcName = "nTraveld";
+  //TString KnmtcName = "nTraveld";
   //TString KnmtcName = "nTraveldL";
   //TString KnmtcName = "nTraveldT";
-  //TString KnmtcName = "nAngle";
+  TString KnmtcName = "nAngle";
   //TString KnmtcName = "MuStp_NCap";
   const int binnumber = SetHistoBinNumber(KnmtcName);
 
@@ -349,7 +343,7 @@ void TaggedN_x_nkinematics(bool beammode) {
   hs_merge -> Add(h1_CCQE_numubar);
 #endif
 
-#if 1
+#if 0
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
@@ -368,8 +362,8 @@ void TaggedN_x_nkinematics(bool beammode) {
   hs_merge -> Draw();
   c1 -> RedrawAxis();
   
-  TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
-  //TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);     // angle
+  //TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
+  TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);     // angle
   //TLegend* legend1 = new TLegend(0.105, 0.45, 0.495, 0.89);   // dL
   legend1 -> SetTextSize(0.04);
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");

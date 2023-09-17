@@ -378,7 +378,8 @@ int main(int argc, char **argv) {
       TotalTrueN += NTrueN;
       //int TrueBefSI = ntagana.GetTrueNBefSI(numu, iprntidx, vtxprnt);
       //int TrueAftSI = ntagana.GetTrueNAftSI(numu, iprntidx, vtxprnt);
-      int TrueBefSI  = ntagana.GetTrueGenNBefSI(numu);
+      //int TrueBefSI  = ntagana.GetTrueGenNBefSI(numu);
+      int TrueBefSI  = ntagana.GetTrueGenNBefSI(numu, Iorgvc);
       int TrueAftSI  = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt, pprntinit);
       if (intmode==1) {
         h1_GenBefSINeutrons -> Fill(TrueBefSI);
@@ -521,6 +522,15 @@ int main(int argc, char **argv) {
       ntagana.TaggedN_x_kinematics(numu, numtaggedneutrons, numtaggednoise, Pt/1000., xMuPtbins, TaggedN_x_MuPt, h1_TaggedN_x_MuPt, 1);
       ntagana.TaggedN_x_kinematics(numu, numtaggedneutrons, numtaggednoise, Qsquare/1000000., xQ2bins, TaggedN_x_Q2, h1_TaggedN_x_Q2, 1);
       ntagana.TaggedN_x_kinematics(numu, numtaggedneutrons, numtaggednoise, recothetamu, xMuAnglebins, TaggedN_x_MuAngle, h1_TaggedN_x_MuAngle, 1);
+      h2_allTaggedN_x_MuPt -> Fill(Pt/1000., numtaggedneutrons);
+      if (Pt/1000. < 0.5) {
+        if (intmode<31) h1_TaggedN_LowPt -> Fill(numtaggedneutrons, OscProb);
+        else h1_TaggedN_LowPt -> Fill(numtaggedneutrons);
+      }
+      else {
+        if (intmode<31) h1_TaggedN_HighPt -> Fill(numtaggedneutrons, OscProb);
+        else h1_TaggedN_HighPt -> Fill(numtaggedneutrons);
+      }
 
       //ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Enu/1000., xEnubins, TrueN_x_Enu, h1_TrueN_x_Enu, 0);
       //ntagana.TrueN_x_kinematics(numu, Type, t, WinMin, Pmu/1000., xMuMombins, TrueN_x_MuMom, h1_TrueN_x_MuMom, 1);
@@ -585,8 +595,11 @@ int main(int argc, char **argv) {
 
       for (UInt_t ican=0; ican<TagOut->size(); ican++) {
         if (etagmode){
+          //if (TagOut->at(ican)>nlikeThreshold && 
+          //    ntagana.DecayelikeChecker(etagmode, N50->at(ican), FitT->at(ican))==false &&
+          //    (Label->at(ican)==0 || Label->at(ican)==1 || Label->at(ican)==2 || Label->at(ican)==3)) {
           if (TagOut->at(ican)>nlikeThreshold && 
-              ntagana.DecayelikeChecker(etagmode, N50->at(ican), FitT->at(ican))==false &&
+              ntagana.DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican))==false &&
               (Label->at(ican)==0 || Label->at(ican)==1 || Label->at(ican)==2 || Label->at(ican)==3)) {
             float NCapVtx[3]   = {fvx->at(ican), fvy->at(ican), fvz->at(ican)};  //Neutron capture vertex
             float nTraveld     = ndistance.TakeDistance(RecoPrmVtx, NCapVtx);  //Neutron flight distance
@@ -856,6 +869,26 @@ int main(int argc, char **argv) {
       if (ibin<binnumber_n-1) resultfile << "#truth n @ dn [" << xnTraveldbins[ibin] << ", " << xnTraveldbins[ibin+1] << "): " << TaggedN_x_nTraveld[ibin] << std::endl;
       else resultfile << "#truth n @ dn > " << xnTraveldbins[ibin] << ": " << TaggedN_x_nTraveld[ibin] << std::endl;
       totalev += TaggedN_x_nTraveld[ibin];
+    }
+    resultfile << "Total: " << totalev << std::endl;
+    resultfile << " " << std::endl;
+
+    totalev = 0.;
+    resultfile << "===== #tagged neutrons as a function of dnL =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_n2; ibin++) {
+      if (ibin<binnumber_n2-1) resultfile << "#truth n @ dnL [" << xnTraveldLbins[ibin] << ", " << xnTraveldLbins[ibin+1] << "): " << TaggedN_x_nTraveldL[ibin] << std::endl;
+      else resultfile << "#truth n @ thetan > " << xnAnglebins[ibin] << ": " << TaggedN_x_nAngle[ibin] << std::endl;
+      totalev += TaggedN_x_nTraveldL[ibin];
+    }
+    resultfile << "Total: " << totalev << std::endl;
+    resultfile << " " << std::endl;
+
+    totalev = 0.;
+    resultfile << "===== #tagged neutrons as a function of neutron angle =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_n3; ibin++) {
+      if (ibin<binnumber_n3-1) resultfile << "#truth n @ thetan [" << xnAnglebins[ibin] << ", " << xnAnglebins[ibin+1] << "): " << TaggedN_x_nAngle[ibin] << std::endl;
+      //else resultfile << "#truth n @ thetan > " << xnAnglebins[ibin] << ": " << TaggedN_x_nAngle[ibin] << std::endl;
+      totalev += TaggedN_x_nAngle[ibin];
     }
     resultfile << "Total: " << totalev << std::endl;
 

@@ -78,6 +78,10 @@ EXECUTE()
   #RUNNAME="newGdMC.promptkeras"
   #RUNNAME="newGdMC.bonsaikeras"
   RUNNAME="newGdMC.bonsaikeras_ToF"
+  #RUNNAME="newGdMC.bonsaikeras_ToF_0511"
+  #RUNNAME="newGdMC.bonsaikeras_ToF_0530"
+  #RUNNAME="newGdMC.bonsaikeras_ToF_0570"
+
 
   ESC=$(printf '\033')
   printf "${ESC}[31m%s${ESC}[m\n" "[### Analysis Option ###] OUTBEAMMODE  : ${OUTBEAMMODE}"
@@ -149,12 +153,12 @@ COMMENTOUT
 #EXECUTE 5 0  ###  nuebar -> nuebar
 
 ###  Gd MC  ###
-EXECUTE 0 1  ###  numu -> numu
-#EXECUTE 1 1  ###  numu -> nue
-#EXECUTE 2 1  ###  numubar -> numubar
-#EXECUTE 3 1  ###  numubar -> nuebar
-#EXECUTE 4 1  ###  nue -> nue
-#EXECUTE 5 1  ###  nuebar -> nuebar
+#EXECUTE 0 1  ###  numu -> numu
+EXECUTE 1 1  ###  numu -> nue
+EXECUTE 2 1  ###  numubar -> numubar
+EXECUTE 3 1  ###  numubar -> nuebar
+EXECUTE 4 1  ###  nue -> nue
+EXECUTE 5 1  ###  nuebar -> nuebar
 
 
 

@@ -22,6 +22,7 @@ TH1F* h1_PrmVtxReso_G4;
 TH1F* h1_PrmVtxResoX;
 TH1F* h1_PrmVtxResoY;
 TH1F* h1_PrmVtxResoZ;
+TH1F* h1_PrmVtxResoDiff;
 TH2F* h2_PrmVtxReso;
 TH2F* h2_True_x_Reco;
 TH2F* h2_TrueR_x_RecoR;

@@ -497,28 +497,51 @@ void GetNeutrinoInteraction(int ientry, int mode) {
   else if (mode==58) IntName = "CC TOTAL";
   else if (mode==59) IntName = "NC TOTAL";
   std::cout << "[### " << ientry << " ###] Neutrino interaction: " << IntName << std::endl;
+}
 
-  /*if (mode==1) {
-    std::cout << "[### " << ientry << " ###] Neutrino interaction: CCQE" << std::endl;
-  }
-  else if (mode>=2 && mode<=10) {
-    std::cout << "[### " << ientry << " ###] Neutrino interaction: CC 2p2h" << std::endl;
-  }
-  else if (mode==13) {
-    std::cout << "[### " << ientry << " ###] Neutrino interaction: CC RES(Delta+)" << std::endl;
-  }
-  else if (mode==11) {
-    std::cout << "[### " << ientry << " ###] Neutrino interaction: CC RES(Delta++)" << std::endl;
-  }
-  else if (mode==12) {
-    std::cout << "[### " << ientry << " ###] Neutrino interaction: CC RES(Delta0)" << std::endl;
-  }
-  else if (mode>13 && mode<=30) {
-    std::cout << "[### " << ientry << " ###] Neutrino interaction: CC other" << std::endl;
-  }
-  else if (mode>=31) {
-    std::cout << "[### " << ientry << " ###] Neutrino interaction: NC" << std::endl;
-  }*/
+
+TString GetGEANTPIDName(int GEANTPID) {
+  TString ParName = "Other particles; "+TString::Format("%d", GEANTPID);
+  if      (GEANTPID==1)  ParName = "gamma";
+  else if (GEANTPID==2)  ParName = "e+";
+  else if (GEANTPID==3)  ParName = "e-";
+  else if (GEANTPID==4)  ParName = "nu";
+  else if (GEANTPID==5)  ParName = "mu+";
+  else if (GEANTPID==6)  ParName = "mu-";
+  else if (GEANTPID==7)  ParName = "pi0";
+  else if (GEANTPID==8)  ParName = "pi+";
+  else if (GEANTPID==9)  ParName = "pi-";
+  else if (GEANTPID==10) ParName = "K0L";
+  else if (GEANTPID==11) ParName = "K+";
+  else if (GEANTPID==12) ParName = "K-";
+  else if (GEANTPID==13) ParName = "n";
+  else if (GEANTPID==14) ParName = "p";
+  else if (GEANTPID==15) ParName = "anti-p";
+  else if (GEANTPID==16) ParName = "K0S";
+  else if (GEANTPID==17) ParName = "eta";
+  else if (GEANTPID==18) ParName = "lambda";
+  else if (GEANTPID==45) ParName = "deutron";
+  return ParName;
+}
+
+TString GetPDGPIDName(int PID) {
+  TString ParName = "Other particles; "+TString::Format("%d", PID);
+  if      (PID==11)     ParName = "e-";
+  else if (PID==-11)    ParName = "e+";
+  else if (PID==12)     ParName = "nue";
+  else if (PID==13)     ParName = "mu-";
+  else if (PID==-13)    ParName = "mu+";
+  else if (PID==14)     ParName = "numu";
+  else if (PID==22)     ParName = "gamma";
+  else if (PID==2212)   ParName = "p";
+  else if (PID==2112)   ParName = "n";
+  else if (PID==211)    ParName = "pi+";
+  else if (PID==-211)   ParName = "pi-";
+  else if (PID==111)    ParName = "pi0";
+  else if (PID==321)    ParName = "K+";
+  else if (PID==-321)   ParName = "K-";
+  else if (PID==100045) ParName = "deutron";
+  return ParName;
 }
 
 

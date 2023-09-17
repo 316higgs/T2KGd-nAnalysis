@@ -406,25 +406,28 @@ int main(int argc, char **argv) {
 
       h1_PrmVtxReso_G4 -> Fill(PrmVtxReso_G4);
 
+      //h1_PrmVtxResoDiff -> Fill( PrmVtxReso_G4 - PrmVtxReso_DETSIM );
+      h1_PrmVtxResoDiff -> Fill( (PrmVtxReso_G4 - PrmVtxReso_DETSIM)/PrmVtxReso_DETSIM );
+
       h2_Enu_x_PrmVtxReso -> Fill(TrueEnu, PrmVtxReso_G4);
       //h2_Enu_x_PrmVtxReso -> Fill(TrueEnu, PrmVtxReso_DETSIM);
 
 
       //////  True vs Reco  //////
-      float dTrue = std::sqrt( PrmVtx[0]*PrmVtx[0] + PrmVtx[1]*PrmVtx[1] + PrmVtx[2]*PrmVtx[2] );
+      //float dTrue = std::sqrt( PrmVtx[0]*PrmVtx[0] + PrmVtx[1]*PrmVtx[1] + PrmVtx[2]*PrmVtx[2] );
       //h2_True_x_Reco -> Fill( dTrue/100., PrmVtxDist_DETSIM/100. );   //  SKDETSIM
-      h2_True_x_Reco -> Fill( dTrue/100., PrmVtxDist_G4/100. );       //  SKG4
+      //h2_True_x_Reco -> Fill( dTrue/100., PrmVtxDist_G4/100. );       //  SKG4
 
-      float RTrue        = PrmVtx[0]*PrmVtx[0] + PrmVtx[1]*PrmVtx[1];
+      /*float RTrue        = PrmVtx[0]*PrmVtx[0] + PrmVtx[1]*PrmVtx[1];
       float RReco_G4     = RecoPrmVtx_G4[0]*RecoPrmVtx_G4[0] +
                            RecoPrmVtx_G4[1]*RecoPrmVtx_G4[1];
       float RReco_DETSIM = RecoPrmVtx_DETSIM[0]*RecoPrmVtx_DETSIM[0] +
-                           RecoPrmVtx_DETSIM[1]*RecoPrmVtx_DETSIM[1];
+                           RecoPrmVtx_DETSIM[1]*RecoPrmVtx_DETSIM[1];*/
       //h2_TrueR_x_RecoR -> Fill( RTrue/10000., RReco_DETSIM/10000. );   //  SKDETSIM
-      h2_TrueR_x_RecoR -> Fill( RTrue/10000., RReco_G4/10000. );       //  SKG4
+      //h2_TrueR_x_RecoR -> Fill( RTrue/10000., RReco_G4/10000. );       //  SKG4
 
       //h2_TrueZ_x_RecoZ -> Fill( PrmVtx[2]/100., RecoPrmVtx_DETSIM[2]/100. );   //  SKDETSIM
-      h2_TrueZ_x_RecoZ -> Fill( PrmVtx[2]/100., RecoPrmVtx_G4[2]/100. );           //  SKG4
+      //h2_TrueZ_x_RecoZ -> Fill( PrmVtx[2]/100., RecoPrmVtx_G4[2]/100. );           //  SKG4
 
 
       /////  SKG4 vs SKDETSIM  /////

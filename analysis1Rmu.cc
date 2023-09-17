@@ -215,40 +215,42 @@ int main(int argc, char **argv) {
   //===== It should be called after numu? ======
   Int_t   nmue;
   Float_t Pvc[100][3];      //Momentum of primary particles
-  //Int_t   Npvc;             //Number of primary particles
-  Int_t   Ipvc[100];        //PID of primary particles
   Int_t   Iflvc[100];       //Flag of final states
-  Int_t   Ichvc[100];       //Chase at detector simulation or not(1: chase/0: not chase)
   Int_t   Iorgvc[100];      //Index of parent particle (0: initial particles, n: n-th final particle at the primary interaction)
-  //Int_t   nscndprt;         //Number of secondary particles
-  Int_t   iprtscnd[1000];   //PID of the secondary particle
   Float_t tscnd[1000];
-  Float_t vtxscnd[1000][3]; //Generated vertex of secondary particles
-  Int_t   iprntprt[1000];   //PID of the parent of this secondary particle
   Float_t vtxprnt[1000][3];
   Int_t   iprntidx[1000];   //Index of the parent particle (0: no parent(connected from primary particles), n: the parent of n-th secondary particle)
   Int_t   ichildidx[1000];  //Index of the first child particle (0: no childs, n: the first child of n-th secondary particle)
-  Int_t   lmecscnd[1000];   //Interaction code of secondary particles based on GEANT
   Int_t   itrkscnd[1000];
+  Float_t pprnt[1000][3];     //Initial momentum of the parent particle at interaction
   Float_t pprntinit[1000][3]; //Initial momentum of the parent particle at birth
-  //tchfQ -> SetBranchAddress("Npvc", &Npvc);  //off if you use numu->Npvc
+
+  Int_t   npar2;
+  UInt_t  ipv2[1000];
+  UInt_t  iorg[1000];
+  Float_t posv2[1000][3];
+  Float_t pmomv2[1000][3];
+
   tchfQ -> SetBranchAddress("nmue", &nmue);
   tchfQ -> SetBranchAddress("Pvc", Pvc);
-  //tchfQ -> SetBranchAddress("Ipvc", Ipvc);
-  //tchfQ -> SetBranchAddress("Ichvc", Ichvc);
   tchfQ -> SetBranchAddress("Iflvc", Iflvc);
   tchfQ -> SetBranchAddress("Iorgvc", Iorgvc);
-  //tchfQ -> SetBranchAddress("nscndprt", &nscndprt);
-  //tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
   tchfQ -> SetBranchAddress("tscnd", tscnd);
-  //tchfQ -> SetBranchAddress("vtxscnd", vtxscnd);
-  //tchfQ -> SetBranchAddress("iprntprt", iprntprt);
   tchfQ -> SetBranchAddress("vtxprnt", vtxprnt);
   tchfQ -> SetBranchAddress("iprntidx", iprntidx);
   tchfQ -> SetBranchAddress("ichildidx", ichildidx);
-  //tchfQ -> SetBranchAddress("lmecscnd", lmecscnd);
   tchfQ -> SetBranchAddress("itrkscnd", itrkscnd);
+  tchfQ -> SetBranchAddress("pprnt", pprnt);
   tchfQ -> SetBranchAddress("pprntinit", pprntinit);
+
+  tchfQ -> SetBranchAddress("npar2", &npar2);
+  tchfQ -> SetBranchAddress("ipv2", ipv2);
+  tchfQ -> SetBranchAddress("iorg", iorg);
+  tchfQ -> SetBranchAddress("posv2", posv2);
+  tchfQ -> SetBranchAddress("pmomv2", pmomv2);
+
+  
+
 
   ResetNeutrinoEvents();
   InitNTagVariables();
@@ -283,11 +285,13 @@ int main(int argc, char **argv) {
   int NoPrmMuEnd_NC = 0;
   const int DCYENUM = 1;
 
-  float BefFSIn = 0;
-  float BefSIn = 0;
-  float SIn = 0;
-  float MuN = 0;
-  float TrueN = 0;
+  float GenPreFSIN  = 0.;
+  float GenPostFSIN = 0.;
+
+  float CapPostFSIN = 0.;
+  float CapSIN      = 0.;
+  float CapMuN      = 0.;
+  float TrueN       = 0.;
 
 
   //Process
@@ -405,23 +409,7 @@ int main(int argc, char **argv) {
             numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::DECAY)) NumDcyE++;
       }
       decayebox.GetTruthDecaye(numu, NumDcyE);
-      /*if (NumDcyE!=0) {
-        GetNeutrinoInteraction(ientry, intmode);
-        std::cout << "------- Primary particles ---------" << std::endl;
-        for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
-          std::cout << "Particle[" << iprm << "]=" << numu->var<int>("Ipvc", iprm)
-                                                   << ", Iflvc=" << Iflvc[iprm] 
-                                                   << ", Ichvc=" << numu->var<int>("Ichvc", iprm)
-                                                   << ", Iorgvc=" << Iorgvc[iprm] << std::endl;
-        }
-        std::cout << "------- Secondary particles ---------" << std::endl;
-        for (int jscnd=0; jscnd<numu->var<int>("nscndprt"); jscnd++) {
-          std::cout << "Particle[" << jscnd << "]=" << numu->var<int>("iprtscnd", jscnd)
-                    << ", iprntprt=" << numu->var<int>("iprntprt", jscnd)
-                    << ", iprntidx=" << iprntidx[jscnd]  
-                    << ", lmecscnd=" << numu->var<int>("lmecscnd", jscnd) << std::endl;
-        }
-      }*/
+
 
       //Muon angle information
       //float truethetamu = neuosc.GetTrueMuDirection(numu, Npvc, Ipvc, Pvc, Iflvc, Ichvc);
@@ -522,21 +510,6 @@ int main(int argc, char **argv) {
       if (intmode==1 && numtaggedneutrons!=0) {
 
         CCQEwTaggedNeutrons++;
-
-        /*
-        //Get neutrons from nu interaction + FSI
-        float GenPrmNeutrons = ntagana.GetGenPrmNeutrons(numu, Iorgvc, Iflvc);
-        h1_GenPrmNeutrons -> Fill(GenPrmNeutrons);
-
-        float GenAftFSINeutrons = ntagana.GetGenAftFSINeutrons(numu);
-        h1_GenAftFSINeutrons -> Fill(GenAftFSINeutrons);
-
-        float GenAftSINeutrons = ntagana.GetGenAftSINeutrons(numu, iprntidx, vtxprnt);
-        h1_GenAftSINeutrons -> Fill(GenAftSINeutrons);
-        */
-
-        //float GenSINeutrons = ntagana.GetGenSINeutrons(numu, iprntidx, vtxprnt);
-        //h1_GenSINeutrons -> Fill(GenSINeutrons);
       }
 
 
@@ -558,10 +531,6 @@ int main(int argc, char **argv) {
 
       //Threshold scan
       for (int ith=0; ith<CUTSTEP; ith++) {
-        
-        //Threshold
-        //if (CUTSTEP==11) TMVATH[ith] = 0.1*ith;
-        //if (CUTSTEP==21) TMVATH[ith] = 0.05*ith;
 
         //Candidates loop
         for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
@@ -614,35 +583,66 @@ int main(int argc, char **argv) {
       PrmVtx[2] = numu->var<float>("posv", 2);
       int TrueMuN = 0;
       float MuNCapVtx[3]   = {0., 0., 0.};  //neutron(from primary interaction) capture vertex
-      ///////////  True distance with respect to each neutron source  /////////////
-      /*GetNeutrinoInteraction(ientry, intmode);
+
+      //GetNeutrinoInteraction(ientry, intmode);
+#if 0
+      std::cout << "[     VECT     ]" << std::endl;
+      for (int iprm=0; iprm<numu->var<int>("npar"); iprm++) {
+        std::cout << "[### " << ientry 
+                  << " ###] Primary[" << iprm+1 << "] " << GetGEANTPIDName( numu->var<int>("ipv", iprm) )
+                  << ", posv = [" << numu->var<float>("posv", 0) << ", " << numu->var<float>("posv", 1) << ", " << numu->var<float>("posv", 2)
+                  << "] cm, pmomv = " << numu->var<float>("pmomv", iprm) << " MeV" 
+                  << ", dirv = [" << numu->var<float>("dirv", iprm, 0) << ", " << numu->var<float>("dirv", iprm, 1) << ", " << numu->var<float>("dirv", iprm, 2) << "]" << std::endl;
+      }
+      std::cout << "----------------------" << std::endl;
+#endif 
+#if 0
       std::cout << "[    NEWORK    ]" << std::endl;
       for (int iprm=0; iprm<numu->var<int>("numnu"); iprm++) {
         std::cout << "[### " << ientry 
-                  << " ###] Primary[" << iprm+1 << "] " << numu->var<int>("ipnu", iprm) 
-                  << " P = " << numu->var<float>("pnu", iprm)*1000. << " MeV" << std::endl;
+                  << " ###] Primary[" << iprm+1 << "] " << GetPDGPIDName( numu->var<int>("ipnu", iprm) )
+                  << ", pnu = " << numu->var<float>("pnu", iprm)*1000. << " MeV" 
+                  << ", dirnu = [" << numu->var<float>("dirnu", iprm, 0) << ", " << numu->var<float>("dirnu", iprm, 1) << ", " << numu->var<float>("dirnu", iprm, 2) << "]" << std::endl;
       }
       std::cout << "----------------------" << std::endl;
+#endif
+#if 0
       std::cout << "[    VCWORK    ]" << std::endl;
       for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
         std::cout << "[### " << ientry 
-                  << " ###] Primary[" << iprm+1 << "] " << numu->var<int>("Ipvc", iprm) 
-                  << " Iorgvc = [" << Iorgvc[iprm] 
-                  << "] Ichvc = [" << numu->var<int>("Ichvc", iprm)
-                  << "] P = [" << Pvc[iprm][0] << ", " << Pvc[iprm][1] << ", " << Pvc[iprm][2] << "] MeV" << std::endl;
+                  << " ###] Primary[" << iprm+1 << "] " << GetPDGPIDName( numu->var<int>("Ipvc", iprm) )
+                  << ", Iorgvc = [" << Iorgvc[iprm] 
+                  << "], Ichvc = [" << numu->var<int>("Ichvc", iprm)
+                  << "], Pvc = [" << Pvc[iprm][0] << ", " << Pvc[iprm][1] << ", " << Pvc[iprm][2] << "] = " << numu->var<float>("Abspvc", iprm) << " MeV" << std::endl;
       }
       std::cout << "----------------------" << std::endl;
-      std::cout << "[    CONVVECT    ]" << std::endl;*/
+#endif
+#if 0
+      std::cout << "[     VECT2    ]" << std::endl;
+      for (int iscnd=0; iscnd<npar2; iscnd++) {
+        std::cout << "[### " << ientry 
+                  << " ###] Secondary[" << iscnd+1 << "] " << GetGEANTPIDName( ipv2[iscnd] )
+                  << ", iorg = [" << iorg[iscnd] 
+                  << "], posv2 = [" << posv2[iscnd][0] << ", " << posv2[iscnd][1] << ", " << posv2[iscnd][2]
+                  << "] cm, pmomv2 = [" << pmomv2[iscnd][0] << ", " << pmomv2[iscnd][1] << ", " << pmomv2[iscnd][2] << "] MeV" << std::endl;
+      }
+      std::cout << "----------------------" << std::endl;
+      std::cout << "[    CONVVECT    ]" << std::endl;
+#endif
       for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
-        /*std::cout << "[### " << ientry 
-                  << " ###] Secondary[" << iscnd+1 << "] " << numu->var<int>("iprtscnd", iscnd) 
-                  << " lmecscnd = " << numu->var<int>("lmecscnd", iscnd)
-                  << " iprntprt = [" << numu->var<int>("iprntprt", iscnd) 
-                  << "] iprntidx = [" << iprntidx[iscnd]
-                  << "] ichildidx = [" << ichildidx[iscnd]
-                  << "] vtxscnd = [" << numu->var<float>("vtxscnd", iscnd, 0) << ", " << numu->var<float>("vtxscnd", iscnd, 1) << ", " << numu->var<float>("vtxscnd", iscnd, 2)
-                  << "] cm, vtxprnt = [" << vtxprnt[iscnd][0] << ", " << vtxprnt[iscnd][1] << ", " << vtxprnt[iscnd][2]
-                  << "] cm, P = [" << pscnd[iscnd][0] << ", " << pscnd[iscnd][1] << ", " << pscnd[iscnd][2] << "] MeV" << std::endl;*/
+#if 0
+        std::cout << "[### " << ientry 
+                  << " ###] Secondary[" << iscnd+1 << "] " << GetPDGPIDName( numu->var<int>("iprtscnd", iscnd) )
+                  << ", lmecscnd = " << numu->var<int>("lmecscnd", iscnd)
+                  << ", iprntprt = " << GetPDGPIDName( numu->var<int>("iprntprt", iscnd) )
+                  << ", iprntidx = [" << iprntidx[iscnd]
+                  << "], ichildidx = [" << ichildidx[iscnd]
+                  << "], vtxscnd = [" << numu->var<float>("vtxscnd", iscnd, 0) << ", " << numu->var<float>("vtxscnd", iscnd, 1) << ", " << numu->var<float>("vtxscnd", iscnd, 2)
+                  << "] cm, pscnd = [" << pscnd[iscnd][0] << ", " << pscnd[iscnd][1] << ", " << pscnd[iscnd][2]
+                  << "] MeV, vtxprnt = [" << vtxprnt[iscnd][0] << ", " << vtxprnt[iscnd][1] << ", " << vtxprnt[iscnd][2]
+                  << "] cm, pprntinit = [" << pprntinit[iscnd][0] << ", " << pprntinit[iscnd][1] << ", " << pprntinit[iscnd][2]
+                  << "] MeV, pprnt = [" << pprnt[iscnd][0] << ", " << pprnt[iscnd][1] << ", " << pprnt[iscnd][2] << "] MeV" << std::endl;
+#endif
         if (ntagana.GetTrueMuNCapVtx(iscnd, numu, ichildidx, MuNCapVtx)) {
           TrueMuN++;
           float d_Prm_x_MuNCap = GetSimpleDistance(PrmVtx, MuNCapVtx);
@@ -650,40 +650,49 @@ int main(int argc, char **argv) {
           else h1_truedistance_MuCapn -> Fill(d_Prm_x_MuNCap/100.);
         }
       }
-      int TrueBefFSI = ntagana.GetTrueGenNBefFSI(numu);
-      int TrueBefSI  = ntagana.GetTrueGenNBefSI(numu);
-      //int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt);
-      //int TrueAftSI    = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt);
-      int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprntinit);
+
+      int TrueBefFSI   = ntagana.GetTrueGenNBefFSI(numu);
+      int TrueBefSI    = ntagana.GetTrueGenNBefSI(numu, Iorgvc);
+      //int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprntinit);
+      int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprntinit, Iorgvc);
       int TrueAftSI    = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt, pprntinit);
-      /*std::cout << "# generated neutrons before FSI: " << TrueBefFSI << std::endl;
+      //int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprnt);
+      //int TrueAftSI    = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt, pprnt);
+
+      //if (TrueBefSI!=0) std::cout << "Neutrons generated by nucleon FSI: " << TrueBefSI << std::endl;
+      //std::cout << " " << std::endl;
+
+#if 0
+      std::cout << "# generated neutrons before FSI: " << TrueBefFSI << std::endl;
       std::cout << "# generated neutrons up to FSI : " << TrueBefSI << std::endl;
       std::cout << "# captured neutrons up to FSI  : " << TrueCapBefSI << std::endl;
       std::cout << "# captured neutrons from SI    : " << TrueAftSI << std::endl;
       std::cout << "# captured neutrons from mu    : " << TrueMuN << std::endl;
-      std::cout << "NTrueN: " << NTrueN << std::endl;*/
+      std::cout << "NTrueN: " << NTrueN << std::endl;
+      std::cout << " " << std::endl;
+#endif
+
       //if (NTrueN-(TrueBefSI+TrueAftSI+TrueMuN)!=0) std::cout << "\e[38;5;09m\e[1m BUG? \e[0m" << std::endl;
       //if (TrueMuN!=0) std::cout << "\e[38;5;09m\e[1m BUG? \e[0m" << std::endl;
       //std::cout << " " << std::endl;
       if (intmode<31) {
-        BefFSIn += TrueBefFSI*OscProb;
-        BefSIn  += TrueCapBefSI*OscProb;
-        SIn     += TrueAftSI*OscProb;
-        MuN     += TrueMuN*OscProb;
-        TrueN   += NTrueN*OscProb;
+        GenPreFSIN   += TrueBefFSI*OscProb;
+        GenPostFSIN  += TrueBefSI*OscProb;
+
+        CapPostFSIN  += TrueCapBefSI*OscProb;
+        CapSIN       += TrueAftSI*OscProb;
+        CapMuN       += TrueMuN*OscProb;
+        TrueN        += NTrueN*OscProb;
       }
       else {
-        BefFSIn += TrueBefFSI;
-        BefSIn  += TrueCapBefSI;
-        SIn     += TrueAftSI;
-        MuN     += TrueMuN;
-        TrueN   += NTrueN;
+        GenPreFSIN   += TrueBefFSI;
+        GenPostFSIN  += TrueBefSI;
+
+        CapPostFSIN  += TrueCapBefSI;
+        CapSIN       += TrueAftSI;
+        CapMuN       += TrueMuN;
+        TrueN        += NTrueN;
       }
-      /*BefFSIn += TrueBefFSI;
-      BefSIn  += TrueCapBefSI;
-      SIn     += TrueAftSI;
-      MuN     += TrueMuN;
-      TrueN   += NTrueN;*/
       
       if (intmode==1) {
         //if (TrueBefFSI==1) std::cout << "\e[38;5;09m\e[1m BUG? \e[0m" << std::endl;
@@ -805,10 +814,24 @@ int main(int argc, char **argv) {
     resultfile << "[Neutrino] Generated 1Rmu Events (Oscillated)  : " << OscillatedAll      << std::endl;
     resultfile << " " << std::endl;
 
-    resultfile << "[Neutron] # generated neutrons before FSI: " << BefFSIn << std::endl;
-    resultfile << "[Neutron] # captured neutrons up to FSI  : " << BefSIn << std::endl;
-    resultfile << "[Neutron] # captured neutrons from SI    : " << SIn << std::endl;
-    resultfile << "[Neutron] # captured neutrons from mu    : " << MuN << std::endl;
+
+    resultfile << "[Neutron] # generated neutrons before FSI: " << GenPreFSIN << std::endl;
+    resultfile << "[Neutron] # generated neutrons before SI : " << GenPostFSIN << std::endl;
+    resultfile << "[Neutron]   (primary interaction): " << GenN_prm << std::endl;
+    resultfile << "[Neutron]   (nucleon FSI)        : " << GenN_nucFSI << std::endl;
+    resultfile << "[Neutron]   (pion FSI)           : " << GenN_piFSI << std::endl;
+    resultfile << "[Neutron]   (de-excitation)      : " << GenN_deex << std::endl;
+
+    resultfile << "[Neutron] # captured neutrons before FSI  : " << CapPostFSIN << std::endl;
+    resultfile << "[Neutron]   (primary interaction): " << CapN_prm << std::endl;
+    resultfile << "[Neutron]   (nucleon FSI)        : " << CapN_nucFSI << std::endl;
+    resultfile << "[Neutron]   (pion FSI)           : " << CapN_piFSI << std::endl;
+    resultfile << "[Neutron]   (de-excitation)      : " << CapN_deex << std::endl;
+
+    resultfile << "[Neutron] # captured neutrons from SI    : " << CapSIN << std::endl;
+    resultfile << "[Neutron] # captured neutrons from mu    : " << CapMuN << std::endl;
+    resultfile << "[Neutron] -------------------------------------------" << std::endl;
+    resultfile << "[Neutron] Total                          : " << CapPostFSIN+CapSIN+CapMuN << std::endl;
     resultfile << "[Neutron] # all true neutrons            : " << TrueN << std::endl;
     resultfile << " " << std::endl;
 

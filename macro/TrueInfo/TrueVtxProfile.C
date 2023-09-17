@@ -60,19 +60,38 @@ void TrueVtxProfile() {
 
   // neutrino direction: [0.669764, -0.742179, 0.024223]
   // Y = X tan theta_nu
-  Double_t Xstart    = -18.;
-  Double_t Ystart    = 18.;
-  Double_t Xlength   = 6.;
-  Double_t Ylength   = Xlength * (-0.742179/0.669764);
+  Double_t XstartXY  = -18.;
+  Double_t YstartXY  = 18.;
+  Double_t XlengthXY = 6.;
+  Double_t YlengthXY = XlengthXY * (-0.742179/0.669764);
   Double_t arrowHead = 0.02;
-  TArrow* ar = new TArrow(Xstart, Ystart, Xstart+Xlength, Ystart+Ylength, arrowHead, "|>");
-  ar -> SetLineWidth(3);
-  ar -> SetLineColor(kGray+2);
-  ar -> SetFillColor(kGray+2);
+  TArrow* arXY = new TArrow(XstartXY, YstartXY, XstartXY+XlengthXY, YstartXY+YlengthXY, arrowHead, "|>");
+  arXY -> SetLineWidth(3);
+  arXY -> SetLineColor(kGray+2);
+  arXY -> SetFillColor(kGray+2);
 
   TLatex* text1 = new TLatex(0.2, 0.81, "#nu beam direction");
   text1 -> SetNDC(1);
   text1 -> SetTextSize(0.045);
+
+  Double_t XstartRZ  = 360;
+  Double_t YstartRZ  = 0.;
+  Double_t XlengthRZ = 60.;
+  Double_t YlengthRZ = XlengthRZ * (0.024223/std::sqrt(0.669764*0.669764 + 0.742179*0.742179) );
+  TArrow* arRZ = new TArrow(XstartRZ, YstartRZ, XstartRZ-XlengthRZ, YstartRZ+YlengthRZ, arrowHead, "|>");
+  arRZ -> SetLineWidth(3);
+  arRZ -> SetLineColor(kGray+2);
+  arRZ -> SetFillColor(kGray+2);
+
+  TLatex* text2 = new TLatex(0.68, 0.45, "#nu beam");
+  text2 -> SetNDC(1);
+  text2 -> SetTextSize(0.045);
+
+  TLatex* text3 = new TLatex(0.67, 0.41, "direction");
+  text3 -> SetNDC(1);
+  text3 -> SetTextSize(0.045);
+
+
 
 
   gROOT -> SetStyle("Plain");
@@ -84,7 +103,7 @@ void TrueVtxProfile() {
   h2_TruePrmVtx_XY -> Draw("COLZ");
   f1_uprFCFV_XY -> Draw("SAME");
   f1_btmFCFV_XY -> Draw("SAME");
-  ar    -> Draw();
+  arXY    -> Draw();
   text1 -> Draw();
 
   TCanvas* c2 = new TCanvas("c2","PrmVtx RZ", 700, 700);
@@ -94,6 +113,9 @@ void TrueVtxProfile() {
   f1_btmFCFV_RZ -> Draw("SAME");
   //f1_brlFCFV_RZ -> Draw("SAME");
   g1_brlFCFV_RZ -> Draw("SAME");
+  //arRZ -> Draw();
+  //text2 -> Draw();
+  //text3 -> Draw();
 #endif
 
 #if 0
@@ -102,13 +124,13 @@ void TrueVtxProfile() {
   h1_TruePrmVtxX -> Draw();
 #endif
 
-#if 1
+#if 0
   TCanvas* c3 = new TCanvas("c3","NCapVtx XY", 700, 700);
   c3 -> SetGrid();
   h2_TrueNCapVtx_XY -> Draw("COLZ");
   f1_uprFCFV_XY -> Draw("SAME");
   f1_btmFCFV_XY -> Draw("SAME");
-  ar    -> Draw();
+  arXY    -> Draw();
   text1 -> Draw();
 
   TCanvas* c4 = new TCanvas("c4","NCapVtx RZ", 700, 700);

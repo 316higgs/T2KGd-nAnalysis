@@ -374,6 +374,17 @@ void mergeTagEff_x_dist(bool beammode) {
   legend2 -> SetFillColor(0);
 
 
+  /////  for JPS
+  TLegend* legend3 = new TLegend(0.13, 0.13, 0.6, 0.35);
+  legend3 -> SetTextSize(0.04);
+  legend3 -> AddEntry((TObject*)0,"#kern[-0.4]{FHC 1R #mu sample}","");
+  legend3 -> AddEntry(h1_Eff_promptkeras_numu, "Keras w/ prompt vertex", "L");
+  legend3 -> AddEntry(h1_Eff_bonsaikeras_ToF_numu, "Keras w/ BONSAI vertex", "L");
+  //legend3 -> AddEntry((TObject*)0,"#kern[-0]{ (n-like threshold: 0.7)}","");
+  legend3 -> SetFillColor(0);
+
+
+gROOT -> SetStyle("Plain");
 #if 0
   TCanvas* ctruen = new TCanvas("ctruen","ctruen", 900, 700);
   ctruen -> SetGrid();
@@ -383,7 +394,7 @@ void mergeTagEff_x_dist(bool beammode) {
 #endif
 
 
-#if 1
+#if 0
   /// Pre-selection ////////////////////////////////
   TCanvas* cpreeff = new TCanvas("cpreeff","cpreeff", 900, 700);
   cpreeff -> SetGrid();
@@ -403,7 +414,7 @@ void mergeTagEff_x_dist(bool beammode) {
 #endif
 
 
-#if 1
+#if 0
   /// NN classification ////////////////////////////////
   TCanvas* cnneff = new TCanvas("cnneff","cnneff", 900, 700);
   cnneff -> SetGrid();
@@ -436,9 +447,11 @@ void mergeTagEff_x_dist(bool beammode) {
   h1_TagEff_promptkeras_merge -> GetYaxis() -> SetRangeUser(0., 0.7);
   h1_TagEff_promptkeras_merge     -> Draw();
   h1_TagEff_bonsaikeras_ToF_merge -> Draw("SAME");
-  h1_TagEff_bonsaikeras_merge     -> Draw("SAME");
+  //h1_TagEff_bonsaikeras_merge     -> Draw("SAME");
 
-  legend2 -> Draw();
+  //legend2 -> Draw();
+  legend3 -> Draw();
+
   /*h1_TagEff_promptkeras_merge -> GetYaxis() -> SetRangeUser(0., 0.7);
   h1_TagEff_promptkeras_merge -> Sumw2();
   h1_TagEff_promptkeras_merge -> Divide(h1_TrueD_merge);

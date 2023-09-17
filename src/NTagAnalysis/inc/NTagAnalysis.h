@@ -100,8 +100,31 @@ TH1F* h1_GenMuCapNeutrons;  // captured neutrons from mu- capture
 //TH1F* h1_GenAtSINeutrons;   // captured neutrons from SI
 //int AllBefSINeutrons = 0;
 //int CapBefSINeutrons = 0;
-TH1F* h1_GenBefSIMom;
-TH1F* h1_GenSIMom;
+
+float GenN_nucFSI = 0.;
+float GenN_piFSI  = 0.;
+float GenN_deex   = 0.;
+float GenN_prm    = 0.;
+
+float CapN_nucFSI = 0.;
+float CapN_piFSI  = 0.;
+float CapN_deex   = 0.;
+float CapN_prm    = 0.;
+
+TH1F* h1_GenBefSIMom;       // momentum distribution of generated neutrons before SI
+TH1F* h1_GenBefSIParentID;     // Parent PID of generated neutrons after FSI
+TH2F* h2_GenBefSIParentID;     // Parent PID of generated neutrons after FSI vs neutron momentum
+TH1F* h1_GenBefSIMom_nucFSI;   // momentum distribution of generated neutrons after FSI (nucleonFSI)
+TH1F* h1_GenBefSIMom_piFSI;    // momentum distribution of generated neutrons after FSI (pionFSI)
+TH1F* h1_GenBefSIMom_deexc;   // momentum distribution of generated neutrons after FSI (de-excitation)
+TH1F* h1_GenBefSIMom_others;   // momentum distribution of generated neutrons after FSI (others)
+TH1F* h1_CapBefSIMom;       // momentum distribution of captured neutrons before SI
+TH1F* h1_CapBefSIMom_nucFSI;   // momentum distribution of captured neutrons after FSI (nucleonFSI)
+TH1F* h1_CapBefSIMom_piFSI;    // momentum distribution of captured neutrons after FSI (pionFSI)
+TH1F* h1_CapBefSIMom_deexc;    // momentum distribution of captured neutrons after FSI (de-excitation)
+TH1F* h1_CapBefSIMom_others;   // momentum distribution of captured neutrons after FSI (others)
+TH1F* h1_CapSIMom;
+TH2F* h2_Mom_x_Dist;
 
 
 ////  #truth neutrons  ////
@@ -205,6 +228,10 @@ TH1F* h1_TaggedN_x_nTraveldL[5];
 TH1F* h1_TaggedN_x_nTraveldT[5];
 TH1F* h1_TaggedN_x_MuStp_NCap[5];
 TH1F* h1_TaggedN_x_nAngle[5];
+
+TH1F* h1_TaggedN_LowPt;
+TH1F* h1_TaggedN_HighPt;
+TH2F* h2_allTaggedN_x_MuPt;
 
 float TrueN_x_Enu[binnumber_nu]     = {0};
 float TrueN_x_MuMom[binnumber_nu]   = {0};
@@ -412,10 +439,12 @@ class NTagAnalysis {
     float GetGenBefSIMom(CC0PiNumu *numu, Int_t *Iorgvc, Int_t *Iflvc);
 
     int GetTrueGenNBefFSI(CC0PiNumu *numu);
-    int GetTrueGenNBefSI(CC0PiNumu *numu);
+    int GetTrueGenNBefSI(CC0PiNumu *numu, Int_t *Iorgvc);
     //int GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
     //int GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
-    int GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]);
+    //int GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]);
+    int GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3], Int_t *Iorgvc);
+    void LabelTrueCapNBefSI(CC0PiNumu *numu, Int_t *Iorgvc, int parentNidx, bool *fillsrc);
     int GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]);
 
     //Get the number of truth neutrons based on NTag variables

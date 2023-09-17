@@ -82,8 +82,21 @@ void NTagAnalysis::SetHistoFrame() {
   for(int i=0; i<10; i++) h1_GenAftSINeutrons ->GetXaxis()->SetBinLabel(i+1, TString::Format("%d", i));
   h1_GenMuCapNeutrons  = new TH1F("h1_GenMuCapNeutrons", "", 10, 0, 10);
   for(int i=0; i<10; i++) h1_GenMuCapNeutrons ->GetXaxis()->SetBinLabel(i+1, TString::Format("%d", i));
-  h1_GenBefSIMom        = new TH1F("h1_GenBefSIMom", "", 20, 0, 200);
-  h1_GenSIMom           = new TH1F("h1_GenSIMom", "", 20, 0, 200);
+
+  h1_GenBefSIMom        = new TH1F("h1_GenBefSIMom", "", 60, 0, 1200);
+  h1_GenBefSIParentID   = new TH1F("h1_GenBefSIParentID", "", 2500, 0, 2500);
+  h2_GenBefSIParentID   = new TH2F("h2_GenBefSIParentID", "", 60, 0, 1200, 2500, 0, 2500);
+  h1_GenBefSIMom_nucFSI = new TH1F("h1_GenBefSIMom_nucFSI", "", 60, 0, 1200);
+  h1_GenBefSIMom_piFSI  = new TH1F("h1_GenBefSIMom_piFSI", "", 60, 0, 1200);
+  h1_GenBefSIMom_deexc  = new TH1F("h1_GenBefSIMom_deexc", "", 60, 0, 1200);
+  h1_GenBefSIMom_others = new TH1F("h1_GenBefSIMom_others", "", 60, 0, 1200);  
+  h1_CapBefSIMom        = new TH1F("h1_CapBefSIMom", "", 60, 0, 1200);
+  h1_CapBefSIMom_nucFSI = new TH1F("h1_CapBefSIMom_nucFSI", "", 60, 0, 1200);
+  h1_CapBefSIMom_piFSI  = new TH1F("h1_CapBefSIMom_piFSI", "", 60, 0, 1200);
+  h1_CapBefSIMom_deexc  = new TH1F("h1_CapBefSIMom_deexc", "", 60, 0, 1200);
+  h1_CapBefSIMom_others = new TH1F("h1_CapBefSIMom_others", "", 60, 0, 1200);  
+  h1_CapSIMom           = new TH1F("h1_CapSIMom", "", 60, 0, 1200);
+  h2_Mom_x_Dist         = new TH2F("h2_Mom_x_Dist", "", 40, 0, 200, 50, 0, 5);
 
   for (int i=0; i<4; i++) {
     h1_N1Rmu_x_Enu[i]     = new TH1F(TString::Format("h1_N1Rmu_x_Enu_mode%d", i), "N1Rmu_x_Enu; Reco Neutrino Energy [GeV]; Number of #nu Events", binnumber_nu-1, xEnubins);
@@ -118,6 +131,10 @@ void NTagAnalysis::SetHistoFrame() {
     h1_TaggedN_x_nAngle[i]     = new TH1F(TString::Format("h1_TaggedN_x_nAngle_mode%d", i), "Tagged_x_nAngle; Cosince of angle b/w n and beam directions; Number of tagged neutrons", binnumber_n3-1, xnAnglebins);
   }
 
+  h1_TaggedN_LowPt     = new TH1F("h1_TaggedN_LowPt", "", 10, 0, 10);
+  h1_TaggedN_HighPt    = new TH1F("h1_TaggedN_HighPt", "", 10, 0, 10);
+  h2_allTaggedN_x_MuPt = new TH2F("h2_allTaggedN_x_MuPt", "", 80, 0, 1.5, 10, 0, 10);
+
   // Tagged truth neutrons
   h1_TagTrueN    = new TH1F("h1_TagTrueN", "", 20, 0, 1);
   h1_TagTrueN_H  = new TH1F("h1_TagTrueN_H", "", 20, 0, 1);
@@ -138,83 +155,7 @@ void NTagAnalysis::SetHistoFrame() {
 }
 
 void NTagAnalysis::SetHistoFormat() {
-  /*for (int i=0; i<TRUETYPE; i++) {
-    h1_NTrueN[i] -> SetLineWidth(2);
-    h1_NTrueN[i] -> SetTitleOffset(1.4, "Y");
-    h1_NTrueN[i] -> SetTitleSize(0.035, "Y");
-    h1_NTrueN[i] -> SetLabelSize(0.033, "Y");
-  }
-  h1_NTrueN[0] -> SetLineColor(kViolet+3); //All truth neutrons
-  h1_NTrueN[1] -> SetLineColor(kAzure-4);  //truth H-n neutrons
-  h1_NTrueN[2] -> SetLineColor(kTeal-5);   //truth Gd-n neutrons
 
-  for (int i=0; i<INTERACTIONTYPE; i++) {
-    h1_TrueNmultiplicity[i] -> SetLineWidth(2);
-    h1_TrueNmultiplicity[i] -> SetTitleOffset(1.4, "Y");
-    h1_TrueNmultiplicity[i] -> SetTitleSize(0.035, "Y");
-    h1_TrueNmultiplicity[i] -> SetLabelSize(0.033, "Y");
-  }
-  h1_TrueNmultiplicity[0] -> SetLineColor(kAzure-1);  //CCQE
-  h1_TrueNmultiplicity[1] -> SetLineColor(kOrange+8); //CC non-QE
-  h1_TrueNmultiplicity[2] -> SetLineColor(kPink+1);   //CCRES+
-  h1_TrueNmultiplicity[3] -> SetLineColor(kPink-8);   //CCRES++
-  h1_TrueNmultiplicity[4] -> SetLineColor(kGray+1);   //CCRES0
-  h1_TrueNmultiplicity[5] -> SetLineColor(kTeal+9);   //NC
-
-  h1_TotGammaE -> SetLineWidth(2);
-  h1_TotGammaE -> SetLineColor(kAzure-4);
-  h1_TotGammaE -> SetTitleOffset(1.4, "Y");
-  h1_TotGammaE -> SetTitleSize(0.035, "Y");
-  h1_TotGammaE -> SetLabelSize(0.033, "Y");
-
-  for (int i=0; i<2; i++) {
-    h1_Enureso_CCQE[i]          -> SetLineWidth(2);
-    h1_Enureso_CC2p2h[i]        -> SetLineWidth(2);
-    h1_Enureso_CCRES_deltap[i]  -> SetLineWidth(2);
-    h1_Enureso_CCRES_deltapp[i] -> SetLineWidth(2);
-    h1_Enureso_CCRES_delta0[i]  -> SetLineWidth(2);
-    h1_Enureso_CCOther[i]       -> SetLineWidth(2);
-    h1_Enureso_NC[i]            -> SetLineWidth(2);
-
-    h1_Enureso_CCQE[i]          -> SetLineColor(kAzure-1);
-    h1_Enureso_CC2p2h[i]        -> SetLineColor(kAzure-5);
-    h1_Enureso_CCRES_deltap[i]  -> SetLineColor(kPink+1);
-    h1_Enureso_CCRES_deltapp[i] -> SetLineColor(kPink-8);
-    h1_Enureso_CCRES_delta0[i]  -> SetLineColor(kGray+1);
-    h1_Enureso_CCOther[i]       -> SetLineColor(kCyan-6);
-    h1_Enureso_NC[i]            -> SetLineColor(kTeal+9);
-
-    h1_Enureso_CCQE[i]          -> SetFillColor(kAzure-1);
-    h1_Enureso_CC2p2h[i]        -> SetFillColor(kAzure-5);
-    h1_Enureso_CCRES_deltap[i]  -> SetFillColor(kPink+1);
-    h1_Enureso_CCRES_deltapp[i] -> SetFillColor(kPink-8);
-    h1_Enureso_CCRES_delta0[i]  -> SetFillColor(kGray+1);
-    h1_Enureso_CCOther[i]       -> SetFillColor(kCyan-6);
-    h1_Enureso_NC[i]            -> SetFillColor(kTeal+9);
-
-    h1_Enureso_CCQE_trueN[i]          -> SetLineWidth(2);
-    h1_Enureso_CC2p2h_trueN[i]        -> SetLineWidth(2);
-    h1_Enureso_CCRES_deltap_trueN[i]  -> SetLineWidth(2);
-    h1_Enureso_CCRES_deltapp_trueN[i] -> SetLineWidth(2);
-    h1_Enureso_CCRES_delta0_trueN[i]  -> SetLineWidth(2);
-    h1_Enureso_NC_trueN[i]            -> SetLineWidth(2);
-
-    h1_Enureso_CCQE_trueN[i]          -> SetLineColor(kAzure-1);
-    h1_Enureso_CC2p2h_trueN[i]        -> SetLineColor(kAzure-5);
-    h1_Enureso_CCRES_deltap_trueN[i]  -> SetLineColor(kPink+1);
-    h1_Enureso_CCRES_deltapp_trueN[i] -> SetLineColor(kPink-8);
-    h1_Enureso_CCRES_delta0_trueN[i]  -> SetLineColor(kGray+1);
-    h1_Enureso_CCOther_trueN[i]       -> SetLineColor(kCyan-6);
-    h1_Enureso_NC_trueN[i]            -> SetLineColor(kTeal+9);
-
-    h1_Enureso_CCQE_trueN[i]          -> SetFillColor(kAzure-1);
-    h1_Enureso_CC2p2h_trueN[i]        -> SetFillColor(kAzure-5);
-    h1_Enureso_CCRES_deltap_trueN[i]  -> SetFillColor(kPink+1);
-    h1_Enureso_CCRES_deltapp_trueN[i] -> SetFillColor(kPink-8);
-    h1_Enureso_CCRES_delta0_trueN[i]  -> SetFillColor(kGray+1);
-    h1_Enureso_CCOther_trueN[i]       -> SetFillColor(kCyan-6);
-    h1_Enureso_NC_trueN[i]            -> SetFillColor(kTeal+9);
-  }*/
 }
 
 
@@ -402,26 +343,124 @@ int NTagAnalysis::GetTrueGenNBefFSI(CC0PiNumu *numu) {
   return TrueNBefFSI;
 }
 
-int NTagAnalysis::GetTrueGenNBefSI(CC0PiNumu *numu) {
+
+int NTagAnalysis::GetTrueGenNBefSI(CC0PiNumu *numu, Int_t *Iorgvc) {
   int TrueNBefSI = 0;
   int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
 
   for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
-    if (numu->var<int>("Ipvc", iprm)==static_cast<int>(PDGPID::NEUTRON)) {
+    if (numu->var<int>("Ipvc", iprm)==static_cast<int>(PDGPID::NEUTRON) &&
+        numu->var<int>("Ichvc", iprm)==1 ) {
       // Count final state neutrons
+      // 2p2h
       if (mode>=2 && mode<=10) {
-        if (iprm>=3) TrueNBefSI++;
+        if (iprm>=3) {
+          TrueNBefSI++;
+          if (mode<31) h1_GenBefSIMom -> Fill(numu->var<float>("Abspvc", iprm), OscProb);
+          else h1_GenBefSIMom -> Fill(numu->var<float>("Abspvc", iprm));
+
+          // Parent PID
+          //h1_GenBefSIParentID -> Fill(numu->var<int>("Ipvc", Iorgvc[iprm]-1));
+
+          // de-excitation
+          if ( iprm+1 > numu->var<int>("numnu") && Iorgvc[iprm]==2 ) {
+            if (mode<31) h1_GenBefSIMom_deexc -> Fill(numu->var<float>("Abspvc", iprm), OscProb);
+            else h1_GenBefSIMom_deexc -> Fill(numu->var<float>("Abspvc", iprm));
+            
+            if (mode<31) GenN_deex += OscProb;
+            else GenN_deex++;
+          }
+          // nucleon FSI
+          else if ( (numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::NEUTRON) ||
+                     numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::PROTON)) &&
+                     iprm+1 > numu->var<int>("numnu") ) {
+            if (mode<31) h1_GenBefSIMom_nucFSI -> Fill(numu->var<float>("Abspvc", iprm), OscProb);
+            else h1_GenBefSIMom_nucFSI -> Fill(numu->var<float>("Abspvc", iprm));
+            
+            if (mode<31) GenN_nucFSI += OscProb;
+            else GenN_nucFSI++;
+          }
+          // pion FSI
+          else if ( (std::fabs(numu->var<int>("Ipvc", Iorgvc[iprm]-1))==static_cast<int>(PDGPID::PIPLUS) ||
+                     numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::PI0)) &&
+                     iprm+1 > numu->var<int>("numnu") ) {
+            if (mode<31) h1_GenBefSIMom_piFSI -> Fill(numu->var<float>("Abspvc", iprm), OscProb);
+            else h1_GenBefSIMom_piFSI -> Fill(numu->var<float>("Abspvc", iprm));
+            
+            if (mode<31) GenN_piFSI += OscProb;
+            else GenN_piFSI++;
+          }
+          else {
+            //std::cout << "Neutrons from primary interaction?" << std::endl;
+            //if (iprm+1 > numu->var<int>("numnu") ) std::cout << "What's this?" << std::endl;
+            if (mode<31) h1_GenBefSIMom_others -> Fill(numu->var<float>("Abspvc", iprm), OscProb);
+            else h1_GenBefSIMom_others -> Fill(numu->var<float>("Abspvc", iprm));
+            
+            if (mode<31) GenN_prm += OscProb;
+            else GenN_prm++;
+          }
+
+        }
       }
+      // others
       else {
-        if (iprm>=2) TrueNBefSI++;
+        if (iprm>=2) {
+          TrueNBefSI++;
+          if (mode<31) h1_GenBefSIMom -> Fill(numu->var<float>("Abspvc", iprm), OscProb);
+          else h1_GenBefSIMom -> Fill(numu->var<float>("Abspvc", iprm));
+
+          // Parent PID
+          //h1_GenBefSIParentID -> Fill(numu->var<int>("Ipvc", Iorgvc[iprm]-1));
+
+          // de-excitation
+          if ( iprm+1 > numu->var<int>("numnu") && Iorgvc[iprm]==2 ) {
+            if (mode<31) h1_GenBefSIMom_deexc -> Fill(numu->var<float>("Abspvc", iprm), OscProb);
+            else h1_GenBefSIMom_deexc -> Fill(numu->var<float>("Abspvc", iprm));
+            
+            if (mode<31) GenN_deex += OscProb;
+            else GenN_deex++;
+          }
+          // nucleon FSI
+          else if ( (numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::NEUTRON) ||
+                     numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::PROTON)) &&
+                     iprm+1 > numu->var<int>("numnu") ) {
+            if (mode<31) h1_GenBefSIMom_nucFSI -> Fill(numu->var<float>("Abspvc", iprm), OscProb);
+            else h1_GenBefSIMom_nucFSI -> Fill(numu->var<float>("Abspvc", iprm));
+            
+            if (mode<31) GenN_nucFSI += OscProb;
+            else GenN_nucFSI++;
+          }
+          // pion FSI
+          else if ( (std::fabs(numu->var<int>("Ipvc", Iorgvc[iprm]-1))==static_cast<int>(PDGPID::PIPLUS) ||
+                     numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::PI0)) &&
+                     iprm+1 > numu->var<int>("numnu") ) {
+            if (mode<31) h1_GenBefSIMom_piFSI -> Fill(numu->var<float>("Abspvc", iprm), OscProb);
+            else h1_GenBefSIMom_piFSI -> Fill(numu->var<float>("Abspvc", iprm));
+            
+            if (mode<31) GenN_piFSI += OscProb;
+            else GenN_piFSI++;
+          }
+          else {
+            std::cout << "Neutrons from primary interaction:[" << iprm+1 << "]" << std::endl;
+            if (iprm+1 > numu->var<int>("numnu") ) std::cout << "What's this?" << std::endl;
+            if (mode<31) h1_GenBefSIMom_others -> Fill(numu->var<float>("Abspvc", iprm), OscProb);
+            else h1_GenBefSIMom_others -> Fill(numu->var<float>("Abspvc", iprm));
+            
+            if (mode<31) GenN_prm += OscProb;
+            else GenN_prm++;
+          }
+
+        }
       }
     }
   }
   return TrueNBefSI;
 }
 
-//int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]) {
-int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]) {
+
+//int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]) {
+int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3], Int_t *Iorgvc) {
   int TrueNBefSI = 0;
 
   float OscProb = numu->getOscWgt();
@@ -432,6 +471,9 @@ int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
   PrmVtx[1] = numu->var<float>("posv", 1);
   PrmVtx[2] = numu->var<float>("posv", 2);
   float NuNCapVtx[3] = {0., 0., 0.};  //neutron(from primary interaction) capture vertex
+
+  bool fillsrc[4];
+  for (int i=0; i<4; i++) fillsrc[i] = false;
 
   std::vector<float> VtxPrntList;
   std::vector<float> VtxScndList;
@@ -456,6 +498,10 @@ int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
       float pNinit = std::sqrt( pprntinit[iscnd][0]*pprntinit[iscnd][0] +
                                 pprntinit[iscnd][1]*pprntinit[iscnd][1] +
                                 pprntinit[iscnd][2]*pprntinit[iscnd][2] );
+      //float KEn = std::sqrt( pNinit*pNinit + NMASS*NMASS ) - NMASS;
+      float KEn = pNinit;
+
+      int parentNidx = 0;
 
       // First gamma
       if (VtxScndList.size()==0) {
@@ -463,6 +509,38 @@ int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
         VtxScndList.push_back(d_vtxscnd);
         //if (iprntidx[ iprntidx[iscnd]-1 ]==0) {
           TrueNBefSI++;
+
+          //std::cout << "Before SI: " << KEn << " MeV" << std::endl;
+          if (mode<31) h1_CapBefSIMom -> Fill(KEn, OscProb);
+          else h1_CapBefSIMom -> Fill(KEn);
+          parentNidx = std::fabs(iprntidx[iscnd]);
+          this -> LabelTrueCapNBefSI(numu, Iorgvc, parentNidx, fillsrc);
+          //std::cout << "parentNidx=[" << parentNidx << "] -> Primary: [" << fillsrc[0] << "] deexc: [" << fillsrc[1] << "] nucleon FSI: [" << fillsrc[2] << "] pion FSI: [" << fillsrc[3] << "]" << std::endl; 
+          if (fillsrc[0]) {
+            if (mode<31) h1_CapBefSIMom_others -> Fill(KEn, OscProb);
+            else h1_CapBefSIMom_others -> Fill(KEn);
+            if (mode<31) CapN_prm += OscProb;
+            else CapN_prm++;
+          }
+          else if (fillsrc[1]) {
+            if (mode<31) h1_CapBefSIMom_deexc -> Fill(KEn, OscProb);
+            else h1_CapBefSIMom_deexc -> Fill(KEn);
+            if (mode<31) CapN_deex += OscProb;
+            else CapN_deex++;
+          }
+          else if (fillsrc[2]) {
+            if (mode<31) h1_CapBefSIMom_nucFSI -> Fill(KEn, OscProb);
+            else h1_CapBefSIMom_nucFSI -> Fill(KEn);
+            if (mode<31) CapN_nucFSI += OscProb;
+            else CapN_nucFSI++;
+          }
+          else if (fillsrc[3]) {
+            if (mode<31) h1_CapBefSIMom_piFSI -> Fill(KEn, OscProb);
+            else h1_CapBefSIMom_piFSI -> Fill(KEn);
+            if (mode<31) CapN_piFSI += OscProb;
+            else CapN_piFSI++;
+          }
+
           NuNCapVtx[0] = vtxscndX;
           NuNCapVtx[1] = vtxscndY;
           NuNCapVtx[2] = vtxscndZ;
@@ -470,8 +548,8 @@ int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
           if (mode<31) h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
           else h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100.);
 
-          if (mode<31) h1_GenBefSIMom -> Fill(pNinit, OscProb);
-          else h1_GenBefSIMom -> Fill(pNinit);
+          if (mode<31) h2_Mom_x_Dist -> Fill(KEn, d_Prm_x_NuNCap/100., OscProb);
+          else h2_Mom_x_Dist -> Fill(KEn, d_Prm_x_NuNCap/100.);
         //}
       }
       // Next gamma
@@ -499,6 +577,37 @@ int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
           VtxPrntList.push_back(d_vtxprnt);
           //if (iprntidx[ iprntidx[iscnd]-1 ]==0) {
             TrueNBefSI++;
+
+            //std::cout << "Before SI: " << KEn << " MeV" << std::endl;
+            if (mode<31) h1_CapBefSIMom -> Fill(KEn, OscProb);
+            else h1_CapBefSIMom -> Fill(KEn);
+            parentNidx = std::fabs(iprntidx[iscnd]);
+            this -> LabelTrueCapNBefSI(numu, Iorgvc, parentNidx, fillsrc);
+            if (fillsrc[0]) {
+              if (mode<31) h1_CapBefSIMom_others -> Fill(KEn, OscProb);
+              else h1_CapBefSIMom_others -> Fill(KEn);
+              if (mode<31) CapN_prm += OscProb;
+              else CapN_prm++;
+            }
+            else if (fillsrc[1]) {
+              if (mode<31) h1_CapBefSIMom_deexc -> Fill(KEn, OscProb);
+              else h1_CapBefSIMom_deexc -> Fill(KEn);
+              if (mode<31) CapN_deex += OscProb;
+              else CapN_deex++;
+            }
+            else if (fillsrc[2]) {
+              if (mode<31) h1_CapBefSIMom_nucFSI -> Fill(KEn, OscProb);
+              else h1_CapBefSIMom_nucFSI -> Fill(KEn);
+              if (mode<31) CapN_nucFSI += OscProb;
+              else CapN_nucFSI++;
+            }
+            else if (fillsrc[3]) {
+              if (mode<31) h1_CapBefSIMom_piFSI -> Fill(KEn, OscProb);
+              else h1_CapBefSIMom_piFSI -> Fill(KEn);
+              if (mode<31) CapN_piFSI += OscProb;
+              else CapN_piFSI++;
+            }
+
             NuNCapVtx[0] = vtxscndX;
             NuNCapVtx[1] = vtxscndY;
             NuNCapVtx[2] = vtxscndZ;
@@ -506,18 +615,90 @@ int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
             if (mode<31) h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
             else h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100.);
 
-            if (mode<31) h1_GenBefSIMom -> Fill(pNinit, OscProb);
-            else h1_GenBefSIMom -> Fill(pNinit);
+            if (mode<31) h2_Mom_x_Dist -> Fill(KEn, d_Prm_x_NuNCap/100., OscProb);
+            else h2_Mom_x_Dist -> Fill(KEn, d_Prm_x_NuNCap/100.);
           //}
         }
       }
 
     } // neutrons
+
+    // clean
+    for (int i=0; i<4; i++) fillsrc[i] = false;
+
   } // truth secondary particles
   return TrueNBefSI;
 }
 
-//int NTagAnalysis::GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]) {
+
+// check which neutron corresponds to iparentNidx
+void NTagAnalysis::LabelTrueCapNBefSI(CC0PiNumu *numu, Int_t *Iorgvc, int parentNidx, bool *fillsrc) {
+
+  bool N_prm    = false;
+  bool N_deex   = false;
+  bool N_nucFSI = false;
+  bool N_piFSI  = false;
+
+  int mode = TMath::Abs(numu->var<int>("mode"));
+
+  for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+    if (numu->var<int>("Ipvc", iprm)==static_cast<int>(PDGPID::NEUTRON) &&
+        numu->var<int>("Ichvc", iprm)==1 &&
+        iprm+1==parentNidx) {
+      // 2p2h
+      if (mode>=2 && mode<=10) {
+        if (iprm>=3) {
+          // de-excitation
+          if ( iprm+1 > numu->var<int>("numnu") && Iorgvc[iprm]==2 ) N_deex = true;
+          // nucleon FSI
+          else if ( (numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::NEUTRON) ||
+                     numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::PROTON)) &&
+                     iprm+1 > numu->var<int>("numnu") ) {
+           N_nucFSI = true; 
+          }
+          // pion FSI
+          else if ( (std::fabs(numu->var<int>("Ipvc", Iorgvc[iprm]-1))==static_cast<int>(PDGPID::PIPLUS) ||
+                     numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::PI0)) &&
+                     iprm+1 > numu->var<int>("numnu") ) {
+            N_piFSI = true;
+          }
+          else N_prm = true;
+        }
+      }
+      // others
+      else {
+        if (iprm>=2) {
+          // de-excitation
+          if ( iprm+1 > numu->var<int>("numnu") && Iorgvc[iprm]==2 ) N_deex = true;
+          // nucleon FSI
+          else if ( (numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::NEUTRON) ||
+                     numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::PROTON)) &&
+                     iprm+1 > numu->var<int>("numnu") ) {
+            N_nucFSI = true;
+          }
+          // pion FSI
+          else if ( (std::fabs(numu->var<int>("Ipvc", Iorgvc[iprm]-1))==static_cast<int>(PDGPID::PIPLUS) ||
+                     numu->var<int>("Ipvc", Iorgvc[iprm]-1)==static_cast<int>(PDGPID::PI0)) &&
+                     iprm+1 > numu->var<int>("numnu") ) {
+            N_piFSI = true;
+          }
+          else N_prm = true;
+        }
+      }
+
+      //std::cout << "!!! parentNidx=[" << parentNidx << "] -> Primary: [" << N_prm << "] deexc: [" << N_deex << "] nucleon FSI: [" << N_nucFSI << "] pion FSI: [" << N_piFSI << "]" << std::endl; 
+      // flag for fill
+      if      (N_prm)    fillsrc[0] = true;
+      else if (N_deex)   fillsrc[1] = true;
+      else if (N_nucFSI) fillsrc[2] = true;
+      else if (N_piFSI)  fillsrc[3] = true;
+    }
+  }
+}
+
+
+
+
 int NTagAnalysis::GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]) {
   int TrueNAftSI = 0;
 
@@ -554,6 +735,8 @@ int NTagAnalysis::GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
       float pNinit = std::sqrt( pprntinit[iscnd][0]*pprntinit[iscnd][0] +
                                 pprntinit[iscnd][1]*pprntinit[iscnd][1] +
                                 pprntinit[iscnd][2]*pprntinit[iscnd][2] );
+      //float KEn = std::sqrt( pNinit*pNinit + NMASS*NMASS ) - NMASS;
+      float KEn = pNinit;
 
       //First gamma
       if (VtxScndList.size()==0) {
@@ -570,8 +753,14 @@ int NTagAnalysis::GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
           if (mode<31) h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
           else h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100.);
 
-          if (mode<31) h1_GenSIMom -> Fill(pNinit, OscProb);
-          else h1_GenSIMom -> Fill(pNinit);
+          //std::cout << "SI: " << KEn << " MeV" << std::endl;
+          //if (mode<31) h1_GenSIMom -> Fill(pNinit, OscProb);
+          //else h1_GenSIMom -> Fill(pNinit);
+          if (mode<31) h1_CapSIMom -> Fill(KEn, OscProb);
+          else h1_CapSIMom -> Fill(KEn);
+
+          if (mode<31) h2_Mom_x_Dist -> Fill(KEn, d_Prm_x_NuNCap/100., OscProb);
+          else h2_Mom_x_Dist -> Fill(KEn, d_Prm_x_NuNCap/100.);
         }
       }
       else {
@@ -605,8 +794,14 @@ int NTagAnalysis::GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
             if (mode<31) h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
             else h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100.);
 
-            if (mode<31) h1_GenSIMom -> Fill(pNinit, OscProb);
-            else h1_GenSIMom -> Fill(pNinit);
+            //std::cout << "SI: " << KEn << " MeV" << std::endl;
+            //if (mode<31) h1_GenSIMom -> Fill(pNinit, OscProb);
+            //else h1_GenSIMom -> Fill(pNinit);
+            if (mode<31) h1_CapSIMom -> Fill(KEn, OscProb);
+            else h1_CapSIMom -> Fill(KEn);
+
+            if (mode<31) h2_Mom_x_Dist -> Fill(KEn, d_Prm_x_NuNCap/100., OscProb);
+            else h2_Mom_x_Dist -> Fill(KEn, d_Prm_x_NuNCap/100.);
           }
         }
       }
@@ -2758,7 +2953,7 @@ void NTagAnalysis::TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<floa
         }
       }
       //out of visual range
-      if (knmtcs>=xbins[binnumber_n2-1]) {
+      if (knmtcs>=xbins[binnumber_n2-1] || knmtcs<xbins[0]) {
         //for (int itagn=0; itagn<TaggedN-TaggedNoise; itagn++) {
         if (Label->at(ican)==2 || Label->at(ican)==3) {
           //TaggedN_x_knmtcs[binnumber_n2-1]++;
@@ -2869,8 +3064,20 @@ void NTagAnalysis::WritePlots() {
   h1_mintimediff_NCap -> Write();
   h1_NCapVtxReso -> Write();
 
-  h1_GenBefSIMom -> Write();
-  h1_GenSIMom    -> Write();
+  h1_GenBefSIMom        -> Write();
+  h1_GenBefSIParentID   -> Write();
+  h2_GenBefSIParentID   -> Write();
+  h1_GenBefSIMom_nucFSI -> Write();
+  h1_GenBefSIMom_piFSI  -> Write();
+  h1_GenBefSIMom_deexc  -> Write();
+  h1_GenBefSIMom_others -> Write();
+  h1_CapBefSIMom        -> Write();
+  h1_CapBefSIMom_nucFSI -> Write();
+  h1_CapBefSIMom_piFSI  -> Write();
+  h1_CapBefSIMom_deexc  -> Write();
+  h1_CapBefSIMom_others -> Write();
+  h1_CapSIMom           -> Write();
+  h2_Mom_x_Dist         -> Write();
 
   h2_TrueNCapVtxXY -> Write();
   h2_TrueNCapVtxRZ -> Write();
@@ -2908,6 +3115,10 @@ void NTagAnalysis::WritePlots() {
     h1_TaggedN_x_MuStp_NCap[i] -> Write();
     h1_TaggedN_x_nAngle[i]     -> Write();
   }
+
+  h1_TaggedN_LowPt -> Write();
+  h1_TaggedN_HighPt -> Write();
+  h2_allTaggedN_x_MuPt -> Write();
   
   for (int i=0; i<TRUETYPE; i++) {
   //  Double_t tot = h1_NTrueN[i]->Integral();
