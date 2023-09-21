@@ -84,6 +84,19 @@ EXECUTE()
   printf "${ESC}[31m%s${ESC}[m\n" "[### Analysis Option ###] NTAGMODE     : ${NTAGMODE}"
   printf "${ESC}[31m%s${ESC}[m\n" "[### Analysis Option ###] RUNNAME      : ${RUNNAME}"
 
+####  fiTQun resolution  ###
+<<COMMENTOUT
+  ./skg4analysis.exe ${DISK3}/${FITQUNVER}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
+                     ${DISK3}/Ntag/output/skg4/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.ntag0026Gd.\*.root\
+                     ${ANALYSISSTAGE}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${RUNNAME}.root\
+                     ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.neutrino.${RUNNAME}.txt\
+                     ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.ntag.${RUNNAME}.txt\
+                     -MCType ${MC_ARG}\
+                     -ETAG ON\
+                     -BEAMMODE ${BEAMMODE_ARG}\
+                     -OSCCH ${OSCCH_ARG}
+COMMENTOUT
+
 #<<COMMENTOUT
   ./skg4analysis.exe ${DISK3}/${FITQUNVER}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
                      ${DISK3}/Ntag/output/skg4/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.ntag0026Gd.\*.root\
@@ -96,25 +109,14 @@ EXECUTE()
                      -OSCCH ${OSCCH_ARG}
 #COMMENTOUT
 
-<<COMMENTOUT
-  ./skg4analysis.exe ${DISK3}/${FITQUNVER}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
-                     ${DISK3}/Ntag/output/${NTAGMODE}/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.ntag0026Gd.\*.root\
-                     ${ANALYSISSTAGE}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${RUNNAME}.root\
-                     ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.neutrino.${RUNNAME}.txt\
-                     ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.ntag.${RUNNAME}.txt\
-                     -MCType ${MC_ARG}\
-                     -ETAG ON\
-                     -BEAMMODE ${BEAMMODE_ARG}\
-                     -OSCCH ${OSCCH_ARG}
-COMMENTOUT
   echo " " 
 }
 
 ###  Gd MC  ###
 EXECUTE 0 1  ###  numu -> numu
-#EXECUTE 1 1  ###  numu -> nue
-#EXECUTE 2 1  ###  numubar -> numubar
-#EXECUTE 3 1  ###  numubar -> nuebar
-#EXECUTE 4 1  ###  nue -> nue
-#EXECUTE 5 1  ###  nuebar -> nuebar
+EXECUTE 1 1  ###  numu -> nue
+EXECUTE 2 1  ###  numubar -> numubar
+EXECUTE 3 1  ###  numubar -> nuebar
+EXECUTE 4 1  ###  nue -> nue
+EXECUTE 5 1  ###  nuebar -> nuebar
 

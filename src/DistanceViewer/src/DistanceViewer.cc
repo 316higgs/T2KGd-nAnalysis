@@ -1,5 +1,8 @@
 #include "DistanceViewer.h"
+#include "../../DecayeBox/inc/DecayeBox.h"
+#include "../../../include/CommonTool.h"
 #include "TGaxis.h"
+
 
 void DistanceViewer::SetHistoFrame() {
   h1_truedistance = new TH1F("h1_truedistance", "", 10, 0, 5);
@@ -74,6 +77,9 @@ void DistanceViewer::SetHistoFrame() {
     h1_OverallEff_dist[i] = new TH1F(TString::Format("h1_OverallEff_dist_thr%d", i), "", 10, 0, 5);
   }
   h1_PreEff_dist = new TH1F("h1_PreEff_dist", "", 10, 0, 5); 
+
+
+  h1_RecoNCapDistance = new TH1F("h1_RecoNCapDistance", "", 50, 0, 5);
 }
 
 void DistanceViewer::SetHistoFormat() {
@@ -242,7 +248,7 @@ void DistanceViewer::cdDistanceViewer(TFile* fout) {
   fout -> cd("DistanceViewer");
 }
 
-void DistanceViewer::WritePlots() {
+void DistanceViewer::WritePlots(bool writeeff) {
   h1_truedistance          -> Write();
   h1_Candidatetruedistance -> Write();
   h1_truendistance        -> Write();
@@ -290,19 +296,24 @@ void DistanceViewer::WritePlots() {
   h2_Enu_x_Prm_NCap -> Write();
   h2_Enu_x_MuStp_NCap -> Write();
 
-  h1_PreEff_dist -> Sumw2();
-  h1_PreEff_dist -> Divide(h1_truedistance);
-  h1_PreEff_dist -> Write();
-  for (int i=0; i<CUTSTEP; i++) {
-    h1_Tagtruedistance[i] -> Write();
+  if (writeeff) {
+    h1_PreEff_dist -> Sumw2();
+    h1_PreEff_dist -> Divide(h1_truedistance);
+    h1_PreEff_dist -> Write();
+    for (int i=0; i<CUTSTEP; i++) {
+      h1_Tagtruedistance[i] -> Write();
 
-    h1_NNEff_dist[i] -> Sumw2();
-    h1_NNEff_dist[i] -> Divide(h1_Candidatetruedistance);
-    h1_NNEff_dist[i] -> Write();
+      h1_NNEff_dist[i] -> Sumw2();
+      h1_NNEff_dist[i] -> Divide(h1_Candidatetruedistance);
+      h1_NNEff_dist[i] -> Write();
 
-    h1_OverallEff_dist[i] -> Sumw2();
-    h1_OverallEff_dist[i] -> Divide(h1_truedistance);
-    h1_OverallEff_dist[i] -> Write();
+      h1_OverallEff_dist[i] -> Sumw2();
+      h1_OverallEff_dist[i] -> Divide(h1_truedistance);
+      h1_OverallEff_dist[i] -> Write();
+    }
   }
+  
+
+  h1_RecoNCapDistance -> Write();
 }
 

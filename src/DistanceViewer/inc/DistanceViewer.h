@@ -69,6 +69,9 @@ TH1F* h1_NNEff_dist[CUTSTEP];
 TH1F* h1_OverallEff_dist[CUTSTEP];
 
 
+TH1F* h1_RecoNCapDistance;
+
+
 class DistanceViewer {
   public:
     DistanceViewer() {};
@@ -110,5 +113,5 @@ class DistanceViewer {
     void SetHistoFrame();
     void SetHistoFormat();
     void cdDistanceViewer(TFile* fout);
-    void WritePlots();
+    void WritePlots(bool writeeff);
 };

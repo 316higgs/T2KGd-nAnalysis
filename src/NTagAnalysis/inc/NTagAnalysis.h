@@ -586,6 +586,8 @@ class NTagAnalysis {
                             float TMVAThreshold, std::vector<float> *dvx, std::vector<float> *dvy, std::vector<float> *dvz);
 
     void GetTrueNCapTime(std::vector<float> *t, std::vector<int> *Type, std::vector<float> *E);
+    void GetRecoNCapTime(CC0PiNumu* numu, bool etagmode, std::vector<float> *FitT, std::vector<float> *NHits, 
+                         std::vector<float> *Label, std::vector<float> *TagOut, float TMVAThreshold);
     
     void N1Rmu_x_kinematics(CC0PiNumu* numu, float knmtcs, double* xbins, float* N1Rmu_x_knmtcs, TH1F** h1, int bintype);
     void TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int TaggedNoise, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype);
@@ -597,7 +599,7 @@ class NTagAnalysis {
     void SetHistoFrame();
     void SetHistoFormat();
     void cdNTagAnalysis(TFile* fout);
-    void WritePlots();
+    void WritePlots(bool writegraph);
 };
 
 

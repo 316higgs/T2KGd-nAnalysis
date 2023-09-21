@@ -102,38 +102,38 @@ void TaggedN_x_nkinematics_NormNTagN(bool beammode) {
 
 
   TH1F* h1_merge = new TH1F("h1_merge", "", binnumber-1, xbins);
-  //h1_merge -> Add(h1_Noise_nuebarbkg);
-  //h1_merge -> Add(h1_Noise_nuebkg);
-  //h1_merge -> Add(h1_Noise_nuebarsig);
-  //h1_merge -> Add(h1_Noise_numubar);
-  //h1_merge -> Add(h1_Noise_nuesig);
+  h1_merge -> Add(h1_Noise_nuebarbkg);
+  h1_merge -> Add(h1_Noise_nuebkg);
+  h1_merge -> Add(h1_Noise_nuebarsig);
+  h1_merge -> Add(h1_Noise_numubar);
+  h1_merge -> Add(h1_Noise_nuesig);
   h1_merge -> Add(h1_Noise_numu);
 
-  //h1_merge -> Add(h1_NC_nuebarbkg);
-  //h1_merge -> Add(h1_NC_nuebkg);
-  //h1_merge -> Add(h1_NC_nuebarsig);
-  //h1_merge -> Add(h1_NC_numubar);
-  //h1_merge -> Add(h1_NC_nuesig);
+  h1_merge -> Add(h1_NC_nuebarbkg);
+  h1_merge -> Add(h1_NC_nuebkg);
+  h1_merge -> Add(h1_NC_nuebarsig);
+  h1_merge -> Add(h1_NC_numubar);
+  h1_merge -> Add(h1_NC_nuesig);
   h1_merge -> Add(h1_NC_numu);
 
-  //h1_merge -> Add(h1_CCOther_nuebarbkg);
-  //h1_merge -> Add(h1_CC2p2h_nuebarbkg);
-  //h1_merge -> Add(h1_CCQE_nuebarbkg);
-  //h1_merge -> Add(h1_CCOther_nuebkg);
-  //h1_merge -> Add(h1_CC2p2h_nuebkg);
-  //h1_merge -> Add(h1_CCQE_nuebkg);
-  //h1_merge -> Add(h1_CCOther_nuebarsig);
-  //h1_merge -> Add(h1_CC2p2h_nuebarsig);
-  //h1_merge -> Add(h1_CCQE_nuebarsig);
-  //h1_merge -> Add(h1_CCOther_nuesig);
-  //h1_merge -> Add(h1_CC2p2h_nuesig);
-  //h1_merge -> Add(h1_CCQE_nuesig);
+  h1_merge -> Add(h1_CCOther_nuebarbkg);
+  h1_merge -> Add(h1_CC2p2h_nuebarbkg);
+  h1_merge -> Add(h1_CCQE_nuebarbkg);
+  h1_merge -> Add(h1_CCOther_nuebkg);
+  h1_merge -> Add(h1_CC2p2h_nuebkg);
+  h1_merge -> Add(h1_CCQE_nuebkg);
+  h1_merge -> Add(h1_CCOther_nuebarsig);
+  h1_merge -> Add(h1_CC2p2h_nuebarsig);
+  h1_merge -> Add(h1_CCQE_nuebarsig);
+  h1_merge -> Add(h1_CCOther_nuesig);
+  h1_merge -> Add(h1_CC2p2h_nuesig);
+  h1_merge -> Add(h1_CCQE_nuesig);
 
-  //h1_merge -> Add(h1_CCOther_numubar);
+  h1_merge -> Add(h1_CCOther_numubar);
   h1_merge -> Add(h1_CCOther_numu);
-  //h1_merge -> Add(h1_CC2p2h_numubar);
+  h1_merge -> Add(h1_CC2p2h_numubar);
   h1_merge -> Add(h1_CC2p2h_numu);
-  //h1_merge -> Add(h1_CCQE_numubar);
+  h1_merge -> Add(h1_CCQE_numubar);
   h1_merge -> Add(h1_CCQE_numu);
 
 
@@ -143,6 +143,43 @@ void TaggedN_x_nkinematics_NormNTagN(bool beammode) {
     TotalTaggedN += h1_merge->GetBinContent(i+1);
   }
   std::cout << "Total number of tagged neutrons: " << TotalTaggedN << std::endl;
+  Double_t NTagN_pw = 60.20;
+  h1_merge -> Scale( NTagN_pw / TotalTaggedN );
+
+  h1_merge -> SetLineWidth(3);
+  h1_merge -> SetLineColor(kViolet-6);
+  h1_merge -> SetFillColor(kViolet-8);
+  h1_merge -> SetFillStyle(3004);
+  h1_merge -> SetStats(0);
+
+
+  gROOT -> SetStyle("Plain");
+  TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
+  c1 -> SetGrid();
+  h1_merge -> SetMinimum(0.);
+  h1_merge -> SetMaximum(24.);
+  h1_merge -> Draw();
+  h1_merge ->GetYaxis()->SetTitleSize(0.038);
+  h1_merge ->GetYaxis()->SetTitleOffset(1.1);
+  h1_merge ->GetYaxis()->SetLabelSize(0.036);
+  if (KnmtcName=="nTraveld")   h1_merge->GetXaxis()->SetTitle("Reconstructed Neutron Travel Distance [cm]");
+  if (KnmtcName=="nTraveldL")  h1_merge->GetXaxis()->SetTitle("Reconstructed Longitidinal Travel Distance [cm]");
+  if (KnmtcName=="nTraveldT")  h1_merge->GetXaxis()->SetTitle("Reconstructed Transverse Travel Distance [cm]");
+  if (KnmtcName=="nAngle")     h1_merge->GetXaxis()->SetTitle("Cosine of Angle b/w n and Beam Directions");
+  if (KnmtcName=="MuStp_NCap") h1_merge->GetXaxis()->SetTitle("Distance b/w #mu Stopping and n Capture Vertices [cm]");
+  h1_merge ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
+  h1_merge -> Draw();
+  c1 -> RedrawAxis();
+
+  TLatex* text1 = new TLatex(0.48, 0.85, "Normalized by #tagged-n of");
+  text1 -> SetNDC(1);
+  text1 -> SetTextSize(0.045);
+  TLatex* text2 = new TLatex(0.48, 0.80, "pure water analysis");
+  text2 -> SetNDC(1);
+  text2 -> SetTextSize(0.045);
+
+  text1 -> Draw();
+  text2 -> Draw();
 
 
 #if 0

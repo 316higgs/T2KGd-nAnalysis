@@ -383,6 +383,7 @@ int main(int argc, char **argv) {
 
     h1_NTrueN[0] -> Fill(NTrueN);
 
+    
     //int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
     int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
     GetSelectedTagN(prmsel, evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false, TagN);
@@ -507,6 +508,7 @@ int main(int argc, char **argv) {
       //int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
       int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
       ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, NHits, Label, TagOut, nlikeThreshold, fvx, fvy, fvz);
+      ntagana.GetRecoNCapTime(numu, etagmode, FitT, NHits, Label, TagOut, nlikeThreshold);
       if (intmode==1 && numtaggedneutrons!=0) {
 
         CCQEwTaggedNeutrons++;
@@ -700,7 +702,31 @@ int main(int argc, char **argv) {
         h1_GenBefSINeutrons  -> Fill(TrueBefSI);
         h1_GenAftSINeutrons  -> Fill(TrueCapBefSI+TrueAftSI);
         h1_GenMuCapNeutrons  -> Fill(TrueMuN);
-      }    
+      } 
+
+
+      /////  Reco distance  /////
+      float RecoPrmVtx[3] = {0., 0., 0.};  // SKDETSIM-based fiTQun vertex
+      RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
+      RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
+      RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
+
+      for (UInt_t ican=0; ican<TagOut->size(); ican++) {
+        bool etagboxin = false;
+        if (etagmode){
+
+          etagboxin = ntagana.DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican));
+          if (TagOut->at(ican)>nlikeThreshold && etagboxin==false) {
+
+            float RecoNCapVtx[3] = {0., 0., 0.};
+            RecoNCapVtx[0] = fvx->at(ican);
+            RecoNCapVtx[1] = fvy->at(ican);
+            RecoNCapVtx[2] = fvz->at(ican);
+
+            h1_RecoNCapDistance -> Fill( GetSimpleDistance(RecoPrmVtx, RecoNCapVtx)/100. );
+          }
+        }
+      }
 
     } //New 1R muon selection
 
@@ -1067,7 +1093,7 @@ int main(int argc, char **argv) {
   gDirectory -> cd("..");
 
   ndistance.cdDistanceViewer(fout);
-  ndistance.WritePlots();
+  ndistance.WritePlots(true);
   gDirectory -> cd("..");
 
   //noise rate and efficiency for window optimization
@@ -1076,7 +1102,7 @@ int main(int argc, char **argv) {
   ntagana.SetEfficiencyGraph(0);  //0 for [3 us, 535 us]
 
   ntagana.cdNTagAnalysis(fout);
-  ntagana.WritePlots();
+  ntagana.WritePlots(true);
   gDirectory -> cd("..");
 
   WriteVECTHisto();

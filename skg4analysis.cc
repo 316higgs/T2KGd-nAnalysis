@@ -221,39 +221,26 @@ int main(int argc, char **argv) {
   //===== It should be called after numu? ======
   Int_t   nmue;
   Float_t Pvc[100][3];      //Momentum of primary particles
-  //Int_t   Npvc;             //Number of primary particles
-  Int_t   Ipvc[100];        //PID of primary particles
   Int_t   Iflvc[100];       //Flag of final states
-  Int_t   Ichvc[100];       //Chase at detector simulation or not(1: chase/0: not chase)
   Int_t   Iorgvc[100];      //Index of parent particle (0: initial particles, n: n-th final particle at the primary interaction)
-  //Int_t   nscndprt;         //Number of secondary particles
-  Int_t   iprtscnd[1000];   //PID of the secondary particle
   Float_t tscnd[1000];
-  Float_t vtxscnd[1000][3]; //Generated vertex of secondary particles
-  Int_t   iprntprt[1000];   //PID of the parent of this secondary particle
   Float_t vtxprnt[1000][3];
   Int_t   iprntidx[1000];   //Index of the parent particle (0: no parent(connected from primary particles), n: the parent of n-th secondary particle)
   Int_t   ichildidx[1000];  //Index of the first child particle (0: no childs, n: the first child of n-th secondary particle)
-  Int_t   lmecscnd[1000];   //Interaction code of secondary particles based on GEANT
   Int_t   itrkscnd[1000];
+  Float_t pprnt[1000][3];     //Initial momentum of the parent particle at interaction
   Float_t pprntinit[1000][3]; //Initial momentum of the parent particle at birth
-  //tchfQ -> SetBranchAddress("Npvc", &Npvc);  //off if you use numu->Npvc
+  
   tchfQ -> SetBranchAddress("nmue", &nmue);
   tchfQ -> SetBranchAddress("Pvc", Pvc);
-  //tchfQ -> SetBranchAddress("Ipvc", Ipvc);
-  //tchfQ -> SetBranchAddress("Ichvc", Ichvc);
   tchfQ -> SetBranchAddress("Iflvc", Iflvc);
   tchfQ -> SetBranchAddress("Iorgvc", Iorgvc);
-  //tchfQ -> SetBranchAddress("nscndprt", &nscndprt);
-  //tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
   tchfQ -> SetBranchAddress("tscnd", tscnd);
-  //tchfQ -> SetBranchAddress("vtxscnd", vtxscnd);
-  //tchfQ -> SetBranchAddress("iprntprt", iprntprt);
   tchfQ -> SetBranchAddress("vtxprnt", vtxprnt);
   tchfQ -> SetBranchAddress("iprntidx", iprntidx);
   tchfQ -> SetBranchAddress("ichildidx", ichildidx);
-  //tchfQ -> SetBranchAddress("lmecscnd", lmecscnd);
   tchfQ -> SetBranchAddress("itrkscnd", itrkscnd);
+  tchfQ -> SetBranchAddress("pprnt", pprnt);
   tchfQ -> SetBranchAddress("pprntinit", pprntinit);
 
   ResetNeutrinoEvents();
@@ -436,6 +423,28 @@ int main(int argc, char **argv) {
       h1_PrmVtxResoZ -> Fill( RecoPrmVtx_DETSIM[2] - RecoPrmVtx_G4[2] );  // DETSIM - G4 Z
       h2_PrmVtxReso  -> Fill( PrmVtxDist_G4/100., PrmVtxDist_DETSIM/100. );
 
+
+      /////  Reco capture time  /////
+      ntagana.GetRecoNCapTime(numu, etagmode, FitT, NHits, Label, TagOut, nlikeThreshold);
+
+      /////  Reco distance  /////
+      for (UInt_t ican=0; ican<TagOut->size(); ican++) {
+        bool etagboxin = false;
+        if (etagmode){
+
+          etagboxin = ntagana.DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican));
+          if (TagOut->at(ican)>nlikeThreshold && etagboxin==false) {
+
+            float RecoNCapVtx_G4[3] = {0., 0., 0.};
+            RecoNCapVtx_G4[0] = fvx->at(ican);
+            RecoNCapVtx_G4[1] = fvy->at(ican);
+            RecoNCapVtx_G4[2] = fvz->at(ican);
+
+            h1_RecoNCapDistance -> Fill( GetSimpleDistance(RecoPrmVtx_G4, RecoNCapVtx_G4)/100. );
+          }
+        }
+      }
+
     }
 
   }
@@ -470,6 +479,14 @@ int main(int argc, char **argv) {
 
   neuosc.cdNeutrinoOscillation(fout);
   neuosc.WritePlots();
+  gDirectory -> cd("..");
+
+  ndistance.cdDistanceViewer(fout);
+  ndistance.WritePlots(false);
+  gDirectory -> cd("..");
+
+  ntagana.cdNTagAnalysis(fout);
+  ntagana.WritePlots(false);
   gDirectory -> cd("..");
 
 }

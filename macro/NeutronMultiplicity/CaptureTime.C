@@ -22,11 +22,7 @@ void CaptureTime(bool beammode) {
     rhcflag = 1;
   }
   else std::cout << "[### Beam mode ###] FHC" << std::endl;
-
-  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.root");
-  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
-  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root");
-
+  
   //FHC
 #if fhcflag
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.bonsaikeras_ToF.root");

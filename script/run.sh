@@ -153,7 +153,7 @@ COMMENTOUT
 #EXECUTE 5 0  ###  nuebar -> nuebar
 
 ###  Gd MC  ###
-#EXECUTE 0 1  ###  numu -> numu
+EXECUTE 0 1  ###  numu -> numu
 EXECUTE 1 1  ###  numu -> nue
 EXECUTE 2 1  ###  numubar -> numubar
 EXECUTE 3 1  ###  numubar -> nuebar

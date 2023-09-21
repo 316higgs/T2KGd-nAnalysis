@@ -150,3 +150,27 @@ Total: 730.644
 #truth n @ dn [1000, 1500): 2
 #truth n @ dn > 1500: 2
 Total: 315.132
+ 
+===== #tagged neutrons as a function of dnL =====
+#truth n @ dnL [-600, -500): 0
+#truth n @ dnL [-500, -400): 1
+#truth n @ dnL [-400, -300): 8
+#truth n @ dnL [-300, -200): 8
+#truth n @ dnL [-200, -100): 22
+#truth n @ dnL [-100, 0): 86.0085
+#truth n @ dnL [0, 100): 101.055
+#truth n @ dnL [100, 200): 61.0691
+#truth n @ dnL [200, 300): 10
+#truth n @ dnL [300, 400): 10
+#truth n @ dnL [400, 500): 3
+#truth n @ dnL [500, 600): 2
+#truth n @ thetan > 600: 4
+Total: 315.132
+ 
+===== #tagged neutrons as a function of neutron angle =====
+#truth n @ thetan [-1, -0.6): 64
+#truth n @ thetan [-0.6, -0.2): 38.0085
+#truth n @ thetan [-0.2, 0.2): 50
+#truth n @ thetan [0.2, 0.6): 60.0438
+#truth n @ thetan [0.6, 1): 103.08
+Total: 315.132

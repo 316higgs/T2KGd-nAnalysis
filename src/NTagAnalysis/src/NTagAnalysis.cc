@@ -2266,7 +2266,7 @@ bool NTagAnalysis::GetRecoNeutronCapVtx(UInt_t ican,
 
 
 int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscnd, Float_t vtxprnt[][3], 
-                                      bool etagmode, std::vector<float> *FitT, std::vector<float> *N50, std::vector<float> *Label, std::vector<float> *TagOut, 
+                                      bool etagmode, std::vector<float> *FitT, std::vector<float> *NHits, std::vector<float> *Label, std::vector<float> *TagOut, 
                                       float TMVAThreshold, std::vector<float> *dvx, std::vector<float> *dvy, std::vector<float> *dvz) 
 {
 
@@ -2354,7 +2354,7 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
       //if (Label->at(ican)==3) h1_N50[3] -> Fill(NHits->at(ican));
 
       //if (NHits->at(ican)>50 && FitT->at(ican)<20) etagboxin = true;
-      etagboxin = this->DecayelikeChecker(etagmode, N50->at(ican), FitT->at(ican));
+      etagboxin = this->DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican));
       //if ( FitT->at(ican) < 1.5 ) etagboxin = true;
       //else if ( FitT->at(ican) < 20. && FitT->at(ican) < 0.25*(N50->at(ican))-7.5 ) etagboxin = true;
       if (TagOut->at(ican)>TMVAThreshold && etagboxin==false) {
@@ -2364,10 +2364,10 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
         dvxlist.push_back(dvx->at(ican));
         dvylist.push_back(dvy->at(ican));
         dvzlist.push_back(dvz->at(ican));
-        if (Label->at(ican)==0) h1_RecoNCapTime[0] -> Fill(FitT->at(ican));  //noise
-        if (Label->at(ican)==1) h1_RecoNCapTime[1] -> Fill(FitT->at(ican));  //decay-e
-        if (Label->at(ican)==2) h1_RecoNCapTime[2] -> Fill(FitT->at(ican));  //H-n
-        if (Label->at(ican)==3) h1_RecoNCapTime[3] -> Fill(FitT->at(ican));  //Gd-n
+        //if (Label->at(ican)==0) h1_RecoNCapTime[0] -> Fill(FitT->at(ican));  //noise
+        //if (Label->at(ican)==1) h1_RecoNCapTime[1] -> Fill(FitT->at(ican));  //decay-e
+        //if (Label->at(ican)==2) h1_RecoNCapTime[2] -> Fill(FitT->at(ican));  //H-n
+        //if (Label->at(ican)==3) h1_RecoNCapTime[3] -> Fill(FitT->at(ican));  //Gd-n
 
         //if (Label->at(ican)==0) h1_N50[0] -> Fill(NHits->at(ican));
         //if (Label->at(ican)==1) h1_N50[1] -> Fill(NHits->at(ican));
@@ -2526,6 +2526,24 @@ int NTagAnalysis::NCapVtxResEstimator(CC0PiNumu* numu, int NTrueN, Float_t *tscn
 void NTagAnalysis::GetTrueNCapTime(std::vector<float> *t, std::vector<int> *Type, std::vector<float> *E) {
   for (UInt_t itaggable=0; itaggable<t->size(); itaggable++) {
     if (Type->at(itaggable)==2 && E->at(itaggable) > 6.) h1_TrueNCapTime -> Fill(t->at(itaggable));
+  }
+}
+
+void NTagAnalysis::GetRecoNCapTime(CC0PiNumu* numu, bool etagmode, std::vector<float> *FitT, std::vector<float> *NHits, 
+                                   std::vector<float> *Label, std::vector<float> *TagOut, float TMVAThreshold) {
+  for (UInt_t ican=0; ican<TagOut->size(); ican++) {
+    bool etagboxin = false;
+    if (etagmode){
+
+      etagboxin = this->DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican));
+      if (TagOut->at(ican)>TMVAThreshold && etagboxin==false) {
+        //if (Label->at(ican)==0) h1_RecoNCapTime[0] -> Fill(FitT->at(ican));  //noise
+        //if (Label->at(ican)==1) h1_RecoNCapTime[1] -> Fill(FitT->at(ican));  //decay-e
+        //if (Label->at(ican)==2) h1_RecoNCapTime[2] -> Fill(FitT->at(ican));  //H-n
+        //if (Label->at(ican)==3) h1_RecoNCapTime[3] -> Fill(FitT->at(ican));  //Gd-n
+        h1_RecoNCapTime[0] -> Fill(FitT->at(ican));
+      }
+    }
   }
 }
 
@@ -3048,7 +3066,7 @@ void NTagAnalysis::cdNTagAnalysis(TFile* fout) {
   fout -> cd("NTagAnalysis");
 }
 
-void NTagAnalysis::WritePlots() {
+void NTagAnalysis::WritePlots(bool writegraph) {
 
   //h1_GenPrmNeutrons    -> Write();
   h1_GenBefFSINeutrons -> Write();
@@ -3172,32 +3190,36 @@ void NTagAnalysis::WritePlots() {
   h1_NuEvtC6        -> Write();
 
 
-  //Noise rate as a function of TagOut for each time window
-  for (int i=0; i<WINSTEP; i++) g_NoiseRate[i] -> Write();  //Graph1-6
-  //Efficiency as a function of the maximum of time window
-  g_NNEffwin        -> Write();  //Graph7
-  g_NNHEffwin       -> Write();  //Graph8
-  g_NNGdEffwin      -> Write();  //Graph9
-  g_OverallEffwin   -> Write();  //Graph10
-  g_OverallHEffwin  -> Write();  //Graph11
-  g_OverallGdEffwin -> Write();  //Graph12
+  if (writegraph) {
+    //Noise rate as a function of TagOut for each time window
+    for (int i=0; i<WINSTEP; i++) g_NoiseRate[i] -> Write();  //Graph1-6
+    //Efficiency as a function of the maximum of time window
+    g_NNEffwin        -> Write();  //Graph7
+    g_NNHEffwin       -> Write();  //Graph8
+    g_NNGdEffwin      -> Write();  //Graph9
+    g_OverallEffwin   -> Write();  //Graph10
+    g_OverallHEffwin  -> Write();  //Graph11
+    g_OverallGdEffwin -> Write();  //Graph12
 
-  //Efficiency as a funtcion of TagOut
-  g_NNEff         -> Write();  //Graph13
-  g_NNHEff        -> Write();  //Graph14
-  g_NNGdEff       -> Write();  //Graph15
-  g_OverallEff    -> Write();  //Graph16
-  g_OverallHEff   -> Write();  //Graph17
-  g_OverallGdEff  -> Write();  //Graph18
-  //Purity as a funtcion of TagOut
-  g_Purity        -> Write();  //Graph19
-  //Noise rate as a funtcion of TagOut at a ceratin time window
-  g_FillNoiseRate -> Write();  //Graph20
-  g_ROC           -> Write();  //Graph21
-  g_FOM           -> Write();  //Graph22
-  g_FOM_p30       -> Write();  //Graph23
-  g_FOM_m30       -> Write();  //Graph24
-  g_FOM_p40       -> Write();  //Graph25
-  g_FOM_m40       -> Write();  //Graph26
+    //Efficiency as a funtcion of TagOut
+    g_NNEff         -> Write();  //Graph13
+    g_NNHEff        -> Write();  //Graph14
+    g_NNGdEff       -> Write();  //Graph15
+    g_OverallEff    -> Write();  //Graph16
+    g_OverallHEff   -> Write();  //Graph17
+    g_OverallGdEff  -> Write();  //Graph18
+    //Purity as a funtcion of TagOut
+    g_Purity        -> Write();  //Graph19
+    //Noise rate as a funtcion of TagOut at a ceratin time window
+    g_FillNoiseRate -> Write();  //Graph20
+  
+    g_ROC           -> Write();  //Graph21
+    g_FOM           -> Write();  //Graph22
+    g_FOM_p30       -> Write();  //Graph23
+    g_FOM_m30       -> Write();  //Graph24
+    g_FOM_p40       -> Write();  //Graph25
+    g_FOM_m40       -> Write();  //Graph26
+  }
+
 }
 
