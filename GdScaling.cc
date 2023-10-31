@@ -12,13 +12,15 @@
 #include "THStack.h"
 //#include "CC0PiNumu.h"  //src: /disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu
 #include "DefBeamMode.h"
-#include "DefOscChannels.h"
+//#include "DefOscChannels.h"
 
 #include "include/NeutrinoEvents.h"
-#include "include/NTagVariables.h"
+//#include "include/NTagVariables.h"
+#include "include/Const.h"
 #include "include/CLTOption.h"
 #include "include/ResultSummary.h"
 #include "include/VECTChannelChecker.h"
+#include "include/CommonTool.h"
 
 #include "src/DecayeBox/inc/DecayeBox.h"
 #include "src/Gd1RmuonSelection/inc/Gd1RmuonSelection.h"
@@ -30,11 +32,10 @@
 constexpr int FLOAT_MIN = 0;
 constexpr int FLOAT_MAX = 1;
 
-float scaledTagEff = 0.75;
-
 
 int main(int argc, char **argv) {
 
+#if 1
   TString fiTQunFileName = argv[1];
   TString NtagFileName   = argv[2];
   TString OutputRootName = argv[3];
@@ -63,53 +64,57 @@ int main(int argc, char **argv) {
   //float thetamin = 0.8;
   float thetamax = 1.;
 
+  float dtMax  = 10.;
+  float N50Min = 50.;
+  float N50Max = 400.;
+  float scaledTagEff = 0.75;
 
   //=========  fiTQun output (TTree: h1)  ============
   TChain *tchfQ = new TChain("h1");
   int nfQFiles = tchfQ->Add( fiTQunFileName );
   if ( nfQFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree h1 from: " << fiTQunFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree h1 from: " << fiTQunFileName << "\e[0m" << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //=========  Event info (TTree: event)  ============
   TChain *tchev = new TChain("event");
   int nevFiles = tchev->Add( NtagFileName );
   if ( nevFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree event from: " << NtagFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree event from: " << NtagFileName << "\e[0m" << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //=========  Event info (TTree: particle)  ============
   TChain *tchpar = new TChain("particle");
   int nparFiles = tchpar->Add( NtagFileName );
   if ( nparFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree particle from: " << NtagFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree particle from: " << NtagFileName << "\e[0m" << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //=========  Delayed info (TTree: taggable)  ============
   TChain *tchtaggable = new TChain("taggable");
   int ntaggableFiles = tchtaggable->Add( NtagFileName );
   if ( ntaggableFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree taggable from: " << NtagFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree taggable from: " << NtagFileName << "\e[0m" << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //=========  NTag output (TTree: ntag)  ============
   TChain *tchntag = new TChain("ntag");
   int ntagFiles = tchntag->Add( NtagFileName );
   if ( ntagFiles==0 ) {
-    std::cout << "[### analysis1Rmu ###]  Cannot load TTree ntag from: " << NtagFileName << std::endl;
-    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree ntag from: " << NtagFileName << "\e[0m" << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //Load succeed
-  std::cout << "[### analysis1Rmu ###]  Loaded " << nfQFiles       << " files from: " << fiTQunFileName << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Loaded " << nevFiles       << " files from: " << NtagFileName   << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Loaded " << nparFiles      << " files from: " << NtagFileName   << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Loaded " << ntaggableFiles << " files from: " << NtagFileName   << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Loaded " << ntagFiles      << " files from: " << NtagFileName   << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << nfQFiles       << " files from: " << fiTQunFileName << "\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << nevFiles       << " files from: " << NtagFileName   << "\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << nparFiles      << " files from: " << NtagFileName   << "\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << ntaggableFiles << " files from: " << NtagFileName   << "\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << ntagFiles      << " files from: " << NtagFileName   << "\e[0m" << std::endl;
 
 
   const int nfQEntries       = tchfQ->GetEntries();       //total entries of TTree h1
@@ -117,15 +122,15 @@ int main(int argc, char **argv) {
   const int nparEntries      = tchpar->GetEntries();       //total entries of TTree particle
   const int ntaggableEntries = tchtaggable->GetEntries(); //total entries of TTree taggable
   const int ntagEntries      = tchntag->GetEntries();     //total entries of TTree ntag
-  std::cout << "[### analysis1Rmu ###]  fiTQun output     : Processing " << nfQEntries       <<" entries..." << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Event info        : Processing " << nevEntries       <<" entries..." << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Particle info     : Processing " << nparEntries      <<" entries..." << std::endl;
-  std::cout << "[### analysis1Rmu ###]  Delayed info      : Processing " << ntaggableEntries <<" entries..." << std::endl;
-  std::cout << "[### analysis1Rmu ###]  NTag output       : Processing " << ntagEntries      <<" entries..." << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  fiTQun output     : Processing " << nfQEntries       <<" entries...\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Event info        : Processing " << nevEntries       <<" entries...\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Particle info     : Processing " << nparEntries      <<" entries...\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Delayed info      : Processing " << ntaggableEntries <<" entries...\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  NTag output       : Processing " << ntagEntries      <<" entries...\e[0m" << std::endl;
 
 
   //=========  TTree event variables  ============
-  float NTrueN = 0.;
+  int NTrueN = 0.;
   float vecvx  = 0.;
   float vecvy  = 0.;
   float vecvz  = 0.;
@@ -202,51 +207,41 @@ int main(int argc, char **argv) {
   
   //=========  TTree h1 variables  ============
   //===== It should be called after numu? ======
-  Float_t posv[3];          //Primary vertex
-  Int_t   npar;
-  Int_t   npar2;            //Number of secondary vertex
-  Float_t posv2[100][3];    //Secondary vertex
-  Int_t   ipv[100];         //GEANT code of primary particle
-  UInt_t  ipv2[100];        //GEANT code of secondary particle
-  Float_t wallv2[100];      //dwall of the secondary particle
-  Int_t   Npvc;             //Number of primary particles
-  Int_t   Ipvc[100];        //PID of primary particles
+  Int_t   nmue;
   Float_t Pvc[100][3];      //Momentum of primary particles
   Int_t   Iflvc[100];       //Flag of final states
-  Int_t   Ichvc[100];       //Chase at detector simulation or not (1: chase/0: not chase)
   Int_t   Iorgvc[100];      //Index of parent particle (0: initial particles, n: n-th final particle at the primary interaction)
-  Int_t   nscndprt;         //Number of secondary particles
-  Int_t   iprtscnd[1000];   //PID of the secondary particle
-  Float_t tscnd[1000];      //Generated time of secondary particles
-  Float_t vtxscnd[1000][3]; //Generated vertex of secondary particles
-  Int_t   iprntprt[1000];   //PID of the parent of this secondary particle
-  Int_t   iorgprt[1000];
-  Int_t   iprnttrk[1000];
+  Float_t tscnd[1000];
+  Float_t vtxprnt[1000][3];
   Int_t   iprntidx[1000];   //Index of the parent particle (0: no parent(connected from primary particles), n: the parent of n-th secondary particle)
   Int_t   ichildidx[1000];  //Index of the first child particle (0: no childs, n: the first child of n-th secondary particle)
-  Int_t   lmecscnd[1000];   //Interaction code of secondary particles based on GEANT
-  tchfQ -> SetBranchAddress("posv", posv);
-  tchfQ -> SetBranchAddress("npar", &npar);
-  tchfQ -> SetBranchAddress("npar2", &npar2);
-  tchfQ -> SetBranchAddress("posv2", posv2);
-  tchfQ -> SetBranchAddress("wallv2", wallv2);
-  tchfQ -> SetBranchAddress("ipv2", ipv2);
-  tchfQ -> SetBranchAddress("Npvc", &Npvc);
+  Int_t   itrkscnd[1000];
+  Float_t pprnt[1000][3];     //Initial momentum of the parent particle at interaction
+  Float_t pprntinit[1000][3]; //Initial momentum of the parent particle at birth
+
+  Int_t   npar2;
+  UInt_t  ipv2[1000];
+  UInt_t  iorg[1000];
+  Float_t posv2[1000][3];
+  Float_t pmomv2[1000][3];
+
+  tchfQ -> SetBranchAddress("nmue", &nmue);
   tchfQ -> SetBranchAddress("Pvc", Pvc);
-  tchfQ -> SetBranchAddress("Ipvc", Ipvc);
-  tchfQ -> SetBranchAddress("Ichvc", Ichvc);
   tchfQ -> SetBranchAddress("Iflvc", Iflvc);
   tchfQ -> SetBranchAddress("Iorgvc", Iorgvc);
-  tchfQ -> SetBranchAddress("nscndprt", &nscndprt);
-  tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
   tchfQ -> SetBranchAddress("tscnd", tscnd);
-  tchfQ -> SetBranchAddress("vtxscnd", vtxscnd);
-  tchfQ -> SetBranchAddress("iprntprt", iprntprt);
-  tchfQ -> SetBranchAddress("iorgprt", iorgprt);
-  tchfQ -> SetBranchAddress("iprnttrk", iprnttrk);
+  tchfQ -> SetBranchAddress("vtxprnt", vtxprnt);
   tchfQ -> SetBranchAddress("iprntidx", iprntidx);
   tchfQ -> SetBranchAddress("ichildidx", ichildidx);
-  tchfQ -> SetBranchAddress("lmecscnd", lmecscnd);
+  tchfQ -> SetBranchAddress("itrkscnd", itrkscnd);
+  tchfQ -> SetBranchAddress("pprnt", pprnt);
+  tchfQ -> SetBranchAddress("pprntinit", pprntinit);
+
+  tchfQ -> SetBranchAddress("npar2", &npar2);
+  tchfQ -> SetBranchAddress("ipv2", ipv2);
+  tchfQ -> SetBranchAddress("iorg", iorg);
+  tchfQ -> SetBranchAddress("posv2", posv2);
+  tchfQ -> SetBranchAddress("pmomv2", pmomv2);
 
   ResetNeutrinoEvents();
   InitNTagVariables();
@@ -273,6 +268,14 @@ int main(int argc, char **argv) {
   ntagana.SetHistoFrame();
   ntagana.SetHistoFormat();
 
+  float GenPreFSIN  = 0.;
+  float GenPostFSIN = 0.;
+
+  float CapPostFSIN = 0.;
+  float CapSIN      = 0.;
+  float CapMuN      = 0.;
+  float TrueN       = 0.;
+
 
   //Process
   if (MCTypeKeyword=="-MCType") {
@@ -280,11 +283,12 @@ int main(int argc, char **argv) {
     else if (MCType=="Water" || MCType=="water") processmax = nfQEntries;
     else {
       std::cout << " " << std::endl;
-      std::cout << "[!!!CLT error!!!] MC type can not be found. --- input Gd or Water" << std::endl;
+      std::cout << "\e[38;5;A0m\e[1m[!!!CLT error!!!] MC type can not be found. --- input Gd or Water\e[0m" << std::endl;
       exit(-1); 
     }
   }
   CLTOptionSummary(ETAGKeyword, ETAG, MCTypeKeyword, MCType);
+
 
 
   int TruthNeutrons = 0;
@@ -293,7 +297,7 @@ int main(int argc, char **argv) {
   for (int ientry=0; ientry<processmax; ientry++) {
 
   	//Progress meter
-    if(ientry>100 && ientry%100==0) std::cout << "[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%" << std::endl;
+    if(ientry>100 && ientry%100==0) std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%\e[0m" << std::endl;
 
     //All neutrino events
     AllParentNeutrinos++;
@@ -326,30 +330,30 @@ int main(int argc, char **argv) {
     numu->computeCC0PiVariables();
     numu->applyfQ1RCC0PiNumuCut();
     const EvSelVar_t evsel = numu->getEvSelVar();
-    Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
+    Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false);
 
     h1_NTrueN[0] -> Fill(NTrueN);
 
     //New 1R muon selection
-    if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false)) {
+    if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false)) {
       //GetSelectedModeEvents(numu);
     
 
       int TrueNeutrons = 0;
       std::vector<float> neutronlists;
       std::vector<int> parentlists;
-      int mode = TMath::Abs(numu->var<int>("mode"));
+      int intmode = TMath::Abs(numu->var<int>("mode"));
 
-      for (int iscnd=0; iscnd<nscndprt; iscnd++) {
+      for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
 
-        float capturedistance = std::sqrt( vtxscnd[iscnd][0]*vtxscnd[iscnd][0] + 
-                                           vtxscnd[iscnd][1]*vtxscnd[iscnd][1] + 
-                                           vtxscnd[iscnd][2]*vtxscnd[iscnd][2] );
+        float capturedistance = std::sqrt( numu->var<float>("vtxscnd", iscnd, 0)*numu->var<float>("vtxscnd", iscnd, 0) + 
+                                           numu->var<float>("vtxscnd", iscnd, 1)*numu->var<float>("vtxscnd", iscnd, 1) + 
+                                           numu->var<float>("vtxscnd", iscnd, 2)*numu->var<float>("vtxscnd", iscnd, 2) );
 
         //Find truth captured neutrons
-        if (iprtscnd[iscnd]==static_cast<int>(PDGPID::GAMMA) &&
-            iprntprt[iscnd]==static_cast<int>(PDGPID::NEUTRON) &&
-            lmecscnd[iscnd]==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) 
+        if (numu->var<int>("iprtscnd", iscnd)==static_cast<int>(PDGPID::GAMMA) &&
+            numu->var<int>("iprntprt", iscnd)==static_cast<int>(PDGPID::NEUTRON) &&
+            numu->var<int>("lmecscnd", iscnd)==static_cast<int>(GEANTINT::NEUTRONCAPTURE)) 
         {
           
           //If neutron list is still empty, fill the first captured neutron
@@ -405,62 +409,93 @@ int main(int argc, char **argv) {
       float RecoEnu = numu->var<float>("erec");
 
       //Energy pectrum
-      if (mode==1) h1_OscProb[0] -> Fill(RecoEnu/1000., OscProb);
-      if (mode>=2 && mode<=10) h1_OscProb[1] -> Fill(RecoEnu/1000., OscProb);
-      if (mode>10 && mode<=30) h1_OscProbCCOther -> Fill(RecoEnu/1000., OscProb);
-      if (mode>=31) h1_OscProb[2] -> Fill(RecoEnu/1000.);
+      if (intmode==1) h1_OscProb[0] -> Fill(RecoEnu/1000., OscProb);
+      if (intmode>=2 && intmode<=10) h1_OscProb[1] -> Fill(RecoEnu/1000., OscProb);
+      if (intmode>10 && intmode<=30) h1_OscProbCCOther -> Fill(RecoEnu/1000., OscProb);
+      if (intmode>=31) h1_OscProb[2] -> Fill(RecoEnu/1000.);
 
       //Separation fraction
       if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) {
-        if (mode==1) OscillatedCCQE += OscProb;
-        if (mode>=2 && mode<=10) OscillatedCCnonQE += OscProb;
-        if (mode==13) OscillatedCCRESp += OscProb;
-        if (mode==11) OscillatedCCRESpp += OscProb;
-        if (mode==12) OscillatedCCRES0 += OscProb;
-        if (mode>14 && mode<=30) OscillatedCCOther += OscProb;
-        if (mode>=31) OscillatedNC++;
+        if (intmode==1) OscillatedCCQE += OscProb;
+        if (intmode>=2 && intmode<=10) OscillatedCCnonQE += OscProb;
+        if (intmode==13) OscillatedCCRESp += OscProb;
+        if (intmode==11) OscillatedCCRESpp += OscProb;
+        if (intmode==12) OscillatedCCRES0 += OscProb;
+        if (intmode>14 && intmode<=30) OscillatedCCOther += OscProb;
+        if (intmode>=31) OscillatedNC++;
       }
 
       if (taggedneutrons==0) {
         //Energy pectrum
-        if (mode==1) h1_OscProb_woNeutron[0] -> Fill(RecoEnu/1000., OscProb);                 //CCQE(1p1h)
-        if (mode>=2 && mode<=10) h1_OscProb_woNeutron[1] -> Fill(RecoEnu/1000., OscProb);     //CC 2p2h
-        if (mode>10 && mode<=30) h1_OscProbCCOther_woNeutron -> Fill(RecoEnu/1000., OscProb); //CC RES+CC Other
-        if (mode>=31) h1_OscProb_woNeutron[2] -> Fill(RecoEnu/1000.);                         //NC
+        if (intmode==1) h1_OscProb_woNeutron[0] -> Fill(RecoEnu/1000., OscProb);                 //CCQE(1p1h)
+        if (intmode>=2 && intmode<=10) h1_OscProb_woNeutron[1] -> Fill(RecoEnu/1000., OscProb);     //CC 2p2h
+        if (intmode>10 && intmode<=30) h1_OscProbCCOther_woNeutron -> Fill(RecoEnu/1000., OscProb); //CC RES+CC Other
+        if (intmode>=31) h1_OscProb_woNeutron[2] -> Fill(RecoEnu/1000.);                         //NC
 
         //Separation fraction
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) {
-          if (mode==1) OscillatedCCQE_woTagN += OscProb;
-          if (mode>=2 && mode<=10) OscillatedCCnonQE_woTagN += OscProb;
-          if (mode==13) OscillatedCCRESp_woTagN += OscProb;
-          if (mode==11) OscillatedCCRESpp_woTagN += OscProb;
-          if (mode==12) OscillatedCCRES0_woTagN += OscProb;
-          if (mode>14 && mode<=30) OscillatedCCOther_woTagN += OscProb;
-          if (mode>=31) OscillatedNC_woTagN++;
+          if (intmode==1) OscillatedCCQE_woTagN += OscProb;
+          if (intmode>=2 && intmode<=10) OscillatedCCnonQE_woTagN += OscProb;
+          if (intmode==13) OscillatedCCRESp_woTagN += OscProb;
+          if (intmode==11) OscillatedCCRESpp_woTagN += OscProb;
+          if (intmode==12) OscillatedCCRES0_woTagN += OscProb;
+          if (intmode>14 && intmode<=30) OscillatedCCOther_woTagN += OscProb;
+          if (intmode>=31) OscillatedNC_woTagN++;
         }
       }
       else {
         //Energy fraction
-        if (mode==1) h1_OscProb_wNeutron[0] -> Fill(RecoEnu/1000., OscProb);                 //CCQE(1p1h)
-        if (mode>=2 && mode<=10) h1_OscProb_wNeutron[1] -> Fill(RecoEnu/1000., OscProb);     //CC 2p2h
-        if (mode>10 && mode<=30) h1_OscProbCCOther_wNeutron -> Fill(RecoEnu/1000., OscProb); //CC RES+CC Other
-        if (mode>=31) h1_OscProb_wNeutron[2] -> Fill(RecoEnu/1000.);                         //NC
+        if (intmode==1) h1_OscProb_wNeutron[0] -> Fill(RecoEnu/1000., OscProb);                 //CCQE(1p1h)
+        if (intmode>=2 && intmode<=10) h1_OscProb_wNeutron[1] -> Fill(RecoEnu/1000., OscProb);     //CC 2p2h
+        if (intmode>10 && intmode<=30) h1_OscProbCCOther_wNeutron -> Fill(RecoEnu/1000., OscProb); //CC RES+CC Other
+        if (intmode>=31) h1_OscProb_wNeutron[2] -> Fill(RecoEnu/1000.);                         //NC
 
         //Separation fraction
         if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) {
-          if (mode==1) OscillatedCCQE_wTagN += OscProb;
-          if (mode>=2 && mode<=10) OscillatedCCnonQE_wTagN += OscProb;
-          if (mode==13) OscillatedCCRESp_wTagN += OscProb;
-          if (mode==11) OscillatedCCRESpp_wTagN += OscProb;
-          if (mode==12) OscillatedCCRES0_wTagN += OscProb;
-          if (mode>14 && mode<=30) OscillatedCCOther_wTagN += OscProb;
-          if (mode>=31) OscillatedNC_wTagN++;
+          if (intmode==1) OscillatedCCQE_wTagN += OscProb;
+          if (intmode>=2 && intmode<=10) OscillatedCCnonQE_wTagN += OscProb;
+          if (intmode==13) OscillatedCCRESp_wTagN += OscProb;
+          if (intmode==11) OscillatedCCRESpp_wTagN += OscProb;
+          if (intmode==12) OscillatedCCRES0_wTagN += OscProb;
+          if (intmode>14 && intmode<=30) OscillatedCCOther_wTagN += OscProb;
+          if (intmode>=31) OscillatedNC_wTagN++;
         }
       }
 
 
       neutronlists.clear();
       parentlists.clear();
+
+
+      int TrueMuN = 0;
+      float MuNCapVtx[3] = {0., 0., 0.};  //neutron(from primary interaction) capture vertex
+      for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
+        if (ntagana.GetTrueMuNCapVtx(iscnd, numu, ichildidx, MuNCapVtx)) TrueMuN++;
+      }
+
+
+      int TrueBefFSI   = ntagana.GetTrueGenNBefFSI(numu);
+      int TrueBefSI    = ntagana.GetTrueGenNBefSI(numu, Iorgvc);
+      int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprntinit, Iorgvc);
+      int TrueAftSI    = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt, pprntinit);
+      if (intmode<31) {
+        GenPreFSIN   += TrueBefFSI*OscProb;
+        GenPostFSIN  += TrueBefSI*OscProb;
+
+        CapPostFSIN  += TrueCapBefSI*OscProb;
+        CapSIN       += TrueAftSI*OscProb;
+        CapMuN       += TrueMuN*OscProb;
+        TrueN        += NTrueN*OscProb;
+      }
+      else {
+        GenPreFSIN   += TrueBefFSI;
+        GenPostFSIN  += TrueBefSI;
+
+        CapPostFSIN  += TrueCapBefSI;
+        CapSIN       += TrueAftSI;
+        CapMuN       += TrueMuN;
+        TrueN        += NTrueN;
+      }
 
       //std::cout << " " << std::endl;
       
@@ -698,7 +733,7 @@ int main(int argc, char **argv) {
   gDirectory -> cd("..");
 
   ndistance.cdDistanceViewer(fout);
-  ndistance.WritePlots();
+  ndistance.WritePlots(false);
   gDirectory -> cd("..");
 
   //noise rate and efficiency for window optimization
@@ -707,7 +742,9 @@ int main(int argc, char **argv) {
   ntagana.SetEfficiencyGraph(0);
 
   ntagana.cdNTagAnalysis(fout);
-  ntagana.WritePlots();
+  ntagana.WritePlots(false);
   gDirectory -> cd("..");
 
+#endif
 }
+

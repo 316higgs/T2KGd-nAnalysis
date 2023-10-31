@@ -47,10 +47,11 @@ int main(int argc, char **argv) {
     std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
     exit(-1);
   }
-  const int ntagEntries = tchntag->GetEntries();
   std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << ntagFiles      << " files from: " << NtagFileName << "\e[0m" << std::endl;
+
+  const int ntagEntries = tchntag->GetEntries();
   std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  NTag output       : Processing " << ntagEntries      <<" entries...\e[0m" << std::endl;
-  
+
   const char* varname1;
   const char* varname2;
   //bool empty = false;
@@ -61,7 +62,7 @@ int main(int argc, char **argv) {
       varname1 = "NHits";  //float
       break;
     case 2:
-      varname1 = "N200";   //float
+      varname1 = "NResHits";   //float
       break;
     case 3:
       varname1 = "TRMS";   //float
@@ -73,25 +74,31 @@ int main(int argc, char **argv) {
       varname1 = "DWallMeanDir";  //float
       break;
     case 6:
-      varname1 = "OpeningAngleMean";  //float
-      break;
-    case 7:
       varname1 = "OpeningAngleStdev";  //float
       break;
-    case 8:
-      varname1 = "OpeningAngleSkew";  //float
-      break;
-    case 9:
-      varname1 = "MeanDirAngleMean";  //float
-      break;
-    case 10:
-      varname1 = "MeanDirAngleRMS";  //float
-      break;
-    case 11:
+    case 7:
       varname1 = "Beta1";  //float
       break;
-    case 12:
+    case 8:
+      varname1 = "Beta2";  //float
+      break;
+    case 9:
+      varname1 = "Beta3";  //float
+      break;
+    case 10:
+      varname1 = "Beta4";  //float
+      break;
+    case 11:
       varname1 = "Beta5";  //float
+      break;
+    case 12:
+      varname1 = "BurstRatio";  //float
+      break;
+    case 13:
+      varname1 = "FitGoodness";  //float
+      break;
+    case 14:
+      varname1 = "DarkLikelihood";  //float
       break;
     default:
       varname1 = "NONE";
@@ -103,7 +110,7 @@ int main(int argc, char **argv) {
       varname2 = "NHits";
       break;
     case 2:
-      varname2 = "N200";
+      varname2 = "NResHits";
       break;
     case 3:
       varname2 = "TRMS";
@@ -115,25 +122,31 @@ int main(int argc, char **argv) {
       varname2 = "DWallMeanDir";
       break;
     case 6:
-      varname2 = "OpeningAngleMean";
-      break;
-    case 7:
       varname2 = "OpeningAngleStdev";
       break;
-    case 8:
-      varname2 = "OpeningAngleSkew";
-      break;
-    case 9:
-      varname2 = "MeanDirAngleMean";
-      break;
-    case 10:
-      varname2 = "MeanDirAngleRMS";
-      break;
-    case 11:
+    case 7:
       varname2 = "Beta1";
       break;
-    case 12:
+    case 8:
+      varname2 = "Beta2";
+      break;
+    case 9:
+      varname2 = "Beta3";
+      break;
+    case 10:
+      varname2 = "Beta4";
+      break;
+    case 11:
       varname2 = "Beta5";
+      break;
+    case 12:
+      varname2 = "BurstRatio";
+      break;
+    case 13:
+      varname2 = "FitGoodness";
+      break;
+    case 14:
+      varname2 = "DarkLikelihood";
       break;
     default:
       varname2 = "NONE";
@@ -156,7 +169,7 @@ int main(int argc, char **argv) {
     col = GetMatrixElementFF(type, tchntag, ntagEntries, varname1, varname2);
   }
 
-
+  std::cout << "Correlation factor: " << col << std::endl;
   if (varid2==0) h2_matrix -> Fill(varid1-1, varid1-1, col);
   else h2_matrix -> Fill(varid1-1, varid2-1, col);
 

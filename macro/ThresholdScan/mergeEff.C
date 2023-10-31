@@ -77,7 +77,7 @@ void mergeEff(bool beammode) {
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.systSIm30.root");
 #endif
 
-#if 1
+#if 0
   ////  +30%  ////
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.systSIp30.root");
   TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.systSIp30.root");
@@ -85,6 +85,16 @@ void mergeEff(bool beammode) {
   TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.systSIp30.root");
   TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.systSIp30.root");
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.systSIp30.root");
+#endif
+
+#if 1
+  ////  0.0251%  ////
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.00251GdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.00251GdMC.bonsaikeras_ToF.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.00251GdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.00251GdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.00251GdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.00251GdMC.bonsaikeras_ToF.root");
 #endif
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");

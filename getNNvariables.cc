@@ -52,48 +52,48 @@ int main(int argc, char **argv) {
   TChain *tchfQ = new TChain("h1");
   int nfQFiles = tchfQ->Add( fiTQunFileName );
   if ( nfQFiles==0 ) {
-    std::cout << "[### getNNvariables ###]  Cannot load TTree h1 from: " << fiTQunFileName << std::endl;
-    std::cout << "[### getNNvariables ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree h1 from: " << fiTQunFileName << "\e[0m" << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //=========  Event info (TTree: event)  ============
   TChain *tchev = new TChain("event");
   int nevFiles = tchev->Add( NtagFileName );
   if ( nevFiles==0 ) {
-    std::cout << "[### getNNvariables ###]  Cannot load TTree event from: " << NtagFileName << std::endl;
-    std::cout << "[### getNNvariables ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree event from: " << NtagFileName << "\e[0m" << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //=========  Event info (TTree: particle)  ============
   TChain *tchpar = new TChain("particle");
   int nparFiles = tchpar->Add( NtagFileName );
   if ( nparFiles==0 ) {
-    std::cout << "[### getNNvariables ###]  Cannot load TTree particle from: " << NtagFileName << std::endl;
-    std::cout << "[### getNNvariables ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree particle from: " << NtagFileName << "\e[0m" << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //=========  Delayed info (TTree: taggable)  ============
   TChain *tchtaggable = new TChain("taggable");
   int ntaggableFiles = tchtaggable->Add( NtagFileName );
   if ( ntaggableFiles==0 ) {
-    std::cout << "[### getNNvariables ###]  Cannot load TTree taggable from: " << NtagFileName << std::endl;
-    std::cout << "[### getNNvariables ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree taggable from: " << NtagFileName << "\e[0m" << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //=========  NTag output (TTree: ntag)  ============
   TChain *tchntag = new TChain("ntag");
   int ntagFiles = tchntag->Add( NtagFileName );
   if ( ntagFiles==0 ) {
-    std::cout << "[### getNNvariables ###]  Cannot load TTree ntag from: " << NtagFileName << std::endl;
-    std::cout << "[### getNNvariables ###]  -> EXIT " << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Cannot load TTree ntag from: " << NtagFileName << "\e[0m" << std::endl;
+    std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  -> EXIT \e[0m" << std::endl;
     exit(-1);
   }
   //Load succeed
-  std::cout << "[### getNNvariables ###]  Loaded " << nfQFiles       << " files from: " << fiTQunFileName << std::endl;
-  std::cout << "[### getNNvariables ###]  Loaded " << nevFiles       << " files from: " << NtagFileName   << std::endl;
-  std::cout << "[### getNNvariables ###]  Loaded " << nparFiles      << " files from: " << NtagFileName   << std::endl;
-  std::cout << "[### getNNvariables ###]  Loaded " << ntaggableFiles << " files from: " << NtagFileName   << std::endl;
-  std::cout << "[### getNNvariables ###]  Loaded " << ntagFiles      << " files from: " << NtagFileName   << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << nfQFiles       << " files from: " << fiTQunFileName << "\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << nevFiles       << " files from: " << NtagFileName   << "\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << nparFiles      << " files from: " << NtagFileName   << "\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << ntaggableFiles << " files from: " << NtagFileName   << "\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << ntagFiles      << " files from: " << NtagFileName   << "\e[0m" << std::endl;
 
 
   const int nfQEntries       = tchfQ->GetEntries();       //total entries of TTree h1
@@ -101,11 +101,11 @@ int main(int argc, char **argv) {
   const int nparEntries      = tchpar->GetEntries();       //total entries of TTree particle
   const int ntaggableEntries = tchtaggable->GetEntries(); //total entries of TTree taggable
   const int ntagEntries      = tchntag->GetEntries();     //total entries of TTree ntag
-  std::cout << "[### getNNvariables ###]  fiTQun output     : Processing " << nfQEntries       <<" entries..." << std::endl;
-  std::cout << "[### getNNvariables ###]  Event info        : Processing " << nevEntries       <<" entries..." << std::endl;
-  std::cout << "[### getNNvariables ###]  Particle info     : Processing " << nparEntries      <<" entries..." << std::endl;
-  std::cout << "[### getNNvariables ###]  Delayed info      : Processing " << ntaggableEntries <<" entries..." << std::endl;
-  std::cout << "[### getNNvariables ###]  NTag output       : Processing " << ntagEntries      <<" entries..." << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  fiTQun output     : Processing " << nfQEntries       <<" entries...\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Event info        : Processing " << nevEntries       <<" entries...\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Particle info     : Processing " << nparEntries      <<" entries...\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Delayed info      : Processing " << ntaggableEntries <<" entries...\e[0m" << std::endl;
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  NTag output       : Processing " << ntagEntries      <<" entries...\e[0m" << std::endl;
 
 
   //=========  TTree event variables  ============
@@ -169,6 +169,8 @@ int main(int argc, char **argv) {
   TBranch *bN50 = 0;
   std::vector<float> *N200 = 0;
   TBranch *bN200 = 0;
+  std::vector<float> *NResHits = 0;
+  TBranch *bNResHits = 0;
   std::vector<float> *TRMS = 0;
   TBranch *bTRMS = 0;
   std::vector<float> *DWall = 0;
@@ -185,8 +187,20 @@ int main(int argc, char **argv) {
   TBranch *bMeanDirAngleMean = 0;
   std::vector<float> *MeanDirAngleRMS = 0;
   TBranch *bMeanDirAngleRMS = 0;
+  std::vector<float> *BurstRatio = 0;
+  TBranch *bBurstRatio = 0;
+  std::vector<float> *FitGoodness = 0;
+  TBranch *bFitGoodness = 0;
+  std::vector<float> *DarkLikelihood = 0;
+  TBranch *bDarkLikelihood = 0;
   std::vector<float> *Beta1 = 0;
   TBranch *bBeta1 = 0;
+  std::vector<float> *Beta2 = 0;
+  TBranch *bBeta2 = 0;
+  std::vector<float> *Beta3 = 0;
+  TBranch *bBeta3 = 0;
+  std::vector<float> *Beta4 = 0;
+  TBranch *bBeta4 = 0;
   std::vector<float> *Beta5 = 0;
   TBranch *bBeta5 = 0;
   std::vector<float> *TagOut = 0;
@@ -198,6 +212,7 @@ int main(int argc, char **argv) {
   tchntag->SetBranchAddress("NHits", &NHits, &bNHits);
   tchntag->SetBranchAddress("N50", &N50, &bN50);
   tchntag->SetBranchAddress("N200", &N200, &bN200);
+  tchntag->SetBranchAddress("NResHits", &NResHits, &bNResHits);
   tchntag->SetBranchAddress("TRMS", &TRMS, &bTRMS);
   tchntag->SetBranchAddress("DWall", &DWall, &bDWall);
   tchntag->SetBranchAddress("DWallMeanDir", &DWallMeanDir, &bDWallMeanDir);
@@ -206,7 +221,13 @@ int main(int argc, char **argv) {
   tchntag->SetBranchAddress("OpeningAngleStdev", &OpeningAngleStdev, &bOpeningAngleStdev);
   tchntag->SetBranchAddress("MeanDirAngleMean", &MeanDirAngleMean, &bMeanDirAngleMean);
   tchntag->SetBranchAddress("MeanDirAngleRMS", &MeanDirAngleRMS, &bMeanDirAngleRMS);
+  tchntag->SetBranchAddress("BurstRatio", &BurstRatio, &bBurstRatio);
+  tchntag->SetBranchAddress("FitGoodness", &FitGoodness, &bFitGoodness);
+  tchntag->SetBranchAddress("DarkLikelihood", &DarkLikelihood, &bDarkLikelihood);
   tchntag->SetBranchAddress("Beta1", &Beta1, &bBeta1);
+  tchntag->SetBranchAddress("Beta2", &Beta2, &bBeta2);
+  tchntag->SetBranchAddress("Beta3", &Beta3, &bBeta3);
+  tchntag->SetBranchAddress("Beta4", &Beta4, &bBeta4);
   tchntag->SetBranchAddress("Beta5", &Beta5, &bBeta5);
   tchntag->SetBranchAddress("TagOut", &TagOut, &bTagOut);
 
@@ -233,21 +254,21 @@ int main(int argc, char **argv) {
   Int_t   ichildidx[1000];  //Index of the first child particle (0: no childs, n: the first child of n-th secondary particle)
   Int_t   lmecscnd[1000];   //Interaction code of secondary particles based on GEANT
   Float_t pscnd[1000][3];   //Momentum of the secondary particle
-  tchfQ -> SetBranchAddress("Npvc", &Npvc);
+  //tchfQ -> SetBranchAddress("Npvc", &Npvc);
   tchfQ -> SetBranchAddress("Pvc", Pvc);
-  tchfQ -> SetBranchAddress("Ipvc", Ipvc);
-  tchfQ -> SetBranchAddress("Ichvc", Ichvc);
+  //tchfQ -> SetBranchAddress("Ipvc", Ipvc);
+  //tchfQ -> SetBranchAddress("Ichvc", Ichvc);
   tchfQ -> SetBranchAddress("Iflvc", Iflvc);
   tchfQ -> SetBranchAddress("Iorgvc", Iorgvc);
-  tchfQ -> SetBranchAddress("nscndprt", &nscndprt);
-  tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
+  //tchfQ -> SetBranchAddress("nscndprt", &nscndprt);
+  //tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
   tchfQ -> SetBranchAddress("tscnd", tscnd);
-  tchfQ -> SetBranchAddress("iprntprt", iprntprt);
-  tchfQ -> SetBranchAddress("iorgprt", iorgprt);
+  //tchfQ -> SetBranchAddress("iprntprt", iprntprt);
+  //tchfQ -> SetBranchAddress("iorgprt", iorgprt);
   tchfQ -> SetBranchAddress("iprnttrk", iprnttrk);
   tchfQ -> SetBranchAddress("iprntidx", iprntidx);
   tchfQ -> SetBranchAddress("ichildidx", ichildidx);
-  tchfQ -> SetBranchAddress("lmecscnd", lmecscnd);
+  //tchfQ -> SetBranchAddress("lmecscnd", lmecscnd);
   tchfQ -> SetBranchAddress("pscnd", pscnd);
 
   ResetNeutrinoEvents();
@@ -292,7 +313,8 @@ int main(int argc, char **argv) {
   for (int ientry=0; ientry<ntagEntries; ientry++) {
 
   	//Progress meter
-    if(ientry>100 && ientry%100==0) std::cout << "[### getNNvariables ###]  Progress: " << 100.*ientry/ntagEntries << "%" << std::endl;
+    //if(ientry>100 && ientry%100==0) std::cout << "[### getNNvariables ###]  Progress: " << 100.*ientry/ntagEntries << "%" << std::endl;
+    if(ientry>100 && ientry%100==0) std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Progress: " << 100.*ientry/ntagEntries << "%\e[0m" << std::endl;
 
     tchfQ       -> GetEntry(ientry);
     tchev       -> GetEntry(ientry);
@@ -317,6 +339,7 @@ int main(int argc, char **argv) {
     bNHits             -> GetEntry(tentry);
     bN50               -> GetEntry(tentry);
     bN200              -> GetEntry(tentry);
+    bNResHits          -> GetEntry(tentry);
     bTRMS              -> GetEntry(tentry);
     bDWall             -> GetEntry(tentry);
     bDWallMeanDir      -> GetEntry(tentry);
@@ -325,7 +348,13 @@ int main(int argc, char **argv) {
     bOpeningAngleStdev -> GetEntry(tentry);
     bMeanDirAngleMean  -> GetEntry(tentry);
     bMeanDirAngleRMS   -> GetEntry(tentry);
+    bBurstRatio        -> GetEntry(tentry);
+    bDarkLikelihood    -> GetEntry(tentry);
+    bFitGoodness       -> GetEntry(tentry);
     bBeta1             -> GetEntry(tentry);
+    bBeta2             -> GetEntry(tentry);
+    bBeta3             -> GetEntry(tentry);
+    bBeta4             -> GetEntry(tentry);
     bBeta5             -> GetEntry(tentry);
     bTagIndex   -> GetEntry(tentry);
     bTagOut     -> GetEntry(tentry);
@@ -371,6 +400,7 @@ int main(int argc, char **argv) {
         float NNVar = 0.;
         for (int ivar=0; ivar<NNVARIABLES; ivar++) {
           switch (ivar) {
+#if 0
             case 0:
               NNVar = NHits->at(jentry);
               break;
@@ -407,6 +437,49 @@ int main(int argc, char **argv) {
             case 11:
               NNVar = Beta5->at(jentry);
               break;
+#endif
+            case 0:
+              NNVar = NHits->at(jentry);
+              break;
+            case 1:
+              NNVar = NResHits->at(jentry);
+              break;
+            case 2:
+              NNVar = TRMS->at(jentry);
+              break;
+            case 3:
+              NNVar = DWall->at(jentry);
+              break;
+            case 4:
+              NNVar = DWallMeanDir->at(jentry);
+              break;
+            case 5:
+              NNVar = OpeningAngleStdev->at(jentry);
+              break;
+            case 6:
+              NNVar = Beta1->at(jentry);
+              break;
+            case 7:
+              NNVar = Beta2->at(jentry);
+              break;
+            case 8:
+              NNVar = Beta3->at(jentry);
+              break;
+            case 9:
+              NNVar = Beta4->at(jentry);
+              break;
+            case 10:
+              NNVar = Beta5->at(jentry);
+              break;
+            case 11:
+              NNVar = BurstRatio->at(jentry);
+              break;
+            case 12:
+              NNVar = FitGoodness->at(jentry);
+              break;
+            case 13:
+              NNVar = DarkLikelihood->at(jentry);
+              break;
             default:
               NNVar = 0.;
               break;  
@@ -414,10 +487,19 @@ int main(int argc, char **argv) {
 
           //Pre-NN
 #if 0
-          if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
-          if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
-          if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar, OscProb);
-          if (Label->at(jentry)==3) h1_NNvar_Gd[ivar]       -> Fill(NNVar, OscProb);
+          if (mode <31) {
+            if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
+            if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
+            if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar, OscProb);
+            if (Label->at(jentry)==3) h1_NNvar_Gd[ivar]       -> Fill(NNVar, OscProb);
+          }
+          else {
+            if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
+            if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar);
+            if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar);
+            if (Label->at(jentry)==3) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
+          }
+          
 #endif
 
           //Post-NN
@@ -427,10 +509,19 @@ int main(int argc, char **argv) {
           //if ( FitT->at(jentry) < 1.5 ) etagboxin = true;
           //else if ( FitT->at(jentry) < 20. && FitT->at(jentry) < 0.25*(N50->at(jentry))-7.5 ) etagboxin = true;
 
-          if (Label->at(jentry)==0 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
-          if (Label->at(jentry)==1 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
-          if (Label->at(jentry)==2 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_H[ivar]        -> Fill(NNVar, OscProb);
-          if (Label->at(jentry)==3 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Gd[ivar]       -> Fill(NNVar, OscProb);
+          if (mode<31) {
+            if (Label->at(jentry)==0 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
+            if (Label->at(jentry)==1 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
+            if (Label->at(jentry)==2 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_H[ivar]        -> Fill(NNVar, OscProb);
+            if (Label->at(jentry)==3 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Gd[ivar]       -> Fill(NNVar, OscProb);
+          }
+          else {
+            if (Label->at(jentry)==0 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
+            if (Label->at(jentry)==1 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Decaye[ivar]   -> Fill(NNVar);
+            if (Label->at(jentry)==2 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_H[ivar]        -> Fill(NNVar);
+            if (Label->at(jentry)==3 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
+          }
+          
 #endif
         }
         //h1_AllNHits -> Fill(NHits->at(jentry), OscProb);
@@ -680,7 +771,7 @@ int main(int argc, char **argv) {
   nninputs.WritePlots();
 
   ndistance.cdDistanceViewer(fout);
-  ndistance.WritePlots();
+  ndistance.WritePlots(false);
   gDirectory -> cd("..");
 
 }

@@ -10,7 +10,8 @@
 #include "TH1F.h"
 #include "TString.h"
 
-#define NNVARIABLES 12
+//#define NNVARIABLES 12  // TMVA
+#define NNVARIABLES 14  // Keras
 
 
 TH1F* h1_NNvar_AccNoise[NNVARIABLES];

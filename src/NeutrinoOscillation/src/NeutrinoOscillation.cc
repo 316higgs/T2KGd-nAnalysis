@@ -375,7 +375,8 @@ float NeutrinoOscillation::GetEnuResolution(CC0PiNumu* numu, float theta, float 
 
     //CC other(not include CCRES)
     //should be included CCRES?
-    if (mode>=14 && mode<=30) h1_Enureso[6] -> Fill(EnuReso);
+    //if (mode>=14 && mode<=30) h1_Enureso[6] -> Fill(EnuReso);
+    if (mode>=11 && mode<=30) h1_Enureso[6] -> Fill(EnuReso);
 
     //NC
     if (mode>=31) {

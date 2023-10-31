@@ -24,38 +24,20 @@ void SimpleNeutron(bool beammode) {
 
   //FHC
 #if fhcflag
-  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronVertex_mu_x_n.root");
-  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronVertex_mu_x_n.root");
-  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.NeutronMultiplicity.root");
-  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronMultiplicity.root");
-
-  //TFile* fin_numu    = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.root");
-  //TFile* fin_numubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.NeutronMultiplicity.root");
-  //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
-
-
-  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.NNoptnewGdMC.Nmult.root");
-  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.NNoptnewGdMC.Nmult.root");
-  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.NNoptnewGdMC.Nmult.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.Nmult.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.Nmult.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.newGdMC.Nmult.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.newGdMC.Nmult.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.Nmult.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.Nmult.root");
 
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
-  //RHC
-#if rhcflag
-  TFile* fin_numu    = new TFile("../../output/rhc/rhc.numu_x_numu.VertexSelection_mu_x_dcye.beforecut.root");
-  TFile* fin_numubar = new TFile("../../output/rhc/rhc.numubar_x_numubar.VertexSelection_mu_x_dcye.beofrecut.root");
-  //TFile* fin_numu    = new TFile("../../output/rhc/rhc.numu_x_numu.VertexSelection.aftercut.root");
-  //TFile* fin_numubar = new TFile("../../output/rhc/rhc.numubar_x_numubar.VertexSelection.aftercut.root");
-  TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
-#endif
 
 
-  bool TruthNeutron = true;
-  //bool TruthNeutron = false;
+  //bool TruthNeutron = true;
+  bool TruthNeutron = false;
 
 
   // Normalization factors
@@ -74,7 +56,7 @@ void SimpleNeutron(bool beammode) {
   Double_t GenN_numu_x_numu       = 63622;
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
-  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_numubar_x_nuebar  = 63460;
   Double_t GenN_nue_x_nue         = 63423;
   Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
@@ -338,16 +320,7 @@ void SimpleNeutron(bool beammode) {
   hs_Neutron -> Add(h1_CCQE_numubar);
   hs_Neutron -> Add(h1_CCQE_numu);
 #endif
-#if rhcflag
-  hs_Neutron -> Add(h1_NC_numu);
-  hs_Neutron -> Add(h1_NC_numubar);
-  hs_Neutron -> Add(h1_CCOther_numu);
-  hs_Neutron -> Add(h1_CCOther_numubar);
-  hs_Neutron -> Add(h1_CC2p2h_numu);
-  hs_Neutron -> Add(h1_CC2p2h_numubar);
-  hs_Neutron -> Add(h1_CCQE_numu);
-  hs_Neutron -> Add(h1_CCQE_numubar);
-#endif
+
 
 
 #if 1

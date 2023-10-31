@@ -45,16 +45,9 @@ void mergeNNinput(bool beammode) {
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.postNN.newGdMC.root");
 #endif
 
-  //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
-  //RHC
-#if rhcflag
-  TFile* fin_numu    = new TFile("../../output/rhc/rhc.numu_x_numu.etagON.cut1.root");
-  TFile* fin_numubar = new TFile("../../output/rhc/rhc.numubar_x_numubar.etagON.root");
-  TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
-#endif
 
   // Normalization factors
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
@@ -96,39 +89,39 @@ void mergeNNinput(bool beammode) {
   std::cout << "[nueb  -> nueb ] Normalization factor for nuebar_x_nuebar: " << (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) << std::endl;
 
 
-  TH1F* h1_NNvar_Gd_numu[12];
-  TH1F* h1_NNvar_H_numu[12];
-  TH1F* h1_NNvar_AccNoise_numu[12];
-  TH1F* h1_NNvar_Decaye_numu[12];
+  TH1F* h1_NNvar_Gd_numu[14];
+  TH1F* h1_NNvar_H_numu[14];
+  TH1F* h1_NNvar_AccNoise_numu[14];
+  TH1F* h1_NNvar_Decaye_numu[14];
 
-  TH1F* h1_NNvar_Gd_nuesig[12];
-  TH1F* h1_NNvar_H_nuesig[12];
-  TH1F* h1_NNvar_AccNoise_nuesig[12];
-  TH1F* h1_NNvar_Decaye_nuesig[12];
+  TH1F* h1_NNvar_Gd_nuesig[14];
+  TH1F* h1_NNvar_H_nuesig[14];
+  TH1F* h1_NNvar_AccNoise_nuesig[14];
+  TH1F* h1_NNvar_Decaye_nuesig[14];
 
-  TH1F* h1_NNvar_Gd_numubar[12];
-  TH1F* h1_NNvar_H_numubar[12];
-  TH1F* h1_NNvar_AccNoise_numubar[12];
-  TH1F* h1_NNvar_Decaye_numubar[12];
+  TH1F* h1_NNvar_Gd_numubar[14];
+  TH1F* h1_NNvar_H_numubar[14];
+  TH1F* h1_NNvar_AccNoise_numubar[14];
+  TH1F* h1_NNvar_Decaye_numubar[14];
 
-  TH1F* h1_NNvar_Gd_nuebarsig[12];
-  TH1F* h1_NNvar_H_nuebarsig[12];
-  TH1F* h1_NNvar_AccNoise_nuebarsig[12];
-  TH1F* h1_NNvar_Decaye_nuebarsig[12];
+  TH1F* h1_NNvar_Gd_nuebarsig[14];
+  TH1F* h1_NNvar_H_nuebarsig[14];
+  TH1F* h1_NNvar_AccNoise_nuebarsig[14];
+  TH1F* h1_NNvar_Decaye_nuebarsig[14];
 
-  TH1F* h1_NNvar_Gd_nuebkg[12];
-  TH1F* h1_NNvar_H_nuebkg[12];
-  TH1F* h1_NNvar_AccNoise_nuebkg[12];
-  TH1F* h1_NNvar_Decaye_nuebkg[12];
+  TH1F* h1_NNvar_Gd_nuebkg[14];
+  TH1F* h1_NNvar_H_nuebkg[14];
+  TH1F* h1_NNvar_AccNoise_nuebkg[14];
+  TH1F* h1_NNvar_Decaye_nuebkg[14];
 
-  TH1F* h1_NNvar_Gd_nuebarbkg[12];
-  TH1F* h1_NNvar_H_nuebarbkg[12];
-  TH1F* h1_NNvar_AccNoise_nuebarbkg[12];
-  TH1F* h1_NNvar_Decaye_nuebarbkg[12];
+  TH1F* h1_NNvar_Gd_nuebarbkg[14];
+  TH1F* h1_NNvar_H_nuebarbkg[14];
+  TH1F* h1_NNvar_AccNoise_nuebarbkg[14];
+  TH1F* h1_NNvar_Decaye_nuebarbkg[14];
 
-  THStack* hs_NNvar[12];
+  THStack* hs_NNvar[14];
 
-  for (int i=0; i<12; i++) {
+  for (int i=0; i<14; i++) {
   	h1_NNvar_Gd_numu[i]       = (TH1F*)fin_numu->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
     h1_NNvar_H_numu[i]        = (TH1F*)fin_numu->Get(TString::Format("NNInputVariables/h1_NNvar_H_type%d", i));
     h1_NNvar_AccNoise_numu[i] = (TH1F*)fin_numu->Get(TString::Format("NNInputVariables/h1_NNvar_AccNoise_type%d", i));
@@ -260,8 +253,8 @@ void mergeNNinput(bool beammode) {
   std::cout << "numu_x_numu #tag-n = " << h1_AllNHits->Integral() << std::endl;
 
 #if 1
-  TLegend* legend = new TLegend(0.45, 0.4, 0.89, 0.89);
-  legend -> SetTextSize(0.06);
+  TLegend* legend = new TLegend(0.2, 0.1, 0.89, 0.89);
+  legend -> SetTextSize(0.08);
   if (!NTagapply) legend -> AddEntry((TObject*)0,"#kern[-0.23]{Pre-NN (Run11)}","");
   else legend -> AddEntry((TObject*)0,"#kern[-0.23]{Post-NN (Run11)}","");
   legend -> AddEntry(h1_NNvar_Gd_numu[0], "Gd-n signal", "F");
@@ -271,9 +264,10 @@ void mergeNNinput(bool beammode) {
   legend -> SetFillColor(0);
 
   gROOT -> SetStyle("Plain");
-  TCanvas* c1 = new TCanvas("c1", "c1", 1200, 1000);
-  c1 -> Divide(4,3);
-  for (int i=0; i<12; i++) {
+  //TCanvas* c1 = new TCanvas("c1", "c1", 1400, 1000);
+  TCanvas* c1 = new TCanvas("c1", "c1", 800, 1400);
+  c1 -> Divide(3,5);
+  for (int i=0; i<14; i++) {
     c1 -> cd(i+1)->SetGrid();
     //gPad->SetLogy();
     hs_NNvar[i] -> Draw();
@@ -286,94 +280,184 @@ void mergeNNinput(bool beammode) {
     hs_NNvar[i] -> Draw();
     //hs_NNvar_nuesig[i] -> Draw("SAME");
     //if (i==0) legend -> Draw();
-    if (i==11) legend -> Draw();
   }
+  c1 -> cd(15) -> SetGrid();
+  legend -> Draw();
 #endif
 }
 
 
+
 TString GetNNVarName(int vartype) {
-	TString histtitle;
-  	switch (vartype) {
-  	  case 0:
-  	    histtitle = "NHits";
-  	    break;
-  	  case 1:
-  	    histtitle = "N200";
-  	    break;
-  	  case 2:
-  	    histtitle = "TRMS";
-  	    break;
+  TString histtitle;
+    switch (vartype) {
+#if 0
+      case 0:
+        histtitle = "NHits";
+        break;
+      case 1:
+        histtitle = "N200";
+        break;
+      case 2:
+        histtitle = "TRMS";
+        break;
       case 3:
-  	    histtitle = "DWall";
-  	    break;
-  	  case 4:
-  	    histtitle = "DWallMeanDir";
-  	    break;
-  	  case 5:
-  	    histtitle = "OpeningAngleMean";
-  	    break;
+        histtitle = "DWall";
+        break;
+      case 4:
+        histtitle = "DWallMeanDir";
+        break;
+      case 5:
+        histtitle = "OpeningAngleMean";
+        break;
       case 6:
-  	    histtitle = "OpeningAngleStdev";
-  	    break;
-  	  case 7:
-  	    histtitle = "OpeningAngleSkew";
-  	    break;
-  	  case 8:
-  	    histtitle = "MeanDirAngleMean";
-  	    break;
-  	  case 9:
-  	    histtitle = "MeanDirAngleRMS";
-  	    break;
-  	  case 10:
-  	    histtitle = "Beta1; Beta1";
-  	    break;
-  	  case 11:
-  	    histtitle = "Beta5; Beta5";
-  	    break;
-  	}
+        histtitle = "OpeningAngleStdev";
+        break;
+      case 7:
+        histtitle = "OpeningAngleSkew";
+        break;
+      case 8:
+        histtitle = "MeanDirAngleMean";
+        break;
+      case 9:
+        histtitle = "MeanDirAngleRMS";
+        break;
+      case 10:
+        histtitle = "Beta1; Beta1";
+        break;
+      case 11:
+        histtitle = "Beta5; Beta5";
+        break;
+#endif
+      case 0:
+        histtitle = "NHits";
+        break;
+      case 1:
+        histtitle = "NResHits";
+        break;
+      case 2:
+        histtitle = "TRMS";
+        break;
+      case 3:
+        histtitle = "DWall";
+        break;
+      case 4:
+        histtitle = "DWallMeanDir";
+        break;
+      case 5:
+        histtitle = "OpeningAngleStdev";
+        break;
+      case 6:
+        histtitle = "Beta1";
+        break;
+      case 7:
+        histtitle = "Beta2";
+        break;
+      case 8:
+        histtitle = "Beta3";
+        break;
+      case 9:
+        histtitle = "Beta4";
+        break;
+      case 10:
+        histtitle = "Beta5";
+        break;
+      case 11:
+        histtitle = "BurstRatio";
+        break;
+      case 12:
+        histtitle = "FitGoodness";
+        break;
+      case 13:
+        histtitle = "DarkLikelihood";
+        break;
+    }
   return histtitle;
 }
 
 TString GetNNVarAxisName(int vartype) {
   TString varname;
   switch (vartype) {
-  	  case 0:
-  	    varname = "NHits";
-  	    break;
-  	  case 1:
-  	    varname = "N200";
-  	    break;
-  	  case 2:
-  	    varname = "TRMS [nsec]";
-  	    break;
+#if 0
+      case 0:
+        varname = "NHits";
+        break;
+      case 1:
+        varname = "N200";
+        break;
+      case 2:
+        varname = "TRMS [nsec]";
+        break;
       case 3:
-  	    varname = "DWall [cm]";
-  	    break;
-  	  case 4:
-  	    varname = "DWallMeanDir [cm]";
-  	    break;
-  	  case 5:
-  	    varname = "OpeningAngleMean [deg]";
-  	    break;
+        varname = "DWall [cm]";
+        break;
+      case 4:
+        varname = "DWallMeanDir [cm]";
+        break;
+      case 5:
+        varname = "OpeningAngleMean [deg]";
+        break;
       case 6:
-  	    varname = "OpeningAngleStdev [deg]";
-  	    break;
-  	  case 7:
-  	    varname = "OpeningAngleSkew";
-  	    break;
-  	  case 8:
-  	    varname = "MeanDirAngleMean [deg]";
-  	    break;
-  	  case 9:
-  	    varname = "MeanDirAngleRMS [deg]";
-  	    break;
-  	  case 10:
-  	    varname = "Beta1";
-  	    break;
-  	  case 11:
-  	    varname = "Beta5";
-  	    break;
-  	}
+        varname = "OpeningAngleStdev [deg]";
+        break;
+      case 7:
+        varname = "OpeningAngleSkew";
+        break;
+      case 8:
+        varname = "MeanDirAngleMean [deg]";
+        break;
+      case 9:
+        varname = "MeanDirAngleRMS [deg]";
+        break;
+      case 10:
+        varname = "Beta1";
+        break;
+      case 11:
+        varname = "Beta5";
+        break;
+#endif
+    case 0:
+        varname = "NHits";
+        break;
+      case 1:
+        varname = "NResHits";
+        break;
+      case 2:
+        varname = "TRMS [nsec]";
+        break;
+      case 3:
+        varname = "DWall [cm]";
+        break;
+      case 4:
+        varname = "DWallMeanDir [cm]";
+        break;
+      case 5:
+        varname = "OpeningAngleStdev [deg]";
+        break;
+      case 6:
+        varname = "Beta1";
+        break;
+      case 7:
+        varname = "Beta2";
+        break;
+      case 8:
+        varname = "Beta3";
+        break;
+      case 9:
+        varname = "Beta4";
+        break;
+      case 10:
+        varname = "Beta5";
+        break;
+      case 11:
+        varname = "BurstRatio";
+        break;
+      case 12:
+        varname = "FitGoodness";
+        break;
+      case 13:
+        varname = "DarkLikelihood";
+        break;
+    }
   return varname;
 }

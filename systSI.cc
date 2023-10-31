@@ -650,10 +650,13 @@ int main(int argc, char **argv) {
         }
       }
       int TrueBefFSI = ntagana.GetTrueGenNBefFSI(numu);
-      int TrueBefSI  = ntagana.GetTrueGenNBefSI(numu);
+      //int TrueBefSI  = ntagana.GetTrueGenNBefSI(numu);
+      int TrueBefSI  = ntagana.GetTrueGenNBefSI(numu, Iorgvc);
       //int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt);
       //int TrueAftSI    = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt);
-      int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprntinit);
+      //int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprntinit);
+      //int TrueAftSI    = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt, pprntinit);
+      int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprntinit, Iorgvc);
       int TrueAftSI    = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt, pprntinit);
       /*std::cout << "# generated neutrons before FSI: " << TrueBefFSI << std::endl;
       std::cout << "# generated neutrons up to FSI : " << TrueBefSI << std::endl;
@@ -1029,7 +1032,7 @@ int main(int argc, char **argv) {
   gDirectory -> cd("..");
 
   ndistance.cdDistanceViewer(fout);
-  ndistance.WritePlots();
+  ndistance.WritePlots(true);
   gDirectory -> cd("..");
 
   //noise rate and efficiency for window optimization
@@ -1038,7 +1041,7 @@ int main(int argc, char **argv) {
   ntagana.SetEfficiencyGraph(0);  //0 for [3 us, 535 us]
 
   ntagana.cdNTagAnalysis(fout);
-  ntagana.WritePlots();
+  ntagana.WritePlots(true);
   gDirectory -> cd("..");
 
   WriteVECTHisto();

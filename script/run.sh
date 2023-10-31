@@ -73,14 +73,22 @@ EXECUTE()
     NTAGMODE=${NNSTYLE}
   fi
 
+  SIVARMODE=0
+  SIVAR=m30
+  if [ ${SIVARMODE} -eq 1 ]; then
+    SIVAR=p30
+  fi
+
   #RUNNAME="water"
   #RUNNAME="NNoptnewGdMC"
   #RUNNAME="newGdMC.promptkeras"
   #RUNNAME="newGdMC.bonsaikeras"
-  RUNNAME="newGdMC.bonsaikeras_ToF"
+  #RUNNAME="newGdMC.bonsaikeras_ToF"
   #RUNNAME="newGdMC.bonsaikeras_ToF_0511"
   #RUNNAME="newGdMC.bonsaikeras_ToF_0530"
   #RUNNAME="newGdMC.bonsaikeras_ToF_0570"
+  #RUNNAME="systSI${SIVAR}.bonsaikeras_ToF"
+  RUNNAME="ggarnet.bonsaikeras_ToF"
 
 
   ESC=$(printf '\033')
@@ -118,9 +126,10 @@ EXECUTE()
                      -OSCCH ${OSCCH_ARG}
 COMMENTOUT
 
+
 <<COMMENTOUT
   ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
-                     ${DISK3}/Ntag/output/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.NNoptntag0026Gd.\*.root\
+                     ${DISK3}/Ntag/output/${NTAGMODE}/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.ntag0026Gd.\*.root\
                      ${ANALYSISSTAGE}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${RUNNAME}.root\
                      ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.neutrino.${RUNNAME}.txt\
                      ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.ntag.${RUNNAME}.txt\
@@ -130,9 +139,23 @@ COMMENTOUT
                      -OSCCH ${OSCCH_ARG}
 COMMENTOUT
 
+#### SI ####
+<<COMMENTOUT
+  ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/systSI/${SIVAR}/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
+                     ${DISK3}/Ntag/output/systSI/${SIVAR}/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.ntag0026Gd.0\*.root\
+                     ${ANALYSISSTAGE}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${RUNNAME}.root\
+                     ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.neutrino.${RUNNAME}.txt\
+                     ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.ntag.${RUNNAME}.txt\
+                     -MCType ${MC_ARG}\
+                     -ETAG ON\
+                     -BEAMMODE ${BEAMMODE_ARG}\
+                     -OSCCH ${OSCCH_ARG}
+COMMENTOUT
+
+#### GGARNET ####
 #<<COMMENTOUT
-  ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
-                     ${DISK3}/Ntag/output/${NTAGMODE}/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.ntag0026Gd.\*.root\
+  ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/ggarnet/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
+                     ${DISK3}/Ntag/output/ggarnet/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.ntag0026Gd.\*.root\
                      ${ANALYSISSTAGE}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${RUNNAME}.root\
                      ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.neutrino.${RUNNAME}.txt\
                      ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.ntag.${RUNNAME}.txt\

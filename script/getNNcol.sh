@@ -24,34 +24,35 @@ DISK3=/disk03/usr8/sedi
 #type=3
 type=4
 Label="All"
+ESC=$(printf '\033')
 if [ $type -eq 0 ]; then
-  echo "==========================="
-  echo " Type: Truth Noise"
-  echo "==========================="
+  printf "${ESC}[31m%s${ESC}[m\n" "==========================="
+  printf "${ESC}[31m%s${ESC}[m\n" " Type: Truth Noise"
+  printf "${ESC}[31m%s${ESC}[m\n" "==========================="
   Label="Noise"
 fi
 if [ $type -eq 1 ]; then
-  echo "==========================="
-  echo " Type: Decay-e"
-  echo "==========================="
+  printf "${ESC}[31m%s${ESC}[m\n" "==========================="
+  printf "${ESC}[31m%s${ESC}[m\n" " Type: Truth Decay electron"
+  printf "${ESC}[31m%s${ESC}[m\n" "==========================="
   Label="Dcye"
 fi
 if [ $type -eq 2 ]; then
-  echo "==========================="
-  echo " Type: Truth H-n"
-  echo "==========================="
+  printf "${ESC}[31m%s${ESC}[m\n" "==========================="
+  printf "${ESC}[31m%s${ESC}[m\n" " Type: Trut J-n"
+  printf "${ESC}[31m%s${ESC}[m\n" "==========================="
   Label="H"
 fi
 if [ $type -eq 3 ]; then
-  echo "==========================="
-  echo " Type: Truth Gd-n"
-  echo "==========================="
+  printf "${ESC}[31m%s${ESC}[m\n" "==========================="
+  printf "${ESC}[31m%s${ESC}[m\n" " Type: Gd-n"
+  printf "${ESC}[31m%s${ESC}[m\n" "==========================="
   Label="Gd"
 fi
 if [ $type -eq 4 ]; then
-  echo "==========================="
-  echo " Type: All"
-  echo "==========================="
+  printf "${ESC}[31m%s${ESC}[m\n" "==========================="
+  printf "${ESC}[31m%s${ESC}[m\n" " Type: All"
+  printf "${ESC}[31m%s${ESC}[m\n" "==========================="
   Label="All"
 fi
 
@@ -59,18 +60,19 @@ fi
 ### NOTE: id1 and id2 must be different!
 mkdir ./tmp
 filecount=0
-for((ivar=1;ivar<13;ivar++))
+for((ivar=1;ivar<15;ivar++))
 do
-  for((jvar=1;jvar<13;jvar++))
+  for((jvar=1;jvar<15;jvar++))
   do
   	filecount=$((++filecount))
+    echo "(i, j) = ($ivar, $jvar)"
   	if [ ${ivar} -eq ${jvar} ]; then
   	  #./NNcorrelation.exe $type ${ivar} 0 ${filecount}   #Self Correlation(diagonal)
       ./NNcorrelation.exe $type\
                           ${ivar}\
                           0\
                           ${filecount}\
-                          ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.0\*.root\
+                          ${DISK3}/Ntag/output/bonsai_keras_prompt_vertex/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.0\*.root\
                           -MCType Gd\
                           -ETAG ON\
                           -BEAMMODE FHC\
@@ -81,7 +83,7 @@ do
                           ${ivar}\
                           ${jvar}\
                           ${filecount}\
-                          ${DISK3}/Ntag/output/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.0\*.root\
+                          ${DISK3}/Ntag/output/bonsai_keras_prompt_vertex/fhc/numu_x_numu/fhc.numu_x_numu.13a.ntag0026Gd.0\*.root\
                           -MCType Gd\
                           -ETAG ON\
                           -BEAMMODE FHC\
@@ -89,11 +91,12 @@ do
 
       #echo " "
     fi
+    echo " "
   done
 done
 
 OUTPUT="./output/fhc/numu_x_numu.NNcol.${Label}.root"
-root -l './macro/NNinputvariables/CorrelationMatrix.C("'${OUTPUT}'")'
+root -l -q './macro/NNinputvariables/CorrelationMatrix.C("'${OUTPUT}'")'
 
 rm -rf ./tmp
 

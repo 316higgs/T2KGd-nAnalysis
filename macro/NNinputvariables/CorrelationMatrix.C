@@ -1,7 +1,7 @@
 #include "TStyle.h"
 #include "TColor.h"
 
-#define VARNUM 12
+#define VARNUM 14
 
 void CorrelationMatrix(TString foutname) {
   /*TFile* fin[196];
@@ -62,34 +62,38 @@ void CorrelationMatrix(TString foutname) {
   h2 -> GetXaxis() -> SetBinLabel(VARNUM, "Beta5");*/
   h2 -> GetXaxis() -> SetNdivisions(VARNUM);
   h2 -> GetXaxis() -> SetBinLabel(1, "NHits");
-  h2 -> GetXaxis() -> SetBinLabel(2, "N200");
+  h2 -> GetXaxis() -> SetBinLabel(2, "NResHits");
   h2 -> GetXaxis() -> SetBinLabel(3, "TRMS");
   h2 -> GetXaxis() -> SetBinLabel(4, "Dwall");
   h2 -> GetXaxis() -> SetBinLabel(5, "DwallMeanDir");
-  h2 -> GetXaxis() -> SetBinLabel(6, "OpeningAngleMean");
-  h2 -> GetXaxis() -> SetBinLabel(7, "OpeningAngleStdev");
-  h2 -> GetXaxis() -> SetBinLabel(8, "OpeningAngleSkew");
-  h2 -> GetXaxis() -> SetBinLabel(9, "MeanDirAngleMean");
-  h2 -> GetXaxis() -> SetBinLabel(10, "MeanDirAngleRMS");
-  h2 -> GetXaxis() -> SetBinLabel(11, "Beta1");
-  h2 -> GetXaxis() -> SetBinLabel(12, "Beta5");
+  h2 -> GetXaxis() -> SetBinLabel(6, "OpeningAngleStdev");
+  h2 -> GetXaxis() -> SetBinLabel(7, "Beta1");
+  h2 -> GetXaxis() -> SetBinLabel(8, "Beta2");
+  h2 -> GetXaxis() -> SetBinLabel(9, "Beta3");
+  h2 -> GetXaxis() -> SetBinLabel(10, "Beta4");
+  h2 -> GetXaxis() -> SetBinLabel(11, "Beta5");
+  h2 -> GetXaxis() -> SetBinLabel(12, "BurstRatio");
+  h2 -> GetXaxis() -> SetBinLabel(13, "FitGoodness");
+  h2 -> GetXaxis() -> SetBinLabel(14, "DarkLikelihood");
   h2 -> SetLabelSize(0.03, "X");
 
 
   h2 -> GetYaxis() -> SetNdivisions(VARNUM);
   h2 -> GetXaxis() -> SetNdivisions(VARNUM);
   h2 -> GetYaxis() -> SetBinLabel(1, "NHits");
-  h2 -> GetYaxis() -> SetBinLabel(2, "N200");
+  h2 -> GetYaxis() -> SetBinLabel(2, "NResHits");
   h2 -> GetYaxis() -> SetBinLabel(3, "TRMS");
   h2 -> GetYaxis() -> SetBinLabel(4, "Dwall");
   h2 -> GetYaxis() -> SetBinLabel(5, "DwallMeanDir");
-  h2 -> GetYaxis() -> SetBinLabel(6, "OpeningAngleMean");
-  h2 -> GetYaxis() -> SetBinLabel(7, "OpeningAngleStdev");
-  h2 -> GetYaxis() -> SetBinLabel(8, "OpeningAngleSkew");
-  h2 -> GetYaxis() -> SetBinLabel(9, "MeanDirAngleMean");
-  h2 -> GetYaxis() -> SetBinLabel(10, "MeanDirAngleRMS");
-  h2 -> GetYaxis() -> SetBinLabel(11, "Beta1");
-  h2 -> GetYaxis() -> SetBinLabel(12, "Beta5");
+  h2 -> GetYaxis() -> SetBinLabel(6, "OpeningAngleStdev");
+  h2 -> GetYaxis() -> SetBinLabel(7, "Beta1");
+  h2 -> GetYaxis() -> SetBinLabel(8, "Beta2");
+  h2 -> GetYaxis() -> SetBinLabel(9, "Beta3");
+  h2 -> GetYaxis() -> SetBinLabel(10, "Beta4");
+  h2 -> GetYaxis() -> SetBinLabel(11, "Beta5");
+  h2 -> GetYaxis() -> SetBinLabel(12, "BurstRatio");
+  h2 -> GetYaxis() -> SetBinLabel(13, "FitGoodness");
+  h2 -> GetYaxis() -> SetBinLabel(14, "DarkLikelihood");
   h2 -> SetLabelSize(0.03, "Y");
 
   h2 -> Merge(l);

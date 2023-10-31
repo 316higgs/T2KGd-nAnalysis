@@ -173,6 +173,8 @@ int main(int argc, char **argv) {
   TBranch *bLabel = 0;
   std::vector<float> *TagClass = 0;
   TBranch *bTagClass = 0;
+  std::vector<float> *FitGoodness = 0;
+  TBranch *bFitGoodness = 0;
   std::vector<float> *FitT = 0;
   TBranch *bFitT = 0;
   std::vector<float> *TagDWall = 0;
@@ -193,6 +195,7 @@ int main(int argc, char **argv) {
   TBranch *bfvz = 0;
   tchntag->SetBranchAddress("Label", &Label, &bLabel);
   tchntag->SetBranchAddress("TagClass", &TagClass, &bTagClass);
+  tchntag->SetBranchAddress("FitGoodness", &FitGoodness, &bFitGoodness);
   tchntag->SetBranchAddress("FitT", &FitT, &bFitT);
   tchntag->SetBranchAddress("DWall", &TagDWall, &bTagDWall);
   tchntag->SetBranchAddress("NHits", &NHits, &bNHits);
@@ -320,27 +323,28 @@ int main(int argc, char **argv) {
     tchntag     -> GetEntry(ientry);
 
     Long64_t tentry = tchntag->LoadTree(ientry);
-    bPID        -> GetEntry(tentry);
-    bParentPID  -> GetEntry(tentry);
-    bIntID      -> GetEntry(tentry);
-    bType       -> GetEntry(tentry);
-    bE          -> GetEntry(tentry);
-    bDWall      -> GetEntry(tentry);
-    btagvx      -> GetEntry(tentry);
-    btagvy      -> GetEntry(tentry);
-    btagvz      -> GetEntry(tentry);
-    bDistFromPV -> GetEntry(tentry);
-    bLabel      -> GetEntry(tentry);
-    bTagClass   -> GetEntry(tentry);
-    bFitT       -> GetEntry(tentry);
-    bTagDWall   -> GetEntry(tentry);
-    bNHits      -> GetEntry(tentry);
-    bN50        -> GetEntry(tentry);
-    bTagIndex   -> GetEntry(tentry);
-    bTagOut     -> GetEntry(tentry);
-    bfvx        -> GetEntry(tentry);
-    bfvy        -> GetEntry(tentry);
-    bfvz        -> GetEntry(tentry);
+    bPID         -> GetEntry(tentry);
+    bParentPID   -> GetEntry(tentry);
+    bIntID       -> GetEntry(tentry);
+    bType        -> GetEntry(tentry);
+    bE           -> GetEntry(tentry);
+    bDWall       -> GetEntry(tentry);
+    btagvx       -> GetEntry(tentry);
+    btagvy       -> GetEntry(tentry);
+    btagvz       -> GetEntry(tentry);
+    bDistFromPV  -> GetEntry(tentry);
+    bLabel       -> GetEntry(tentry);
+    bTagClass    -> GetEntry(tentry);
+    bFitGoodness -> GetEntry(tentry);
+    bFitT        -> GetEntry(tentry);
+    bTagDWall    -> GetEntry(tentry);
+    bNHits       -> GetEntry(tentry);
+    bN50         -> GetEntry(tentry);
+    bTagIndex    -> GetEntry(tentry);
+    bTagOut      -> GetEntry(tentry);
+    bfvx         -> GetEntry(tentry);
+    bfvy         -> GetEntry(tentry);
+    bfvz         -> GetEntry(tentry);
 
 
     numu->computeCC0PiVariables();
@@ -509,9 +513,29 @@ int main(int argc, char **argv) {
       int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
       ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, NHits, Label, TagOut, nlikeThreshold, fvx, fvy, fvz);
       ntagana.GetRecoNCapTime(numu, etagmode, FitT, NHits, Label, TagOut, nlikeThreshold);
-      if (intmode==1 && numtaggedneutrons!=0) {
+      if (intmode==1 && numtaggedneutrons!=0) CCQEwTaggedNeutrons++;
 
-        CCQEwTaggedNeutrons++;
+      if (intmode==1)                 h1_TagNmultiplicity[0]->Fill(numtaggedneutrons, OscProb);
+      if (intmode>=2 && intmode<=10)  h1_TagNmultiplicity[1]->Fill(numtaggedneutrons, OscProb);
+      if (intmode>10 && intmode<=30)  h1_TagNmultiplicity[2]->Fill(numtaggedneutrons, OscProb);
+      if (intmode>=31)                h1_TagNmultiplicity[3]->Fill(numtaggedneutrons);
+
+
+      //std::cout << "TagOut size: " << TagOut->size() << ", FitGoodness size: " << FitGoodness->size() << std::endl;
+      for (UInt_t jentry=0; jentry<FitGoodness->size(); jentry++) {
+        if (intmode<31) {
+          if (Label->at(jentry)==0) h1_Goodness[0] -> Fill(FitGoodness->at(jentry), OscProb);  
+          if (Label->at(jentry)==1) h1_Goodness[1] -> Fill(FitGoodness->at(jentry), OscProb);
+          if (Label->at(jentry)==2) h1_Goodness[2] -> Fill(FitGoodness->at(jentry), OscProb);
+          if (Label->at(jentry)==3) h1_Goodness[3] -> Fill(FitGoodness->at(jentry), OscProb);
+        }
+        else {
+          if (Label->at(jentry)==0) h1_Goodness[0] -> Fill(FitGoodness->at(jentry));  
+          if (Label->at(jentry)==1) h1_Goodness[1] -> Fill(FitGoodness->at(jentry));
+          if (Label->at(jentry)==2) h1_Goodness[2] -> Fill(FitGoodness->at(jentry));
+          if (Label->at(jentry)==3) h1_Goodness[3] -> Fill(FitGoodness->at(jentry));
+        }
+        
       }
 
 

@@ -20,6 +20,7 @@ void th23Var(bool beammode, TString outname) {
   //FHC
 #if fhcflag
 
+/////////  0.01%  //////////
 #if 0
   //  0.511
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.bonsaikeras_ToF_0511.root");
@@ -50,7 +51,7 @@ void th23Var(bool beammode, TString outname) {
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.bonsaikeras_ToF.root");
 #endif
 
-#if 1
+#if 0
   //  0.570
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.bonsaikeras_ToF_0570.root");
   TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.bonsaikeras_ToF_0570.root");
@@ -58,6 +59,48 @@ void th23Var(bool beammode, TString outname) {
   TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.newGdMC.bonsaikeras_ToF_0570.root");
   TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.bonsaikeras_ToF_0570.root");
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.bonsaikeras_ToF_0570.root");
+#endif
+
+
+/////////  (pseudo-)0.03%  //////////
+#if 0
+  //  0.511
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.003GdMC.bonsaikeras_ToF_0511.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.003GdMC.bonsaikeras_ToF_0511.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.003GdMC.bonsaikeras_ToF_0511.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.003GdMC.bonsaikeras_ToF_0511.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.003GdMC.bonsaikeras_ToF_0511.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.003GdMC.bonsaikeras_ToF_0511.root");
+#endif
+
+#if 0
+  //  0.550
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.003GdMC.bonsaikeras_ToF_0530.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.003GdMC.bonsaikeras_ToF_0530.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.003GdMC.bonsaikeras_ToF_0530.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.003GdMC.bonsaikeras_ToF_0530.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.003GdMC.bonsaikeras_ToF_0530.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.003GdMC.bonsaikeras_ToF_0530.root");
+#endif
+
+#if 1
+  //  0.561
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.003GdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.003GdMC.bonsaikeras_ToF.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.003GdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.003GdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.003GdMC.bonsaikeras_ToF.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.003GdMC.bonsaikeras_ToF.root");
+#endif
+
+#if 0
+  //  0.570
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.003GdMC.bonsaikeras_ToF_0570.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.003GdMC.bonsaikeras_ToF_0570.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.003GdMC.bonsaikeras_ToF_0570.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.003GdMC.bonsaikeras_ToF_0570.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.003GdMC.bonsaikeras_ToF_0570.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.003GdMC.bonsaikeras_ToF_0570.root");
 #endif
 
   //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");

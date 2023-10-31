@@ -20,464 +20,464 @@
 [   Pre    ] Pre-selection Efficiency(Gd)  : 96.2566 %
 [    NN    ] ===== Threshold: 0 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 27147.9
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 27143.6
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 8010.45
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 19137.4
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 54.5735
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 254186
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 281388
-[    NN    ] Noise Rate: 1994.24 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 19133
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 47.9646
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 254187
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 281378
+[    NN    ] Noise Rate: 1994.2 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 99.9913 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 10
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5973
+[    NN    ] NN Efficiency(Gd+H): 99.9752 %
 [    NN    ] NN Efficiency(H)   : 100 %
-[    NN    ] NN Efficiency(Gd)  : 99.9876 %
-[  Overall ] Overall Efficiency(Gd+H): 69.3702 %
+[    NN    ] NN Efficiency(Gd)  : 99.9649 %
+[  Overall ] Overall Efficiency(Gd+H): 69.3591 %
 [  Overall ] Overall Efficiency(H)   : 41.6116 %
-[  Overall ] Overall Efficiency(Gd)  : 96.2447 %
-[  Purity  ] Purity: 9.64785
+[  Overall ] Overall Efficiency(Gd)  : 96.2228 %
+[  Purity  ] Purity: 9.64664
 [    NN    ] ===== Threshold: 0.05 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 21735.7
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 21731.4
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 3510.3
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 18225.5
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 48.0949
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9809.22
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 31593.1
-[    NN    ] Noise Rate: 77.3097 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 18221.1
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 41.4859
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9810.36
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 31583.2
+[    NN    ] Noise Rate: 77.2683 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 80.0572 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 80.0411 %
 [    NN    ] NN Efficiency(H)   : 43.8215 %
-[    NN    ] NN Efficiency(Gd)  : 95.2231 %
-[  Overall ] Overall Efficiency(Gd+H): 55.5407 %
+[    NN    ] NN Efficiency(Gd)  : 95.2004 %
+[  Overall ] Overall Efficiency(Gd+H): 55.5295 %
 [  Overall ] Overall Efficiency(H)   : 18.2348 %
-[  Overall ] Overall Efficiency(Gd)  : 91.6586 %
-[  Purity  ] Purity: 68.7991
+[  Overall ] Overall Efficiency(Gd)  : 91.6367 %
+[  Purity  ] Purity: 68.8067
 [    NN    ] ===== Threshold: 0.1 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 20802.8
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 20798.5
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 2843.94
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17959
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 46.6903
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 4082.28
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 24931.8
-[    NN    ] Noise Rate: 32.3771 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17954.6
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 40.0813
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 4083.42
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 24922
+[    NN    ] Noise Rate: 32.3357 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 76.6211 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 76.605 %
 [    NN    ] NN Efficiency(H)   : 35.5028 %
-[    NN    ] NN Efficiency(Gd)  : 93.8307 %
-[  Overall ] Overall Efficiency(Gd+H): 53.1569 %
+[    NN    ] NN Efficiency(Gd)  : 93.8079 %
+[  Overall ] Overall Efficiency(Gd+H): 53.1457 %
 [  Overall ] Overall Efficiency(H)   : 14.7733 %
-[  Overall ] Overall Efficiency(Gd)  : 90.3182 %
-[  Purity  ] Purity: 83.439
+[  Overall ] Overall Efficiency(Gd)  : 90.2963 %
+[  Purity  ] Purity: 83.4544
 [    NN    ] ===== Threshold: 0.15 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 20187.4
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 20183
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 2425.22
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17762.3
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 46.6793
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 2290.34
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 22524.4
-[    NN    ] Noise Rate: 18.3212 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17757.9
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 40.0703
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 2291.48
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 22514.6
+[    NN    ] Noise Rate: 18.2797 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 74.3543 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 74.3382 %
 [    NN    ] NN Efficiency(H)   : 30.2757 %
-[    NN    ] NN Efficiency(Gd)  : 92.803 %
-[  Overall ] Overall Efficiency(Gd+H): 51.5842 %
+[    NN    ] NN Efficiency(Gd)  : 92.7802 %
+[  Overall ] Overall Efficiency(Gd+H): 51.5731 %
 [  Overall ] Overall Efficiency(H)   : 12.5982 %
-[  Overall ] Overall Efficiency(Gd)  : 89.329 %
-[  Purity  ] Purity: 89.6245
+[  Overall ] Overall Efficiency(Gd)  : 89.3071 %
+[  Purity  ] Purity: 89.6443
 [    NN    ] ===== Threshold: 0.2 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 19701.5
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 19697.2
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 2121.07
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17580.5
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 46.6793
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 1488.67
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 21236.9
-[    NN    ] Noise Rate: 12.0329 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17576.2
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 40.0703
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 1489.81
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 21227.1
+[    NN    ] Noise Rate: 11.9915 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 72.5648 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 72.5487 %
 [    NN    ] NN Efficiency(H)   : 26.4788 %
-[    NN    ] NN Efficiency(Gd)  : 91.8534 %
-[  Overall ] Overall Efficiency(Gd+H): 50.3427 %
+[    NN    ] NN Efficiency(Gd)  : 91.8306 %
+[  Overall ] Overall Efficiency(Gd+H): 50.3316 %
 [  Overall ] Overall Efficiency(H)   : 11.0182 %
-[  Overall ] Overall Efficiency(Gd)  : 88.415 %
-[  Purity  ] Purity: 92.7703
+[  Overall ] Overall Efficiency(Gd)  : 88.3931 %
+[  Purity  ] Purity: 92.7928
 [    NN    ] ===== Threshold: 0.25 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 19358.7
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 19354.4
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 1919.28
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17439.5
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 46.6793
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 1015.56
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 20421
-[    NN    ] Noise Rate: 8.32184 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17435.2
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 40.0703
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 1016.7
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 20411.1
+[    NN    ] Noise Rate: 8.28039 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 71.3021 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 71.2861 %
 [    NN    ] NN Efficiency(H)   : 23.9598 %
-[    NN    ] NN Efficiency(Gd)  : 91.1167 %
-[  Overall ] Overall Efficiency(Gd+H): 49.4668 %
+[    NN    ] NN Efficiency(Gd)  : 91.094 %
+[  Overall ] Overall Efficiency(Gd+H): 49.4556 %
 [  Overall ] Overall Efficiency(H)   : 9.97004 %
-[  Overall ] Overall Efficiency(Gd)  : 87.7059 %
-[  Purity  ] Purity: 94.7983
+[  Overall ] Overall Efficiency(Gd)  : 87.684 %
+[  Purity  ] Purity: 94.8226
 [    NN    ] ===== Threshold: 0.3 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 19029.8
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 19025.4
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 1733.5
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17296.4
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 46.6793
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 771.966
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 19848.4
-[    NN    ] Noise Rate: 6.41109 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17292
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 40.0703
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 773.104
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 19838.6
+[    NN    ] Noise Rate: 6.36964 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 70.0906 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 70.0745 %
 [    NN    ] NN Efficiency(H)   : 21.6405 %
-[    NN    ] NN Efficiency(Gd)  : 90.3687 %
-[  Overall ] Overall Efficiency(Gd+H): 48.6262 %
+[    NN    ] NN Efficiency(Gd)  : 90.3459 %
+[  Overall ] Overall Efficiency(Gd+H): 48.6151 %
 [  Overall ] Overall Efficiency(H)   : 9.00495 %
-[  Overall ] Overall Efficiency(Gd)  : 86.9858 %
-[  Purity  ] Purity: 95.8755
+[  Overall ] Overall Efficiency(Gd)  : 86.9639 %
+[  Purity  ] Purity: 95.9011
 [    NN    ] ===== Threshold: 0.35 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 18743
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 18738.7
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 1582.7
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17160.4
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 46.6793
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 587.868
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 19377.6
-[    NN    ] Noise Rate: 4.96704 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17156
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 40.0703
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 589.007
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 19367.7
+[    NN    ] Noise Rate: 4.92559 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 69.0343 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 69.0183 %
 [    NN    ] NN Efficiency(H)   : 19.7579 %
-[    NN    ] NN Efficiency(Gd)  : 89.6581 %
-[  Overall ] Overall Efficiency(Gd+H): 47.8935 %
+[    NN    ] NN Efficiency(Gd)  : 89.6353 %
+[  Overall ] Overall Efficiency(Gd+H): 47.8823 %
 [  Overall ] Overall Efficiency(H)   : 8.22157 %
-[  Overall ] Overall Efficiency(Gd)  : 86.3019 %
-[  Purity  ] Purity: 96.7253
+[  Overall ] Overall Efficiency(Gd)  : 86.28 %
+[  Purity  ] Purity: 96.7519
 [    NN    ] ===== Threshold: 0.4 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 18503
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 18498.7
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 1465.59
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17037.4
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 46.6793
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 464.387
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 19014.1
-[    NN    ] Noise Rate: 3.99846 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 17033.1
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 40.0703
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 465.525
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 19004.3
+[    NN    ] Noise Rate: 3.957 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 68.1504 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 68.1343 %
 [    NN    ] NN Efficiency(H)   : 18.2959 %
-[    NN    ] NN Efficiency(Gd)  : 89.0159 %
-[  Overall ] Overall Efficiency(Gd+H): 47.2802 %
+[    NN    ] NN Efficiency(Gd)  : 88.9931 %
+[  Overall ] Overall Efficiency(Gd+H): 47.2691 %
 [  Overall ] Overall Efficiency(H)   : 7.61323 %
-[  Overall ] Overall Efficiency(Gd)  : 85.6837 %
-[  Purity  ] Purity: 97.3122
+[  Overall ] Overall Efficiency(Gd)  : 85.6618 %
+[  Purity  ] Purity: 97.3396
 [    NN    ] ===== Threshold: 0.45 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 18304.8
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 18300.5
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 1375.58
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16929.2
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 45.4795
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 361.051
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 18711.4
-[    NN    ] Noise Rate: 3.17875 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16924.9
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 38.8705
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 362.189
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 18701.5
+[    NN    ] Noise Rate: 3.1373 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 67.4204 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 67.4043 %
 [    NN    ] NN Efficiency(H)   : 17.1724 %
-[    NN    ] NN Efficiency(Gd)  : 88.4507 %
-[  Overall ] Overall Efficiency(Gd+H): 46.7738 %
+[    NN    ] NN Efficiency(Gd)  : 88.4279 %
+[  Overall ] Overall Efficiency(Gd+H): 46.7626 %
 [  Overall ] Overall Efficiency(H)   : 7.14569 %
-[  Overall ] Overall Efficiency(Gd)  : 85.1396 %
-[  Purity  ] Purity: 97.8274
+[  Overall ] Overall Efficiency(Gd)  : 85.1177 %
+[  Purity  ] Purity: 97.8555
 [    NN    ] ===== Threshold: 0.5 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 18081.3
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 18076.9
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 1266.11
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16815.2
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 45.4795
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 285.749
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 18412.5
-[    NN    ] Noise Rate: 2.58809 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16810.8
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 38.8705
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 286.888
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 18402.7
+[    NN    ] Noise Rate: 2.54664 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 66.5971 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 66.581 %
 [    NN    ] NN Efficiency(H)   : 15.8057 %
-[    NN    ] NN Efficiency(Gd)  : 87.8548 %
-[  Overall ] Overall Efficiency(Gd+H): 46.2026 %
+[    NN    ] NN Efficiency(Gd)  : 87.832 %
+[  Overall ] Overall Efficiency(Gd+H): 46.1914 %
 [  Overall ] Overall Efficiency(H)   : 6.57702 %
-[  Overall ] Overall Efficiency(Gd)  : 84.5661 %
-[  Purity  ] Purity: 98.2011
+[  Overall ] Overall Efficiency(Gd)  : 84.5441 %
+[  Purity  ] Purity: 98.2298
 [    NN    ] ===== Threshold: 0.55 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 17899.1
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 17894.8
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 1175.53
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16723.6
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 45.4795
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 227.249
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 18171.8
-[    NN    ] Noise Rate: 2.12921 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16719.2
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 38.8705
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 228.388
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 18162
+[    NN    ] Noise Rate: 2.08776 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 65.926 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 65.91 %
 [    NN    ] NN Efficiency(H)   : 14.6749 %
-[    NN    ] NN Efficiency(Gd)  : 87.3762 %
-[  Overall ] Overall Efficiency(Gd+H): 45.737 %
+[    NN    ] NN Efficiency(Gd)  : 87.3534 %
+[  Overall ] Overall Efficiency(Gd+H): 45.7259 %
 [  Overall ] Overall Efficiency(H)   : 6.10648 %
-[  Overall ] Overall Efficiency(Gd)  : 84.1053 %
-[  Purity  ] Purity: 98.4992
+[  Overall ] Overall Efficiency(Gd)  : 84.0834 %
+[  Purity  ] Purity: 98.5285
 [    NN    ] ===== Threshold: 0.6 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 17702.6
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 17698.2
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 1090.44
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16612.1
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 45.4795
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 185.655
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 17933.7
-[    NN    ] Noise Rate: 1.80295 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16607.8
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 38.8705
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 186.794
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 17923.9
+[    NN    ] Noise Rate: 1.7615 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 65.2022 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 65.1862 %
 [    NN    ] NN Efficiency(H)   : 13.6127 %
-[    NN    ] NN Efficiency(Gd)  : 86.7938 %
-[  Overall ] Overall Efficiency(Gd+H): 45.2349 %
+[    NN    ] NN Efficiency(Gd)  : 86.7711 %
+[  Overall ] Overall Efficiency(Gd+H): 45.2238 %
 [  Overall ] Overall Efficiency(H)   : 5.66446 %
-[  Overall ] Overall Efficiency(Gd)  : 83.5448 %
-[  Purity  ] Purity: 98.7112
+[  Overall ] Overall Efficiency(Gd)  : 83.5229 %
+[  Purity  ] Purity: 98.741
 [    NN    ] ===== Threshold: 0.65 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 17496.8
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 17492.4
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 1005.43
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16491.3
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 44.5695
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 148.712
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 17690.1
-[    NN    ] Noise Rate: 1.50624 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16487
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 37.9605
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 149.851
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 17680.2
+[    NN    ] Noise Rate: 1.46479 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 64.4442 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 64.4281 %
 [    NN    ] NN Efficiency(H)   : 12.5514 %
-[    NN    ] NN Efficiency(Gd)  : 86.1627 %
-[  Overall ] Overall Efficiency(Gd+H): 44.709 %
+[    NN    ] NN Efficiency(Gd)  : 86.1399 %
+[  Overall ] Overall Efficiency(Gd+H): 44.6978 %
 [  Overall ] Overall Efficiency(H)   : 5.22285 %
-[  Overall ] Overall Efficiency(Gd)  : 82.9373 %
-[  Purity  ] Purity: 98.9074
+[  Overall ] Overall Efficiency(Gd)  : 82.9154 %
+[  Purity  ] Purity: 98.9377
 [    NN    ] ===== Threshold: 0.7 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 17274.3
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 17270
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 914.053
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16360.2
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 44.5695
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 115.412
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 17434.3
-[    NN    ] Noise Rate: 1.24503 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16355.9
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 37.9605
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 116.55
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 17424.5
+[    NN    ] Noise Rate: 1.20358 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 63.6249 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 63.6088 %
 [    NN    ] NN Efficiency(H)   : 11.4108 %
-[    NN    ] NN Efficiency(Gd)  : 85.4778 %
-[  Overall ] Overall Efficiency(Gd+H): 44.1406 %
+[    NN    ] NN Efficiency(Gd)  : 85.455 %
+[  Overall ] Overall Efficiency(Gd+H): 44.1294 %
 [  Overall ] Overall Efficiency(H)   : 4.7482 %
-[  Overall ] Overall Efficiency(Gd)  : 82.278 %
-[  Purity  ] Purity: 99.0824
+[  Overall ] Overall Efficiency(Gd)  : 82.2561 %
+[  Purity  ] Purity: 99.1133
 [    NN    ] ===== Threshold: 0.75 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 17018
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 17013.6
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 813.848
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16204.1
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 44.0789
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 87.1776
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 17149.2
-[    NN    ] Noise Rate: 1.01982 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16199.7
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 37.47
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 88.3158
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 17139.4
+[    NN    ] Noise Rate: 0.978371 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 62.6806 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 62.6646 %
 [    NN    ] NN Efficiency(H)   : 10.1598 %
-[    NN    ] NN Efficiency(Gd)  : 84.6619 %
-[  Overall ] Overall Efficiency(Gd+H): 43.4855 %
+[    NN    ] NN Efficiency(Gd)  : 84.6392 %
+[  Overall ] Overall Efficiency(Gd+H): 43.4743 %
 [  Overall ] Overall Efficiency(H)   : 4.22767 %
-[  Overall ] Overall Efficiency(Gd)  : 81.4927 %
-[  Purity  ] Purity: 99.2346
+[  Overall ] Overall Efficiency(Gd)  : 81.4708 %
+[  Purity  ] Purity: 99.2661
 [    NN    ] ===== Threshold: 0.8 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 16727.6
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 16723.2
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 724.222
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 16003.3
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 43.1561
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 66.5219
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 16837.3
-[    NN    ] Noise Rate: 0.850765 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15999
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 36.5471
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 67.6601
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 16827.4
+[    NN    ] Noise Rate: 0.809314 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 61.6111 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 61.595 %
 [    NN    ] NN Efficiency(H)   : 9.04097 %
-[    NN    ] NN Efficiency(Gd)  : 83.613 %
-[  Overall ] Overall Efficiency(Gd+H): 42.7435 %
+[    NN    ] NN Efficiency(Gd)  : 83.5902 %
+[  Overall ] Overall Efficiency(Gd+H): 42.7323 %
 [  Overall ] Overall Efficiency(H)   : 3.76209 %
-[  Overall ] Overall Efficiency(Gd)  : 80.4831 %
-[  Purity  ] Purity: 99.3486
+[  Overall ] Overall Efficiency(Gd)  : 80.4611 %
+[  Purity  ] Purity: 99.3807
 [    NN    ] ===== Threshold: 0.85 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 16367.4
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 16363
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 622.448
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15744.9
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 43.1561
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 45.1879
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 16455.7
-[    NN    ] Noise Rate: 0.683422 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15740.6
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 36.5471
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 46.3261
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 16445.9
+[    NN    ] Noise Rate: 0.641971 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 60.2843 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 60.2682 %
 [    NN    ] NN Efficiency(H)   : 7.77045 %
-[    NN    ] NN Efficiency(Gd)  : 82.2629 %
-[  Overall ] Overall Efficiency(Gd+H): 41.823 %
+[    NN    ] NN Efficiency(Gd)  : 82.2401 %
+[  Overall ] Overall Efficiency(Gd+H): 41.8119 %
 [  Overall ] Overall Efficiency(H)   : 3.23341 %
-[  Overall ] Overall Efficiency(Gd)  : 79.1835 %
-[  Purity  ] Purity: 99.4632
+[  Overall ] Overall Efficiency(Gd)  : 79.1615 %
+[  Purity  ] Purity: 99.4961
 [    NN    ] ===== Threshold: 0.9 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15884.7
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15880.4
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 496.728
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15388
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 42.2651
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 31.0549
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 15958.1
-[    NN    ] Noise Rate: 0.565772 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15383.7
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 35.6562
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 32.1931
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 15948.2
+[    NN    ] Noise Rate: 0.524321 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 58.5067 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 58.4906 %
 [    NN    ] NN Efficiency(H)   : 6.201 %
-[    NN    ] NN Efficiency(Gd)  : 80.3982 %
-[  Overall ] Overall Efficiency(Gd+H): 40.5898 %
+[    NN    ] NN Efficiency(Gd)  : 80.3754 %
+[  Overall ] Overall Efficiency(Gd+H): 40.5786 %
 [  Overall ] Overall Efficiency(H)   : 2.58034 %
-[  Overall ] Overall Efficiency(Gd)  : 77.3886 %
-[  Purity  ] Purity: 99.5405
+[  Overall ] Overall Efficiency(Gd)  : 77.3667 %
+[  Purity  ] Purity: 99.5746
 [    NN    ] ===== Threshold: 0.95 =====
 [    NN    ]  ----------- n-like candidates -----------
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15057.2
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15052.9
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 337.667
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 14719.6
-[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 40.4958
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 18.4615
-[    NN    ] All Tagged Neutrons (n-like candidates)     : 15116.2
-[    NN    ] Noise Rate: 0.453503 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 14715.2
+[    NN    ] Mis-tagged Truth Decay-e in Search Window   : 33.8869
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 19.5997
+[    NN    ] All Tagged Neutrons (n-like candidates)     : 15106.4
+[    NN    ] Noise Rate: 0.412052 %
 [    NN    ]  ----------- e-like candidates -----------
-[    NN    ] Tagged Truth Decay-e in Search Window       : 5937
-[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 6
+[    NN    ] Tagged Truth Decay-e in Search Window       : 5948
+[    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 15
 [    NN    ] Tagged Truth H-n Neutrons in Search Window  : 0
-[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 6
-[    NN    ] Mis-tagged Acc. Noise in Search Window      : 11
-[    NN    ] All Tagged decay-e (e-like candidates)      : 5954
-[    NN    ] NN Efficiency(Gd+H): 55.4588 %
+[    NN    ] Tagged Truth Gd-n Neutrons in Search Window : 15
+[    NN    ] Mis-tagged Acc. Noise in Search Window      : 9
+[    NN    ] All Tagged decay-e (e-like candidates)      : 5972
+[    NN    ] NN Efficiency(Gd+H): 55.4428 %
 [    NN    ] NN Efficiency(H)   : 4.21533 %
-[    NN    ] NN Efficiency(Gd)  : 76.9057 %
-[  Overall ] Overall Efficiency(Gd+H): 38.4753 %
+[    NN    ] NN Efficiency(Gd)  : 76.8829 %
+[  Overall ] Overall Efficiency(Gd+H): 38.4641 %
 [  Overall ] Overall Efficiency(H)   : 1.75406 %
-[  Overall ] Overall Efficiency(Gd)  : 74.0268 %
-[  Purity  ] Purity: 99.61
+[  Overall ] Overall Efficiency(Gd)  : 74.0049 %
+[  Purity  ] Purity: 99.6459
 [    NN    ] ===== Threshold: 1 =====
 [    NN    ]  ----------- n-like candidates -----------
 [    NN    ] Tagged Truth Neutrons(Gd+H) in Search Window: 0
@@ -509,140 +509,140 @@
 [    NN    ] Neutrino Events with Tagged Neutrons   : 13118.5
 [    NN    ] Neutrino Events with Only One Nlike    : 0
 [    NN    ] Neutrino Events with One Nlike Decay-e : 0
-[    NN    ] Neutrino Events with No Truth Neutrons : 2042.76
+[    NN    ] Neutrino Events with No Truth Neutrons : 2042.84
 [    NN    ] ===== Threshold: 0.05 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 1432.58
-[    NN    ] Neutrino Events with Tagged Neutrons   : 11685.9
-[    NN    ] Neutrino Events with Only One Nlike    : 3180.76
-[    NN    ] Neutrino Events with One Nlike Decay-e : 2.46692
-[    NN    ] Neutrino Events with No Truth Neutrons : 1604.97
+[    NN    ] Neutrino Events with No Tagged Neutrons: 1432.76
+[    NN    ] Neutrino Events with Tagged Neutrons   : 11685.8
+[    NN    ] Neutrino Events with Only One Nlike    : 3183.42
+[    NN    ] Neutrino Events with One Nlike Decay-e : 2.85678
+[    NN    ] Neutrino Events with No Truth Neutrons : 1605.84
 [    NN    ] ===== Threshold: 0.1 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 2361.34
-[    NN    ] Neutrino Events with Tagged Neutrons   : 10757.2
-[    NN    ] Neutrino Events with Only One Nlike    : 4056.23
-[    NN    ] Neutrino Events with One Nlike Decay-e : 6.97287
-[    NN    ] Neutrino Events with No Truth Neutrons : 886.45
+[    NN    ] Neutrino Events with No Tagged Neutrons: 2362.9
+[    NN    ] Neutrino Events with Tagged Neutrons   : 10755.6
+[    NN    ] Neutrino Events with Only One Nlike    : 4057.22
+[    NN    ] Neutrino Events with One Nlike Decay-e : 5.98914
+[    NN    ] Neutrino Events with No Truth Neutrons : 885.941
 [    NN    ] ===== Threshold: 0.15 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 2853.9
-[    NN    ] Neutrino Events with Tagged Neutrons   : 10264.6
-[    NN    ] Neutrino Events with Only One Nlike    : 4267.12
-[    NN    ] Neutrino Events with One Nlike Decay-e : 8.5754
-[    NN    ] Neutrino Events with No Truth Neutrons : 550.509
+[    NN    ] Neutrino Events with No Tagged Neutrons: 2855.63
+[    NN    ] Neutrino Events with Tagged Neutrons   : 10262.9
+[    NN    ] Neutrino Events with Only One Nlike    : 4267.79
+[    NN    ] Neutrino Events with One Nlike Decay-e : 7.49459
+[    NN    ] Neutrino Events with No Truth Neutrons : 549.829
 [    NN    ] ===== Threshold: 0.2 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 3136.32
-[    NN    ] Neutrino Events with Tagged Neutrons   : 9982.23
-[    NN    ] Neutrino Events with Only One Nlike    : 4392.25
-[    NN    ] Neutrino Events with One Nlike Decay-e : 10.7511
-[    NN    ] Neutrino Events with No Truth Neutrons : 384.795
+[    NN    ] Neutrino Events with No Tagged Neutrons: 3138.05
+[    NN    ] Neutrino Events with Tagged Neutrons   : 9980.5
+[    NN    ] Neutrino Events with Only One Nlike    : 4392.09
+[    NN    ] Neutrino Events with One Nlike Decay-e : 9.67032
+[    NN    ] Neutrino Events with No Truth Neutrons : 384.115
 [    NN    ] ===== Threshold: 0.25 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 3329.92
-[    NN    ] Neutrino Events with Tagged Neutrons   : 9788.62
-[    NN    ] Neutrino Events with Only One Nlike    : 4459.1
-[    NN    ] Neutrino Events with One Nlike Decay-e : 11.006
-[    NN    ] Neutrino Events with No Truth Neutrons : 273.659
+[    NN    ] Neutrino Events with No Tagged Neutrons: 3331.65
+[    NN    ] Neutrino Events with Tagged Neutrons   : 9786.89
+[    NN    ] Neutrino Events with Only One Nlike    : 4458.94
+[    NN    ] Neutrino Events with One Nlike Decay-e : 9.92519
+[    NN    ] Neutrino Events with No Truth Neutrons : 272.979
 [    NN    ] ===== Threshold: 0.3 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 3453.15
-[    NN    ] Neutrino Events with Tagged Neutrons   : 9665.41
-[    NN    ] Neutrino Events with Only One Nlike    : 4503.98
-[    NN    ] Neutrino Events with One Nlike Decay-e : 11.006
-[    NN    ] Neutrino Events with No Truth Neutrons : 220.492
+[    NN    ] Neutrino Events with No Tagged Neutrons: 3454.83
+[    NN    ] Neutrino Events with Tagged Neutrons   : 9663.72
+[    NN    ] Neutrino Events with Only One Nlike    : 4504.64
+[    NN    ] Neutrino Events with One Nlike Decay-e : 10.3649
+[    NN    ] Neutrino Events with No Truth Neutrons : 219.851
 [    NN    ] ===== Threshold: 0.35 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 3568.01
-[    NN    ] Neutrino Events with Tagged Neutrons   : 9550.55
-[    NN    ] Neutrino Events with Only One Nlike    : 4526.98
-[    NN    ] Neutrino Events with One Nlike Decay-e : 11.006
-[    NN    ] Neutrino Events with No Truth Neutrons : 177.213
+[    NN    ] Neutrino Events with No Tagged Neutrons: 3569.69
+[    NN    ] Neutrino Events with Tagged Neutrons   : 9548.86
+[    NN    ] Neutrino Events with Only One Nlike    : 4528.62
+[    NN    ] Neutrino Events with One Nlike Decay-e : 10.3649
+[    NN    ] Neutrino Events with No Truth Neutrons : 176.572
 [    NN    ] ===== Threshold: 0.4 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 3666.09
-[    NN    ] Neutrino Events with Tagged Neutrons   : 9452.46
-[    NN    ] Neutrino Events with Only One Nlike    : 4535.09
-[    NN    ] Neutrino Events with One Nlike Decay-e : 11.3627
-[    NN    ] Neutrino Events with No Truth Neutrons : 143.917
+[    NN    ] Neutrino Events with No Tagged Neutrons: 3668.13
+[    NN    ] Neutrino Events with Tagged Neutrons   : 9450.42
+[    NN    ] Neutrino Events with Only One Nlike    : 4536.79
+[    NN    ] Neutrino Events with One Nlike Decay-e : 10.3649
+[    NN    ] Neutrino Events with No Truth Neutrons : 142.919
 [    NN    ] ===== Threshold: 0.45 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 3744.64
-[    NN    ] Neutrino Events with Tagged Neutrons   : 9373.91
-[    NN    ] Neutrino Events with Only One Nlike    : 4548.88
-[    NN    ] Neutrino Events with One Nlike Decay-e : 11.0401
-[    NN    ] Neutrino Events with No Truth Neutrons : 116.808
+[    NN    ] Neutrino Events with No Tagged Neutrons: 3746.69
+[    NN    ] Neutrino Events with Tagged Neutrons   : 9371.86
+[    NN    ] Neutrino Events with Only One Nlike    : 4550.58
+[    NN    ] Neutrino Events with One Nlike Decay-e : 10.0422
+[    NN    ] Neutrino Events with No Truth Neutrons : 115.81
 [    NN    ] ===== Threshold: 0.5 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 3825.34
-[    NN    ] Neutrino Events with Tagged Neutrons   : 9293.21
-[    NN    ] Neutrino Events with Only One Nlike    : 4558.14
-[    NN    ] Neutrino Events with One Nlike Decay-e : 11.3859
-[    NN    ] Neutrino Events with No Truth Neutrons : 96.9295
+[    NN    ] Neutrino Events with No Tagged Neutrons: 3827.72
+[    NN    ] Neutrino Events with Tagged Neutrons   : 9290.83
+[    NN    ] Neutrino Events with Only One Nlike    : 4559.96
+[    NN    ] Neutrino Events with One Nlike Decay-e : 10.0559
+[    NN    ] Neutrino Events with No Truth Neutrons : 95.5995
 [    NN    ] ===== Threshold: 0.55 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 3887.03
-[    NN    ] Neutrino Events with Tagged Neutrons   : 9231.52
-[    NN    ] Neutrino Events with Only One Nlike    : 4566.67
-[    NN    ] Neutrino Events with One Nlike Decay-e : 11.3859
-[    NN    ] Neutrino Events with No Truth Neutrons : 83.3709
+[    NN    ] Neutrino Events with No Tagged Neutrons: 3889.41
+[    NN    ] Neutrino Events with Tagged Neutrons   : 9229.14
+[    NN    ] Neutrino Events with Only One Nlike    : 4568.49
+[    NN    ] Neutrino Events with One Nlike Decay-e : 10.0559
+[    NN    ] Neutrino Events with No Truth Neutrons : 82.041
 [    NN    ] ===== Threshold: 0.6 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 3955.33
-[    NN    ] Neutrino Events with Tagged Neutrons   : 9163.21
-[    NN    ] Neutrino Events with Only One Nlike    : 4559.1
-[    NN    ] Neutrino Events with One Nlike Decay-e : 11.8764
-[    NN    ] Neutrino Events with No Truth Neutrons : 70.4726
+[    NN    ] Neutrino Events with No Tagged Neutrons: 3958.58
+[    NN    ] Neutrino Events with Tagged Neutrons   : 9159.96
+[    NN    ] Neutrino Events with Only One Nlike    : 4559.17
+[    NN    ] Neutrino Events with One Nlike Decay-e : 10.5465
+[    NN    ] Neutrino Events with No Truth Neutrons : 69.1427
 [    NN    ] ===== Threshold: 0.65 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 4024.54
-[    NN    ] Neutrino Events with Tagged Neutrons   : 9094
-[    NN    ] Neutrino Events with Only One Nlike    : 4551.38
-[    NN    ] Neutrino Events with One Nlike Decay-e : 11.8764
-[    NN    ] Neutrino Events with No Truth Neutrons : 55.6525
+[    NN    ] Neutrino Events with No Tagged Neutrons: 4027.8
+[    NN    ] Neutrino Events with Tagged Neutrons   : 9090.75
+[    NN    ] Neutrino Events with Only One Nlike    : 4551.45
+[    NN    ] Neutrino Events with One Nlike Decay-e : 10.5465
+[    NN    ] Neutrino Events with No Truth Neutrons : 54.3226
 [    NN    ] ===== Threshold: 0.7 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 4092.55
-[    NN    ] Neutrino Events with Tagged Neutrons   : 9026
-[    NN    ] Neutrino Events with Only One Nlike    : 4563.8
-[    NN    ] Neutrino Events with One Nlike Decay-e : 11.9112
-[    NN    ] Neutrino Events with No Truth Neutrons : 49.0609
+[    NN    ] Neutrino Events with No Tagged Neutrons: 4095.81
+[    NN    ] Neutrino Events with Tagged Neutrons   : 9022.74
+[    NN    ] Neutrino Events with Only One Nlike    : 4563.87
+[    NN    ] Neutrino Events with One Nlike Decay-e : 10.5812
+[    NN    ] Neutrino Events with No Truth Neutrons : 47.731
 [    NN    ] ===== Threshold: 0.75 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 4178.9
-[    NN    ] Neutrino Events with Tagged Neutrons   : 8939.65
-[    NN    ] Neutrino Events with Only One Nlike    : 4549.47
-[    NN    ] Neutrino Events with One Nlike Decay-e : 11.4207
-[    NN    ] Neutrino Events with No Truth Neutrons : 43.3009
+[    NN    ] Neutrino Events with No Tagged Neutrons: 4182.15
+[    NN    ] Neutrino Events with Tagged Neutrons   : 8936.4
+[    NN    ] Neutrino Events with Only One Nlike    : 4549.53
+[    NN    ] Neutrino Events with One Nlike Decay-e : 10.0907
+[    NN    ] Neutrino Events with No Truth Neutrons : 41.971
 [    NN    ] ===== Threshold: 0.8 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 4270.08
-[    NN    ] Neutrino Events with Tagged Neutrons   : 8848.47
-[    NN    ] Neutrino Events with Only One Nlike    : 4550.48
-[    NN    ] Neutrino Events with One Nlike Decay-e : 12.1982
-[    NN    ] Neutrino Events with No Truth Neutrons : 33.9502
+[    NN    ] Neutrino Events with No Tagged Neutrons: 4274.12
+[    NN    ] Neutrino Events with Tagged Neutrons   : 8844.44
+[    NN    ] Neutrino Events with Only One Nlike    : 4548.34
+[    NN    ] Neutrino Events with One Nlike Decay-e : 10.0907
+[    NN    ] Neutrino Events with No Truth Neutrons : 31.8428
 [    NN    ] ===== Threshold: 0.85 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 4380.41
-[    NN    ] Neutrino Events with Tagged Neutrons   : 8738.14
-[    NN    ] Neutrino Events with Only One Nlike    : 4540.38
-[    NN    ] Neutrino Events with One Nlike Decay-e : 14.4937
-[    NN    ] Neutrino Events with No Truth Neutrons : 32.6883
+[    NN    ] Neutrino Events with No Tagged Neutrons: 4385.63
+[    NN    ] Neutrino Events with Tagged Neutrons   : 8732.92
+[    NN    ] Neutrino Events with Only One Nlike    : 4536.19
+[    NN    ] Neutrino Events with One Nlike Decay-e : 11.1963
+[    NN    ] Neutrino Events with No Truth Neutrons : 29.3909
 [    NN    ] ===== Threshold: 0.9 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 4516.83
-[    NN    ] Neutrino Events with Tagged Neutrons   : 8601.72
-[    NN    ] Neutrino Events with Only One Nlike    : 4547.97
-[    NN    ] Neutrino Events with One Nlike Decay-e : 15.9741
-[    NN    ] Neutrino Events with No Truth Neutrons : 29.7152
+[    NN    ] Neutrino Events with No Tagged Neutrons: 4522.06
+[    NN    ] Neutrino Events with Tagged Neutrons   : 8596.5
+[    NN    ] Neutrino Events with Only One Nlike    : 4544.05
+[    NN    ] Neutrino Events with One Nlike Decay-e : 12.6768
+[    NN    ] Neutrino Events with No Truth Neutrons : 26.4178
 [    NN    ] ===== Threshold: 0.95 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 4777.03
-[    NN    ] Neutrino Events with Tagged Neutrons   : 8341.51
-[    NN    ] Neutrino Events with Only One Nlike    : 4525.75
-[    NN    ] Neutrino Events with One Nlike Decay-e : 17.0202
-[    NN    ] Neutrino Events with No Truth Neutrons : 25.681
+[    NN    ] Neutrino Events with No Tagged Neutrons: 4782.26
+[    NN    ] Neutrino Events with Tagged Neutrons   : 8336.29
+[    NN    ] Neutrino Events with Only One Nlike    : 4523.45
+[    NN    ] Neutrino Events with One Nlike Decay-e : 13.7228
+[    NN    ] Neutrino Events with No Truth Neutrons : 22.3836
 [    NN    ] ===== Threshold: 1 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
 [    NN    ] Neutrino Events with No Tagged Neutrons: 13118.5

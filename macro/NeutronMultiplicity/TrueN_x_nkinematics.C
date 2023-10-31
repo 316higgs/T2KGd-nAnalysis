@@ -78,8 +78,8 @@ void TrueN_x_nkinematics(bool beammode) {
   //TString KnmtcName = "nTraveld";
   //TString KnmtcName = "nTraveldL";
   //TString KnmtcName = "nTraveldT";
-  TString KnmtcName = "nAngle";
-  //TString KnmtcName = "MuStp_NCap";
+  //TString KnmtcName = "nAngle";
+  TString KnmtcName = "MuStp_NCap";
   const int binnumber = SetHistoBinNumber(KnmtcName);
 
   TString Prefix      = "NTagAnalysis/h1_TrueN_x_";
@@ -213,18 +213,6 @@ void TrueN_x_nkinematics(bool beammode) {
 #endif
 
 
-#if 0
-  h1_CCQE_numu       -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CCQE_numubar    -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_CC2p2h_numu     -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CC2p2h_numubar  -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_CCOther_numu    -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_CCOther_numubar -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  h1_NC_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  h1_NC_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-  //h1_Noise_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
-  //h1_Noise_numubar   -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
-#endif
 
   /////  Normalizations  //////
 #if 1
@@ -314,12 +302,12 @@ void TrueN_x_nkinematics(bool beammode) {
   hs_merge -> Add(h1_CCQE_numubar);
 #endif
 
-#if 0
+#if 1
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
   hs_merge -> SetMaximum(30);
-  //hs_merge -> SetMaximum(40);
+  //hs_merge -> SetMaximum(40);  // dT
   hs_merge -> Draw();
   hs_merge ->GetYaxis()->SetTitleSize(0.038);
   hs_merge ->GetYaxis()->SetTitleOffset(1.1);
@@ -333,8 +321,8 @@ void TrueN_x_nkinematics(bool beammode) {
   hs_merge -> Draw();
   c1 -> RedrawAxis();
   
-  //TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
-  TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);     // nangle
+  TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
+  //TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);     // nangle
   //TLegend* legend1 = new TLegend(0.105, 0.45, 0.495, 0.89); // dL
   legend1 -> SetTextSize(0.04);
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");

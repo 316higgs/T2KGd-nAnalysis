@@ -10,11 +10,22 @@ void mergeth23Var(bool beammode) {
   else std::cout << "[### Beam mode ###] FHC" << std::endl;
 
   //FHC
+#if 1
 #if fhcflag
   TFile* f1 = new TFile("./output/fhc_0511.root");
   TFile* f2 = new TFile("./output/fhc_0530.root");
   TFile* f3 = new TFile("./output/fhc_0561.root");
   TFile* f4 = new TFile("./output/fhc_0570.root");
+#endif
+#endif
+
+#if 0
+#if fhcflag
+  TFile* f1 = new TFile("./output/fhc_003conc_0511.root");
+  TFile* f2 = new TFile("./output/fhc_003conc_0530.root");
+  TFile* f3 = new TFile("./output/fhc_003conc_0561.root");
+  TFile* f4 = new TFile("./output/fhc_003conc_0570.root");
+#endif
 #endif
 
 
@@ -117,6 +128,8 @@ void mergeth23Var(bool beammode) {
 
   TLegend* legend1 = new TLegend(0.35, 0.57, 0.89, 0.89);
   legend1 -> SetTextSize(0.04);
+  legend1 -> AddEntry((TObject*)0,"#kern[-0.3]{FHC 1R #mu sample (0.01% Gd)}","");
+  //legend1 -> AddEntry((TObject*)0,"#kern[-0.3]{FHC 1R #mu sample (0.03% Gd)}","");
   legend1 -> AddEntry(h1_NoNTag1, "sin^{2}#theta_{23}=0.511(maximal mixing)", "L");
   legend1 -> AddEntry(h1_NoNTag2, "sin^{2}#theta_{23}=0.53", "L");
   legend1 -> AddEntry(h1_NoNTag3, "sin^{2}#theta_{23}=0.561(nominal MC)", "L");
@@ -138,7 +151,19 @@ void mergeth23Var(bool beammode) {
   h1_wTagN3 -> Draw("SAME");
   h1_wTagN2 -> Draw("SAME");
   h1_wTagN1 -> Draw("SAME");
-  legend1->Draw();
+
+  TLegend* legend2 = new TLegend(0.35, 0.55, 0.89, 0.89);
+  legend2 -> SetTextSize(0.04);
+  legend2 -> AddEntry((TObject*)0,"#kern[-0.3]{FHC 1R #mu sample (0.01% Gd)}","");
+  //legend2 -> AddEntry((TObject*)0,"#kern[-0.3]{FHC 1R #mu sample (0.03% Gd)}","");
+  legend2 -> AddEntry((TObject*)0,"#kern[-0.65]{w/ neutrons}","");
+  legend2 -> AddEntry(h1_NoNTag1, "sin^{2}#theta_{23}=0.511(maximal mixing)", "L");
+  legend2 -> AddEntry(h1_NoNTag2, "sin^{2}#theta_{23}=0.53", "L");
+  legend2 -> AddEntry(h1_NoNTag3, "sin^{2}#theta_{23}=0.561(nominal MC)", "L");
+  legend2 -> AddEntry(h1_NoNTag4, "sin^{2}#theta_{23}=0.57", "L");
+  legend2->SetFillColor(0);
+  legend2->Draw();
+
 
   TCanvas* c3 = new TCanvas("c3", "c3", 900, 700);
   c3 -> SetGrid();
@@ -152,7 +177,18 @@ void mergeth23Var(bool beammode) {
   h1_woTagN3 -> Draw("SAME");
   h1_woTagN2 -> Draw("SAME");
   h1_woTagN1 -> Draw("SAME");
-  legend1->Draw();
+  
+  TLegend* legend3 = new TLegend(0.35, 0.55, 0.89, 0.89);
+  legend3 -> SetTextSize(0.04);
+  legend3 -> AddEntry((TObject*)0,"#kern[-0.3]{FHC 1R #mu sample (0.01% Gd)}","");
+  //legend3 -> AddEntry((TObject*)0,"#kern[-0.3]{FHC 1R #mu sample (0.03% Gd)}","");
+  legend3 -> AddEntry((TObject*)0,"#kern[-0.6]{w/o neutrons}","");
+  legend3 -> AddEntry(h1_NoNTag1, "sin^{2}#theta_{23}=0.511(maximal mixing)", "L");
+  legend3 -> AddEntry(h1_NoNTag2, "sin^{2}#theta_{23}=0.53", "L");
+  legend3 -> AddEntry(h1_NoNTag3, "sin^{2}#theta_{23}=0.561(nominal MC)", "L");
+  legend3 -> AddEntry(h1_NoNTag4, "sin^{2}#theta_{23}=0.57", "L");
+  legend3->SetFillColor(0);
+  legend3->Draw();
 #endif
 
 }

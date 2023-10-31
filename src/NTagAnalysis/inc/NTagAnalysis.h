@@ -126,6 +126,12 @@ TH1F* h1_CapBefSIMom_others;   // momentum distribution of captured neutrons aft
 TH1F* h1_CapSIMom;
 TH2F* h2_Mom_x_Dist;
 
+TH1F* h1_GenBefSIEkin;
+TH1F* h1_CapBefSIEkin;
+TH1F* h1_CapSIEkin;
+
+TH1F* h1_Goodness[4];
+
 
 ////  #truth neutrons  ////
 float AllTruthNeutrons = 0.;

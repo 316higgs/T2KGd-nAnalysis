@@ -4,7 +4,7 @@
 #include "TColor.h"
 #include <iomanip>
 
-#define VARNUM 12
+#define VARNUM 14
 
 Double_t var[10000000];
 Double_t var1[10000000]; 

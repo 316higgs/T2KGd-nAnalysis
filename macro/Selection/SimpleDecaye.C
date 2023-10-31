@@ -65,7 +65,7 @@ void SimpleDecaye(bool beammode) {
   Double_t GenN_numu_x_numu       = 63622;
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
-  Double_t GenN_numubar_x_nuebar  = 63463;
+  Double_t GenN_numubar_x_nuebar  = 63460;
   Double_t GenN_nue_x_nue         = 63423;
   Double_t GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;

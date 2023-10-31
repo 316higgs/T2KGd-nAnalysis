@@ -78,24 +78,35 @@ EXECUTE()
                -BEAMMODE ${BEAMMODE_ARG}\
                -OSCCH ${OSCCH_ARG}
 #COMMENTOUT
+<<COMMENTOUT
+  ./systSI.exe ${DISK3}/${FITQUNVER}/output/systSI/${SIVAR}/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
+               ${DISK3}/Ntag/output/systSI/${SIVAR}/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.ntag0026Gd.0\*.root\
+               ${ANALYSISSTAGE}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${RUNNAME}.root\
+               ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.neutrino.${RUNNAME}.txt\
+               ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.ntag.${RUNNAME}.txt\
+               -MCType Gd\
+               -ETAG ON\
+               -BEAMMODE ${BEAMMODE_ARG}\
+               -OSCCH ${OSCCH_ARG}
+COMMENTOUT
 
   echo " " 
 }
 
 
 ####  -30%  ####
-#EXECUTE 0 0  ###  numu -> numu
-#EXECUTE 1 0  ###  numu -> nue  
-#EXECUTE 2 0  ###  numubar -> numubar
-#EXECUTE 3 0  ###  numubar -> nuebar
-#EXECUTE 4 0  ###  nue -> nue
+EXECUTE 0 0  ###  numu -> numu
+EXECUTE 1 0  ###  numu -> nue  
+EXECUTE 2 0  ###  numubar -> numubar
+EXECUTE 3 0  ###  numubar -> nuebar
+EXECUTE 4 0  ###  nue -> nue
 EXECUTE 5 0  ###  nuebar -> nuebar
 
 ####  +30%  ####
-#EXECUTE 0 1  ###  numu -> numu
-#EXECUTE 1 1  ###  numu -> nue
-#EXECUTE 2 1  ###  numubar -> numubar
-#EXECUTE 3 1  ###  numubar -> nuebar
-#EXECUTE 4 1  ###  nue -> nue
+EXECUTE 0 1  ###  numu -> numu
+EXECUTE 1 1  ###  numu -> nue
+EXECUTE 2 1  ###  numubar -> numubar
+EXECUTE 3 1  ###  numubar -> nuebar
+EXECUTE 4 1  ###  nue -> nue
 EXECUTE 5 1  ###  nuebar -> nuebar
 

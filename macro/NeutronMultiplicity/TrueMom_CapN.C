@@ -153,7 +153,7 @@ void TrueMom_CapN(bool beammode) {
   bool osc_mode_on[6] = {1, 1, 1, 1, 1, 1};  // numu, numubar, nuesig, nuebarsig, nuebkg, nuebarbkg
 
   // 1D hist for each neutron source
-  TH1F* h1_GenBefSI = new TH1F("h1_GenBefSI", "", 60, 0, 1200);
+  TH1F* h1_GenBefSI = new TH1F("h1_GenBefSI", "", 120, 0, 1200);
   if (osc_mode_on[5]) h1_GenBefSI -> Add(h1_GenBefSI_nuebarbkg);
   if (osc_mode_on[4]) h1_GenBefSI -> Add(h1_GenBefSI_nuebkg);
   if (osc_mode_on[3]) h1_GenBefSI -> Add(h1_GenBefSI_nuebarsig);
@@ -168,7 +168,7 @@ void TrueMom_CapN(bool beammode) {
   h1_GenBefSI -> SetLineWidth(3);
 
 
-  TH1F* h1_CapBefSI = new TH1F("h1_CapBefSI", "", 60, 0, 1200);
+  TH1F* h1_CapBefSI = new TH1F("h1_CapBefSI", "", 120, 0, 1200);
   if (osc_mode_on[5]) h1_CapBefSI -> Add(h1_CapBefSI_nuebarbkg);
   if (osc_mode_on[4]) h1_CapBefSI -> Add(h1_CapBefSI_nuebkg);
   if (osc_mode_on[3]) h1_CapBefSI -> Add(h1_CapBefSI_nuebarsig);
@@ -183,7 +183,7 @@ void TrueMom_CapN(bool beammode) {
   h1_CapBefSI -> SetLineWidth(3);
 
 
-  TH1F* h1_CapAftSI = new TH1F("h1_CapAftSI", "", 60, 0, 1200);
+  TH1F* h1_CapAftSI = new TH1F("h1_CapAftSI", "", 120, 0, 1200);
   if (osc_mode_on[5]) h1_CapAftSI -> Add(h1_CapAftSI_nuebarbkg);
   if (osc_mode_on[4]) h1_CapAftSI -> Add(h1_CapAftSI_nuebkg);
   if (osc_mode_on[3]) h1_CapAftSI -> Add(h1_CapAftSI_nuebarsig);
@@ -204,16 +204,16 @@ void TrueMom_CapN(bool beammode) {
 #if 1
   TCanvas* c2 = new TCanvas("c2","c2",900,700);
   c2 -> SetGrid();
-  //h1_CapBefSI -> SetMaximum(9000);
-  h1_CapBefSI -> SetMaximum(1000);
+  h1_CapBefSI -> SetMaximum(5000);
+  //h1_CapBefSI -> SetMaximum(1000);
   h1_CapBefSI ->GetYaxis()->SetTitleSize(0.04);
   h1_CapBefSI ->GetYaxis()->SetTitleOffset(1.2);
   h1_CapBefSI ->GetYaxis()->SetLabelSize(0.036);
   h1_CapBefSI ->GetXaxis()->SetTitle("Truth Neutron Momentum [MeV]");
   h1_CapBefSI ->GetYaxis()->SetTitle("Number of Captured Neutrons");
   h1_CapBefSI -> Draw("SAME");
-  //h1_GenBefSI -> Draw("SAME");
-  //h1_CapAftSI -> Draw("SAME");
+  h1_GenBefSI -> Draw("SAME");
+  h1_CapAftSI -> Draw("SAME");
   
 
   TLegend* legend2 = new TLegend(0.3, 0.65, 0.89, 0.89);
