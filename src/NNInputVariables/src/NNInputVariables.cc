@@ -116,7 +116,7 @@ void NNInputVariables::SetHistoFrame(int vartype, TString histtitle) {
       h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 40, 10, 30);
       h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 40, 10, 30);
       break;
-    case 6: //Beta1
+    /*case 6: //Beta1
       h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 40, -0.2, 0.8);
       h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 40, -0.2, 0.8);
       h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 40, -0.2, 0.8);
@@ -145,6 +145,36 @@ void NNInputVariables::SetHistoFrame(int vartype, TString histtitle) {
       h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 40, -0.2, 0.4);
       h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 40, -0.2, 0.4);
       h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 40, -0.2, 0.4);
+      break;*/
+    case 6: //Beta1
+      h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 80, -0.5, 1.2);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 80, -0.5, 1.2);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 80, -0.5, 1.2);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 80, -0.5, 1.2);
+      break;
+    case 7:  //Beta2
+      h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 80, -0.5, 1.2);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 80, -0.5, 1.2);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 80, -0.5, 1.2);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 80, -0.5, 1.2);
+      break;
+    case 8:  //Beta3
+      h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 80, -0.5, 1.2);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 80, -0.5, 1.2);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 80, -0.5, 1.2);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 80, -0.5, 1.2);
+      break;
+    case 9:  //Beta4
+      h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 80, -0.5, 1.2);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 80, -0.5, 1.2);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 80, -0.5, 1.2);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 80, -0.5, 1.2);
+      break;
+    case 10:  //Beta5
+      h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 80, -0.5, 1.2);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 80, -0.5, 1.2);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 80, -0.5, 1.2);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 80, -0.5, 1.2);
       break;
     case 11:  //BurstRatio
       h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 20, 0, 1);
@@ -301,6 +331,8 @@ void NNInputVariables::SetNNinputHisto() {
   h1_NTagOut[2] -> SetFillColor(kAzure-4);
   h1_NTagOut[3] -> SetFillColor(kTeal-5);
 
+  h1_AllNTagOut = new TH1F("h1_AllNTagOut", "", 20, 0, 1);
+
 
   h1_FitT_NHitsExcess = new TH1F("h1_FitT_NHitsExcess", "h1_FitT_NHitsExcess; FitT[#musec]; Entries", 80, 0, 20);
   //h1_lmecscnd_NHitsExcess = new TH1F("h1_lmecscnd_NHitsExcess", "h1_lmecscnd_NHitsExcess; lmecscnd; Number of Secondary Particles", 30, 0, 30);
@@ -370,6 +402,8 @@ void NNInputVariables::WritePlots() {
   }
 
   h1_AllNHits -> Write();
+
+  h1_AllNTagOut -> Write();
 
   for (int i=0; i<4; i++) h1_NTagOut[i] -> Write();
 

@@ -14,6 +14,7 @@ enum OscChan::E_OSC_CHAN CLTOptionOscMode(TString OscKeyWord, TString Osc) {
     else if (Osc=="NUEBARSIG" || Osc=="nuebarsig") eOscMode = eNUEBARSIG; //numubar_x_nuebar
     else if (Osc=="NUE" || Osc=="nue") eOscMode = eNUE;                   //nue_x_nue
     else if (Osc=="NUEBAR" || Osc=="nuebar") eOscMode = eNUEBAR;          //nuebar_x_nuebar
+    else if (Osc=="DATA" || Osc=="data") eOscMode = eDATA;
     else {
       std::cout << " " << std::endl;
       std::cout << "\e[38;5;A0m\e[1m[!!!CLT error!!!] Oscillation channel can not be found. --- input NUMU/NUMUBAR\e[0m" << std::endl;

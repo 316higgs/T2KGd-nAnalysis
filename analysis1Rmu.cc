@@ -385,7 +385,7 @@ int main(int argc, char **argv) {
     //neuosc.GetTruePrmVtx(numu, TruePrmVtx);
     //ntagana.TrueNCapVtxProfile(Type, tagvx, tagvy, tagvz);
 
-    h1_NTrueN[0] -> Fill(NTrueN);
+    //h1_NTrueN[0] -> Fill(NTrueN);
 
     
     //int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
@@ -395,12 +395,19 @@ int main(int argc, char **argv) {
     //New 1R muon selection
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false)) {
 
-      int intmode = TMath::Abs(numu->var<int>("mode"));
+      int intmode   = TMath::Abs(numu->var<int>("mode"));
+      float OscProb = numu->getOscWgt();
+      float Enu     = numu->var<float>("erec");
 
       //Neutrino energy distribution
       neuosc.GetTrueEnu(numu);
       neuosc.GetRecoEnu(numu);
       neuosc.GetPrmVtxResolution(numu);
+      neuosc.GetMuonPtResolution(numu);
+
+      float PrmMuMom[3] = {0., 0., 0.}; //primary mu momentum
+      bool PrmMu = decayebox.GetTruePrmMuMom(Pvc, numu, PrmMuMom);
+      neuosc.GetPrmMuMomResolution(numu, PrmMuMom);
 
       float TruePrmVtx[3] = {0., 0., 0.,};
       neuosc.GetTruePrmVtx(numu, TruePrmVtx);
@@ -437,11 +444,137 @@ int main(int argc, char **argv) {
       neuosc.GetWgtNeutrino_wTrueN(numu, NTrueN, recothetamu, thetamin, thetamax);
 
 
+      //  Generated neutrons
+      float PrmVtx[3] = {0., 0., 0.};  //Primary vertex
+      PrmVtx[0] = numu->var<float>("posv", 0);
+      PrmVtx[1] = numu->var<float>("posv", 1);
+      PrmVtx[2] = numu->var<float>("posv", 2);
+      int TrueMuN = 0;
+      float MuNCapVtx[3]   = {0., 0., 0.};  //neutron(from primary interaction) capture vertex
+
+      //GetNeutrinoInteraction(ientry, intmode);
+#if 0
+      std::cout << "[     VECT     ]" << std::endl;
+      for (int iprm=0; iprm<numu->var<int>("npar"); iprm++) {
+        std::cout << "[### " << ientry 
+                  << " ###] Primary[" << iprm+1 << "] " << GetGEANTPIDName( numu->var<int>("ipv", iprm) )
+                  << ", posv = [" << numu->var<float>("posv", 0) << ", " << numu->var<float>("posv", 1) << ", " << numu->var<float>("posv", 2)
+                  << "] cm, pmomv = " << numu->var<float>("pmomv", iprm) << " MeV" 
+                  << ", dirv = [" << numu->var<float>("dirv", iprm, 0) << ", " << numu->var<float>("dirv", iprm, 1) << ", " << numu->var<float>("dirv", iprm, 2) << "]" << std::endl;
+      }
+      std::cout << "----------------------" << std::endl;
+#endif 
+#if 0
+      std::cout << "[    NEWORK    ]" << std::endl;
+      for (int iprm=0; iprm<numu->var<int>("numnu"); iprm++) {
+        std::cout << "[### " << ientry 
+                  << " ###] Primary[" << iprm+1 << "] " << GetPDGPIDName( numu->var<int>("ipnu", iprm) )
+                  << ", pnu = " << numu->var<float>("pnu", iprm)*1000. << " MeV" 
+                  << ", dirnu = [" << numu->var<float>("dirnu", iprm, 0) << ", " << numu->var<float>("dirnu", iprm, 1) << ", " << numu->var<float>("dirnu", iprm, 2) << "]" << std::endl;
+      }
+      std::cout << "----------------------" << std::endl;
+#endif
+#if 0
+      std::cout << "[    VCWORK    ]" << std::endl;
+      for (int iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
+        std::cout << "[### " << ientry 
+                  << " ###] Primary[" << iprm+1 << "] " << GetPDGPIDName( numu->var<int>("Ipvc", iprm) )
+                  << ", Iorgvc = [" << Iorgvc[iprm] 
+                  << "], Ichvc = [" << numu->var<int>("Ichvc", iprm)
+                  << "], Pvc = [" << Pvc[iprm][0] << ", " << Pvc[iprm][1] << ", " << Pvc[iprm][2] << "] = " << numu->var<float>("Abspvc", iprm) << " MeV" << std::endl;
+      }
+      std::cout << "----------------------" << std::endl;
+#endif
+#if 0
+      std::cout << "[     VECT2    ]" << std::endl;
+      for (int iscnd=0; iscnd<npar2; iscnd++) {
+        std::cout << "[### " << ientry 
+                  << " ###] Secondary[" << iscnd+1 << "] " << GetGEANTPIDName( ipv2[iscnd] )
+                  << ", iorg = [" << iorg[iscnd] 
+                  << "], posv2 = [" << posv2[iscnd][0] << ", " << posv2[iscnd][1] << ", " << posv2[iscnd][2]
+                  << "] cm, pmomv2 = [" << pmomv2[iscnd][0] << ", " << pmomv2[iscnd][1] << ", " << pmomv2[iscnd][2] << "] MeV" << std::endl;
+      }
+      std::cout << "----------------------" << std::endl;
+      std::cout << "[    CONVVECT    ]" << std::endl;
+#endif
+      for (int iscnd=0; iscnd<numu->var<int>("nscndprt"); iscnd++) {
+#if 0
+        std::cout << "[### " << ientry 
+                  << " ###] Secondary[" << iscnd+1 << "] " << GetPDGPIDName( numu->var<int>("iprtscnd", iscnd) )
+                  << ", lmecscnd = " << numu->var<int>("lmecscnd", iscnd)
+                  << ", iprntprt = " << GetPDGPIDName( numu->var<int>("iprntprt", iscnd) )
+                  << ", iprntidx = [" << iprntidx[iscnd]
+                  << "], ichildidx = [" << ichildidx[iscnd]
+                  << "], vtxscnd = [" << numu->var<float>("vtxscnd", iscnd, 0) << ", " << numu->var<float>("vtxscnd", iscnd, 1) << ", " << numu->var<float>("vtxscnd", iscnd, 2)
+                  << "] cm, pscnd = [" << pscnd[iscnd][0] << ", " << pscnd[iscnd][1] << ", " << pscnd[iscnd][2]
+                  << "] MeV, vtxprnt = [" << vtxprnt[iscnd][0] << ", " << vtxprnt[iscnd][1] << ", " << vtxprnt[iscnd][2]
+                  << "] cm, pprntinit = [" << pprntinit[iscnd][0] << ", " << pprntinit[iscnd][1] << ", " << pprntinit[iscnd][2]
+                  << "] MeV, pprnt = [" << pprnt[iscnd][0] << ", " << pprnt[iscnd][1] << ", " << pprnt[iscnd][2] << "] MeV" << std::endl;
+#endif
+        if (ntagana.GetTrueMuNCapVtx(iscnd, numu, ichildidx, MuNCapVtx)) {
+          TrueMuN++;
+          float d_Prm_x_MuNCap = GetSimpleDistance(PrmVtx, MuNCapVtx);
+          if (intmode<31) h1_truedistance_MuCapn -> Fill(d_Prm_x_MuNCap/100., OscProb);
+          else h1_truedistance_MuCapn -> Fill(d_Prm_x_MuNCap/100.);
+        }
+      }
+
+
+      int TrueBefFSI   = ntagana.GetTrueGenNBefFSI(numu);
+      int TrueBefSI    = ntagana.GetTrueGenNBefSI(numu, Iorgvc);
+      //int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprntinit);
+      int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprntinit, Iorgvc);
+      int TrueAftSI    = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt, pprntinit);
+      //int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprnt);
+      //int TrueAftSI    = ntagana.GetTrueCapNAftSI(numu, iprntidx, vtxprnt, pprnt);
+
+      //if (TrueBefSI!=0) std::cout << "Neutrons generated by nucleon FSI: " << TrueBefSI << std::endl;
+      //std::cout << " " << std::endl;
+
+#if 0
+      std::cout << "# generated neutrons before FSI: " << TrueBefFSI << std::endl;
+      std::cout << "# generated neutrons up to FSI : " << TrueBefSI << std::endl;
+      std::cout << "# captured neutrons up to FSI  : " << TrueCapBefSI << std::endl;
+      std::cout << "# captured neutrons from SI    : " << TrueAftSI << std::endl;
+      std::cout << "# captured neutrons from mu    : " << TrueMuN << std::endl;
+      std::cout << "NTrueN: " << NTrueN << std::endl;
+      std::cout << " " << std::endl;
+#endif
+
+      //if (NTrueN-(TrueBefSI+TrueAftSI+TrueMuN)!=0) std::cout << "\e[38;5;09m\e[1m BUG? \e[0m" << std::endl;
+      //if (TrueMuN!=0) std::cout << "\e[38;5;09m\e[1m BUG? \e[0m" << std::endl;
+      //std::cout << " " << std::endl;
+      if (intmode<31) {
+        GenPreFSIN   += TrueBefFSI*OscProb;
+        GenPostFSIN  += TrueBefSI*OscProb;
+
+        CapPostFSIN  += TrueCapBefSI*OscProb;
+        CapSIN       += TrueAftSI*OscProb;
+        CapMuN       += TrueMuN*OscProb;
+        TrueN        += NTrueN*OscProb;
+      }
+      else {
+        GenPreFSIN   += TrueBefFSI;
+        GenPostFSIN  += TrueBefSI;
+
+        CapPostFSIN  += TrueCapBefSI;
+        CapSIN       += TrueAftSI;
+        CapMuN       += TrueMuN;
+        TrueN        += NTrueN;
+      }
+      
+      if (intmode==1) {
+        //if (TrueBefFSI==1) std::cout << "\e[38;5;09m\e[1m BUG? \e[0m" << std::endl;
+        h1_GenBefFSINeutrons -> Fill(TrueBefFSI);
+        h1_GenBefSINeutrons  -> Fill(TrueBefSI);
+        h1_GenAftSINeutrons  -> Fill(TrueCapBefSI+TrueAftSI);
+        h1_GenMuCapNeutrons  -> Fill(TrueMuN);
+      } 
+
+
+
       if (MCType=="Water" || MCType=="water") continue;
 
-
-      float OscProb = numu->getOscWgt();
-      float Enu = numu->var<float>("erec");
 
       //decay-e distance @ C1-C6
       int FQDcyE_Box = decayebox.GetDecayeInBox(numu, eMode, eOsc, dtMax, N50Min, N50Max, false);
@@ -602,7 +735,7 @@ int main(int argc, char **argv) {
 
       } //threshold scan
 
-
+/*
       float PrmVtx[3] = {0., 0., 0.};  //Primary vertex
       PrmVtx[0] = numu->var<float>("posv", 0);
       PrmVtx[1] = numu->var<float>("posv", 1);
@@ -677,6 +810,8 @@ int main(int argc, char **argv) {
         }
       }
 
+
+
       int TrueBefFSI   = ntagana.GetTrueGenNBefFSI(numu);
       int TrueBefSI    = ntagana.GetTrueGenNBefSI(numu, Iorgvc);
       //int TrueCapBefSI = ntagana.GetTrueCapNBefSI(numu, iprntidx, vtxprnt, pprntinit);
@@ -727,6 +862,8 @@ int main(int argc, char **argv) {
         h1_GenAftSINeutrons  -> Fill(TrueCapBefSI+TrueAftSI);
         h1_GenMuCapNeutrons  -> Fill(TrueMuN);
       } 
+*/
+
 
 
       /////  Reco distance  /////

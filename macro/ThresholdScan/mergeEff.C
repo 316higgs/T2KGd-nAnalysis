@@ -77,7 +77,7 @@ void mergeEff(bool beammode) {
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.systSIm30.root");
 #endif
 
-#if 0
+#if 1
   ////  +30%  ////
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.systSIp30.root");
   TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.systSIp30.root");
@@ -87,7 +87,7 @@ void mergeEff(bool beammode) {
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.systSIp30.root");
 #endif
 
-#if 1
+#if 0
   ////  0.0251%  ////
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.00251GdMC.bonsaikeras_ToF.root");
   TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.00251GdMC.bonsaikeras_ToF.root");
@@ -97,7 +97,6 @@ void mergeEff(bool beammode) {
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.00251GdMC.bonsaikeras_ToF.root");
 #endif
 
-  //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 

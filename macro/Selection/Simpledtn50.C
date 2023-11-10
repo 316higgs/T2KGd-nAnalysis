@@ -46,10 +46,18 @@ void Simpledtn50() {
   g1_side2 -> SetLineColor(kOrange+7);
 
 
+  TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
+  TH1F* h2_dtn50_data  = (TH1F*)fin_data->Get("DecayeBox/h2_dtn50");
+  h2_dtn50_data -> SetLineColor(kGray+3);
+  h2_dtn50_data -> SetLineWidth(3);
+
+
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 1000, 700);
   c1 -> SetGrid();
   h2_dtn50 -> Draw("COLZ");
+  //h2_dtn50 -> Draw("BOX");
+  h2_dtn50_data -> Draw("SAME box");
   f1_btm -> Draw("SAME");
   //f1_upr -> Draw("SAME");
   g1_side1 -> Draw("SAME");

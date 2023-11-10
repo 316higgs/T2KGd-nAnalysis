@@ -52,6 +52,8 @@ TH1F* h1_NC_nuebarbkg[CUTSTEP];
 
 THStack* hs_C[CUTSTEP];
 
+TH1F* h1_data[CUTSTEP];
+
 Double_t ExpN_numu_x_numu;
 Double_t ExpN_numu_x_nue;
 Double_t ExpN_numubar_x_numubar;
@@ -70,10 +72,11 @@ TString CCQEHistoName;
 TString CC2p2hHistoName;
 TString CCOtherHistoName;
 TString NCHistoName;
+TString DataHistoName;
 
 TString SetHistoVarName(int istep);
 void SetHisto(int istep, TFile* fin, int OscMode);
-void SetHistoColor(int istep);
+void SetHistoColor(int istep, bool data);
 void ScaleHisto(int istep, int OscMode);
 void SetTHStack(int istep);
 
@@ -102,12 +105,6 @@ void SelectionVar(bool beammode) {
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
-  //RHC
-#if rhcflag
-  TFile* fin_numu    = new TFile("../../output/rhc/rhc.numu_x_numu.etagON.cut1.root");
-  TFile* fin_numubar = new TFile("../../output/rhc/rhc.numubar_x_numubar.etagON.root");
-  TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
-#endif
 
   // Normalization factors
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
@@ -125,7 +122,7 @@ void SelectionVar(bool beammode) {
   GenN_numu_x_numu       = 63622;
   GenN_numu_x_nue        = 63538;
   GenN_numubar_x_numubar = 63444;
-  GenN_numubar_x_nuebar  = 63463;
+  GenN_numubar_x_nuebar  = 63460;
   GenN_nue_x_nue         = 63423;
   GenN_nuebar_x_nuebar   = 63652;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
@@ -165,7 +162,7 @@ void SelectionVar(bool beammode) {
   	if (i==4) g_Cut[i] = new TGraph(2, xC5, y);
   	if (i==5) g_Cut[i] = new TGraph(2, xC6, y);
   	g_Cut[i] -> SetLineWidth(2);
-    g_Cut[i] -> SetLineColor(kViolet-8);
+    g_Cut[i] -> SetLineColor(kOrange+7);
     g_Cut[i] -> SetLineStyle(7);
   }
 
@@ -175,6 +172,7 @@ void SelectionVar(bool beammode) {
   TString suffix_CC2p2h  = "_mode1";
   TString suffix_CCOther = "_mode3";
   TString suffix_NC      = "_mode2";
+  bool isData            = false;
   for (int istep=0; istep<CUTSTEP; istep++) {
   	TString VarName = SetHistoVarName(istep);
   	CCQEHistoName    = VarPath+VarName+suffix_CCQE;
@@ -191,7 +189,7 @@ void SelectionVar(bool beammode) {
     SetHisto(istep, fin_nuebarbkg, 5); // nuebar -> nuebar
 
     // Color
-    SetHistoColor(istep);
+    SetHistoColor(istep, isData);
 
     // Scale
     ScaleHisto(istep, 0);  // numu    -> numu
@@ -204,8 +202,32 @@ void SelectionVar(bool beammode) {
     // Stack
     SetTHStack(istep);
   }
+
+
+  // Data
+  isData = true;
+  TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
+  for (int istep=0; istep<CUTSTEP; istep++) {
+    TString VarName = SetHistoVarName(istep);
+    DataHistoName = VarPath+"All"+VarName;
+    //std::cout << DataHistoName << std::endl;
+
+    SetHisto(istep, fin_data, 6); // data
+
+    // Color
+    SetHistoColor(istep, isData);
+  }
+
+  //#ring
+  /*h1_data[1]->SetBinContent(3, 0.);
+  h1_data[1]->SetBinContent(4, 0.);
+  h1_data[1]->SetBinContent(5, 0.);
+  h1_data[1]->SetBinError(3, 0.);
+  h1_data[1]->SetBinError(4, 0.);
+  h1_data[1]->SetBinError(5, 0.);*/
   
 
+#if 1
   // Draw
   gROOT -> SetStyle("Plain");
 
@@ -227,15 +249,35 @@ void SelectionVar(bool beammode) {
 
   for (int istep=0; istep<CUTSTEP; istep++) {
   	c -> cd(istep+1) -> SetGrid();
-    if (istep==0) hs_C[istep] -> SetMaximum(13);
+    if (istep==0) hs_C[istep] -> SetMaximum(30);
+    if (istep==1) hs_C[istep] -> SetMaximum(50);
+    if (istep==4) hs_C[istep] -> SetMaximum(30);
     hs_C[istep] -> Draw();
     hs_C[istep] ->GetYaxis()->SetTitleSize(0.038);
     hs_C[istep] ->GetYaxis()->SetTitleOffset(1.3);
     hs_C[istep] ->GetYaxis()->SetLabelSize(0.036);
     hs_C[istep] -> Draw();
+    h1_data[istep] -> Draw("SAME P E");
     g_Cut[istep]  -> Draw("SAME");
     if (istep==0) legend1->Draw();
   }
+#endif
+
+#if 0
+  // Draw
+  gROOT -> SetStyle("Plain");
+
+  TCanvas* c = new TCanvas("c", "c", 1200, 800);
+  c -> SetGrid();
+  hs_C[4] -> SetMaximum(30);
+  hs_C[4] -> Draw();
+  //hs_C[4] ->GetYaxis()->SetTitleSize(0.038);
+  //hs_C[4] ->GetYaxis()->SetTitleOffset(1.3);
+  //hs_C[4] ->GetYaxis()->SetLabelSize(0.036);
+  //hs_C[4] -> Draw();
+  h1_data[4] -> Draw("SAME P E");
+  //g_Cut[4]  -> Draw("SAME");
+#endif
  
 }
 
@@ -308,6 +350,9 @@ void SetHisto(int istep, TFile* fin, int OscMode) {
       h1_CCOther_nuebarbkg[istep] = (TH1F*)fin->Get(CCOtherHistoName);
       h1_NC_nuebarbkg[istep]      = (TH1F*)fin->Get(NCHistoName);
       break;
+    default:
+      h1_data[istep] = (TH1F*)fin->Get(DataHistoName);
+      break;
   }
 }
 
@@ -348,6 +393,8 @@ void ScaleHisto(int istep, int OscMode) {
       h1_CC2p2h_nuebarbkg[istep]  -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
       h1_CCOther_nuebarbkg[istep] -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
       h1_NC_nuebarbkg[istep]      -> Scale( (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) );
+      break;
+    default:
       break;
   }
 }
@@ -405,60 +452,70 @@ void SetTHStack(int istep) {
   hs_C[istep] -> Add(h1_CCQE_numu[istep]);
 }
 
-void SetHistoColor(int istep) {
-  h1_CCQE_numu[istep]    -> SetLineColor(kAzure-1);
-  h1_CCQE_numu[istep]    -> SetFillColor(kAzure-1);
-  h1_CC2p2h_numu[istep]  -> SetLineColor(kAzure-5);
-  h1_CC2p2h_numu[istep]  -> SetFillColor(kAzure-5);
-  h1_CCOther_numu[istep] -> SetLineColor(kCyan-8);
-  h1_CCOther_numu[istep] -> SetFillColor(kCyan-8);
-  h1_NC_numu[istep]      -> SetLineColor(kSpring-9);
-  h1_NC_numu[istep]      -> SetFillColor(kSpring-9);
+void SetHistoColor(int istep, bool data) {
 
-  h1_CCQE_nuesig[istep]    -> SetLineColor(kViolet-1);
-  h1_CCQE_nuesig[istep]    -> SetFillColor(kViolet-1);
-  h1_CC2p2h_nuesig[istep]  -> SetLineColor(kViolet-1);
-  h1_CC2p2h_nuesig[istep]  -> SetFillColor(kViolet-1);
-  h1_CCOther_nuesig[istep] -> SetLineColor(kViolet-1);
-  h1_CCOther_nuesig[istep] -> SetFillColor(kViolet-1);
-  h1_NC_nuesig[istep]      -> SetLineColor(kSpring-9);
-  h1_NC_nuesig[istep]      -> SetFillColor(kSpring-9);
+  if (!data) {
+    h1_CCQE_numu[istep]    -> SetLineColor(kAzure-1);
+    h1_CCQE_numu[istep]    -> SetFillColor(kAzure-1);
+    h1_CC2p2h_numu[istep]  -> SetLineColor(kAzure-5);
+    h1_CC2p2h_numu[istep]  -> SetFillColor(kAzure-5);
+    h1_CCOther_numu[istep] -> SetLineColor(kCyan-8);
+    h1_CCOther_numu[istep] -> SetFillColor(kCyan-8);
+    h1_NC_numu[istep]      -> SetLineColor(kSpring-9);
+    h1_NC_numu[istep]      -> SetFillColor(kSpring-9);
 
-  h1_CCQE_numubar[istep]    -> SetLineColor(kOrange+7);
-  h1_CCQE_numubar[istep]    -> SetFillColor(kOrange+7);
-  h1_CC2p2h_numubar[istep]  -> SetLineColor(kOrange+6);
-  h1_CC2p2h_numubar[istep]  -> SetFillColor(kOrange+6);
-  h1_CCOther_numubar[istep] -> SetLineColor(kOrange+0);
-  h1_CCOther_numubar[istep] -> SetFillColor(kOrange+0);
-  h1_NC_numubar[istep]      -> SetLineColor(kSpring-9);
-  h1_NC_numubar[istep]      -> SetFillColor(kSpring-9);
+    h1_CCQE_nuesig[istep]    -> SetLineColor(kViolet-1);
+    h1_CCQE_nuesig[istep]    -> SetFillColor(kViolet-1);
+    h1_CC2p2h_nuesig[istep]  -> SetLineColor(kViolet-1);
+    h1_CC2p2h_nuesig[istep]  -> SetFillColor(kViolet-1);
+    h1_CCOther_nuesig[istep] -> SetLineColor(kViolet-1);
+    h1_CCOther_nuesig[istep] -> SetFillColor(kViolet-1);
+    h1_NC_nuesig[istep]      -> SetLineColor(kSpring-9);
+    h1_NC_nuesig[istep]      -> SetFillColor(kSpring-9);
 
-  h1_CCQE_nuebarsig[istep]    -> SetLineColor(kViolet-1);
-  h1_CCQE_nuebarsig[istep]    -> SetFillColor(kViolet-1);
-  h1_CC2p2h_nuebarsig[istep]  -> SetLineColor(kViolet-1);
-  h1_CC2p2h_nuebarsig[istep]  -> SetFillColor(kViolet-1);
-  h1_CCOther_nuebarsig[istep] -> SetLineColor(kViolet-1);
-  h1_CCOther_nuebarsig[istep] -> SetFillColor(kViolet-1);
-  h1_NC_nuebarsig[istep]      -> SetLineColor(kSpring-9);
-  h1_NC_nuebarsig[istep]      -> SetFillColor(kSpring-9);
+    h1_CCQE_numubar[istep]    -> SetLineColor(kOrange+7);
+    h1_CCQE_numubar[istep]    -> SetFillColor(kOrange+7);
+    h1_CC2p2h_numubar[istep]  -> SetLineColor(kOrange+6);
+    h1_CC2p2h_numubar[istep]  -> SetFillColor(kOrange+6);
+    h1_CCOther_numubar[istep] -> SetLineColor(kOrange+0);
+    h1_CCOther_numubar[istep] -> SetFillColor(kOrange+0);
+    h1_NC_numubar[istep]      -> SetLineColor(kSpring-9);
+    h1_NC_numubar[istep]      -> SetFillColor(kSpring-9);
+
+    h1_CCQE_nuebarsig[istep]    -> SetLineColor(kViolet-1);
+    h1_CCQE_nuebarsig[istep]    -> SetFillColor(kViolet-1);
+    h1_CC2p2h_nuebarsig[istep]  -> SetLineColor(kViolet-1);
+    h1_CC2p2h_nuebarsig[istep]  -> SetFillColor(kViolet-1);
+    h1_CCOther_nuebarsig[istep] -> SetLineColor(kViolet-1);
+    h1_CCOther_nuebarsig[istep] -> SetFillColor(kViolet-1);
+    h1_NC_nuebarsig[istep]      -> SetLineColor(kSpring-9);
+    h1_NC_nuebarsig[istep]      -> SetFillColor(kSpring-9);
   
-  h1_CCQE_nuebkg[istep]    -> SetLineColor(kViolet-1);
-  h1_CCQE_nuebkg[istep]    -> SetFillColor(kViolet-1);
-  h1_CC2p2h_nuebkg[istep]  -> SetLineColor(kViolet-1);
-  h1_CC2p2h_nuebkg[istep]  -> SetFillColor(kViolet-1);
-  h1_CCOther_nuebkg[istep] -> SetLineColor(kViolet-1);
-  h1_CCOther_nuebkg[istep] -> SetFillColor(kViolet-1);
-  h1_NC_nuebkg[istep]      -> SetLineColor(kSpring-9);
-  h1_NC_nuebkg[istep]      -> SetFillColor(kSpring-9);
+    h1_CCQE_nuebkg[istep]    -> SetLineColor(kViolet-1);
+    h1_CCQE_nuebkg[istep]    -> SetFillColor(kViolet-1);
+    h1_CC2p2h_nuebkg[istep]  -> SetLineColor(kViolet-1);
+    h1_CC2p2h_nuebkg[istep]  -> SetFillColor(kViolet-1);
+    h1_CCOther_nuebkg[istep] -> SetLineColor(kViolet-1);
+    h1_CCOther_nuebkg[istep] -> SetFillColor(kViolet-1);
+    h1_NC_nuebkg[istep]      -> SetLineColor(kSpring-9);
+    h1_NC_nuebkg[istep]      -> SetFillColor(kSpring-9);
 
-  h1_CCQE_nuebarbkg[istep]    -> SetLineColor(kOrange+7);
-  h1_CCQE_nuebarbkg[istep]    -> SetFillColor(kOrange+7);
-  h1_CC2p2h_nuebarbkg[istep]  -> SetLineColor(kOrange+6);
-  h1_CC2p2h_nuebarbkg[istep]  -> SetFillColor(kOrange+6);
-  h1_CCOther_nuebarbkg[istep] -> SetLineColor(kOrange+0);
-  h1_CCOther_nuebarbkg[istep] -> SetFillColor(kOrange+0);
-  h1_NC_nuebarbkg[istep]      -> SetLineColor(kSpring-9);
-  h1_NC_nuebarbkg[istep]      -> SetFillColor(kSpring-9);
+    h1_CCQE_nuebarbkg[istep]    -> SetLineColor(kOrange+7);
+    h1_CCQE_nuebarbkg[istep]    -> SetFillColor(kOrange+7);
+    h1_CC2p2h_nuebarbkg[istep]  -> SetLineColor(kOrange+6);
+    h1_CC2p2h_nuebarbkg[istep]  -> SetFillColor(kOrange+6);
+    h1_CCOther_nuebarbkg[istep] -> SetLineColor(kOrange+0);
+    h1_CCOther_nuebarbkg[istep] -> SetFillColor(kOrange+0);
+    h1_NC_nuebarbkg[istep]      -> SetLineColor(kSpring-9);
+    h1_NC_nuebarbkg[istep]      -> SetFillColor(kSpring-9);
+  }
+  else {
+    h1_data[istep] -> SetMarkerStyle(20);
+    h1_data[istep] -> SetMarkerSize(1.2);
+    h1_data[istep] -> SetMarkerColor(kBlack);
+    h1_data[istep] -> SetLineColor(kBlack);
+    h1_data[istep] -> SetLineWidth(1.5);
+  }
 }
 
 

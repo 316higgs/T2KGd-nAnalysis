@@ -555,6 +555,17 @@ void mergeEnuOscillation(bool beammode) {
 
 
 
+  // Data
+  TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
+  TH1F* h1_EnuReco_data = (TH1F*)fin_data->Get("NeutrinoOscillation/h1_AllEnureco");
+  h1_EnuReco_data -> SetMarkerStyle(20);
+  h1_EnuReco_data -> SetMarkerSize(1.2);
+  h1_EnuReco_data -> SetMarkerColor(kBlack);
+  h1_EnuReco_data -> SetLineColor(kBlack);
+  h1_EnuReco_data -> SetLineWidth(1.5);
+
+
+
   gROOT -> SetStyle("Plain");
 #if 1
   // No NTag separation
@@ -571,6 +582,9 @@ void mergeEnuOscillation(bool beammode) {
   hs_RecoOsc ->GetXaxis()->SetTitle("Reconstructed Neutrino Energy E_{#nu}[GeV]");
   hs_RecoOsc ->GetYaxis()->SetTitle("Number of Neutrino Events");
   hs_RecoOsc -> Draw();
+
+  h1_EnuReco_data -> Draw("SAME P E");
+
   c1->RedrawAxis();
 
   TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
@@ -591,7 +605,7 @@ void mergeEnuOscillation(bool beammode) {
   legend1->Draw();
 #endif
 
-#if 1
+#if 0
   // NTag separation
   TCanvas* c2 = new TCanvas("c2","c2",900,700);
   c2 -> SetGrid();

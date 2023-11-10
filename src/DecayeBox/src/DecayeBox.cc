@@ -357,7 +357,7 @@ int DecayeBox::GetDecayeInBox(CC0PiNumu* numu,
   float OscProb = numu->getOscWgt();
   int Decaye = 0;
   const int nse = numu->var<int>("fqnse");
-  //int mode = TMath::Abs(numu->var<int>("mode"));
+  int mode = TMath::Abs(numu->var<int>("mode"));
 
   //bool fillthem = false;  //for checking of naturalness of dt scan results
   //int fillcounter = 0;    //for checking of naturalness of dt scan results
@@ -366,7 +366,15 @@ int DecayeBox::GetDecayeInBox(CC0PiNumu* numu,
     float dt  = numu->var<float>("fq1rt0", jsub, FQ_EHYP) - numu->var<float>("fq1rt0", 0, FQ_MUHYP); //new
     float N50 = numu->var<int>("fqn50", jsub);
     //std::cout << " Matched fiTQun decya-e in the box: " << MatchedBoxfQdcye << std::endl;
-    if (histofill==true) h2_dtn50 -> Fill(dt/1000., N50, OscProb);
+    if (histofill==true) {
+      if (!data) {
+        if (mode<31) h2_dtn50 -> Fill(dt/1000., N50, OscProb);
+        else h2_dtn50 -> Fill(dt/1000., N50);
+      }
+      else {
+        h2_dtn50 -> Fill(dt/1000., N50);
+      }
+    }
     TaggedDecaye++;
 
     //if (dt/1000. > 15. && dt/1000. < 20.) fillthem = true;

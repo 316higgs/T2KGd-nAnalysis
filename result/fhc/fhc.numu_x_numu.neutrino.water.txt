@@ -202,11 +202,22 @@
 [Neutrino] Generated Neutrino Events(wallv>200): 448378
 [Neutrino] Generated 1Rmu Events (Oscillated)  : 54930.2
  
-[Neutron] # generated neutrons before FSI: 0
-[Neutron] # captured neutrons up to FSI  : 0
-[Neutron] # captured neutrons from SI    : 0
+[Neutron] # generated neutrons before FSI: 4945.66
+[Neutron] # generated neutrons before SI : 24910.9
+[Neutron]   (primary interaction): 3889.04
+[Neutron]   (nucleon FSI)        : 12773.7
+[Neutron]   (pion FSI)           : 6318.11
+[Neutron]   (de-excitation)      : 1929.87
+[Neutron] # captured neutrons before FSI  : 0
+[Neutron]   (primary interaction): 0
+[Neutron]   (nucleon FSI)        : 0
+[Neutron]   (pion FSI)           : 0
+[Neutron]   (de-excitation)      : 0
+[Neutron] # captured neutrons from SI    : 59785.5
 [Neutron] # captured neutrons from mu    : 0
-[Neutron] # all true neutrons            : 0
+[Neutron] -------------------------------------------
+[Neutron] Total                          : 59785.5
+[Neutron] # all true neutrons            : 112345
  
 [Neutrino] Oscillated CCQE Events     : 28449.7(70.8262 %)
            w/ truth neutrons : 26738.1 (70.8645 %), w/o truth neutrons :1711.34 (70.2301 %)

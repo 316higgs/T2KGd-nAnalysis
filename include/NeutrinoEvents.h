@@ -33,6 +33,7 @@ float SelectedCCQETagN[SELECTIONCUTS];
 float SelectedCC2p2hTagN[SELECTIONCUTS];
 float SelectedCCnonQETagN[SELECTIONCUTS];
 float SelectedNCTagN[SELECTIONCUTS];
+float SelectedAllTagN[SELECTIONCUTS] = {0.};
 
 //Decay-e cut scan (after C.1-C.4 applying)
 //dt = 20 us, 15 us, 10 us, 5 us, 3 us
@@ -169,10 +170,17 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
   prmsel.GetEvis(numu);
   prmsel.GetDWall(numu);
   if (prmsel.C1ApplyFCFV(evsel)) {
-    if (mode<31) SelectedParentNeutrinos[0] += OscProb;
-    else SelectedParentNeutrinos[0]++;
-    if (mode<31) ProtoSelectedParentNeutrinos[0] += OscProb;
-    else ProtoSelectedParentNeutrinos[0]++;
+
+    if (!data) {
+      if (mode<31) SelectedParentNeutrinos[0] += OscProb;
+      else SelectedParentNeutrinos[0]++;
+      if (mode<31) ProtoSelectedParentNeutrinos[0] += OscProb;
+      else ProtoSelectedParentNeutrinos[0]++;
+    }
+    else {
+      SelectedParentNeutrinos[0]++;
+      ProtoSelectedParentNeutrinos[0]++;
+    }
 
     if (mode==1)             SelectedNoOscCCQENeutrinos[0]++;
     if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[0]++;
@@ -186,10 +194,17 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
     prmsel.GetNring(numu);
 
     if (prmsel.C2Apply1R(evsel)) {
-      if (mode<31) SelectedParentNeutrinos[1] += OscProb;
-      else SelectedParentNeutrinos[1]++;
-      if (mode<31) ProtoSelectedParentNeutrinos[1] += OscProb;
-      else ProtoSelectedParentNeutrinos[1]++;
+      
+      if (!data) {
+        if (mode<31) SelectedParentNeutrinos[1] += OscProb;
+        else SelectedParentNeutrinos[1]++;
+        if (mode<31) ProtoSelectedParentNeutrinos[1] += OscProb;
+        else ProtoSelectedParentNeutrinos[1]++;
+      }
+      else {
+        SelectedParentNeutrinos[1]++;
+        ProtoSelectedParentNeutrinos[1]++;
+      }
 
       if (mode==1)             SelectedNoOscCCQENeutrinos[1]++;
       if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[1]++;
@@ -203,10 +218,16 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
       prmsel.GetemuLikelihood(numu);
 
       if (prmsel.C3Applymuonlike(evsel)) {
-        if (mode<31) SelectedParentNeutrinos[2] += OscProb;
-        else SelectedParentNeutrinos[2]++;
-        if (mode<31) ProtoSelectedParentNeutrinos[2] += OscProb;
-        else ProtoSelectedParentNeutrinos[2]++;
+        if (!data) {
+          if (mode<31) SelectedParentNeutrinos[2] += OscProb;
+          else SelectedParentNeutrinos[2]++;
+          if (mode<31) ProtoSelectedParentNeutrinos[2] += OscProb;
+          else ProtoSelectedParentNeutrinos[2]++;
+        }
+        else {
+          SelectedParentNeutrinos[2]++;
+          ProtoSelectedParentNeutrinos[2]++;
+        }
 
         if (mode==1)             SelectedNoOscCCQENeutrinos[2]++;
         if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[2]++;
@@ -220,10 +241,16 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
         prmsel.GetPmu(numu);
 
         if (prmsel.C4ApplyPmu200MeV(evsel)) {
-          if (mode<31) SelectedParentNeutrinos[3] += OscProb;
-          else SelectedParentNeutrinos[3]++;
-          if (mode<31) ProtoSelectedParentNeutrinos[3] += OscProb;
-          else ProtoSelectedParentNeutrinos[3]++;
+          if (!data) {
+            if (mode<31) SelectedParentNeutrinos[3] += OscProb;
+            else SelectedParentNeutrinos[3]++;
+            if (mode<31) ProtoSelectedParentNeutrinos[3] += OscProb;
+            else ProtoSelectedParentNeutrinos[3]++;
+          }
+          else {
+            SelectedParentNeutrinos[3]++;
+            ProtoSelectedParentNeutrinos[3]++;
+          }
 
           if (mode==1)             SelectedNoOscCCQENeutrinos[3]++;
           if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[3]++;
@@ -238,8 +265,13 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
           //decayebox.GetDecayeTagPurity(numu, dtCut, N50CutMin, N50CutMax);
 
           if (prmsel.C5Applydecaye(evsel, numu, decayebox, eMode, eOsc, dtCut, N50CutMin, N50CutMax, dtvsn50fill)) {
-            if (mode<31) SelectedParentNeutrinos[4] += OscProb;
-            else SelectedParentNeutrinos[4]++;
+            if (!data) {
+              if (mode<31) SelectedParentNeutrinos[4] += OscProb;
+              else SelectedParentNeutrinos[4]++;
+            }
+            else {
+              SelectedParentNeutrinos[4]++;
+            }
 
             if (mode==1)             SelectedNoOscCCQENeutrinos[4]++;
             if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[4]++;
@@ -253,8 +285,13 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
             prmsel.GetpimuLikelihood(numu);
 
             if (prmsel.C6Applynotpionlike(evsel)) {
-              if (mode<31) SelectedParentNeutrinos[5] += OscProb;
-              else SelectedParentNeutrinos[5]++;
+              if (!data) {
+                if (mode<31) SelectedParentNeutrinos[5] += OscProb;
+                else SelectedParentNeutrinos[5]++;
+              }
+              else {
+                SelectedParentNeutrinos[5]++;
+              }
 
               if (mode==1)             SelectedNoOscCCQENeutrinos[5]++;
               if (mode>=2 && mode<=10) SelectedNoOscCC2p2hNeutrinos[5]++;
@@ -269,12 +306,22 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
           }
 
           if (prmsel.C5ApplyProtodecaye(evsel)) {
-            if (mode<31) ProtoSelectedParentNeutrinos[4] += OscProb;
-            else ProtoSelectedParentNeutrinos[4]++;
+            if (!data) {
+              if (mode<31) ProtoSelectedParentNeutrinos[4] += OscProb;
+              else ProtoSelectedParentNeutrinos[4]++;
+            }
+            else {
+              ProtoSelectedParentNeutrinos[4]++;
+            }
 
             if (prmsel.C6Applynotpionlike(evsel)) {
-              if (mode<31) ProtoSelectedParentNeutrinos[5] += OscProb;
-              else ProtoSelectedParentNeutrinos[5]++;
+              if (!data) {
+                if (mode<31) ProtoSelectedParentNeutrinos[5] += OscProb;
+                else ProtoSelectedParentNeutrinos[5]++;
+              }
+              else {
+                ProtoSelectedParentNeutrinos[5]++;
+              }
             }
           }
         }
@@ -572,79 +619,102 @@ void GetSelectedTagN(Gd1RmuonSelection prmsel,
                      float N50CutMax,
                      bool dtvsn50fill,
                      int TagN) {
-  int mode = TMath::Abs(numu->var<int>("mode"));
-  float OscProb = numu->getOscWgt();
-  if (prmsel.C1ApplyFCFV(evsel)) {
-    if (mode==1)             SelectedNoOscCCQETagN[0] += TagN;
-    if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[0] += TagN;
-    if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[0] += TagN;
-    if (mode>=31)            SelectedNoOscNCTagN[0] += TagN;
+  if (!data) {
+    int mode = TMath::Abs(numu->var<int>("mode"));
+    float OscProb = numu->getOscWgt();
+    if (prmsel.C1ApplyFCFV(evsel)) {
+      if (mode==1)             SelectedNoOscCCQETagN[0] += TagN;
+      if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[0] += TagN;
+      if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[0] += TagN;
+      if (mode>=31)            SelectedNoOscNCTagN[0] += TagN;
 
-    if (mode==1)             SelectedCCQETagN[0] += TagN*OscProb;
-    if (mode>=2 && mode<=10) SelectedCC2p2hTagN[0] += TagN*OscProb;
-    if (mode>10 && mode<=30) SelectedCCnonQETagN[0] += TagN*OscProb;
-    if (mode>=31)            SelectedNCTagN[0] += TagN;
+      if (mode==1)             SelectedCCQETagN[0] += TagN*OscProb;
+      if (mode>=2 && mode<=10) SelectedCC2p2hTagN[0] += TagN*OscProb;
+      if (mode>10 && mode<=30) SelectedCCnonQETagN[0] += TagN*OscProb;
+      if (mode>=31)            SelectedNCTagN[0] += TagN;
 
-    if (prmsel.C2Apply1R(evsel)) {
-      if (mode==1)             SelectedNoOscCCQETagN[1] += TagN;
-      if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[1] += TagN;
-      if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[1] += TagN;
-      if (mode>=31)            SelectedNoOscNCTagN[1] += TagN;
+      if (prmsel.C2Apply1R(evsel)) {
+        if (mode==1)             SelectedNoOscCCQETagN[1] += TagN;
+        if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[1] += TagN;
+        if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[1] += TagN;
+        if (mode>=31)            SelectedNoOscNCTagN[1] += TagN;
 
-      if (mode==1)             SelectedCCQETagN[1] += TagN*OscProb;
-      if (mode>=2 && mode<=10) SelectedCC2p2hTagN[1] += TagN*OscProb;
-      if (mode>10 && mode<=30) SelectedCCnonQETagN[1] += TagN*OscProb;
-      if (mode>=31)            SelectedNCTagN[1] += TagN;
+        if (mode==1)             SelectedCCQETagN[1] += TagN*OscProb;
+        if (mode>=2 && mode<=10) SelectedCC2p2hTagN[1] += TagN*OscProb;
+        if (mode>10 && mode<=30) SelectedCCnonQETagN[1] += TagN*OscProb;
+        if (mode>=31)            SelectedNCTagN[1] += TagN;
 
-      if (prmsel.C3Applymuonlike(evsel)) {
-        if (mode==1)             SelectedNoOscCCQETagN[2] += TagN;
-        if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[2] += TagN;
-        if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[2] += TagN;
-        if (mode>=31)            SelectedNoOscNCTagN[2] += TagN;
+        if (prmsel.C3Applymuonlike(evsel)) {
+          if (mode==1)             SelectedNoOscCCQETagN[2] += TagN;
+          if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[2] += TagN;
+          if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[2] += TagN;
+          if (mode>=31)            SelectedNoOscNCTagN[2] += TagN;
 
-        if (mode==1)             SelectedCCQETagN[2] += TagN*OscProb;
-        if (mode>=2 && mode<=10) SelectedCC2p2hTagN[2] += TagN*OscProb;
-        if (mode>10 && mode<=30) SelectedCCnonQETagN[2] += TagN*OscProb;
-        if (mode>=31)            SelectedNCTagN[2] += TagN;
+          if (mode==1)             SelectedCCQETagN[2] += TagN*OscProb;
+          if (mode>=2 && mode<=10) SelectedCC2p2hTagN[2] += TagN*OscProb;
+          if (mode>10 && mode<=30) SelectedCCnonQETagN[2] += TagN*OscProb;
+          if (mode>=31)            SelectedNCTagN[2] += TagN;
 
-        if (prmsel.C4ApplyPmu200MeV(evsel)) {
-          if (mode==1)             SelectedNoOscCCQETagN[3] += TagN;
-          if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[3] += TagN;
-          if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[3] += TagN;
-          if (mode>=31)            SelectedNoOscNCTagN[3] += TagN;
+          if (prmsel.C4ApplyPmu200MeV(evsel)) {
+            if (mode==1)             SelectedNoOscCCQETagN[3] += TagN;
+            if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[3] += TagN;
+            if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[3] += TagN;
+            if (mode>=31)            SelectedNoOscNCTagN[3] += TagN;
 
-          if (mode==1)             SelectedCCQETagN[3] += TagN*OscProb;
-          if (mode>=2 && mode<=10) SelectedCC2p2hTagN[3] += TagN*OscProb;
-          if (mode>10 && mode<=30) SelectedCCnonQETagN[3] += TagN*OscProb;
-          if (mode>=31)            SelectedNCTagN[3] += TagN;
+            if (mode==1)             SelectedCCQETagN[3] += TagN*OscProb;
+            if (mode>=2 && mode<=10) SelectedCC2p2hTagN[3] += TagN*OscProb;
+            if (mode>10 && mode<=30) SelectedCCnonQETagN[3] += TagN*OscProb;
+            if (mode>=31)            SelectedNCTagN[3] += TagN;
 
-          if (prmsel.C5Applydecaye(evsel, numu, decayebox, eMode, eOsc, dtCut, N50CutMin, N50CutMax, false)) {
-            if (mode==1)             SelectedNoOscCCQETagN[4] += TagN;
-            if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[4] += TagN;
-            if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[4] += TagN;
-            if (mode>=31)            SelectedNoOscNCTagN[4] += TagN;
+            if (prmsel.C5Applydecaye(evsel, numu, decayebox, eMode, eOsc, dtCut, N50CutMin, N50CutMax, false)) {
+              if (mode==1)             SelectedNoOscCCQETagN[4] += TagN;
+              if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[4] += TagN;
+              if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[4] += TagN;
+              if (mode>=31)            SelectedNoOscNCTagN[4] += TagN;
 
-            if (mode==1)             SelectedCCQETagN[4] += TagN*OscProb;
-            if (mode>=2 && mode<=10) SelectedCC2p2hTagN[4] += TagN*OscProb;
-            if (mode>10 && mode<=30) SelectedCCnonQETagN[4] += TagN*OscProb;
-            if (mode>=31)            SelectedNCTagN[4] += TagN;
+              if (mode==1)             SelectedCCQETagN[4] += TagN*OscProb;
+              if (mode>=2 && mode<=10) SelectedCC2p2hTagN[4] += TagN*OscProb;
+              if (mode>10 && mode<=30) SelectedCCnonQETagN[4] += TagN*OscProb;
+              if (mode>=31)            SelectedNCTagN[4] += TagN;
 
-            if (prmsel.C6Applynotpionlike(evsel)) {
-              if (mode==1)             SelectedNoOscCCQETagN[5] += TagN;
-              if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[5] += TagN;
-              if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[5] += TagN;
-              if (mode>=31)            SelectedNoOscNCTagN[5] += TagN;
+              if (prmsel.C6Applynotpionlike(evsel)) {
+                if (mode==1)             SelectedNoOscCCQETagN[5] += TagN;
+                if (mode>=2 && mode<=10) SelectedNoOscCC2p2hTagN[5] += TagN;
+                if (mode>10 && mode<=30) SelectedNoOscCCnonQETagN[5] += TagN;
+                if (mode>=31)            SelectedNoOscNCTagN[5] += TagN;
 
-              if (mode==1)             SelectedCCQETagN[5] += TagN*OscProb;
-              if (mode>=2 && mode<=10) SelectedCC2p2hTagN[5] += TagN*OscProb;
-              if (mode>10 && mode<=30) SelectedCCnonQETagN[5] += TagN*OscProb;
-              if (mode>=31)            SelectedNCTagN[5] += TagN;
+                if (mode==1)             SelectedCCQETagN[5] += TagN*OscProb;
+                if (mode>=2 && mode<=10) SelectedCC2p2hTagN[5] += TagN*OscProb;
+                if (mode>10 && mode<=30) SelectedCCnonQETagN[5] += TagN*OscProb;
+                if (mode>=31)            SelectedNCTagN[5] += TagN;
+              }
             }
           }
         }
       }
     }
   }
+  else {
+    if (prmsel.C1ApplyFCFV(evsel)) {
+      SelectedAllTagN[0]++;
+      if (prmsel.C2Apply1R(evsel)) {
+        SelectedAllTagN[1]++;
+        if (prmsel.C3Applymuonlike(evsel)) {
+          SelectedAllTagN[2]++;
+          if (prmsel.C4ApplyPmu200MeV(evsel)) {
+            SelectedAllTagN[3]++;
+            if (prmsel.C5Applydecaye(evsel, numu, decayebox, eMode, eOsc, dtCut, N50CutMin, N50CutMax, false)) {
+              SelectedAllTagN[4]++;
+              if (prmsel.C6Applynotpionlike(evsel)) {
+                SelectedAllTagN[5]++;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
 }
 
 

@@ -37,7 +37,10 @@ void NeutrinoOscillation::SetHistoFrame() {
   //h2_TrueZ_x_RecoZ     = new TH2F("h2_TrueZ_x_RecoZ", "", 400, -20, 20, 400, -20, 20);
   h2_Enu_x_PrmVtxReso  = new TH2F("h2_Enu_x_PrmVtxReso", "", 150, 0, 3, 200, 0, 100);
 
-  h1_PrmMuMomReso = new TH1F("h1_PrmMuMomReso", "Primary #mu Momentum Resolution; (P^{true}_{#mu}-P^{reco}_{#mu})/P^{true}_{#mu}; Number of Events", 2000, -0.2, 0.2);
+  h1_PrmMuMomReso = new TH1F("h1_PrmMuMomReso", "", 1800, -0.2, 0.2);
+  //h1_MuonPtReso   = new TH1F("h1_MuonPtReso", "", 1800, -0.2, 0.2);
+  h1_MuonPtReso     = new TH1F("h1_MuonPtReso", "", 800, -50, 50);
+  h2_MuonPtReso_x_E = new TH2F("h2_MuonPtReso_x_E", "", 60, 0, 3000, 80, -50, 50);
   h1_PrmMuEndVtxReso = new TH1F("h1_PrmMuEndVtxReso", "Primary #mu Stopping Vertex Resolution; Reco. - Truth [cm]; Number of Neutrino Events", 2000, 0, 200);
   h2_PrmMuEndVtxReso = new TH2F("h2_PrmMuEndVtxReso", "Primary #mu Stopping Vertex Resolution; Truth [cm]; Reco [cm]", 300, 0, 3000, 300, 0, 3000);
 
@@ -430,20 +433,75 @@ float NeutrinoOscillation::GetPrmVtxResolution(CC0PiNumu* numu) {
   return PrmVtxReso;
 }
 
-void NeutrinoOscillation::GetReso_x_TrueEnu(CC0PiNumu* numu) {
-  float TrueEnu = numu->var<float>("pnu", 0);
+float NeutrinoOscillation::GetMuonPtResolution(CC0PiNumu* numu) {
+
+  int   mode    = TMath::Abs(numu->var<int>("mode"));
   float RecoEnu = numu->var<float>("erec");
-  float EnuReso = (TrueEnu - RecoEnu/1000.)/TrueEnu;
-  h2_Reso_x_TrueEnu -> Fill(TrueEnu, EnuReso);
+  float OscProb = numu->getOscWgt();
+
+  float nudirx = beamDir[0];
+  float nudiry = beamDir[1];
+  float nudirz = beamDir[2];
+  float nudir  = std::sqrt(nudirx*nudirx + nudiry*nudiry + nudirz*nudirz);  //should be 1
+
+  // true muon direction
+  float mudirx_true = numu->var<float>("dirv", 2, 0);
+  float mudiry_true = numu->var<float>("dirv", 2, 1);
+  float mudirz_true = numu->var<float>("dirv", 2, 2);
+  float mudir_true  = std::sqrt(mudirx_true*mudirx_true + mudiry_true*mudiry_true + mudirz_true*mudirz_true);  //should be 1
+
+  // true muon angle
+  float InnerProduct_true = nudirx*mudirx_true + nudiry*mudiry_true + nudirz*mudirz_true;
+  float costhetamu_true   = InnerProduct_true/(nudir * mudir_true);
+
+  // true muon Pt
+  float Pmu_true = numu->var<float>("pmomv", 2);
+  float Pt_true  = Pmu_true * std::sin( std::acos(costhetamu_true) );
+  
+  // reco muon direction
+  float mudirx_reco = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 0);
+  float mudiry_reco = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 1);
+  float mudirz_reco = numu->var<float>("fq1rdir", PrmEvent, FQ_MUHYP, 2);
+  float mudir_reco  = std::sqrt(mudirx_reco*mudirx_reco + mudiry_reco*mudiry_reco + mudirz_reco*mudirz_reco);  //should be 1
+  
+  // reco muon angle
+  float InnerProduct_reco = nudirx*mudirx_reco + nudiry*mudiry_reco + nudirz*mudirz_reco;
+  float costhetamu_reco   = InnerProduct_reco/(nudir * mudir_reco);
+
+  // reco muon Pt
+  float Pmu_reco = numu->var<float>("fq1rmom", PrmEvent, FQ_MUHYP); // [MeV]
+  float Pt_reco  = Pmu_reco * std::sin( std::acos(costhetamu_reco) );
+
+  //float Pt_reso = ( Pt_reco - Pt_true )/Pt_true;
+  float Pt_reso = Pt_reco - Pt_true;
+  if (mode<31) {
+    h1_MuonPtReso -> Fill(Pt_reso, OscProb);
+    h2_MuonPtReso_x_E -> Fill(RecoEnu, Pt_reso, OscProb);
+  }
+  else {
+    h1_MuonPtReso -> Fill(Pt_reso);
+    h2_MuonPtReso_x_E -> Fill(RecoEnu, Pt_reso);
+  } 
+
+  return Pt_reso;
 }
 
 float NeutrinoOscillation::GetPrmMuMomResolution(CC0PiNumu* numu, float *MuMom) {
   float RecoMuMom = numu->var<float>("fq1rmom", 0, FQ_MUHYP);
   float TrueMuMom = std::sqrt( MuMom[0]*MuMom[0] + MuMom[1]*MuMom[1] + MuMom[2]*MuMom[2] );
   //float PrmMuReso = std::fabs(RecoMuMom - TrueMuMom);
-  float PrmMuReso = (TrueMuMom - RecoMuMom)/TrueMuMom;
+  
+  //float PrmMuReso = (RecoMuMom - TrueMuMom)/TrueMuMom;
+  float PrmMuReso = RecoMuMom - TrueMuMom;
   h1_PrmMuMomReso -> Fill(PrmMuReso);
   return PrmMuReso;
+}
+
+void NeutrinoOscillation::GetReso_x_TrueEnu(CC0PiNumu* numu) {
+  float TrueEnu = numu->var<float>("pnu", 0);
+  float RecoEnu = numu->var<float>("erec");
+  float EnuReso = (TrueEnu - RecoEnu/1000.)/TrueEnu;
+  h2_Reso_x_TrueEnu -> Fill(TrueEnu, EnuReso);
 }
 
 
@@ -928,6 +986,8 @@ void NeutrinoOscillation::WritePlots() {
 
   h2_Enu_x_PrmVtxReso -> Write();
   h1_PrmMuMomReso -> Write();
+  h1_MuonPtReso   -> Write();
+  h2_MuonPtReso_x_E -> Write();
   h1_PrmMuEndVtxReso -> Write();
   h2_PrmMuEndVtxReso -> Write();
 

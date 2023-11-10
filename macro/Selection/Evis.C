@@ -267,6 +267,15 @@ void Evis(bool beammode) {
 #endif
 
 
+  TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
+  TH1F* h1_data = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_Allevis");
+  h1_data -> SetMarkerStyle(20);
+  h1_data -> SetMarkerSize(1.2);
+  h1_data -> SetMarkerColor(kBlack);
+  h1_data -> SetLineColor(kBlack);
+  h1_data -> SetLineWidth(1.5);
+
+
   gROOT -> SetStyle("Plain");
 
   TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
@@ -292,6 +301,7 @@ void Evis(bool beammode) {
   hs_C1 ->GetYaxis()->SetTitleOffset(1.0);
   hs_C1 ->GetYaxis()->SetLabelSize(0.036);
   hs_C1 -> Draw();
+  h1_data -> Draw("SAME E P");
   g_C1  -> Draw("SAME");
   legend1->Draw();
 

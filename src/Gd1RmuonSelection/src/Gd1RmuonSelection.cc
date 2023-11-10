@@ -2,14 +2,15 @@
 #include "../../../include/NeutrinoEvents.h"
 
 void Gd1RmuonSelection::SetHistoFrame() {
-  h1_1RmuonEvents = new TH1F("h1_1RmuonEvents", "", 6, 0, 6);
+  h1_1RmuonEvents      = new TH1F("h1_1RmuonEvents", "", 6, 0, 6);
   h1_Proto1RmuonEvents = new TH1F("h1_Proto1RmuonEvents", "", 6, 0, 6);
+  h1_AllSelTagN        = new TH1F("h1_AllSelTagN", "", 6, 0, 6);
   for (int i=0; i<4; i++) {
     h1_SelNuEvents[i] = new TH1F(TString::Format("h1_SelNuEvents_mode%d", i), "", 6, 0, 6);
     h1_SelTagN[i]     = new TH1F(TString::Format("h1_SelTagN_mode%d", i), "", 6, 0, 6);
   }
 
-  for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
+  /*for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
     h1_evis[i]           = new TH1F(TString::Format("h1_evis_mode%d", i), "", 100, 0, 1000);
     h1_dwall[i]          = new TH1F(TString::Format("h1_dwall_mode%d", i), "", 30, 0, 600);
     h1_Nring[i]          = new TH1F(TString::Format("h1_Nring_mode%d", i), "", 5, 1, 6);
@@ -18,6 +19,30 @@ void Gd1RmuonSelection::SetHistoFrame() {
     h1_Decaye[i]         = new TH1F(TString::Format("h1_Decaye_mode%d", i), "", 6, 0, 6);
     h1_pimulikelihood[i] = new TH1F(TString::Format("h1_pimulikelihood_mode%d", i), "", 40, -300, 100);
   }
+  h1_Allevis           = new TH1F("h1_Allevis", "", 100, 0, 1000);
+  h1_Alldwall          = new TH1F("h1_Alldwall", "", 30, 0, 600);
+  h1_AllNring          = new TH1F("h1_AllNring", "", 5, 1, 6);
+  h1_Allemulikelihood  = new TH1F("h1_Allemulikelihood", "", 50, -1500, 1500);
+  h1_AllPmu            = new TH1F("h1_AllPmu", "", 40, 0, 3000);
+  h1_AllDecaye         = new TH1F("h1_AllDecaye", "", 6, 0, 6);
+  h1_Allpimulikelihood = new TH1F("h1_Allpimulikelihood", "", 40, -300, 100);*/
+
+  for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
+    h1_evis[i]           = new TH1F(TString::Format("h1_evis_mode%d", i), "", 20, 0, 1000);
+    h1_dwall[i]          = new TH1F(TString::Format("h1_dwall_mode%d", i), "", 10, 0, 600);
+    h1_Nring[i]          = new TH1F(TString::Format("h1_Nring_mode%d", i), "", 5, 1, 6);
+    h1_emulikelihood[i]  = new TH1F(TString::Format("h1_emulikelihood_mode%d", i), "", 15, -1500, 1500);
+    h1_Pmu[i]            = new TH1F(TString::Format("h1_Pmu_mode%d", i), "", 20, 0, 3000);
+    h1_Decaye[i]         = new TH1F(TString::Format("h1_Decaye_mode%d", i), "", 6, 0, 6);
+    h1_pimulikelihood[i] = new TH1F(TString::Format("h1_pimulikelihood_mode%d", i), "", 10, -300, 100);
+  }
+  h1_Allevis           = new TH1F("h1_Allevis", "", 20, 0, 1000);
+  h1_Alldwall          = new TH1F("h1_Alldwall", "", 10, 0, 600);
+  h1_AllNring          = new TH1F("h1_AllNring", "", 5, 1, 6);
+  h1_Allemulikelihood  = new TH1F("h1_Allemulikelihood", "", 15, -1500, 1500);
+  h1_AllPmu            = new TH1F("h1_AllPmu", "", 20, 0, 3000);
+  h1_AllDecaye         = new TH1F("h1_AllDecaye", "", 6, 0, 6);
+  h1_Allpimulikelihood = new TH1F("h1_Allpimulikelihood", "", 10, -300, 100);
 }
 
 void Gd1RmuonSelection::SetHistoFormat() {
@@ -95,6 +120,7 @@ float Gd1RmuonSelection::GetEvis(CC0PiNumu* numu) {
   float OscProb = numu->getOscWgt();
 
   float evis = numu->var<float>("fqevis");
+  if (data) h1_Allevis -> Fill(evis); 
   if (mode==1)              h1_evis[0] -> Fill(evis, OscProb); //CCQE
   if (mode>=2 && mode<=10)  h1_evis[1] -> Fill(evis, OscProb); //CC 2p2h
   if (mode>=31)             h1_evis[2] -> Fill(evis, OscProb); //NC
@@ -108,6 +134,7 @@ float Gd1RmuonSelection::GetDWall(CC0PiNumu* numu) {
   float OscProb = numu->getOscWgt();
 
   float dwall = numu->var<float>("fqdwall");
+  if (data) h1_Alldwall -> Fill(dwall);
   if (mode==1)              h1_dwall[0] -> Fill(dwall, OscProb); //CCQE
   if (mode>=2 && mode<=10)  h1_dwall[1] -> Fill(dwall, OscProb); //CC 2p2h
   if (mode>=31)             h1_dwall[2] -> Fill(dwall, OscProb); //NC
@@ -121,6 +148,7 @@ int Gd1RmuonSelection::GetNring(CC0PiNumu* numu) {
   float OscProb = numu->getOscWgt();
 
   int Nring = numu->var<int>("fqmrnring",0);
+  if (data) h1_AllNring -> Fill(Nring);
   if (mode==1)              h1_Nring[0] -> Fill(Nring, OscProb); //CCQE
   if (mode>=2 && mode<=10)  h1_Nring[1] -> Fill(Nring, OscProb); //CC 2p2h
   if (mode>=31)             h1_Nring[2] -> Fill(Nring, OscProb); //NC
@@ -134,6 +162,7 @@ float Gd1RmuonSelection::GetemuLikelihood(CC0PiNumu* numu) {
   float OscProb = numu->getOscWgt();
 
   float likelihood = numu->var<float>("pidemu");
+  if (data) h1_Allemulikelihood -> Fill(likelihood);
   if (mode==1)              h1_emulikelihood[0] -> Fill(likelihood, OscProb);
   if (mode>=2 && mode<=10)  h1_emulikelihood[1] -> Fill(likelihood, OscProb);
   if (mode>=31)             h1_emulikelihood[2] -> Fill(likelihood, OscProb);
@@ -147,6 +176,7 @@ float Gd1RmuonSelection::GetPmu(CC0PiNumu* numu) {
   float OscProb = numu->getOscWgt();
 
   float Pmu = numu->var<float>("fqmomm");
+  if (data) h1_AllPmu -> Fill(Pmu);
   if (mode==1)              h1_Pmu[0] -> Fill(Pmu, OscProb);
   if (mode>=2 && mode<=10)  h1_Pmu[1] -> Fill(Pmu, OscProb);
   if (mode>=31)             h1_Pmu[2] -> Fill(Pmu, OscProb);
@@ -160,6 +190,7 @@ float Gd1RmuonSelection::GetpimuLikelihood(CC0PiNumu* numu) {
   float OscProb = numu->getOscWgt();
 
   float likelihood = numu->var<float>("pidcpimu");
+  if (data) h1_Allpimulikelihood -> Fill(likelihood);
   if (mode==1)              h1_pimulikelihood[0] -> Fill(likelihood, OscProb);
   if (mode>=2 && mode<=10)  h1_pimulikelihood[1] -> Fill(likelihood, OscProb);
   if (mode>=31)             h1_pimulikelihood[2] -> Fill(likelihood, OscProb);
@@ -268,6 +299,7 @@ bool Gd1RmuonSelection::Apply1RmuonSelection(EvSelVar_t evsel,
     //decayebox.GetDecayeTagPurity(numu, dtCut, N50CutMin, N50CutMax);
 
     int mode = TMath::Abs(numu->var<int>("mode"));
+    if (data) h1_AllDecaye -> Fill(NumDecaye);
     if (mode==1)              h1_Decaye[0] -> Fill(NumDecaye, OscProb);
     if (mode>=2 && mode<=10)  h1_Decaye[1] -> Fill(NumDecaye, OscProb);
     if (mode>10 && mode<=30)  h1_Decaye[2] -> Fill(NumDecaye, OscProb);
@@ -326,6 +358,7 @@ void Gd1RmuonSelection::WritePlots() {
     h1_SelNuEvents[i] -> Write();
     h1_SelTagN[i]     -> Write();
   }
+  h1_AllSelTagN -> Write();
 
   for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
     h1_evis[i]           -> Write();
@@ -335,6 +368,15 @@ void Gd1RmuonSelection::WritePlots() {
     h1_Pmu[i]            -> Write();
     h1_Decaye[i]         -> Write();
     h1_pimulikelihood[i] -> Write();
+  }
+  if (data) {
+    h1_Allevis           -> Write();
+    h1_Alldwall          -> Write();
+    h1_AllNring          -> Write();
+    h1_Allemulikelihood  -> Write();
+    h1_AllPmu            -> Write();
+    h1_AllDecaye         -> Write();
+    h1_Allpimulikelihood -> Write();
   }
 }
 

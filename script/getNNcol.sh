@@ -18,11 +18,11 @@ fi
 DISK3=/disk03/usr8/sedi
 
 
-#type=0
+type=0
 #type=1
 #type=2
 #type=3
-type=4
+#type=4
 Label="All"
 ESC=$(printf '\033')
 if [ $type -eq 0 ]; then
@@ -39,7 +39,7 @@ if [ $type -eq 1 ]; then
 fi
 if [ $type -eq 2 ]; then
   printf "${ESC}[31m%s${ESC}[m\n" "==========================="
-  printf "${ESC}[31m%s${ESC}[m\n" " Type: Trut J-n"
+  printf "${ESC}[31m%s${ESC}[m\n" " Type: Trut H-n"
   printf "${ESC}[31m%s${ESC}[m\n" "==========================="
   Label="H"
 fi

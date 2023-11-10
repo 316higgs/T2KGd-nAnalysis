@@ -83,19 +83,19 @@ void NTagAnalysis::SetHistoFrame() {
   h1_GenMuCapNeutrons  = new TH1F("h1_GenMuCapNeutrons", "", 10, 0, 10);
   for(int i=0; i<10; i++) h1_GenMuCapNeutrons ->GetXaxis()->SetBinLabel(i+1, TString::Format("%d", i));
 
-  h1_GenBefSIMom        = new TH1F("h1_GenBefSIMom", "", 120, 0, 1200);
+  h1_GenBefSIMom        = new TH1F("h1_GenBefSIMom", "", 60, 0, 1200);
   h1_GenBefSIParentID   = new TH1F("h1_GenBefSIParentID", "", 2500, 0, 2500);
   h2_GenBefSIParentID   = new TH2F("h2_GenBefSIParentID", "", 60, 0, 1200, 2500, 0, 2500);
   h1_GenBefSIMom_nucFSI = new TH1F("h1_GenBefSIMom_nucFSI", "", 60, 0, 1200);
   h1_GenBefSIMom_piFSI  = new TH1F("h1_GenBefSIMom_piFSI", "", 60, 0, 1200);
   h1_GenBefSIMom_deexc  = new TH1F("h1_GenBefSIMom_deexc", "", 60, 0, 1200);
   h1_GenBefSIMom_others = new TH1F("h1_GenBefSIMom_others", "", 60, 0, 1200);  
-  h1_CapBefSIMom        = new TH1F("h1_CapBefSIMom", "", 120, 0, 1200);
+  h1_CapBefSIMom        = new TH1F("h1_CapBefSIMom", "", 60, 0, 1200);
   h1_CapBefSIMom_nucFSI = new TH1F("h1_CapBefSIMom_nucFSI", "", 60, 0, 1200);
   h1_CapBefSIMom_piFSI  = new TH1F("h1_CapBefSIMom_piFSI", "", 60, 0, 1200);
   h1_CapBefSIMom_deexc  = new TH1F("h1_CapBefSIMom_deexc", "", 60, 0, 1200);
   h1_CapBefSIMom_others = new TH1F("h1_CapBefSIMom_others", "", 60, 0, 1200);  
-  h1_CapSIMom           = new TH1F("h1_CapSIMom", "", 120, 0, 1200);
+  h1_CapSIMom           = new TH1F("h1_CapSIMom", "", 60, 0, 1200);
   h2_Mom_x_Dist         = new TH2F("h2_Mom_x_Dist", "", 40, 0, 200, 50, 0, 5);
 
   h1_GenBefSIEkin = new TH1F("h1_GenBefSIEkin", "", 100, 0, 200);
@@ -3276,12 +3276,12 @@ void NTagAnalysis::WritePlots(bool writegraph) {
     //Noise rate as a funtcion of TagOut at a ceratin time window
     g_FillNoiseRate -> Write();  //Graph20
   
-    g_ROC           -> Write();  //Graph21
+    /*g_ROC           -> Write();  //Graph21
     g_FOM           -> Write();  //Graph22
     g_FOM_p30       -> Write();  //Graph23
     g_FOM_m30       -> Write();  //Graph24
     g_FOM_p40       -> Write();  //Graph25
-    g_FOM_m40       -> Write();  //Graph26
+    g_FOM_m40       -> Write();  //Graph26*/
   }
 
 }

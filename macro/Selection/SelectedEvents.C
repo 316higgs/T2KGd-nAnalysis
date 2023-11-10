@@ -12,6 +12,7 @@
 //#define POTSCALE 1.63  //Run1-10 RHC
 #define POTSCALE 0.17
 
+#define SELECTIONCUTS 6
 
 void SelectedEvents(bool beammode) {
 
@@ -34,7 +35,6 @@ void SelectedEvents(bool beammode) {
   TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.bonsaikeras_ToF.root");
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.bonsaikeras_ToF.root");
 
-  //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
@@ -79,7 +79,7 @@ void SelectedEvents(bool beammode) {
   std::cout << "[nueb  -> nueb ] Normalization factor for nuebar_x_nuebar: " << (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) << std::endl;
 
 // Neutrino events
-#if 0
+#if 1
   TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode0");
   TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode1");
   TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode2");
@@ -118,7 +118,7 @@ void SelectedEvents(bool beammode) {
 #endif
 
 // Tagged neutrons
-#if 1
+#if 0
   TH1F* h1_CCQE_numu     = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode0");
   TH1F* h1_CC2p2h_numu   = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode1");
   TH1F* h1_CCOther_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode2");
@@ -243,7 +243,7 @@ void SelectedEvents(bool beammode) {
 
 
   /////  Normalizations  //////
-#if 0
+#if 1
   h1_CCQE_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CCQE_nuesig       -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
   h1_CCQE_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
@@ -488,31 +488,70 @@ void SelectedEvents(bool beammode) {
   h1_SelEff_merge -> GetXaxis()->SetBinLabel(6, "C6.Not #pi^{#pm}-like");
 
 
-#if 0
+  // Data
+  TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
+  TH1F* h1_NuEvt_data  = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_1RmuonEvents");
+  TH1F* h1_TagN_data   = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_AllSelTagN");
+  //TH1F* h1_SelEff_data = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_1RmuonEvents");
+  TH1F* h1_FCFV_data = new TH1F("h1_FCFV_data", "", SELECTIONCUTS, 0, SELECTIONCUTS);
+  for (int istep=0; istep<SELECTIONCUTS; istep++) {
+    std::cout << "Cut[ " << istep << " ] Data: " << h1_NuEvt_data->GetBinContent(istep+1) << " +/- " << h1_NuEvt_data->GetBinError(istep+1) << std::endl;
+    //std::cout << "Cut[ " << istep << " ] Data: " << h1_TagN_data->GetBinContent(istep+1) << std::endl;
+    float FCFV_data = h1_NuEvt_data->GetBinContent(1);
+    h1_FCFV_data -> SetBinContent(istep+1, FCFV_data);
+  }
+
+  h1_NuEvt_data -> SetMarkerStyle(20);
+  h1_NuEvt_data -> SetMarkerSize(1.2);
+  h1_NuEvt_data -> SetMarkerColor(kBlack);
+  h1_NuEvt_data -> SetLineColor(kBlack);
+  h1_NuEvt_data -> SetLineWidth(1.5);
+
+  h1_TagN_data -> SetMarkerStyle(20);
+  h1_TagN_data -> SetMarkerSize(1.2);
+  h1_TagN_data -> SetMarkerColor(kBlack);
+  h1_TagN_data -> SetLineColor(kBlack);
+  h1_TagN_data -> SetLineWidth(1.5);
+
+  /*
+  h1_SelEff_data -> Sumw2();
+  h1_SelEff_data -> Divide(h1_FCFV_data);
+  for (int istep=0; istep<SELECTIONCUTS; istep++) {
+    std::cout << "Cut[ " << istep << " ] Data efficiency: " << h1_SelEff_data->GetBinContent(istep+1) << " +/- " << h1_SelEff_data->GetBinError(istep+1) << std::endl;
+  }
+  h1_SelEff_data->SetBinError(1, 0.); // definition
+  h1_SelEff_data -> SetMarkerStyle(20);
+  h1_SelEff_data -> SetMarkerSize(1.2);
+  h1_SelEff_data -> SetMarkerColor(kBlack);
+  h1_SelEff_data -> SetLineColor(kBlack);
+  h1_SelEff_data -> SetLineWidth(1.5);
+  */
+
+#if 1
   // Number of Events
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1","c1", 1000,700);
   c1 -> SetGrid();
+  c1 -> SetTicks(1);
   //if (beammode) hs_NuEvt -> SetMaximum(110);
   if (beammode) hs_NuEvt -> SetMaximum(180);
-  //else hs_NuEvt -> SetMaximum(10);
   hs_NuEvt -> Draw();
   hs_NuEvt ->GetYaxis()->SetTitleSize(0.038);
   hs_NuEvt ->GetYaxis()->SetTitleOffset(1.3);
   hs_NuEvt ->GetYaxis()->SetLabelSize(0.036);
-  //hs_NuEvt ->GetYaxis()->SetTitle("Number of #nu Events");
-  hs_NuEvt ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
+  hs_NuEvt ->GetYaxis()->SetTitle("Number of #nu Events");
+  //hs_NuEvt ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
   hs_NuEvt -> Draw();
+  h1_NuEvt_data -> Draw("SAME P E");
+
   TGaxis* axis = new TGaxis(6, 0, 6, 115, 0, 115, 23, "+L");
   axis -> SetLabelColor(kWhite);
-  //axis -> Draw();
   c1 -> RedrawAxis();
 
 
   TLegend* legend1 = new TLegend(0.47, 0.42, 0.89, 0.89);
   legend1 -> SetTextSize(0.04);
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.2]{FHC 1R #mu sample (0.01% Gd)}","");
-  //else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
   legend1 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CC2p2h_numu, "#nu_{#mu} CC-2p2h", "F");
@@ -527,7 +566,7 @@ void SelectedEvents(bool beammode) {
 
 #if 0
   //Selection efficiency
-
+  gROOT -> SetStyle("Plain");
   TCanvas* c2 = new TCanvas("c2","c2",1000,700);
   c2 -> SetGrid();
   h1_SelEff_merge -> SetMinimum(0.);
@@ -540,6 +579,7 @@ void SelectedEvents(bool beammode) {
   h1_SelEff_merge ->GetYaxis()->SetTitleSize(0.045);
   h1_SelEff_merge ->GetXaxis()->SetLabelSize(0.045);
   h1_SelEff_merge -> Draw();
+  h1_SelEff_data -> Draw("SAME E P");
   c2->RedrawAxis();
   
   TLatex* text1 = new TLatex(0.47, 0.82, "T2K FHC Run11 (0.01% Gd)");
@@ -548,12 +588,20 @@ void SelectedEvents(bool beammode) {
   TLatex* text2 = new TLatex(0.5, 0.77, "-1R #mu sample");
   text2 -> SetNDC(1);
   text2 -> SetTextSize(0.04);
-  //TLatex* text3 = new TLatex(0.5, 0.72, "-#nu events");
-  TLatex* text3 = new TLatex(0.5, 0.72, "-#tagged neutrons");
+  TLatex* text3 = new TLatex(0.5, 0.72, "-#nu events");
+  //TLatex* text3 = new TLatex(0.5, 0.72, "-#tagged neutrons");
   text3 -> SetNDC(1);
   text3 -> SetTextSize(0.04);
   text1 -> Draw();
   text2 -> Draw();
   text3 -> Draw();
 #endif
+
+
+#if 0
+  TCanvas* c3 = new TCanvas("c3", "", 900, 700);
+  c3 -> SetGrid();
+  h1_FCFV_data -> Draw();
+#endif
+
 }

@@ -93,4 +93,5 @@ const float MUMASS = 105.65836;  // MeV
 const float NMASS  = 939.565346; // MeV
 const float PMASS  = 938.272013; // MeV
 
+float data = false;
 

@@ -12,6 +12,8 @@
 //#define POTSCALE 1.63  //Run1-10 RHC
 #define POTSCALE 0.17
 
+#define SELECTIONCUTS 6
+
 
 void CompareSelEff(bool beammode) {
 
@@ -175,13 +177,12 @@ void CompareSelEff(bool beammode) {
   h1_SelEff_pw      -> Scale(1./fcfv_pw);
 
 
-  for (int istep=0; istep<6; istep++) {
+  for (int istep=0; istep<SELECTIONCUTS; istep++) {
     std::cout << "[" << istep+1 << "] Gd MC(floor cut) : " << h1_SelEff_gd->GetBinContent(istep+1) << std::endl;
     std::cout << "[" << istep+1 << "] Gd MC            : " << h1_ProtoSelEff_gd->GetBinContent(istep+1) << std::endl;
     std::cout << "[" << istep+1 << "] Pure water MC    : " << h1_SelEff_pw->GetBinContent(istep+1) << std::endl;
     std::cout << " " << std::endl;
   }
-
 
 
   h1_SelEff_gd -> SetLineColor(kOrange+0);
@@ -203,7 +204,22 @@ void CompareSelEff(bool beammode) {
   h1_SelEff_pw -> GetXaxis()->SetBinLabel(6, "C6.Not #pi^{#pm}-like");
 
 
-#if 1
+
+  // Data
+  TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
+  TH1F* h1_SelEff_data = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_1RmuonEvents");
+  Double_t xstep[SELECTIONCUTS]  = {0.5, 1.5, 2.5, 3.5, 4.5, 5.5};
+  Double_t dxstep[SELECTIONCUTS] = {0.5, 0.5, 0.5, 0.5, 0.5, 0.5};
+  Double_t seleff[SELECTIONCUTS] = {0.};
+  Double_t dseleff[SELECTIONCUTS] = {0.};
+  for (int istep=0; istep<SELECTIONCUTS; istep++) {
+    seleff[istep] = h1_SelEff_data->GetBinContent(istep+1);
+    std::cout << "C" << istep << ". Data: " << seleff[istep] << std::endl;
+  }
+  //TGraphErrors* g_SelEff_data = new TGraphErrors();
+
+
+#if 0
   TCanvas* c2 = new TCanvas("c2","c2", 1000, 700);
   c2 -> SetGrid();
   h1_SelEff_pw -> Draw();

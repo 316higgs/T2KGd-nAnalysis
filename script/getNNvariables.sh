@@ -63,8 +63,8 @@ EXECUTE()
   #NNMODEL="tmva"
   NNMODEL="keras"
   
-  DLYVTXTYPE="bonsai"
-  #DLYVTXTYPE="prompt"
+  #DLYVTXTYPE="bonsai"
+  DLYVTXTYPE="prompt"
 
   NNSTYLE="${DLYVTXTYPE}_${NNMODEL}"
   NTAGMODE=${NNSTYLE}_${PRESELMODE}
@@ -72,8 +72,8 @@ EXECUTE()
     NTAGMODE=${NNSTYLE}
   fi
 
-  #RUNNAME="preNN.newGdMC"
-  RUNNAME="postNN.newGdMC"
+  #RUNNAME="preNN.newGdMC_${NTAGMODE}"
+  RUNNAME="postNN.newGdMC_${NTAGMODE}"
 
   ESC=$(printf '\033')
   printf "${ESC}[31m%s${ESC}[m\n" "[### Analysis Option ###] OUTBEAMMODE  : ${OUTBEAMMODE}"

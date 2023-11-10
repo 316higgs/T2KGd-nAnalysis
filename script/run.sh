@@ -83,12 +83,12 @@ EXECUTE()
   #RUNNAME="NNoptnewGdMC"
   #RUNNAME="newGdMC.promptkeras"
   #RUNNAME="newGdMC.bonsaikeras"
-  #RUNNAME="newGdMC.bonsaikeras_ToF"
+  RUNNAME="newGdMC.bonsaikeras_ToF"
   #RUNNAME="newGdMC.bonsaikeras_ToF_0511"
   #RUNNAME="newGdMC.bonsaikeras_ToF_0530"
   #RUNNAME="newGdMC.bonsaikeras_ToF_0570"
   #RUNNAME="systSI${SIVAR}.bonsaikeras_ToF"
-  RUNNAME="ggarnet.bonsaikeras_ToF"
+  #RUNNAME="ggarnet.bonsaikeras_ToF"
 
 
   ESC=$(printf '\033')
@@ -127,7 +127,7 @@ EXECUTE()
 COMMENTOUT
 
 
-<<COMMENTOUT
+#<<COMMENTOUT
   ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
                      ${DISK3}/Ntag/output/${NTAGMODE}/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.ntag0026Gd.\*.root\
                      ${ANALYSISSTAGE}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${RUNNAME}.root\
@@ -137,7 +137,7 @@ COMMENTOUT
                      -ETAG ON\
                      -BEAMMODE ${BEAMMODE_ARG}\
                      -OSCCH ${OSCCH_ARG}
-COMMENTOUT
+#COMMENTOUT
 
 #### SI ####
 <<COMMENTOUT
@@ -153,7 +153,7 @@ COMMENTOUT
 COMMENTOUT
 
 #### GGARNET ####
-#<<COMMENTOUT
+<<COMMENTOUT
   ./analysis1Rmu.exe ${DISK3}/${FITQUNVER}/output/ggarnet/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.fiTQun0026Gd.0\*.root\
                      ${DISK3}/Ntag/output/ggarnet/${OUTBEAMMODE}/${OUTCHANNEL}/${OUTBEAMMODE}.${OUTCHANNEL}.${OUTFLUXVER}.ntag0026Gd.\*.root\
                      ${ANALYSISSTAGE}/output/${OUTBEAMMODE}/${OUTBEAMMODE}.${OUTCHANNEL}.${RUNNAME}.root\
@@ -163,7 +163,7 @@ COMMENTOUT
                      -ETAG ON\
                      -BEAMMODE ${BEAMMODE_ARG}\
                      -OSCCH ${OSCCH_ARG}
-#COMMENTOUT
+COMMENTOUT
   echo " " 
 }
 
@@ -177,11 +177,11 @@ COMMENTOUT
 
 ###  Gd MC  ###
 EXECUTE 0 1  ###  numu -> numu
-EXECUTE 1 1  ###  numu -> nue
-EXECUTE 2 1  ###  numubar -> numubar
-EXECUTE 3 1  ###  numubar -> nuebar
-EXECUTE 4 1  ###  nue -> nue
-EXECUTE 5 1  ###  nuebar -> nuebar
+#EXECUTE 1 1  ###  numu -> nue
+#EXECUTE 2 1  ###  numubar -> numubar
+#EXECUTE 3 1  ###  numubar -> nuebar
+#EXECUTE 4 1  ###  nue -> nue
+#EXECUTE 5 1  ###  nuebar -> nuebar
 
 
 

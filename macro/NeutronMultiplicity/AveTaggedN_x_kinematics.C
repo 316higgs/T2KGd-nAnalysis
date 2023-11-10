@@ -49,12 +49,14 @@ void AveTaggedN_x_kinematics(bool beammode) {
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
-  //RHC
-#if rhcflag
-  TFile* fin_numu    = new TFile("../../output/rhc/rhc.numu_x_numu.VertexSelection_mu_x_dcye.beforecut.root");
-  TFile* fin_numubar = new TFile("../../output/rhc/rhc.numubar_x_numubar.VertexSelection_mu_x_dcye.beofrecut.root");
-  TFile* fin_skrate  = new TFile("./rhc.sk_rate_tmp.root");
-#endif
+
+  // pure water results
+  TFile* fin_purewater = new TFile("../PureWater/output/purewater_results.root");
+  TH1F* h1_fhc_nmult_x_pt_MC               = (TH1F*)fin_purewater->Get("h1_fhc_nmult_x_pt_MC");    // MC central value
+  TGraphErrors* g_fhc_nmult_x_pt_MC        = (TGraphErrors*)fin_purewater->Get("Graph;1"); // MC error bars
+  TGraphAsymmErrors* g_fhc_nmult_x_pt_Data = (TGraphAsymmErrors*)fin_purewater->Get("gTrMomAveData_fhc_statsys;1");      // Data
+
+
 
   // Normalization factors
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
@@ -777,10 +779,11 @@ void AveTaggedN_x_kinematics(bool beammode) {
   g_MCerr -> SetLineColor(kViolet-7);
 
 
-#if 0
+#if 1
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
+  c1 -> SetTicks(1);
   h1_AveTaggedN_x_kinematics -> SetMinimum(0);
   h1_AveTaggedN_x_kinematics -> SetMaximum(5.0);
   h1_AveTaggedN_x_kinematics ->GetYaxis()->SetTitleSize(0.045);
@@ -798,6 +801,11 @@ void AveTaggedN_x_kinematics(bool beammode) {
   //h1_AveTaggedN_x_kinematics -> Draw("");
   //h1_AveTaggedN_x_kinematics -> Draw("hist same");
   g_MCerr -> Draw("SAMEP");
+
+  h1_fhc_nmult_x_pt_MC  -> Draw("SAME");   // pure water MC
+  g_fhc_nmult_x_pt_MC   -> Draw("SAMEP");
+  g_fhc_nmult_x_pt_Data -> Draw("SAMEP");  // pure water data
+
   c1->RedrawAxis();
   
   TLatex* text1 = new TLatex(0.12, 0.82, "T2K FHC Run11 (0.01% Gd)");
@@ -812,10 +820,37 @@ void AveTaggedN_x_kinematics(bool beammode) {
   TLatex* text4 = new TLatex(0.14, 0.67, "-Tagging efficiency corrected");
   text4 -> SetNDC(1);
   text4 -> SetTextSize(0.04);
+
+#if 0
   text1 -> Draw();
   text2 -> Draw();
   text3 -> Draw();
   text4 -> Draw();
+#endif
+
+#if 1
+  h1_AveTaggedN_x_kinematics -> SetLineColor(kOrange+0);
+  h1_AveTaggedN_x_kinematics -> SetFillColor(kOrange-4);
+  h1_AveTaggedN_x_kinematics -> SetLineWidth(3);
+  g_MCerr -> SetLineColor(kOrange+0);
+
+  h1_fhc_nmult_x_pt_MC -> SetLineColor(kAzure+1);
+  g_fhc_nmult_x_pt_MC  -> SetLineColor(kAzure+1);
+  h1_fhc_nmult_x_pt_MC -> SetLineWidth(3);
+
+
+  TLegend* legend1 = new TLegend(0.12, 0.65, 0.6, 0.89);
+  legend1 -> SetTextSize(0.04);
+  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.4]{FHC 1R #mu sample}","");
+  //else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
+  legend1 -> AddEntry(h1_AveTaggedN_x_kinematics, "0.01% Gd MC", "F");
+  legend1 -> AddEntry(h1_fhc_nmult_x_pt_MC, "Pure water MC (TN371)", "L");
+  legend1 -> AddEntry(g_fhc_nmult_x_pt_Data, "Pure water data (TN371)", "LP");
+  legend1->SetFillColor(0);
+  legend1->Draw();
+#endif
+
+
 #endif
 
 }

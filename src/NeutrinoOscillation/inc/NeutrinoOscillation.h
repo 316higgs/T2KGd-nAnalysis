@@ -29,6 +29,8 @@ TH2F* h2_TrueR_x_RecoR;
 TH2F* h2_TrueZ_x_RecoZ;
 TH2F* h2_Enu_x_PrmVtxReso;
 TH1F* h1_PrmMuMomReso;
+TH1F* h1_MuonPtReso;
+TH2F* h2_MuonPtReso_x_E;
 TH1F* h1_PrmMuEndVtxReso;
 TH2F* h2_PrmMuEndVtxReso;
 
@@ -98,6 +100,7 @@ class NeutrinoOscillation {
     float GetEnuResolution(CC0PiNumu* numu, float theta, float thetamin, float thetamax);
     void  GetTruePrmVtx(CC0PiNumu *numu, float *PrmVtx);
     float GetPrmVtxResolution(CC0PiNumu* numu);
+    float GetMuonPtResolution(CC0PiNumu* numu);
     float GetPrmMuMomResolution(CC0PiNumu* numu, float *MuMom);
     void  GetReso_x_TrueEnu(CC0PiNumu* numu);
 

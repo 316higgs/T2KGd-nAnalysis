@@ -21,6 +21,7 @@ TH1F* h1_NNvar_Gd[NNVARIABLES];
 TH1F* h1_AllNHits; // for sanity check of #tag-n in NN input variable plots
 
 TH1F* h1_NTagOut[4];
+TH1F* h1_AllNTagOut;
 
 TH1F* h1_FitT_NHitsExcess;  // use @ getNNvariables.cc
 //TH1F* h1_lmecscnd_NHitsExcess;

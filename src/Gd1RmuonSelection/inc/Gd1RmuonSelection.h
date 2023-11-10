@@ -14,6 +14,7 @@ TH1F* h1_1RmuonEvents;
 TH1F* h1_Proto1RmuonEvents;
 TH1F* h1_SelNuEvents[4];
 TH1F* h1_SelTagN[4];
+TH1F* h1_AllSelTagN;
 
 TH1F* h1_evis[INTERACTIONTYPE];
 TH1F* h1_dwall[INTERACTIONTYPE];
@@ -22,6 +23,14 @@ TH1F* h1_emulikelihood[INTERACTIONTYPE];
 TH1F* h1_Pmu[INTERACTIONTYPE];
 TH1F* h1_Decaye[INTERACTIONTYPE];
 TH1F* h1_pimulikelihood[INTERACTIONTYPE];
+
+TH1F* h1_Allevis;
+TH1F* h1_Alldwall;
+TH1F* h1_AllNring;
+TH1F* h1_Allemulikelihood;
+TH1F* h1_AllPmu;
+TH1F* h1_AllDecaye;
+TH1F* h1_Allpimulikelihood;
 
 class Gd1RmuonSelection {
   public:

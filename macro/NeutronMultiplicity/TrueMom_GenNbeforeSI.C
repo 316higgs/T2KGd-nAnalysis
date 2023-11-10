@@ -23,7 +23,7 @@ void TrueMom_GenNbeforeSI(bool beammode) {
   else std::cout << "[### Beam mode ###] FHC" << std::endl;
 
 
-  //FHC
+  // Gd MC
 #if fhcflag
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.newGdMC.bonsaikeras_ToF.root");
   TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.newGdMC.bonsaikeras_ToF.root");
@@ -49,12 +49,14 @@ void TrueMom_GenNbeforeSI(bool beammode) {
   Double_t ExpN_numubar_x_nuebar    = h1_skrate_numubar_x_nuebar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   Double_t ExpN_nue_x_nue           = h1_skrate_nue_x_nue->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   Double_t ExpN_nuebar_x_nuebar     = h1_skrate_nuebar_x_nuebar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
+#if 1
   Double_t GenN_numu_x_numu       = 63622;
   Double_t GenN_numu_x_nue        = 63538;
   Double_t GenN_numubar_x_numubar = 63444;
   Double_t GenN_numubar_x_nuebar  = 63460;
   Double_t GenN_nue_x_nue         = 63423;
   Double_t GenN_nuebar_x_nuebar   = 63652;
+#endif
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
   std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
   std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;

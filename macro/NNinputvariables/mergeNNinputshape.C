@@ -23,26 +23,26 @@ void mergeNNinputshape(bool beammode) {
   //FHC
 #if fhcflag
 
-#if 1
+#if 0
   // Pre
   bool NTagapply = false;
-  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
-  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.preNN.newGdMC.root");
-  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root");
-  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root");
-  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.preNN.newGdMC.root");
-  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.preNN.newGdMC.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC_prompt_keras.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.preNN.newGdMC_prompt_keras.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC_prompt_keras.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC_prompt_keras.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.preNN.newGdMC_prompt_keras.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.preNN.newGdMC_prompt_keras.root");
 #endif
 
-#if 0
+#if 1
   // Post
   bool NTagapply = true;
-  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.newGdMC.root");
-  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.postNN.newGdMC.root");
-  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.newGdMC.root");
-  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.newGdMC.root");
-  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.postNN.newGdMC.root");
-  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.postNN.newGdMC.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.newGdMC_prompt_keras.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.postNN.newGdMC_prompt_keras.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.newGdMC_prompt_keras.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_numubar.postNN.newGdMC_prompt_keras.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.postNN.newGdMC_prompt_keras.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.postNN.newGdMC_prompt_keras.root");
 #endif
 
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
@@ -126,9 +126,9 @@ void mergeNNinputshape(bool beammode) {
   /*float binnum[14] = {50, 40, 50,   50,   50,  40, 40,   40,  40,  40,   40,   40};
   float xmin[14]   = {0,   0,  0, -150,    0,  20, 10, -150,  20,   0, -0.2, -0.2};
   float xmax[14]   = {50, 80,  5, 1600, 5000,  80, 30,  150,  90,  60,  0.8,  0.4};*/
-  float binnum[14] = {50, 70, 50,   50,   50,  40,   40,   40,    40,    40,   40, 20, 50, 20};
-  float xmin[14]   = {0,   0,  0, -150,    0,  10, -0.2, -0.2,  -0.2,  -0.2, -0.2,  0,  0,  0};
-  float xmax[14]   = {50, 70, 10, 1600, 5000,  30,  0.8,  0.8,   0.4,   0.4,  0.4,  1,  1,  1};
+  float binnum[14] = {50, 70, 50,   50,   50,  40,   80,   80,    80,    80,   80, 20, 50, 20};
+  float xmin[14]   = {0,   0,  0, -150,    0,  10, -0.5, -0.5,  -0.5,  -0.5, -0.5,  0,  0,  0};
+  float xmax[14]   = {50, 70, 10, 1600, 5000,  30,  1.2,  1.2,   1.2,   1.2,  1.2,  1,  1,  1};
 
   for (int i=0; i<14; i++) {
   	h1_NNvar_Gd_numu[i]       = (TH1F*)fin_numu->Get(TString::Format("NNInputVariables/h1_NNvar_Gd_type%d", i));
@@ -290,7 +290,7 @@ void mergeNNinputshape(bool beammode) {
   c1 -> Divide(3,5);
   for (int i=0; i<14; i++) {
     c1 -> cd(i+1) -> SetGrid();
-    //gPad->SetLogy();
+    gPad->SetLogy();
     TString varname = GetNNVarAxisName(i);
     h1_NNvar_Gd[i]       -> GetXaxis()->SetTitle(varname);
     h1_NNvar_Gd[i]       -> GetYaxis()->SetTitle("Area Normalized");
@@ -315,6 +315,8 @@ void mergeNNinputshape(bool beammode) {
     ((TGaxis*)h1_NNvar_H[i]        ->GetYaxis())->SetMaxDigits(3);
     ((TGaxis*)h1_NNvar_Decaye[i]   ->GetYaxis())->SetMaxDigits(3);
 
+// bonsai_keras
+#if 0
 #if !NTagapply
     if (i==0 || i==1 || i==3 || i==4) {
       h1_NNvar_AccNoise[i] -> Draw();
@@ -329,6 +331,28 @@ void mergeNNinputshape(bool beammode) {
       h1_NNvar_Decaye[i]   -> Draw("SAME");
     }
     else if (i==2 || i==8 || i==13) {
+      h1_NNvar_Decaye[i]   -> Draw();
+      h1_NNvar_Gd[i]       -> Draw("SAME");
+      h1_NNvar_H[i]        -> Draw("SAME");
+      h1_NNvar_AccNoise[i] -> Draw("SAME");
+    }
+#endif
+#endif
+// prompt_keras
+#if !NTagapply
+    if (i==0 || i==1 || i==3 || i==4) {
+      h1_NNvar_AccNoise[i] -> Draw();
+      h1_NNvar_H[i]        -> Draw("SAME");
+      h1_NNvar_Gd[i]       -> Draw("SAME");
+      h1_NNvar_Decaye[i]   -> Draw("SAME");
+    }
+    else if (i==2 || (i>=5 && i<=8) || i==9 || i==10 || i==11 || i==12 ) {
+      h1_NNvar_Gd[i]       -> Draw();
+      h1_NNvar_AccNoise[i] -> Draw("SAME");
+      h1_NNvar_H[i]        -> Draw("SAME");
+      h1_NNvar_Decaye[i]   -> Draw("SAME");
+    }
+    else if (i==13) {
       h1_NNvar_Decaye[i]   -> Draw();
       h1_NNvar_Gd[i]       -> Draw("SAME");
       h1_NNvar_H[i]        -> Draw("SAME");
