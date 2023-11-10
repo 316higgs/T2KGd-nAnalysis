@@ -4,7 +4,7 @@
 
 void GetMeanMult_x_Pt() {
 
-  TString fname = "./nmeas_results.2019May.conststaterr.root";
+  TString fname = "/disk03/usr8/sedi/PureWater/nmeas_results.2019May.conststaterr.root";
   TFile* fin = new TFile(fname);
 
   TGraphErrors* gMC = (TGraphErrors*)fin->Get("gTrMomAveMC_fhc");  // MC
