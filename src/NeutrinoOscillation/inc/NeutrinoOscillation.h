@@ -74,8 +74,8 @@ TH1F* h1_All_OscProbRatio_woTruthNeutron;
 //Selected 1R muon events w/(o) tagged neutrons
 TH1F* h1_All_OscProbRatio_woNeutron;
 
-TH2F* h2_TruePrmVtxXY;
-TH2F* h2_TruePrmVtxRZ;
+TH2F* h2_PrmVtxXY;
+TH2F* h2_PrmVtxRZ;
 
 TH2F* h2_TrueMuDirectionXY;
 TH2F* h2_TrueMuDirectionRZ;
@@ -98,7 +98,7 @@ class NeutrinoOscillation {
     float GetTrueEnu(CC0PiNumu* numu);
     float GetRecoEnu(CC0PiNumu* numu);
     float GetEnuResolution(CC0PiNumu* numu, float theta, float thetamin, float thetamax);
-    void  GetTruePrmVtx(CC0PiNumu *numu, float *PrmVtx);
+    void  GetPrmVtx(CC0PiNumu *numu);
     float GetPrmVtxResolution(CC0PiNumu* numu);
     float GetMuonPtResolution(CC0PiNumu* numu);
     float GetPrmMuMomResolution(CC0PiNumu* numu, float *MuMom);

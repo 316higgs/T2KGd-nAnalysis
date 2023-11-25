@@ -111,6 +111,39 @@ void CompareSelEff(bool beammode) {
   TH1F* h1_SelEff_nuebarbkg_pw = (TH1F*)fin_nuebarbkg_pw->Get("Gd1RmuonSelection/h1_1RmuonEvents");
 
 
+  //  Generated number (for error calculation)
+  TH1F* h1_GenSelEff_pw = new TH1F("h1_GenSelEff_pw", "", 6, 0, 6);
+  h1_GenSelEff_pw -> Add(h1_SelEff_numu_pw);
+  h1_GenSelEff_pw -> Add(h1_SelEff_nuesig_pw);
+  h1_GenSelEff_pw -> Add(h1_SelEff_numubar_pw);
+  h1_GenSelEff_pw -> Add(h1_SelEff_nuebarsig_pw);
+  h1_GenSelEff_pw -> Add(h1_SelEff_nuebkg_pw);
+  h1_GenSelEff_pw -> Add(h1_SelEff_nuebarbkg_pw);
+
+  TH1F* h1_ProtoGenSelEff_gd = new TH1F("h1_ProtoGenSelEff_gd", "", 6, 0, 6);
+  h1_ProtoGenSelEff_gd -> Add(h1_ProtoSelEff_numu_gd);
+  h1_ProtoGenSelEff_gd -> Add(h1_ProtoSelEff_nuesig_gd);
+  h1_ProtoGenSelEff_gd -> Add(h1_ProtoSelEff_numubar_gd);
+  h1_ProtoGenSelEff_gd -> Add(h1_ProtoSelEff_nuebarsig_gd);
+  h1_ProtoGenSelEff_gd -> Add(h1_ProtoSelEff_nuebkg_gd);
+  h1_ProtoGenSelEff_gd -> Add(h1_ProtoSelEff_nuebarbkg_gd);
+
+  TH1F* h1_GenSelEff_gd = new TH1F("h1_GenSelEff_gd", "", 6, 0, 6);
+  h1_GenSelEff_gd -> Add(h1_SelEff_numu_gd);
+  h1_GenSelEff_gd -> Add(h1_SelEff_nuesig_gd);
+  h1_GenSelEff_gd -> Add(h1_SelEff_numubar_gd);
+  h1_GenSelEff_gd -> Add(h1_SelEff_nuebarsig_gd);
+  h1_GenSelEff_gd -> Add(h1_SelEff_nuebkg_gd);
+  h1_GenSelEff_gd -> Add(h1_SelEff_nuebarbkg_gd);
+
+  TH1F* h1_GenFCFV_pw = new TH1F("h1_FCFV_pw", "", 6, 0, 6);
+  TH1F* h1_GenFCFV_gd = new TH1F("h1_FCFV_gd", "", 6, 0, 6);
+  for (int ibin=0; ibin<SELECTIONCUTS; ibin++) {
+    h1_GenFCFV_pw      -> SetBinContent(ibin+1, h1_GenSelEff_pw->GetBinContent(1));
+    h1_GenFCFV_gd      -> SetBinContent(ibin+1, h1_GenSelEff_gd->GetBinContent(1));
+  }
+
+
   /////  Normalizations  //////
   h1_SelEff_numu_gd      -> Scale( (ExpN_numu_x_numu_gd)/(GenN_numu_x_numu_gd) );
   h1_SelEff_nuesig_gd    -> Scale( (ExpN_numu_x_nue_gd)/(GenN_numu_x_nue_gd) );
@@ -204,22 +237,56 @@ void CompareSelEff(bool beammode) {
   h1_SelEff_pw -> GetXaxis()->SetBinLabel(6, "C6.Not #pi^{#pm}-like");
 
 
+  //  error histograms
+  h1_GenSelEff_gd -> Sumw2();
+  h1_GenSelEff_gd -> Divide(h1_GenFCFV_gd);
 
-  // Data
-  TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
-  TH1F* h1_SelEff_data = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_1RmuonEvents");
-  Double_t xstep[SELECTIONCUTS]  = {0.5, 1.5, 2.5, 3.5, 4.5, 5.5};
-  Double_t dxstep[SELECTIONCUTS] = {0.5, 0.5, 0.5, 0.5, 0.5, 0.5};
-  Double_t seleff[SELECTIONCUTS] = {0.};
-  Double_t dseleff[SELECTIONCUTS] = {0.};
-  for (int istep=0; istep<SELECTIONCUTS; istep++) {
-    seleff[istep] = h1_SelEff_data->GetBinContent(istep+1);
-    std::cout << "C" << istep << ". Data: " << seleff[istep] << std::endl;
+  h1_ProtoGenSelEff_gd -> Sumw2();
+  h1_ProtoGenSelEff_gd -> Divide(h1_GenFCFV_gd);
+
+  h1_GenSelEff_pw -> Sumw2();
+  h1_GenSelEff_pw -> Divide(h1_GenFCFV_pw);
+
+  Double_t step[SELECTIONCUTS]            = {0.5, 1.5, 2.5, 3.5, 4.5, 5.5};
+  Double_t dstep[SELECTIONCUTS]           = {0.};
+  Double_t SelEff_gd[SELECTIONCUTS]       = {0.};
+  Double_t dSelEff_gd[SELECTIONCUTS]      = {0.};
+  Double_t ProtoSelEff_gd[SELECTIONCUTS]  = {0.};
+  Double_t dProtoSelEff_gd[SELECTIONCUTS] = {0.};
+  Double_t SelEff_pw[SELECTIONCUTS]       = {0.};
+  Double_t dSelEff_pw[SELECTIONCUTS]      = {0.};
+
+  for (int ibin=0; ibin<SELECTIONCUTS; ibin++) {
+    SelEff_gd[ibin]      = h1_SelEff_gd->GetBinContent(ibin+1);
+    ProtoSelEff_gd[ibin] = h1_ProtoSelEff_gd->GetBinContent(ibin+1);
+    SelEff_pw[ibin]      = h1_SelEff_pw->GetBinContent(ibin+1);
+    if (ibin==0) {
+      dSelEff_gd[ibin]      = 0.;  // definition
+      dProtoSelEff_gd[ibin] = 0.;  // definition
+      dSelEff_pw[ibin]      = 0.;  // definition
+    }
+    else {
+      dSelEff_gd[ibin]      = h1_GenSelEff_gd->GetBinError(ibin+1);
+      dProtoSelEff_gd[ibin] = h1_ProtoGenSelEff_gd->GetBinError(ibin+1);
+      dSelEff_pw[ibin]      = h1_GenSelEff_pw->GetBinError(ibin+1);
+    }
   }
-  //TGraphErrors* g_SelEff_data = new TGraphErrors();
+
+  TGraphErrors* g_SelEff_gd = new TGraphErrors(SELECTIONCUTS, step, SelEff_gd, dstep, dSelEff_gd);
+  g_SelEff_gd -> SetLineColor(kOrange+0);
+  g_SelEff_gd -> SetLineWidth(2);
+
+  TGraphErrors* g_ProtoSelEff_gd = new TGraphErrors(SELECTIONCUTS, step, ProtoSelEff_gd, dstep, dProtoSelEff_gd);
+  g_ProtoSelEff_gd -> SetLineColor(kOrange+0);
+  g_ProtoSelEff_gd -> SetLineWidth(2);
+
+  TGraphErrors* g_SelEff_pw = new TGraphErrors(SELECTIONCUTS, step, SelEff_pw, dstep, dSelEff_pw);
+  g_SelEff_pw -> SetLineColor(kAzure+1);
+  g_SelEff_pw -> SetLineWidth(2);
 
 
-#if 0
+#if 1
+  gROOT -> SetStyle("Plain");
   TCanvas* c2 = new TCanvas("c2","c2", 1000, 700);
   c2 -> SetGrid();
   h1_SelEff_pw -> Draw();
@@ -231,9 +298,15 @@ void CompareSelEff(bool beammode) {
   h1_SelEff_pw ->GetYaxis()->SetTitle("Remaining rate from FCFV cut");
   h1_SelEff_pw ->GetYaxis()->SetTitleSize(0.045);
   h1_SelEff_pw ->GetXaxis()->SetLabelSize(0.045);
+  
   h1_SelEff_pw -> Draw("");
+  g_SelEff_pw  -> Draw("SAME E P");
+  
   h1_ProtoSelEff_gd -> Draw("SAME");
+  g_ProtoSelEff_gd  -> Draw("SAME E P");
+
   h1_SelEff_gd -> Draw("SAME");
+  g_SelEff_gd  -> Draw("SAME E P");
 
   TLegend* legend1 = new TLegend(0.35, 0.65, 0.89, 0.89);
   legend1 -> SetTextSize(0.045);

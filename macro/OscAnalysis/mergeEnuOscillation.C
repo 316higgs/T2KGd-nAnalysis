@@ -559,7 +559,7 @@ void mergeEnuOscillation(bool beammode) {
   TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
   TH1F* h1_EnuReco_data = (TH1F*)fin_data->Get("NeutrinoOscillation/h1_AllEnureco");
   h1_EnuReco_data -> SetMarkerStyle(20);
-  h1_EnuReco_data -> SetMarkerSize(1.2);
+  h1_EnuReco_data -> SetMarkerSize(1.5);
   h1_EnuReco_data -> SetMarkerColor(kBlack);
   h1_EnuReco_data -> SetLineColor(kBlack);
   h1_EnuReco_data -> SetLineWidth(1.5);
@@ -573,8 +573,8 @@ void mergeEnuOscillation(bool beammode) {
   c1 -> SetGrid();
   //if (beammode) hs_RecoOsc -> SetMaximum(16);
   //else hs_RecoOsc -> SetMaximum(10);
-  if (beammode) hs_RecoOsc -> SetMaximum(2.1);
-  else hs_RecoOsc -> SetMaximum(10);
+  //hs_RecoOsc -> SetMaximum(2.1);
+  hs_RecoOsc -> SetMaximum(6.5);
   hs_RecoOsc -> Draw();
   hs_RecoOsc ->GetYaxis()->SetTitleSize(0.038);
   hs_RecoOsc ->GetYaxis()->SetTitleOffset(1.2);

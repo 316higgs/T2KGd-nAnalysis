@@ -100,6 +100,7 @@ EXECUTE()
   printf "${ESC}[31m%s${ESC}[m\n" "[### Analysis Option ###] NTAGMODE     : ${NTAGMODE}"
   printf "${ESC}[31m%s${ESC}[m\n" "[### Analysis Option ###] RUNNAME      : ${RUNNAME}"
 
+
 <<COMMENTOUT
   FILENUM=0
   if [ ${OSCMODE} -eq 0 ]; then
@@ -177,11 +178,11 @@ COMMENTOUT
 
 ###  Gd MC  ###
 EXECUTE 0 1  ###  numu -> numu
-#EXECUTE 1 1  ###  numu -> nue
-#EXECUTE 2 1  ###  numubar -> numubar
-#EXECUTE 3 1  ###  numubar -> nuebar
-#EXECUTE 4 1  ###  nue -> nue
-#EXECUTE 5 1  ###  nuebar -> nuebar
+EXECUTE 1 1  ###  numu -> nue
+EXECUTE 2 1  ###  numubar -> numubar
+EXECUTE 3 1  ###  numubar -> nuebar
+EXECUTE 4 1  ###  nue -> nue
+EXECUTE 5 1  ###  nuebar -> nuebar
 
 
 

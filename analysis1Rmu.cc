@@ -7,9 +7,7 @@
 #include "TGaxis.h"
 #include "TPaveStats.h"
 #include "THStack.h"
-//#include "CC0PiNumu.h"  //src: /disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu
 #include "DefBeamMode.h"
-//#include "DefOscChannels.h"
 
 #include "include/NeutrinoEvents.h"
 //#include "include/NTagVariables.h"
@@ -24,6 +22,7 @@
 #include "src/NeutrinoOscillation/inc/NeutrinoOscillation.h"
 #include "src/DistanceViewer/inc/DistanceViewer.h"
 #include "src/NTagAnalysis/inc/NTagAnalysis.h"
+#include "src/NNInputVariables/inc/NNInputVariables.h"
 
 
 int main(int argc, char **argv) {
@@ -56,7 +55,7 @@ int main(int argc, char **argv) {
   //float thetamin = 0.8;
   float thetamax = 1.;
 
-  float dtMax  = 10.;
+  float dtMax  = 20.;
   float N50Min = 50.;
   float N50Max = 400.;
   float nlikeThreshold = 0.7;
@@ -193,6 +192,28 @@ int main(int argc, char **argv) {
   TBranch *bfvx = 0;
   TBranch *bfvy = 0;
   TBranch *bfvz = 0;
+  std::vector<float> *NResHits = 0;
+  TBranch *bNResHits = 0;
+  std::vector<float> *TRMS = 0;
+  TBranch *bTRMS = 0;
+  std::vector<float> *DWallMeanDir = 0;
+  TBranch *bDWallMeanDir = 0;
+  std::vector<float> *OpeningAngleStdev = 0;
+  TBranch *bOpeningAngleStdev = 0;
+  std::vector<float> *BurstRatio = 0;
+  TBranch *bBurstRatio = 0;
+  std::vector<float> *DarkLikelihood = 0;
+  TBranch *bDarkLikelihood = 0;
+  std::vector<float> *Beta1 = 0;
+  TBranch *bBeta1 = 0;
+  std::vector<float> *Beta2 = 0;
+  TBranch *bBeta2 = 0;
+  std::vector<float> *Beta3 = 0;
+  TBranch *bBeta3 = 0;
+  std::vector<float> *Beta4 = 0;
+  TBranch *bBeta4 = 0;
+  std::vector<float> *Beta5 = 0;
+  TBranch *bBeta5 = 0;
   tchntag->SetBranchAddress("Label", &Label, &bLabel);
   tchntag->SetBranchAddress("TagClass", &TagClass, &bTagClass);
   tchntag->SetBranchAddress("FitGoodness", &FitGoodness, &bFitGoodness);
@@ -200,6 +221,17 @@ int main(int argc, char **argv) {
   tchntag->SetBranchAddress("DWall", &TagDWall, &bTagDWall);
   tchntag->SetBranchAddress("NHits", &NHits, &bNHits);
   tchntag->SetBranchAddress("N50", &N50, &bN50);
+  tchntag->SetBranchAddress("NResHits", &NResHits, &bNResHits);
+  tchntag->SetBranchAddress("TRMS", &TRMS, &bTRMS);
+  tchntag->SetBranchAddress("DWallMeanDir", &DWallMeanDir, &bDWallMeanDir);
+  tchntag->SetBranchAddress("OpeningAngleStdev", &OpeningAngleStdev, &bOpeningAngleStdev);
+  tchntag->SetBranchAddress("BurstRatio", &BurstRatio, &bBurstRatio);
+  tchntag->SetBranchAddress("DarkLikelihood", &DarkLikelihood, &bDarkLikelihood);
+  tchntag->SetBranchAddress("Beta1", &Beta1, &bBeta1);
+  tchntag->SetBranchAddress("Beta2", &Beta2, &bBeta2);
+  tchntag->SetBranchAddress("Beta3", &Beta3, &bBeta3);
+  tchntag->SetBranchAddress("Beta4", &Beta4, &bBeta4);
+  tchntag->SetBranchAddress("Beta5", &Beta5, &bBeta5);
   tchntag->SetBranchAddress("TagIndex", &TagIndex, &bTagIndex);
   tchntag->SetBranchAddress("TagOut", &TagOut, &bTagOut);
   tchntag->SetBranchAddress("fvx", &fvx, &bfvx);
@@ -281,7 +313,9 @@ int main(int argc, char **argv) {
   NTagAnalysis ntagana;
   ntagana.InitNeutrons();
   ntagana.SetHistoFrame();
-  ntagana.SetHistoFormat();
+
+  NNInputVariables nninputs;
+  nninputs.SetNNinputHisto();
 
   int NoPrmMuEnd_CCQE = 0;
   int NoPrmMuEnd_CCnonQE = 0;
@@ -296,6 +330,30 @@ int main(int argc, char **argv) {
   float CapMuN      = 0.;
   float TrueN       = 0.;
 
+  float nlikeAll = 0;
+  float N1_acc  = 0;
+  float N1_dcye = 0;
+  float N1_H    = 0;
+  float N1_Gd   = 0;
+  float N2_acc  = 0;
+  float N2_dcye = 0;
+  float N2_H    = 0;
+  float N2_Gd   = 0;
+  float N3_acc  = 0;
+  float N3_dcye = 0;
+  float N3_H    = 0;
+  float N3_Gd   = 0;
+  float N4_acc  = 0;
+  float N4_dcye = 0;
+  float N4_H    = 0;
+  float N4_Gd   = 0;
+
+  float sel_C1 = 0;
+  float sel_C2 = 0;
+  float sel_C3 = 0;
+  float sel_C4 = 0;
+  float sel_C5 = 0;
+  float sel_C6 = 0;
 
   //Process
   if (MCTypeKeyword=="-MCType") {
@@ -311,7 +369,7 @@ int main(int argc, char **argv) {
 
   for (int ientry=0; ientry<processmax; ientry++) {
 
-  	//Progress meter
+    //Progress meter
     if(ientry>100 && ientry%100==0) std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%\e[0m" << std::endl;
 
     //All neutrino events
@@ -341,6 +399,17 @@ int main(int argc, char **argv) {
     bNHits       -> GetEntry(tentry);
     bN50         -> GetEntry(tentry);
     bTagIndex    -> GetEntry(tentry);
+    bNResHits          -> GetEntry(tentry);
+    bTRMS              -> GetEntry(tentry);
+    bDWallMeanDir      -> GetEntry(tentry);
+    bOpeningAngleStdev -> GetEntry(tentry);
+    bBurstRatio        -> GetEntry(tentry);
+    bDarkLikelihood    -> GetEntry(tentry);
+    bBeta1             -> GetEntry(tentry);
+    bBeta2             -> GetEntry(tentry);
+    bBeta3             -> GetEntry(tentry);
+    bBeta4             -> GetEntry(tentry);
+    bBeta5             -> GetEntry(tentry);
     bTagOut      -> GetEntry(tentry);
     bfvx         -> GetEntry(tentry);
     bfvy         -> GetEntry(tentry);
@@ -361,6 +430,7 @@ int main(int argc, char **argv) {
     {
 
       //decayebox.GetDecayeTagPurity(numu, tscnd, pscnd, dtMax, N50Min, N50Max);
+      floorcut = false;
       decayebox.DecayeMatching(numu, nmue, tscnd);
 
       //Reconstructed neutrino energy
@@ -370,9 +440,11 @@ int main(int argc, char **argv) {
       //if (Enu/1000. < 1. && FQDcyE==1) GetSelectedModeEvents(numu);
     }
 
+    int intmode   = TMath::Abs(numu->var<int>("mode"));
+    float OscProb = numu->getOscWgt();
+
     GetSelectedModeEvents(numu);
 
-    //if (wallv>200) GeneratedEvents++;
     if (numu->var<float>("wallv")>200) GeneratedEvents++;
 
 
@@ -380,12 +452,120 @@ int main(int argc, char **argv) {
     if (prmsel.ApplyProto1RmuonSelection(evsel)) GetProtoSelectedModeEvents(numu);
 
 
-    //if (prmsel.C1ApplyFCFV(evsel)) neuosc.GetTrueEnu(numu);
-    //float TruePrmVtx[3] = {0., 0., 0.,};
-    //neuosc.GetTruePrmVtx(numu, TruePrmVtx);
-    //ntagana.TrueNCapVtxProfile(Type, tagvx, tagvy, tagvz);
+    if (prmsel.C1ApplyFCFV(evsel)) {
 
-    //h1_NTrueN[0] -> Fill(NTrueN);
+      ntagana.GetRecoNCapTime(numu, etagmode, FitT, NHits, Label, TagOut, nlikeThreshold);
+
+      //ntagana.GetNlikeCandidates(numu, etagmode, NHits, FitT, TagOut, Label);
+
+      for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
+        //h1_AllRecoNCapTime -> Fill(FitT->at(jentry));
+
+#if 0
+        HistFillforLabel(numu, Label->at(jentry), N50->at(jentry), h1_N50_preNN);
+        HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_preNN);
+        HistFillforLabel(numu, Label->at(jentry), FitT->at(jentry), h1_FitT_preNN);
+        h1_AllN50_preNN   -> Fill(N50->at(jentry));
+        h1_AllNHits_preNN -> Fill(NHits->at(jentry));
+        h1_AllFitT_preNN  -> Fill(FitT->at(jentry));
+#endif
+
+        h1_AllNTagOut -> Fill(TagOut->at(jentry));
+        bool etagboxin = false;
+        etagboxin = ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry));
+        if (TagOut->at(jentry)>nlikeThreshold && !ntagana.RemnantChecker(Label->at(jentry))) {
+
+          if (NHits->at(jentry)<N50Min) {
+            if (FitT->at(jentry)<dtMax) {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) N1_acc+=OscProb;
+                if (Label->at(jentry)==1) N1_dcye+=OscProb;
+                if (Label->at(jentry)==2) N1_H+=OscProb;
+                if (Label->at(jentry)==3) N1_Gd+=OscProb;
+              }
+              else {
+                if (Label->at(jentry)==0) N1_acc++;
+                if (Label->at(jentry)==1) N1_dcye++;
+                if (Label->at(jentry)==2) N1_H++;
+                if (Label->at(jentry)==3) N1_Gd++;
+              }
+            }
+            else {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) N2_acc+=OscProb;
+                if (Label->at(jentry)==1) N2_dcye+=OscProb;
+                if (Label->at(jentry)==2) N2_H+=OscProb;
+                if (Label->at(jentry)==3) N2_Gd+=OscProb;
+              }
+              else {
+                if (Label->at(jentry)==0) N2_acc++;
+                if (Label->at(jentry)==1) N2_dcye++;
+                if (Label->at(jentry)==2) N2_H++;
+                if (Label->at(jentry)==3) N2_Gd++;
+              }
+            }
+          }
+          else {
+            if (FitT->at(jentry)<dtMax) {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) N3_acc+=OscProb;
+                if (Label->at(jentry)==1) N3_dcye+=OscProb;
+                if (Label->at(jentry)==2) N3_H+=OscProb;
+                if (Label->at(jentry)==3) N3_Gd+=OscProb;
+              }
+              else {
+                if (Label->at(jentry)==0) N3_acc++;
+                if (Label->at(jentry)==1) N3_dcye++;
+                if (Label->at(jentry)==2) N3_H++;
+                if (Label->at(jentry)==3) N3_Gd++;
+              }
+            }
+            else {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) N4_acc+=OscProb;
+                if (Label->at(jentry)==1) N4_dcye+=OscProb;
+                if (Label->at(jentry)==2) N4_H+=OscProb;
+                if (Label->at(jentry)==3) N4_Gd+=OscProb;
+              }
+              else {
+                if (Label->at(jentry)==0) N4_acc++;
+                if (Label->at(jentry)==1) N4_dcye++;
+                if (Label->at(jentry)==2) N4_H++;
+                if (Label->at(jentry)==3) N4_Gd++;
+              }
+            }
+          }
+
+#if 0
+          HistFillforLabel(numu, Label->at(jentry), N50->at(jentry), h1_N50_postNN);
+          HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_postNN);
+          HistFillforLabel(numu, Label->at(jentry), FitT->at(jentry), h1_FitT_postNN);
+          h1_AllN50_postNN   -> Fill(N50->at(jentry));
+          h1_AllNHits_postNN -> Fill(NHits->at(jentry));
+          h1_AllFitT_postNN  -> Fill(FitT->at(jentry));
+#endif
+
+          bool etagboxin = false;
+          etagboxin = ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry));
+          if (!etagboxin) {
+            HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_Nlike);
+            HistFillforLabel(numu, Label->at(jentry), FitT->at(jentry), h1_FitT_Nlike);
+            h1_AllNHits_Nlike -> Fill(NHits->at(jentry));
+            h1_AllFitT_Nlike  -> Fill(FitT->at(jentry));
+          }
+          else {
+            HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_Elike);
+            HistFillforLabel(numu, Label->at(jentry), FitT->at(jentry), h1_FitT_Elike);
+            h1_AllNHits_Elike -> Fill(NHits->at(jentry));
+            h1_AllFitT_Elike  -> Fill(FitT->at(jentry));
+          }
+
+
+          if (intmode<31) nlikeAll+=OscProb;
+          else nlikeAll++;
+        }
+      }
+    }
 
     
     //int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
@@ -395,9 +575,7 @@ int main(int argc, char **argv) {
     //New 1R muon selection
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false)) {
 
-      int intmode   = TMath::Abs(numu->var<int>("mode"));
-      float OscProb = numu->getOscWgt();
-      float Enu     = numu->var<float>("erec");
+      float Enu = numu->var<float>("erec");
 
       //Neutrino energy distribution
       neuosc.GetTrueEnu(numu);
@@ -409,8 +587,7 @@ int main(int argc, char **argv) {
       bool PrmMu = decayebox.GetTruePrmMuMom(Pvc, numu, PrmMuMom);
       neuosc.GetPrmMuMomResolution(numu, PrmMuMom);
 
-      float TruePrmVtx[3] = {0., 0., 0.,};
-      neuosc.GetTruePrmVtx(numu, TruePrmVtx);
+      neuosc.GetPrmVtx(numu);
       ntagana.TrueNCapVtxProfile(Type, tagvx, tagvy, tagvz);
       ntagana.GetTrueNCapTime(t, Type, E);
 
@@ -606,7 +783,48 @@ int main(int argc, char **argv) {
         }
       }
       
+      
+      // cut selection
+#if 0
+      for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
+        if (DWallMeanDir->at(jentry)<2500) {
+          if (intmode<31) sel_C1 += OscProb;
+          else sel_C1++;
+          HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_CutBase1);
 
+          if (TagDWall->at(jentry)>200) {
+            if (intmode<31) sel_C2 += OscProb;
+            else sel_C2++;
+            HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_CutBase2);
+
+            if (Beta1->at(jentry)<0.3) {
+              if (intmode<31) sel_C3 += OscProb;
+              else sel_C3++;
+              HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_CutBase3);
+              
+              if (Beta2->at(jentry)>-0.05 && Beta2->at(jentry)<0.1) {
+                if (intmode<31) sel_C4 += OscProb;
+                else sel_C4++;
+                HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_CutBase4);
+
+                if (DarkLikelihood->at(jentry)<0.1) {
+                  if (intmode<31) sel_C5 += OscProb;
+                  else sel_C5++;
+                  HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_CutBase5);
+
+                  if (BurstRatio->at(jentry)<0.2) {
+                    if (intmode<31) sel_C6 += OscProb;
+                    else sel_C6++;
+                    HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_CutBase6);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+#endif
+      
 
       ntagana.GetTruthNeutrons(NTrueN, numu, Type, E, DWall);
       ntagana.GetTruthNeutronsIntType(numu, NTrueN);
@@ -624,28 +842,43 @@ int main(int argc, char **argv) {
       // Check truth breakdown(H-n/Gd-n/Decay-e/Acc.Noise) of candidates in the time window
       ntagana.TruthBreakdowninWindow(numu, TagClass, t, DWall, TagIndex, Label, FitT, TagDWall);
 
-      // Check tagged truth neutrons and mis-tagged decay-e and noise with respect to window and threshold.
-      ntagana.GetNlikeCandidatesinWindow(numu, t, DWall, TagIndex, etagmode, NHits, FitT, TagOut, Label, TagDWall);
-      //ntagana.GetNlikeCandidatesinWindow(numu, t, DWall, TagIndex, etagmode, N50, FitT, TagOut, Label, TagDWall);
-
-      // Check tagged truth decay-e and mis-tagged neutrons and noise with respect to window and threshold.
-      ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, NHits, FitT, TagOut, Label);
-      //ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, N50, FitT, TagOut, Label);
+      ntagana.GetNlikeCandidates(numu, etagmode, NHits, FitT, TagOut, Label);
 
       // Check neutrino events with tagged neutrons
       ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, 
                                      etagmode, numu, neuosc, nlikeThreshold/0.05,
                                      recothetamu, thetamin, thetamax);
-      //ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, N50, FitT, Label, NTrueN, 
-      //                               etagmode, numu, neuosc, nlikeThreshold/0.05,
-      //                               recothetamu, thetamin, thetamax);
+
+#if 0
+      for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
+        if (TagOut->at(jentry)>nlikeThreshold && !ntagana.RemnantChecker(Label->at(jentry))) {
+          bool etagboxin = false;
+          etagboxin = ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry));
+          if (!etagboxin) {
+            h1_AllNHits_Nlike -> Fill(NHits->at(jentry));
+            h1_AllFitT_Nlike  -> Fill(FitT->at(jentry));
+          }
+          else {
+            h1_AllNHits_Elike -> Fill(NHits->at(jentry));
+            h1_AllFitT_Elike  -> Fill(FitT->at(jentry));
+          }
+        }
+      }
+#endif
+      
 
       //Number of tagged-neutrons
       //CCQE w/ tagged-n
-      //int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
       int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
+      int numtaggednoise = ntagana.GetTaggedNoise(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
+
+      float Pmu = numu->var<float>("fq1rmom", PrmEvent, FQ_MUHYP);
+      float Pt  = neuosc.GetMuonPt(numu);
+      ntagana.TaggedN_x_kinematics(numu, numtaggedneutrons, numtaggednoise, Pt/1000., xMuPtbins, TaggedN_x_MuPt, h1_TaggedN_x_MuPt, 1);
+      ntagana.TrueN_x_kinematics(numu, NTrueN, Pt/1000., xMuPtbins, TrueN_x_MuPt, h1_TrueN_x_MuPt, 1);
+
       ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, NHits, Label, TagOut, nlikeThreshold, fvx, fvy, fvz);
-      ntagana.GetRecoNCapTime(numu, etagmode, FitT, NHits, Label, TagOut, nlikeThreshold);
+      //ntagana.GetRecoNCapTime(numu, etagmode, FitT, NHits, Label, TagOut, nlikeThreshold);
       if (intmode==1 && numtaggedneutrons!=0) CCQEwTaggedNeutrons++;
 
       if (intmode==1)                 h1_TagNmultiplicity[0]->Fill(numtaggedneutrons, OscProb);
@@ -873,6 +1106,9 @@ int main(int argc, char **argv) {
       RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
 
       for (UInt_t ican=0; ican<TagOut->size(); ican++) {
+
+        //h1_AllRecoNCapTime -> Fill(FitT->at(ican));
+
         bool etagboxin = false;
         if (etagmode){
 
@@ -984,17 +1220,34 @@ int main(int argc, char **argv) {
     resultfile << " efficiency Q1/(Q1+Q3): " << SelectedMatchTrueDcye /( SelectedMatchTrueDcye + RejectedMatchedTrueDcye )*100.  << " %" << std::endl;
     resultfile << " purity     Q1/(Q1+Q2): " << SelectedMatchTrueDcye /( SelectedMatchTrueDcye + SelectedfQdcye)*100. << " %" << std::endl;
 
-    /*resultfile << "[Decay-e Cut Scan] " << std::endl;
-    resultfile << "[Decay-e Cut Scan] dt = 20 us: " << SelectedParentNeutrinos_dtScan[0]      << std::endl;
-    resultfile << "                             : " << FinalSelectedParentNeutrinos_dtScan[0] << std::endl;
-    resultfile << "[Decay-e Cut Scan] dt = 15 us: " << SelectedParentNeutrinos_dtScan[1]      << std::endl;
-    resultfile << "                             : " << FinalSelectedParentNeutrinos_dtScan[1] << std::endl;
-    resultfile << "[Decay-e Cut Scan] dt = 10 us: " << SelectedParentNeutrinos_dtScan[2]      << std::endl;
-    resultfile << "                             : " << FinalSelectedParentNeutrinos_dtScan[2] << std::endl;
-    resultfile << "[Decay-e Cut Scan] dt =  5 us: " << SelectedParentNeutrinos_dtScan[3]      << std::endl;
-    resultfile << "                             : " << FinalSelectedParentNeutrinos_dtScan[3] << std::endl;
-    resultfile << "[Decay-e Cut Scan] dt =  3 us: " << SelectedParentNeutrinos_dtScan[4]      << std::endl;
-    resultfile << "                             : " << FinalSelectedParentNeutrinos_dtScan[4] << std::endl;*/
+    resultfile << "N1 (acc) : " << N1_acc << std::endl;
+    resultfile << "N1 (dcye): " << N1_dcye << std::endl;
+    resultfile << "N1 (H)   : " << N1_H << std::endl;
+    resultfile << "N1 (Gd)  : " << N1_Gd << std::endl;
+    resultfile << " " << std::endl;
+    resultfile << "N2 (acc) : " << N2_acc << std::endl;
+    resultfile << "N2 (dcye): " << N2_dcye << std::endl;
+    resultfile << "N2 (H)   : " << N2_H << std::endl;
+    resultfile << "N2 (Gd)  : " << N2_Gd << std::endl;
+    resultfile << " " << std::endl;
+    resultfile << "N3 (acc) : " << N3_acc << std::endl;
+    resultfile << "N3 (dcye): " << N3_dcye << std::endl;
+    resultfile << "N3 (H)   : " << N3_H << std::endl;
+    resultfile << "N3 (Gd)  : " << N3_Gd << std::endl;
+    resultfile << " " << std::endl;
+    resultfile << "N4 (acc) : " << N4_acc << std::endl;
+    resultfile << "N4 (dcye): " << N4_dcye << std::endl;
+    resultfile << "N4 (H)   : " << N4_H << std::endl;
+    resultfile << "N4 (Gd)  : " << N4_Gd << std::endl;
+    resultfile << " " << std::endl;
+
+    resultfile << "NTag Cut Base[ DarkLikelihood ]: " << sel_C1 << std::endl;
+    resultfile << "NTag Cut Base[ BurstRatio     ]: " << sel_C2 << std::endl;
+    resultfile << "NTag Cut Base[ DWallMeanDir   ]: " << sel_C3 << std::endl;
+    resultfile << "NTag Cut Base[ DWall          ]: " << sel_C4 << std::endl;
+    resultfile << "NTag Cut Base[ Beta1          ]: " << sel_C5 << std::endl;
+    resultfile << "NTag Cut Base[ Beta2          ]: " << sel_C6 << std::endl;
+    resultfile << " " << std::endl;
 
     resultfile << "[Neutrino] All Parent Neutrino Events          : " << AllParentNeutrinos << std::endl;
     resultfile << "[Neutrino] Generated Neutrino Events(wallv>200): " << GeneratedEvents    << std::endl;
@@ -1114,17 +1367,18 @@ int main(int argc, char **argv) {
     resultfile << "           w/o truth neutrons : " << OscwoTrueN  << "(Osc)/" << NoOscwoTrueN  << "(No Osc) = " << OscwoTrueN/NoOscwoTrueN   << std::endl;
     resultfile << "           w/o tagged neutrons: " << OscwoTagN   << "(Osc)/" << NoOscwoTagN   << "(No Osc) = " << OscwoTagN/NoOscwoTagN     << std::endl;
 
+    resultfile << "All Truth neutrons: " << AllTruthNeutrons << std::endl;
+    resultfile << "Candidates        : " << TagCandidates << std::endl;
+    std::cout  << "All neutron-like  : " << nlikeAll << std::endl;
 
     // Calculation of ROC
+#if 0
     float TagTPR[CUTSTEP];
     float TagFPR[CUTSTEP];
     for (int i=0; i<CUTSTEP; i++) {
       TagTPR[i] = 0;
       TagFPR[i] = 0;
     }
-
-    resultfile << "All Truth neutrons: " << AllTruthNeutrons << std::endl;
-    resultfile << "Candidates        : " << TagCandidates << std::endl;
     for (int ith=0; ith<CUTSTEP; ith++) {
       TagFN[ith] = AllTruthNeutrons - TagTP[ith];
       TagTN[ith] = TagCandidates - (TagFP[ith]+TagTP[ith]+TagFN[ith]);
@@ -1214,6 +1468,7 @@ int main(int argc, char **argv) {
     g_FOM_m30 -> RemovePoint(20); // remove infinity @ n-likelihood=1
     g_FOM_p40 -> RemovePoint(20); // remove infinity @ n-likelihood=1
     g_FOM_m40 -> RemovePoint(20); // remove infinity @ n-likelihood=1
+#endif
 
     ntagana.SummaryTruthInfoinSearch(3., NTagSummary);
     for (int ithr=0; ithr<CUTSTEP; ithr++) {
@@ -1259,7 +1514,7 @@ int main(int argc, char **argv) {
 
   //noise rate and efficiency for window optimization
   ntagana.SetNoiseRateGraph();
-  ntagana.GetEfficiencyforWinOpt();
+  //ntagana.GetEfficiencyforWinOpt();
   ntagana.SetEfficiencyGraph(0);  //0 for [3 us, 535 us]
 
   ntagana.cdNTagAnalysis(fout);

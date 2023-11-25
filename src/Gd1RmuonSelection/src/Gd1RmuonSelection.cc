@@ -123,7 +123,7 @@ float Gd1RmuonSelection::GetEvis(CC0PiNumu* numu) {
   if (data) h1_Allevis -> Fill(evis); 
   if (mode==1)              h1_evis[0] -> Fill(evis, OscProb); //CCQE
   if (mode>=2 && mode<=10)  h1_evis[1] -> Fill(evis, OscProb); //CC 2p2h
-  if (mode>=31)             h1_evis[2] -> Fill(evis, OscProb); //NC
+  if (mode>=31)             h1_evis[2] -> Fill(evis); //NC
   if (mode>10 && mode<=30)  h1_evis[3] -> Fill(evis, OscProb); //CC other
 
   return evis;
@@ -137,7 +137,7 @@ float Gd1RmuonSelection::GetDWall(CC0PiNumu* numu) {
   if (data) h1_Alldwall -> Fill(dwall);
   if (mode==1)              h1_dwall[0] -> Fill(dwall, OscProb); //CCQE
   if (mode>=2 && mode<=10)  h1_dwall[1] -> Fill(dwall, OscProb); //CC 2p2h
-  if (mode>=31)             h1_dwall[2] -> Fill(dwall, OscProb); //NC
+  if (mode>=31)             h1_dwall[2] -> Fill(dwall); //NC
   if (mode>10 && mode<=30)  h1_dwall[3] -> Fill(dwall, OscProb); //CC other
 
   return dwall;
@@ -151,7 +151,7 @@ int Gd1RmuonSelection::GetNring(CC0PiNumu* numu) {
   if (data) h1_AllNring -> Fill(Nring);
   if (mode==1)              h1_Nring[0] -> Fill(Nring, OscProb); //CCQE
   if (mode>=2 && mode<=10)  h1_Nring[1] -> Fill(Nring, OscProb); //CC 2p2h
-  if (mode>=31)             h1_Nring[2] -> Fill(Nring, OscProb); //NC
+  if (mode>=31)             h1_Nring[2] -> Fill(Nring); //NC
   if (mode>10 && mode<=30)  h1_Nring[3] -> Fill(Nring, OscProb); //CC other
 
   return Nring;
@@ -165,7 +165,7 @@ float Gd1RmuonSelection::GetemuLikelihood(CC0PiNumu* numu) {
   if (data) h1_Allemulikelihood -> Fill(likelihood);
   if (mode==1)              h1_emulikelihood[0] -> Fill(likelihood, OscProb);
   if (mode>=2 && mode<=10)  h1_emulikelihood[1] -> Fill(likelihood, OscProb);
-  if (mode>=31)             h1_emulikelihood[2] -> Fill(likelihood, OscProb);
+  if (mode>=31)             h1_emulikelihood[2] -> Fill(likelihood);
   if (mode>10 && mode<=30)  h1_emulikelihood[3] -> Fill(likelihood, OscProb);
 
   return likelihood;
@@ -179,7 +179,7 @@ float Gd1RmuonSelection::GetPmu(CC0PiNumu* numu) {
   if (data) h1_AllPmu -> Fill(Pmu);
   if (mode==1)              h1_Pmu[0] -> Fill(Pmu, OscProb);
   if (mode>=2 && mode<=10)  h1_Pmu[1] -> Fill(Pmu, OscProb);
-  if (mode>=31)             h1_Pmu[2] -> Fill(Pmu, OscProb);
+  if (mode>=31)             h1_Pmu[2] -> Fill(Pmu);
   if (mode>10 && mode<=30)  h1_Pmu[3] -> Fill(Pmu, OscProb);
 
   return Pmu;
@@ -193,7 +193,7 @@ float Gd1RmuonSelection::GetpimuLikelihood(CC0PiNumu* numu) {
   if (data) h1_Allpimulikelihood -> Fill(likelihood);
   if (mode==1)              h1_pimulikelihood[0] -> Fill(likelihood, OscProb);
   if (mode>=2 && mode<=10)  h1_pimulikelihood[1] -> Fill(likelihood, OscProb);
-  if (mode>=31)             h1_pimulikelihood[2] -> Fill(likelihood, OscProb);
+  if (mode>=31)             h1_pimulikelihood[2] -> Fill(likelihood);
   if (mode>10 && mode<=30)  h1_pimulikelihood[3] -> Fill(likelihood, OscProb);
 
   return likelihood;

@@ -56,7 +56,7 @@ int main(int argc, char **argv) {
   //float thetamin = 0.8;
   float thetamax = 1.;
 
-  float dtMax  = 10.;
+  float dtMax  = 20.;
   float N50Min = 50.;
   float N50Max = 400.;
   float nlikeThreshold = 0.7;
@@ -276,7 +276,6 @@ int main(int argc, char **argv) {
   NTagAnalysis ntagana;
   ntagana.InitNeutrons();
   ntagana.SetHistoFrame();
-  ntagana.SetHistoFormat();
 
   int NoPrmMuEnd_CCQE = 0;
   int NoPrmMuEnd_CCnonQE = 0;
@@ -396,7 +395,7 @@ int main(int argc, char **argv) {
       //ntagana.NCapVtxResEstimator(numu, NTrueN, tscnd, vtxprnt, true, FitT, NHits, Label, TagOut, nlikeThreshold, fvx, fvy, fvz);
 
       float TruePrmVtx[3] = {0., 0., 0.,};
-      neuosc.GetTruePrmVtx(numu, TruePrmVtx);
+      neuosc.GetPrmVtx(numu);
       ntagana.TrueNCapVtxProfile(Type, tagvx, tagvy, tagvz);
       ntagana.GetTrueNCapTime(t, Type, E);
 
@@ -499,13 +498,7 @@ int main(int argc, char **argv) {
       // Check truth breakdown(H-n/Gd-n/Decay-e/Acc.Noise) of candidates in the time window
       ntagana.TruthBreakdowninWindow(numu, TagClass, t, DWall, TagIndex, Label, FitT, TagDWall);
 
-      // Check tagged truth neutrons and mis-tagged decay-e and noise with respect to window and threshold.
-      ntagana.GetNlikeCandidatesinWindow(numu, t, DWall, TagIndex, etagmode, NHits, FitT, TagOut, Label, TagDWall);
-      //ntagana.GetNlikeCandidatesinWindow(numu, t, DWall, TagIndex, etagmode, N50, FitT, TagOut, Label, TagDWall);
-
-      // Check tagged truth decay-e and mis-tagged neutrons and noise with respect to window and threshold.
-      ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, NHits, FitT, TagOut, Label);
-      //ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, N50, FitT, TagOut, Label);
+      ntagana.GetNlikeCandidates(numu, etagmode, NHits, FitT, TagOut, Label);
 
       // Check neutrino events with tagged neutrons
       ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, 
@@ -517,8 +510,14 @@ int main(int argc, char **argv) {
 
       //Number of tagged-neutrons
       //CCQE w/ tagged-n
-      //int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, N50, FitT, Label, etagmode);
       int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
+      int numtaggednoise = ntagana.GetTaggedNoise(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
+
+      float Pmu = numu->var<float>("fq1rmom", PrmEvent, FQ_MUHYP);
+      float Pt  = neuosc.GetMuonPt(numu);
+      ntagana.TaggedN_x_kinematics(numu, numtaggedneutrons, numtaggednoise, Pt/1000., xMuPtbins, TaggedN_x_MuPt, h1_TaggedN_x_MuPt, 1);
+      ntagana.TrueN_x_kinematics(numu, NTrueN, Pt/1000., xMuPtbins, TrueN_x_MuPt, h1_TrueN_x_MuPt, 1);
+
       if (intmode==1 && numtaggedneutrons!=0) {
 
         CCQEwTaggedNeutrons++;
@@ -694,6 +693,7 @@ int main(int argc, char **argv) {
         h1_GenAftSINeutrons  -> Fill(TrueCapBefSI+TrueAftSI);
         h1_GenMuCapNeutrons  -> Fill(TrueMuN);
       }
+
 
     } //New 1R muon selection
 

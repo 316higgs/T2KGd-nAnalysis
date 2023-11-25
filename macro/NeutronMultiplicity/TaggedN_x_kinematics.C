@@ -76,9 +76,9 @@ void TaggedN_x_kinematics(bool beammode) {
 
   //TString KnmtcName = "Enu";
   //TString KnmtcName = "MuMom";
-  TString KnmtcName = "MuPt";
+  //TString KnmtcName = "MuPt";
   //TString KnmtcName = "Q2";
-  //TString KnmtcName = "MuAngle";
+  TString KnmtcName = "MuAngle";
   const int binnumber = SetHistoBinNumber(KnmtcName);
 
   TString Prefix      = "NTagAnalysis/h1_TaggedN_x_";
@@ -205,7 +205,7 @@ void TaggedN_x_kinematics(bool beammode) {
 
 
   /////  Normalizations  //////
-#if 0
+#if 1
   h1_CCQE_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_CCQE_nuesig       -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
   h1_CCQE_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
@@ -338,7 +338,23 @@ void TaggedN_x_kinematics(bool beammode) {
   hs_merge -> Add(h1_CCQE_numubar);
 #endif
 
-#if 0
+
+  TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
+  TString DataName     = "_mode0";
+  TString FileDataName = Prefix+KnmtcName+DataName;
+  TH1F*   h1_data      = (TH1F*)fin_data->Get(FileDataName);
+  h1_data -> SetMarkerStyle(20);
+  h1_data -> SetMarkerSize(1.5);
+  h1_data -> SetMarkerColor(kBlack);
+  h1_data -> SetLineColor(kBlack);
+  h1_data -> SetLineWidth(1.5);
+
+  for (int i=0; i<binnumber; i++) {
+    std::cout << "[### Bin" << i << " ###] [Data] : " <<  h1_data->GetBinContent(i+1) << std::endl;
+  }
+
+
+#if 1
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
@@ -356,6 +372,9 @@ void TaggedN_x_kinematics(bool beammode) {
   if (KnmtcName=="MuAngle") hs_merge->GetXaxis()->SetTitle("Cosine of Angle b/w #mu and Beam Directions");
   hs_merge->GetYaxis()->SetTitle("Number of Tagged Neutrons");
   hs_merge -> Draw();
+
+  h1_data -> Draw("SAME E P");
+
   c1->RedrawAxis();
   
   float xmin = 0.45;

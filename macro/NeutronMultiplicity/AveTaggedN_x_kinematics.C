@@ -3,6 +3,7 @@
 #include "TStyle.h"
 #include "TROOT.h"
 #include "TText.h"
+#include "./syst_input.h"
 
 #define NA 6.0221409
 #define FV 22.5
@@ -56,6 +57,9 @@ void AveTaggedN_x_kinematics(bool beammode) {
   TGraphErrors* g_fhc_nmult_x_pt_MC        = (TGraphErrors*)fin_purewater->Get("Graph;1"); // MC error bars
   TGraphAsymmErrors* g_fhc_nmult_x_pt_Data = (TGraphAsymmErrors*)fin_purewater->Get("gTrMomAveData_fhc_statsys;1");      // Data
 
+
+  // run11 data
+  TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
 
 
   // Normalization factors
@@ -115,9 +119,11 @@ void AveTaggedN_x_kinematics(bool beammode) {
   double start = xbins[0];                        // start value
   double maximum = xbins[binnumber-1];            // end value
   double interval = (maximum - start)/binnumber;  // bin width
-  float N1Rmu_x_kinematics[binnumber];
-  float TaggedN_x_kinematics[binnumber];
-  float NTagEff_x_kinematics[binnumber];
+  float  N1Rmu_x_kinematics[binnumber];
+  float  TaggedN_x_kinematics[binnumber];
+  float  N1Rmu_x_kinematics_data[binnumber];
+  float  TaggedN_x_kinematics_data[binnumber];
+  float  NTagEff_x_kinematics[binnumber];
   double Gen_N1Rmu_x_kinematics[binnumber];
   double Gen_TaggedN_x_kinematics[binnumber];
   double Gen_TrueN_x_kinematics[binnumber];
@@ -177,72 +183,6 @@ void AveTaggedN_x_kinematics(bool beammode) {
   TH1F* h1_TagN_NC_nuebarbkg      = (TH1F*)fin_nuebarbkg->Get(FileNCName);
   TH1F* h1_TagN_Noise_nuebarbkg   = (TH1F*)fin_nuebarbkg->Get(FileNoiseName);
   h1_TagN_CCQE_nuebarbkg -> SetStats(0);
-
-  h1_TagN_CCQE_numu    -> SetLineColor(kAzure-1);
-  h1_TagN_CC2p2h_numu  -> SetLineColor(kAzure-5);
-  h1_TagN_CCOther_numu -> SetLineColor(kCyan-8);
-  h1_TagN_NC_numu      -> SetLineColor(kSpring-9);
-  h1_TagN_Noise_numu   -> SetLineColor(kYellow+2);
-  h1_TagN_CCQE_numu    -> SetFillColor(kAzure-1);
-  h1_TagN_CC2p2h_numu  -> SetFillColor(kAzure-5);
-  h1_TagN_CCOther_numu -> SetFillColor(kCyan-8);
-  h1_TagN_NC_numu      -> SetFillColor(kSpring-9);
-  h1_TagN_Noise_numu   -> SetFillColor(kYellow+2);
-
-  h1_TagN_CCQE_nuesig    -> SetLineColor(kViolet-1);
-  h1_TagN_CC2p2h_nuesig  -> SetLineColor(kViolet-1);
-  h1_TagN_CCOther_nuesig -> SetLineColor(kViolet-1);
-  h1_TagN_NC_nuesig      -> SetLineColor(kSpring-9);
-  h1_TagN_Noise_nuesig   -> SetLineColor(kYellow+2);
-  h1_TagN_CCQE_nuesig    -> SetFillColor(kViolet-1);
-  h1_TagN_CC2p2h_nuesig  -> SetFillColor(kViolet-1);
-  h1_TagN_CCOther_nuesig -> SetFillColor(kViolet-1);
-  h1_TagN_NC_nuesig      -> SetFillColor(kSpring-9);
-  h1_TagN_Noise_nuesig   -> SetFillColor(kYellow+2);
-
-  h1_TagN_CCQE_numubar    -> SetLineColor(kOrange+7);
-  h1_TagN_CC2p2h_numubar  -> SetLineColor(kOrange+6);
-  h1_TagN_CCOther_numubar -> SetLineColor(kOrange+0);
-  h1_TagN_NC_numubar      -> SetLineColor(kSpring-9);
-  h1_TagN_Noise_numubar   -> SetLineColor(kYellow+2);
-  h1_TagN_CCQE_numubar    -> SetFillColor(kOrange+7);
-  h1_TagN_CC2p2h_numubar  -> SetFillColor(kOrange+6);
-  h1_TagN_CCOther_numubar -> SetFillColor(kOrange+0);
-  h1_TagN_NC_numubar      -> SetFillColor(kSpring-9);
-  h1_TagN_Noise_numubar   -> SetFillColor(kYellow+2);
-
-  h1_TagN_CCQE_nuebarsig    -> SetLineColor(kViolet-1);
-  h1_TagN_CC2p2h_nuebarsig  -> SetLineColor(kViolet-1);
-  h1_TagN_CCOther_nuebarsig -> SetLineColor(kViolet-1);
-  h1_TagN_NC_nuebarsig      -> SetLineColor(kSpring-9);
-  h1_TagN_Noise_nuebarsig   -> SetLineColor(kYellow+2);
-  h1_TagN_CCQE_nuebarsig    -> SetFillColor(kViolet-1);
-  h1_TagN_CC2p2h_nuebarsig  -> SetFillColor(kViolet-1);
-  h1_TagN_CCOther_nuebarsig -> SetFillColor(kViolet-1);
-  h1_TagN_NC_nuebarsig      -> SetFillColor(kSpring-9);
-  h1_TagN_Noise_nuebarsig   -> SetFillColor(kYellow+2);
-
-  h1_TagN_CCQE_nuebkg    -> SetLineColor(kViolet-1);
-  h1_TagN_CC2p2h_nuebkg  -> SetLineColor(kViolet-1);
-  h1_TagN_CCOther_nuebkg -> SetLineColor(kViolet-1);
-  h1_TagN_NC_nuebkg      -> SetLineColor(kSpring-9);
-  h1_TagN_Noise_nuebkg   -> SetLineColor(kYellow+2);
-  h1_TagN_CCQE_nuebkg    -> SetFillColor(kViolet-1);
-  h1_TagN_CC2p2h_nuebkg  -> SetFillColor(kViolet-1);
-  h1_TagN_CCOther_nuebkg -> SetFillColor(kViolet-1);
-  h1_TagN_NC_nuebkg      -> SetFillColor(kSpring-9);
-  h1_TagN_Noise_nuebkg   -> SetFillColor(kYellow+2);
-
-  h1_TagN_CCQE_nuebarbkg    -> SetLineColor(kViolet-1);
-  h1_TagN_CC2p2h_nuebarbkg  -> SetLineColor(kViolet-1);
-  h1_TagN_CCOther_nuebarbkg -> SetLineColor(kViolet-1);
-  h1_TagN_NC_nuebarbkg      -> SetLineColor(kSpring-9);
-  h1_TagN_Noise_nuebarbkg   -> SetLineColor(kYellow+2);
-  h1_TagN_CCQE_nuebarbkg    -> SetFillColor(kViolet-1);
-  h1_TagN_CC2p2h_nuebarbkg  -> SetFillColor(kViolet-1);
-  h1_TagN_CCOther_nuebarbkg -> SetFillColor(kViolet-1);
-  h1_TagN_NC_nuebarbkg      -> SetFillColor(kSpring-9);
-  h1_TagN_Noise_nuebarbkg   -> SetFillColor(kYellow+2);
 
   for (int ibin=0; ibin<binnumber; ibin++) {
     Gen_TaggedN_x_kinematics[ibin] = h1_TagN_CCQE_numu->GetBinContent(ibin+1) + h1_TagN_CC2p2h_numu->GetBinContent(ibin+1) + h1_TagN_CCOther_numu->GetBinContent(ibin+1) + h1_TagN_NC_numu->GetBinContent(ibin+1) + h1_TagN_Noise_numu->GetBinContent(ibin+1)
@@ -340,9 +280,13 @@ void AveTaggedN_x_kinematics(bool beammode) {
   h1_TagN_merge -> SetStats(0);
   GetHistoBinContent(binnumber, start, TaggedN_x_kinematics, h1_TagN_merge);
   //for (int ibin=0; ibin<binnumber-1; ibin++) std::cout << "Bin[" << ibin << "]: " << TaggedN_x_kinematics[ibin] << std::endl;
+  
+  TH1F* h1_TagN_data = (TH1F*)fin_data->Get(FileCCQEName);
+  GetHistoBinContent(binnumber, start, TaggedN_x_kinematics_data, h1_TagN_data);
+
+  /////////////////////////////////////////////////////////////////////////////
 
   TH1F* h1_NTagEff_merge = new TH1F("h1_NTagEff_merge", "", binnumber-1, xbins);
-
   h1_NTagEff_merge -> Add(h1_TagN_NC_nuebarbkg);
   h1_NTagEff_merge -> Add(h1_TagN_NC_nuebkg);
   h1_NTagEff_merge -> Add(h1_TagN_NC_nuebarsig);
@@ -375,7 +319,6 @@ void AveTaggedN_x_kinematics(bool beammode) {
   h1_NTagEff_merge -> SetFillStyle(3004);
   h1_NTagEff_merge -> SetStats(0);
 
-  /////////////////////////////////////////////////////////////////////////////
 
   Prefix = "NTagAnalysis/h1_TrueN_x_";
   FileCCQEName    = Prefix+KnmtcName+CCQEName;
@@ -418,60 +361,6 @@ void AveTaggedN_x_kinematics(bool beammode) {
   TH1F* h1_TrueN_CCOther_nuebarbkg = (TH1F*)fin_nuebarbkg->Get(FileCCOtherName);
   TH1F* h1_TrueN_NC_nuebarbkg      = (TH1F*)fin_nuebarbkg->Get(FileNCName);
   h1_TrueN_CCQE_nuebarbkg -> SetStats(0);
-
-  h1_TrueN_CCQE_numu    -> SetLineColor(kAzure-1);
-  h1_TrueN_CC2p2h_numu  -> SetLineColor(kAzure-5);
-  h1_TrueN_CCOther_numu -> SetLineColor(kCyan-8);
-  h1_TrueN_NC_numu      -> SetLineColor(kSpring-9);
-  h1_TrueN_CCQE_numu    -> SetFillColor(kAzure-1);
-  h1_TrueN_CC2p2h_numu  -> SetFillColor(kAzure-5);
-  h1_TrueN_CCOther_numu -> SetFillColor(kCyan-8);
-  h1_TrueN_NC_numu      -> SetFillColor(kSpring-9);
-
-  h1_TrueN_CCQE_nuesig    -> SetLineColor(kViolet-1);
-  h1_TrueN_CC2p2h_nuesig  -> SetLineColor(kViolet-1);
-  h1_TrueN_CCOther_nuesig -> SetLineColor(kViolet-1);
-  h1_TrueN_NC_nuesig      -> SetLineColor(kSpring-9);
-  h1_TrueN_CCQE_nuesig    -> SetFillColor(kViolet-1);
-  h1_TrueN_CC2p2h_nuesig  -> SetFillColor(kViolet-1);
-  h1_TrueN_CCOther_nuesig -> SetFillColor(kViolet-1);
-  h1_TrueN_NC_nuesig      -> SetFillColor(kSpring-9);
-
-  h1_TrueN_CCQE_numubar    -> SetLineColor(kOrange+7);
-  h1_TrueN_CC2p2h_numubar  -> SetLineColor(kOrange+6);
-  h1_TrueN_CCOther_numubar -> SetLineColor(kOrange+0);
-  h1_TrueN_NC_numubar      -> SetLineColor(kSpring-9);
-  h1_TrueN_CCQE_numubar    -> SetFillColor(kOrange+7);
-  h1_TrueN_CC2p2h_numubar  -> SetFillColor(kOrange+6);
-  h1_TrueN_CCOther_numubar -> SetFillColor(kOrange+0);
-  h1_TrueN_NC_numubar      -> SetFillColor(kSpring-9);
-
-  h1_TrueN_CCQE_nuebarsig    -> SetLineColor(kViolet-1);
-  h1_TrueN_CC2p2h_nuebarsig  -> SetLineColor(kViolet-1);
-  h1_TrueN_CCOther_nuebarsig -> SetLineColor(kViolet-1);
-  h1_TrueN_NC_nuebarsig      -> SetLineColor(kSpring-9);
-  h1_TrueN_CCQE_nuebarsig    -> SetFillColor(kViolet-1);
-  h1_TrueN_CC2p2h_nuebarsig  -> SetFillColor(kViolet-1);
-  h1_TrueN_CCOther_nuebarsig -> SetFillColor(kViolet-1);
-  h1_TrueN_NC_nuebarsig      -> SetFillColor(kSpring-9);
-
-  h1_TrueN_CCQE_nuebkg    -> SetLineColor(kViolet-1);
-  h1_TrueN_CC2p2h_nuebkg  -> SetLineColor(kViolet-1);
-  h1_TrueN_CCOther_nuebkg -> SetLineColor(kViolet-1);
-  h1_TrueN_NC_nuebkg      -> SetLineColor(kSpring-9);
-  h1_TrueN_CCQE_nuebkg    -> SetFillColor(kViolet-1);
-  h1_TrueN_CC2p2h_nuebkg  -> SetFillColor(kViolet-1);
-  h1_TrueN_CCOther_nuebkg -> SetFillColor(kViolet-1);
-  h1_TrueN_NC_nuebkg      -> SetFillColor(kSpring-9);
-
-  h1_TrueN_CCQE_nuebarbkg    -> SetLineColor(kViolet-1);
-  h1_TrueN_CC2p2h_nuebarbkg  -> SetLineColor(kViolet-1);
-  h1_TrueN_CCOther_nuebarbkg -> SetLineColor(kViolet-1);
-  h1_TrueN_NC_nuebarbkg      -> SetLineColor(kSpring-9);
-  h1_TrueN_CCQE_nuebarbkg    -> SetFillColor(kViolet-1);
-  h1_TrueN_CC2p2h_nuebarbkg  -> SetFillColor(kViolet-1);
-  h1_TrueN_CCOther_nuebarbkg -> SetFillColor(kViolet-1);
-  h1_TrueN_NC_nuebarbkg      -> SetFillColor(kSpring-9);
 
   for (int ibin=0; ibin<binnumber; ibin++) {
     Gen_TrueN_x_kinematics[ibin] = h1_TrueN_CCQE_numu->GetBinContent(ibin+1) + h1_TrueN_CC2p2h_numu->GetBinContent(ibin+1) + h1_TrueN_CCOther_numu->GetBinContent(ibin+1) + h1_TrueN_NC_numu->GetBinContent(ibin+1)
@@ -597,60 +486,6 @@ void AveTaggedN_x_kinematics(bool beammode) {
   TH1F* h1_NC_nuebarbkg      = (TH1F*)fin_nuebarbkg->Get(FileNCName);
   h1_CCQE_nuebarbkg -> SetStats(0);
 
-  h1_CCQE_numu    -> SetLineColor(kAzure-1);
-  h1_CC2p2h_numu  -> SetLineColor(kAzure-5);
-  h1_CCOther_numu -> SetLineColor(kCyan-8);
-  h1_NC_numu      -> SetLineColor(kSpring-9);
-  h1_CCQE_numu    -> SetFillColor(kAzure-1);
-  h1_CC2p2h_numu  -> SetFillColor(kAzure-5);
-  h1_CCOther_numu -> SetFillColor(kCyan-8);
-  h1_NC_numu      -> SetFillColor(kSpring-9);
-
-  h1_CCQE_nuesig    -> SetLineColor(kViolet-1);
-  h1_CC2p2h_nuesig  -> SetLineColor(kViolet-1);
-  h1_CCOther_nuesig -> SetLineColor(kViolet-1);
-  h1_NC_nuesig      -> SetLineColor(kSpring-9);
-  h1_CCQE_nuesig    -> SetFillColor(kViolet-1);
-  h1_CC2p2h_nuesig  -> SetFillColor(kViolet-1);
-  h1_CCOther_nuesig -> SetFillColor(kViolet-1);
-  h1_NC_nuesig      -> SetFillColor(kSpring-9);
-
-  h1_CCQE_numubar    -> SetLineColor(kOrange+7);
-  h1_CC2p2h_numubar  -> SetLineColor(kOrange+6);
-  h1_CCOther_numubar -> SetLineColor(kOrange+0);
-  h1_NC_numubar      -> SetLineColor(kSpring-9);
-  h1_CCQE_numubar    -> SetFillColor(kOrange+7);
-  h1_CC2p2h_numubar  -> SetFillColor(kOrange+6);
-  h1_CCOther_numubar -> SetFillColor(kOrange+0);
-  h1_NC_numubar      -> SetFillColor(kSpring-9);
-
-  h1_CCQE_nuebarsig    -> SetLineColor(kViolet-1);
-  h1_CC2p2h_nuebarsig  -> SetLineColor(kViolet-1);
-  h1_CCOther_nuebarsig -> SetLineColor(kViolet-1);
-  h1_NC_nuebarsig      -> SetLineColor(kSpring-9);
-  h1_CCQE_nuebarsig    -> SetFillColor(kViolet-1);
-  h1_CC2p2h_nuebarsig  -> SetFillColor(kViolet-1);
-  h1_CCOther_nuebarsig -> SetFillColor(kViolet-1);
-  h1_NC_nuebarsig      -> SetFillColor(kSpring-9);
-
-  h1_CCQE_nuebkg    -> SetLineColor(kViolet-1);
-  h1_CC2p2h_nuebkg  -> SetLineColor(kViolet-1);
-  h1_CCOther_nuebkg -> SetLineColor(kViolet-1);
-  h1_NC_nuebkg      -> SetLineColor(kSpring-9);
-  h1_CCQE_nuebkg    -> SetFillColor(kViolet-1);
-  h1_CC2p2h_nuebkg  -> SetFillColor(kViolet-1);
-  h1_CCOther_nuebkg -> SetFillColor(kViolet-1);
-  h1_NC_nuebkg      -> SetFillColor(kSpring-9);
-
-  h1_CCQE_nuebarbkg    -> SetLineColor(kViolet-1);
-  h1_CC2p2h_nuebarbkg  -> SetLineColor(kViolet-1);
-  h1_CCOther_nuebarbkg -> SetLineColor(kViolet-1);
-  h1_NC_nuebarbkg      -> SetLineColor(kSpring-9);
-  h1_CCQE_nuebarbkg    -> SetFillColor(kViolet-1);
-  h1_CC2p2h_nuebarbkg  -> SetFillColor(kViolet-1);
-  h1_CCOther_nuebarbkg -> SetFillColor(kViolet-1);
-  h1_NC_nuebarbkg      -> SetFillColor(kSpring-9);
-
   for (int ibin=0; ibin<binnumber; ibin++) {
     Gen_N1Rmu_x_kinematics[ibin] = h1_CCQE_numu->GetBinContent(ibin+1) + h1_CC2p2h_numu->GetBinContent(ibin+1) + h1_CCOther_numu->GetBinContent(ibin+1) + h1_NC_numu->GetBinContent(ibin+1)
                                  + h1_CCQE_nuesig->GetBinContent(ibin+1) + h1_CC2p2h_nuesig->GetBinContent(ibin+1) + h1_CCOther_nuesig->GetBinContent(ibin+1) + h1_NC_nuesig->GetBinContent(ibin+1)
@@ -726,8 +561,13 @@ void AveTaggedN_x_kinematics(bool beammode) {
   h1_N1Rmu_merge -> SetStats(0);
   GetHistoBinContent(binnumber, start, N1Rmu_x_kinematics, h1_N1Rmu_merge);
   //for (int ibin=0; ibin<binnumber-1; ibin++) std::cout << "Bin[" << ibin << "]: " << N1Rmu_x_kinematics[ibin] << std::endl;
+  
+  TH1F* h1_N1Rmu_data = (TH1F*)fin_data->Get(FileCCQEName);
+  GetHistoBinContent(binnumber, start, N1Rmu_x_kinematics_data, h1_N1Rmu_data);
+
 
   /////////////////////////////////////////////////////////////////////////////
+
 
   TH1F* h1_Denominator = new TH1F("h1_Denominator", "", binnumber-1, xbins);
   for (int ibin=0; ibin<binnumber-1; ibin++) {
@@ -742,8 +582,6 @@ void AveTaggedN_x_kinematics(bool beammode) {
   h1_AveTaggedN_x_kinematics -> SetStats(0);
   double AveTaggedN_x_kinematics[binnumber];
   for (int ibin=0; ibin<binnumber-1; ibin++) {
-    //AveTaggedN_x_kinematics[ibin] = ( TaggedN_x_kinematics[ibin] - rNoise*N1Rmu_x_kinematics[ibin] )/N1Rmu_x_kinematics[ibin];
-    //AveTaggedN_x_kinematics[ibin] /= NTagEff_x_kinematics[ibin];
     AveTaggedN_x_kinematics[ibin] = TaggedN_x_kinematics[ibin] - rNoise*N1Rmu_x_kinematics[ibin];
     h1_AveTaggedN_x_kinematics->fArray[ibin+1] = AveTaggedN_x_kinematics[ibin];
   }
@@ -754,18 +592,17 @@ void AveTaggedN_x_kinematics(bool beammode) {
   double dkinematics[binnumber] = {0.};
   double nMult[binnumber]       = {0.};
   double dnMult[binnumber]      = {0.};
-  std::cout << "Mean neutron multiplicity" << std::endl;
+  std::cout << "[ MC ] Mean neutron multiplicity" << std::endl;
   for (int i=0; i<binnumber; i++) {
     
-    std::cout << "[ " << xbins[i] << ", " << xbins[i+1] << " ]" << std::endl;
     if (i!=binnumber-1) kinematics[i] = xbins[i] + (xbins[i+1] - xbins[i])/2.;
     else kinematics[i] = 2.0;
-
-    std::cout << "kinematics: " << kinematics[i] << std::endl;
 
     nMult[i]  = h1_AveTaggedN_x_kinematics->GetBinContent(i+1);
     dnMult[i] = CalStatErr(Gen_N1Rmu_x_kinematics[i], Gen_TaggedN_x_kinematics[i], Gen_NTagEff_x_kinematics[i]);
 
+    std::cout << "[ " << xbins[i] << ", " << xbins[i+1] << " ]" << std::endl;
+    std::cout << "kinematics: " << kinematics[i] << std::endl;
     std::cout << "[### Bin" << i << " ###] " << std::endl;
     std::cout << "    #neutrino events    : " << N1Rmu_x_kinematics[i] << std::endl;
     std::cout << "    #tagged neutrons    : " << TaggedN_x_kinematics[i] << std::endl;
@@ -773,12 +610,64 @@ void AveTaggedN_x_kinematics(bool beammode) {
     std::cout << "    Neutron multiplicity: " << h1_AveTaggedN_x_kinematics->GetBinContent(i+1)  
               << " p/m " << dnMult[i] << " ( flactional error: " << (dnMult[i]/nMult[i])*100. << " % )" << std::endl;
   }
+
   TGraphErrors* g_MCerr = new TGraphErrors(binnumber, kinematics, nMult, dkinematics, dnMult);
   g_MCerr -> SetLineWidth(3);
   g_MCerr -> SetMarkerColor(kViolet-7);
   g_MCerr -> SetLineColor(kViolet-7);
 
 
+
+///////////////////////////////////////////////////////////
+//  data
+  TH1F* h1_Denominator_data = new TH1F("h1_Denominator_data", "", binnumber-1, xbins);
+  for (int ibin=0; ibin<binnumber-1; ibin++) {
+    h1_Denominator_data->fArray[ibin+1] = NTagEff_x_kinematics[ibin] * N1Rmu_x_kinematics_data[ibin];
+  }
+
+  TH1F* h1_AveTaggedN_x_kinematics_data = new TH1F("h1_AveTaggedN_x_kinematics_data", "", binnumber-1, xbins);
+  h1_AveTaggedN_x_kinematics_data -> SetMarkerStyle(20);
+  h1_AveTaggedN_x_kinematics_data -> SetMarkerSize(1.5);
+  h1_AveTaggedN_x_kinematics_data -> SetMarkerColor(kBlack);
+  h1_AveTaggedN_x_kinematics_data -> SetLineColor(kBlack);
+  h1_AveTaggedN_x_kinematics_data -> SetLineWidth(1.5);
+  double AveTaggedN_x_kinematics_data[binnumber];
+  std::cout << "[ Data ] Mean neutron multiplicity" << std::endl;
+  for (int ibin=0; ibin<binnumber-1; ibin++) {
+    AveTaggedN_x_kinematics_data[ibin] = TaggedN_x_kinematics_data[ibin] - rNoise*N1Rmu_x_kinematics_data[ibin];
+    h1_AveTaggedN_x_kinematics_data->fArray[ibin+1] = AveTaggedN_x_kinematics_data[ibin];
+
+    std::cout << "[### Bin" << i << " ###] " << std::endl;
+    std::cout << "    #neutrino events    : " << N1Rmu_x_kinematics_data[ibin] << std::endl;
+    std::cout << "    #tagged neutrons    : " << TaggedN_x_kinematics_data[ibin] << std::endl;
+    std::cout << "    Tagging efficiency  : " << NTagEff_x_kinematics[ibin] << std::endl;
+  }
+  h1_AveTaggedN_x_kinematics_data -> Sumw2();
+  h1_AveTaggedN_x_kinematics_data -> Divide(h1_Denominator_data);
+
+  double Stat_x_Pt[5] = {0.502224, 0.191513, 0.533866, 0., 0.};
+  double nMult_data[binnumber]      = {0.};
+  double dnMult_data_Up[binnumber]  = {0.};
+  double dnMult_data_Low[binnumber] = {0.};
+  for (int ibin=0; ibin<binnumber-1; ibin++) {
+    nMult_data[ibin] = h1_AveTaggedN_x_kinematics_data -> GetBinContent(ibin+1);
+    dnMult_data_Up[ibin]  = sqrt( Stat_x_Pt[ibin]*Stat_x_Pt[ibin]
+                                + TotSyst_x_Pt_Upper[ibin]*TotSyst_x_Pt_Upper[ibin]);
+    dnMult_data_Low[ibin] = sqrt( Stat_x_Pt[ibin]*Stat_x_Pt[ibin]
+                                + TotSyst_x_Pt_Lower[ibin]*TotSyst_x_Pt_Lower[ibin]);
+    std::cout << "Multiplicity: " << nMult_data[ibin] << " +" << dnMult_data_Up[ibin] << "/-" << dnMult_data_Low[ibin] << std::endl;
+  }
+
+  TGraphAsymmErrors* g_DataErr = new TGraphAsymmErrors(binnumber, kinematics, nMult_data, dkinematics, dkinematics, dnMult_data_Low, dnMult_data_Up);
+  g_DataErr -> SetLineWidth(2);
+  g_DataErr -> SetMarkerSize(1.5);
+  g_DataErr -> SetMarkerStyle(20);
+  g_DataErr -> SetMarkerColor(kBlack);
+  g_DataErr -> SetLineColor(kBlack);
+
+
+
+///////////////////////////////////////////////////////////
 #if 1
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
@@ -796,15 +685,17 @@ void AveTaggedN_x_kinematics(bool beammode) {
   if (KnmtcName=="Q2")      h1_AveTaggedN_x_kinematics->GetXaxis()->SetTitle("Reconstructed Q^{2}(CCQE Assumption) [GeV^{2}]");
   if (KnmtcName=="MuAngle") h1_AveTaggedN_x_kinematics->GetXaxis()->SetTitle("Cosine of Angle b/w #mu and Beam Directions");
   h1_AveTaggedN_x_kinematics->GetYaxis()->SetTitle("Mean Neutron Multiplicity");
-  h1_AveTaggedN_x_kinematics -> Draw("histo");
-  //h1_AveTaggedN_x_kinematics -> Draw("E1");
-  //h1_AveTaggedN_x_kinematics -> Draw("");
-  //h1_AveTaggedN_x_kinematics -> Draw("hist same");
+  
+  h1_AveTaggedN_x_kinematics -> Draw("histo"); // 0.01% Gd MC
   g_MCerr -> Draw("SAMEP");
 
   h1_fhc_nmult_x_pt_MC  -> Draw("SAME");   // pure water MC
-  g_fhc_nmult_x_pt_MC   -> Draw("SAMEP");
-  g_fhc_nmult_x_pt_Data -> Draw("SAMEP");  // pure water data
+  g_fhc_nmult_x_pt_MC   -> Draw("SAME E P ");
+
+  g_fhc_nmult_x_pt_Data -> Draw("SAME E P");  // pure water data
+
+  h1_AveTaggedN_x_kinematics_data -> Draw("SAMEP"); // run 11 data
+  g_DataErr -> Draw("SAME E P");
 
   c1->RedrawAxis();
   
@@ -834,9 +725,21 @@ void AveTaggedN_x_kinematics(bool beammode) {
   h1_AveTaggedN_x_kinematics -> SetLineWidth(3);
   g_MCerr -> SetLineColor(kOrange+0);
 
+  h1_AveTaggedN_x_kinematics_data -> SetMarkerColor(kOrange+5);
+  h1_AveTaggedN_x_kinematics_data -> SetLineColor(kOrange+5);
+  h1_AveTaggedN_x_kinematics_data -> SetLineWidth(2);
+  g_DataErr -> SetLineColor(kOrange+5);
+  g_DataErr -> SetMarkerColor(kOrange+5);
+
   h1_fhc_nmult_x_pt_MC -> SetLineColor(kAzure+1);
   g_fhc_nmult_x_pt_MC  -> SetLineColor(kAzure+1);
   h1_fhc_nmult_x_pt_MC -> SetLineWidth(3);
+
+  g_fhc_nmult_x_pt_Data -> SetMarkerColor(kAzure-1);
+  g_fhc_nmult_x_pt_Data -> SetMarkerSize(1.5);
+  g_fhc_nmult_x_pt_Data -> SetMarkerStyle(21);
+  g_fhc_nmult_x_pt_Data -> SetLineColor(kAzure-1);
+  g_fhc_nmult_x_pt_Data -> SetLineWidth(2);
 
 
   TLegend* legend1 = new TLegend(0.12, 0.65, 0.6, 0.89);
@@ -844,6 +747,7 @@ void AveTaggedN_x_kinematics(bool beammode) {
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.4]{FHC 1R #mu sample}","");
   //else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
   legend1 -> AddEntry(h1_AveTaggedN_x_kinematics, "0.01% Gd MC", "F");
+  legend1 -> AddEntry(h1_AveTaggedN_x_kinematics_data, "Run 11 data", "LP");
   legend1 -> AddEntry(h1_fhc_nmult_x_pt_MC, "Pure water MC (TN371)", "L");
   legend1 -> AddEntry(g_fhc_nmult_x_pt_Data, "Pure water data (TN371)", "LP");
   legend1->SetFillColor(0);
@@ -854,6 +758,7 @@ void AveTaggedN_x_kinematics(bool beammode) {
 #endif
 
 }
+
 
 
 

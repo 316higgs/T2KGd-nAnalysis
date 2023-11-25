@@ -11,7 +11,6 @@
 #define POTSCALE 0.17  //Run11 FHC
 //#define POTSCALE 1.63  //Run1-10 RHC
 
-// Normalized with the same Run1-9 POT
 
 void TaggedN_x_nkinematics(bool beammode) {
 
@@ -80,8 +79,8 @@ void TaggedN_x_nkinematics(bool beammode) {
   //TString KnmtcName = "nTraveld";
   //TString KnmtcName = "nTraveldL";
   //TString KnmtcName = "nTraveldT";
-  TString KnmtcName = "nAngle";
-  //TString KnmtcName = "MuStp_NCap";
+  //TString KnmtcName = "nAngle";
+  TString KnmtcName = "MuStp_NCap";
   const int binnumber = SetHistoBinNumber(KnmtcName);
 
   TString Prefix      = "NTagAnalysis/h1_TaggedN_x_";
@@ -343,10 +342,27 @@ void TaggedN_x_nkinematics(bool beammode) {
   hs_merge -> Add(h1_CCQE_numubar);
 #endif
 
-#if 0
+
+  TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
+  TString DataName     = "_mode0";
+  TString FileDataName = Prefix+KnmtcName+DataName;
+  TH1F*   h1_data      = (TH1F*)fin_data->Get(FileDataName);
+  h1_data -> SetMarkerStyle(20);
+  h1_data -> SetMarkerSize(1.5);
+  h1_data -> SetMarkerColor(kBlack);
+  h1_data -> SetLineColor(kBlack);
+  h1_data -> SetLineWidth(1.5);
+
+  for (int i=0; i<binnumber; i++) {
+    std::cout << "[### Bin" << i << " ###] [Data] : " <<  h1_data->GetBinContent(i+1) << std::endl;
+  }
+
+
+#if 1
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
+  c1 -> SetTicks(1);
   hs_merge -> SetMaximum(12);
   //hs_merge -> SetMaximum(70);
   hs_merge -> Draw();
@@ -360,10 +376,11 @@ void TaggedN_x_nkinematics(bool beammode) {
   if (KnmtcName=="MuStp_NCap") hs_merge->GetXaxis()->SetTitle("Distance b/w #mu Stopping and n Capture Vertices [cm]");
   hs_merge ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
   hs_merge -> Draw();
+  h1_data  -> Draw("SAME E P");
   c1 -> RedrawAxis();
   
-  //TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
-  TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);     // angle
+  TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
+  //TLegend* legend1 = new TLegend(0.15, 0.45, 0.59, 0.89);     // angle
   //TLegend* legend1 = new TLegend(0.105, 0.45, 0.495, 0.89);   // dL
   legend1 -> SetTextSize(0.04);
   if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");

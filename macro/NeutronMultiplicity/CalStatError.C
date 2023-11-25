@@ -7,7 +7,7 @@ float CalMeanNStatErr(float NtagN, float TagEff, float N1Rmu);
 void CalStatError() {
   
   /////  input variables  ////
-#if 1
+#if 0
   ////  Table 8.12 0 < Pt < 0.25  ////
   float N1Rmu  = 202.12;
   float NtagN  = 60.20;
@@ -68,6 +68,14 @@ void CalStatError() {
   float N1Rmu  = 1.42219;
   float NtagN  = 2.52017;
   float TagEff = 0.440070;
+  float rnoise = 0.0135;
+#endif
+
+#if 1
+  ////  Run11  ////
+  float N1Rmu  = 27;
+  float NtagN  = 6;
+  float TagEff = 0.463;
   float rnoise = 0.0135;
 #endif
 

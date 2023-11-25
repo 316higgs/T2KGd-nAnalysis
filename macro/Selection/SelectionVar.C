@@ -204,6 +204,17 @@ void SelectionVar(bool beammode) {
   }
 
 
+  int thisstep = 1;
+  for (int ibin=0; ibin<5; ibin++) {
+    std::cout << "[ C." << thisstep+1 << " ] numu_x_numu      : " <<  h1_CCQE_numu[thisstep]->GetBinContent(ibin+1)+h1_CC2p2h_numu[thisstep]->GetBinContent(ibin+1)+h1_CCOther_numu[thisstep]->GetBinContent(ibin+1)+h1_NC_numu[thisstep]->GetBinContent(ibin+1) << std::endl;
+    std::cout << "[ C." << thisstep+1 << " ] numu_x_nue       : " <<  h1_CCQE_nuesig[thisstep]->GetBinContent(ibin+1)+h1_CC2p2h_nuesig[thisstep]->GetBinContent(ibin+1)+h1_CCOther_nuesig[thisstep]->GetBinContent(ibin+1)+h1_NC_nuesig[thisstep]->GetBinContent(ibin+1) << std::endl;
+    std::cout << "[ C." << thisstep+1 << " ] numubar_x_numubar: " <<  h1_CCQE_numubar[thisstep]->GetBinContent(ibin+1)+h1_CC2p2h_numubar[thisstep]->GetBinContent(ibin+1)+h1_CCOther_numubar[thisstep]->GetBinContent(ibin+1)+h1_NC_numubar[thisstep]->GetBinContent(ibin+1) << std::endl;
+    std::cout << "[ C." << thisstep+1 << " ] numubar_x_nuebar : " <<  h1_CCQE_nuebarsig[thisstep]->GetBinContent(ibin+1)+h1_CC2p2h_nuebarsig[thisstep]->GetBinContent(ibin+1)+h1_CCOther_nuebarsig[thisstep]->GetBinContent(ibin+1)+h1_NC_nuebarsig[thisstep]->GetBinContent(ibin+1) << std::endl;
+    std::cout << "[ C." << thisstep+1 << " ] nue_x_nue        : " <<  h1_CCQE_nuebkg[thisstep]->GetBinContent(ibin+1)+h1_CC2p2h_nuebkg[thisstep]->GetBinContent(ibin+1)+h1_CCOther_nuebkg[thisstep]->GetBinContent(ibin+1)+h1_NC_nuebkg[thisstep]->GetBinContent(ibin+1) << std::endl;
+    std::cout << "[ C." << thisstep+1 << " ] nuebar_x_nuebar  : " <<  h1_CCQE_nuebarbkg[thisstep]->GetBinContent(ibin+1)+h1_CC2p2h_nuebarbkg[thisstep]->GetBinContent(ibin+1)+h1_CCOther_nuebarbkg[thisstep]->GetBinContent(ibin+1)+h1_NC_nuebarbkg[thisstep]->GetBinContent(ibin+1) << std::endl;
+  }
+
+
   // Data
   isData = true;
   TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
@@ -250,7 +261,7 @@ void SelectionVar(bool beammode) {
   for (int istep=0; istep<CUTSTEP; istep++) {
   	c -> cd(istep+1) -> SetGrid();
     if (istep==0) hs_C[istep] -> SetMaximum(30);
-    if (istep==1) hs_C[istep] -> SetMaximum(50);
+    if (istep==1) hs_C[istep] -> SetMaximum(70);
     if (istep==4) hs_C[istep] -> SetMaximum(30);
     hs_C[istep] -> Draw();
     hs_C[istep] ->GetYaxis()->SetTitleSize(0.038);
@@ -402,22 +413,22 @@ void ScaleHisto(int istep, int OscMode) {
 void SetTHStack(int istep) {
   switch (istep+1) {
     case 1:
-      hs_C[istep] = new THStack("hs_C1", "1. Dwall #geq 2 m; fiTQun Dwall[cm]; ");
+      hs_C[istep] = new THStack("hs_C1", "1. Dwall #geq 2 m; fiTQun Dwall[cm]; Number of Neutrino Events");
       break;
     case 2:
-      hs_C[istep] = new THStack("hs_C2", "2. Single ring; Number of Rings; ");
+      hs_C[istep] = new THStack("hs_C2", "2. Single ring; Number of Rings; Number of Neutrino Events");
       break;
     case 3:
-      hs_C[istep] = new THStack("hs_C3", "3. #mu-like; e-#mu PID; ");
+      hs_C[istep] = new THStack("hs_C3", "3. #mu-like; e-#mu PID; Number of Neutrino Events");
       break;
     case 4:
-      hs_C[istep] = new THStack("hs_C4", "4. P_{#mu} #geq 200 MeV; #mu momentum[MeV/c]; ");
+      hs_C[istep] = new THStack("hs_C4", "4. P_{#mu} #geq 200 MeV; #mu momentum[MeV/c]; Number of Neutrino Events");
       break;
     case 5:
-      hs_C[istep] = new THStack("hs_C5", "5. Decay-e #leq 1; Number of Decay-e; ");
+      hs_C[istep] = new THStack("hs_C5", "5. Decay-e #leq 1; Number of Decay-e; Number of Neutrino Events");
       break;
     case 6:
-      hs_C[istep] = new THStack("hs_C6", "6. Not#pi^{#pm}like; #pi^{#pm}-#mu PID; ");
+      hs_C[istep] = new THStack("hs_C6", "6. Not#pi^{#pm}like; #pi^{#pm}-#mu PID; Number of Neutrino Events");
       break;
   }
 

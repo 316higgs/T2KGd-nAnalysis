@@ -63,8 +63,8 @@ EXECUTE()
   #NNMODEL="tmva"
   NNMODEL="keras"
   
-  #DLYVTXTYPE="bonsai"
-  DLYVTXTYPE="prompt"
+  DLYVTXTYPE="bonsai"
+  #DLYVTXTYPE="prompt"
 
   NNSTYLE="${DLYVTXTYPE}_${NNMODEL}"
   NTAGMODE=${NNSTYLE}_${PRESELMODE}
@@ -72,6 +72,8 @@ EXECUTE()
     NTAGMODE=${NNSTYLE}
   fi
 
+  #RUNNAME="preNN.newGdMC_${NTAGMODE}.FCFVvalid"
+  #RUNNAME="postNN.newGdMC_${NTAGMODE}.FCFVvalid"
   #RUNNAME="preNN.newGdMC_${NTAGMODE}"
   RUNNAME="postNN.newGdMC_${NTAGMODE}"
 

@@ -1,5 +1,6 @@
 #include "../include/NeutrinoEvents.h"
 #include "../include/CommonTool.h"
+#include "../include/Const.h"
 #include "DecayeBox.h"
 #include "TGaxis.h"
 #include "/disk02/usr6/sedi/anat2ksk/src/cc0pinumu/inc/DefOscChannels.h"
@@ -39,18 +40,59 @@ void DecayeBox::SetHistoFrame() {
   h2_DcyVtxReso_x_dwall = new TH2F("h2_DcyVtxReso_x_dwall", "h2_DcyVtxReso_x_dwall; Decay-e Vertex Resolution[cm]; Dwall[cm]", 100, 0, 200, 40, 0, 20);
   h2_DcyVtxReso_x_dwall -> SetStats(0);
 
-  h2_dtn50 = new TH2D("h2_dtn50", "", 100, 0, 50, 40, 0, 400);
-  h2_dtn50 -> SetTitleOffset(1.3, "Y");
-  h2_dtn50 -> SetTitleSize(0.035, "Y");
-  h2_dtn50 -> SetLabelSize(0.035, "Y");
-  h2_dtn50 -> SetTitleSize(0.035, "X");
-  h2_dtn50 -> SetLabelSize(0.035, "X");
-  h2_dtn50 -> SetStats(0);
-  ((TGaxis*)h2_dtn50->GetXaxis())->SetMaxDigits(3);
+  h2_dtn50        = new TH2F("h2_dtn50", "", 100, 0, 50, 40, 0, 400);
+
+  h1_AllN50_preNN  = new TH1F("h1_AllN50_preNN", "", 40, 0, 400);
+  h1_AllN50_postNN = new TH1F("h1_AllN50_postNN", "", 40, 0, 400);
+  h1_AllN50_Nlike  = new TH1F("h1_AllN50_Nlike", "", 40, 0, 400);
+
+  //h1_AllNHits_preNN  = new TH1F("h1_AllNHits_preNN", "", 25, 0, 50);
+  //h1_AllNHits_postNN = new TH1F("h1_AllNHits_postNN", "", 25, 0, 50);
+  //h1_AllNHits_Nlike  = new TH1F("h1_AllNHits_Nlike", "", 25, 0, 50);
+  //h1_AllNHits_Elike  = new TH1F("h1_AllNHits_Elike", "", 25, 0, 50);
+  h1_AllNHits_preNN  = new TH1F("h1_AllNHits_preNN", "", 25, 0, 400);
+  h1_AllNHits_postNN = new TH1F("h1_AllNHits_postNN", "", 25, 0, 400);
+  h1_AllNHits_Nlike  = new TH1F("h1_AllNHits_Nlike", "", 25, 0, 400);
+  h1_AllNHits_Elike  = new TH1F("h1_AllNHits_Elike", "", 25, 0, 400);
+  
+  h1_AllFitT_preNN   = new TH1F("h1_AllFitT_preNN", "", 25, 0, 400);
+  h1_AllFitT_postNN  = new TH1F("h1_AllFitT_postNN", "", 25, 0, 400);
+  h1_AllFitT_Nlike   = new TH1F("h1_AllFitT_Nlike", "", 40, 0, 400);
+  h1_AllFitT_Elike   = new TH1F("h1_AllFitT_Elike", "", 40, 0, 400);
+
+  //h1_NHits_gtr = new TH1F("h1_NHits_gtr", "", 40, 0, 400);
+  //h1_NHits_lss = new TH1F("h1_NHits_lss", "", 40, 0, 400);
+  //h1_FitT_gtr  = new TH1F("h1_FitT_gtr", "", 40, 0, 200);
+  //h1_FitT_lss  = new TH1F("h1_FitT_lss", "", 40, 0, 200);
+
+  for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
+    h1_N50_preNN[i]  = new TH1F(TString::Format("h1_N50_preNN_mode%d", i), "", 40, 0, 400);
+    h1_N50_postNN[i] = new TH1F(TString::Format("h1_N50_postNN_mode%d", i), "", 40, 0, 400);
+    h1_N50_Nlike[i]  = new TH1F(TString::Format("h1_N50_Nlike_mode%d", i), "", 40, 0, 400);
+    h1_NHits_preNN[i]  = new TH1F(TString::Format("h1_NHits_preNN_mode%d", i), "", 25, 0, 50);
+    h1_NHits_postNN[i] = new TH1F(TString::Format("h1_NHits_postNN_mode%d", i), "", 25, 0, 50);
+    h1_NHits_Nlike[i]  = new TH1F(TString::Format("h1_NHits_Nlike_mode%d", i), "", 25, 0, 400);
+    h1_NHits_Elike[i]  = new TH1F(TString::Format("h1_NHits_Elike_mode%d", i), "", 25, 0, 400);
+    //h1_NHits_preNN[i]  = new TH1F(TString::Format("h1_NHits_preNN_mode%d", i), "", 40, 0, 400);
+    //h1_NHits_postNN[i] = new TH1F(TString::Format("h1_NHits_postNN_mode%d", i), "", 40, 0, 400);
+    //h1_NHits_Nlike[i]  = new TH1F(TString::Format("h1_NHits_Nlike_mode%d", i), "", 40, 0, 400);
+    h1_FitT_preNN[i]   = new TH1F(TString::Format("h1_FitT_preNN_mode%d", i), "", 40, 0, 200);
+    h1_FitT_postNN[i]  = new TH1F(TString::Format("h1_FitT_postNN_mode%d", i), "", 40, 0, 200);
+    h1_FitT_Nlike[i]   = new TH1F(TString::Format("h1_FitT_Nlike_mode%d", i), "", 40, 0, 200);
+    h1_FitT_Elike[i]   = new TH1F(TString::Format("h1_FitT_Elike_mode%d", i), "", 40, 0, 200);
+  
+    /*
+    h1_NHits_CutBase1[i] = new TH1F(TString::Format("h1_NHits_CutBase1_mode%d", i), "", 50, 0, 50);
+    h1_NHits_CutBase2[i] = new TH1F(TString::Format("h1_NHits_CutBase2_mode%d", i), "", 50, 0, 50);
+    h1_NHits_CutBase3[i] = new TH1F(TString::Format("h1_NHits_CutBase3_mode%d", i), "", 50, 0, 50);
+    h1_NHits_CutBase4[i] = new TH1F(TString::Format("h1_NHits_CutBase4_mode%d", i), "", 50, 0, 50);
+    h1_NHits_CutBase5[i] = new TH1F(TString::Format("h1_NHits_CutBase5_mode%d", i), "", 50, 0, 50);
+    h1_NHits_CutBase6[i] = new TH1F(TString::Format("h1_NHits_CutBase6_mode%d", i), "", 50, 0, 50);
+    */
+  }
 }
 
 void DecayeBox::SetHistoFormat() {
-  //h1_TaggedDecaye      -> SetLineWidth(2);
   h1_TaggedDecaye_CCQE -> SetLineWidth(2);
   h1_TaggedDecaye_CCpi -> SetLineWidth(2);
 
@@ -683,8 +725,13 @@ std::vector<int> DecayeBox::GetSelectedfQSubEvt(CC0PiNumu* numu) {
   for (int ireco=1; ireco<numu->var<int>("fqnse"); ireco++) {
     dtlist[ireco-1] = (numu->var<float>("fq1rt0", ireco, FQ_EHYP) - numu->var<float>("fq1rt0", 0, FQ_MUHYP))/1000.; 
     float N50 = numu->var<int>("fqn50", ireco);
-    if ( dtlist[ireco-1] < 1.5 ) SelectedfQSubEvt.push_back(ireco);
-    else if ( dtlist[ireco-1] < 20. && dtlist[ireco-1] < 0.25*N50-7.5 ) SelectedfQSubEvt.push_back(ireco);
+    if (floorcut) {
+      if ( dtlist[ireco-1] < 1.5 ) SelectedfQSubEvt.push_back(ireco);
+      else if ( dtlist[ireco-1] < 20. && dtlist[ireco-1] < 0.25*N50-7.5 ) SelectedfQSubEvt.push_back(ireco);
+    }
+    else {
+      if ( dtlist[ireco-1] < 20. && N50 > 50. ) SelectedfQSubEvt.push_back(ireco);
+    }
   }
   return SelectedfQSubEvt;
 }
@@ -737,7 +784,7 @@ std::vector<bool> DecayeBox::GetMatchedTrueDecaye(CC0PiNumu* numu, Int_t nmue, F
 void DecayeBox::DecayeMatching(CC0PiNumu* numu, Int_t nmue, Float_t *tscnd) {
 
   std::vector<int> SelectedfQSubEvt = this->GetSelectedfQSubEvt(numu);
-  std::vector<bool> DcyeMatching = this->GetMatchedTrueDecaye(numu, nmue, tscnd);
+  std::vector<bool> DcyeMatching    = this->GetMatchedTrueDecaye(numu, nmue, tscnd);
 
   int   mode = TMath::Abs(numu->var<int>("mode"));
   float OscProb = numu->getOscWgt();
@@ -820,7 +867,7 @@ void DecayeBox::cdDecayeBox(TFile* fout) {
 
 void DecayeBox::WritePlots() {
 
-  Double_t tot_decaye_CCQE = h1_TaggedDecaye_CCQE->Integral();
+  /*Double_t tot_decaye_CCQE = h1_TaggedDecaye_CCQE->Integral();
   h1_TaggedDecaye_CCQE -> Scale(1./tot_decaye_CCQE);
   h1_TaggedDecaye_CCQE -> Write();
 
@@ -832,7 +879,7 @@ void DecayeBox::WritePlots() {
   h1_PiPlusMom_PiDcy -> Write();
   h1_PiPlusMom_PiAbs -> Write();
   h1_PiPlusMom_PiHad -> Write();
-  h2_PiPlusMom_x_Enu -> Write();
+  h2_PiPlusMom_x_Enu -> Write();*/
 
   h1_mintimediff -> Write();
   h1_DcyVtxReso  -> Write();
@@ -842,9 +889,47 @@ void DecayeBox::WritePlots() {
   h2_DcyVtxReso_x_pscnd -> Write();
   h2_DcyVtxReso_x_dwall -> Write();
 
-  //h2_dtn50 -> Scale(1./SelectedParentNeutrinos[5]);
-  h2_dtn50 -> Scale(1./SelectedParentNeutrinos[3]);
-  h2_dtn50 -> Write();
+  h2_dtn50    -> Scale(1./SelectedParentNeutrinos[3]);
+  SaveThisHist(h2_dtn50);
+  for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
+    SaveThisHist(h1_N50_preNN[i]);
+    SaveThisHist(h1_N50_postNN[i]);
+    SaveThisHist(h1_N50_Nlike[i]);
+    SaveThisHist(h1_NHits_preNN[i]);
+    SaveThisHist(h1_NHits_postNN[i]);
+    h1_NHits_Nlike[i] -> Write();
+    h1_NHits_Elike[i] -> Write();
+    SaveThisHist(h1_FitT_preNN[i]);
+    SaveThisHist(h1_FitT_postNN[i]);
+    h1_FitT_Nlike[i] -> Write();
+    h1_FitT_Elike[i] -> Write();
+    /*
+    SaveThisHist(h1_NHits_CutBase1[i]);
+    SaveThisHist(h1_NHits_CutBase2[i]);
+    SaveThisHist(h1_NHits_CutBase3[i]);
+    SaveThisHist(h1_NHits_CutBase4[i]);
+    SaveThisHist(h1_NHits_CutBase5[i]);
+    SaveThisHist(h1_NHits_CutBase6[i]);
+    */
+  }
+  SaveThisHist(h1_AllN50_preNN);
+  SaveThisHist(h1_AllN50_postNN);
+  SaveThisHist(h1_AllN50_Nlike);
+
+  SaveThisHist(h1_AllNHits_preNN);
+  SaveThisHist(h1_AllNHits_postNN);
+  SaveThisHist(h1_AllNHits_Nlike);
+  SaveThisHist(h1_AllNHits_Elike);
+
+  SaveThisHist(h1_AllFitT_preNN);
+  SaveThisHist(h1_AllFitT_postNN);
+  SaveThisHist(h1_AllFitT_Nlike);
+  SaveThisHist(h1_AllFitT_Elike);
+
+  //SaveThisHist(h1_NHits_gtr);
+  //SaveThisHist(h1_NHits_lss);
+  //SaveThisHist(h1_FitT_gtr);
+  //SaveThisHist(h1_FitT_lss);
 
   for (int i=0; i<INTERACTIONTYPE; i++) {
     //Double_t tot_truedecaye = h1_TrueDecaye[i]->Integral();

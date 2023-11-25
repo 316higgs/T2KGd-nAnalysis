@@ -15,9 +15,9 @@ void NeutrinoOscillation::SetHistoFrame() {
 
     h1_NoOsc[i]              = new TH1F(TString::Format("h1_NoOsc_mode%d", i), "No Oscillation; Reconstructed Neurtino Energy[GeV]; Number of Neutrino Events", 60, 0, 3);
 
-    h1_OscProb[i]            = new TH1F(TString::Format("h1_OscProb_mode%d", i), "", 60, 0, 3);
-    h1_OscProb_wNeutron[i]   = new TH1F(TString::Format("h1_OscProb_wNeutron_mode%d", i), "", 60, 0, 3);
-    h1_OscProb_woNeutron[i]  = new TH1F(TString::Format("h1_OscProb_woNeutron_mode%d", i), "", 60, 0, 3);
+    h1_OscProb[i]            = new TH1F(TString::Format("h1_OscProb_mode%d", i), "", 30, 0, 3);
+    h1_OscProb_wNeutron[i]   = new TH1F(TString::Format("h1_OscProb_wNeutron_mode%d", i), "", 30, 0, 3);
+    h1_OscProb_woNeutron[i]  = new TH1F(TString::Format("h1_OscProb_woNeutron_mode%d", i), "", 30, 0, 3);
 
     h1_OscProbRatio[i]       = new TH1F(TString::Format("h1_OscProbRatio_mode%d", i), "Oscillation Probability; Reconstructed Neurtino Energy[GeV]; Ratio to No Oscillation", 60, 0, 3);
   
@@ -45,7 +45,7 @@ void NeutrinoOscillation::SetHistoFrame() {
   h2_PrmMuEndVtxReso = new TH2F("h2_PrmMuEndVtxReso", "Primary #mu Stopping Vertex Resolution; Truth [cm]; Reco [cm]", 300, 0, 3000, 300, 0, 3000);
 
   h1_AllEnutrue     = new TH1F("h1_AllEnutrue",  "Truth Neutrino Energy; Truth Neutrino Energy E^{true}_{#nu}[GeV]; Number of Neutrino Events", 60, 0, 3);
-  h1_AllEnureco     = new TH1F("h1_AllEnureco",  "Truth Neutrino Energy; Reconstructed Neutrino Energy E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, 0, 3);
+  h1_AllEnureco     = new TH1F("h1_AllEnureco",  "Truth Neutrino Energy; Reconstructed Neutrino Energy E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 30, 0, 3);
   h1_AllEnureso     = new TH1F("h1_AllEnureso",  "Neutrino Energy Resolution; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 50, -0.8, 0.8);
   h1_EnuresoCCnonQE = new TH1F("h1_EnuresoCCnonQE", "Neutrino Energy Resolution; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
   h2_Reso_x_TrueEnu = new TH2F("h2_Reso_x_TrueEnu", "Resolution vs Truth Neutrino Energy; Truth Neutrino Energy E^{true}_{#nu}[GeV]; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}", 60, 0, 3, 60, -1, 1);
@@ -59,15 +59,15 @@ void NeutrinoOscillation::SetHistoFrame() {
   h1_All_OscProbRatio                = new TH1F("h1_All_OscProbRatio", "Oscillation Probability; Reconstructed Neurtino Energy[GeV]; Ratio to No Oscillation", 60, 0, 3);
   h1_All_OscProbRatio_woTruthNeutron = new TH1F("h1_All_OscProbRatio_woTruthNeutron", "Oscillation Probability w/o Truth Neutrons; Reconstructed Neurtino Energy[GeV]; Ratio to No Oscillation", 60, 0, 3);
   h1_All_OscProbRatio_woNeutron      = new TH1F("h1_All_OscProbRatio_woNeutron", "Oscillation Probability w/o Tagged Neutrons; Reconstructed Neurtino Energy[GeV]; Ratio to No Oscillation", 60, 0, 3);
-  h1_OscProbCCOther                  = new TH1F("h1_OscProbCCOther", "", 60, 0, 3);
-  h1_OscProbCCnonQE                  = new TH1F("h1_OscProbCCnonQE", "", 60, 0, 3);
-  h1_OscProbCCOther_wNeutron         = new TH1F("h1_OscProbCCOther_wNeutron", "", 60, 0, 3);
-  h1_OscProbCCOther_woNeutron        = new TH1F("h1_OscProbCCOther_woNeutron", "", 60, 0, 3);
-  h1_OscProbCCnonQE_wNeutron         = new TH1F("h1_OscProbCCnonQE_wNeutron", "", 60, 0, 3);
-  h1_OscProbCCnonQE_woNeutron        = new TH1F("h1_OscProbCCnonQE_woNeutron", "", 60, 0, 3);
+  h1_OscProbCCOther                  = new TH1F("h1_OscProbCCOther", "", 30, 0, 3);
+  h1_OscProbCCnonQE                  = new TH1F("h1_OscProbCCnonQE", "", 30, 0, 3);
+  h1_OscProbCCOther_wNeutron         = new TH1F("h1_OscProbCCOther_wNeutron", "", 30, 0, 3);
+  h1_OscProbCCOther_woNeutron        = new TH1F("h1_OscProbCCOther_woNeutron", "", 30, 0, 3);
+  h1_OscProbCCnonQE_wNeutron         = new TH1F("h1_OscProbCCnonQE_wNeutron", "", 30, 0, 3);
+  h1_OscProbCCnonQE_woNeutron        = new TH1F("h1_OscProbCCnonQE_woNeutron", "", 30, 0, 3);
 
-  h2_TruePrmVtxXY = new TH2F("h2_TruePrmVtxXY", "", 100, -20, 20, 100, -20, 20);
-  h2_TruePrmVtxRZ = new TH2F("h2_TruePrmVtxRZ", "", 100, 0, 400, 100, -20, 20);
+  h2_PrmVtxXY = new TH2F("h2_PrmVtxXY", "", 100, -20, 20, 100, -20, 20);
+  h2_PrmVtxRZ = new TH2F("h2_PrmVtxRZ", "", 100, 0, 400, 100, -20, 20);
 
   h2_TrueMuDirectionXY = new TH2F("h2_TrueMuDirectionXY", "Truth Dir; X #mu direction; Y #mu direction ", 100, -1, 1, 100, -1, 1);
   h2_TrueMuDirectionRZ = new TH2F("h2_TrueMuDirectionRZ", "Truth Dir; R^{2} #mu direction; Z #mu direction ", 100, 0, 2, 100, -1, 1);
@@ -392,13 +392,26 @@ float NeutrinoOscillation::GetEnuResolution(CC0PiNumu* numu, float theta, float 
 }
 
 //Get truth primary vertex
-void NeutrinoOscillation::GetTruePrmVtx(CC0PiNumu *numu, float *PrmVtx) {
-  PrmVtx[0] = numu->var<float>("posv", 0);
-  PrmVtx[1] = numu->var<float>("posv", 1);
-  PrmVtx[2] = numu->var<float>("posv", 2);
+void NeutrinoOscillation::GetPrmVtx(CC0PiNumu *numu) {
 
-  h2_TruePrmVtxXY -> Fill(PrmVtx[0]/100., PrmVtx[1]/100.);
-  h2_TruePrmVtxRZ -> Fill( (PrmVtx[0]*PrmVtx[0]+PrmVtx[1]*PrmVtx[1])/10000., PrmVtx[2]/100. );
+  float PrmVtx[3] = {0.};
+
+  if (!data) {
+    PrmVtx[0] = numu->var<float>("posv", 0);
+    PrmVtx[1] = numu->var<float>("posv", 1);
+    PrmVtx[2] = numu->var<float>("posv", 2);
+
+    h2_PrmVtxXY -> Fill(PrmVtx[0]/100., PrmVtx[1]/100.);
+    h2_PrmVtxRZ -> Fill( (PrmVtx[0]*PrmVtx[0]+PrmVtx[1]*PrmVtx[1])/10000., PrmVtx[2]/100. );
+  }
+  else {
+    PrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0); // [cm]
+    PrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1); // [cm]
+    PrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2); // [cm]
+    h2_PrmVtxXY -> Fill(PrmVtx[0]/100., PrmVtx[1]/100.);
+    h2_PrmVtxRZ -> Fill( (PrmVtx[0]*PrmVtx[0]+PrmVtx[1]*PrmVtx[1])/10000., PrmVtx[2]/100. );
+  }
+
 }
 
 float NeutrinoOscillation::GetPrmVtxResolution(CC0PiNumu* numu) {
@@ -998,8 +1011,8 @@ void NeutrinoOscillation::WritePlots() {
   h1_OscProbCCOther_wNeutron  -> Write();
   h1_OscProbCCOther_woNeutron -> Write();
 
-  h2_TruePrmVtxXY -> Write();
-  h2_TruePrmVtxRZ -> Write();
+  h2_PrmVtxXY -> Write();
+  h2_PrmVtxRZ -> Write();
 
   h2_TrueMuDirectionXY -> Write();
   h2_TrueMuDirectionRZ -> Write();

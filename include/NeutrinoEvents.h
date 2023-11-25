@@ -167,8 +167,19 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
 {
   int mode = TMath::Abs(numu->var<int>("mode"));
   float OscProb = numu->getOscWgt();
-  prmsel.GetEvis(numu);
-  prmsel.GetDWall(numu);
+
+  if (numu->var<int>("nhitac")<16 &&
+      numu->var<int>("evclass")==1) {
+    prmsel.GetEvis(numu);
+  }
+
+  //if (numu->var<int>("nhitac")<16 &&
+  //    numu->var<int>("evclass")==1 &&
+  //    numu->var<int>("fqevis")>30) {
+  if (numu->var<int>("evclass")==1) {
+    prmsel.GetDWall(numu);
+  }
+
   if (prmsel.C1ApplyFCFV(evsel)) {
 
     if (!data) {
@@ -696,17 +707,17 @@ void GetSelectedTagN(Gd1RmuonSelection prmsel,
   }
   else {
     if (prmsel.C1ApplyFCFV(evsel)) {
-      SelectedAllTagN[0]++;
+      SelectedAllTagN[0] += TagN;
       if (prmsel.C2Apply1R(evsel)) {
-        SelectedAllTagN[1]++;
+        SelectedAllTagN[1] += TagN;
         if (prmsel.C3Applymuonlike(evsel)) {
-          SelectedAllTagN[2]++;
+          SelectedAllTagN[2] += TagN;
           if (prmsel.C4ApplyPmu200MeV(evsel)) {
-            SelectedAllTagN[3]++;
+            SelectedAllTagN[3] += TagN;
             if (prmsel.C5Applydecaye(evsel, numu, decayebox, eMode, eOsc, dtCut, N50CutMin, N50CutMax, false)) {
-              SelectedAllTagN[4]++;
+              SelectedAllTagN[4] += TagN;
               if (prmsel.C6Applynotpionlike(evsel)) {
-                SelectedAllTagN[5]++;
+                SelectedAllTagN[5] += TagN;
               }
             }
           }

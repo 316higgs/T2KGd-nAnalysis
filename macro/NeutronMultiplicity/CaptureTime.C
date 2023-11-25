@@ -9,8 +9,10 @@
 #define FV 22.5
 //#define POTSCALE 1.96  //Run1-10 FHC
 //#define POTSCALE 1.63  //Run1-10 RHC
-//#define POTSCALE 0.17
-#define POTSCALE 1
+#define POTSCALE 0.17
+//#define POTSCALE 1
+
+#define NNAPPLY 1  // 0 for pre-NN, 1 for post-NN
 
 void CaptureTime(bool beammode) {
 
@@ -32,7 +34,6 @@ void CaptureTime(bool beammode) {
   TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.newGdMC.bonsaikeras_ToF.root");
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.newGdMC.bonsaikeras_ToF.root");
 
-  //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
@@ -84,62 +85,44 @@ void CaptureTime(bool beammode) {
   TH1F* h1_TrueCapTime_nuebkg    = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_TrueNCapTime");
   TH1F* h1_TrueCapTime_nuebarbkg = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_TrueNCapTime");
 
-  /*h1_TrueCapTime_numu -> SetXTitle("True Capture Time [#musec]");
-  h1_TrueCapTime_numu -> SetYTitle("Number of Captured Neutrons");*/
-  //Double_t tot_True = h1_TrueCapTime_numu->Integral();
-  //h1_TrueCapTime_numu -> Scale(1./tot_True);
-
-#if 0
-  TH1F* h1_RecoCapTime_AccNoise_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_RecoNCapTime_type0");
-  h1_RecoCapTime_AccNoise_numu -> SetFillColor(kGray+2);
-  h1_RecoCapTime_AccNoise_numu -> SetLineColor(kGray+2);
-  TH1F* h1_RecoCapTime_dcye_numu  = (TH1F*)fin_numu->Get("NTagAnalysis/h1_RecoNCapTime_type1");
-  h1_RecoCapTime_dcye_numu -> SetFillColor(kYellow-3);
-  h1_RecoCapTime_dcye_numu -> SetLineColor(kYellow-3);
-  TH1F* h1_RecoCapTime_H_numu  = (TH1F*)fin_numu->Get("NTagAnalysis/h1_RecoNCapTime_type2");
-  h1_RecoCapTime_H_numu -> SetFillColor(kAzure-4);
-  h1_RecoCapTime_H_numu -> SetLineColor(kAzure-4);
-  TH1F* h1_RecoCapTime_Gd_numu  = (TH1F*)fin_numu->Get("NTagAnalysis/h1_RecoNCapTime_type3");
-  h1_RecoCapTime_Gd_numu -> SetFillColor(kTeal-5);
-  h1_RecoCapTime_Gd_numu -> SetLineColor(kTeal-5);
-
-  THStack* hs_RecoCapTime_numu = new THStack("hs_RecoCapTime_numu", "Reco Captured Time; Reconstructed Capture Time [#mu sec]; Number of Events");
-  hs_RecoCapTime_numu -> Add(h1_RecoCapTime_AccNoise_numu);
-  hs_RecoCapTime_numu -> Add(h1_RecoCapTime_dcye_numu);
-  //hs_RecoCapTime_numu -> Add(h1_RecoCapTime_H_numu);
-  //hs_RecoCapTime_numu -> Add(h1_RecoCapTime_Gd_numu);
-#endif 
 
   //////  Reco Capture Time  //////
-  TH1F* h1_RecoCapTime_AccNoise_numu = (TH1F*)fin_numu->Get("NTagAnalysis/h1_RecoNCapTime_type0");
-  TH1F* h1_RecoCapTime_dcye_numu     = (TH1F*)fin_numu->Get("NTagAnalysis/h1_RecoNCapTime_type1");
-  TH1F* h1_RecoCapTime_H_numu        = (TH1F*)fin_numu->Get("NTagAnalysis/h1_RecoNCapTime_type2");
-  TH1F* h1_RecoCapTime_Gd_numu       = (TH1F*)fin_numu->Get("NTagAnalysis/h1_RecoNCapTime_type3");
+  TString DirName   = "NTagAnalysis/";
+  TString HistName  = "h1_RecoNCapTime_";
+  TString TypeNoise = "type0";
+  TString TypeDcyE  = "type1";
+  TString TypeHn    = "type2";
+  TString TypeGdn   = "type3";
+  TString NNmode    = TString::Format("_NN%d", NNAPPLY);
+  TH1F* h1_RecoCapTime_AccNoise_numu = (TH1F*)fin_numu->Get(DirName+HistName+TypeNoise+NNmode);
+  TH1F* h1_RecoCapTime_dcye_numu     = (TH1F*)fin_numu->Get(DirName+HistName+TypeDcyE+NNmode);
+  TH1F* h1_RecoCapTime_H_numu        = (TH1F*)fin_numu->Get(DirName+HistName+TypeHn+NNmode);
+  TH1F* h1_RecoCapTime_Gd_numu       = (TH1F*)fin_numu->Get(DirName+HistName+TypeGdn+NNmode);
 
-  TH1F* h1_RecoCapTime_AccNoise_nuesig = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_RecoNCapTime_type0");
-  TH1F* h1_RecoCapTime_dcye_nuesig     = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_RecoNCapTime_type1");
-  TH1F* h1_RecoCapTime_H_nuesig        = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_RecoNCapTime_type2");
-  TH1F* h1_RecoCapTime_Gd_nuesig       = (TH1F*)fin_nuesig->Get("NTagAnalysis/h1_RecoNCapTime_type3");
+  TH1F* h1_RecoCapTime_AccNoise_nuesig = (TH1F*)fin_nuesig->Get(DirName+HistName+TypeNoise+NNmode);
+  TH1F* h1_RecoCapTime_dcye_nuesig     = (TH1F*)fin_nuesig->Get(DirName+HistName+TypeDcyE+NNmode);
+  TH1F* h1_RecoCapTime_H_nuesig        = (TH1F*)fin_nuesig->Get(DirName+HistName+TypeHn+NNmode);
+  TH1F* h1_RecoCapTime_Gd_nuesig       = (TH1F*)fin_nuesig->Get(DirName+HistName+TypeGdn+NNmode);
 
-  TH1F* h1_RecoCapTime_AccNoise_numubar = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_RecoNCapTime_type0");
-  TH1F* h1_RecoCapTime_dcye_numubar     = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_RecoNCapTime_type1");
-  TH1F* h1_RecoCapTime_H_numubar        = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_RecoNCapTime_type2");
-  TH1F* h1_RecoCapTime_Gd_numubar       = (TH1F*)fin_numubar->Get("NTagAnalysis/h1_RecoNCapTime_type3");
+  TH1F* h1_RecoCapTime_AccNoise_numubar = (TH1F*)fin_numubar->Get(DirName+HistName+TypeNoise+NNmode);
+  TH1F* h1_RecoCapTime_dcye_numubar     = (TH1F*)fin_numubar->Get(DirName+HistName+TypeDcyE+NNmode);
+  TH1F* h1_RecoCapTime_H_numubar        = (TH1F*)fin_numubar->Get(DirName+HistName+TypeHn+NNmode);
+  TH1F* h1_RecoCapTime_Gd_numubar       = (TH1F*)fin_numubar->Get(DirName+HistName+TypeGdn+NNmode);
 
-  TH1F* h1_RecoCapTime_AccNoise_nuebarsig = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_RecoNCapTime_type0");
-  TH1F* h1_RecoCapTime_dcye_nuebarsig     = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_RecoNCapTime_type1");
-  TH1F* h1_RecoCapTime_H_nuebarsig        = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_RecoNCapTime_type2");
-  TH1F* h1_RecoCapTime_Gd_nuebarsig       = (TH1F*)fin_nuebarsig->Get("NTagAnalysis/h1_RecoNCapTime_type3");
+  TH1F* h1_RecoCapTime_AccNoise_nuebarsig = (TH1F*)fin_nuebarsig->Get(DirName+HistName+TypeNoise+NNmode);
+  TH1F* h1_RecoCapTime_dcye_nuebarsig     = (TH1F*)fin_nuebarsig->Get(DirName+HistName+TypeDcyE+NNmode);
+  TH1F* h1_RecoCapTime_H_nuebarsig        = (TH1F*)fin_nuebarsig->Get(DirName+HistName+TypeHn+NNmode);
+  TH1F* h1_RecoCapTime_Gd_nuebarsig       = (TH1F*)fin_nuebarsig->Get(DirName+HistName+TypeGdn+NNmode);
 
-  TH1F* h1_RecoCapTime_AccNoise_nuebkg = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_RecoNCapTime_type0");
-  TH1F* h1_RecoCapTime_dcye_nuebkg     = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_RecoNCapTime_type1");
-  TH1F* h1_RecoCapTime_H_nuebkg        = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_RecoNCapTime_type2");
-  TH1F* h1_RecoCapTime_Gd_nuebkg       = (TH1F*)fin_nuebkg->Get("NTagAnalysis/h1_RecoNCapTime_type3");
+  TH1F* h1_RecoCapTime_AccNoise_nuebkg = (TH1F*)fin_nuebkg->Get(DirName+HistName+TypeNoise+NNmode);
+  TH1F* h1_RecoCapTime_dcye_nuebkg     = (TH1F*)fin_nuebkg->Get(DirName+HistName+TypeDcyE+NNmode);
+  TH1F* h1_RecoCapTime_H_nuebkg        = (TH1F*)fin_nuebkg->Get(DirName+HistName+TypeHn+NNmode);
+  TH1F* h1_RecoCapTime_Gd_nuebkg       = (TH1F*)fin_nuebkg->Get(DirName+HistName+TypeGdn+NNmode);
 
-  TH1F* h1_RecoCapTime_AccNoise_nuebarbkg = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_RecoNCapTime_type0");
-  TH1F* h1_RecoCapTime_dcye_nuebarbkg     = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_RecoNCapTime_type1");
-  TH1F* h1_RecoCapTime_H_nuebarbkg        = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_RecoNCapTime_type2");
-  TH1F* h1_RecoCapTime_Gd_nuebarbkg       = (TH1F*)fin_nuebarbkg->Get("NTagAnalysis/h1_RecoNCapTime_type3");
+  TH1F* h1_RecoCapTime_AccNoise_nuebarbkg = (TH1F*)fin_nuebarbkg->Get(DirName+HistName+TypeNoise+NNmode);
+  TH1F* h1_RecoCapTime_dcye_nuebarbkg     = (TH1F*)fin_nuebarbkg->Get(DirName+HistName+TypeDcyE+NNmode);
+  TH1F* h1_RecoCapTime_H_nuebarbkg        = (TH1F*)fin_nuebarbkg->Get(DirName+HistName+TypeHn+NNmode);
+  TH1F* h1_RecoCapTime_Gd_nuebarbkg       = (TH1F*)fin_nuebarbkg->Get(DirName+HistName+TypeGdn+NNmode);
 
   h1_RecoCapTime_AccNoise_numu      -> SetFillColor(kGray+2);
   h1_RecoCapTime_AccNoise_nuesig    -> SetFillColor(kGray+2);
@@ -195,7 +178,7 @@ void CaptureTime(bool beammode) {
 
 
   /////  Normalizations  //////
-#if 0
+#if 1
   h1_TrueCapTime_numu      -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_TrueCapTime_nuesig    -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
   h1_TrueCapTime_numubar   -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
@@ -244,7 +227,7 @@ void CaptureTime(bool beammode) {
   h1_TrueCapTime -> GetXaxis()->SetTitleSize(0.045);
   h1_TrueCapTime -> GetYaxis()->SetTitleSize(0.045);
 
-  TH1F* h1_RecoCapTime = new TH1F("h1_RecoCapTime", "", 107, 0, 535);
+  TH1F* h1_RecoCapTime = new TH1F("h1_RecoCapTime", "", 50, 0, 535);
   //TH1F* h1_RecoCapTime = new TH1F("h1_RecoCapTime", "Reco Captrued Time; Reconstructed Capture Time [#mu sec]; Number of Events", 40, 0, 20);
   //h1_TrueCapTime -> SetFillColor(kViolet-8);
   h1_RecoCapTime -> SetLineColor(kSpring-7);
@@ -335,9 +318,20 @@ void CaptureTime(bool beammode) {
   f1_CapTime -> SetNpx(10000);
 
 
+  // Data
+  TString HistData = "h1_AllRecoNCapTime";
+  TFile* fin_data     = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
+  TH1F* h1_RecoCapTime_data = (TH1F*)fin_data->Get(DirName+HistData+NNmode);
+  h1_RecoCapTime_data -> SetMarkerStyle(20);
+  h1_RecoCapTime_data -> SetMarkerSize(1.2);
+  h1_RecoCapTime_data -> SetMarkerColor(kBlack);
+  h1_RecoCapTime_data -> SetLineColor(kBlack);
+  h1_RecoCapTime_data -> SetLineWidth(1.5);
+
   gStyle->SetOptFit(1111);
+  gROOT -> SetStyle("Plain");
   /////////// True Capture Time //////////
-#if 1
+#if 0
   TCanvas* c1 = new TCanvas("c1", "c1", 1000, 600);
   c1 -> SetGrid();
   h1_TrueCapTime -> Fit(f1_CapTime, "rLL");
@@ -362,42 +356,40 @@ void CaptureTime(bool beammode) {
 
 
   /////////// Reco Capture Time //////////
-#if 0
-  h1_RecoCapTime -> Fit(f1_CapTime, "rLL");
-
-  //Double_t tot_Reco_H  = h1_RecoCapTime_H_numu->Integral();
-  //Double_t tot_Reco_Gd = h1_RecoCapTime_Gd_numu->Integral();
-  //h1_RecoCapTime_H_numu  -> Scale(1./(tot_Reco_H+tot_Reco_Gd));
-  //h1_RecoCapTime_Gd_numu -> Scale(1./(tot_Reco_H+tot_Reco_Gd));
-  //h1_RecoCapTime_H_numu  -> Scale(1./tot_True);
-  //h1_RecoCapTime_Gd_numu -> Scale(1./tot_True);
+#if 1
+  //h1_RecoCapTime -> Fit(f1_CapTime, "rLL");
 
   TCanvas* c1 = new TCanvas("c1", "c1", 1000, 600);
   c1 -> SetGrid();
+  if (NNAPPLY==0) hs_RecoCapTime -> SetMaximum(150);
+  else hs_RecoCapTime -> SetMaximum(25);
   hs_RecoCapTime -> Draw("");
   hs_RecoCapTime ->GetXaxis()->SetTitle("Reconstructed Capture Time [#musec]");
   hs_RecoCapTime ->GetXaxis()->SetTitleSize(0.045);
   hs_RecoCapTime ->GetYaxis()->SetTitle("Number of Captured Neutrons");
   hs_RecoCapTime ->GetYaxis()->SetTitleSize(0.045);
   h1_RecoCapTime -> Draw("SAME");
-  //h1_RecoCapTime_numu -> Draw();
-  //h1_TrueCapTime_numu -> Draw("SAME");
-  f1_CapTime -> Draw("SAME");
+  //f1_CapTime -> Draw("SAME");
+
+  h1_RecoCapTime_data -> Draw("SAME E P");
   c1->RedrawAxis();
 
   Double_t CapTime = f1_CapTime->GetParameter(2);
   Double_t CapTimeErr = f1_CapTime->GetParError(2);
 
-  TLegend* legend1 = new TLegend(0.45, 0.4, 0.89, 0.89);
+
+  TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
   legend1 -> SetTextSize(0.05);
   //legend1 -> AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (T2K Run11)}","");
-  legend1 -> AddEntry((TObject*)0,"#kern[-0.35]{FHC 1R #mu sample}","");
+  //legend1 -> AddEntry((TObject*)0,"#kern[-0.35]{FCFV applied (pre-NN)}","");
+  if (NNAPPLY==0) legend1 -> AddEntry((TObject*)0,"#kern[-0.35]{FCFV applied (pre-NN)}","");
+  else legend1 -> AddEntry((TObject*)0,"#kern[-0.34]{FCFV applied (post-NN)}","");
   legend1 -> AddEntry(h1_RecoCapTime_AccNoise_numu, "Acc. noise", "F");
   legend1 -> AddEntry(h1_RecoCapTime_dcye_numu, "Decay-e", "F");
   legend1 -> AddEntry(h1_RecoCapTime_H_numu, "H-n signal", "F");
   legend1 -> AddEntry(h1_RecoCapTime_Gd_numu, "Gd-n signal", "F");
-  legend1 -> AddEntry(f1_CapTime, "A*(1-e^{-B*t})*exp(-x/C)+D", "L");
-  legend1 -> AddEntry((TObject*)0,TString::Format("#kern[-0.25]{Capture time = %.1f #pm %.1f #musec}", CapTime, CapTimeErr),"");
+  //legend1 -> AddEntry(f1_CapTime, "A*(1-e^{-B*t})*exp(-x/C)+D", "L");
+  //legend1 -> AddEntry((TObject*)0,TString::Format("#kern[-0.25]{Capture time = %.1f #pm %.1f #musec}", CapTime, CapTimeErr),"");
   legend1 -> SetFillColor(0);
   legend1 -> Draw();
 #endif

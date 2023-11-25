@@ -1,6 +1,7 @@
 #pragma once
 
-//#include "../../../include/Const.h"
+#include "/disk02/usr6/sedi/anat2ksk/src/cc0pinumu/inc/CC0PiNumu.h"
+#include "/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis/include/Const.h"
 
 float GetDWall(float *Vtx) {
   float dwall = 0.;
@@ -54,4 +55,42 @@ float GetSimpleDistance(float *Vtx1, float *Vtx2) {
 float GetInnerProduct(float *Vtx1, float *Vtx2) {
   float IP = Vtx1[0]*Vtx2[0] + Vtx1[1]*Vtx2[1] + Vtx1[2]*Vtx2[2];
   return IP;
+}
+
+void HistFillforMode(CC0PiNumu *numu, float value, TH1F** h1) {
+  float wgt  = data ? 1. : numu->getOscWgt();
+  int   mode = TMath::Abs(numu->var<int>("mode"));
+  if (mode==1)             h1[0] -> Fill(value, wgt);
+  if (mode>=2 && mode<=10) h1[1] -> Fill(value, wgt);
+  if (mode>10 && mode<=30) h1[2] -> Fill(value, wgt);
+  if (mode>=31)            h1[3] -> Fill(value);
+}
+
+void HistFillforLabel(CC0PiNumu *numu, float Label, float value, TH1F** h1) {
+  float wgt  = data ? 1. : numu->getOscWgt();
+  int   mode = TMath::Abs(numu->var<int>("mode"));
+  if (mode<31) {
+    if (Label==0) h1[0] -> Fill(value, wgt);
+    if (Label==1) h1[1] -> Fill(value, wgt);
+    if (Label==2) h1[2] -> Fill(value, wgt);
+    if (Label==3) h1[3] -> Fill(value, wgt);
+  }
+  else {
+    if (Label==0) h1[0] -> Fill(value);
+    if (Label==1) h1[1] -> Fill(value);
+    if (Label==2) h1[2] -> Fill(value);
+    if (Label==3) h1[3] -> Fill(value);
+  }
+}
+
+void SaveThisHist(TH1F* h1) {
+  if (h1->GetEntries()!=0) h1 -> Write();
+}
+
+void SaveThisHist(TH2F* h2) {
+  if (h2->GetEntries()!=0) h2 -> Write();
+}
+
+void AddLog(std::fstream fout, TString text) {
+  fout << text << std::endl;
 }

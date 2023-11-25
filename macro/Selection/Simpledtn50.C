@@ -63,14 +63,15 @@ void Simpledtn50() {
   g1_side1 -> Draw("SAME");
   g1_side2 -> Draw("SAME");
 
-  TLatex* text1 = new TLatex(0.44, 0.85, "C1-C4 applied");
+  //TLatex* text1 = new TLatex(0.44, 0.85, "C1-C4 applied");
+  TLatex* text1 = new TLatex(0.44, 0.85, "FCFV applied");
   text1 -> SetNDC(1);
   text1 -> SetTextSize(0.045);
   text1 -> Draw();
   TLatex* text2 = new TLatex(0.44, 0.8, "Normalized with ##nu events@C1-C4");
   text2 -> SetNDC(1);
   text2 -> SetTextSize(0.045);
-  text2 -> Draw();
+  //text2 -> Draw();
   TLatex* text3 = new TLatex(0.44, 0.7, "Decay-e definition:");
   text3 -> SetNDC(1);
   text3 -> SetTextSize(0.045);

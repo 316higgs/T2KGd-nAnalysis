@@ -37,6 +37,7 @@ EXECUTE()
   fi
 
   RUNNAME="run11"
+  #RUNNAME="run11.FCFVvalid"
 
   ESC=$(printf '\033')
   printf "${ESC}[31m%s${ESC}[m\n" "[### Analysis Option ###] NTAGMODE     : ${NTAGMODE}"
@@ -46,9 +47,9 @@ EXECUTE()
 #<<COMMENTOUT
   ./analysis1Rmu_data.exe ${DISK3}/Run11Data/final.run86.fc.apfit.ontiming.21againcorr.fQv4r0c.root\
                           ${DISK3}/Ntag/output/Run11/final.run86.fc.apfit.ontiming.21againcorr.ntag.root\
-                          ${ANALYSISSTAGE}/output/${OUTBEAMMODE}/run11.${NTAGMODE}.root\
-                          ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/run11.neutrino.${NTAGMODE}.txt\
-                          ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/run11.ntag.${NTAGMODE}.txt\
+                          ${ANALYSISSTAGE}/output/${OUTBEAMMODE}/${RUNNAME}.${NTAGMODE}.root\
+                          ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${RUNNAME}.neutrino.${NTAGMODE}.txt\
+                          ${ANALYSISSTAGE}/result/${OUTBEAMMODE}/${RUNNAME}.ntag.${NTAGMODE}.txt\
                           -ETAG ON\
                           -BEAMMODE ${BEAMMODE_ARG}\
                           -OSCCH DATA

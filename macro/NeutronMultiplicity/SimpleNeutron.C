@@ -11,6 +11,7 @@
 //#define POTSCALE 1.63  //Run1-10 RHC
 #define POTSCALE 0.17  //Run11 FHC
 
+
 void SimpleNeutron(bool beammode) {
 
   int fhcflag = 1;
@@ -38,7 +39,6 @@ void SimpleNeutron(bool beammode) {
 
   //bool TruthNeutron = true;
   bool TruthNeutron = false;
-
 
   // Normalization factors
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
@@ -322,12 +322,21 @@ void SimpleNeutron(bool beammode) {
 #endif
 
 
+  TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
+  TH1F*   h1_data = (TH1F*)fin_data->Get("NTagAnalysis/h1_AllTagNmultiplicity");
+  h1_data -> SetMarkerStyle(20);
+  h1_data -> SetMarkerSize(1.5);
+  h1_data -> SetMarkerColor(kBlack);
+  h1_data -> SetLineColor(kBlack);
+  h1_data -> SetLineWidth(1.5);
+
+
 
 #if 1
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
-  hs_Neutron -> SetMaximum(15);
+  hs_Neutron -> SetMaximum(23);
   hs_Neutron -> Draw();
   hs_Neutron ->GetYaxis()->SetTitleSize(0.038);
   hs_Neutron ->GetYaxis()->SetTitleOffset(1.3);
@@ -336,19 +345,18 @@ void SimpleNeutron(bool beammode) {
   else hs_Neutron ->GetXaxis()->SetTitle("Tagged Neutron Multiplicity");
   hs_Neutron ->GetYaxis()->SetTitle("Number of #nu Events");
   hs_Neutron -> Draw();
+  h1_data    -> Draw("SAME E P");
   c1->RedrawAxis();
   
   TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
   legend1 -> SetTextSize(0.04);
-  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");
-  //else legend1->AddEntry((TObject*)0,"#kern[-0.25]{RHC 1R #mu sample (0.01% Gd)}","");
+  legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");
   legend1 -> AddEntry(h1_CCQE_numu, "#nu_{#mu} CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CCQE_numubar, "#bar{#nu}_{#mu} CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CC2p2h_numu, "#nu_{#mu} CC-2p2h", "F");
   legend1 -> AddEntry(h1_CC2p2h_numubar, "#bar{#nu}_{#mu} CC-2p2h", "F");
   legend1 -> AddEntry(h1_CCOther_numu, "#nu_{#mu} CC-other", "F");
   legend1 -> AddEntry(h1_CCOther_numubar, "#bar{#nu}_{#mu} CC-other", "F");
-  //legend1 -> AddEntry(h1_CCOther_numubar, "#nu_{#mu}+#bar{#nu}_{#mu} CC non-QE", "F");
   legend1 -> AddEntry(h1_CCQE_nuesig, "#nu_{e} / #bar#nu_{e} CC", "F");
   legend1 -> AddEntry(h1_NC_numu, "NC", "F");
   legend1->SetFillColor(0);

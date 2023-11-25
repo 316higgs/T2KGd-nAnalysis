@@ -368,7 +368,14 @@ int main(int argc, char **argv) {
     //Number of selected neutrino events
     Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
 
+    if (prmsel.C1ApplyFCFV(evsel)) {
+      for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
+        h1_AllNTagOut -> Fill(TagOut->at(jentry));
+      }
+    }
+
     //New 1R muon selection
+    //if (prmsel.C1ApplyFCFV(evsel)) {
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., true)) {
       GetSelectedModeEvents(numu);
 
@@ -499,16 +506,11 @@ int main(int argc, char **argv) {
             if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar);
             if (Label->at(jentry)==3) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
           }
-          
+          h1_NNvar[ivar] -> Fill(NNVar);
 #endif
 
           //Post-NN
 #if 1
-          //bool etagboxin = false;
-          //if (NHits->at(jentry)>50 && FitT->at(jentry)<20) etagboxin = true;
-          //if ( FitT->at(jentry) < 1.5 ) etagboxin = true;
-          //else if ( FitT->at(jentry) < 20. && FitT->at(jentry) < 0.25*(N50->at(jentry))-7.5 ) etagboxin = true;
-
           if (mode<31) {
             if (Label->at(jentry)==0 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
             if (Label->at(jentry)==1 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
@@ -521,17 +523,24 @@ int main(int argc, char **argv) {
             if (Label->at(jentry)==2 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_H[ivar]        -> Fill(NNVar);
             if (Label->at(jentry)==3 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
           }
-          
+          h1_NNvar[ivar] -> Fill(NNVar);
 #endif
         }
         //h1_AllNHits -> Fill(NHits->at(jentry), OscProb);
-        if (TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_AllNHits -> Fill(NHits->at(jentry), OscProb);
 
-        //TMVA output
-        if (Label->at(jentry)==0) h1_NTagOut[0] -> Fill(TagOut->at(jentry), OscProb);
-        if (Label->at(jentry)==1) h1_NTagOut[1] -> Fill(TagOut->at(jentry), OscProb);
-        if (Label->at(jentry)==2) h1_NTagOut[2] -> Fill(TagOut->at(jentry), OscProb);
-        if (Label->at(jentry)==3) h1_NTagOut[3] -> Fill(TagOut->at(jentry), OscProb);
+        //NN output
+        if (mode < 31) {
+          if (Label->at(jentry)==0) h1_NTagOut[0] -> Fill(TagOut->at(jentry), OscProb);
+          if (Label->at(jentry)==1) h1_NTagOut[1] -> Fill(TagOut->at(jentry), OscProb);
+          if (Label->at(jentry)==2) h1_NTagOut[2] -> Fill(TagOut->at(jentry), OscProb);
+          if (Label->at(jentry)==3) h1_NTagOut[3] -> Fill(TagOut->at(jentry), OscProb);
+        }
+        else {
+          if (Label->at(jentry)==0) h1_NTagOut[0] -> Fill(TagOut->at(jentry));
+          if (Label->at(jentry)==1) h1_NTagOut[1] -> Fill(TagOut->at(jentry));
+          if (Label->at(jentry)==2) h1_NTagOut[2] -> Fill(TagOut->at(jentry));
+          if (Label->at(jentry)==3) h1_NTagOut[3] -> Fill(TagOut->at(jentry));
+        }
 
 
         //Excess of NHits for numu MC

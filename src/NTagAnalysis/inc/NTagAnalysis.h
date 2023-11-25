@@ -13,7 +13,8 @@
 #include "../../../include/NeutrinoEvents.h"
 
 #define TRUETYPE 3
-#define WINSTEP 6
+//#define WINSTEP 6
+#define WINSTEP 1
 #define WINDOWMIN 3
 #define NOISECUT 18
 
@@ -22,6 +23,7 @@ TH1F* h1_TrueCapTime;
 TH1F* h1_NTrueN[TRUETYPE];
 TH1F* h1_TrueNmultiplicity[INTERACTIONTYPE]; //# of truth captured neutrons (neutrino interactions)
 TH1F* h1_TagNmultiplicity[INTERACTIONTYPE];  //# of tagged captured neutrons (neutrino interactions)
+TH1F* h1_AllTagNmultiplicity;
 TH1F* h1_TrueMuN;  //# of truth captured neutrons (neutrons from mu capture)
 TH1F* h1_TrueNuN;  //# of truth captured neutrons (neutrons from neutrino interactions)
 TH1F* h1_TotGammaE;
@@ -34,8 +36,8 @@ float NTrueN_CC2p2h_osc  = 0.;
 float NTrueN_CCOther_osc = 0.;
 float NTrueN_NC_osc      = 0.;
 
-TH2F* h2_TrueNCapVtxXY;
-TH2F* h2_TrueNCapVtxRZ;
+TH2F* h2_NCapVtxXY[2];
+TH2F* h2_NCapVtxRZ[2];
 
 //Neutrino energy resolution w/ truth neutrons & w/o truth neutrons
 TH1F* h1_Enureso_CCQE_trueN[2];
@@ -86,8 +88,8 @@ TGraph* g_FOM_m40;
 
 //Capture vertex resolution
 TH1F* h1_TrueNCapTime;
-TH1F* h1_RecoNCapTime[4];
-//TH1F* h1_N50[4];
+TH1F* h1_RecoNCapTime[4][2];
+TH1F* h1_AllRecoNCapTime[2];
 TH1F* h1_mintimediff_NCap;
 TH1F* h1_NCapVtxReso;
 
@@ -141,13 +143,20 @@ float TruthGdNeutrons  = 0.;
 float TruthNeutroninCandidatesinWin[WINSTEP];
 float TruthHNeutroninCandidatesinWin[WINSTEP];
 float TruthGdNeutroninCandidatesinWin[WINSTEP];
-////  #tagged candidates  ////
+////  n-like candidates  ////
 float TaggedTruthNeutronsinWin[WINSTEP][CUTSTEP];
 float TaggedTruthHNeutronsinWin[WINSTEP][CUTSTEP];
 float TaggedTruthGdNeutronsinWin[WINSTEP][CUTSTEP];
 float MisTaggedDecayeinNlike[WINSTEP][CUTSTEP];
 float MisTaggedAccNoiseinNlike[WINSTEP][CUTSTEP];
 float AllNlikeCandidates[WINSTEP][CUTSTEP];
+////  e-like candidates  ////
+float TaggedTruthDecayeinWin[WINSTEP][CUTSTEP];
+float MisTaggedTruthNeutronsinElike[WINSTEP][CUTSTEP];
+float MisTaggedTruthHNeutronsinElike[WINSTEP][CUTSTEP];
+float MisTaggedTruthGdNeutronsinElike[WINSTEP][CUTSTEP];
+float MisTaggedAccNoiseinElike[WINSTEP][CUTSTEP];
+float AllElikeCandidates[WINSTEP][CUTSTEP];
 
 float TagCandidates = 0;
 float TagTP[CUTSTEP];  // True positive  (tagged truth neutrons)
@@ -168,6 +177,10 @@ TH1F* h1_TrueN_H;
 TH1F* h1_MisTagDcye;
 TH1F* h1_MisTagAccNoise;
 TH1F* h1_NuEvtC6;
+
+TH1F* h1_FC_run;
+TH1F* h1_1Rmu_run;
+TH1F* h1_TagN_run;
 
 
 int test1 = 0;
@@ -357,12 +370,12 @@ class NTagAnalysis {
 
     //e-like candidates
     //Taggged truth decay-e/Mis-tagged neutrons/Mis-tagged acc. noise
-    int TaggedTruthDecayeinWin[WINSTEP][CUTSTEP];
-    int MisTaggedTruthNeutronsinElike[WINSTEP][CUTSTEP];
-    int MisTaggedTruthHNeutronsinElike[WINSTEP][CUTSTEP];
-    int MisTaggedTruthGdNeutronsinElike[WINSTEP][CUTSTEP];
-    int MisTaggedAccNoiseinElike[WINSTEP][CUTSTEP];
-    int AllElikeCandidates[WINSTEP][CUTSTEP];
+    //int TaggedTruthDecayeinWin[WINSTEP][CUTSTEP];
+    //int MisTaggedTruthNeutronsinElike[WINSTEP][CUTSTEP];
+    //int MisTaggedTruthHNeutronsinElike[WINSTEP][CUTSTEP];
+    //int MisTaggedTruthGdNeutronsinElike[WINSTEP][CUTSTEP];
+    //int MisTaggedAccNoiseinElike[WINSTEP][CUTSTEP];
+    //int AllElikeCandidates[WINSTEP][CUTSTEP];
 
     //
     float NoiseRate[WINSTEP][CUTSTEP];
@@ -436,19 +449,10 @@ class NTagAnalysis {
 
     void InitNeutrons();
 
-    //Get the number of truth neutrons based on NEUT variables
-    //int GetGenPrmNeutrons(CC0PiNumu *numu, Int_t *Iorgvc, Int_t *Iflvc);
-    //int GetGenAftFSINeutrons(CC0PiNumu *numu);
-    //int GetGenAftSINeutrons(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
-    //int GetGenSINeutrons(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
-
     float GetGenBefSIMom(CC0PiNumu *numu, Int_t *Iorgvc, Int_t *Iflvc);
 
     int GetTrueGenNBefFSI(CC0PiNumu *numu);
     int GetTrueGenNBefSI(CC0PiNumu *numu, Int_t *Iorgvc);
-    //int GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
-    //int GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3]);
-    //int GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]);
     int GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3], Int_t *Iorgvc);
     void LabelTrueCapNBefSI(CC0PiNumu *numu, Int_t *Iorgvc, int parentNidx, bool *fillsrc);
     int GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtxprnt[][3], Float_t pprntinit[][3]);
@@ -462,9 +466,17 @@ class NTagAnalysis {
 
     void GetTruthNeutronsIntType(CC0PiNumu* numu, float NTrueN);
 
-    void TrueNCapVtxProfile(std::vector<int> *Type, std::vector<float> *tagvx, 
-                                                std::vector<float> *tagvy, 
-                                                std::vector<float> *tagvz);
+    void TrueNCapVtxProfile(std::vector<int> *Type, std::vector<float> *vx, 
+                                                    std::vector<float> *vy, 
+                                                    std::vector<float> *vz);
+    void RecoNCapVtxProfile(std::vector<float> *TagOut, 
+                            std::vector<float> *vx, 
+                            std::vector<float> *vy, 
+                            std::vector<float> *vz,
+                            bool etagmode,
+                            std::vector<float> *N50,
+                            std::vector<float> *FitT,
+                            float Threshold);
 
     void GetTruthNeutronsinSearch(UInt_t truthneutrons, 
                                   std::vector<int> *Type,
@@ -487,7 +499,7 @@ class NTagAnalysis {
                                 std::vector<float> *FitT,
                                 std::vector<float> *TagDWall);
 
-    void GetNlikeCandidatesinWindow(CC0PiNumu* numu,
+    /*void GetNlikeCandidatesinWindow(CC0PiNumu* numu,
                                     std::vector<float> *t,
                                     std::vector<float> *DWall,
                                     std::vector<float> *TagIndex,
@@ -497,13 +509,21 @@ class NTagAnalysis {
                                     std::vector<float> *TagOut,
                                     std::vector<float> *Label,
                                     std::vector<float> *TagDWall);
-    void GetElikeCandidatesinWindow(std::vector<float> *t,
+    void GetElikeCandidatesinWindow(CC0PiNumu* numu,
+                                    std::vector<float> *t,
                                     std::vector<float> *TagIndex,
                                     bool etagmode,
                                     std::vector<float> *N50,
                                     std::vector<float> *FitT,
                                     std::vector<float> *TagOut,
-                                    std::vector<float> *Label);
+                                    std::vector<float> *Label);*/
+
+    void GetNlikeCandidates(CC0PiNumu* numu,
+                            bool etagmode,
+                            std::vector<float> *N50,
+                            std::vector<float> *FitT,
+                            std::vector<float> *TagOut,
+                            std::vector<float> *Label);
 
     void GetNeutrinoEventswNTag(std::vector<float> *TagOut,
                                 std::vector<float> *TagIndex,
@@ -520,6 +540,7 @@ class NTagAnalysis {
     void GetResolutionwTrueN(CC0PiNumu* numu, float NTrueN);
 
     bool DecayelikeChecker(bool etagmode, float N50, float FitT);
+    bool RemnantChecker(float Label);
 
     void Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float theta, float thetamin, float thetamax);
 
@@ -534,26 +555,12 @@ class NTagAnalysis {
                          bool etagmode);
 
     //For neutron multiplicity measurement
-    //float GetTaggedNeutrons(std::vector<float> *TagOut,
-    //                        float Threshold,
-    //                        std::vector<float> *TagIndex,
-    //                        std::vector<float> *NHits,
-    //                        std::vector<float> *FitT,
-    //                        std::vector<float> *Label,
-    //                        bool etagmode);
     float GetTaggedNeutrons(std::vector<float> *TagOut,
                             float Threshold,
                             std::vector<float> *N50,
                             std::vector<float> *FitT,
                             std::vector<float> *Label,
                             bool etagmode);
-    //float GetTaggedNoise(std::vector<float> *TagOut,
-    //                     float Threshold,
-    //                     std::vector<float> *TagIndex,
-    //                     std::vector<float> *NHits,
-    //                     std::vector<float> *FitT,
-    //                     std::vector<float> *Label,
-    //                     bool etagmode);
     float GetTaggedNoise(std::vector<float> *TagOut,
                          float Threshold,
                          std::vector<float> *N50,
@@ -597,10 +604,11 @@ class NTagAnalysis {
     
     void N1Rmu_x_kinematics(CC0PiNumu* numu, float knmtcs, double* xbins, float* N1Rmu_x_knmtcs, TH1F** h1, int bintype);
     void TaggedN_x_kinematics(CC0PiNumu* numu, int TaggedN, int TaggedNoise, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype);
-    //void TrueN_x_kinematics(CC0PiNumu* numu, std::vector<int> *Type, std::vector<float> *t, float WinMin, float knmtcs, double* xbins, float* TrueN_x_knmtcs, TH1F** h1, int bintype);
+    void TaggedN_x_kinematics_data(CC0PiNumu* numu, int TaggedN, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype);
     void TrueN_x_kinematics(CC0PiNumu* numu, int NTrueN, float knmtcs, double* xbins, float* TrueN_x_knmtcs, TH1F** h1, int bintype);
     void TrueN_x_Neutronkinematics(CC0PiNumu* numu, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype);
     void TaggedN_x_Neutronkinematics(CC0PiNumu* numu, std::vector<float> *Label, UInt_t ican, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype);
+    void TaggedN_x_Neutronkinematics_data(CC0PiNumu* numu, float knmtcs, double* xbins, float* TaggedN_x_knmtcs, TH1F** h1, int bintype);
 
     void SetHistoFrame();
     void SetHistoFormat();
@@ -614,7 +622,8 @@ float GetNoiseRate(float MisTaggedDecaye, float MisTaggedAccNoise, float ParentN
 {
   //std::cout << "          Correction factor: " << (float)(varwindowmax - WINDOWMIN)/(varwindowmax - NOISECUT) << std::endl;
   //std::cout << "          ParentNeutrinos  : " << ParentNeutrinos << std::endl;
-  float NoiseRate = ( MisTaggedDecaye + MisTaggedAccNoise*((float)(varwindowmax - WINDOWMIN)/(varwindowmax - NOISECUT)) )/ParentNeutrinos;
+  //float NoiseRate = ( MisTaggedDecaye + MisTaggedAccNoise*((float)(varwindowmax - WINDOWMIN)/(varwindowmax - NOISECUT)) )/ParentNeutrinos;
+  float NoiseRate = ( MisTaggedDecaye + MisTaggedAccNoise )/ParentNeutrinos;
   return NoiseRate;
 }
 

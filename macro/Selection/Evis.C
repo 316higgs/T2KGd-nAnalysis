@@ -100,7 +100,7 @@ void Evis(bool beammode) {
   std::cout << "[nueb  -> nueb ] Normalization factor for nuebar_x_nuebar: " << (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) << std::endl;
 
 
-  float y[2] = {0., 200.};
+  float y[2] = {0., 400.};
   float xC1[2] = {30, 30};
   TGraph* g_C1 = new TGraph(2, xC1, y);
   g_C1 -> SetLineWidth(2);
@@ -295,7 +295,7 @@ void Evis(bool beammode) {
   TCanvas* c = new TCanvas("c", "c", 1000, 700);
   c -> SetGrid();
   c -> SetLogy();
-  //hs_C1 -> SetMaximum(10);
+  hs_C1 -> SetMaximum(50);
   hs_C1 -> Draw();
   hs_C1 ->GetYaxis()->SetTitleSize(0.045);
   hs_C1 ->GetYaxis()->SetTitleOffset(1.0);

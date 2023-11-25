@@ -79,7 +79,7 @@ void SelectedEvents(bool beammode) {
   std::cout << "[nueb  -> nueb ] Normalization factor for nuebar_x_nuebar: " << (ExpN_nuebar_x_nuebar)/(GenN_nuebar_x_nuebar) << std::endl;
 
 // Neutrino events
-#if 1
+#if 0
   TH1F* h1_CCQE_numu    = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode0");
   TH1F* h1_CC2p2h_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode1");
   TH1F* h1_CCOther_numu = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelNuEvents_mode2");
@@ -118,7 +118,7 @@ void SelectedEvents(bool beammode) {
 #endif
 
 // Tagged neutrons
-#if 0
+#if 1
   TH1F* h1_CCQE_numu     = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode0");
   TH1F* h1_CC2p2h_numu   = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode1");
   TH1F* h1_CCOther_numu  = (TH1F*)fin_numu->Get("Gd1RmuonSelection/h1_SelTagN_mode2");
@@ -304,16 +304,6 @@ void SelectedEvents(bool beammode) {
   hs_NuEvt -> Add(h1_CCQE_numubar);
   hs_NuEvt -> Add(h1_CCQE_numu);
 #endif
-#if rhcflag
-  hs_NuEvt -> Add(h1_NC_numu);
-  hs_NuEvt -> Add(h1_NC_numubar);
-  hs_NuEvt -> Add(h1_CCOther_numu);
-  hs_NuEvt -> Add(h1_CCOther_numubar);
-  hs_NuEvt -> Add(h1_CC2p2h_numu);
-  hs_NuEvt -> Add(h1_CC2p2h_numubar);
-  hs_NuEvt -> Add(h1_CCQE_numu);
-  hs_NuEvt -> Add(h1_CCQE_numubar);
-#endif
 
 
   /////  Merged Selection Efficiency  //////
@@ -490,42 +480,33 @@ void SelectedEvents(bool beammode) {
 
   // Data
   TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
-  TH1F* h1_NuEvt_data  = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_1RmuonEvents");
-  TH1F* h1_TagN_data   = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_AllSelTagN");
-  //TH1F* h1_SelEff_data = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_1RmuonEvents");
-  TH1F* h1_FCFV_data = new TH1F("h1_FCFV_data", "", SELECTIONCUTS, 0, SELECTIONCUTS);
+  TH1F* h1_NuEvt_data        = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_1RmuonEvents");
+  TH1F* h1_NuEvt_SelEff_data = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_1RmuonEvents");
+  TH1F* h1_TagN_data         = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_AllSelTagN");
+  TH1F* h1_TagN_SelEff_data  = (TH1F*)fin_data->Get("Gd1RmuonSelection/h1_AllSelTagN");
+  TH1F* h1_NuEvt_FCFV_data = new TH1F("h1_NuEvt_FCFV_data", "", SELECTIONCUTS, 0, SELECTIONCUTS);
+  TH1F* h1_TagN_FCFV_data  = new TH1F("h1_TagN_FCFV_data", "", SELECTIONCUTS, 0, SELECTIONCUTS);
+  float NuEvt_FCFV_data = h1_NuEvt_data->GetBinContent(1);
+  float TagN_FCFV_data  = h1_TagN_data->GetBinContent(1);
   for (int istep=0; istep<SELECTIONCUTS; istep++) {
     std::cout << "Cut[ " << istep << " ] Data: " << h1_NuEvt_data->GetBinContent(istep+1) << " +/- " << h1_NuEvt_data->GetBinError(istep+1) << std::endl;
-    //std::cout << "Cut[ " << istep << " ] Data: " << h1_TagN_data->GetBinContent(istep+1) << std::endl;
-    float FCFV_data = h1_NuEvt_data->GetBinContent(1);
-    h1_FCFV_data -> SetBinContent(istep+1, FCFV_data);
+    std::cout << "Cut[ " << istep << " ] Data: " << h1_TagN_data->GetBinContent(istep+1)  << " +/- " << h1_TagN_data->GetBinError(istep+1) << std::endl;
+    h1_NuEvt_FCFV_data -> SetBinContent(istep+1, NuEvt_FCFV_data);
+    h1_TagN_FCFV_data  -> SetBinContent(istep+1, TagN_FCFV_data);
   }
 
   h1_NuEvt_data -> SetMarkerStyle(20);
-  h1_NuEvt_data -> SetMarkerSize(1.2);
+  h1_NuEvt_data -> SetMarkerSize(1.5);
   h1_NuEvt_data -> SetMarkerColor(kBlack);
   h1_NuEvt_data -> SetLineColor(kBlack);
   h1_NuEvt_data -> SetLineWidth(1.5);
 
   h1_TagN_data -> SetMarkerStyle(20);
-  h1_TagN_data -> SetMarkerSize(1.2);
+  h1_TagN_data -> SetMarkerSize(1.5);
   h1_TagN_data -> SetMarkerColor(kBlack);
   h1_TagN_data -> SetLineColor(kBlack);
   h1_TagN_data -> SetLineWidth(1.5);
 
-  /*
-  h1_SelEff_data -> Sumw2();
-  h1_SelEff_data -> Divide(h1_FCFV_data);
-  for (int istep=0; istep<SELECTIONCUTS; istep++) {
-    std::cout << "Cut[ " << istep << " ] Data efficiency: " << h1_SelEff_data->GetBinContent(istep+1) << " +/- " << h1_SelEff_data->GetBinError(istep+1) << std::endl;
-  }
-  h1_SelEff_data->SetBinError(1, 0.); // definition
-  h1_SelEff_data -> SetMarkerStyle(20);
-  h1_SelEff_data -> SetMarkerSize(1.2);
-  h1_SelEff_data -> SetMarkerColor(kBlack);
-  h1_SelEff_data -> SetLineColor(kBlack);
-  h1_SelEff_data -> SetLineWidth(1.5);
-  */
 
 #if 1
   // Number of Events
@@ -539,10 +520,11 @@ void SelectedEvents(bool beammode) {
   hs_NuEvt ->GetYaxis()->SetTitleSize(0.038);
   hs_NuEvt ->GetYaxis()->SetTitleOffset(1.3);
   hs_NuEvt ->GetYaxis()->SetLabelSize(0.036);
-  hs_NuEvt ->GetYaxis()->SetTitle("Number of #nu Events");
-  //hs_NuEvt ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
+  //hs_NuEvt ->GetYaxis()->SetTitle("Number of #nu Events");
+  hs_NuEvt ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
   hs_NuEvt -> Draw();
-  h1_NuEvt_data -> Draw("SAME P E");
+  //h1_NuEvt_data -> Draw("SAME P E");
+  h1_TagN_data -> Draw("SAME P E");
 
   TGaxis* axis = new TGaxis(6, 0, 6, 115, 0, 115, 23, "+L");
   axis -> SetLabelColor(kWhite);
@@ -564,11 +546,40 @@ void SelectedEvents(bool beammode) {
   legend1->Draw();
 #endif
 
+
 #if 0
+  h1_NuEvt_SelEff_data -> Sumw2();
+  h1_TagN_SelEff_data  -> Sumw2();
+  h1_NuEvt_SelEff_data -> Divide(h1_NuEvt_FCFV_data);
+  h1_TagN_SelEff_data  -> Divide(h1_TagN_FCFV_data);
+  for (int istep=0; istep<SELECTIONCUTS; istep++) {
+    std::cout << "Cut[ " << istep << " ] Data efficiency: " << h1_NuEvt_SelEff_data->GetBinContent(istep+1) 
+              << " + " << h1_NuEvt_SelEff_data->GetBinErrorUp(istep+1) 
+              << "/ - " << h1_NuEvt_SelEff_data->GetBinErrorLow(istep+1) << std::endl;
+    std::cout << "Cut[ " << istep << " ] Data efficiency: " << h1_TagN_SelEff_data->GetBinContent(istep+1) 
+              << " + " << h1_TagN_SelEff_data->GetBinErrorUp(istep+1) 
+              << "/ - " << h1_TagN_SelEff_data->GetBinErrorLow(istep+1) << std::endl;
+  }
+  h1_NuEvt_SelEff_data -> SetBinError(1, 0.); // definition
+  h1_NuEvt_SelEff_data -> SetMarkerStyle(20);
+  h1_NuEvt_SelEff_data -> SetMarkerSize(1.5);
+  h1_NuEvt_SelEff_data -> SetMarkerColor(kBlack);
+  h1_NuEvt_SelEff_data -> SetLineColor(kBlack);
+  h1_NuEvt_SelEff_data -> SetLineWidth(1.5);
+
+  h1_TagN_SelEff_data -> SetBinError(1, 0.); // definition
+  h1_TagN_SelEff_data -> SetMarkerStyle(20);
+  h1_TagN_SelEff_data -> SetMarkerSize(1.5);
+  h1_TagN_SelEff_data -> SetMarkerColor(kBlack);
+  h1_TagN_SelEff_data -> SetLineColor(kBlack);
+  h1_TagN_SelEff_data -> SetLineWidth(1.5);
+  
+
   //Selection efficiency
   gROOT -> SetStyle("Plain");
   TCanvas* c2 = new TCanvas("c2","c2",1000,700);
   c2 -> SetGrid();
+  c2 -> SetTicks(1);
   h1_SelEff_merge -> SetMinimum(0.);
   h1_SelEff_merge -> SetMaximum(1.1);
   h1_SelEff_merge -> Draw();
@@ -579,7 +590,8 @@ void SelectedEvents(bool beammode) {
   h1_SelEff_merge ->GetYaxis()->SetTitleSize(0.045);
   h1_SelEff_merge ->GetXaxis()->SetLabelSize(0.045);
   h1_SelEff_merge -> Draw();
-  h1_SelEff_data -> Draw("SAME E P");
+  h1_NuEvt_SelEff_data -> Draw("SAME E P");
+  //h1_TagN_SelEff_data  -> Draw("SAME E P");
   c2->RedrawAxis();
   
   TLatex* text1 = new TLatex(0.47, 0.82, "T2K FHC Run11 (0.01% Gd)");
@@ -587,11 +599,11 @@ void SelectedEvents(bool beammode) {
   text1 -> SetTextSize(0.05);
   TLatex* text2 = new TLatex(0.5, 0.77, "-1R #mu sample");
   text2 -> SetNDC(1);
-  text2 -> SetTextSize(0.04);
+  text2 -> SetTextSize(0.045);
   TLatex* text3 = new TLatex(0.5, 0.72, "-#nu events");
   //TLatex* text3 = new TLatex(0.5, 0.72, "-#tagged neutrons");
   text3 -> SetNDC(1);
-  text3 -> SetTextSize(0.04);
+  text3 -> SetTextSize(0.045);
   text1 -> Draw();
   text2 -> Draw();
   text3 -> Draw();
@@ -601,7 +613,7 @@ void SelectedEvents(bool beammode) {
 #if 0
   TCanvas* c3 = new TCanvas("c3", "", 900, 700);
   c3 -> SetGrid();
-  h1_FCFV_data -> Draw();
+  h1_NuEvt_FCFV_data -> Draw();
 #endif
 
 }

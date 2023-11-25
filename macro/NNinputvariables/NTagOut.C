@@ -9,7 +9,7 @@
 //#define POTSCALE 1.96  //Run1-10 FHC
 //#define POTSCALE 1.63  //Run1-10 RHC
 #define POTSCALE 0.17  //Run11 FHC
-#define NTHRESHOLD 0.65
+#define NTHRESHOLD 0.7
 
 
 void NTagOut(bool beammode) {
@@ -26,12 +26,23 @@ void NTagOut(bool beammode) {
 #if fhcflag
 
   //Pre
+#if 0
   TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC.root");
   TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.preNN.newGdMC.root");
   TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root");
   TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC.root");
   TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.preNN.newGdMC.root");
   TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.preNN.newGdMC.root");
+#endif
+
+#if 1
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.preNN.newGdMC_bonsai_keras_prompt_vertex.FCFVvalid.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.preNN.newGdMC_bonsai_keras_prompt_vertex.FCFVvalid.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC_bonsai_keras_prompt_vertex.FCFVvalid.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_numubar.preNN.newGdMC_bonsai_keras_prompt_vertex.FCFVvalid.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.preNN.newGdMC_bonsai_keras_prompt_vertex.FCFVvalid.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.preNN.newGdMC_bonsai_keras_prompt_vertex.FCFVvalid.root");
+#endif
 
   //Post
   //TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.newGdMC.root");
@@ -41,7 +52,6 @@ void NTagOut(bool beammode) {
   //TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.postNN.newGdMC.root");
   //TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.postNN.newGdMC.root");
 
-  //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
   TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
@@ -194,18 +204,31 @@ void NTagOut(bool beammode) {
   float y[2] = {0., 200.};
   float xC[2] = {NTHRESHOLD, NTHRESHOLD};
   TGraph* g_C = new TGraph(2, xC, y);
-  g_C -> SetLineWidth(2);
-  g_C -> SetLineColor(kViolet-8);
+  g_C -> SetLineWidth(3);
+  g_C -> SetLineColor(kOrange+7);
   g_C -> SetLineStyle(7);
+
+
+  //TFile* fin_data = new TFile("../../output/fhc/run11.bonsai_keras_prompt_vertex.root");
+  TFile* fin_data = new TFile("../../output/fhc/run11.FCFVvalid.bonsai_keras_prompt_vertex.root");
+  TH1F* h1_NTagOut_data  = (TH1F*)fin_data->Get("NNInputVariables/h1_AllNTagOut");
+  h1_NTagOut_data -> SetMarkerStyle(20);
+  h1_NTagOut_data -> SetMarkerSize(1.2);
+  h1_NTagOut_data -> SetMarkerColor(kBlack);
+  h1_NTagOut_data -> SetLineColor(kBlack);
+  h1_NTagOut_data -> SetLineWidth(1.5);
+
 
   gROOT -> SetStyle("Plain");
 
   TCanvas* c1 = new TCanvas("c1","c1",900,700);
   c1 -> SetGrid();
   c1 -> SetLogy();
+  c1 -> SetTicks(1);
 
 #if 1
-  hs_NTagOut -> SetMaximum(1000);
+  //hs_NTagOut -> SetMaximum(1000);
+  hs_NTagOut -> SetMaximum(5000);
   hs_NTagOut -> Draw();
   hs_NTagOut ->GetYaxis()->SetTitleSize(0.038);
   hs_NTagOut ->GetYaxis()->SetTitleOffset(1.3);
@@ -213,7 +236,8 @@ void NTagOut(bool beammode) {
   hs_NTagOut -> GetXaxis()->SetTitle("n-likelihood");
   hs_NTagOut -> GetYaxis()->SetTitle("Number of Candidates in Pre-selection");
   hs_NTagOut -> Draw();
-  //g_C        -> Draw("SAME");
+  g_C        -> Draw("SAME");
+  h1_NTagOut_data -> Draw("SAME E P");
 
   c1 -> RedrawAxis();
 #endif
@@ -229,8 +253,8 @@ void NTagOut(bool beammode) {
   legend1 -> SetTextSize(0.045);
   //legend1->AddEntry((TObject*)0,"#kern[-0.3]{ FHC 1R#mu sample (#nu_{#mu}#rightarrow#nu_{#mu}) }","");
   //legend1->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
-  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");
-  else legend1->AddEntry((TObject*)0,"#kern[-0.25]{RHC 1R #mu sample (0.01% Gd)}","");
+  //if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FHC 1R #mu sample (0.01% Gd)}","");
+  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.25]{FCFV applied (0.01% Gd)}","");
   legend1 -> AddEntry(h1_NTagOut_Gd_numu, "Gd-n signal", "F");
   legend1 -> AddEntry(h1_NTagOut_H_numu, "H-n signal", "F");
   legend1 -> AddEntry(h1_NTagOut_Decaye_numu, "Decay-e", "F");

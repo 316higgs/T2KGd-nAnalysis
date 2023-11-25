@@ -24,22 +24,49 @@ TH1F* h1_TrueDecaye[INTERACTIONTYPE];     //original (C1-C3)
 TH1F* h1_TrueDecaye_vtx[INTERACTIONTYPE]; //add vtx cut
 
 //dt vs N50 for decay-e cut
-TH2D* h2_dtn50;
+TH2F* h2_dtn50;
+TH1F* h1_AllN50_preNN;
+TH1F* h1_AllN50_postNN;
+TH1F* h1_AllN50_Nlike;
+TH1F* h1_AllNHits_preNN;
+TH1F* h1_AllNHits_postNN;
+TH1F* h1_AllNHits_Nlike;
+TH1F* h1_AllNHits_Elike;
+TH1F* h1_AllFitT_preNN;
+TH1F* h1_AllFitT_postNN;
+TH1F* h1_AllFitT_Nlike;
+TH1F* h1_AllFitT_Elike;
+
+//TH1F* h1_NHits_gtr;
+//TH1F* h1_NHits_lss;
+//TH1F* h1_FitT_gtr;
+//TH1F* h1_FitT_lss;
+
+TH1F* h1_N50_preNN[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_N50_postNN[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_N50_Nlike[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_NHits_preNN[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_NHits_postNN[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_NHits_Nlike[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_NHits_Elike[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_FitT_preNN[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_FitT_postNN[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_FitT_Nlike[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_FitT_Elike[INTERACTIONTYPE_FOR_MERGE];
+/*TH1F* h1_NHits_CutBase1[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_NHits_CutBase2[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_NHits_CutBase3[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_NHits_CutBase4[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_NHits_CutBase5[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_NHits_CutBase6[INTERACTIONTYPE_FOR_MERGE];*/
 
 TH2F* h2_reso_x_pscnd;
 TH2F* h2_DcyVtxReso_x_pscnd;
 TH2F* h2_DcyVtxReso_x_dwall;
 
-//int NumHotSpot = 0;
-int TaggedTrueDecaye = 0;
+int TaggedTrueDecaye  = 0;
 int TaggedDecayeinBox = 0; //for new selection
 int TaggedDecaye      = 0; //for older selection
-
-//Variables for purity & efficiency calculation
-/*int AllTrueDcye   = 0;
-int AllfQdcye     = 0;
-int BoxfQdcye     = 0;
-int MatchedfQdcye = 0;*/
 
 float AllTrueDcye   = 0.;
 float AllfQdcye     = 0.;
@@ -48,13 +75,13 @@ float MatchedfQdcye = 0.;
 float MatchedBoxfQdcye = 0.;
 
 float RejectedMatchedTrueDcye = 0.;
-float SelectedfQdcye = 0.;
-float SelectedMatchTrueDcye = 0.;
+float SelectedfQdcye          = 0.;
+float SelectedMatchTrueDcye   = 0.;
 
-int DcyE_CCQE = 0;
-int DcyE_CC2p2h = 0;
+int DcyE_CCQE    = 0;
+int DcyE_CC2p2h  = 0;
 int DcyE_CCnonQE = 0;
-int DcyE_NC = 0;
+int DcyE_NC      = 0;
 
 
 class DecayeBox {

@@ -2,8 +2,32 @@
 [NTag   OUTPUT] /disk03/usr8/sedi/Ntag/output/Run11/final.run86.fc.apfit.ontiming.21againcorr.ntag.root
  
 [Neutrino] C1: 94 -> 94
+[Neutron ] C1: 108
 [Neutrino] C2: 41 -> 41
+[Neutron ] C2: 13
 [Neutrino] C3: 31 -> 31
+[Neutron ] C3: 8
 [Neutrino] C4: 31 -> 31
+[Neutron ] C4: 8
 [Neutrino] C5: 29 -> 29
+[Neutron ] C5: 6
 [Neutrino] C6: 27 -> 27
+[Neutron ] C6: 6
+N1: 14
+N2: 92
+N3: 59
+N4: 2
+===== #1Rmu as a function of Pt =====
+#1Rmu @ Pt [0, 0.25): 8
+#1Rmu @ Pt [0.25, 0.5): 12
+#1Rmu @ Pt [0.5, 0.75): 6
+#1Rmu @ Pt [0.75, 1.5): 1
+#1Rmu @ Pt > 1.5: 0
+Total: 27
+===== #tagged neutrons as a function of Pt =====
+#tagged-n @ Pt [0, 0.25): 3
+#tagged-n @ Pt [0.25, 0.5): 1
+#tagged-n @ Pt [0.5, 0.75): 2
+#tagged-n @ Pt [0.75, 1.5): 0
+#tagged-n @ Pt > 1.5: 0
+Total: 6

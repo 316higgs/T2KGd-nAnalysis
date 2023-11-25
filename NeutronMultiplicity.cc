@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
   //float thetamin = 0.8;
   float thetamax = 1.;
 
-  float dtMax  = 10.;
+  float dtMax  = 20.;
   float N50Min = 50.;
   float N50Max = 400.;
   float nlikeThreshold = 0.7;
@@ -550,10 +550,12 @@ int main(int argc, char **argv) {
       TruePrmVtx[0] = numu->var<float>("posv", 0);
       TruePrmVtx[1] = numu->var<float>("posv", 1);
       TruePrmVtx[2] = numu->var<float>("posv", 2);
+      
       float NuBeamDir[3] = {0., 0., 0.};
       NuBeamDir[0] = beamDir[0];
       NuBeamDir[1] = beamDir[1];
       NuBeamDir[2] = beamDir[2];
+
       float TrueMuStpVtx[3] = {0., 0., 0.};
       bool  TrueMuEnd       = decayebox.GetTrueMuEndVtx(eOsc, iprntidx, numu, TrueMuStpVtx);
       
@@ -595,9 +597,6 @@ int main(int argc, char **argv) {
 
       for (UInt_t ican=0; ican<TagOut->size(); ican++) {
         if (etagmode){
-          //if (TagOut->at(ican)>nlikeThreshold && 
-          //    ntagana.DecayelikeChecker(etagmode, N50->at(ican), FitT->at(ican))==false &&
-          //    (Label->at(ican)==0 || Label->at(ican)==1 || Label->at(ican)==2 || Label->at(ican)==3)) {
           if (TagOut->at(ican)>nlikeThreshold && 
               ntagana.DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican))==false &&
               (Label->at(ican)==0 || Label->at(ican)==1 || Label->at(ican)==2 || Label->at(ican)==3)) {

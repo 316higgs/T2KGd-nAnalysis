@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
 
   if (Osc=="DATA") data = true;
 
-  float dtMax  = 10.;
+  float dtMax  = 20.;
   float N50Min = 50.;
   float N50Max = 400.;
   float nlikeThreshold = 0.7;
@@ -82,15 +82,14 @@ int main(int argc, char **argv) {
   std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Loaded " << ntagFiles      << " files from: " << NtagFileName   << "\e[0m" << std::endl;
 
 
-  const int nfQEntries       = tchfQ->GetEntries();       //total entries of TTree h1
-  const int nevEntries       = tchev->GetEntries();       //total entries of TTree event
-  const int ntagEntries      = tchntag->GetEntries();     //total entries of TTree ntag
+  const int nfQEntries  = tchfQ->GetEntries();       //total entries of TTree h1
+  const int nevEntries  = tchev->GetEntries();       //total entries of TTree event
+  const int ntagEntries = tchntag->GetEntries();     //total entries of TTree ntag
   std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  fiTQun output     : Processing " << nfQEntries       <<" entries...\e[0m" << std::endl;
   std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Event info        : Processing " << nevEntries       <<" entries...\e[0m" << std::endl;
   std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  NTag output       : Processing " << ntagEntries      <<" entries...\e[0m" << std::endl;
 
 
-  //=========  TTree event variables  ============
   //=========  TTree ntag variables  ============
   int NCandidates = 0;
   std::vector<float> *Label = 0;
@@ -134,6 +133,17 @@ int main(int argc, char **argv) {
   numu->resisterDefaultAllStacks();
   numu->seth1Tree(tchfQ);
 
+  UInt_t nrun;
+  Int_t nev;
+  Int_t nsub;
+  Int_t nurun;
+  Int_t nspill;
+  tchfQ -> SetBranchAddress("nrun", &nrun);
+  tchfQ -> SetBranchAddress("nev", &nev);
+  tchfQ -> SetBranchAddress("nsub", &nsub);
+  tchfQ -> SetBranchAddress("nurun", &nurun);
+  tchfQ -> SetBranchAddress("nspill", &nspill);
+
   ResetNeutrinoEvents();
   InitNTagVariables();
 
@@ -157,13 +167,17 @@ int main(int argc, char **argv) {
   NTagAnalysis ntagana;
   ntagana.InitNeutrons();
   ntagana.SetHistoFrame();
-  ntagana.SetHistoFormat();
 
   NNInputVariables nninputs;
   nninputs.SetNNinputHisto();
 
-  int allcandidates = 0;
-
+  int selnuevents   = 0;
+  int selcandidates = 0;
+  int selTagN = 0;
+  int N1 = 0;
+  int N2 = 0;
+  int N3 = 0;
+  int N4 = 0;
 
   //Process
   if (nfQEntries==ntagEntries) processmax = ntagEntries;
@@ -171,8 +185,8 @@ int main(int argc, char **argv) {
 
   for (int ientry=0; ientry<processmax; ientry++) {
 
-  	//Progress meter
-    if(ientry>1 && ientry%2==0) std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%\e[0m" << std::endl;
+    //Progress meter
+    //if(ientry>1 && ientry%2==0) std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%\e[0m" << std::endl;
 
     //All neutrino events
     AllParentNeutrinos++;
@@ -204,36 +218,180 @@ int main(int argc, char **argv) {
     int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
     GetSelectedTagN(prmsel, evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false, TagN);
 
-    //allcandidates += TagOut->size();
-    for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
-      //h1_AllNTagOut -> Fill(TagOut->at(jentry));
+    for (int i=0; i<10; i++) h1_FC_run -> Fill(nspill);
+
+    //  data quality check
+#if 1
+    if (prmsel.C1ApplyFCFV(evsel)) {
+
+      decayebox.GetDecayeInBox(numu, eMode, eOsc, dtMax, N50Min, N50Max, true);
+
+      neuosc.GetPrmVtx(numu);
+
+      ntagana.GetRecoNCapTime(numu, etagmode, FitT, NHits, Label, TagOut, nlikeThreshold);
+      //ntagana.RecoNCapVtxProfile(TagOut, fvx, fvy, fvz, etagmode, N50, FitT, nlikeThreshold);
+
+      selcandidates += TagOut->size();
+      for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
+        //h1_AllRecoNCapTime -> Fill(FitT->at(jentry));
+        //h1_AllNTagOut -> Fill(TagOut->at(jentry));
+#if 0
+        h1_AllN50_preNN   -> Fill(N50->at(jentry));
+        h1_AllNHits_preNN -> Fill(NHits->at(jentry));
+        h1_AllFitT_preNN  -> Fill(FitT->at(jentry));
+#endif
+
+        bool etagboxin = false;
+        etagboxin = ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry));
+        if (TagOut->at(jentry)>nlikeThreshold) {
+
+          if (NHits->at(jentry)<N50Min) {
+            if (FitT->at(jentry)<dtMax) N1++;
+            else N2++;
+          }
+          else {
+            if (FitT->at(jentry)<dtMax) N3++;
+            else N4++;
+          } 
+
+#if 0
+          h1_AllN50_postNN   -> Fill(N50->at(jentry));
+          h1_AllNHits_postNN -> Fill(NHits->at(jentry));
+          h1_AllFitT_postNN  -> Fill(FitT->at(jentry));
+#endif
+
+          bool etagboxin = false;
+          etagboxin = ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry));
+          if (!etagboxin) {
+            h1_AllNHits_Nlike -> Fill(NHits->at(jentry));
+            h1_AllFitT_Nlike  -> Fill(FitT->at(jentry));
+          }
+          else {
+            h1_AllNHits_Elike -> Fill(NHits->at(jentry));
+            h1_AllFitT_Elike  -> Fill(FitT->at(jentry));
+          }
+
+
+          //selcandidates++;
+          h1_AllNTagOut -> Fill(TagOut->at(jentry));
+        }
+      }
     }
+#endif
 
     //New 1R muon selection
-    if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, true)) {
+    if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false)) {
 
-      //float OscProb = numu->getOscWgt();
-      float Enu     = numu->var<float>("erec");
-      std::cout << "data = " << data << std::endl;
+      float Enu = numu->var<float>("erec");
+      //std::cout << "data = " << data << std::endl;
+      selnuevents++;
 
-      //Neutrino energy distribution
+      //  Neutrino energy distribution
       neuosc.GetRecoEnu(numu);
 
-      /*int TagN = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
-      GetSelectedTagN(prmsel, evsel, numu, decayebox, eMode, eOsc, dtMax, N50Min, N50Max, false, TagN);
-      std::cout << "#tagged-n: " << TagN << std::endl;*/
+      //ntagana.GetRecoNCapTime(numu, etagmode, FitT, NHits, Label, TagOut, nlikeThreshold);
 
-      //std::cout << "TagOut: " << TagOut->size() << std::endl;
-      allcandidates += TagOut->size();
-      for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
-        h1_AllNTagOut -> Fill(TagOut->at(jentry));
+      int numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, nlikeThreshold, NHits, FitT, Label, etagmode);
+      selTagN += numtaggedneutrons;
+
+      if (numtaggedneutrons==0) {
+        std::cout << "\e[38;5;94m\e[1m MR Run[ " << nurun << " ] Spill[ " << nspill << " ] SK Run[ " << nrun << " ] Ev[ " << nev << " ] Sub[ " << nsub << " ]\e[0m" << std::endl;
+        for (int i=0; i<10; i++) h1_1Rmu_run -> Fill(nspill);  // make a band
+      }
+      else {
+        std::cout << "\e[38;5;30m\e[1m MR Run[ " << nurun << " ] Spill[ " << nspill << " ] SK Run[ " << nrun << " ] Ev[ " << nev << " ] Sub[ " << nsub << " ] #tagged-n: " << numtaggedneutrons << "\e[0m" << std::endl;
+        for (int i=0; i<10; i++) h1_1Rmu_run -> Fill(nspill);  // make a band
+        for (int i=0; i<numtaggedneutrons; i++) h1_TagN_run -> Fill(nspill);
       }
 
+
+#if 0
+      for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
+        if (TagOut->at(jentry)>nlikeThreshold && !ntagana.RemnantChecker(Label->at(jentry))) {
+          bool etagboxin = false;
+          etagboxin = ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry));
+          if (!etagboxin) {
+            h1_AllNHits_Nlike -> Fill(NHits->at(jentry));
+            h1_AllFitT_Nlike  -> Fill(FitT->at(jentry));
+          }
+          else {
+            h1_AllNHits_Elike -> Fill(NHits->at(jentry));
+            h1_AllFitT_Elike  -> Fill(FitT->at(jentry));
+          }
+        }
+      }
+#endif
+
+      ntagana.RecoNCapVtxProfile(TagOut, fvx, fvy, fvz, etagmode, N50, FitT, nlikeThreshold);
+
+
+      //  Neutron multiplicity
+#if 1
+      float Pmu         = numu->var<float>("fq1rmom", PrmEvent, FQ_MUHYP);
+      float Pt          = neuosc.GetMuonPt(numu);
+      float Qsquare     = neuosc.GetQsquare(numu);
+      float recothetamu = neuosc.GetRecoMuDirection(numu);
+      ntagana.N1Rmu_x_kinematics(numu, Enu/1000., xEnubins, N1Rmu_x_Enu, h1_N1Rmu_x_Enu, 0);
+      ntagana.N1Rmu_x_kinematics(numu, Pmu/1000., xMuMombins, N1Rmu_x_MuMom, h1_N1Rmu_x_MuMom, 1);
+      ntagana.N1Rmu_x_kinematics(numu, Pt/1000., xMuPtbins, N1Rmu_x_MuPt, h1_N1Rmu_x_MuPt, 1);
+      ntagana.N1Rmu_x_kinematics(numu, Qsquare/1000000., xQ2bins, N1Rmu_x_Q2, h1_N1Rmu_x_Q2, 1);
+      ntagana.N1Rmu_x_kinematics(numu, recothetamu, xMuAnglebins, N1Rmu_x_MuAngle, h1_N1Rmu_x_MuAngle, 1);
+
+      h1_AllTagNmultiplicity -> Fill(numtaggedneutrons);
+      ntagana.TaggedN_x_kinematics_data(numu, numtaggedneutrons, Enu/1000., xEnubins, TaggedN_x_Enu, h1_TaggedN_x_Enu, 0);
+      ntagana.TaggedN_x_kinematics_data(numu, numtaggedneutrons, Pmu/1000., xMuMombins, TaggedN_x_MuMom, h1_TaggedN_x_MuMom, 1);
+      ntagana.TaggedN_x_kinematics_data(numu, numtaggedneutrons, Pt/1000., xMuPtbins, TaggedN_x_MuPt, h1_TaggedN_x_MuPt, 1);
+      ntagana.TaggedN_x_kinematics_data(numu, numtaggedneutrons, Qsquare/1000000., xQ2bins, TaggedN_x_Q2, h1_TaggedN_x_Q2, 1);
+      ntagana.TaggedN_x_kinematics_data(numu, numtaggedneutrons, recothetamu, xMuAnglebins, TaggedN_x_MuAngle, h1_TaggedN_x_MuAngle, 1);
+#endif
+#if 1
+      float RecoPrmVtx[3] = {0., 0., 0.};
+      RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
+      RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
+      RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
+
+      float NuBeamDir[3] = {0., 0., 0.};
+      NuBeamDir[0] = beamDir[0];
+      NuBeamDir[1] = beamDir[1];
+      NuBeamDir[2] = beamDir[2];
+
+      float RecoMuStpVtx[3] = {0., 0., 0.};
+      float RecoMuRange     = decayebox.GetRecoMuEndVtx(numu, RecoMuStpVtx);
+
+      for (UInt_t ican=0; ican<TagOut->size(); ican++) {
+        if (etagmode){
+          if (TagOut->at(ican)>nlikeThreshold && 
+              ntagana.DecayelikeChecker(etagmode, NHits->at(ican), FitT->at(ican))==false) {
+            float NCapVtx[3]   = {fvx->at(ican), fvy->at(ican), fvz->at(ican)};  //Neutron capture vertex
+            float nTraveld     = ndistance.TakeDistance(RecoPrmVtx, NCapVtx);    //Neutron flight distance
+            float d_MuStp_NCap = ndistance.TakeDistance(RecoMuStpVtx, NCapVtx);  //Distance b/w muon stopping and neutron capture vertices
+            float nTraveldv[3] = {0., 0., 0.};  //Neutron flight distance vector
+            nTraveldv[0]       = NCapVtx[0] - RecoPrmVtx[0];
+            nTraveldv[1]       = NCapVtx[1] - RecoPrmVtx[1];
+            nTraveldv[2]       = NCapVtx[2] - RecoPrmVtx[2];
+            float nTraveldL    = GetInnerProduct(nTraveldv, NuBeamDir);  //Longitudinal neutron flight distance
+            float nTraveldT    = nTraveld*std::sin( std::acos( nTraveldL/nTraveld ) );
+            float ncostheta    = nTraveldL/nTraveld;
+            ntagana.TaggedN_x_Neutronkinematics_data(numu, nTraveld, xnTraveldbins, TaggedN_x_nTraveld, h1_TaggedN_x_nTraveld, 0);
+            ntagana.TaggedN_x_Neutronkinematics_data(numu, d_MuStp_NCap, xMuStp_NCapbins, TaggedN_x_MuStp_NCap, h1_TaggedN_x_MuStp_NCap, 0);
+            ntagana.TaggedN_x_Neutronkinematics_data(numu, nTraveldL, xnTraveldLbins, TaggedN_x_nTraveldL, h1_TaggedN_x_nTraveldL, 1);
+            ntagana.TaggedN_x_Neutronkinematics_data(numu, nTraveldT, xnTraveldTbins, TaggedN_x_nTraveldT, h1_TaggedN_x_nTraveldT, 0);
+            ntagana.TaggedN_x_Neutronkinematics_data(numu, ncostheta, xnAnglebins, TaggedN_x_nAngle, h1_TaggedN_x_nAngle, 2);
+          }
+        }
+      }
+#endif
+
     } //New 1R muon selection
+    else {
+      std::cout << "\e[38;5;00m\e[1m MR Run[ " << nurun << " ] Spill[ " << nspill << " ] SK Run[ " << nrun << " ] Ev[ " << nev << " ] Sub[ " << nsub << " ] \e[0m" << std::endl;
+    }
 
   }
 
-  std::cout << "#all candidates: " << allcandidates << std::endl;
+  std::cout << "#nu events : " << selnuevents << std::endl;
+  std::cout << "#candidates: " << selcandidates << std::endl;
+  std::cout << "#tagged-n  : " << selTagN << std::endl;
 
 
   std::fstream resultfile;
@@ -247,10 +405,38 @@ int main(int argc, char **argv) {
     resultfile << " " << std::endl;
 
     for (int i=0; i<SELECTIONCUTS; i++) {
-      resultfile << "[Neutrino] C" << i+1 << ": " << ProtoSelectedParentNeutrinos[i] << " -> " << SelectedParentNeutrinos[i] << std::endl;
       h1_1RmuonEvents      -> SetBinContent(i+1, SelectedParentNeutrinos[i]);
       h1_Proto1RmuonEvents -> SetBinContent(i+1, ProtoSelectedParentNeutrinos[i]);
+      h1_AllSelTagN        -> SetBinContent(i+1, SelectedAllTagN[i]);
+
+      resultfile << "[Neutrino] C" << i+1 << ": " << ProtoSelectedParentNeutrinos[i] << " -> " << SelectedParentNeutrinos[i] << std::endl;
+      resultfile << "[Neutron ] C" << i+1 << ": " << SelectedAllTagN[i] << std::endl;
     }
+
+    resultfile << "N1: " << N1 << std::endl;
+    resultfile << "N2: " << N2 << std::endl;
+    resultfile << "N3: " << N3 << std::endl;
+    resultfile << "N4: " << N4 << std::endl;
+
+    float totalev = 0.;
+    totalev = 0.;
+    resultfile << "===== #1Rmu as a function of Pt =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_mu; ibin++) {
+      if (ibin<binnumber_mu-1) resultfile << "#1Rmu @ Pt [" << xMuPtbins[ibin] << ", " << xMuPtbins[ibin+1] << "): " << N1Rmu_x_MuPt[ibin] << std::endl;
+      else resultfile << "#1Rmu @ Pt > " << xMuPtbins[ibin] << ": " << N1Rmu_x_MuPt[ibin] << std::endl;
+      totalev += N1Rmu_x_MuPt[ibin];
+    }
+    resultfile << "Total: " << totalev << std::endl;
+
+    totalev = 0.;
+    resultfile << "===== #tagged neutrons as a function of Pt =====" << std::endl;
+    for (int ibin=0; ibin<binnumber_mu; ibin++) {
+      if (ibin<binnumber_mu-1) resultfile << "#tagged-n @ Pt [" << xMuPtbins[ibin] << ", " << xMuPtbins[ibin+1] << "): " << TaggedN_x_MuPt[ibin] << std::endl;
+      else resultfile << "#tagged-n @ Pt > " << xMuPtbins[ibin] << ": " << TaggedN_x_MuPt[ibin] << std::endl;
+      totalev += TaggedN_x_MuPt[ibin];
+    }
+    resultfile << "Total: " << totalev << std::endl;
+
   }
 
 
