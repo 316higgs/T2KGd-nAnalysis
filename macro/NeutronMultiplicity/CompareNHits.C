@@ -23,16 +23,22 @@ void CompareNHits() {
   TString DirName        = "DecayeBox/";
   TString HistName_NHits = "h1_NHits";
   //TString StageName      = "_preNN";
-  //TString StageName      = "_postNN";
-  TString StageName      = "_Nlike";
+  TString StageName      = "_postNN";
+  //TString StageName      = "_Nlike";
   for (int isample=0; isample<SAMPLES; isample++) {
+    float TaggedNeutrons = 0;
     for (int ilabel=0; ilabel<NTAGLABEL; ilabel++) {
       h1_NHits[isample][ilabel] = (TH1F*)fin_MC[isample]->Get(DirName+HistName_NHits+StageName+TString::Format("_mode%d", ilabel));
+
+      TaggedNeutrons += h1_NHits[isample][ilabel]->GetEntries();
+      //TaggedNeutrons += h1_NHits[isample][ilabel]->Integral();
+
       SetMCHistColor_Label(ilabel, h1_NHits[isample][ilabel]);
 
       //  normalization
       ApplyNorm(h1_NHits[isample][ilabel], isample);
     }
+    std::cout << "[ " << isample << " ] NHits: " << TaggedNeutrons << std::endl;
   }
 
   for (int ilabel=0; ilabel<NTAGLABEL; ilabel++) {
@@ -61,8 +67,8 @@ void CompareNHits() {
 
   h1_NHits_postNN_data -> SetMarkerStyle(20);
   h1_NHits_postNN_data -> SetMarkerSize(1.2);
-  h1_NHits_postNN_data -> SetMarkerColor(kPink-5);
-  h1_NHits_postNN_data -> SetLineColor(kPink-5);
+  h1_NHits_postNN_data -> SetMarkerColor(kBlack);
+  h1_NHits_postNN_data -> SetLineColor(kBlack);
   h1_NHits_postNN_data -> SetLineWidth(1.5);
 
   h1_NHits_Nlike_data -> SetMarkerStyle(20);
@@ -87,18 +93,17 @@ void CompareNHits() {
   hs_NHits ->GetXaxis()->SetTitle("NHits");
   hs_NHits ->GetYaxis()->SetTitle("Number of Candidates");
   hs_NHits -> Draw();
-  h1_NHits_preNN_data -> Draw("SAME E P");
   h1_NHits_postNN_data -> Draw("SAME E P");
-  h1_NHits_Nlike_data -> Draw("SAME E P");
 
-  TLegend* legend2 = new TLegend(0.3, 0.6, 0.89, 0.89);
-  legend2 -> SetTextSize(0.045);
-  legend2 -> AddEntry((TObject*)0,"#kern[-0.65]{FCFV}","");
-  legend2 -> AddEntry(h1_NHits_preNN_data, "pre-NN", "P");
-  legend2 -> AddEntry(h1_NHits_postNN_data, "NN output > 0.7", "P");
-  legend2 -> AddEntry(h1_NHits_Nlike_data, "NN output > 0.7 && not e-like", "P");
-  legend2 -> SetFillColor(0);
-  legend2 -> Draw();
+  TLegend* legend1 = new TLegend(0.55, 0.55, 0.89, 0.89);
+  legend1 -> SetTextSize(0.045);
+  legend1->AddEntry((TObject*)0,"#kern[-0.32]{FCFV post-NN}","");
+  legend1 -> AddEntry(h1_NHits[0][3], "Gd-n signal", "F");
+  legend1 -> AddEntry(h1_NHits[0][2], "H-n signal", "F");
+  legend1 -> AddEntry(h1_NHits[0][1], "Decay-e", "F");
+  legend1 -> AddEntry(h1_NHits[0][0], "Acc. noise", "F");
+  legend1->SetFillColor(0);
+  legend1->Draw();
 #endif
   
 }

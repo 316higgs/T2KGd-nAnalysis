@@ -360,16 +360,22 @@ void NNInputVariables::SetNNinputHisto() {
 
   h1_AllNTagOut = new TH1F("h1_AllNTagOut", "", 12, 0.6, 1.2);
 
+  h1_Beta1 = new TH1F("h1_Beta1", "", 40, -0.2, 1.2);
+  h1_Beta2 = new TH1F("h1_Beta2", "", 40, -0.2, 1.2);
+  h1_Beta3 = new TH1F("h1_Beta3", "", 40, -0.2, 1.2);
+  h1_Beta4 = new TH1F("h1_Beta4", "", 40, -0.2, 1.2);
+  h1_Beta5 = new TH1F("h1_Beta5", "", 40, -0.2, 1.2);
+
 
   h1_FitT_NHitsExcess = new TH1F("h1_FitT_NHitsExcess", "h1_FitT_NHitsExcess; FitT[#musec]; Entries", 80, 0, 20);
 
   h1_FitT_NHitsExcess -> SetLineWidth(2);
 
-  h1_IntID = new TH1F("h1_IntID", "h1_IntID; IntID; Area Normalized", 25, 5, 30);
+  h1_IntID = new TH1F("h1_IntID", "", 25, 5, 30);
   h1_KE = new TH1F("h1_KE", "h1_KE; E_{#gamma}[MeV]; Area Normalized", 20, 0, 10);
   h1_timediff = new TH1F("h1_timediff", "h1_timediff; t^{true} - t^{reco}[#musec]; Area Normalized", 50, -0.02, 0.02);
 
-  h1_MuNeutronMultiplicity = new TH1F("h1_MuNeutronMultiplicity", "h1_MuNeutronMultiplicity; # of neutrons/event; Entries", 5, 0, 5);
+  h1_MuNeutronMultiplicity = new TH1F("h1_MuNeutronMultiplicity", "", 5, 0, 5);
 }
 
 
@@ -388,6 +394,11 @@ void NNInputVariables::WritePlots() {
     h1_NNvar_Gd[i]       -> Write();
     h1_NNvar[i]          -> Write();
   }
+  SaveThisHist(h1_Beta1);
+  SaveThisHist(h1_Beta2);
+  SaveThisHist(h1_Beta3);
+  SaveThisHist(h1_Beta4);
+  SaveThisHist(h1_Beta5);
 
   //h1_AllNHits -> Write();
 

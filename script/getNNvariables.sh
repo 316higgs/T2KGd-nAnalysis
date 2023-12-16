@@ -63,8 +63,8 @@ EXECUTE()
   #NNMODEL="tmva"
   NNMODEL="keras"
   
-  DLYVTXTYPE="bonsai"
-  #DLYVTXTYPE="prompt"
+  #DLYVTXTYPE="bonsai"
+  DLYVTXTYPE="prompt"
 
   NNSTYLE="${DLYVTXTYPE}_${NNMODEL}"
   NTAGMODE=${NNSTYLE}_${PRESELMODE}
@@ -74,8 +74,8 @@ EXECUTE()
 
   #RUNNAME="preNN.newGdMC_${NTAGMODE}.FCFVvalid"
   #RUNNAME="postNN.newGdMC_${NTAGMODE}.FCFVvalid"
-  #RUNNAME="preNN.newGdMC_${NTAGMODE}"
-  RUNNAME="postNN.newGdMC_${NTAGMODE}"
+  RUNNAME="preNN.newGdMC_${NTAGMODE}"
+  #RUNNAME="postNN.newGdMC_${NTAGMODE}"
 
   ESC=$(printf '\033')
   printf "${ESC}[31m%s${ESC}[m\n" "[### Analysis Option ###] OUTBEAMMODE  : ${OUTBEAMMODE}"
@@ -103,11 +103,11 @@ EXECUTE()
 
 ###  Gd MC  ###
 EXECUTE 0 1  ###  numu -> numu
-EXECUTE 1 1  ###  numu -> nue
-EXECUTE 2 1  ###  numubar -> numubar
-EXECUTE 3 1  ###  numubar -> nuebar
-EXECUTE 4 1  ###  nue -> nue
-EXECUTE 5 1  ###  nuebar -> nuebar
+#EXECUTE 1 1  ###  numu -> nue
+#EXECUTE 2 1  ###  numubar -> numubar
+#EXECUTE 3 1  ###  numubar -> nuebar
+#EXECUTE 4 1  ###  nue -> nue
+#EXECUTE 5 1  ###  nuebar -> nuebar
 
 
 

@@ -382,20 +382,6 @@ int main(int argc, char **argv) {
       int mode = TMath::Abs(numu->var<int>("mode"));
       float OscProb = numu->getOscWgt();
 
-      //truth secondary loop
-      /*for (Int_t itruth=0; itruth<nscndprt; itruth++) {
-    
-        //Gamma from mu- (not mu+!)
-        if (iprntprt[itruth]==13 && std::abs(iprtscnd[itruth])==22) {
-        //if (std::abs(iprntprt[itruth])==13 && std::abs(iprtscnd[itruth])==22) {
-          h1_tscnd_capture -> Fill(tscnd[itruth]/1000.);
-
-          float gammaenergy = std::sqrt( pscnd[itruth][0]*pscnd[itruth][0] + pscnd[itruth][1]*pscnd[itruth][1] + pscnd[itruth][2]*pscnd[itruth][2] );
-          h1_energy_capture -> Fill(gammaenergy);
-        }
-      }*/
-
-
       int reco = 0;
       float reco_mucaptime = 0.;
       for (UInt_t jentry=0; jentry<Label->size(); ++jentry) {
@@ -493,7 +479,7 @@ int main(int argc, char **argv) {
           }
 
           //Pre-NN
-#if 0
+#if 1
           if (mode <31) {
             if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
             if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
@@ -510,7 +496,7 @@ int main(int argc, char **argv) {
 #endif
 
           //Post-NN
-#if 1
+#if 0
           if (mode<31) {
             if (Label->at(jentry)==0 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_AccNoise[ivar] -> Fill(NNVar, OscProb);
             if (Label->at(jentry)==1 && TagOut->at(jentry)>NLIKETHRESHOLD && etagboxin==false) h1_NNvar_Decaye[ivar]   -> Fill(NNVar, OscProb);
@@ -550,7 +536,14 @@ int main(int argc, char **argv) {
           reco_mucaptime = FitT->at(jentry);
           //NHitsExcess = true;
         }
+
+        h1_Beta1 -> Fill(Beta1->at(jentry));
+        h1_Beta2 -> Fill(Beta2->at(jentry));
+        h1_Beta3 -> Fill(Beta3->at(jentry));
+        h1_Beta4 -> Fill(Beta4->at(jentry));
+        h1_Beta5 -> Fill(Beta5->at(jentry));
       }
+
 
 
       //NHits excess check

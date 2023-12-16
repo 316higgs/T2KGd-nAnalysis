@@ -366,8 +366,11 @@ int main(int argc, char **argv) {
     }
   }
   CLTOptionSummary(ETAGKeyword, ETAG, MCTypeKeyword, MCType);
+  std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  #prod. = " << processmax << " \e[0m" << std::endl;
+
 
   for (int ientry=0; ientry<processmax; ientry++) {
+  //for (int ientry=0; ientry<100000; ientry++) {
 
     //Progress meter
     if(ientry>100 && ientry%100==0) std::cout << "\e[38;5;70m\e[1m[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%\e[0m" << std::endl;
@@ -442,6 +445,10 @@ int main(int argc, char **argv) {
 
     int intmode   = TMath::Abs(numu->var<int>("mode"));
     float OscProb = numu->getOscWgt();
+    float RecoPrmVtx[3] = {0., 0., 0.};
+    RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
+    RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
+    RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
 
     GetSelectedModeEvents(numu);
 
@@ -536,30 +543,56 @@ int main(int argc, char **argv) {
             }
           }
 
-#if 0
+#if 1
           HistFillforLabel(numu, Label->at(jentry), N50->at(jentry), h1_N50_postNN);
           HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_postNN);
           HistFillforLabel(numu, Label->at(jentry), FitT->at(jentry), h1_FitT_postNN);
-          h1_AllN50_postNN   -> Fill(N50->at(jentry));
-          h1_AllNHits_postNN -> Fill(NHits->at(jentry));
-          h1_AllFitT_postNN  -> Fill(FitT->at(jentry));
+          HistFillperMode(numu, N50->at(jentry), h1_AllN50_postNN);
+          HistFillperMode(numu, NHits->at(jentry), h1_AllNHits_postNN);
+          if (FitT->at(jentry)<dtMax) HistFillperMode(numu, NHits->at(jentry), h1_AllNHits_postNN_lt20us);
+          else HistFillperMode(numu, NHits->at(jentry), h1_AllNHits_postNN_gt20us);
+          HistFillperMode(numu, FitT->at(jentry), h1_AllFitT_postNN);
+
+          // weighted NHits
+          //HistFillperMode(numu, NHits->at(jentry), h1_AllNHits_postNN_mvar);
+          /*
+          float wgt = 1.;
+          if (NHits->at(jentry)<50) {
+            wgt = (-0.25*(NHits->at(jentry) - 25.8)*(NHits->at(jentry) - 25.8) + 80*0.95) / (-0.25*(NHits->at(jentry) - 25.8)*(NHits->at(jentry) - 25.8) + 80);
+          }
+          if (NHits->at(jentry)>=50 && NHits->at(jentry)<230) {
+            wgt =  (-0.00004*(NHits->at(jentry) - 230)*(NHits->at(jentry) - 230) + 1*1.2) / (-0.00004*(NHits->at(jentry) - 230)*(NHits->at(jentry) - 230) + 1);
+          }
+          if (NHits->at(jentry)>=230) {
+            wgt =  (-0.0002*(NHits->at(jentry) - 230)*(NHits->at(jentry) - 230) + 1*1.2) / (-0.0002*(NHits->at(jentry) - 230)*(NHits->at(jentry) - 230) + 1);
+          }
+          if (intmode<31) h1_AllNHits_postNN_mvar -> Fill(NHits->at(jentry), OscProb*wgt);
+          else h1_AllNHits_postNN_mvar -> Fill(NHits->at(jentry), wgt);
+          */
 #endif
+
+          float RecoNCapVtx[3] = {0., 0., 0.};
+          RecoNCapVtx[0] = fvx->at(jentry);
+          RecoNCapVtx[1] = fvy->at(jentry);
+          RecoNCapVtx[2] = fvz->at(jentry);
 
           bool etagboxin = false;
           etagboxin = ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry));
           if (!etagboxin) {
             HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_Nlike);
             HistFillforLabel(numu, Label->at(jentry), FitT->at(jentry), h1_FitT_Nlike);
-            h1_AllNHits_Nlike -> Fill(NHits->at(jentry));
-            h1_AllFitT_Nlike  -> Fill(FitT->at(jentry));
+            HistFillperMode(numu, NHits->at(jentry), h1_AllNHits_Nlike);
+            HistFillperMode(numu, FitT->at(jentry), h1_AllFitT_Nlike);
+            
+            HistFillforLabel(numu, Label->at(jentry), GetSimpleDistance(RecoPrmVtx, RecoNCapVtx)/100., h1_RecoNCapDistance);
+            h1_AllRecoNCapDistance -> Fill(GetSimpleDistance(RecoPrmVtx, RecoNCapVtx)/100.);
           }
           else {
             HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_Elike);
             HistFillforLabel(numu, Label->at(jentry), FitT->at(jentry), h1_FitT_Elike);
-            h1_AllNHits_Elike -> Fill(NHits->at(jentry));
-            h1_AllFitT_Elike  -> Fill(FitT->at(jentry));
+            HistFillperMode(numu, NHits->at(jentry), h1_AllNHits_Elike);
+            HistFillperMode(numu, FitT->at(jentry), h1_AllFitT_Elike);
           }
-
 
           if (intmode<31) nlikeAll+=OscProb;
           else nlikeAll++;
@@ -1120,7 +1153,7 @@ int main(int argc, char **argv) {
             RecoNCapVtx[1] = fvy->at(ican);
             RecoNCapVtx[2] = fvz->at(ican);
 
-            h1_RecoNCapDistance -> Fill( GetSimpleDistance(RecoPrmVtx, RecoNCapVtx)/100. );
+            //h1_RecoNCapDistance -> Fill( GetSimpleDistance(RecoPrmVtx, RecoNCapVtx)/100. );
           }
         }
       }

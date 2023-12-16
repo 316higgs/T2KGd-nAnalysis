@@ -265,19 +265,19 @@ void CompareDecaye(bool beammode) {
       h1_DcyE_pw[i]    -> Draw();
       h1_DcyE_gd[i]    -> Draw("SAME");
       h1_DcyE_boxgd[i] -> Draw("SAME");
-      g_Cut            -> Draw("SAME");
+      //g_Cut            -> Draw("SAME");
     }
     else if (i==0) {
       h1_DcyE_All_pw    -> Draw();
       h1_DcyE_All_gd    -> Draw("SAME");
       h1_DcyE_All_boxgd -> Draw("SAME");
-      g_Cut             -> Draw("SAME");
+      //g_Cut             -> Draw("SAME");
     }
     else if (i==1) {
       h1_DcyE_QElike_pw    -> Draw();
       h1_DcyE_QElike_gd    -> Draw("SAME");
       h1_DcyE_QElike_boxgd -> Draw("SAME");
-      g_Cut                -> Draw("SAME");
+      //g_Cut                -> Draw("SAME");
     }
 
     TLegend* legend1 = new TLegend(0.45, 0.5, 0.89, 0.89);

@@ -645,16 +645,20 @@ void AveTaggedN_x_kinematics(bool beammode) {
   h1_AveTaggedN_x_kinematics_data -> Sumw2();
   h1_AveTaggedN_x_kinematics_data -> Divide(h1_Denominator_data);
 
-  double Stat_x_Pt[5] = {0.502224, 0.191513, 0.533866, 0., 0.};
+  //double Stat_x_Pt[5] = {0.502224, 0.191513, 0.533866, 0., 0.};
   double nMult_data[binnumber]      = {0.};
   double dnMult_data_Up[binnumber]  = {0.};
   double dnMult_data_Low[binnumber] = {0.};
+  double dnMult_syst_data_Up[binnumber]  = {0.};
+  double dnMult_syst_data_Low[binnumber] = {0.};
   for (int ibin=0; ibin<binnumber-1; ibin++) {
     nMult_data[ibin] = h1_AveTaggedN_x_kinematics_data -> GetBinContent(ibin+1);
     dnMult_data_Up[ibin]  = sqrt( Stat_x_Pt[ibin]*Stat_x_Pt[ibin]
                                 + TotSyst_x_Pt_Upper[ibin]*TotSyst_x_Pt_Upper[ibin]);
     dnMult_data_Low[ibin] = sqrt( Stat_x_Pt[ibin]*Stat_x_Pt[ibin]
                                 + TotSyst_x_Pt_Lower[ibin]*TotSyst_x_Pt_Lower[ibin]);
+    dnMult_syst_data_Up[ibin]  = TotSyst_x_Pt_Upper[ibin];
+    dnMult_syst_data_Low[ibin] = TotSyst_x_Pt_Lower[ibin];
     std::cout << "Multiplicity: " << nMult_data[ibin] << " +" << dnMult_data_Up[ibin] << "/-" << dnMult_data_Low[ibin] << std::endl;
   }
 
@@ -664,6 +668,13 @@ void AveTaggedN_x_kinematics(bool beammode) {
   g_DataErr -> SetMarkerStyle(20);
   g_DataErr -> SetMarkerColor(kBlack);
   g_DataErr -> SetLineColor(kBlack);
+
+  TGraphAsymmErrors* g_DataSystErr = new TGraphAsymmErrors(binnumber, kinematics, nMult_data, dkinematics, dkinematics, dnMult_syst_data_Low, dnMult_syst_data_Up);
+  g_DataSystErr -> SetLineWidth(2);
+  g_DataSystErr -> SetMarkerSize(1.5);
+  g_DataSystErr -> SetMarkerStyle(20);
+  g_DataSystErr -> SetMarkerColor(kBlack);
+  g_DataSystErr -> SetLineColor(kBlack);
 
 
 
@@ -695,6 +706,7 @@ void AveTaggedN_x_kinematics(bool beammode) {
   g_fhc_nmult_x_pt_Data -> Draw("SAME E P");  // pure water data
 
   h1_AveTaggedN_x_kinematics_data -> Draw("SAMEP"); // run 11 data
+  //g_DataSystErr -> Draw("SAME E P");
   g_DataErr -> Draw("SAME E P");
 
   c1->RedrawAxis();
@@ -720,16 +732,18 @@ void AveTaggedN_x_kinematics(bool beammode) {
 #endif
 
 #if 1
+
+  int GdDataColor = kOrange-6;
   h1_AveTaggedN_x_kinematics -> SetLineColor(kOrange+0);
   h1_AveTaggedN_x_kinematics -> SetFillColor(kOrange-4);
   h1_AveTaggedN_x_kinematics -> SetLineWidth(3);
   g_MCerr -> SetLineColor(kOrange+0);
 
-  h1_AveTaggedN_x_kinematics_data -> SetMarkerColor(kOrange+5);
-  h1_AveTaggedN_x_kinematics_data -> SetLineColor(kOrange+5);
+  h1_AveTaggedN_x_kinematics_data -> SetMarkerColor(GdDataColor);
+  h1_AveTaggedN_x_kinematics_data -> SetLineColor(GdDataColor);
   h1_AveTaggedN_x_kinematics_data -> SetLineWidth(2);
-  g_DataErr -> SetLineColor(kOrange+5);
-  g_DataErr -> SetMarkerColor(kOrange+5);
+  g_DataErr -> SetLineColor(GdDataColor);
+  g_DataErr -> SetMarkerColor(GdDataColor);
 
   h1_fhc_nmult_x_pt_MC -> SetLineColor(kAzure+1);
   g_fhc_nmult_x_pt_MC  -> SetLineColor(kAzure+1);
@@ -742,14 +756,14 @@ void AveTaggedN_x_kinematics(bool beammode) {
   g_fhc_nmult_x_pt_Data -> SetLineWidth(2);
 
 
-  TLegend* legend1 = new TLegend(0.12, 0.65, 0.6, 0.89);
+  TLegend* legend1 = new TLegend(0.12, 0.65, 0.48, 0.89);
   legend1 -> SetTextSize(0.04);
-  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.4]{FHC 1R #mu sample}","");
+  if (beammode) legend1->AddEntry((TObject*)0,"#kern[-0.32]{FHC 1R #mu sample}","");
   //else legend1->AddEntry((TObject*)0,"#kern[-0.2]{RHC 1R #mu sample (0.01% Gd)}","");
   legend1 -> AddEntry(h1_AveTaggedN_x_kinematics, "0.01% Gd MC", "F");
   legend1 -> AddEntry(h1_AveTaggedN_x_kinematics_data, "Run 11 data", "LP");
-  legend1 -> AddEntry(h1_fhc_nmult_x_pt_MC, "Pure water MC (TN371)", "L");
-  legend1 -> AddEntry(g_fhc_nmult_x_pt_Data, "Pure water data (TN371)", "LP");
+  legend1 -> AddEntry(h1_fhc_nmult_x_pt_MC, "Pure water MC", "L");
+  legend1 -> AddEntry(g_fhc_nmult_x_pt_Data, "Pure water data", "LP");
   legend1->SetFillColor(0);
   legend1->Draw();
 #endif

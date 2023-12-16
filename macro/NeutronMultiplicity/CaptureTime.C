@@ -313,9 +313,22 @@ void CaptureTime(bool beammode) {
   f1_CapTime -> SetParameter(1, 50);
   f1_CapTime -> SetParameter(2, 120);
   f1_CapTime -> SetParameter(3, 10);
-  f1_CapTime -> SetLineColor(kPink-8);
-  f1_CapTime -> SetLineWidth(3);
+  //f1_CapTime -> SetLineColor(kPink-8);
+  f1_CapTime -> SetLineColor(kSpring-7);
+  f1_CapTime -> SetLineStyle(7);
+  f1_CapTime -> SetLineWidth(2);
   f1_CapTime -> SetNpx(10000);
+
+  TF1* f1_CapTime_data = new TF1("f_data", "[0] * (1-exp(-[1]*x)) * exp(-x/[2]) + [3]", 10, 535);
+  f1_CapTime_data -> SetParameter(0, 50);    // for LL option (if normalized, LL should be used)
+  f1_CapTime_data -> SetParameter(1, 100);
+  f1_CapTime_data -> SetParameter(2, 120);
+  f1_CapTime_data -> SetParameter(3, 10);
+  //f1_CapTime_data -> SetLineColor(kPink-8);
+  f1_CapTime_data -> SetLineColor(kBlack);
+  f1_CapTime_data -> SetLineStyle(7);
+  f1_CapTime_data -> SetLineWidth(2);
+  f1_CapTime_data -> SetNpx(10000);
 
 
   // Data
@@ -357,10 +370,12 @@ void CaptureTime(bool beammode) {
 
   /////////// Reco Capture Time //////////
 #if 1
-  //h1_RecoCapTime -> Fit(f1_CapTime, "rLL");
+  h1_RecoCapTime -> Fit(f1_CapTime, "rLL");
+  //h1_RecoCapTime_data -> Fit(f1_CapTime_data, "rLL");
 
   TCanvas* c1 = new TCanvas("c1", "c1", 1000, 600);
   c1 -> SetGrid();
+  //c1 -> SetLogy();
   if (NNAPPLY==0) hs_RecoCapTime -> SetMaximum(150);
   else hs_RecoCapTime -> SetMaximum(25);
   hs_RecoCapTime -> Draw("");
@@ -369,13 +384,16 @@ void CaptureTime(bool beammode) {
   hs_RecoCapTime ->GetYaxis()->SetTitle("Number of Captured Neutrons");
   hs_RecoCapTime ->GetYaxis()->SetTitleSize(0.045);
   h1_RecoCapTime -> Draw("SAME");
-  //f1_CapTime -> Draw("SAME");
+  f1_CapTime -> Draw("SAME");
 
   h1_RecoCapTime_data -> Draw("SAME E P");
   c1->RedrawAxis();
 
   Double_t CapTime = f1_CapTime->GetParameter(2);
   Double_t CapTimeErr = f1_CapTime->GetParError(2);
+
+  Double_t CapTime_data = f1_CapTime_data->GetParameter(2);
+  Double_t CapTimeErr_data = f1_CapTime_data->GetParError(2);
 
 
   TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);
@@ -388,8 +406,10 @@ void CaptureTime(bool beammode) {
   legend1 -> AddEntry(h1_RecoCapTime_dcye_numu, "Decay-e", "F");
   legend1 -> AddEntry(h1_RecoCapTime_H_numu, "H-n signal", "F");
   legend1 -> AddEntry(h1_RecoCapTime_Gd_numu, "Gd-n signal", "F");
-  //legend1 -> AddEntry(f1_CapTime, "A*(1-e^{-B*t})*exp(-x/C)+D", "L");
+  legend1 -> AddEntry(f1_CapTime, "A*(1-e^{-B*t})*exp(-x/C)+D", "L");
   //legend1 -> AddEntry((TObject*)0,TString::Format("#kern[-0.25]{Capture time = %.1f #pm %.1f #musec}", CapTime, CapTimeErr),"");
+  //legend1 -> AddEntry((TObject*)0,TString::Format("#kern[-0.25]{Capture time (MC) = %.1f #musec}", CapTime),"");
+  //legend1 -> AddEntry((TObject*)0,TString::Format("#kern[-0.25]{Capture time = %.1f #pm %.1f #musec}", CapTime_data, CapTimeErr_data),"");
   legend1 -> SetFillColor(0);
   legend1 -> Draw();
 #endif

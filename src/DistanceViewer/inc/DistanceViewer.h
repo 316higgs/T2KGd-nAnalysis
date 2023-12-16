@@ -55,7 +55,6 @@ TH2F* h2_Enu_x_MuTrack;
 TH2F* h2_Enu_x_Prm_NCap;
 TH2F* h2_Enu_x_MuStp_NCap;
 
-//TH2F* h2_truedistance_x_mom;
 
 //Truth distance distribution of truth neutrons in candidates
 TH1F* h1_Candidatetruedistance;
@@ -69,7 +68,8 @@ TH1F* h1_NNEff_dist[CUTSTEP];
 TH1F* h1_OverallEff_dist[CUTSTEP];
 
 
-TH1F* h1_RecoNCapDistance;
+TH1F* h1_AllRecoNCapDistance;
+TH1F* h1_RecoNCapDistance[4];
 
 
 class DistanceViewer {

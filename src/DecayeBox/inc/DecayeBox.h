@@ -30,6 +30,8 @@ TH1F* h1_AllN50_postNN;
 TH1F* h1_AllN50_Nlike;
 TH1F* h1_AllNHits_preNN;
 TH1F* h1_AllNHits_postNN;
+TH1F* h1_AllNHits_postNN_lt20us;
+TH1F* h1_AllNHits_postNN_gt20us;
 TH1F* h1_AllNHits_Nlike;
 TH1F* h1_AllNHits_Elike;
 TH1F* h1_AllFitT_preNN;

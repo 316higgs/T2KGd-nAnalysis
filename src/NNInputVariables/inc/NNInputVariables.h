@@ -20,6 +20,11 @@ TH1F* h1_NNvar_H[NNVARIABLES];
 TH1F* h1_NNvar_Gd[NNVARIABLES];
 TH1F* h1_NNvar[NNVARIABLES];
 //TH1F* h1_AllNHits; // for sanity check of #tag-n in NN input variable plots
+TH1F* h1_Beta1;
+TH1F* h1_Beta2;
+TH1F* h1_Beta3;
+TH1F* h1_Beta4;
+TH1F* h1_Beta5;
 
 TH1F* h1_NTagOut[4];
 TH1F* h1_AllNTagOut;

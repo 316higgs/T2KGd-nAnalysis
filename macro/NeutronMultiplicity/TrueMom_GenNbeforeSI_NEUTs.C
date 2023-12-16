@@ -8,7 +8,8 @@
 #define FV 22.5
 //#define POTSCALE 1.96  //Run1-10 FHC
 //#define POTSCALE 1.63  //Run1-10 RHC
-#define POTSCALE 0.17
+//#define POTSCALE 0.17
+#define POTSCALE 17.0
 
 
 void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
@@ -25,14 +26,15 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
 
   // pure water MC
 #if fhcflag
-  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.water.root");
-  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.water.root");
-  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.water.root");
-  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.water.root");
-  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.water.root");
-  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.water.root");
+  TFile* fin_numu      = new TFile("../../output/fhc/fhc.numu_x_numu.water_100k.root");
+  TFile* fin_nuesig    = new TFile("../../output/fhc/fhc.numu_x_nue.water_100k.root");
+  TFile* fin_numubar   = new TFile("../../output/fhc/fhc.numubar_x_numubar.water_100k.root");
+  TFile* fin_nuebarsig = new TFile("../../output/fhc/fhc.numubar_x_nuebar.water_100k.root");
+  TFile* fin_nuebkg    = new TFile("../../output/fhc/fhc.nue_x_nue.water_100k.root");
+  TFile* fin_nuebarbkg = new TFile("../../output/fhc/fhc.nuebar_x_nuebar.water_100k.root");
 
-  TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
+  //TFile* fin_skrate  = new TFile("./fhc.sk_rate_tmp.root");
+  TFile* fin_skrate  = new TFile("/disk03/usr8/sedi/NEUTvect_5.6.3/skrate/fhc_sk_rate_tmp.root");
 #endif
 
 
@@ -49,14 +51,18 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
   Double_t ExpN_numubar_x_nuebar    = h1_skrate_numubar_x_nuebar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   Double_t ExpN_nue_x_nue           = h1_skrate_nue_x_nue->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
   Double_t ExpN_nuebar_x_nuebar     = h1_skrate_nuebar_x_nuebar->Integral() * ( (NA*FV*1.e-6) / (50.e-3) ) * POTSCALE;
-#if 1
-  Double_t GenN_numu_x_numu       = 448378;
+  /*Double_t GenN_numu_x_numu       = 448378;
   Double_t GenN_numu_x_nue        = 100190;
   Double_t GenN_numubar_x_numubar = 429594;
   Double_t GenN_numubar_x_nuebar  = 98073;
   Double_t GenN_nue_x_nue         = 105070;
-  Double_t GenN_nuebar_x_nuebar   = 98053;
-#endif
+  Double_t GenN_nuebar_x_nuebar   = 98053;*/
+  Double_t GenN_numu_x_numu       = 73636;
+  Double_t GenN_numu_x_nue        = 76570;
+  Double_t GenN_numubar_x_numubar = 75066;
+  Double_t GenN_numubar_x_nuebar  = 79664;
+  Double_t GenN_nue_x_nue         = 79441;
+  Double_t GenN_nuebar_x_nuebar   = 81546;
   std::cout << "Misc. factor: " << (NA*FV*1.e-6) / (50.e-3) << std::endl;
   std::cout << "[numu  -> numu ] ExpN_numu_x_numu = " << h1_skrate_numu_x_numu->Integral() << std::endl;
   std::cout << "[numu  -> numu ] GenN_numu_x_numu = " << GenN_numu_x_numu << std::endl;
@@ -142,7 +148,7 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
 
 
   /////  Normalizations  //////
-#if 0
+#if 1
   h1_GenBefSI_numu         -> Scale( (ExpN_numu_x_numu)/(GenN_numu_x_numu) );
   h1_GenBefSI_nuesig       -> Scale( (ExpN_numu_x_nue)/(GenN_numu_x_nue) );
   h1_GenBefSI_numubar      -> Scale( (ExpN_numubar_x_numubar)/(GenN_numubar_x_numubar) );
@@ -181,6 +187,12 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
 
 
   bool osc_mode_on[6] = {1, 1, 1, 1, 1, 1};  // numu, numubar, nuesig, nuebarsig, nuebkg, nuebarbkg
+  //  1Rmu
+  //Double_t GdProd = 26132+535+24816+265+272+316;
+  //Double_t PWProd = 249629+410+224607+542+500+639;
+  //  FCFV (Osc.)
+  Double_t GdProd = 16884.9+5960.52+26950.2+6138.77+45768.1+42963.9;
+  Double_t PWProd = 176471+12784.4+279639+14296.3+92089.3+85283.4;
 
   // 1D hist for each neutron source
   //  generated neutrons
@@ -195,6 +207,7 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
   h1_GenBefSI -> SetLineColor(kGray+2);
   h1_GenBefSI -> SetStats(0);
   h1_GenBefSI -> SetLineWidth(3);
+  std::cout << "#all generated neutrons: " << h1_GenBefSI->Integral() << std::endl;
 
   TH1F* h1_GenBefSI_FSI = new TH1F("h1_GenBefSI_FSI", "", 60, 0, 1200);
   if (osc_mode_on[5]) {
@@ -231,6 +244,7 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
   h1_GenBefSI_FSI -> SetLineColor(kGray+2);
   h1_GenBefSI_FSI -> SetStats(0);
   h1_GenBefSI_FSI -> SetLineWidth(3);
+  //h1_GenBefSI_FSI -> Scale( GdProd/PWProd );
 
 
   TH1F* h1_GenBefSI_nucFSI = new TH1F("h1_GenBefSI_nucFSI", "", 60, 0, 1200);
@@ -244,6 +258,7 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
   h1_GenBefSI_nucFSI -> SetLineColor(kAzure+5);
   h1_GenBefSI_nucFSI -> SetStats(0);
   h1_GenBefSI_nucFSI -> SetLineWidth(3);
+  //h1_GenBefSI_nucFSI -> Scale( GdProd/PWProd );
 
   TH1F* h1_GenBefSI_piFSI = new TH1F("h1_GenBefSI_piFSI", "", 60, 0, 1200);
   if (osc_mode_on[5]) h1_GenBefSI_piFSI -> Add(h1_GenBefSI_piFSI_nuebarbkg);
@@ -256,6 +271,7 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
   h1_GenBefSI_piFSI -> SetLineColor(kRed-6);
   h1_GenBefSI_piFSI -> SetStats(0);
   h1_GenBefSI_piFSI -> SetLineWidth(3);
+  //h1_GenBefSI_piFSI -> Scale( GdProd/PWProd );
 
   TH1F* h1_GenBefSI_deexc = new TH1F("h1_GenBefSI_deexc", "", 60, 0, 1200);
   if (osc_mode_on[5]) h1_GenBefSI_deexc -> Add(h1_GenBefSI_deexc_nuebarbkg);
@@ -268,6 +284,7 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
   h1_GenBefSI_deexc -> SetLineColor(kSpring+5);
   h1_GenBefSI_deexc -> SetStats(0);
   h1_GenBefSI_deexc -> SetLineWidth(3);
+  //h1_GenBefSI_deexc -> Scale( GdProd/PWProd );
 
   TH1F* h1_GenBefSI_others = new TH1F("h1_GenBefSI_others", "", 60, 0, 1200);
   if (osc_mode_on[5]) h1_GenBefSI_others -> Add(h1_GenBefSI_others_nuebarbkg);
@@ -281,7 +298,7 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
   h1_GenBefSI_others -> SetStats(0);
   h1_GenBefSI_others -> SetLineWidth(3);
 
-
+#if 0
   //  captured neutrons
   TH1F* h1_CapBefSI = new TH1F("h1_CapBefSI", "", 60, 0, 1200);
   if (osc_mode_on[5]) h1_CapBefSI -> Add(h1_CapBefSI_nuebarbkg);
@@ -311,7 +328,8 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
   h1_CapAftSI -> SetFillStyle(3004);
   h1_CapAftSI -> SetStats(0);
   h1_CapAftSI -> SetLineWidth(3);
-
+#endif
+  
 
   gROOT -> SetStyle("Plain");
 #if 0
@@ -340,10 +358,15 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
   legend1->Draw();
 #endif
 
+  TLatex* text1 = new TLatex(0.5, 0.91, "Normalized by #1R#mu events");
+  text1 -> SetNDC(1);
+  text1 -> SetTextSize(0.045);
+
 #if 1
   // except with primary interaction
   TCanvas* c2 = new TCanvas("c2","c2",900,700);
   c2 -> SetGrid();
+  h1_GenBefSI_FSI -> SetMaximum(100);
   h1_GenBefSI_FSI ->GetXaxis()->SetTitleSize(0.045);
   h1_GenBefSI_FSI ->GetYaxis()->SetTitleSize(0.045);
   h1_GenBefSI_FSI ->GetYaxis()->SetTitleOffset(1.1);
@@ -358,13 +381,26 @@ void TrueMom_GenNbeforeSI_NEUTs(bool beammode) {
   
   TLegend* legend1 = new TLegend(0.45, 0.6, 0.89, 0.89);
   legend1 -> SetTextSize(0.04);
+  legend1 -> AddEntry((TObject*)0,"#kern[-0.65]{NEUT 5.3.2}","");
   legend1 -> AddEntry(h1_GenBefSI, "All neutrons (before SI)", "L");
   legend1 -> AddEntry(h1_GenBefSI_nucFSI, "Nucleon FSI", "L");
   legend1 -> AddEntry(h1_GenBefSI_piFSI, "#pi FSI", "L");
   legend1 -> AddEntry(h1_GenBefSI_deexc, "de-excitation", "L");
   legend1->SetFillColor(0);
   legend1->Draw();
+
+  //text1 -> Draw();
 #endif
+
+
+
+
+  TFile* fout = new TFile("./output/NEUT5.3.3.root", "RECREATE");
+  fout -> cd();
+  h1_GenBefSI_FSI    -> Write();
+  h1_GenBefSI_nucFSI -> Write();
+  h1_GenBefSI_deexc  -> Write();
+  h1_GenBefSI_piFSI  -> Write();
 
 }
 

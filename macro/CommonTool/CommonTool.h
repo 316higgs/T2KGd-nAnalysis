@@ -203,3 +203,9 @@ void SetMCHistColor_Label(int ilabel, TH1F* h1) {
 }
 
 
+void ApplyAreaNorm(TH1F* h1) {
+  Double_t tot_h1 = h1->Integral();
+  h1 -> Scale(1./tot_h1);
+}
+
+

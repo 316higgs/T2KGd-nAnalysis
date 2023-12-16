@@ -177,6 +177,7 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
   //    numu->var<int>("evclass")==1 &&
   //    numu->var<int>("fqevis")>30) {
   if (numu->var<int>("evclass")==1) {
+  //if (numu->var<int>("nhitac")<16) {
     prmsel.GetDWall(numu);
   }
 

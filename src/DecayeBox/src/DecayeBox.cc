@@ -50,10 +50,12 @@ void DecayeBox::SetHistoFrame() {
   //h1_AllNHits_postNN = new TH1F("h1_AllNHits_postNN", "", 25, 0, 50);
   //h1_AllNHits_Nlike  = new TH1F("h1_AllNHits_Nlike", "", 25, 0, 50);
   //h1_AllNHits_Elike  = new TH1F("h1_AllNHits_Elike", "", 25, 0, 50);
-  h1_AllNHits_preNN  = new TH1F("h1_AllNHits_preNN", "", 25, 0, 400);
-  h1_AllNHits_postNN = new TH1F("h1_AllNHits_postNN", "", 25, 0, 400);
-  h1_AllNHits_Nlike  = new TH1F("h1_AllNHits_Nlike", "", 25, 0, 400);
-  h1_AllNHits_Elike  = new TH1F("h1_AllNHits_Elike", "", 25, 0, 400);
+  h1_AllNHits_preNN  = new TH1F("h1_AllNHits_preNN", "", 42, 0, 420);
+  h1_AllNHits_postNN = new TH1F("h1_AllNHits_postNN", "", 42, 0, 420);
+  h1_AllNHits_postNN_lt20us = new TH1F("h1_AllNHits_postNN_lt20us", "", 42, 0, 420);
+  h1_AllNHits_postNN_gt20us = new TH1F("h1_AllNHits_postNN_gt20us", "", 42, 0, 420);
+  h1_AllNHits_Nlike  = new TH1F("h1_AllNHits_Nlike", "", 42, 0, 420);
+  h1_AllNHits_Elike  = new TH1F("h1_AllNHits_Elike", "", 42, 0, 420);
   
   h1_AllFitT_preNN   = new TH1F("h1_AllFitT_preNN", "", 25, 0, 400);
   h1_AllFitT_postNN  = new TH1F("h1_AllFitT_postNN", "", 25, 0, 400);
@@ -69,10 +71,10 @@ void DecayeBox::SetHistoFrame() {
     h1_N50_preNN[i]  = new TH1F(TString::Format("h1_N50_preNN_mode%d", i), "", 40, 0, 400);
     h1_N50_postNN[i] = new TH1F(TString::Format("h1_N50_postNN_mode%d", i), "", 40, 0, 400);
     h1_N50_Nlike[i]  = new TH1F(TString::Format("h1_N50_Nlike_mode%d", i), "", 40, 0, 400);
-    h1_NHits_preNN[i]  = new TH1F(TString::Format("h1_NHits_preNN_mode%d", i), "", 25, 0, 50);
-    h1_NHits_postNN[i] = new TH1F(TString::Format("h1_NHits_postNN_mode%d", i), "", 25, 0, 50);
-    h1_NHits_Nlike[i]  = new TH1F(TString::Format("h1_NHits_Nlike_mode%d", i), "", 25, 0, 400);
-    h1_NHits_Elike[i]  = new TH1F(TString::Format("h1_NHits_Elike_mode%d", i), "", 25, 0, 400);
+    h1_NHits_preNN[i]  = new TH1F(TString::Format("h1_NHits_preNN_mode%d", i), "", 42, 0, 420);
+    h1_NHits_postNN[i] = new TH1F(TString::Format("h1_NHits_postNN_mode%d", i), "", 42, 0, 420);
+    h1_NHits_Nlike[i]  = new TH1F(TString::Format("h1_NHits_Nlike_mode%d", i), "", 42, 0, 420);
+    h1_NHits_Elike[i]  = new TH1F(TString::Format("h1_NHits_Elike_mode%d", i), "", 42, 0, 420);
     //h1_NHits_preNN[i]  = new TH1F(TString::Format("h1_NHits_preNN_mode%d", i), "", 40, 0, 400);
     //h1_NHits_postNN[i] = new TH1F(TString::Format("h1_NHits_postNN_mode%d", i), "", 40, 0, 400);
     //h1_NHits_Nlike[i]  = new TH1F(TString::Format("h1_NHits_Nlike_mode%d", i), "", 40, 0, 400);
@@ -918,6 +920,8 @@ void DecayeBox::WritePlots() {
 
   SaveThisHist(h1_AllNHits_preNN);
   SaveThisHist(h1_AllNHits_postNN);
+  SaveThisHist(h1_AllNHits_postNN_lt20us);
+  SaveThisHist(h1_AllNHits_postNN_gt20us);
   SaveThisHist(h1_AllNHits_Nlike);
   SaveThisHist(h1_AllNHits_Elike);
 

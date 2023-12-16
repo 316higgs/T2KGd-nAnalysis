@@ -220,6 +220,13 @@ int main(int argc, char **argv) {
 
     for (int i=0; i<10; i++) h1_FC_run -> Fill(nspill);
 
+
+    float RecoPrmVtx[3] = {0., 0., 0.};
+    RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
+    RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
+    RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
+
+
     //  data quality check
 #if 1
     if (prmsel.C1ApplyFCFV(evsel)) {
@@ -235,8 +242,8 @@ int main(int argc, char **argv) {
       for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
         //h1_AllRecoNCapTime -> Fill(FitT->at(jentry));
         //h1_AllNTagOut -> Fill(TagOut->at(jentry));
-#if 0
-        h1_AllN50_preNN   -> Fill(N50->at(jentry));
+#if 1
+        //h1_AllN50_preNN   -> Fill(N50->at(jentry));
         h1_AllNHits_preNN -> Fill(NHits->at(jentry));
         h1_AllFitT_preNN  -> Fill(FitT->at(jentry));
 #endif
@@ -254,23 +261,32 @@ int main(int argc, char **argv) {
             else N4++;
           } 
 
-#if 0
+#if 1
           h1_AllN50_postNN   -> Fill(N50->at(jentry));
+          
           h1_AllNHits_postNN -> Fill(NHits->at(jentry));
+          if (FitT->at(jentry)<dtMax) h1_AllNHits_postNN_lt20us -> Fill(NHits->at(jentry));
+          else h1_AllNHits_postNN_gt20us -> Fill(NHits->at(jentry));
+
           h1_AllFitT_postNN  -> Fill(FitT->at(jentry));
 #endif
+
+          float RecoNCapVtx[3] = {0., 0., 0.};
+          RecoNCapVtx[0] = fvx->at(jentry);
+          RecoNCapVtx[1] = fvy->at(jentry);
+          RecoNCapVtx[2] = fvz->at(jentry);
 
           bool etagboxin = false;
           etagboxin = ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry));
           if (!etagboxin) {
             h1_AllNHits_Nlike -> Fill(NHits->at(jentry));
             h1_AllFitT_Nlike  -> Fill(FitT->at(jentry));
+            h1_AllRecoNCapDistance -> Fill(GetSimpleDistance(RecoPrmVtx, RecoNCapVtx)/100.);
           }
           else {
             h1_AllNHits_Elike -> Fill(NHits->at(jentry));
             h1_AllFitT_Elike  -> Fill(FitT->at(jentry));
           }
-
 
           //selcandidates++;
           h1_AllNTagOut -> Fill(TagOut->at(jentry));
@@ -345,10 +361,10 @@ int main(int argc, char **argv) {
       ntagana.TaggedN_x_kinematics_data(numu, numtaggedneutrons, recothetamu, xMuAnglebins, TaggedN_x_MuAngle, h1_TaggedN_x_MuAngle, 1);
 #endif
 #if 1
-      float RecoPrmVtx[3] = {0., 0., 0.};
-      RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
-      RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
-      RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
+      //float RecoPrmVtx[3] = {0., 0., 0.};
+      //RecoPrmVtx[0] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 0);
+      //RecoPrmVtx[1] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 1);
+      //RecoPrmVtx[2] = numu->var<float>("fq1rpos", PrmEvent, FQ_MUHYP, 2);
 
       float NuBeamDir[3] = {0., 0., 0.};
       NuBeamDir[0] = beamDir[0];

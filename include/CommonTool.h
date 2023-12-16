@@ -83,6 +83,13 @@ void HistFillforLabel(CC0PiNumu *numu, float Label, float value, TH1F** h1) {
   }
 }
 
+void HistFillperMode(CC0PiNumu *numu, float value, TH1F* h1) {
+  float wgt  = data ? 1. : numu->getOscWgt();
+  int   mode = TMath::Abs(numu->var<int>("mode"));
+  if (mode<31) h1 -> Fill(value, wgt);
+  else h1 -> Fill(value);
+}
+
 void SaveThisHist(TH1F* h1) {
   if (h1->GetEntries()!=0) h1 -> Write();
 }

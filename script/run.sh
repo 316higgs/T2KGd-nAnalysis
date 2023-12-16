@@ -80,6 +80,7 @@ EXECUTE()
   fi
 
   #RUNNAME="water"
+  #RUNNAME="water_100k"
   #RUNNAME="NNoptnewGdMC"
   #RUNNAME="newGdMC.promptkeras"
   #RUNNAME="newGdMC.bonsaikeras"
