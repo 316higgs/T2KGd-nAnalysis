@@ -374,7 +374,7 @@ void TaggedN_x_nkinematics(bool beammode) {
   if (KnmtcName=="nTraveldT")  hs_merge->GetXaxis()->SetTitle("Reconstructed Transverse Travel Distance [cm]");
   if (KnmtcName=="nAngle")     hs_merge->GetXaxis()->SetTitle("Cosine of Angle b/w n and Beam Directions");
   if (KnmtcName=="MuStp_NCap") hs_merge->GetXaxis()->SetTitle("Distance b/w #mu Stopping and n Capture Vertices [cm]");
-  hs_merge ->GetYaxis()->SetTitle("Number of Tagged Neutrons");
+  hs_merge ->GetYaxis()->SetTitle("Number of Tagged Neutron Candidates");
   hs_merge -> Draw();
   h1_data  -> Draw("SAME E P");
   c1 -> RedrawAxis();

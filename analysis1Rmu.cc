@@ -482,67 +482,6 @@ int main(int argc, char **argv) {
         etagboxin = ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry));
         if (TagOut->at(jentry)>nlikeThreshold && !ntagana.RemnantChecker(Label->at(jentry))) {
 
-          if (NHits->at(jentry)<N50Min) {
-            if (FitT->at(jentry)<dtMax) {
-              if (intmode<31) {
-                if (Label->at(jentry)==0) N1_acc+=OscProb;
-                if (Label->at(jentry)==1) N1_dcye+=OscProb;
-                if (Label->at(jentry)==2) N1_H+=OscProb;
-                if (Label->at(jentry)==3) N1_Gd+=OscProb;
-              }
-              else {
-                if (Label->at(jentry)==0) N1_acc++;
-                if (Label->at(jentry)==1) N1_dcye++;
-                if (Label->at(jentry)==2) N1_H++;
-                if (Label->at(jentry)==3) N1_Gd++;
-              }
-            }
-            else {
-              if (intmode<31) {
-                if (Label->at(jentry)==0) N2_acc+=OscProb;
-                if (Label->at(jentry)==1) N2_dcye+=OscProb;
-                if (Label->at(jentry)==2) N2_H+=OscProb;
-                if (Label->at(jentry)==3) N2_Gd+=OscProb;
-              }
-              else {
-                if (Label->at(jentry)==0) N2_acc++;
-                if (Label->at(jentry)==1) N2_dcye++;
-                if (Label->at(jentry)==2) N2_H++;
-                if (Label->at(jentry)==3) N2_Gd++;
-              }
-            }
-          }
-          else {
-            if (FitT->at(jentry)<dtMax) {
-              if (intmode<31) {
-                if (Label->at(jentry)==0) N3_acc+=OscProb;
-                if (Label->at(jentry)==1) N3_dcye+=OscProb;
-                if (Label->at(jentry)==2) N3_H+=OscProb;
-                if (Label->at(jentry)==3) N3_Gd+=OscProb;
-              }
-              else {
-                if (Label->at(jentry)==0) N3_acc++;
-                if (Label->at(jentry)==1) N3_dcye++;
-                if (Label->at(jentry)==2) N3_H++;
-                if (Label->at(jentry)==3) N3_Gd++;
-              }
-            }
-            else {
-              if (intmode<31) {
-                if (Label->at(jentry)==0) N4_acc+=OscProb;
-                if (Label->at(jentry)==1) N4_dcye+=OscProb;
-                if (Label->at(jentry)==2) N4_H+=OscProb;
-                if (Label->at(jentry)==3) N4_Gd+=OscProb;
-              }
-              else {
-                if (Label->at(jentry)==0) N4_acc++;
-                if (Label->at(jentry)==1) N4_dcye++;
-                if (Label->at(jentry)==2) N4_H++;
-                if (Label->at(jentry)==3) N4_Gd++;
-              }
-            }
-          }
-
 #if 1
           HistFillforLabel(numu, Label->at(jentry), N50->at(jentry), h1_N50_postNN);
           HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_postNN);
@@ -552,23 +491,6 @@ int main(int argc, char **argv) {
           if (FitT->at(jentry)<dtMax) HistFillperMode(numu, NHits->at(jentry), h1_AllNHits_postNN_lt20us);
           else HistFillperMode(numu, NHits->at(jentry), h1_AllNHits_postNN_gt20us);
           HistFillperMode(numu, FitT->at(jentry), h1_AllFitT_postNN);
-
-          // weighted NHits
-          //HistFillperMode(numu, NHits->at(jentry), h1_AllNHits_postNN_mvar);
-          /*
-          float wgt = 1.;
-          if (NHits->at(jentry)<50) {
-            wgt = (-0.25*(NHits->at(jentry) - 25.8)*(NHits->at(jentry) - 25.8) + 80*0.95) / (-0.25*(NHits->at(jentry) - 25.8)*(NHits->at(jentry) - 25.8) + 80);
-          }
-          if (NHits->at(jentry)>=50 && NHits->at(jentry)<230) {
-            wgt =  (-0.00004*(NHits->at(jentry) - 230)*(NHits->at(jentry) - 230) + 1*1.2) / (-0.00004*(NHits->at(jentry) - 230)*(NHits->at(jentry) - 230) + 1);
-          }
-          if (NHits->at(jentry)>=230) {
-            wgt =  (-0.0002*(NHits->at(jentry) - 230)*(NHits->at(jentry) - 230) + 1*1.2) / (-0.0002*(NHits->at(jentry) - 230)*(NHits->at(jentry) - 230) + 1);
-          }
-          if (intmode<31) h1_AllNHits_postNN_mvar -> Fill(NHits->at(jentry), OscProb*wgt);
-          else h1_AllNHits_postNN_mvar -> Fill(NHits->at(jentry), wgt);
-          */
 #endif
 
           float RecoNCapVtx[3] = {0., 0., 0.};
@@ -881,23 +803,6 @@ int main(int argc, char **argv) {
       ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, 
                                      etagmode, numu, neuosc, nlikeThreshold/0.05,
                                      recothetamu, thetamin, thetamax);
-
-#if 0
-      for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
-        if (TagOut->at(jentry)>nlikeThreshold && !ntagana.RemnantChecker(Label->at(jentry))) {
-          bool etagboxin = false;
-          etagboxin = ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry));
-          if (!etagboxin) {
-            h1_AllNHits_Nlike -> Fill(NHits->at(jentry));
-            h1_AllFitT_Nlike  -> Fill(FitT->at(jentry));
-          }
-          else {
-            h1_AllNHits_Elike -> Fill(NHits->at(jentry));
-            h1_AllFitT_Elike  -> Fill(FitT->at(jentry));
-          }
-        }
-      }
-#endif
       
 
       //Number of tagged-neutrons
@@ -934,8 +839,806 @@ int main(int argc, char **argv) {
           if (Label->at(jentry)==2) h1_Goodness[2] -> Fill(FitGoodness->at(jentry));
           if (Label->at(jentry)==3) h1_Goodness[3] -> Fill(FitGoodness->at(jentry));
         }
-        
       }
+
+
+      for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
+        //if (TagOut->at(jentry)>nlikeThreshold && !ntagana.RemnantChecker(Label->at(jentry))) {
+        if (TagOut->at(jentry)>nlikeThreshold) {
+          if (NHits->at(jentry)>N50Min) {
+            if (FitT->at(jentry)<dtMax) {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) Nlike3[0]+=OscProb;
+                if (Label->at(jentry)==1) Nlike3[1]+=OscProb;
+                if (Label->at(jentry)==2) Nlike3[2]+=OscProb;
+                if (Label->at(jentry)==3) Nlike3[3]+=OscProb;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike3_Pt[0][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike3_Pt[0][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike3_Pt[0][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike3_Pt[0][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike3_Pt[1][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike3_Pt[1][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike3_Pt[1][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike3_Pt[1][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike3_Pt[2][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike3_Pt[2][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike3_Pt[2][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike3_Pt[2][3]+=OscProb;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike3_Pt[3][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike3_Pt[3][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike3_Pt[3][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike3_Pt[3][3]+=OscProb;
+                }
+              }
+              else {
+                if (Label->at(jentry)==0) Nlike3[0]++;
+                if (Label->at(jentry)==1) Nlike3[1]++;
+                if (Label->at(jentry)==2) Nlike3[2]++;
+                if (Label->at(jentry)==3) Nlike3[3]++;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike3_Pt[0][0]++;
+                  if (Label->at(jentry)==1) Nlike3_Pt[0][1]++;
+                  if (Label->at(jentry)==2) Nlike3_Pt[0][2]++;
+                  if (Label->at(jentry)==3) Nlike3_Pt[0][3]++;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike3_Pt[1][0]++;
+                  if (Label->at(jentry)==1) Nlike3_Pt[1][1]++;
+                  if (Label->at(jentry)==2) Nlike3_Pt[1][2]++;
+                  if (Label->at(jentry)==3) Nlike3_Pt[1][3]++;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike3_Pt[2][0]++;
+                  if (Label->at(jentry)==1) Nlike3_Pt[2][1]++;
+                  if (Label->at(jentry)==2) Nlike3_Pt[2][2]++;
+                  if (Label->at(jentry)==3) Nlike3_Pt[2][3]++;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike3_Pt[3][0]++;
+                  if (Label->at(jentry)==1) Nlike3_Pt[3][1]++;
+                  if (Label->at(jentry)==2) Nlike3_Pt[3][2]++;
+                  if (Label->at(jentry)==3) Nlike3_Pt[3][3]++;
+                }
+              }
+            }
+            else {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) Nlike4[0]+=OscProb;
+                if (Label->at(jentry)==1) Nlike4[1]+=OscProb;
+                if (Label->at(jentry)==2) Nlike4[2]+=OscProb;
+                if (Label->at(jentry)==3) Nlike4[3]+=OscProb;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike4_Pt[0][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike4_Pt[0][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike4_Pt[0][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike4_Pt[0][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike4_Pt[1][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike4_Pt[1][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike4_Pt[1][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike4_Pt[1][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike4_Pt[2][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike4_Pt[2][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike4_Pt[2][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike4_Pt[2][3]+=OscProb;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike4_Pt[3][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike4_Pt[3][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike4_Pt[3][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike4_Pt[3][3]+=OscProb;
+                }
+              }
+              else {
+                if (Label->at(jentry)==0) Nlike4[0]++;
+                if (Label->at(jentry)==1) Nlike4[1]++;
+                if (Label->at(jentry)==2) Nlike4[2]++;
+                if (Label->at(jentry)==3) Nlike4[3]++;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike4_Pt[0][0]++;
+                  if (Label->at(jentry)==1) Nlike4_Pt[0][1]++;
+                  if (Label->at(jentry)==2) Nlike4_Pt[0][2]++;
+                  if (Label->at(jentry)==3) Nlike4_Pt[0][3]++;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike4_Pt[1][0]++;
+                  if (Label->at(jentry)==1) Nlike4_Pt[1][1]++;
+                  if (Label->at(jentry)==2) Nlike4_Pt[1][2]++;
+                  if (Label->at(jentry)==3) Nlike4_Pt[1][3]++;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike4_Pt[2][0]++;
+                  if (Label->at(jentry)==1) Nlike4_Pt[2][1]++;
+                  if (Label->at(jentry)==2) Nlike4_Pt[2][2]++;
+                  if (Label->at(jentry)==3) Nlike4_Pt[2][3]++;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike4_Pt[3][0]++;
+                  if (Label->at(jentry)==1) Nlike4_Pt[3][1]++;
+                  if (Label->at(jentry)==2) Nlike4_Pt[3][2]++;
+                  if (Label->at(jentry)==3) Nlike4_Pt[3][3]++;
+                }
+              }
+            }
+          }
+          else {
+            if (FitT->at(jentry)<dtMax) {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) Nlike1[0]+=OscProb;
+                if (Label->at(jentry)==1) Nlike1[1]+=OscProb;
+                if (Label->at(jentry)==2) Nlike1[2]+=OscProb;
+                if (Label->at(jentry)==3) Nlike1[3]+=OscProb;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike1_Pt[0][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike1_Pt[0][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike1_Pt[0][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike1_Pt[0][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike1_Pt[1][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike1_Pt[1][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike1_Pt[1][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike1_Pt[1][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike1_Pt[2][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike1_Pt[2][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike1_Pt[2][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike1_Pt[2][3]+=OscProb;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike1_Pt[3][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike1_Pt[3][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike1_Pt[3][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike1_Pt[3][3]+=OscProb;
+                }
+              }
+              else {
+                if (Label->at(jentry)==0) Nlike1[0]++;
+                if (Label->at(jentry)==1) Nlike1[1]++;
+                if (Label->at(jentry)==2) Nlike1[2]++;
+                if (Label->at(jentry)==3) Nlike1[3]++;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike1_Pt[0][0]++;
+                  if (Label->at(jentry)==1) Nlike1_Pt[0][1]++;
+                  if (Label->at(jentry)==2) Nlike1_Pt[0][2]++;
+                  if (Label->at(jentry)==3) Nlike1_Pt[0][3]++;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike1_Pt[1][0]++;
+                  if (Label->at(jentry)==1) Nlike1_Pt[1][1]++;
+                  if (Label->at(jentry)==2) Nlike1_Pt[1][2]++;
+                  if (Label->at(jentry)==3) Nlike1_Pt[1][3]++;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike1_Pt[2][0]++;
+                  if (Label->at(jentry)==1) Nlike1_Pt[2][1]++;
+                  if (Label->at(jentry)==2) Nlike1_Pt[2][2]++;
+                  if (Label->at(jentry)==3) Nlike1_Pt[2][3]++;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike1_Pt[3][0]++;
+                  if (Label->at(jentry)==1) Nlike1_Pt[3][1]++;
+                  if (Label->at(jentry)==2) Nlike1_Pt[3][2]++;
+                  if (Label->at(jentry)==3) Nlike1_Pt[3][3]++;
+                }
+              }
+            }
+            else {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) Nlike2[0]+=OscProb;
+                if (Label->at(jentry)==1) Nlike2[1]+=OscProb;
+                if (Label->at(jentry)==2) Nlike2[2]+=OscProb;
+                if (Label->at(jentry)==3) Nlike2[3]+=OscProb;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike2_Pt[0][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike2_Pt[0][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike2_Pt[0][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike2_Pt[0][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike2_Pt[1][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike2_Pt[1][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike2_Pt[1][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike2_Pt[1][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike2_Pt[2][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike2_Pt[2][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike2_Pt[2][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike2_Pt[2][3]+=OscProb;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike2_Pt[3][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike2_Pt[3][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike2_Pt[3][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike2_Pt[3][3]+=OscProb;
+                }
+              }
+              else {
+                if (Label->at(jentry)==0) Nlike2[0]++;
+                if (Label->at(jentry)==1) Nlike2[1]++;
+                if (Label->at(jentry)==2) Nlike2[2]++;
+                if (Label->at(jentry)==3) Nlike2[3]++;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike2_Pt[0][0]++;
+                  if (Label->at(jentry)==1) Nlike2_Pt[0][1]++;
+                  if (Label->at(jentry)==2) Nlike2_Pt[0][2]++;
+                  if (Label->at(jentry)==3) Nlike2_Pt[0][3]++;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike2_Pt[1][0]++;
+                  if (Label->at(jentry)==1) Nlike2_Pt[1][1]++;
+                  if (Label->at(jentry)==2) Nlike2_Pt[1][2]++;
+                  if (Label->at(jentry)==3) Nlike2_Pt[1][3]++;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike2_Pt[2][0]++;
+                  if (Label->at(jentry)==1) Nlike2_Pt[2][1]++;
+                  if (Label->at(jentry)==2) Nlike2_Pt[2][2]++;
+                  if (Label->at(jentry)==3) Nlike2_Pt[2][3]++;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike2_Pt[3][0]++;
+                  if (Label->at(jentry)==1) Nlike2_Pt[3][1]++;
+                  if (Label->at(jentry)==2) Nlike2_Pt[3][2]++;
+                  if (Label->at(jentry)==3) Nlike2_Pt[3][3]++;
+                }
+              }
+            }
+          }
+
+
+          if (ceil(NHits->at(jentry)*1.02)>N50Min) {
+            if (FitT->at(jentry)<dtMax) {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) Nlike3_pvar[0]+=OscProb;
+                if (Label->at(jentry)==1) Nlike3_pvar[1]+=OscProb;
+                if (Label->at(jentry)==2) Nlike3_pvar[2]+=OscProb;
+                if (Label->at(jentry)==3) Nlike3_pvar[3]+=OscProb;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike3_pvar_Pt[0][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike3_pvar_Pt[0][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike3_pvar_Pt[0][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike3_pvar_Pt[0][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike3_pvar_Pt[1][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike3_pvar_Pt[1][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike3_pvar_Pt[1][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike3_pvar_Pt[1][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike3_pvar_Pt[2][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike3_pvar_Pt[2][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike3_pvar_Pt[2][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike3_pvar_Pt[2][3]+=OscProb;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike3_pvar_Pt[3][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike3_pvar_Pt[3][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike3_pvar_Pt[3][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike3_pvar_Pt[3][3]+=OscProb;
+                }
+              }
+              else {
+                if (Label->at(jentry)==0) Nlike3_pvar[0]++;
+                if (Label->at(jentry)==1) Nlike3_pvar[1]++;
+                if (Label->at(jentry)==2) Nlike3_pvar[2]++;
+                if (Label->at(jentry)==3) Nlike3_pvar[3]++;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike3_pvar_Pt[0][0]++;
+                  if (Label->at(jentry)==1) Nlike3_pvar_Pt[0][1]++;
+                  if (Label->at(jentry)==2) Nlike3_pvar_Pt[0][2]++;
+                  if (Label->at(jentry)==3) Nlike3_pvar_Pt[0][3]++;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike3_pvar_Pt[1][0]++;
+                  if (Label->at(jentry)==1) Nlike3_pvar_Pt[1][1]++;
+                  if (Label->at(jentry)==2) Nlike3_pvar_Pt[1][2]++;
+                  if (Label->at(jentry)==3) Nlike3_pvar_Pt[1][3]++;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike3_pvar_Pt[2][0]++;
+                  if (Label->at(jentry)==1) Nlike3_pvar_Pt[2][1]++;
+                  if (Label->at(jentry)==2) Nlike3_pvar_Pt[2][2]++;
+                  if (Label->at(jentry)==3) Nlike3_pvar_Pt[2][3]++;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike3_pvar_Pt[3][0]++;
+                  if (Label->at(jentry)==1) Nlike3_pvar_Pt[3][1]++;
+                  if (Label->at(jentry)==2) Nlike3_pvar_Pt[3][2]++;
+                  if (Label->at(jentry)==3) Nlike3_pvar_Pt[3][3]++;
+                }
+              }
+            }
+            else {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) Nlike4_pvar[0]+=OscProb;
+                if (Label->at(jentry)==1) Nlike4_pvar[1]+=OscProb;
+                if (Label->at(jentry)==2) Nlike4_pvar[2]+=OscProb;
+                if (Label->at(jentry)==3) Nlike4_pvar[3]+=OscProb;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike4_pvar_Pt[0][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike4_pvar_Pt[0][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike4_pvar_Pt[0][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike4_pvar_Pt[0][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike4_pvar_Pt[1][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike4_pvar_Pt[1][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike4_pvar_Pt[1][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike4_pvar_Pt[1][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike4_pvar_Pt[2][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike4_pvar_Pt[2][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike4_pvar_Pt[2][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike4_pvar_Pt[2][3]+=OscProb;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike4_pvar_Pt[3][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike4_pvar_Pt[3][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike4_pvar_Pt[3][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike4_pvar_Pt[3][3]+=OscProb;
+                }
+              }
+              else {
+                if (Label->at(jentry)==0) Nlike4_pvar[0]++;
+                if (Label->at(jentry)==1) Nlike4_pvar[1]++;
+                if (Label->at(jentry)==2) Nlike4_pvar[2]++;
+                if (Label->at(jentry)==3) Nlike4_pvar[3]++;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike4_pvar_Pt[0][0]++;
+                  if (Label->at(jentry)==1) Nlike4_pvar_Pt[0][1]++;
+                  if (Label->at(jentry)==2) Nlike4_pvar_Pt[0][2]++;
+                  if (Label->at(jentry)==3) Nlike4_pvar_Pt[0][3]++;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike4_pvar_Pt[1][0]++;
+                  if (Label->at(jentry)==1) Nlike4_pvar_Pt[1][1]++;
+                  if (Label->at(jentry)==2) Nlike4_pvar_Pt[1][2]++;
+                  if (Label->at(jentry)==3) Nlike4_pvar_Pt[1][3]++;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike4_pvar_Pt[2][0]++;
+                  if (Label->at(jentry)==1) Nlike4_pvar_Pt[2][1]++;
+                  if (Label->at(jentry)==2) Nlike4_pvar_Pt[2][2]++;
+                  if (Label->at(jentry)==3) Nlike4_pvar_Pt[2][3]++;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike4_pvar_Pt[3][0]++;
+                  if (Label->at(jentry)==1) Nlike4_pvar_Pt[3][1]++;
+                  if (Label->at(jentry)==2) Nlike4_pvar_Pt[3][2]++;
+                  if (Label->at(jentry)==3) Nlike4_pvar_Pt[3][3]++;
+                }
+              }
+            }
+          }
+          else {
+            if (FitT->at(jentry)<dtMax) {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) Nlike1_pvar[0]+=OscProb;
+                if (Label->at(jentry)==1) Nlike1_pvar[1]+=OscProb;
+                if (Label->at(jentry)==2) Nlike1_pvar[2]+=OscProb;
+                if (Label->at(jentry)==3) Nlike1_pvar[3]+=OscProb;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike1_pvar_Pt[0][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike1_pvar_Pt[0][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike1_pvar_Pt[0][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike1_pvar_Pt[0][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike1_pvar_Pt[1][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike1_pvar_Pt[1][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike1_pvar_Pt[1][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike1_pvar_Pt[1][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike1_pvar_Pt[2][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike1_pvar_Pt[2][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike1_pvar_Pt[2][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike1_pvar_Pt[2][3]+=OscProb;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike1_pvar_Pt[3][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike1_pvar_Pt[3][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike1_pvar_Pt[3][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike1_pvar_Pt[3][3]+=OscProb;
+                }
+              }
+              else {
+                if (Label->at(jentry)==0) Nlike1_pvar[0]++;
+                if (Label->at(jentry)==1) Nlike1_pvar[1]++;
+                if (Label->at(jentry)==2) Nlike1_pvar[2]++;
+                if (Label->at(jentry)==3) Nlike1_pvar[3]++;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike1_pvar_Pt[0][0]++;
+                  if (Label->at(jentry)==1) Nlike1_pvar_Pt[0][1]++;
+                  if (Label->at(jentry)==2) Nlike1_pvar_Pt[0][2]++;
+                  if (Label->at(jentry)==3) Nlike1_pvar_Pt[0][3]++;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike1_pvar_Pt[1][0]++;
+                  if (Label->at(jentry)==1) Nlike1_pvar_Pt[1][1]++;
+                  if (Label->at(jentry)==2) Nlike1_pvar_Pt[1][2]++;
+                  if (Label->at(jentry)==3) Nlike1_pvar_Pt[1][3]++;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike1_pvar_Pt[2][0]++;
+                  if (Label->at(jentry)==1) Nlike1_pvar_Pt[2][1]++;
+                  if (Label->at(jentry)==2) Nlike1_pvar_Pt[2][2]++;
+                  if (Label->at(jentry)==3) Nlike1_pvar_Pt[2][3]++;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike1_pvar_Pt[3][0]++;
+                  if (Label->at(jentry)==1) Nlike1_pvar_Pt[3][1]++;
+                  if (Label->at(jentry)==2) Nlike1_pvar_Pt[3][2]++;
+                  if (Label->at(jentry)==3) Nlike1_pvar_Pt[3][3]++;
+                }
+              }
+            }
+            else {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) Nlike2_pvar[0]+=OscProb;
+                if (Label->at(jentry)==1) Nlike2_pvar[1]+=OscProb;
+                if (Label->at(jentry)==2) Nlike2_pvar[2]+=OscProb;
+                if (Label->at(jentry)==3) Nlike2_pvar[3]+=OscProb;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike2_pvar_Pt[0][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike2_pvar_Pt[0][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike2_pvar_Pt[0][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike2_pvar_Pt[0][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike2_pvar_Pt[1][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike2_pvar_Pt[1][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike2_pvar_Pt[1][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike2_pvar_Pt[1][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike2_pvar_Pt[2][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike2_pvar_Pt[2][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike2_pvar_Pt[2][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike2_pvar_Pt[2][3]+=OscProb;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike2_pvar_Pt[3][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike2_pvar_Pt[3][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike2_pvar_Pt[3][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike2_pvar_Pt[3][3]+=OscProb;
+                }
+              }
+              else {
+                if (Label->at(jentry)==0) Nlike2_pvar[0]++;
+                if (Label->at(jentry)==1) Nlike2_pvar[1]++;
+                if (Label->at(jentry)==2) Nlike2_pvar[2]++;
+                if (Label->at(jentry)==3) Nlike2_pvar[3]++;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike2_pvar_Pt[0][0]++;
+                  if (Label->at(jentry)==1) Nlike2_pvar_Pt[0][1]++;
+                  if (Label->at(jentry)==2) Nlike2_pvar_Pt[0][2]++;
+                  if (Label->at(jentry)==3) Nlike2_pvar_Pt[0][3]++;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike2_pvar_Pt[1][0]++;
+                  if (Label->at(jentry)==1) Nlike2_pvar_Pt[1][1]++;
+                  if (Label->at(jentry)==2) Nlike2_pvar_Pt[1][2]++;
+                  if (Label->at(jentry)==3) Nlike2_pvar_Pt[1][3]++;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike2_pvar_Pt[2][0]++;
+                  if (Label->at(jentry)==1) Nlike2_pvar_Pt[2][1]++;
+                  if (Label->at(jentry)==2) Nlike2_pvar_Pt[2][2]++;
+                  if (Label->at(jentry)==3) Nlike2_pvar_Pt[2][3]++;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike2_pvar_Pt[3][0]++;
+                  if (Label->at(jentry)==1) Nlike2_pvar_Pt[3][1]++;
+                  if (Label->at(jentry)==2) Nlike2_pvar_Pt[3][2]++;
+                  if (Label->at(jentry)==3) Nlike2_pvar_Pt[3][3]++;
+                }
+              }
+            }
+          }
+
+
+          if (ceil(NHits->at(jentry)*0.98)>N50Min) {
+            if (FitT->at(jentry)<dtMax) {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) Nlike3_mvar[0]+=OscProb;
+                if (Label->at(jentry)==1) Nlike3_mvar[1]+=OscProb;
+                if (Label->at(jentry)==2) Nlike3_mvar[2]+=OscProb;
+                if (Label->at(jentry)==3) Nlike3_mvar[3]+=OscProb;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike3_mvar_Pt[0][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike3_mvar_Pt[0][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike3_mvar_Pt[0][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike3_mvar_Pt[0][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike3_mvar_Pt[1][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike3_mvar_Pt[1][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike3_mvar_Pt[1][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike3_mvar_Pt[1][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike3_mvar_Pt[2][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike3_mvar_Pt[2][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike3_mvar_Pt[2][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike3_mvar_Pt[2][3]+=OscProb;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike3_mvar_Pt[3][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike3_mvar_Pt[3][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike3_mvar_Pt[3][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike3_mvar_Pt[3][3]+=OscProb;
+                }
+              }
+              else {
+                if (Label->at(jentry)==0) Nlike3_mvar[0]++;
+                if (Label->at(jentry)==1) Nlike3_mvar[1]++;
+                if (Label->at(jentry)==2) Nlike3_mvar[2]++;
+                if (Label->at(jentry)==3) Nlike3_mvar[3]++;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike3_mvar_Pt[0][0]++;
+                  if (Label->at(jentry)==1) Nlike3_mvar_Pt[0][1]++;
+                  if (Label->at(jentry)==2) Nlike3_mvar_Pt[0][2]++;
+                  if (Label->at(jentry)==3) Nlike3_mvar_Pt[0][3]++;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike3_mvar_Pt[1][0]++;
+                  if (Label->at(jentry)==1) Nlike3_mvar_Pt[1][1]++;
+                  if (Label->at(jentry)==2) Nlike3_mvar_Pt[1][2]++;
+                  if (Label->at(jentry)==3) Nlike3_mvar_Pt[1][3]++;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike3_mvar_Pt[2][0]++;
+                  if (Label->at(jentry)==1) Nlike3_mvar_Pt[2][1]++;
+                  if (Label->at(jentry)==2) Nlike3_mvar_Pt[2][2]++;
+                  if (Label->at(jentry)==3) Nlike3_mvar_Pt[2][3]++;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike3_mvar_Pt[3][0]++;
+                  if (Label->at(jentry)==1) Nlike3_mvar_Pt[3][1]++;
+                  if (Label->at(jentry)==2) Nlike3_mvar_Pt[3][2]++;
+                  if (Label->at(jentry)==3) Nlike3_mvar_Pt[3][3]++;
+                }
+              }
+            }
+            else {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) Nlike4_mvar[0]+=OscProb;
+                if (Label->at(jentry)==1) Nlike4_mvar[1]+=OscProb;
+                if (Label->at(jentry)==2) Nlike4_mvar[2]+=OscProb;
+                if (Label->at(jentry)==3) Nlike4_mvar[3]+=OscProb;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike4_mvar_Pt[0][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike4_mvar_Pt[0][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike4_mvar_Pt[0][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike4_mvar_Pt[0][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike4_mvar_Pt[1][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike4_mvar_Pt[1][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike4_mvar_Pt[1][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike4_mvar_Pt[1][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike4_mvar_Pt[2][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike4_mvar_Pt[2][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike4_mvar_Pt[2][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike4_mvar_Pt[2][3]+=OscProb;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike4_mvar_Pt[3][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike4_mvar_Pt[3][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike4_mvar_Pt[3][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike4_mvar_Pt[3][3]+=OscProb;
+                }
+              }
+              else {
+                if (Label->at(jentry)==0) Nlike4_mvar[0]++;
+                if (Label->at(jentry)==1) Nlike4_mvar[1]++;
+                if (Label->at(jentry)==2) Nlike4_mvar[2]++;
+                if (Label->at(jentry)==3) Nlike4_mvar[3]++;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike4_mvar_Pt[0][0]++;
+                  if (Label->at(jentry)==1) Nlike4_mvar_Pt[0][1]++;
+                  if (Label->at(jentry)==2) Nlike4_mvar_Pt[0][2]++;
+                  if (Label->at(jentry)==3) Nlike4_mvar_Pt[0][3]++;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike4_mvar_Pt[1][0]++;
+                  if (Label->at(jentry)==1) Nlike4_mvar_Pt[1][1]++;
+                  if (Label->at(jentry)==2) Nlike4_mvar_Pt[1][2]++;
+                  if (Label->at(jentry)==3) Nlike4_mvar_Pt[1][3]++;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike4_mvar_Pt[2][0]++;
+                  if (Label->at(jentry)==1) Nlike4_mvar_Pt[2][1]++;
+                  if (Label->at(jentry)==2) Nlike4_mvar_Pt[2][2]++;
+                  if (Label->at(jentry)==3) Nlike4_mvar_Pt[2][3]++;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike4_mvar_Pt[3][0]++;
+                  if (Label->at(jentry)==1) Nlike4_mvar_Pt[3][1]++;
+                  if (Label->at(jentry)==2) Nlike4_mvar_Pt[3][2]++;
+                  if (Label->at(jentry)==3) Nlike4_mvar_Pt[3][3]++;
+                }
+              }
+            }
+          }
+          else {
+            if (FitT->at(jentry)<dtMax) {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) Nlike1_mvar[0]+=OscProb;
+                if (Label->at(jentry)==1) Nlike1_mvar[1]+=OscProb;
+                if (Label->at(jentry)==2) Nlike1_mvar[2]+=OscProb;
+                if (Label->at(jentry)==3) Nlike1_mvar[3]+=OscProb;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike1_mvar_Pt[0][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike1_mvar_Pt[0][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike1_mvar_Pt[0][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike1_mvar_Pt[0][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike1_mvar_Pt[1][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike1_mvar_Pt[1][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike1_mvar_Pt[1][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike1_mvar_Pt[1][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike1_mvar_Pt[2][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike1_mvar_Pt[2][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike1_mvar_Pt[2][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike1_mvar_Pt[2][3]+=OscProb;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike1_mvar_Pt[3][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike1_mvar_Pt[3][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike1_mvar_Pt[3][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike1_mvar_Pt[3][3]+=OscProb;
+                }
+              }
+              else {
+                if (Label->at(jentry)==0) Nlike1_mvar[0]++;
+                if (Label->at(jentry)==1) Nlike1_mvar[1]++;
+                if (Label->at(jentry)==2) Nlike1_mvar[2]++;
+                if (Label->at(jentry)==3) Nlike1_mvar[3]++;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike1_mvar_Pt[0][0]++;
+                  if (Label->at(jentry)==1) Nlike1_mvar_Pt[0][1]++;
+                  if (Label->at(jentry)==2) Nlike1_mvar_Pt[0][2]++;
+                  if (Label->at(jentry)==3) Nlike1_mvar_Pt[0][3]++;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike1_mvar_Pt[1][0]++;
+                  if (Label->at(jentry)==1) Nlike1_mvar_Pt[1][1]++;
+                  if (Label->at(jentry)==2) Nlike1_mvar_Pt[1][2]++;
+                  if (Label->at(jentry)==3) Nlike1_mvar_Pt[1][3]++;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike1_mvar_Pt[2][0]++;
+                  if (Label->at(jentry)==1) Nlike1_mvar_Pt[2][1]++;
+                  if (Label->at(jentry)==2) Nlike1_mvar_Pt[2][2]++;
+                  if (Label->at(jentry)==3) Nlike1_mvar_Pt[2][3]++;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike1_mvar_Pt[3][0]++;
+                  if (Label->at(jentry)==1) Nlike1_mvar_Pt[3][1]++;
+                  if (Label->at(jentry)==2) Nlike1_mvar_Pt[3][2]++;
+                  if (Label->at(jentry)==3) Nlike1_mvar_Pt[3][3]++;
+                }
+              }
+            }
+            else {
+              if (intmode<31) {
+                if (Label->at(jentry)==0) Nlike2_mvar[0]+=OscProb;
+                if (Label->at(jentry)==1) Nlike2_mvar[1]+=OscProb;
+                if (Label->at(jentry)==2) Nlike2_mvar[2]+=OscProb;
+                if (Label->at(jentry)==3) Nlike2_mvar[3]+=OscProb;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike2_mvar_Pt[0][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike2_mvar_Pt[0][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike2_mvar_Pt[0][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike2_mvar_Pt[0][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike2_mvar_Pt[1][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike2_mvar_Pt[1][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike2_mvar_Pt[1][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike2_mvar_Pt[1][3]+=OscProb;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike2_mvar_Pt[2][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike2_mvar_Pt[2][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike2_mvar_Pt[2][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike2_mvar_Pt[2][3]+=OscProb;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike2_mvar_Pt[3][0]+=OscProb;
+                  if (Label->at(jentry)==1) Nlike2_mvar_Pt[3][1]+=OscProb;
+                  if (Label->at(jentry)==2) Nlike2_mvar_Pt[3][2]+=OscProb;
+                  if (Label->at(jentry)==3) Nlike2_mvar_Pt[3][3]+=OscProb;
+                }
+              }
+              else {
+                if (Label->at(jentry)==0) Nlike2_mvar[0]++;
+                if (Label->at(jentry)==1) Nlike2_mvar[1]++;
+                if (Label->at(jentry)==2) Nlike2_mvar[2]++;
+                if (Label->at(jentry)==3) Nlike2_mvar[3]++;
+
+                if (Pt/1000. < 0.25) {
+                  if (Label->at(jentry)==0) Nlike2_mvar_Pt[0][0]++;
+                  if (Label->at(jentry)==1) Nlike2_mvar_Pt[0][1]++;
+                  if (Label->at(jentry)==2) Nlike2_mvar_Pt[0][2]++;
+                  if (Label->at(jentry)==3) Nlike2_mvar_Pt[0][3]++;
+                }
+                else if (Pt/1000. >= 0.25 && Pt/1000. < 0.5) {
+                  if (Label->at(jentry)==0) Nlike2_mvar_Pt[1][0]++;
+                  if (Label->at(jentry)==1) Nlike2_mvar_Pt[1][1]++;
+                  if (Label->at(jentry)==2) Nlike2_mvar_Pt[1][2]++;
+                  if (Label->at(jentry)==3) Nlike2_mvar_Pt[1][3]++;
+                }
+                else if (Pt/1000. >= 0.5 && Pt/1000. < 0.75) {
+                  if (Label->at(jentry)==0) Nlike2_mvar_Pt[2][0]++;
+                  if (Label->at(jentry)==1) Nlike2_mvar_Pt[2][1]++;
+                  if (Label->at(jentry)==2) Nlike2_mvar_Pt[2][2]++;
+                  if (Label->at(jentry)==3) Nlike2_mvar_Pt[2][3]++;
+                }
+                else {
+                  if (Label->at(jentry)==0) Nlike2_mvar_Pt[3][0]++;
+                  if (Label->at(jentry)==1) Nlike2_mvar_Pt[3][1]++;
+                  if (Label->at(jentry)==2) Nlike2_mvar_Pt[3][2]++;
+                  if (Label->at(jentry)==3) Nlike2_mvar_Pt[3][3]++;
+                }
+              }
+            }
+          }
+
+        }
+
+        if (FitT->at(jentry)<dtMax) {
+          HistFillforLabel(numu, Label->at(jentry), NHits->at(jentry), h1_NHits_nominal);
+          HistFillforLabel(numu, Label->at(jentry), ceil(NHits->at(jentry)*1.02), h1_NHits_pvar);  // +2% frac
+          HistFillforLabel(numu, Label->at(jentry), ceil(NHits->at(jentry)*0.98), h1_NHits_mvar);  // -2% frac
+        }
+      }
+
 
 
       //Pre-selection
@@ -1252,34 +1955,170 @@ int main(int argc, char **argv) {
     resultfile << " Q3 : " << RejectedMatchedTrueDcye << std::endl;
     resultfile << " efficiency Q1/(Q1+Q3): " << SelectedMatchTrueDcye /( SelectedMatchTrueDcye + RejectedMatchedTrueDcye )*100.  << " %" << std::endl;
     resultfile << " purity     Q1/(Q1+Q2): " << SelectedMatchTrueDcye /( SelectedMatchTrueDcye + SelectedfQdcye)*100. << " %" << std::endl;
-
-    resultfile << "N1 (acc) : " << N1_acc << std::endl;
-    resultfile << "N1 (dcye): " << N1_dcye << std::endl;
-    resultfile << "N1 (H)   : " << N1_H << std::endl;
-    resultfile << "N1 (Gd)  : " << N1_Gd << std::endl;
     resultfile << " " << std::endl;
-    resultfile << "N2 (acc) : " << N2_acc << std::endl;
-    resultfile << "N2 (dcye): " << N2_dcye << std::endl;
-    resultfile << "N2 (H)   : " << N2_H << std::endl;
-    resultfile << "N2 (Gd)  : " << N2_Gd << std::endl;
+    
+    resultfile << "--- nominal ---" << std::endl;
+    resultfile << "N1 (acc) : " << Nlike1[0] << std::endl;
+    resultfile << "N1 (dcye): " << Nlike1[1] << std::endl;
+    resultfile << "N1 (H)   : " << Nlike1[2] << std::endl;
+    resultfile << "N1 (Gd)  : " << Nlike1[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N1 (acc) : " << Nlike1_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (dcye): " << Nlike1_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (H)   : " << Nlike1_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (Gd)  : " << Nlike1_Pt[i][3] << std::endl;
+    }
     resultfile << " " << std::endl;
-    resultfile << "N3 (acc) : " << N3_acc << std::endl;
-    resultfile << "N3 (dcye): " << N3_dcye << std::endl;
-    resultfile << "N3 (H)   : " << N3_H << std::endl;
-    resultfile << "N3 (Gd)  : " << N3_Gd << std::endl;
+    resultfile << "N2 (acc) : " << Nlike2[0] << std::endl;
+    resultfile << "N2 (dcye): " << Nlike2[1] << std::endl;
+    resultfile << "N2 (H)   : " << Nlike2[2] << std::endl;
+    resultfile << "N2 (Gd)  : " << Nlike2[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N2 (acc) : " << Nlike2_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N2 (dcye): " << Nlike2_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N2 (H)   : " << Nlike2_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N2 (Gd)  : " << Nlike2_Pt[i][3] << std::endl;
+    }
     resultfile << " " << std::endl;
-    resultfile << "N4 (acc) : " << N4_acc << std::endl;
-    resultfile << "N4 (dcye): " << N4_dcye << std::endl;
-    resultfile << "N4 (H)   : " << N4_H << std::endl;
-    resultfile << "N4 (Gd)  : " << N4_Gd << std::endl;
+    resultfile << "N3 (acc) : " << Nlike3[0] << std::endl;
+    resultfile << "N3 (dcye): " << Nlike3[1] << std::endl;
+    resultfile << "N3 (H)   : " << Nlike3[2] << std::endl;
+    resultfile << "N3 (Gd)  : " << Nlike3[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N3 (acc) : " << Nlike3_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N3 (dcye): " << Nlike3_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N3 (H)   : " << Nlike3_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N3 (Gd)  : " << Nlike3_Pt[i][3] << std::endl;
+    }
     resultfile << " " << std::endl;
-
-    resultfile << "NTag Cut Base[ DarkLikelihood ]: " << sel_C1 << std::endl;
-    resultfile << "NTag Cut Base[ BurstRatio     ]: " << sel_C2 << std::endl;
-    resultfile << "NTag Cut Base[ DWallMeanDir   ]: " << sel_C3 << std::endl;
-    resultfile << "NTag Cut Base[ DWall          ]: " << sel_C4 << std::endl;
-    resultfile << "NTag Cut Base[ Beta1          ]: " << sel_C5 << std::endl;
-    resultfile << "NTag Cut Base[ Beta2          ]: " << sel_C6 << std::endl;
+    resultfile << "N4 (acc) : " << Nlike4[0] << std::endl;
+    resultfile << "N4 (dcye): " << Nlike4[1] << std::endl;
+    resultfile << "N4 (H)   : " << Nlike4[2] << std::endl;
+    resultfile << "N4 (Gd)  : " << Nlike4[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N4 (acc) : " << Nlike4_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N4 (dcye): " << Nlike4_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N4 (H)   : " << Nlike4_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N4 (Gd)  : " << Nlike4_Pt[i][3] << std::endl;
+    }
+    resultfile << "N1+N2+N4 (acc) : " << Nlike1[0]+Nlike2[0]+Nlike4[0] << std::endl;
+    resultfile << "N1+N2+N4 (dcye): " << Nlike1[1]+Nlike2[1]+Nlike4[1] << std::endl;
+    resultfile << "N1+N2+N4 (H)   : " << Nlike1[2]+Nlike2[2]+Nlike4[2] << std::endl;
+    resultfile << "N1+N2+N4 (Gd)  : " << Nlike1[3]+Nlike2[3]+Nlike4[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N1+N2+N4 (acc) : " << Nlike1_Pt[i][0]+Nlike2_Pt[i][0]+Nlike4_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N1+N2+N4 (dcye): " << Nlike1_Pt[i][1]+Nlike2_Pt[i][1]+Nlike4_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N1+N2+N4 (H)   : " << Nlike1_Pt[i][2]+Nlike2_Pt[i][2]+Nlike4_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N1+N2+N4 (Gd)  : " << Nlike1_Pt[i][3]+Nlike2_Pt[i][3]+Nlike4_Pt[i][3] << std::endl;
+    }
+    resultfile << "--- -2% ---" << std::endl;
+    resultfile << "N1 (acc) : " << Nlike1_mvar[0] << std::endl;
+    resultfile << "N1 (dcye): " << Nlike1_mvar[1] << std::endl;
+    resultfile << "N1 (H)   : " << Nlike1_mvar[2] << std::endl;
+    resultfile << "N1 (Gd)  : " << Nlike1_mvar[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N1 (acc) : " << Nlike1_mvar_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (dcye): " << Nlike1_mvar_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (H)   : " << Nlike1_mvar_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (Gd)  : " << Nlike1_mvar_Pt[i][3] << std::endl;
+    }
+    resultfile << " " << std::endl;
+    resultfile << "N2 (acc) : " << Nlike2_mvar[0] << std::endl;
+    resultfile << "N2 (dcye): " << Nlike2_mvar[1] << std::endl;
+    resultfile << "N2 (H)   : " << Nlike2_mvar[2] << std::endl;
+    resultfile << "N2 (Gd)  : " << Nlike2_mvar[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N1 (acc) : " << Nlike2_mvar_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (dcye): " << Nlike2_mvar_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (H)   : " << Nlike2_mvar_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (Gd)  : " << Nlike2_mvar_Pt[i][3] << std::endl;
+    }
+    resultfile << " " << std::endl;
+    resultfile << "N3 (acc) : " << Nlike3_mvar[0] << std::endl;
+    resultfile << "N3 (dcye): " << Nlike3_mvar[1] << std::endl;
+    resultfile << "N3 (H)   : " << Nlike3_mvar[2] << std::endl;
+    resultfile << "N3 (Gd)  : " << Nlike3_mvar[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N1 (acc) : " << Nlike3_mvar_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (dcye): " << Nlike3_mvar_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (H)   : " << Nlike3_mvar_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (Gd)  : " << Nlike3_mvar_Pt[i][3] << std::endl;
+    }
+    resultfile << " " << std::endl;
+    resultfile << "N4 (acc) : " << Nlike4_mvar[0] << std::endl;
+    resultfile << "N4 (dcye): " << Nlike4_mvar[1] << std::endl;
+    resultfile << "N4 (H)   : " << Nlike4_mvar[2] << std::endl;
+    resultfile << "N4 (Gd)  : " << Nlike4_mvar[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N1 (acc) : " << Nlike4_mvar_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (dcye): " << Nlike4_mvar_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (H)   : " << Nlike4_mvar_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (Gd)  : " << Nlike4_mvar_Pt[i][3] << std::endl;
+    }
+    resultfile << "N1+N2+N4 (acc) : " << Nlike1_mvar[0]+Nlike2_mvar[0]+Nlike4_mvar[0] << std::endl;
+    resultfile << "N1+N2+N4 (dcye): " << Nlike1_mvar[1]+Nlike2_mvar[1]+Nlike4_mvar[1] << std::endl;
+    resultfile << "N1+N2+N4 (H)   : " << Nlike1_mvar[2]+Nlike2_mvar[2]+Nlike4_mvar[2] << std::endl;
+    resultfile << "N1+N2+N4 (Gd)  : " << Nlike1_mvar[3]+Nlike2_mvar[3]+Nlike4_mvar[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N1+N2+N4 (acc) : " << Nlike1_mvar_Pt[i][0]+Nlike2_mvar_Pt[i][0]+Nlike4_mvar_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N1+N2+N4 (dcye): " << Nlike1_mvar_Pt[i][1]+Nlike2_mvar_Pt[i][1]+Nlike4_mvar_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N1+N2+N4 (H)   : " << Nlike1_mvar_Pt[i][2]+Nlike2_mvar_Pt[i][2]+Nlike4_mvar_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N1+N2+N4 (Gd)  : " << Nlike1_mvar_Pt[i][3]+Nlike2_mvar_Pt[i][3]+Nlike4_mvar_Pt[i][3] << std::endl;
+    }
+    resultfile << "--- +2% ---" << std::endl;
+    resultfile << "N1 (acc) : " << Nlike1_pvar[0] << std::endl;
+    resultfile << "N1 (dcye): " << Nlike1_pvar[1] << std::endl;
+    resultfile << "N1 (H)   : " << Nlike1_pvar[2] << std::endl;
+    resultfile << "N1 (Gd)  : " << Nlike1_pvar[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N1 (acc) : " << Nlike1_pvar_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (dcye): " << Nlike1_pvar_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (H)   : " << Nlike1_pvar_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (Gd)  : " << Nlike1_pvar_Pt[i][3] << std::endl;
+    }
+    resultfile << " " << std::endl;
+    resultfile << "N2 (acc) : " << Nlike2_pvar[0] << std::endl;
+    resultfile << "N2 (dcye): " << Nlike2_pvar[1] << std::endl;
+    resultfile << "N2 (H)   : " << Nlike2_pvar[2] << std::endl;
+    resultfile << "N2 (Gd)  : " << Nlike2_pvar[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N1 (acc) : " << Nlike2_pvar_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (dcye): " << Nlike2_pvar_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (H)   : " << Nlike2_pvar_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (Gd)  : " << Nlike2_pvar_Pt[i][3] << std::endl;
+    }
+    resultfile << " " << std::endl;
+    resultfile << "N3 (acc) : " << Nlike3_pvar[0] << std::endl;
+    resultfile << "N3 (dcye): " << Nlike3_pvar[1] << std::endl;
+    resultfile << "N3 (H)   : " << Nlike3_pvar[2] << std::endl;
+    resultfile << "N3 (Gd)  : " << Nlike3_pvar[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N1 (acc) : " << Nlike3_pvar_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (dcye): " << Nlike3_pvar_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (H)   : " << Nlike3_pvar_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (Gd)  : " << Nlike3_pvar_Pt[i][3] << std::endl;
+    }
+    resultfile << " " << std::endl;
+    resultfile << "N4 (acc) : " << Nlike4_pvar[0] << std::endl;
+    resultfile << "N4 (dcye): " << Nlike4_pvar[1] << std::endl;
+    resultfile << "N4 (H)   : " << Nlike4_pvar[2] << std::endl;
+    resultfile << "N4 (Gd)  : " << Nlike4_pvar[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N1 (acc) : " << Nlike4_pvar_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (dcye): " << Nlike4_pvar_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (H)   : " << Nlike4_pvar_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N1 (Gd)  : " << Nlike4_pvar_Pt[i][3] << std::endl;
+    }
+    resultfile << "N1+N2+N4 (acc) : " << Nlike1_pvar[0]+Nlike2_pvar[0]+Nlike4_pvar[0] << std::endl;
+    resultfile << "N1+N2+N4 (dcye): " << Nlike1_pvar[1]+Nlike2_pvar[1]+Nlike4_pvar[1] << std::endl;
+    resultfile << "N1+N2+N4 (H)   : " << Nlike1_pvar[2]+Nlike2_pvar[2]+Nlike4_pvar[2] << std::endl;
+    resultfile << "N1+N2+N4 (Gd)  : " << Nlike1_pvar[3]+Nlike2_pvar[3]+Nlike4_pvar[3] << std::endl;
+    for (int i=0; i<4; i++) {
+      resultfile << "Bin[" << i << "] N1+N2+N4 (acc) : " << Nlike1_pvar_Pt[i][0]+Nlike2_pvar_Pt[i][0]+Nlike4_pvar_Pt[i][0] << std::endl;
+      resultfile << "Bin[" << i << "] N1+N2+N4 (dcye): " << Nlike1_pvar_Pt[i][1]+Nlike2_pvar_Pt[i][1]+Nlike4_pvar_Pt[i][1] << std::endl;
+      resultfile << "Bin[" << i << "] N1+N2+N4 (H)   : " << Nlike1_pvar_Pt[i][2]+Nlike2_pvar_Pt[i][2]+Nlike4_pvar_Pt[i][2] << std::endl;
+      resultfile << "Bin[" << i << "] N1+N2+N4 (Gd)  : " << Nlike1_pvar_Pt[i][3]+Nlike2_pvar_Pt[i][3]+Nlike4_pvar_Pt[i][3] << std::endl;
+    }
     resultfile << " " << std::endl;
 
     resultfile << "[Neutrino] All Parent Neutrino Events          : " << AllParentNeutrinos << std::endl;

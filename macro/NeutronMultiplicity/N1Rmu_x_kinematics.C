@@ -76,10 +76,10 @@ void N1Rmu_x_kinematics(bool beammode) {
 
 
   //TString KnmtcName = "Enu";
-  TString KnmtcName = "MuMom";
+  //TString KnmtcName = "MuMom";
   //TString KnmtcName = "MuPt";
   //TString KnmtcName = "Q2";
-  //TString KnmtcName = "MuAngle";
+  TString KnmtcName = "MuAngle";
   const int binnumber = SetHistoBinNumber(KnmtcName);
 
   TString Prefix      = "NTagAnalysis/h1_N1Rmu_x_";
@@ -319,7 +319,7 @@ void N1Rmu_x_kinematics(bool beammode) {
   if (KnmtcName=="MuPt")    hs_merge->GetXaxis()->SetTitle("Reconstructed #mu Transverse Momentum [GeV]");
   if (KnmtcName=="Q2")      hs_merge->GetXaxis()->SetTitle("Reconstructed Q^{2}(CCQE Assumption) [GeV^{2}]");
   if (KnmtcName=="MuAngle") hs_merge->GetXaxis()->SetTitle("Cosine of Angle b/w #mu and Beam Directions");
-  hs_merge->GetYaxis()->SetTitle("Number of Neutrino Events");
+  hs_merge->GetYaxis()->SetTitle("Number of 1R#mu Events");
   hs_merge -> Draw();
 
   h1_data -> Draw("SAME E P");

@@ -37,8 +37,8 @@ void SimpleNeutron(bool beammode) {
 
 
 
-  //bool TruthNeutron = true;
-  bool TruthNeutron = false;
+  bool TruthNeutron = true;
+  //bool TruthNeutron = false;
 
   // Normalization factors
   TH1F* h1_skrate_numu_x_numu       = (TH1F*)fin_skrate->Get("skrate_numu_x_numu");
@@ -336,16 +336,17 @@ void SimpleNeutron(bool beammode) {
   gROOT -> SetStyle("Plain");
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
-  hs_Neutron -> SetMaximum(23);
+  if (TruthNeutron) hs_Neutron -> SetMaximum(15);
+  else hs_Neutron -> SetMaximum(23);
   hs_Neutron -> Draw();
   hs_Neutron ->GetYaxis()->SetTitleSize(0.038);
   hs_Neutron ->GetYaxis()->SetTitleOffset(1.3);
   hs_Neutron ->GetYaxis()->SetLabelSize(0.036);
-  if (TruthNeutron) hs_Neutron ->GetXaxis()->SetTitle("Truth Neutron Multiplicity");
+  if (TruthNeutron) hs_Neutron ->GetXaxis()->SetTitle("Neutron Multiplicity");
   else hs_Neutron ->GetXaxis()->SetTitle("Tagged Neutron Multiplicity");
-  hs_Neutron ->GetYaxis()->SetTitle("Number of #nu Events");
+  hs_Neutron ->GetYaxis()->SetTitle("Number of Events");
   hs_Neutron -> Draw();
-  h1_data    -> Draw("SAME E P");
+  if (!TruthNeutron) h1_data    -> Draw("SAME E P");
   c1->RedrawAxis();
   
   TLegend* legend1 = new TLegend(0.45, 0.45, 0.89, 0.89);

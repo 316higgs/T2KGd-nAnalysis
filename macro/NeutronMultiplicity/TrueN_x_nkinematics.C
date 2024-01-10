@@ -312,12 +312,12 @@ void TrueN_x_nkinematics(bool beammode) {
   hs_merge ->GetYaxis()->SetTitleSize(0.038);
   hs_merge ->GetYaxis()->SetTitleOffset(1.1);
   hs_merge ->GetYaxis()->SetLabelSize(0.036);
-  if (KnmtcName=="nTraveld")   hs_merge->GetXaxis()->SetTitle("Truth Neutron Travel Distance [cm]");
-  if (KnmtcName=="nTraveldL")  hs_merge->GetXaxis()->SetTitle("Truth Longitidinal Travel Distance [cm]");
-  if (KnmtcName=="nTraveldT")  hs_merge->GetXaxis()->SetTitle("Truth Transverse Travel Distance [cm]");
+  if (KnmtcName=="nTraveld")   hs_merge->GetXaxis()->SetTitle("Neutron Travel Distance [cm]");
+  if (KnmtcName=="nTraveldL")  hs_merge->GetXaxis()->SetTitle("Longitidinal Travel Distance [cm]");
+  if (KnmtcName=="nTraveldT")  hs_merge->GetXaxis()->SetTitle("Transverse Travel Distance [cm]");
   if (KnmtcName=="nAngle")     hs_merge->GetXaxis()->SetTitle("Cosine of Angle b/w n and Beam Directions");
   if (KnmtcName=="MuStp_NCap") hs_merge->GetXaxis()->SetTitle("Distance b/w #mu Stopping and n Capture Vertices [cm]");
-  hs_merge ->GetYaxis()->SetTitle("Number of True Captured Neutrons");
+  hs_merge ->GetYaxis()->SetTitle("Number of Captured Neutrons");
   hs_merge -> Draw();
   c1 -> RedrawAxis();
   

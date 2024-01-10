@@ -127,11 +127,13 @@ void TrueNCapDistance(bool beammode) {
   h1_TrueCapNSIn  -> Add(h1_TrueCapNSIn_nuebarbkg );
 #endif
 
+  //std::cout << "Before SI: " << h1_TrueCapNBefSIn->Integral() << std::endl;
+  //std::cout << "After SI : " << h1_TrueCapNSIn->Integral() << std::endl;
+
 
   gROOT -> SetStyle("Plain");
   /////////// Reco Capture Time //////////
 #if 1
-
   TCanvas* c1 = new TCanvas("c1", "c1", 900, 700);
   c1 -> SetGrid();
   //h1_TrueCapNBefSIn -> SetMaximum(4000);
@@ -152,7 +154,6 @@ void TrueNCapDistance(bool beammode) {
   legend1 -> AddEntry(h1_TrueCapNSIn, "SI (Captured)", "L");
   legend1 -> SetFillColor(0);
   legend1 -> Draw();
-
 #endif
 
 

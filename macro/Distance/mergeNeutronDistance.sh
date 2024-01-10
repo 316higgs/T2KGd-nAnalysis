@@ -12,7 +12,7 @@ BEAMMODE=true
 #root -l 'TrueDistance.C('${BEAMMODE}')'        ### neutron travel distance (neutrino interaction type)
 #root -l 'TrueDistance_nsrc.C('${BEAMMODE}')'    ### neutron travel distance (neutron sources)
 #root -l 'TrueMom_nsrc.C('${BEAMMODE}')'    ### neutron momentum (neutron sources)
-#root -l 'TrueNCapDistance.C('${BEAMMODE}')'
+root -l 'TrueNCapDistance.C('${BEAMMODE}')'
 
 #root -l 'NeutronDistance_prm_x_n.C('${BEAMMODE}')'
 #root -l 'NeutronDistance_mu_x_n.C('${BEAMMODE}')'
@@ -24,7 +24,7 @@ BEAMMODE=true
 #root -l 'NeutronEnergy.C('${BEAMMODE}')'
 
 
-root -l 'mergeTagEff_x_dist.C('${BEAMMODE}')'
+#root -l 'mergeTagEff_x_dist.C('${BEAMMODE}')'
 
 
 #root -l 'systSIDistance.C('${BEAMMODE}')'

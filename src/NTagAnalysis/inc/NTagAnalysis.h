@@ -126,6 +126,8 @@ TH1F* h1_CapBefSIMom_piFSI;    // momentum distribution of captured neutrons aft
 TH1F* h1_CapBefSIMom_deexc;    // momentum distribution of captured neutrons after FSI (de-excitation)
 TH1F* h1_CapBefSIMom_others;   // momentum distribution of captured neutrons after FSI (others)
 TH1F* h1_CapSIMom;
+TH1F* h1_nAngle_BefSIn;
+TH1F* h1_nAngle_SIn;
 TH2F* h2_Mom_x_Dist;
 
 TH1F* h1_GenBefSIEkin;

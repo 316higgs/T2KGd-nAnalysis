@@ -98,6 +98,8 @@ void NTagAnalysis::SetHistoFrame() {
   h1_CapBefSIMom_deexc  = new TH1F("h1_CapBefSIMom_deexc", "", 60, 0, 1200);
   h1_CapBefSIMom_others = new TH1F("h1_CapBefSIMom_others", "", 60, 0, 1200);  
   h1_CapSIMom           = new TH1F("h1_CapSIMom", "", 60, 0, 1200);
+  h1_nAngle_BefSIn      = new TH1F("h1_nAngle_BefSIn", "", 10, -1, 1);
+  h1_nAngle_SIn         = new TH1F("h1_nAngle_SIn", "", 10, -1, 1);
   h2_Mom_x_Dist         = new TH2F("h2_Mom_x_Dist", "", 40, 0, 200, 50, 0, 5);
 
   h1_GenBefSIEkin = new TH1F("h1_GenBefSIEkin", "", 100, 0, 200);
@@ -482,6 +484,13 @@ int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
   PrmVtx[0] = numu->var<float>("posv", 0);
   PrmVtx[1] = numu->var<float>("posv", 1);
   PrmVtx[2] = numu->var<float>("posv", 2);
+
+  float NuBeamDir[3] = {0., 0., 0.};
+  NuBeamDir[0] = beamDir[0];
+  NuBeamDir[1] = beamDir[1];
+  NuBeamDir[2] = beamDir[2];
+  //std::cout << "Beam dir = [" << NuBeamDir[0] << ", " << NuBeamDir[1] << ", " << NuBeamDir[2] << "]" << std::endl;
+
   float NuNCapVtx[3] = {0., 0., 0.};  //neutron(from primary interaction) capture vertex
 
   bool fillsrc[4];
@@ -522,9 +531,6 @@ int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
         //if (iprntidx[ iprntidx[iscnd]-1 ]==0) {
           TrueNBefSI++;
 
-          //std::cout << "Before SI: " << KEn << " MeV" << std::endl;
-          //if (mode<31) h1_CapBefSIMom -> Fill(KEn, OscProb);
-          //else h1_CapBefSIMom -> Fill(KEn);
           if (mode<31) {
             h1_CapBefSIMom  -> Fill(pNinit, OscProb);
             h1_CapBefSIEkin -> Fill(KEn, OscProb);
@@ -566,8 +572,21 @@ int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
           NuNCapVtx[1] = vtxscndY;
           NuNCapVtx[2] = vtxscndZ;
           float d_Prm_x_NuNCap = GetSimpleDistance(PrmVtx, NuNCapVtx);
-          if (mode<31) h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
-          else h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100.);
+          float Traveldv[3] = {0., 0., 0.};
+          Traveldv[0]       = NuNCapVtx[0] - PrmVtx[0];
+          Traveldv[1]       = NuNCapVtx[1] - PrmVtx[1];
+          Traveldv[2]       = NuNCapVtx[2] - PrmVtx[2];
+          float TraveldL    = GetInnerProduct(Traveldv, NuBeamDir);
+          float ncostheta   = TraveldL/d_Prm_x_NuNCap;
+
+          if (mode<31) {
+            h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
+            h1_nAngle_BefSIn       -> Fill(ncostheta, OscProb);
+          }
+          else {
+            h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100.);
+            h1_nAngle_BefSIn       -> Fill(ncostheta);
+          }
 
           if (mode<31) h2_Mom_x_Dist -> Fill(pNinit, d_Prm_x_NuNCap/100., OscProb);
           else h2_Mom_x_Dist -> Fill(pNinit, d_Prm_x_NuNCap/100.);
@@ -642,8 +661,21 @@ int NTagAnalysis::GetTrueCapNBefSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
             NuNCapVtx[1] = vtxscndY;
             NuNCapVtx[2] = vtxscndZ;
             float d_Prm_x_NuNCap = GetSimpleDistance(PrmVtx, NuNCapVtx);
-            if (mode<31) h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
-            else h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100.);
+            float Traveldv[3] = {0., 0., 0.};
+            Traveldv[0]       = NuNCapVtx[0] - PrmVtx[0];
+            Traveldv[1]       = NuNCapVtx[1] - PrmVtx[1];
+            Traveldv[2]       = NuNCapVtx[2] - PrmVtx[2];
+            float TraveldL    = GetInnerProduct(Traveldv, NuBeamDir);
+            float ncostheta   = TraveldL/d_Prm_x_NuNCap;
+
+            if (mode<31) {
+              h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
+              h1_nAngle_BefSIn       -> Fill(ncostheta, OscProb);
+            }
+            else {
+              h1_truedistance_BefSIn -> Fill(d_Prm_x_NuNCap/100.);
+              h1_nAngle_BefSIn       -> Fill(ncostheta);
+            }
 
             if (mode<31) h2_Mom_x_Dist -> Fill(pNinit, d_Prm_x_NuNCap/100., OscProb);
             else h2_Mom_x_Dist -> Fill(pNinit, d_Prm_x_NuNCap/100.);
@@ -739,6 +771,12 @@ int NTagAnalysis::GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
   PrmVtx[0] = numu->var<float>("posv", 0);
   PrmVtx[1] = numu->var<float>("posv", 1);
   PrmVtx[2] = numu->var<float>("posv", 2);
+
+  float NuBeamDir[3] = {0., 0., 0.};
+  NuBeamDir[0] = beamDir[0];
+  NuBeamDir[1] = beamDir[1];
+  NuBeamDir[2] = beamDir[2];
+
   float NuNCapVtx[3] = {0., 0., 0.};  //neutron(from primary interaction) capture vertex
 
   std::vector<float> VtxPrntList;
@@ -780,8 +818,22 @@ int NTagAnalysis::GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
           NuNCapVtx[1] = vtxscndY;
           NuNCapVtx[2] = vtxscndZ;
           float d_Prm_x_NuNCap = GetSimpleDistance(PrmVtx, NuNCapVtx);
-          if (mode<31) h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
-          else h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100.);
+
+          float Traveldv[3] = {0., 0., 0.};
+          Traveldv[0]       = NuNCapVtx[0] - PrmVtx[0];
+          Traveldv[1]       = NuNCapVtx[1] - PrmVtx[1];
+          Traveldv[2]       = NuNCapVtx[2] - PrmVtx[2];
+          float TraveldL    = GetInnerProduct(Traveldv, NuBeamDir);
+          float ncostheta   = TraveldL/d_Prm_x_NuNCap;
+
+          if (mode<31) {
+            h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
+            h1_nAngle_SIn       -> Fill(ncostheta, OscProb);
+          }
+          else {
+            h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100.);
+            h1_nAngle_SIn       -> Fill(ncostheta);
+          }
 
           //std::cout << "SI: " << KEn << " MeV" << std::endl;
           //if (mode<31) h1_GenSIMom -> Fill(pNinit, OscProb);
@@ -829,8 +881,22 @@ int NTagAnalysis::GetTrueCapNAftSI(CC0PiNumu *numu, Int_t *iprntidx, Float_t vtx
             NuNCapVtx[1] = vtxscndY;
             NuNCapVtx[2] = vtxscndZ;
             float d_Prm_x_NuNCap = GetSimpleDistance(PrmVtx, NuNCapVtx);
-            if (mode<31) h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
-            else h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100.);
+
+            float Traveldv[3] = {0., 0., 0.};
+            Traveldv[0]       = NuNCapVtx[0] - PrmVtx[0];
+            Traveldv[1]       = NuNCapVtx[1] - PrmVtx[1];
+            Traveldv[2]       = NuNCapVtx[2] - PrmVtx[2];
+            float TraveldL    = GetInnerProduct(Traveldv, NuBeamDir);
+            float ncostheta   = TraveldL/d_Prm_x_NuNCap;
+
+            if (mode<31) {
+              h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100., OscProb);
+              h1_nAngle_SIn       -> Fill(ncostheta, OscProb);
+            }
+            else {
+              h1_truedistance_SIn -> Fill(d_Prm_x_NuNCap/100.);
+              h1_nAngle_SIn       -> Fill(ncostheta);
+            }
 
             //std::cout << "SI: " << KEn << " MeV" << std::endl;
             //if (mode<31) h1_GenSIMom -> Fill(pNinit, OscProb);
@@ -3231,6 +3297,8 @@ void NTagAnalysis::WritePlots(bool writegraph) {
   SaveThisHist(h1_CapBefSIMom_deexc );
   SaveThisHist(h1_CapBefSIMom_others);
   SaveThisHist(h1_CapSIMom          );
+  SaveThisHist(h1_nAngle_BefSIn     );
+  SaveThisHist(h1_nAngle_SIn        );
   SaveThisHist(h2_Mom_x_Dist        );
 
   SaveThisHist(h1_GenBefSIEkin);

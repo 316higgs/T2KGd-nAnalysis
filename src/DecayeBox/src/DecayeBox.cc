@@ -62,10 +62,6 @@ void DecayeBox::SetHistoFrame() {
   h1_AllFitT_Nlike   = new TH1F("h1_AllFitT_Nlike", "", 40, 0, 400);
   h1_AllFitT_Elike   = new TH1F("h1_AllFitT_Elike", "", 40, 0, 400);
 
-  //h1_NHits_gtr = new TH1F("h1_NHits_gtr", "", 40, 0, 400);
-  //h1_NHits_lss = new TH1F("h1_NHits_lss", "", 40, 0, 400);
-  //h1_FitT_gtr  = new TH1F("h1_FitT_gtr", "", 40, 0, 200);
-  //h1_FitT_lss  = new TH1F("h1_FitT_lss", "", 40, 0, 200);
 
   for (int i=0; i<INTERACTIONTYPE_FOR_MERGE; i++) {
     h1_N50_preNN[i]  = new TH1F(TString::Format("h1_N50_preNN_mode%d", i), "", 40, 0, 400);
@@ -82,15 +78,10 @@ void DecayeBox::SetHistoFrame() {
     h1_FitT_postNN[i]  = new TH1F(TString::Format("h1_FitT_postNN_mode%d", i), "", 40, 0, 200);
     h1_FitT_Nlike[i]   = new TH1F(TString::Format("h1_FitT_Nlike_mode%d", i), "", 40, 0, 200);
     h1_FitT_Elike[i]   = new TH1F(TString::Format("h1_FitT_Elike_mode%d", i), "", 40, 0, 200);
-  
-    /*
-    h1_NHits_CutBase1[i] = new TH1F(TString::Format("h1_NHits_CutBase1_mode%d", i), "", 50, 0, 50);
-    h1_NHits_CutBase2[i] = new TH1F(TString::Format("h1_NHits_CutBase2_mode%d", i), "", 50, 0, 50);
-    h1_NHits_CutBase3[i] = new TH1F(TString::Format("h1_NHits_CutBase3_mode%d", i), "", 50, 0, 50);
-    h1_NHits_CutBase4[i] = new TH1F(TString::Format("h1_NHits_CutBase4_mode%d", i), "", 50, 0, 50);
-    h1_NHits_CutBase5[i] = new TH1F(TString::Format("h1_NHits_CutBase5_mode%d", i), "", 50, 0, 50);
-    h1_NHits_CutBase6[i] = new TH1F(TString::Format("h1_NHits_CutBase6_mode%d", i), "", 50, 0, 50);
-    */
+
+    h1_NHits_mvar[i]    = new TH1F(TString::Format("h1_NHits_mvar_mode%d", i), "", 100, 0, 100);
+    h1_NHits_pvar[i]    = new TH1F(TString::Format("h1_NHits_pvar_mode%d", i), "", 100, 0, 100);
+    h1_NHits_nominal[i] = new TH1F(TString::Format("h1_NHits_nominal_mode%d", i), "", 100, 0, 100);
   }
 }
 
@@ -901,6 +892,9 @@ void DecayeBox::WritePlots() {
     SaveThisHist(h1_NHits_postNN[i]);
     h1_NHits_Nlike[i] -> Write();
     h1_NHits_Elike[i] -> Write();
+    h1_NHits_mvar[i]    -> Write();
+    h1_NHits_pvar[i]    -> Write();
+    h1_NHits_nominal[i] -> Write();
     SaveThisHist(h1_FitT_preNN[i]);
     SaveThisHist(h1_FitT_postNN[i]);
     h1_FitT_Nlike[i] -> Write();

@@ -18,28 +18,29 @@ void CompareNHits_var() {
   }
 
 
-  TH1F* h1_NHits[SAMPLES];
-  TH1F* h1_NHits_lt20us[SAMPLES];
-  TH1F* h1_NHits_gt20us[SAMPLES];
-  TH1F* h1_mergeNHits        = new TH1F("h1_mergeNHits", "", 42, 0, 420);
-  TH1F* h1_mergeNHits_lt20us = new TH1F("h1_mergeNHits_lt20us", "", 42, 0, 420);
-  TH1F* h1_mergeNHits_gt20us = new TH1F("h1_mergeNHits_gt20us", "", 42, 0, 420);
-  TString DirName        = "DecayeBox/";
-  TString HistName_NHits = "h1_AllNHits";
-  TString StageName      = "_postNN";
+  TH1F* h1_NHits[SAMPLES][NTAGLABEL];
+  TH1F* h1_NHits_mvar[SAMPLES][NTAGLABEL];
+  TH1F* h1_NHits_pvar[SAMPLES][NTAGLABEL];
+  TH1F* h1_mergeNHits      = new TH1F("h1_mergeNHits", "", 100, 0, 100);
+  TH1F* h1_mergeNHits_mvar = new TH1F("h1_mergeNHits_mvar", "", 100, 0, 100);
+  TH1F* h1_mergeNHits_pvar = new TH1F("h1_mergeNHits_pvar", "", 100, 0, 100);
+  TString DirName  = "DecayeBox/";
+  TString HistName = "h1_NHits";
   for (int isample=0; isample<SAMPLES; isample++) {
-    h1_NHits[isample]        = (TH1F*)fin_MC[isample]->Get(DirName+HistName_NHits+StageName);
-    h1_NHits_lt20us[isample] = (TH1F*)fin_MC[isample]->Get(DirName+HistName_NHits+StageName+"_lt20us");
-    h1_NHits_gt20us[isample] = (TH1F*)fin_MC[isample]->Get(DirName+HistName_NHits+StageName+"_gt20us");
+    for (int ilabel=0; ilabel<NTAGLABEL; ilabel++) {
+      h1_NHits[isample][ilabel]      = (TH1F*)fin_MC[isample]->Get(DirName+HistName+"_nominal_"+TString::Format("mode%d", ilabel));
+      h1_NHits_mvar[isample][ilabel] = (TH1F*)fin_MC[isample]->Get(DirName+HistName+"_mvar_"+TString::Format("mode%d", ilabel));
+      h1_NHits_pvar[isample][ilabel] = (TH1F*)fin_MC[isample]->Get(DirName+HistName+"_pvar_"+TString::Format("mode%d", ilabel));
+  
+      //  normalization
+      ApplyNorm(h1_NHits[isample][ilabel], isample);
+      ApplyNorm(h1_NHits_mvar[isample][ilabel], isample);
+      ApplyNorm(h1_NHits_pvar[isample][ilabel], isample);
 
-    //  normalization
-    ApplyNorm(h1_NHits[isample], isample);
-    ApplyNorm(h1_NHits_lt20us[isample], isample);
-    ApplyNorm(h1_NHits_gt20us[isample], isample);
-
-    h1_mergeNHits        -> Add(h1_NHits[isample]);
-    h1_mergeNHits_lt20us -> Add(h1_NHits_lt20us[isample]);
-    h1_mergeNHits_gt20us -> Add(h1_NHits_gt20us[isample]);
+      h1_mergeNHits      -> Add(h1_NHits[isample][ilabel]);
+      h1_mergeNHits_mvar -> Add(h1_NHits_mvar[isample][ilabel]);
+      h1_mergeNHits_pvar -> Add(h1_NHits_pvar[isample][ilabel]);
+    }
   }
 
   h1_mergeNHits -> SetLineWidth(3);
@@ -48,20 +49,55 @@ void CompareNHits_var() {
   h1_mergeNHits -> SetFillStyle(3356);
   h1_mergeNHits -> SetStats(0);
 
-  h1_mergeNHits_lt20us -> SetLineWidth(3);
-  h1_mergeNHits_lt20us -> SetLineColor(kSpring+4);
-  h1_mergeNHits_lt20us -> SetFillColor(kSpring+2);
-  h1_mergeNHits_lt20us -> SetFillStyle(3356);
-  h1_mergeNHits_lt20us -> SetStats(0);
+  h1_mergeNHits_mvar -> SetLineWidth(3);
+  h1_mergeNHits_mvar -> SetLineColor(kAzure+2);
+  h1_mergeNHits_mvar -> SetStats(0);
 
-  h1_mergeNHits_gt20us -> SetLineWidth(3);
-  h1_mergeNHits_gt20us -> SetLineColor(kSpring+4);
-  h1_mergeNHits_gt20us -> SetFillColor(kSpring+2);
-  h1_mergeNHits_gt20us -> SetFillStyle(3356);
-  h1_mergeNHits_gt20us -> SetStats(0);
+  h1_mergeNHits_pvar -> SetLineWidth(3);
+  h1_mergeNHits_pvar -> SetLineColor(kRed-3);
+  h1_mergeNHits_pvar -> SetStats(0);
 
 
-  TFile* fin_data   = new TFile(fdata);
+  TLatex* text1 = new TLatex(0.63, 0.95, "FHC 1R#mu, post-NN");
+  text1 -> SetNDC(1);
+  text1 -> SetTextSize(0.045);
+
+  TLatex* text2 = new TLatex(0.75, 0.91, "dt < 20 #mus");
+  text2 -> SetNDC(1);
+  text2 -> SetTextSize(0.045);
+
+  TLegend* legend1 = new TLegend(0.55, 0.55, 0.89, 0.89);
+  legend1 -> SetTextSize(0.045);
+  legend1 -> AddEntry(h1_mergeNHits, "Nominal MC", "F");
+  legend1 -> AddEntry(h1_mergeNHits_mvar, "-2% NHits", "L");
+  legend1 -> AddEntry(h1_mergeNHits_pvar, "+2% NHits", "L");
+  legend1->SetFillColor(0);
+
+
+  gROOT -> SetStyle("Plain");
+  TCanvas* c2 = new TCanvas("c2", "c2", 900, 700);
+  c2 -> SetGrid();
+  c2 -> SetLogy();
+  //h1_mergeNHits -> Fit(f1_NHits_middle, "r");
+  //h1_mergeNHits -> SetMinimum(1e-4);
+  //h1_mergeNHits -> SetMaximum(1e4);
+  h1_mergeNHits ->GetYaxis()->SetTitleSize(0.038);
+  h1_mergeNHits ->GetYaxis()->SetTitleOffset(1.3);
+  h1_mergeNHits ->GetYaxis()->SetLabelSize(0.036);
+  h1_mergeNHits ->GetXaxis()->SetTitle("NHits");
+  h1_mergeNHits ->GetYaxis()->SetTitle("Number of Candidates");
+  h1_mergeNHits -> Draw("");
+  h1_mergeNHits_mvar -> Draw("SAME");
+  h1_mergeNHits_pvar -> Draw("SAME");
+
+  text1 -> Draw();
+  text2 -> Draw();
+  legend1->Draw();
+
+
+
+
+  /*TFile* fin_data   = new TFile(fdata);
   TH1F* h1_NHits_postNN_data = (TH1F*)fin_data->Get(DirName+HistName_NHits+StageName);
   TH1F* h1_NHits_lt20us_data = (TH1F*)fin_data->Get(DirName+HistName_NHits+StageName+"_lt20us");
   TH1F* h1_NHits_gt20us_data = (TH1F*)fin_data->Get(DirName+HistName_NHits+StageName+"_gt20us");
@@ -116,11 +152,11 @@ void CompareNHits_var() {
   std::cout << "#candidates(data): " << NHits_data << std::endl;
   std::cout << "  dt < 20 us     : " << NHits_lt20us_data << std::endl;
   std::cout << "                   " << NHits_lt20us_lt50_data << "(NHits<50) + " << NHits_lt20us_gt50_data << "(NHits>50)" << std::endl;
-  std::cout << "  dt > 20 us     : " << NHits_gt20us_data << std::endl;
+  std::cout << "  dt > 20 us     : " << NHits_gt20us_data << std::endl;*/
 
 
   // area normalizaion
-#if 1
+#if 0
   Double_t tot_mergeNHits_lt20us = h1_mergeNHits_lt20us->Integral();
   TH1F* h1_mergeNHits_lt20us_wgt = (TH1F*)h1_mergeNHits_lt20us->Clone();
   h1_mergeNHits_lt20us_wgt -> Scale(1./tot_mergeNHits_lt20us);
@@ -133,7 +169,7 @@ void CompareNHits_var() {
 
 
   //////  Data / MC  //////
-  TH1F* h1_wgt_lt20us = new TH1F("h1_wgt_lt20us", "", 42, 0, 420);
+  /*TH1F* h1_wgt_lt20us = new TH1F("h1_wgt_lt20us", "", 42, 0, 420);
   h1_wgt_lt20us = (TH1F*)h1_NHits_lt20us_wgt_data->Clone();
   h1_wgt_lt20us -> Divide(h1_mergeNHits_lt20us_wgt);
 
@@ -144,7 +180,7 @@ void CompareNHits_var() {
     wgt[ibin] = h1_wgt_lt20us->GetBinContent(ibin+1);
     NHits_var_mc += h1_mergeNHits_lt20us->GetBinContent(ibin+1)*wgt[ibin];
   }
-  std::cout << "#candidates(var): " << NHits_var_mc << std::endl;
+  std::cout << "#candidates(var): " << NHits_var_mc << std::endl;*/
 
 
 

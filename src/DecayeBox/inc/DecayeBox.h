@@ -34,15 +34,14 @@ TH1F* h1_AllNHits_postNN_lt20us;
 TH1F* h1_AllNHits_postNN_gt20us;
 TH1F* h1_AllNHits_Nlike;
 TH1F* h1_AllNHits_Elike;
+TH1F* h1_NHits_pvar[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_NHits_mvar[INTERACTIONTYPE_FOR_MERGE];
+TH1F* h1_NHits_nominal[INTERACTIONTYPE_FOR_MERGE];
 TH1F* h1_AllFitT_preNN;
 TH1F* h1_AllFitT_postNN;
 TH1F* h1_AllFitT_Nlike;
 TH1F* h1_AllFitT_Elike;
 
-//TH1F* h1_NHits_gtr;
-//TH1F* h1_NHits_lss;
-//TH1F* h1_FitT_gtr;
-//TH1F* h1_FitT_lss;
 
 TH1F* h1_N50_preNN[INTERACTIONTYPE_FOR_MERGE];
 TH1F* h1_N50_postNN[INTERACTIONTYPE_FOR_MERGE];
@@ -55,12 +54,6 @@ TH1F* h1_FitT_preNN[INTERACTIONTYPE_FOR_MERGE];
 TH1F* h1_FitT_postNN[INTERACTIONTYPE_FOR_MERGE];
 TH1F* h1_FitT_Nlike[INTERACTIONTYPE_FOR_MERGE];
 TH1F* h1_FitT_Elike[INTERACTIONTYPE_FOR_MERGE];
-/*TH1F* h1_NHits_CutBase1[INTERACTIONTYPE_FOR_MERGE];
-TH1F* h1_NHits_CutBase2[INTERACTIONTYPE_FOR_MERGE];
-TH1F* h1_NHits_CutBase3[INTERACTIONTYPE_FOR_MERGE];
-TH1F* h1_NHits_CutBase4[INTERACTIONTYPE_FOR_MERGE];
-TH1F* h1_NHits_CutBase5[INTERACTIONTYPE_FOR_MERGE];
-TH1F* h1_NHits_CutBase6[INTERACTIONTYPE_FOR_MERGE];*/
 
 TH2F* h2_reso_x_pscnd;
 TH2F* h2_DcyVtxReso_x_pscnd;
@@ -84,6 +77,36 @@ int DcyE_CCQE    = 0;
 int DcyE_CC2p2h  = 0;
 int DcyE_CCnonQE = 0;
 int DcyE_NC      = 0;
+
+float Nlike1[INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike2[INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike3[INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike4[INTERACTIONTYPE_FOR_MERGE] = {0.};
+
+float Nlike1_Pt[4][INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike2_Pt[4][INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike3_Pt[4][INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike4_Pt[4][INTERACTIONTYPE_FOR_MERGE] = {0.};
+
+float Nlike1_mvar[INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike2_mvar[INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike3_mvar[INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike4_mvar[INTERACTIONTYPE_FOR_MERGE] = {0.};
+
+float Nlike1_mvar_Pt[4][INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike2_mvar_Pt[4][INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike3_mvar_Pt[4][INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike4_mvar_Pt[4][INTERACTIONTYPE_FOR_MERGE] = {0.};
+
+float Nlike1_pvar[INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike2_pvar[INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike3_pvar[INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike4_pvar[INTERACTIONTYPE_FOR_MERGE] = {0.};
+
+float Nlike1_pvar_Pt[4][INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike2_pvar_Pt[4][INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike3_pvar_Pt[4][INTERACTIONTYPE_FOR_MERGE] = {0.};
+float Nlike4_pvar_Pt[4][INTERACTIONTYPE_FOR_MERGE] = {0.};
 
 
 class DecayeBox {

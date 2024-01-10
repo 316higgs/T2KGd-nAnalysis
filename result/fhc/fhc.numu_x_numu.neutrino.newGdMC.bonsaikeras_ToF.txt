@@ -198,32 +198,319 @@
  Q3 : 477.35
  efficiency Q1/(Q1+Q3): 92.3246 %
  purity     Q1/(Q1+Q2): 99.4859 %
-N1 (acc) : 26.9994
-N1 (dcye): 22.8931
-N1 (H)   : 179.131
-N1 (Gd)  : 3290.66
  
-N2 (acc) : 159.436
+--- nominal ---
+N1 (acc) : 15.1286
+N1 (dcye): 8.34508
+N1 (H)   : 28.2789
+N1 (Gd)  : 535.803
+Bin[0] N1 (acc) : 6.30936
+Bin[0] N1 (dcye): 4.74217
+Bin[0] N1 (H)   : 6.37888
+Bin[0] N1 (Gd)  : 111.584
+Bin[1] N1 (acc) : 5.12645
+Bin[1] N1 (dcye): 3.36872
+Bin[1] N1 (H)   : 13.8451
+Bin[1] N1 (Gd)  : 218.128
+Bin[2] N1 (acc) : 3.69276
+Bin[2] N1 (dcye): 0.234194
+Bin[2] N1 (H)   : 6.199
+Bin[2] N1 (Gd)  : 138.399
+Bin[3] N1 (acc) : 0
+Bin[3] N1 (dcye): 0
+Bin[3] N1 (H)   : 1.85593
+Bin[3] N1 (Gd)  : 67.6927
+ 
+N2 (acc) : 56.6984
 N2 (dcye): 0
-N2 (H)   : 1315.61
-N2 (Gd)  : 23174.4
+N2 (H)   : 225.837
+N2 (Gd)  : 3716.78
+Bin[0] N2 (acc) : 17.5645
+Bin[0] N2 (dcye): 0
+Bin[0] N2 (H)   : 43.2124
+Bin[0] N2 (Gd)  : 761.094
+Bin[1] N2 (acc) : 25.9841
+Bin[1] N2 (dcye): 0
+Bin[1] N2 (H)   : 95.4169
+Bin[1] N2 (Gd)  : 1581.64
+Bin[2] N2 (acc) : 8.53947
+Bin[2] N2 (dcye): 0
+Bin[2] N2 (H)   : 58.1695
+Bin[2] N2 (Gd)  : 918.547
+Bin[3] N2 (acc) : 4.61031
+Bin[3] N2 (dcye): 0
+Bin[3] N2 (H)   : 29.0383
+Bin[3] N2 (Gd)  : 455.508
  
-N3 (acc) : 4.65126
-N3 (dcye): 3298.66
+N3 (acc) : 0.205678
+N3 (dcye): 877.939
 N3 (H)   : 0
-N3 (Gd)  : 22.4096
+N3 (Gd)  : 4.2794
+Bin[0] N3 (acc) : 0.0777776
+Bin[0] N3 (dcye): 282.533
+Bin[0] N3 (H)   : 0
+Bin[0] N3 (Gd)  : 0.131155
+Bin[1] N3 (acc) : 0.127901
+Bin[1] N3 (dcye): 394.769
+Bin[1] N3 (H)   : 0
+Bin[1] N3 (Gd)  : 1.83473
+Bin[2] N3 (acc) : 0
+Bin[2] N3 (dcye): 161.519
+Bin[2] N3 (H)   : 0
+Bin[2] N3 (Gd)  : 0.609383
+Bin[3] N3 (acc) : 0
+Bin[3] N3 (dcye): 39.1182
+Bin[3] N3 (H)   : 0
+Bin[3] N3 (Gd)  : 1.70413
  
-N4 (acc) : 2.71206
+N4 (acc) : 0.79836
 N4 (dcye): 0
 N4 (H)   : 0
-N4 (Gd)  : 142.07
+N4 (Gd)  : 16.0849
+Bin[0] N4 (acc) : 0.712274
+Bin[0] N4 (dcye): 0
+Bin[0] N4 (H)   : 0
+Bin[0] N4 (Gd)  : 1.55889
+Bin[1] N4 (acc) : 0.0860854
+Bin[1] N4 (dcye): 0
+Bin[1] N4 (H)   : 0
+Bin[1] N4 (Gd)  : 7.58462
+Bin[2] N4 (acc) : 0
+Bin[2] N4 (dcye): 0
+Bin[2] N4 (H)   : 0
+Bin[2] N4 (Gd)  : 4.46148
+Bin[3] N4 (acc) : 0
+Bin[3] N4 (dcye): 0
+Bin[3] N4 (H)   : 0
+Bin[3] N4 (Gd)  : 2.47993
+N1+N2+N4 (acc) : 72.6253
+N1+N2+N4 (dcye): 8.34508
+N1+N2+N4 (H)   : 254.116
+N1+N2+N4 (Gd)  : 4268.67
+Bin[0] N1+N2+N4 (acc) : 24.5862
+Bin[0] N1+N2+N4 (dcye): 4.74217
+Bin[0] N1+N2+N4 (H)   : 49.5913
+Bin[0] N1+N2+N4 (Gd)  : 874.237
+Bin[1] N1+N2+N4 (acc) : 31.1966
+Bin[1] N1+N2+N4 (dcye): 3.36872
+Bin[1] N1+N2+N4 (H)   : 109.262
+Bin[1] N1+N2+N4 (Gd)  : 1807.35
+Bin[2] N1+N2+N4 (acc) : 12.2322
+Bin[2] N1+N2+N4 (dcye): 0.234194
+Bin[2] N1+N2+N4 (H)   : 64.3685
+Bin[2] N1+N2+N4 (Gd)  : 1061.41
+Bin[3] N1+N2+N4 (acc) : 4.61031
+Bin[3] N1+N2+N4 (dcye): 0
+Bin[3] N1+N2+N4 (H)   : 30.8942
+Bin[3] N1+N2+N4 (Gd)  : 525.681
+--- -2% ---
+N1 (acc) : 15.2189
+N1 (dcye): 9.41868
+N1 (H)   : 28.2789
+N1 (Gd)  : 536.413
+Bin[0] N1 (acc) : 6.30936
+Bin[0] N1 (dcye): 4.74217
+Bin[0] N1 (H)   : 6.37888
+Bin[0] N1 (Gd)  : 111.584
+Bin[1] N1 (acc) : 5.21677
+Bin[1] N1 (dcye): 4.44231
+Bin[1] N1 (H)   : 13.8451
+Bin[1] N1 (Gd)  : 218.128
+Bin[2] N1 (acc) : 3.69276
+Bin[2] N1 (dcye): 0.234194
+Bin[2] N1 (H)   : 6.199
+Bin[2] N1 (Gd)  : 139.008
+Bin[3] N1 (acc) : 0
+Bin[3] N1 (dcye): 0
+Bin[3] N1 (H)   : 1.85593
+Bin[3] N1 (Gd)  : 67.6927
  
-NTag Cut Base[ DarkLikelihood ]: 0
-NTag Cut Base[ BurstRatio     ]: 0
-NTag Cut Base[ DWallMeanDir   ]: 0
-NTag Cut Base[ DWall          ]: 0
-NTag Cut Base[ Beta1          ]: 0
-NTag Cut Base[ Beta2          ]: 0
+N2 (acc) : 56.6984
+N2 (dcye): 0
+N2 (H)   : 225.837
+N2 (Gd)  : 3721.01
+Bin[0] N1 (acc) : 17.5645
+Bin[0] N1 (dcye): 0
+Bin[0] N1 (H)   : 43.2124
+Bin[0] N1 (Gd)  : 761.482
+Bin[1] N1 (acc) : 25.9841
+Bin[1] N1 (dcye): 0
+Bin[1] N1 (H)   : 95.4169
+Bin[1] N1 (Gd)  : 1584.57
+Bin[2] N1 (acc) : 8.53947
+Bin[2] N1 (dcye): 0
+Bin[2] N1 (H)   : 58.1695
+Bin[2] N1 (Gd)  : 919.455
+Bin[3] N1 (acc) : 4.61031
+Bin[3] N1 (dcye): 0
+Bin[3] N1 (H)   : 29.0383
+Bin[3] N1 (Gd)  : 455.508
+ 
+N3 (acc) : 0.115353
+N3 (dcye): 876.866
+N3 (H)   : 0
+N3 (Gd)  : 3.67002
+Bin[0] N1 (acc) : 0.0777776
+Bin[0] N1 (dcye): 282.533
+Bin[0] N1 (H)   : 0
+Bin[0] N1 (Gd)  : 0.131155
+Bin[1] N1 (acc) : 0.0375756
+Bin[1] N1 (dcye): 393.695
+Bin[1] N1 (H)   : 0
+Bin[1] N1 (Gd)  : 1.83473
+Bin[2] N1 (acc) : 0
+Bin[2] N1 (dcye): 161.519
+Bin[2] N1 (H)   : 0
+Bin[2] N1 (Gd)  : 0
+Bin[3] N1 (acc) : 0
+Bin[3] N1 (dcye): 39.1182
+Bin[3] N1 (H)   : 0
+Bin[3] N1 (Gd)  : 1.70413
+ 
+N4 (acc) : 0.79836
+N4 (dcye): 0
+N4 (H)   : 0
+N4 (Gd)  : 11.8499
+Bin[0] N1 (acc) : 0.712274
+Bin[0] N1 (dcye): 0
+Bin[0] N1 (H)   : 0
+Bin[0] N1 (Gd)  : 1.17108
+Bin[1] N1 (acc) : 0.0860854
+Bin[1] N1 (dcye): 0
+Bin[1] N1 (H)   : 0
+Bin[1] N1 (Gd)  : 4.64576
+Bin[2] N1 (acc) : 0
+Bin[2] N1 (dcye): 0
+Bin[2] N1 (H)   : 0
+Bin[2] N1 (Gd)  : 3.55314
+Bin[3] N1 (acc) : 0
+Bin[3] N1 (dcye): 0
+Bin[3] N1 (H)   : 0
+Bin[3] N1 (Gd)  : 2.47993
+N1+N2+N4 (acc) : 72.7156
+N1+N2+N4 (dcye): 9.41868
+N1+N2+N4 (H)   : 254.116
+N1+N2+N4 (Gd)  : 4269.28
+Bin[0] N1+N2+N4 (acc) : 24.5862
+Bin[0] N1+N2+N4 (dcye): 4.74217
+Bin[0] N1+N2+N4 (H)   : 49.5913
+Bin[0] N1+N2+N4 (Gd)  : 874.237
+Bin[1] N1+N2+N4 (acc) : 31.2869
+Bin[1] N1+N2+N4 (dcye): 4.44231
+Bin[1] N1+N2+N4 (H)   : 109.262
+Bin[1] N1+N2+N4 (Gd)  : 1807.35
+Bin[2] N1+N2+N4 (acc) : 12.2322
+Bin[2] N1+N2+N4 (dcye): 0.234194
+Bin[2] N1+N2+N4 (H)   : 64.3685
+Bin[2] N1+N2+N4 (Gd)  : 1062.02
+Bin[3] N1+N2+N4 (acc) : 4.61031
+Bin[3] N1+N2+N4 (dcye): 0
+Bin[3] N1+N2+N4 (H)   : 30.8942
+Bin[3] N1+N2+N4 (Gd)  : 525.681
+--- +2% ---
+N1 (acc) : 15.1286
+N1 (dcye): 8.34508
+N1 (H)   : 28.2789
+N1 (Gd)  : 535.755
+Bin[0] N1 (acc) : 6.30936
+Bin[0] N1 (dcye): 4.74217
+Bin[0] N1 (H)   : 6.37888
+Bin[0] N1 (Gd)  : 111.554
+Bin[1] N1 (acc) : 5.12645
+Bin[1] N1 (dcye): 3.36872
+Bin[1] N1 (H)   : 13.8451
+Bin[1] N1 (Gd)  : 218.11
+Bin[2] N1 (acc) : 3.69276
+Bin[2] N1 (dcye): 0.234194
+Bin[2] N1 (H)   : 6.199
+Bin[2] N1 (Gd)  : 138.399
+Bin[3] N1 (acc) : 0
+Bin[3] N1 (dcye): 0
+Bin[3] N1 (H)   : 1.85593
+Bin[3] N1 (Gd)  : 67.6927
+ 
+N2 (acc) : 56.6984
+N2 (dcye): 0
+N2 (H)   : 225.837
+N2 (Gd)  : 3713.29
+Bin[0] N1 (acc) : 17.5645
+Bin[0] N1 (dcye): 0
+Bin[0] N1 (H)   : 43.2124
+Bin[0] N1 (Gd)  : 759.742
+Bin[1] N1 (acc) : 25.9841
+Bin[1] N1 (dcye): 0
+Bin[1] N1 (H)   : 95.4169
+Bin[1] N1 (Gd)  : 1580.24
+Bin[2] N1 (acc) : 8.53947
+Bin[2] N1 (dcye): 0
+Bin[2] N1 (H)   : 58.1695
+Bin[2] N1 (Gd)  : 917.799
+Bin[3] N1 (acc) : 4.61031
+Bin[3] N1 (dcye): 0
+Bin[3] N1 (H)   : 29.0383
+Bin[3] N1 (Gd)  : 455.508
+ 
+N3 (acc) : 0.205678
+N3 (dcye): 877.939
+N3 (H)   : 0
+N3 (Gd)  : 4.32788
+Bin[0] N1 (acc) : 0.0777776
+Bin[0] N1 (dcye): 282.533
+Bin[0] N1 (H)   : 0
+Bin[0] N1 (Gd)  : 0.161863
+Bin[1] N1 (acc) : 0.127901
+Bin[1] N1 (dcye): 394.769
+Bin[1] N1 (H)   : 0
+Bin[1] N1 (Gd)  : 1.8525
+Bin[2] N1 (acc) : 0
+Bin[2] N1 (dcye): 161.519
+Bin[2] N1 (H)   : 0
+Bin[2] N1 (Gd)  : 0.609383
+Bin[3] N1 (acc) : 0
+Bin[3] N1 (dcye): 39.1182
+Bin[3] N1 (H)   : 0
+Bin[3] N1 (Gd)  : 1.70413
+ 
+N4 (acc) : 0.79836
+N4 (dcye): 0
+N4 (H)   : 0
+N4 (Gd)  : 19.5765
+Bin[0] N1 (acc) : 0.712274
+Bin[0] N1 (dcye): 0
+Bin[0] N1 (H)   : 0
+Bin[0] N1 (Gd)  : 2.911
+Bin[1] N1 (acc) : 0.0860854
+Bin[1] N1 (dcye): 0
+Bin[1] N1 (H)   : 0
+Bin[1] N1 (Gd)  : 8.97624
+Bin[2] N1 (acc) : 0
+Bin[2] N1 (dcye): 0
+Bin[2] N1 (H)   : 0
+Bin[2] N1 (Gd)  : 5.20934
+Bin[3] N1 (acc) : 0
+Bin[3] N1 (dcye): 0
+Bin[3] N1 (H)   : 0
+Bin[3] N1 (Gd)  : 2.47993
+N1+N2+N4 (acc) : 72.6253
+N1+N2+N4 (dcye): 8.34508
+N1+N2+N4 (H)   : 254.116
+N1+N2+N4 (Gd)  : 4268.62
+Bin[0] N1+N2+N4 (acc) : 24.5862
+Bin[0] N1+N2+N4 (dcye): 4.74217
+Bin[0] N1+N2+N4 (H)   : 49.5913
+Bin[0] N1+N2+N4 (Gd)  : 874.207
+Bin[1] N1+N2+N4 (acc) : 31.1966
+Bin[1] N1+N2+N4 (dcye): 3.36872
+Bin[1] N1+N2+N4 (H)   : 109.262
+Bin[1] N1+N2+N4 (Gd)  : 1807.33
+Bin[2] N1+N2+N4 (acc) : 12.2322
+Bin[2] N1+N2+N4 (dcye): 0.234194
+Bin[2] N1+N2+N4 (H)   : 64.3685
+Bin[2] N1+N2+N4 (Gd)  : 1061.41
+Bin[3] N1+N2+N4 (acc) : 4.61031
+Bin[3] N1+N2+N4 (dcye): 0
+Bin[3] N1+N2+N4 (H)   : 30.8942
+Bin[3] N1+N2+N4 (Gd)  : 525.681
  
 [Neutrino] All Parent Neutrino Events          : 100000
 [Neutrino] Generated Neutrino Events(wallv>200): 63622
